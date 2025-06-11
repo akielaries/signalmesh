@@ -1,3 +1,17 @@
+- [signalmesh](#signalmesh)
+- [Technical bits and features](#technical-bits-and-features)
+  * [The hardware](#the-hardware)
+    + [The Audio Creation Module (ACM)](#the-audio-creation-module--acm-)
+    + [The Data Siphon Module (DSM)](#the-data-siphon-module--dsm-)
+      - [Siphon](#siphon)
+      - [Preset Storage](#preset-storage)
+    + [The Telemetry & Debug Module (TDM)](#the-telemetry---debug-module--tdm-)
+    + [The Bootloader and Update Module (BUM!!)](#the-bootloader-and-update-module--bum---)
+  * [The infrastructure](#the-infrastructure)
+    + [`mkupdater`](#-mkupdater-)
+  * [Planned protocols](#planned-protocols)
+  * [Planned drivers](#planned-drivers)
+
 # signalmesh
 **signalmesh** aims to be a digital synthesizer and open source
 hardware/software project
@@ -101,3 +115,19 @@ to each device in the manifest (ACM, DSM, etc). The BUM will be
 responsible for parsing this blob of data and breaking it up to
 be sent to each device (not sure the protocol yet, SPI is our
 fastest option I think)
+
+## Planned protocols
+* UART
+* SPI
+* I2C
+* USB
+* FMC
+* CAN
+Each of these will need planning around what their packets look
+like
+
+## Planned drivers
+Here is a list of planned drivers, interfaces, and just general
+backbone code we'll need for *meshing* all of the hardware together:
+
+
