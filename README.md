@@ -97,8 +97,7 @@ manifest file like so:
 
 From these manifest contents we should be able to create a single
 binary file. This binary file will containing the code to flash
-to each device in the manifest (ACM, DSM, etc)
-
-
-
-
+to each device in the manifest (ACM, DSM, etc). The BUM will be
+responsible for parsing this blob of data and breaking it up to
+be sent to each device (not sure the protocol yet, SPI is our
+fastest option I think)
