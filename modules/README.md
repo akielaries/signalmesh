@@ -44,12 +44,13 @@ Master CAN node for telemetry streaming from other devices
 
 Stores a crash table AKA telemetry snapshot in an I2C flash
 
-## Bootloader and Updater Module (BUM)
+## Upload and Updater Module (UUM)
 STM32F103
 
-This device might need an upgrade. The goal is simple, a stripped down bootloader
-that is able to select images to boot for each device in the circuit. Meaning it
-is capable of updates
+This device might need an upgrade to an STM32F3 or better
+
+The goal is simple, a stripped down bootloader that is able to select
+images to boot for each device in the circuit. Meaning it is capable of updates
 
 There should ideally be a USB female hookup to this device
 
