@@ -1,4 +1,12 @@
 /**
+ * signalmesh 2025
+ *
+ * @file
+ * @brief [Short description of the file/module]
+ * @author Akiel Aries
+ */
+
+/**
   * UART block component. Runs at 115200 baud assuming 27mhz clock
   */
 `default_nettype none
