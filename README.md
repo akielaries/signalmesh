@@ -28,11 +28,15 @@ Think of this as a light requirements spec/idea list
 * STM32F103
     * Cheap POS bluepill as the dev board
 * GW1NR-9
-    * Cheap POS TangNano9k as the dev board
+    * TangNano9k as the dev board
 
-### The Audio Creation Module (ACM)
+## The Audio Acquisition Module (AAM)
 * USB 3.0 MIDI input to STM32H755
 * STM32H755 processes MIDI packets and sends them to a TangNano 9k FPGA
+* STM32H755 delivers stereo audio data over its DAC pins to internal speakers
+or to external ones if connected
+
+## The Audio Creation Module (ACM)
 * TangNano 9k FPGA acts as a synthesizer/oscillation engine
 * TangNano 9k OR TangNano 1k FPGA act as an FX engine
 * Output from FPGA to STM32H755 via FMC (Flexible Memory Controller)
@@ -41,13 +45,11 @@ in a parallel fashion over several GPIO pins on the board to the
 dedicated FMC pins (idk if these exist, needs research)
 * I think having the FPGA deliver parallel stereo data over two GPIOs
 to the H755 may be the route to take here
-* STM32H755 delivers stereo audio data over its DAC pins to internal speakers
-or to external ones if connected
 
-### The Data Siphon Module (DSM)
+## The Data Siphon Module (DSM)
 * This module has 2 purposes. Audio data siphoning + recording and
 synth preset storage
-#### Siphon
+### Siphon
 * STM32H753 will listen/poll/act upon an interrupt when audio data is
 delivered to a set of pins, siphoning the data from the STM32H755's
 DAC. If and only if a media device is connected, otherwise this is
@@ -55,14 +57,14 @@ wasted cycles
 * The siphoned data will be delivered via USB to a connected media
 device (SSD, thumbdrive, etc)
 
-#### Preset Storage
+### Preset Storage
 Still needs more though on how all settings/parameters will be
 inserted in the first place
 * Record presets and save them to redundant pieces of I2C flash. Some
 formatting will be needed here in the flash
 * Probably some other stuff too
 
-### The Telemetry & Debug Module (TDM)
+## The Telemetry & Debug Module (TDM)
 * A STM32F33 will act as a hub for delivering all of the systems
 debug messages over UART. This can get fancy and sophisticated, how can
 it be made simple?
@@ -73,7 +75,7 @@ telemetry (which culd be also reported as debug messages). Ideally this
 can be delivered from each board via CAN to this common module
 * Failure state and telemetry should be stored in a flash device
 
-### The Bootloader and Update Module (BUM!!)
+## The Bootloader and Update Module (BUM!!)
 * Another STM32F103C8 that acts as a sort of simple brain for the circuit
 that is responsible for orchestrating updates to other devices and itself
 * This device is able to read and write to redundant flash parts
