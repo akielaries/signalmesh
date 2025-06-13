@@ -39,7 +39,9 @@ Think of this as a light requirements spec/idea list
 implemented as an FPGA block/component/module. The FPGA delivers this
 in a parallel fashion over several GPIO pins on the board to the
 dedicated FMC pins (idk if these exist, needs research)
-* STM32H755 delivers audio data over its DAC do internal speakers
+* I think having the FPGA deliver parallel stereo data over two GPIOs
+to the H755 may be the route to take here
+* STM32H755 delivers stereo audio data over its DAC pins to internal speakers
 or to external ones if connected
 
 ### The Data Siphon Module (DSM)
@@ -156,6 +158,8 @@ Here is a list of planned drivers needed for hardware
     * `ln513ra.c`
 * BME280 temperature, humidity, pressure sensor
     * `bme280.c`
+* W25Q64 QSPI flash
+    * `w25q64.c`
 
 * Network of thermistors across the board
     * `thermistor.c`
@@ -232,7 +236,12 @@ in this case acts as the single *master* and the rest of the devices
 are made *slaves* via the `CS` chip select pin
 
 I think the output of this is going to be some bringup SPI code and
-perhaps a driver for the SPI flash parts I have in th mail
+perhaps a driver for the 8mb W25Q64 QSPI flash. I'm really curious how
+I can utilize this
+
+```
+w25q64.c
+```
 
 ## CAN
 I'm unfamiliar with CAN packets/frames. Will need to dig into how these
