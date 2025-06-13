@@ -7,7 +7,7 @@
     + [Siphon](#siphon)
     + [Preset Storage](#preset-storage)
   * [The Telemetry & Debug Module (TDM)](#the-telemetry---debug-module--tdm-)
-  * [The Bootloader and Update Module (BUM!!)](#the-bootloader-and-update-module--bum---)
+  * [The Upload and Update Module (UUM)](#the-upload-and-update-module--uum---)
   * [The infrastructure](#the-infrastructure)
     + [`mkupdater`](#-mkupdater-)
   * [Planned protocols](#planned-protocols)
@@ -86,7 +86,7 @@ telemetry (which culd be also reported as debug messages). Ideally this
 can be delivered from each board via CAN to this common module
 * Failure state and telemetry should be stored in a flash device
 
-## The Bootloader and Update Module (BUM!!)
+## The Uploader and Update Module (UUM!!)
 * Another STM32F103C8 that acts as a sort of simple brain for the circuit
 that is responsible for orchestrating updates to other devices and itself
 * This device is able to read and write to redundant flash parts
@@ -127,8 +127,8 @@ manifest file like so:
     "filepath": "build/tdm/tdm_mcu.elf"
   },
   "bum_mcu": {
-    "HWID": "BUM",
-    "name": "Bootloader and Update Module",
+    "HWID": "UUM",
+    "name": "Uploader and Update Module",
     "version": "0.3.0",
     "filepath": "build/bum/bum_mcu.elf"
   }
@@ -137,7 +137,7 @@ manifest file like so:
 
 From these manifest contents we should be able to create a single
 binary file. This binary file will containing the code to flash
-to each device in the manifest (ACM, DSM, etc). The BUM will be
+to each device in the manifest (ACM, DSM, etc). The UUM will be
 responsible for parsing this blob of data and breaking it up to
 be sent to each device (not sure the protocol yet, SPI is our
 fastest option I think)
