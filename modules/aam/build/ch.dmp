@@ -78,13 +78,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  28 .comment      0000004c  00000000  00000000  00015903  2**0
                   CONTENTS, READONLY
- 29 .debug_line   0000c5b8  00000000  00000000  0001594f  2**0
+ 29 .debug_line   0000c5ba  00000000  00000000  0001594f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 30 .debug_line_str 000013df  00000000  00000000  00021f07  2**0
+ 30 .debug_line_str 000013df  00000000  00000000  00021f09  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 31 .debug_info   00026329  00000000  00000000  000232e6  2**0
+ 31 .debug_info   00026329  00000000  00000000  000232e8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 32 .debug_abbrev 00005cc5  00000000  00000000  0004960f  2**0
+ 32 .debug_abbrev 00005cc5  00000000  00000000  00049611  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  33 .debug_aranges 000004f0  00000000  00000000  0004f2d8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -1417,7 +1417,6 @@ SYMBOL TABLE:
 08001668 g     F .text	00000012 .hidden __aeabi_fcmpgt
 0800196c g     F .text	00000022 .hidden __floatsidf
 00000000 g       *ABS*	00000000 __flash7_size__
-00022be2  w      .debug_info	00000000 .hidden dac_ex.c.8723cd77
 00000000 g       .bss	00000000 __ram6_base__
 20000800 g       .pstack	00000000 __main_thread_stack_end__
 0001da5c  w      .debug_info	00000000 .hidden chevents.c.c11d5aa6
@@ -1712,6 +1711,7 @@ SYMBOL TABLE:
 30040000 g       .ram3_init	00000000 __ram3_init__
 080003ba  w    F .text	00000000 Vector104
 08001608 g     F .text	00000010 .hidden __aeabi_cfcmpeq
+00022be2  w      .debug_info	00000000 .hidden dac_ex.c.4e311cd0
 24000000 g       .bss	00000000 __ram0_base__
 080003ba  w    F .text	00000000 Vector184
 080003ba  w    F .text	00000000 Vector10C

@@ -16,8 +16,9 @@ static const DACConfig dac_cfg = {
   .init     = 2047U,
   .datamode = DAC_DHRM_12BIT_RIGHT,
   //.cr       = 0,
-  .cr       = DAC_CR_TSEL1_0 | DAC_CR_TEN1 |  // DAC1_CH1 trigger
-              DAC_CR_TSEL2_0 | DAC_CR_TEN2    // DAC1_CH2 trigger
+  .cr       = DAC_CR_TEN1 | DAC_CR_TEN2
+  //.cr       = DAC_CR_TSEL1_0 | DAC_CR_TEN1 |  // DAC1_CH1 trigger
+  //            DAC_CR_TSEL2_0 | DAC_CR_TEN2    // DAC1_CH2 trigger
 };
 
 
@@ -99,9 +100,12 @@ int main(void) {
   dacStart(&DACD1, &dac_cfg);
   dacStart(&DACD2, &dac_cfg);
   setup_tim6_for_dac();
-  //dacStartConversion(&DACD1, &dac_grpcfg, stereo_wave, 2 * SAMPLES);
   dacStartConversion(&DACD1, &single_channel_cfg, left_wave, SAMPLES);
   dacStartConversion(&DACD2, &single_channel_cfg, right_wave, SAMPLES);
+
+  // debug DAC voltage
+  // dacPutChannelX(&DACD1, 0, 1024);
+  // dacPutChannelX(&DACD2, 0, 3072);
 
   //dac_write(1, 2048); // Write mid-scale to PA4
   //dac_write(2, 4095); // Write some value to PA5
