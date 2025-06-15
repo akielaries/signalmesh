@@ -2,6 +2,11 @@
 #include "hal.h"
 #include "chprintf.h"
 
+
+#define LINE_EXT_BUTTON PAL_LINE(GPIOE, 3)
+#define LINE_TRIGGER_OUT PAL_LINE(GPIOE, 6)
+
+
 static BaseSequentialStream *chp    = (BaseSequentialStream *)&SD5;
 static const SerialConfig uart5_cfg = {
   .speed = 1000000,
@@ -10,7 +15,9 @@ static const SerialConfig uart5_cfg = {
   .cr3   = 0,
 };
 
-#define LINE_EXT_BUTTON PAL_LINE(GPIOE, 3)
+
+static virtual_timer_t vt;
+static binary_semaphore_t buttonSem;
 
 
 // callback for button press
@@ -18,8 +25,7 @@ static void button_cb(void *arg);
 // virtual timer callback
 static void vt_cb(virtual_timer_t *vtp, void *p);
 
-/* Virtual timer. */
-static virtual_timer_t vt;
+
 /* Callback of the virtual timer. */
 static void vt_cb(virtual_timer_t *vtp, void *p) {
   (void)vtp;
@@ -31,7 +37,6 @@ static void vt_cb(virtual_timer_t *vtp, void *p) {
   chSysUnlockFromISR();
 }
 
-static binary_semaphore_t buttonSem;
 static void button_cb(void *arg) {
   (void)arg;
   palToggleLine(LINE_LED1);
@@ -68,19 +73,32 @@ int main(void) {
   }
 
   palSetLineMode(LINE_EXT_BUTTON, PAL_MODE_INPUT_PULLUP);
+  palSetLineMode(LINE_TRIGGER_OUT, PAL_MODE_OUTPUT_PUSHPULL);
+
   /* Enabling the event and associating the callback. */
   palEnableLineEvent(LINE_EXT_BUTTON, PAL_EVENT_MODE_RISING_EDGE);
   palSetLineCallback(LINE_EXT_BUTTON, button_cb, NULL);
 
-  chprintf(chp, "Press button to trigger interrupt\r\n");
 
   chprintf(chp, "main loop...\r\n");
 
-
   while (true) {
-    if (chBSemWaitTimeout(&buttonSem, TIME_INFINITE) == MSG_OK) {
-      chprintf(chp, "Button pressed!\r\n");
+    // Reset semaphore to ensure we're not reacting to old signals
+    chBSemReset(&buttonSem, TRUE);
+
+    // Simulate external interrupt by toggling PE6
+    palClearLine(LINE_TRIGGER_OUT);
+    chThdSleepMilliseconds(10);
+    palSetLine(LINE_TRIGGER_OUT); // Rising edge
+    chThdSleepMilliseconds(10);
+    palClearLine(LINE_TRIGGER_OUT); // Back to low
+
+    // Wait for interrupt to fire
+    if (chBSemWaitTimeout(&buttonSem, TIME_MS2I(100)) == MSG_OK) {
+      chprintf(chp, "interrupt fired...\r\n");
       palSetLine(LINE_LED3);
+    } else {
+      chprintf(chp, "no interrupt detected\r\n");
     }
 
     palSetLine(LINE_LED2);
@@ -88,4 +106,5 @@ int main(void) {
     palClearLine(LINE_LED2);
     chThdSleepMilliseconds(200);
   }
+
 }
