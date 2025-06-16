@@ -143,13 +143,15 @@ int main(void) {
     chThdSleepMilliseconds(100);
   }
 
+  generate_dac_buffer(dac_buffer, DAC_BUFFER_SIZE);
+  SCB_CleanDCache_by_Addr((uint32_t*)dac_buffer, DAC_BUFFER_SIZE * sizeof(dacsample_t));
   /* Starting DAC1 driver.*/
   dacStart(&DACD1, &dac1cfg1);
 
   /* Starting GPT6 driver, it is used for triggering the DAC.*/
   gptStart(&GPTD6, &gpt6cfg1);
 
-  generate_dac_buffer(dac_buffer, DAC_BUFFER_SIZE);
+
   for (int i = 0; i < sizeof(dac_buffer) / sizeof(dac_buffer[i]); i++) {
     chprintf(chp, "gen: %d | ref: %d\r\n", dac_buffer[i], static_dac_buffer[i]);
   }
