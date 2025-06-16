@@ -5,7 +5,7 @@
 
 #define AMPLITUDE  2047
 #define OFFSET     2048
-#define MAX_VOICES 4
+#define MAX_VOICES 16
 
 
 typedef enum {
@@ -34,7 +34,6 @@ static const float note_frequencies[NOTE_COUNT] = {
   4186.01f, 4434.92f, 4698.63f, 4978.03f, 5274.04f, 5587.65f, 5919.91f, 6271.93f, 6644.88f, 7040.00f, 7458.62f, 7902.13f
 };
 
-void gpt6_callback(GPTDriver *gptp);
 
 // Simple voice structure
 typedef struct {
@@ -73,6 +72,17 @@ void dac_write(int dac, int16_t val) {
   }
 }
 
+void test_dac_write(int16_t right, int16_t left){
+  float dac1_volt = (right / (pow(2, 12)) * 3.3);
+  float dac2_volt = (left / (pow(2, 12)) * 3.3);
+
+  chprintf(chp, "writing %d (%f v) to DAC1 %d (%f v) to DAC2\r\n",
+           right, dac1_volt,
+           left, dac2_volt);
+  dac_write(1, right);
+  dac_write(2, left);
+}
+
 // Generate waveform sample (copied from your code)
 static float generate_sample(int waveform, float phase) {
   switch (waveform) {
@@ -94,61 +104,6 @@ static float generate_sample(int waveform, float phase) {
     default:
       return 0.0f;
   }
-}
-
-
-CH_IRQ_HANDLER(TIM6_DAC_IRQHandler) {
-  CH_IRQ_PROLOGUE();
-
-  if (TIM6->SR & TIM_SR_UIF) {
-    TIM6->SR &= ~TIM_SR_UIF;  // Clear update interrupt
-    gpt6_callback(NULL);      // Call audio generator
-  }
-
-  CH_IRQ_EPILOGUE();
-}
-
-void gpt6_callback(GPTDriver *gptp) {
-  (void)gptp;
-
-  float mixed_sample = 0.0f;
-  int active_count = 0;
-
-  for (int i = 0; i < MAX_VOICES; i++) {
-    if (voices[i].active) {
-      float sample = generate_sample(voices[i].waveform, voices[i].phase);
-      mixed_sample += sample * voices[i].amplitude;
-      voices[i].phase += (2.0f * M_PI * voices[i].frequency) / 44100.0f;
-      if (voices[i].phase >= 2.0f * M_PI)
-        voices[i].phase -= 2.0f * M_PI;
-      active_count++;
-    }
-  }
-
-  if (active_count > 0) mixed_sample /= active_count;
-  if (mixed_sample > 1.0f) mixed_sample = 1.0f;
-  else if (mixed_sample < -1.0f) mixed_sample = -1.0f;
-
-  dacPutChannelX(&DACD1, 0, (dacsample_t)(mixed_sample * AMPLITUDE + OFFSET));
-  dacPutChannelX(&DACD2, 0, (dacsample_t)(mixed_sample * AMPLITUDE + OFFSET));
-}
-
-// Timer initialization (TIM6, 44.1kHz)
-static void init_timer6_for_audio(uint32_t sample_rate_hz) {
-  rccEnableTIM6(FALSE);
-  rccResetTIM6();
-
-  uint32_t timer_clk = STM32_TIMCLK1;
-  uint32_t prescaler = 0;
-  uint32_t period = (timer_clk / sample_rate_hz) - 1;
-
-  TIM6->PSC = prescaler;
-  TIM6->ARR = period;
-  TIM6->DIER = TIM_DIER_UIE;
-  TIM6->CR1 = TIM_CR1_CEN;
-  TIM6->CNT = 0;
-
-  nvicEnableVector(TIM6_DAC_IRQn, CORTEX_PRIO_MASK(12));
 }
 
 // Start a voice
@@ -176,22 +131,130 @@ void stop_voice(int voice_id) {
   }
 }
 
+// Test C major chord
 void test_c_major_chord(int waveform) {
-  chprintf(chp, "\n=== C Major Chord ===\r\n");
-  start_voice(note_frequencies[NOTE_C5], 0.15f, waveform);
-  start_voice(note_frequencies[NOTE_E5], 0.15f, waveform);
-  start_voice(note_frequencies[NOTE_G5], 0.15f, waveform);
-  chThdSleepMilliseconds(3000);
-  for (int i = 0; i < MAX_VOICES; i++) stop_voice(i);
+  chprintf(chp, "\n=== Testing C Major Chord ===\r\n");
+
+  // Start three voices for C major chord (C, E, G)
+  int voice1 = start_voice(note_frequencies[NOTE_C5], 0.3f, waveform); // C4
+  int voice2 = start_voice(note_frequencies[NOTE_E5], 0.3f, waveform); // E4
+  int voice3 = start_voice(note_frequencies[NOTE_G5], 0.3f, waveform); // G4
+
+  // Play for a while using your original timing approach
+  uint32_t sample_rate_hz         = 44100;
+  uint32_t sample_interval_us     = 1000000U / sample_rate_hz;
+  systime_t sample_interval_ticks = TIME_US2I(sample_interval_us);
+  systime_t next_time             = chVTGetSystemTimeX();
+  systime_t end_time              = next_time + TIME_S2I(3); // 3 seconds
+
+  while (chVTGetSystemTimeX() < end_time) {
+    // Mix all active voices
+    float mixed_sample = 0.0f;
+    int active_count   = 0;
+
+    for (int i = 0; i < MAX_VOICES; i++) {
+      if (voices[i].active) {
+        float sample = generate_sample(voices[i].waveform, voices[i].phase);
+        mixed_sample += sample * voices[i].amplitude;
+        active_count++;
+
+        // Advance phase
+        float phase_increment =
+          (2.0f * M_PI * voices[i].frequency) / sample_rate_hz;
+        voices[i].phase += phase_increment;
+        if (voices[i].phase >= 2.0f * M_PI) {
+          voices[i].phase -= 2.0f * M_PI;
+        }
+      }
+    }
+
+    // something about clamping the signal to prevent distortion but this doesn't work!
+    if (active_count > 0) {
+      mixed_sample /= active_count;
+    }
+    if (mixed_sample > 1.0f) mixed_sample = 1.0f;
+    if (mixed_sample < -1.0f) mixed_sample = -1.0f;
+
+    // Convert to DAC sample
+    dacsample_t dac_sample = (dacsample_t)(mixed_sample * AMPLITUDE + OFFSET);
+
+    // Output to both DACs (same as your original)
+    dacPutChannelX(&DACD1, 0, dac_sample);
+    dacPutChannelX(&DACD2, 0, dac_sample);
+
+    // Your original timing
+    next_time += sample_interval_ticks;
+    chThdSleepUntil(next_time);
+  }
+
+  // Stop all voices
+  stop_voice(voice1);
+  stop_voice(voice2);
+  stop_voice(voice3);
+
+  chprintf(chp, "cmaj test complete\r\n");
 }
 
 void test_b_major_chord(int waveform) {
-  chprintf(chp, "\n=== B Major Chord ===\r\n");
-  start_voice(note_frequencies[NOTE_B4], 0.15f, waveform);
-  start_voice(note_frequencies[NOTE_DS5], 0.15f, waveform);
-  start_voice(note_frequencies[NOTE_FS5], 0.15f, waveform);
-  chThdSleepMilliseconds(3000);
-  for (int i = 0; i < MAX_VOICES; i++) stop_voice(i);
+  chprintf(chp, "\n=== Testing B Major Chord ===\r\n");
+
+  int voice1 = start_voice(note_frequencies[NOTE_B4], 0.3f, waveform);
+  int voice2 = start_voice(note_frequencies[NOTE_DS5], 0.3f, waveform);
+  int voice3 = start_voice(note_frequencies[NOTE_FS5], 0.3f, waveform);
+
+  // Play for a while using your original timing approach
+  uint32_t sample_rate_hz         = 44100;
+  uint32_t sample_interval_us     = 1000000U / sample_rate_hz;
+  systime_t sample_interval_ticks = TIME_US2I(sample_interval_us);
+  systime_t next_time             = chVTGetSystemTimeX();
+  systime_t end_time              = next_time + TIME_S2I(3); // 3 seconds
+
+  while (chVTGetSystemTimeX() < end_time) {
+    // Mix all active voices
+    float mixed_sample = 0.0f;
+    int active_count   = 0;
+
+    for (int i = 0; i < MAX_VOICES; i++) {
+      if (voices[i].active) {
+        float sample = generate_sample(voices[i].waveform, voices[i].phase);
+        mixed_sample += sample * voices[i].amplitude;
+        active_count++;
+
+        // Advance phase
+        float phase_increment =
+          (2.0f * M_PI * voices[i].frequency) / sample_rate_hz;
+        voices[i].phase += phase_increment;
+        if (voices[i].phase >= 2.0f * M_PI) {
+          voices[i].phase -= 2.0f * M_PI;
+        }
+      }
+    }
+
+    // something about clamping the signal to prevent distortion but this doesn't work!
+    if (active_count > 0) {
+      mixed_sample /= active_count;
+    }
+    if (mixed_sample > 1.0f) mixed_sample = 1.0f;
+    if (mixed_sample < -1.0f) mixed_sample = -1.0f;
+
+    // Convert to DAC sample
+    dacsample_t dac_sample = (dacsample_t)(mixed_sample * AMPLITUDE + OFFSET);
+
+    // Output to both DACs (same as your original)
+    dacPutChannelX(&DACD1, 0, dac_sample);
+    dacPutChannelX(&DACD2, 0, dac_sample);
+
+    // Your original timing
+    next_time += sample_interval_ticks;
+    chThdSleepUntil(next_time);
+  }
+
+  // Stop all voices
+  stop_voice(voice1);
+  stop_voice(voice2);
+  stop_voice(voice3);
+
+  chprintf(chp, "bmaj test complete\r\n");
 }
 
 int main(void) {
@@ -202,6 +265,7 @@ int main(void) {
   palSetPadMode(GPIOD, GPIOD_PIN2, PAL_MODE_ALTERNATE(8));
   sdStart(&SD5, &uart5_cfg);
   chprintf(chp, "Multi-Voice Test Starting...\r\n");
+  chprintf(chp, "System tick freq: %u Hz\n\r", CH_CFG_ST_FREQUENCY);
 
   palSetPadMode(GPIOA, GPIOA_PIN3, PAL_STM32_MODE_OUTPUT);
   palSetPadMode(GPIOA, GPIOA_PIN4, PAL_STM32_MODE_ANALOG);
@@ -219,21 +283,49 @@ int main(void) {
 
   chprintf(chp, "DAC initialized. Starting tests...\r\n");
 
-  chprintf(chp, "DAC initialized. Starting TIM6 interrupt...\r\n");
+  test_dac_write(2048, 2048);
+  chThdSleepSeconds(5);
 
-  // Initialize timer for 44.1kHz audio output
-  init_timer6_for_audio(44100);
 
-  // Test chord (interrupt handles audio generation now)
-  test_c_major_chord(1);
-  chThdSleepMilliseconds(1000);
-  test_b_major_chord(1);
+  chprintf(chp, "Testing single 440Hz sine wave...\r\n");
+  float frequency_hz      = 440.0f;
+  float phase             = 0.0f;
+  uint32_t sample_rate_hz = 44100;
+  float phase_increment   = (2.0f * M_PI * frequency_hz) / sample_rate_hz;
 
-  // LED blink loop
-  palSetPadMode(GPIOA, GPIOA_PIN3, PAL_STM32_MODE_OUTPUT);
+  uint32_t sample_interval_us     = 1000000U / sample_rate_hz;
+  systime_t sample_interval_ticks = TIME_US2I(sample_interval_us);
+  systime_t next_time             = chVTGetSystemTimeX();
+  systime_t end_time              = next_time + TIME_S2I(60);
+
+  chprintf(chp, "ticks: %d\r\n", sample_interval_ticks);
+  while (chVTGetSystemTimeX() < end_time) {
+    dacsample_t sample = (dacsample_t)(AMPLITUDE * sinf(phase) + OFFSET);
+
+    dacPutChannelX(&DACD1, 0, sample);
+    dacPutChannelX(&DACD2, 0, sample);
+
+    phase += phase_increment;
+    if (phase >= 2.0f * M_PI) {
+      phase -= 2.0f * M_PI;
+    }
+
+    next_time += sample_interval_ticks;
+    chThdSleepUntil(next_time);
+  }
+
+  chprintf(chp, "Single tone test complete\r\n");
+  chThdSleepMilliseconds(500);
+
+  while (true) {
+    test_c_major_chord(0);
+    test_b_major_chord(0);
+  }
+
+
   while (true) {
     palTogglePad(GPIOA, GPIOA_PIN3);
-    chThdSleepMilliseconds(500);
+    chThdSleepSeconds(1);
   }
 
   return 0;

@@ -121,7 +121,8 @@ LDSCRIPT= $(STARTUPLD)/STM32H755xI_M7.ld
 # setting.
 CSRC = $(ALLCSRC) \
        $(TESTSRC) \
-       src/dac_ex2.c
+			 $(CONFDIR)/portab.c \
+       src/dac_ex3.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.

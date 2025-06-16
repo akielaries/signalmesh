@@ -133,7 +133,6 @@ void generate_waveform(int waveform_type) {
   }
 }
 
-// Your original DAC write function (kept for compatibility)
 void dac_write(int dac, int16_t val) {
   switch (dac) {
     case 1:
