@@ -8,7 +8,10 @@
 #define DAC_BUFFER_SIZE 360
 
 
-static dacsample_t dac_buffer[DAC_BUFFER_SIZE];
+static dacsample_t dac_buffer[DAC_BUFFER_SIZE] __attribute__((aligned(32)));
+//__attribute__((section(".dma_buffer")))
+//dacsample_t dac_buffer[DAC_BUFFER_SIZE];
+
 static const dacsample_t static_dac_buffer[DAC_BUFFER_SIZE] = {
   2047, 2082, 2118, 2154, 2189, 2225, 2260, 2296, 2331, 2367, 2402, 2437,
   2472, 2507, 2542, 2576, 2611, 2645, 2679, 2713, 2747, 2780, 2813, 2846,
@@ -117,6 +120,21 @@ static const GPTConfig gpt6cfg1 = {
   .dier         = 0U
 };
 
+
+void play_sine_wave(float frequency_hz) {
+    const uint32_t num_samples = DAC_BUFFER_SIZE;
+    uint32_t dac_update_rate = (uint32_t)(frequency_hz * num_samples);
+
+    chprintf(chp, "Setting sine wave frequency: %.2f Hz (DAC update rate: %u Hz)\r\n",
+             frequency_hz, dac_update_rate);
+
+    gptStopTimer(&GPTD6);
+    gptChangeInterval(&GPTD6, gpt6cfg1.frequency / dac_update_rate);
+    dacStartConversion(&DACD1, &dacgrpcfg1,
+                       (dacsample_t *)static_dac_buffer, DAC_BUFFER_SIZE);
+    gptStartContinuous(&GPTD6, gpt6cfg1.frequency / dac_update_rate);
+}
+
 /*
  * Application entry point.
  */
@@ -152,13 +170,19 @@ int main(void) {
   gptStart(&GPTD6, &gpt6cfg1);
 
 
-  for (int i = 0; i < sizeof(dac_buffer) / sizeof(dac_buffer[i]); i++) {
+  for (uint32_t i = 0; i < sizeof(dac_buffer) / sizeof(dac_buffer[i]); i++) {
     chprintf(chp, "gen: %d | ref: %d\r\n", dac_buffer[i], static_dac_buffer[i]);
   }
   /* Starting a continuous conversion.*/
   dacStartConversion(&DACD1, &dacgrpcfg1,
-                     (dacsample_t *)dac_buffer, DAC_BUFFER_SIZE);
-  gptStartContinuous(&GPTD6, 40);
+                     (dacsample_t *)static_dac_buffer, DAC_BUFFER_SIZE);
+
+  float frequency_hz = 440.0f;
+  const uint32_t num_samples = DAC_BUFFER_SIZE;
+  uint32_t dac_update_rate = (uint32_t)(frequency_hz * num_samples);
+
+
+  gptStartContinuous(&GPTD6, gpt6cfg1.frequency / dac_update_rate); // this will change the freq
 
   /*
    * Normal main() thread activity, if the button is pressed then the DAC
