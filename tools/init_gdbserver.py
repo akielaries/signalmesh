@@ -31,10 +31,6 @@ device_list = {
 
 
 def print_devices():
-    #command = "st-info --probe"
-    #result = subprocess.check_output(command, shell=True, text=True)
-    #print(result)
-
     for device in device_list:
         print(f"device: {device}")
         print(f"    serial: {device_list[device]['serial']}")
