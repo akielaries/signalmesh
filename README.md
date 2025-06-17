@@ -55,7 +55,7 @@ via UART. Ready to display via two USB 2.0 ports respectively.
 # Development
 I debug port access is simple and there are several examples through the code. Use
 any USB -> Serial TTY converter and hook up the TX/RX pins to UART5 (`SD5`) on
-the STM32.
+the STM32. I use `tio` to view the debug port activity at 1,000,000 BAUD.
 
 For development there is `tools/gdbserver.py` which is helpful for starting,
 killing, listing, and monitoring GDB server sessions for all of our board
