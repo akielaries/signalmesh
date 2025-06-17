@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import shlex
 import subprocess
 import os
 import signal
@@ -55,28 +56,36 @@ def kill_gdbserver():
         # No st-util processes running
         pass
 
-import shlex
-
 def start_gdbserver(monitor=False):
     print("Starting GDB server for devices:")
-    print_devices()
+    threads = []
 
     for device, info in device_list.items():
         serial = info['serial']
         port = info['port']
-        cmd = f"st-util --serial {serial} -p {port}"
+        cmd = f"stdbuf -oL st-util --serial {serial} -p {port}"
         print(f"Launching st-util for {device} on port {port}")
 
         if monitor:
             process = subprocess.Popen(shlex.split(cmd),
                                        stdout=subprocess.PIPE,
                                        stderr=subprocess.STDOUT,
-                                       text=True)
-            threading.Thread(target=stream_output, args=(process, device), daemon=True).start()
+                                       text=True,
+                                       bufsize=1)
+            t = threading.Thread(target=stream_output, args=(process, device), daemon=True)
+            t.start()
+            threads.append(t)
         else:
             subprocess.Popen(shlex.split(cmd),
                              stdout=subprocess.DEVNULL,
                              stderr=subprocess.DEVNULL)
+
+    if monitor:
+        try:
+            for t in threads:
+                t.join()
+        except KeyboardInterrupt:
+            print("\nMonitoring interrupted by user.")
 
 def list_gdbservers():
     serial_to_name = {info["serial"]: name for name, info in device_list.items()}
