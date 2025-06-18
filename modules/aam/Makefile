@@ -83,7 +83,7 @@ endif
 #
 
 # Define project name here
-PROJECT = ch
+PROJECT = stm32h755_aam
 
 # Target settings.
 MCU  = cortex-m7
@@ -122,7 +122,8 @@ LDSCRIPT= $(STARTUPLD)/STM32H755xI_M7.ld
 CSRC = $(ALLCSRC) \
        $(TESTSRC) \
 			 $(CONFDIR)/portab.c \
-       src/sine.c
+			 $(BUILDDIR)/main.c
+       #src/sine.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -182,6 +183,9 @@ include $(RULESPATH)/rules.mk
 # Common rules
 ##############################################################################
 
+TARGET = libchibios.a
+all: $(OBJS)
+	$(AR) rcs $(BUILD_DIR)/$(TARGET) $(OBJS)
 ##############################################################################
 # Custom rules
 #

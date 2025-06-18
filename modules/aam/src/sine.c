@@ -169,10 +169,11 @@ int main(void) {
   /* Starting GPT6 driver, it is used for triggering the DAC.*/
   gptStart(&GPTD6, &gpt6cfg1);
 
-
+  /*
   for (uint32_t i = 0; i < sizeof(dac_buffer) / sizeof(dac_buffer[i]); i++) {
     chprintf(chp, "gen: %d | ref: %d\r\n", dac_buffer[i], static_dac_buffer[i]);
   }
+  */
   /* Starting a continuous conversion.*/
   dacStartConversion(&DACD1, &dacgrpcfg1,
                      (dacsample_t *)static_dac_buffer, DAC_BUFFER_SIZE);
