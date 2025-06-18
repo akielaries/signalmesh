@@ -185,7 +185,7 @@ include $(RULESPATH)/rules.mk
 
 TARGET = libchibios.a
 all: $(OBJS)
-	$(AR) rcs $(BUILD_DIR)/$(TARGET) $(OBJS)
+	$(AR) rcs $(BUILDDIR)/$(TARGET) $(OBJS)
 ##############################################################################
 # Custom rules
 #
