@@ -122,8 +122,7 @@ LDSCRIPT= $(STARTUPLD)/STM32H755xI_M7.ld
 CSRC = $(ALLCSRC) \
        $(TESTSRC) \
 			 $(CONFDIR)/portab.c \
-			 $(BUILDDIR)/main.c
-       #src/sine.c
+       src/sine.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -183,9 +182,6 @@ include $(RULESPATH)/rules.mk
 # Common rules
 ##############################################################################
 
-TARGET = libchibios.a
-all: $(OBJS)
-	$(AR) rcs $(BUILDDIR)/$(TARGET) $(OBJS)
 ##############################################################################
 # Custom rules
 #
