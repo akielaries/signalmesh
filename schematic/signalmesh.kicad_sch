@@ -15229,8 +15229,8 @@
 		(uuid 38c547ba-7412-4195-a17f-d3348600991c)
 	)
 	(rectangle
-		(start 212.09 237.49)
-		(end 259.08 251.46)
+		(start 196.85 238.76)
+		(end 243.84 252.73)
 		(stroke
 			(width 0)
 			(type solid)
@@ -15280,8 +15280,8 @@
 		(uuid 6e62e06c-4f28-4968-a37e-8a834a714112)
 	)
 	(rectangle
-		(start 90.17 255.27)
-		(end 402.59 474.98)
+		(start 74.93 256.54)
+		(end 387.35 476.25)
 		(stroke
 			(width 0)
 			(type solid)
@@ -15342,8 +15342,8 @@
 		(uuid ab553471-7650-4a29-9935-8bbbff034414)
 	)
 	(rectangle
-		(start 91.44 256.54)
-		(end 364.49 410.21)
+		(start 76.2 261.62)
+		(end 377.19 411.48)
 		(stroke
 			(width 0)
 			(type solid)
@@ -15439,7 +15439,7 @@
 	)
 	(text "STM32H753 NUCLEO"
 		(exclude_from_sim no)
-		(at 106.68 259.334 0)
+		(at 91.44 264.16 0)
 		(effects
 			(font
 				(size 1.905 1.905)
@@ -15501,7 +15501,7 @@
 	)
 	(text "AAM -> DSM Record"
 		(exclude_from_sim no)
-		(at 246.634 239.522 0)
+		(at 231.394 240.792 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -15561,7 +15561,7 @@
 	)
 	(text "Data Siphon Module"
 		(exclude_from_sim no)
-		(at 383.794 258.064 0)
+		(at 368.554 259.334 0)
 		(effects
 			(font
 				(size 1.905 1.905)
@@ -16168,10 +16168,6 @@
 	(no_connect
 		(at 541.02 62.23)
 		(uuid "bb01ad1b-ab75-4448-85b2-caaff0ac842c")
-	)
-	(no_connect
-		(at 480.06 64.77)
-		(uuid "c600ede6-ed18-4e97-acd2-1412202f3270")
 	)
 	(no_connect
 		(at 480.06 57.15)
@@ -17279,7 +17275,7 @@
 	)
 	(wire
 		(pts
-			(xy 240.03 246.38) (xy 231.14 246.38)
+			(xy 224.79 247.65) (xy 215.9 247.65)
 		)
 		(stroke
 			(width 0)
@@ -18129,7 +18125,7 @@
 	)
 	(wire
 		(pts
-			(xy 240.03 243.84) (xy 231.14 243.84)
+			(xy 224.79 245.11) (xy 215.9 245.11)
 		)
 		(stroke
 			(width 0)
@@ -19699,7 +19695,7 @@
 	)
 	(wire
 		(pts
-			(xy 240.03 248.92) (xy 231.14 248.92)
+			(xy 224.79 250.19) (xy 215.9 250.19)
 		)
 		(stroke
 			(width 0)
@@ -20953,6 +20949,28 @@
 			)
 		)
 	)
+	(global_label "ACM_LED_OK"
+		(shape input)
+		(at 480.06 44.45 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "1edf837d-18d2-4986-a080-b900a06e8bff")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 465.282 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "ACM_LED_FAIL"
 		(shape input)
 		(at 553.72 106.68 180)
@@ -20966,6 +20984,28 @@
 		(uuid "21a104f3-1f08-4118-ac43-ce9bf2c09204")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 537.7324 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "DSM_DBG_RX"
+		(shape input)
+		(at 83.82 381 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "2283a972-0ddd-4683-8002-c88f2da5271a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 68.9815 381 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21197,7 +21237,7 @@
 	)
 	(global_label "DSM_DAC_R"
 		(shape bidirectional)
-		(at 240.03 246.38 0)
+		(at 224.79 247.65 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -21207,7 +21247,7 @@
 		)
 		(uuid "283b7f94-924a-40cc-82a1-174ac4295bba")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 254.8912 246.38 0)
+			(at 239.6512 247.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21521,28 +21561,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "ACM_LED_OK"
-		(shape input)
-		(at 480.06 46.99 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "3af6a9ae-4b8a-495a-b10a-511e32d0dd73")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 465.282 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 				(hide yes)
 			)
 		)
@@ -22163,28 +22181,6 @@
 			)
 		)
 	)
-	(global_label "ACM_LED_PWR"
-		(shape output)
-		(at 480.06 41.91 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "6be80502-8b62-4372-8567-f7d9c95c913a")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 463.8911 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "ACM_SPI_SCLK"
 		(shape bidirectional)
 		(at 514.35 143.51 180)
@@ -22495,7 +22491,7 @@
 	)
 	(global_label "DSM_INTRPT_RX"
 		(shape bidirectional)
-		(at 240.03 243.84 0)
+		(at 224.79 245.11 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22505,12 +22501,34 @@
 		)
 		(uuid "7e878844-9648-4301-aafd-15322ca5564f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 258.8826 243.84 0)
+			(at 243.6426 245.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "AAM_DBG_RX"
+		(shape input)
+		(at 97.79 139.7 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "7ebc330c-b425-4a94-bc94-c4f7fd578ecf")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 82.9515 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -22757,9 +22775,9 @@
 			)
 		)
 	)
-	(global_label "ACM_LED_WARN"
-		(shape input)
-		(at 480.06 49.53 180)
+	(global_label "ACM_FMC_CLK"
+		(shape bidirectional)
+		(at 480.06 64.77 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22767,9 +22785,9 @@
 			)
 			(justify right)
 		)
-		(uuid "90f30354-98f4-4ef4-8d76-92c367044923")
+		(uuid "91735b17-bafe-41c7-ab78-ad86b01ee078")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 462.742 49.53 0)
+			(at 462.8402 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22814,6 +22832,28 @@
 		(uuid "92407be4-dbe5-43c8-9e0f-88962b3c29ad")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 81.8402 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "DSM_DBG_TX"
+		(shape input)
+		(at 83.82 363.22 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "92460682-a3e3-4d4a-925a-2a3099ffd976")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 69.2839 363.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22990,6 +23030,28 @@
 		(uuid "9d3dba6d-1c6c-4289-995e-480f8b67eb25")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 412.0402 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "ACM_LED_FAIL"
+		(shape output)
+		(at 480.06 41.91 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "9d9f5230-1fde-4ab1-9fe1-453643326ba0")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 464.0724 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23397,7 +23459,7 @@
 	)
 	(global_label "AAM_INTRPT_TX"
 		(shape bidirectional)
-		(at 231.14 243.84 180)
+		(at 215.9 245.11 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -23407,7 +23469,7 @@
 		)
 		(uuid "b18be5ae-2019-41bf-8ca6-44aa7c1baaac")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 212.8921 243.84 0)
+			(at 197.6521 245.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23571,6 +23633,28 @@
 			)
 		)
 	)
+	(global_label "AAM_DBG_TX"
+		(shape input)
+		(at 97.79 121.92 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b77b805f-6246-4837-a640-6b967e7ad98a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 83.2539 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "TDM_I2C1_SDA"
 		(shape bidirectional)
 		(at 609.6 118.11 0)
@@ -23716,28 +23800,6 @@
 		(uuid "c52c8e29-b374-4594-ba91-9062b867a349")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 735.5274 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "ACM_FMC_CLK"
-		(shape bidirectional)
-		(at 480.06 52.07 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "c63cf556-0d2d-4202-a957-4d1afe4cfe31")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 462.8402 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23914,28 +23976,6 @@
 		(uuid "d196d154-9b65-4b11-afd3-9bb9bff2e3e7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 412.0402 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "ACM_LED_FAIL"
-		(shape output)
-		(at 480.06 44.45 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "d1f8f5ff-eb4b-43a2-80b5-de6dfb7d2905")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 464.0724 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24167,7 +24207,7 @@
 	)
 	(global_label "AAM_DAC_L"
 		(shape bidirectional)
-		(at 231.14 248.92 180)
+		(at 215.9 250.19 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24177,7 +24217,7 @@
 		)
 		(uuid "e657f4b4-746d-4e8b-9435-406785759a85")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 216.823 248.92 0)
+			(at 201.583 250.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24189,7 +24229,7 @@
 	)
 	(global_label "DSM_DAC_L"
 		(shape bidirectional)
-		(at 240.03 248.92 0)
+		(at 224.79 250.19 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24199,7 +24239,7 @@
 		)
 		(uuid "e724b116-c4d3-48cf-99da-60cbcfea60ca")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 254.6493 248.92 0)
+			(at 239.4093 250.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24249,6 +24289,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "ACM_LED_WARN"
+		(shape input)
+		(at 480.06 46.99 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "f32832b0-4f44-45b0-95a2-1e756a9e4376")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 462.742 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -24365,7 +24427,7 @@
 	)
 	(global_label "AAM_DAC_R"
 		(shape bidirectional)
-		(at 231.14 246.38 180)
+		(at 215.9 247.65 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24375,7 +24437,7 @@
 		)
 		(uuid "fc8258f6-1b72-448c-81a0-0cb1a054ceba")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 216.5811 246.38 0)
+			(at 201.3411 247.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25480,7 +25542,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 280.67 289.56 0)
+		(at 265.43 290.83 0)
 		(unit 5)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25489,7 +25551,7 @@
 		(fields_autoplaced yes)
 		(uuid "11d98829-9c96-4ea0-b7fc-d3d6914fd732")
 		(property "Reference" "U17"
-			(at 280.67 261.62 0)
+			(at 265.43 262.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25497,7 +25559,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 280.67 264.16 0)
+			(at 265.43 265.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25505,7 +25567,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 280.67 289.56 0)
+			(at 265.43 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25515,7 +25577,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 280.67 289.56 0)
+			(at 265.43 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25524,7 +25586,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 280.67 289.56 0)
+			(at 265.43 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25533,7 +25595,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 280.67 289.56 0)
+			(at 265.43 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25543,7 +25605,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 280.67 289.56 0)
+			(at 265.43 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25553,7 +25615,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 280.67 289.56 0)
+			(at 265.43 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25563,7 +25625,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 280.67 289.56 0)
+			(at 265.43 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25573,7 +25635,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 280.67 289.56 0)
+			(at 265.43 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25583,7 +25645,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 280.67 289.56 0)
+			(at 265.43 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25593,7 +25655,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 280.67 289.56 0)
+			(at 265.43 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25603,7 +25665,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 280.67 289.56 0)
+			(at 265.43 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25613,7 +25675,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 280.67 289.56 0)
+			(at 265.43 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25623,7 +25685,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 280.67 289.56 0)
+			(at 265.43 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25633,7 +25695,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 280.67 289.56 0)
+			(at 265.43 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30768,7 +30830,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 116.84 349.25 0)
+		(at 101.6 350.52 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -30777,7 +30839,7 @@
 		(fields_autoplaced yes)
 		(uuid "3cf435f1-bafa-4aea-8431-f4f35e7bf443")
 		(property "Reference" "U17"
-			(at 116.84 288.29 0)
+			(at 101.6 289.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30785,7 +30847,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 116.84 290.83 0)
+			(at 101.6 292.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30793,7 +30855,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 116.84 349.25 0)
+			(at 101.6 350.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30803,7 +30865,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 116.84 349.25 0)
+			(at 101.6 350.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30812,7 +30874,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 116.84 349.25 0)
+			(at 101.6 350.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30821,7 +30883,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 116.84 349.25 0)
+			(at 101.6 350.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30831,7 +30893,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 116.84 349.25 0)
+			(at 101.6 350.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30841,7 +30903,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 116.84 349.25 0)
+			(at 101.6 350.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30851,7 +30913,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 116.84 349.25 0)
+			(at 101.6 350.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30861,7 +30923,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 116.84 349.25 0)
+			(at 101.6 350.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30871,7 +30933,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 116.84 349.25 0)
+			(at 101.6 350.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30881,7 +30943,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 116.84 349.25 0)
+			(at 101.6 350.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30891,7 +30953,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 116.84 349.25 0)
+			(at 101.6 350.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30901,7 +30963,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 116.84 349.25 0)
+			(at 101.6 350.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30911,7 +30973,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 116.84 349.25 0)
+			(at 101.6 350.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30921,7 +30983,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 116.84 349.25 0)
+			(at 101.6 350.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33258,7 +33320,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 341.63 327.66 0)
+		(at 326.39 328.93 0)
 		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -33267,7 +33329,7 @@
 		(fields_autoplaced yes)
 		(uuid "54e7c125-1fe3-403c-a1c8-307c95dfaade")
 		(property "Reference" "U17"
-			(at 341.63 266.7 0)
+			(at 326.39 267.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33275,7 +33337,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 341.63 269.24 0)
+			(at 326.39 270.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33283,7 +33345,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 341.63 327.66 0)
+			(at 326.39 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33293,7 +33355,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 341.63 327.66 0)
+			(at 326.39 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33302,7 +33364,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 341.63 327.66 0)
+			(at 326.39 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33311,7 +33373,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 341.63 327.66 0)
+			(at 326.39 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33321,7 +33383,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 341.63 327.66 0)
+			(at 326.39 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33331,7 +33393,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 341.63 327.66 0)
+			(at 326.39 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33341,7 +33403,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 341.63 327.66 0)
+			(at 326.39 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33351,7 +33413,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 341.63 327.66 0)
+			(at 326.39 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33361,7 +33423,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 341.63 327.66 0)
+			(at 326.39 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33371,7 +33433,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 341.63 327.66 0)
+			(at 326.39 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33381,7 +33443,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 341.63 327.66 0)
+			(at 326.39 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33391,7 +33453,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 341.63 327.66 0)
+			(at 326.39 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33401,7 +33463,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 341.63 327.66 0)
+			(at 326.39 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33411,7 +33473,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 341.63 327.66 0)
+			(at 326.39 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39742,7 +39804,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 180.34 292.1 0)
+		(at 165.1 293.37 0)
 		(unit 3)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -39751,7 +39813,7 @@
 		(fields_autoplaced yes)
 		(uuid "9ec8aabf-8529-4130-8cd9-8b03dd413505")
 		(property "Reference" "U17"
-			(at 180.34 264.16 0)
+			(at 165.1 265.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39759,7 +39821,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 180.34 266.7 0)
+			(at 165.1 267.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39767,7 +39829,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 180.34 292.1 0)
+			(at 165.1 293.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39777,7 +39839,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 180.34 292.1 0)
+			(at 165.1 293.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39786,7 +39848,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 180.34 292.1 0)
+			(at 165.1 293.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39795,7 +39857,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 180.34 292.1 0)
+			(at 165.1 293.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39805,7 +39867,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 180.34 292.1 0)
+			(at 165.1 293.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39815,7 +39877,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 180.34 292.1 0)
+			(at 165.1 293.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39825,7 +39887,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 180.34 292.1 0)
+			(at 165.1 293.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39835,7 +39897,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 180.34 292.1 0)
+			(at 165.1 293.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39845,7 +39907,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 180.34 292.1 0)
+			(at 165.1 293.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39855,7 +39917,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 180.34 292.1 0)
+			(at 165.1 293.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39865,7 +39927,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 180.34 292.1 0)
+			(at 165.1 293.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39875,7 +39937,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 180.34 292.1 0)
+			(at 165.1 293.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39885,7 +39947,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 180.34 292.1 0)
+			(at 165.1 293.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39895,7 +39957,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 180.34 292.1 0)
+			(at 165.1 293.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41377,7 +41439,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 273.05 355.6 0)
+		(at 257.81 356.87 0)
 		(unit 6)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -41386,7 +41448,7 @@
 		(fields_autoplaced yes)
 		(uuid "a78482bc-8ca7-48de-86e6-4c4ac50953c2")
 		(property "Reference" "U17"
-			(at 273.05 317.5 0)
+			(at 257.81 318.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41394,7 +41456,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 273.05 320.04 0)
+			(at 257.81 321.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41402,7 +41464,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 273.05 355.6 0)
+			(at 257.81 356.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41412,7 +41474,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 273.05 355.6 0)
+			(at 257.81 356.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41421,7 +41483,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 273.05 355.6 0)
+			(at 257.81 356.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41430,7 +41492,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 273.05 355.6 0)
+			(at 257.81 356.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41440,7 +41502,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 273.05 355.6 0)
+			(at 257.81 356.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41450,7 +41512,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 273.05 355.6 0)
+			(at 257.81 356.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41460,7 +41522,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 273.05 355.6 0)
+			(at 257.81 356.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41470,7 +41532,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 273.05 355.6 0)
+			(at 257.81 356.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41480,7 +41542,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 273.05 355.6 0)
+			(at 257.81 356.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41490,7 +41552,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 273.05 355.6 0)
+			(at 257.81 356.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41500,7 +41562,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 273.05 355.6 0)
+			(at 257.81 356.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41510,7 +41572,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 273.05 355.6 0)
+			(at 257.81 356.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41520,7 +41582,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 273.05 355.6 0)
+			(at 257.81 356.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41530,7 +41592,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 273.05 355.6 0)
+			(at 257.81 356.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -48727,7 +48789,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 186.69 346.71 0)
+		(at 171.45 347.98 0)
 		(unit 4)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -48736,7 +48798,7 @@
 		(fields_autoplaced yes)
 		(uuid "eb6d5ce9-ad38-454c-b7c4-c87207f1a0d6")
 		(property "Reference" "U17"
-			(at 186.69 313.69 0)
+			(at 171.45 314.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -48744,7 +48806,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 186.69 316.23 0)
+			(at 171.45 317.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -48752,7 +48814,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 186.69 346.71 0)
+			(at 171.45 347.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -48762,7 +48824,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 186.69 346.71 0)
+			(at 171.45 347.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -48771,7 +48833,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 186.69 346.71 0)
+			(at 171.45 347.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -48780,7 +48842,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 186.69 346.71 0)
+			(at 171.45 347.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -48790,7 +48852,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 186.69 346.71 0)
+			(at 171.45 347.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -48800,7 +48862,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 186.69 346.71 0)
+			(at 171.45 347.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -48810,7 +48872,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 186.69 346.71 0)
+			(at 171.45 347.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -48820,7 +48882,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 186.69 346.71 0)
+			(at 171.45 347.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -48830,7 +48892,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 186.69 346.71 0)
+			(at 171.45 347.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -48840,7 +48902,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 186.69 346.71 0)
+			(at 171.45 347.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -48850,7 +48912,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 186.69 346.71 0)
+			(at 171.45 347.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -48860,7 +48922,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 186.69 346.71 0)
+			(at 171.45 347.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -48870,7 +48932,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 186.69 346.71 0)
+			(at 171.45 347.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -48880,7 +48942,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 186.69 346.71 0)
+			(at 171.45 347.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)

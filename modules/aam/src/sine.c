@@ -160,6 +160,7 @@ int main(void) {
       dacStopConversion(&DACD1);
     }
     chThdSleepMilliseconds(500);
+    chprintf(chp, "arggg....\r\n");
   }
   return 0;
 }
