@@ -1,4 +1,4 @@
-25633234472512179
+25634984976953981
 24LC256-I_SN
 SOIC127P600X175-8N
 
@@ -6,6 +6,13 @@ SOIC127P600X175-8N
 0
 8
 8
+74HC4050D
+SO16
+<b>Small Outline package</b> 150 mil
+
+0
+16
+16
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
