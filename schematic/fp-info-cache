@@ -1,4 +1,4 @@
-25634984976953981
+25636735748096165
 24LC256-I_SN
 SOIC127P600X175-8N
 
@@ -93848,6 +93848,13 @@ rotary encoder illuminated switch vertical
 0
 9
 8
+SN74LVC1G3157
+SC70-6
+
+
+0
+6
+6
 Sensor
 ASAIR_AM2302_P2.54mm_Lead2.75mm_TabDown
 Temperature and humidity module, http://akizukidenshi.com/download/ds/aosong/AM2302.pdf
