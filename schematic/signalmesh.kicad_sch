@@ -16180,6 +16180,19 @@
 		(uuid 4d615267-3107-4f38-8720-444f12388116)
 	)
 	(rectangle
+		(start 397.51 99.06)
+		(end 444.5 111.76)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type color)
+			(color 255 255 194 1)
+		)
+		(uuid 50d29f15-1f36-44ec-a490-767b11bec963)
+	)
+	(rectangle
 		(start 449.58 182.88)
 		(end 504.19 223.52)
 		(stroke
@@ -16570,7 +16583,7 @@
 	)
 	(text "TDM CAN TLM"
 		(exclude_from_sim no)
-		(at 496.57 184.912 0)
+		(at 497.078 313.436 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16610,7 +16623,7 @@
 	)
 	(text "DSM CAN TLM"
 		(exclude_from_sim no)
-		(at 496.824 227.33 0)
+		(at 496.57 270.002 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16620,7 +16633,7 @@
 	)
 	(text "AAM CAN TLM"
 		(exclude_from_sim no)
-		(at 496.824 272.288 0)
+		(at 496.57 227.33 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16637,6 +16650,16 @@
 			)
 		)
 		(uuid "d90a73f7-08c2-45af-b21f-d08da73c00d0")
+	)
+	(text "AAM <-> ACM command ctrl"
+		(exclude_from_sim no)
+		(at 428.244 101.092 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "ddbace51-029f-481c-93cd-f888ab6e6b91")
 	)
 	(text "STM32H755 NUCLEO"
 		(exclude_from_sim no)
@@ -16670,7 +16693,7 @@
 	)
 	(text "UUM CAN TLM"
 		(exclude_from_sim no)
-		(at 496.824 315.468 0)
+		(at 496.824 185.674 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17820,7 +17843,7 @@
 	)
 	(wire
 		(pts
-			(xy 469.9 39.37) (xy 476.25 39.37)
+			(xy 464.82 39.37) (xy 476.25 39.37)
 		)
 		(stroke
 			(width 0)
@@ -17880,6 +17903,16 @@
 	)
 	(wire
 		(pts
+			(xy 416.56 105.41) (xy 425.45 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "10531016-18bc-4874-ae13-54b45ffa7b8f")
+	)
+	(wire
+		(pts
 			(xy 124.46 182.88) (xy 124.46 184.15)
 		)
 		(stroke
@@ -17927,6 +17960,16 @@
 			(type default)
 		)
 		(uuid "123799fc-9cce-495c-97b2-6742a4bffcab")
+	)
+	(wire
+		(pts
+			(xy 416.56 107.95) (xy 425.45 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "14abb5a1-3177-4a96-9bff-134819ede586")
 	)
 	(wire
 		(pts
@@ -18200,7 +18243,7 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 160.02) (xy 135.89 160.02)
+			(xy 139.7 160.02) (xy 142.24 160.02)
 		)
 		(stroke
 			(width 0)
@@ -18687,6 +18730,16 @@
 			(type default)
 		)
 		(uuid "331565ac-b1f2-413d-8667-ff6bcce534df")
+	)
+	(wire
+		(pts
+			(xy 755.65 59.69) (xy 768.35 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3323ec63-d229-4e68-9a56-cd9c8929ca88")
 	)
 	(wire
 		(pts
@@ -19710,7 +19763,7 @@
 	)
 	(wire
 		(pts
-			(xy 495.3 287.02) (xy 488.95 287.02)
+			(xy 502.92 287.02) (xy 488.95 287.02)
 		)
 		(stroke
 			(width 0)
@@ -20100,7 +20153,7 @@
 	)
 	(wire
 		(pts
-			(xy 495.3 330.2) (xy 488.95 330.2)
+			(xy 502.92 330.2) (xy 488.95 330.2)
 		)
 		(stroke
 			(width 0)
@@ -20200,6 +20253,16 @@
 	)
 	(wire
 		(pts
+			(xy 91.44 116.84) (xy 104.14 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7aae7208-0835-403e-bc37-93af7dee4866")
+	)
+	(wire
+		(pts
 			(xy 553.72 119.38) (xy 553.72 118.11)
 		)
 		(stroke
@@ -20217,6 +20280,16 @@
 			(type default)
 		)
 		(uuid "7b444c8d-e6b3-4284-a4dc-60bd1d92659f")
+	)
+	(wire
+		(pts
+			(xy 675.64 199.39) (xy 688.34 199.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7b7b254d-06ac-4a0f-98a9-23da3e60a783")
 	)
 	(wire
 		(pts
@@ -20310,6 +20383,16 @@
 	)
 	(wire
 		(pts
+			(xy 309.88 87.63) (xy 322.58 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "828f428a-c440-4383-ae00-ed515e169a1c")
+	)
+	(wire
+		(pts
 			(xy 678.18 328.93) (xy 681.99 328.93)
 		)
 		(stroke
@@ -20390,6 +20473,16 @@
 	)
 	(wire
 		(pts
+			(xy 304.8 294.64) (xy 317.5 294.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "86083d98-c1d4-4328-b7e7-eefb6ca975e2")
+	)
+	(wire
+		(pts
 			(xy 579.12 341.63) (xy 579.12 372.11)
 		)
 		(stroke
@@ -20417,6 +20510,16 @@
 			(type default)
 		)
 		(uuid "8715a7e3-6622-47b8-bd81-9dadc6524ef8")
+	)
+	(wire
+		(pts
+			(xy 309.88 90.17) (xy 322.58 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "87ac8597-00b4-402e-b5c4-d448ccbfc9fa")
 	)
 	(wire
 		(pts
@@ -20840,7 +20943,7 @@
 	)
 	(wire
 		(pts
-			(xy 495.3 201.93) (xy 488.95 201.93)
+			(xy 502.92 201.93) (xy 488.95 201.93)
 		)
 		(stroke
 			(width 0)
@@ -21700,6 +21803,16 @@
 	)
 	(wire
 		(pts
+			(xy 675.64 196.85) (xy 688.34 196.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bdfa0cfc-45f2-4e91-aca9-000e98b7697e")
+	)
+	(wire
+		(pts
 			(xy 219.71 396.24) (xy 222.25 396.24)
 		)
 		(stroke
@@ -21870,6 +21983,16 @@
 	)
 	(wire
 		(pts
+			(xy 304.8 297.18) (xy 317.5 297.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c47b5537-ede7-4af6-808d-bd69e24ca4af")
+	)
+	(wire
+		(pts
 			(xy 673.1 128.27) (xy 676.91 128.27)
 		)
 		(stroke
@@ -22007,6 +22130,16 @@
 			(type default)
 		)
 		(uuid "ce94b83f-6084-4933-bad0-3cebe6eb8143")
+	)
+	(wire
+		(pts
+			(xy 755.65 57.15) (xy 768.35 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cf21ce30-8f50-47db-8a48-bbfe11c82f9a")
 	)
 	(wire
 		(pts
@@ -22250,7 +22383,7 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 60.96) (xy 135.89 60.96)
+			(xy 139.7 60.96) (xy 142.24 60.96)
 		)
 		(stroke
 			(width 0)
@@ -22390,7 +22523,7 @@
 	)
 	(wire
 		(pts
-			(xy 495.3 243.84) (xy 488.95 243.84)
+			(xy 502.92 243.84) (xy 488.95 243.84)
 		)
 		(stroke
 			(width 0)
@@ -22620,6 +22753,16 @@
 	)
 	(wire
 		(pts
+			(xy 91.44 119.38) (xy 104.14 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ed9e3657-892e-4f3e-8914-4ffff8aaff32")
+	)
+	(wire
+		(pts
 			(xy 660.4 341.63) (xy 660.4 394.97)
 		)
 		(stroke
@@ -22780,7 +22923,7 @@
 	)
 	(wire
 		(pts
-			(xy 469.9 36.83) (xy 476.25 36.83)
+			(xy 464.82 36.83) (xy 476.25 36.83)
 		)
 		(stroke
 			(width 0)
@@ -23138,6 +23281,36 @@
 		)
 		(uuid "027d4db8-7389-48c0-921c-07e6f0a1f455")
 	)
+	(label "UUM_CAN_TD"
+		(at 488.95 201.93 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "05706653-f19d-46d8-9c7d-561444829ced")
+	)
+	(label "ACM_CMD_RX"
+		(at 91.44 119.38 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1efd388b-6844-4a90-969b-0051dce80999")
+	)
+	(label "UUM_CAN_TD"
+		(at 675.64 199.39 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "24bc4cf2-b741-4c87-b9bb-a6a8ba6767b4")
+	)
 	(label "CAN-"
 		(at 462.28 325.12 0)
 		(effects
@@ -23147,6 +23320,46 @@
 			(justify left bottom)
 		)
 		(uuid "29de8c45-e556-42f8-bce2-a71e277d83ab")
+	)
+	(label "TDM_CAN_TD"
+		(at 490.22 330.2 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2a8f95b9-640b-44b9-8e73-50348964bfb5")
+	)
+	(label "UUM_CAN_RD"
+		(at 675.64 196.85 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2bf941be-b9d8-4fba-936d-d36fb3c0e3df")
+	)
+	(label "DSM_CAN_TD"
+		(at 488.95 287.02 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2c999b6c-86f4-4cdd-a4db-15bc4e48baf8")
+	)
+	(label "ACM_CMD_TX"
+		(at 91.44 116.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "32d5715c-f2fd-4091-8997-d4c8bc25f398")
 	)
 	(label "CAN+"
 		(at 462.28 287.02 0)
@@ -23168,6 +23381,16 @@
 		)
 		(uuid "5dff3020-2d1f-493b-bf83-6aa735435d13")
 	)
+	(label "TDM_CAN_RD"
+		(at 490.22 332.74 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6c7dcc5c-56e3-476e-8489-915b90d0121d")
+	)
 	(label "CAN+"
 		(at 462.28 243.84 0)
 		(effects
@@ -23178,6 +23401,86 @@
 		)
 		(uuid "78685d3c-f1eb-4c9b-9e35-2a8aea893422")
 	)
+	(label "TDM_CAN_TD"
+		(at 755.65 59.69 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7c164c61-27ef-47d4-9769-fa634b489e7d")
+	)
+	(label "TDM_CAN_RD"
+		(at 755.65 57.15 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "89d06192-e37c-4cde-a5f4-e6b5eb38a71b")
+	)
+	(label "AAM_CAN_RD"
+		(at 309.88 87.63 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8db26b55-7513-44e6-93cc-5a74c8467f40")
+	)
+	(label "DSM_CAN_RD"
+		(at 304.8 294.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ac72dac0-d4c7-4c1e-87f5-561582c78a42")
+	)
+	(label "ACM_CMD_RX"
+		(at 464.82 36.83 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "afff49de-20ce-428b-9ca6-4fccd9553f07")
+	)
+	(label "AAM_CAN_RD"
+		(at 488.95 246.38 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ba356925-8058-4855-8478-ded6002f80b7")
+	)
+	(label "DSM_CAN_TD"
+		(at 304.8 297.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c3fb5140-3497-44c2-b91a-8c4b0c587078")
+	)
+	(label "DSM_CAN_RD"
+		(at 488.95 289.56 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c60cd1e4-0399-47a9-a077-d4051f616f40")
+	)
 	(label "CAN-"
 		(at 462.28 196.85 0)
 		(effects
@@ -23187,6 +23490,26 @@
 			(justify left bottom)
 		)
 		(uuid "c96a7b27-edd9-46ef-8843-afb98b861ad8")
+	)
+	(label "AAM_CAN_TD"
+		(at 488.95 243.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ce68ee46-3f2a-45ac-95f4-33f91ec15edc")
+	)
+	(label "UUM_CAN_RD"
+		(at 488.95 204.47 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cf53f324-aba3-4a46-b80a-1e5c505fa426")
 	)
 	(label "CAN+"
 		(at 462.28 201.93 0)
@@ -23207,6 +23530,26 @@
 			(justify left bottom)
 		)
 		(uuid "d9f2f1dc-6489-43d8-902f-b95d84d08763")
+	)
+	(label "ACM_CMD_TX"
+		(at 464.82 39.37 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "dc248dd8-90b5-4c12-9ce2-323f56ba4c96")
+	)
+	(label "AAM_CAN_TD"
+		(at 309.88 90.17 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "eca82dab-8aa9-4b9a-a040-c0b78aa659cf")
 	)
 	(global_label "DSM_INTRPT_RX"
 		(shape bidirectional)
@@ -23320,7 +23663,7 @@
 	)
 	(global_label "AAM_FMC_D2"
 		(shape bidirectional)
-		(at 97.79 134.62 180)
+		(at 104.14 134.62 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -23330,7 +23673,7 @@
 		)
 		(uuid "08b44003-75cd-423d-a861-a8b36c1b49f5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 81.8402 134.62 0)
+			(at 88.1902 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23362,6 +23705,50 @@
 			)
 		)
 	)
+	(global_label "AAM_CAN_TD"
+		(shape output)
+		(at 309.88 90.17 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "0b412786-5b88-4f6a-9bfd-ffd0f9c9b3bd")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 295.4043 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "UUM_CAN_TD"
+		(shape output)
+		(at 502.92 201.93 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "0b9f2a53-b179-45b1-8f82-b1fd14ce014f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 502.92 216.8895 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "ACM_FMC_D4"
 		(shape bidirectional)
 		(at 424.18 59.69 0)
@@ -23386,7 +23773,7 @@
 	)
 	(global_label "ACM_FMC_D14"
 		(shape bidirectional)
-		(at 97.79 154.94 180)
+		(at 104.14 154.94 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -23396,7 +23783,7 @@
 		)
 		(uuid "0c6df92c-b637-4e02-8945-7c30547c0f90")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 80.4493 154.94 0)
+			(at 86.7993 154.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23516,6 +23903,28 @@
 			)
 		)
 	)
+	(global_label "UUM_CAN_TD"
+		(shape output)
+		(at 675.64 199.39 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "12342340-c8e5-4997-a0c5-f7a4004fa306")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 660.6805 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "TDM_DBG_RX"
 		(shape input)
 		(at 803.91 137.16 180)
@@ -23600,6 +24009,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "AAM_CMD_TX"
+		(shape output)
+		(at 416.56 105.41 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "16621bb1-951f-4d24-b4ed-cf8aad11aabf")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 401.8425 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -23848,7 +24279,7 @@
 	)
 	(global_label "ACM_CMD_TX"
 		(shape output)
-		(at 469.9 36.83 180)
+		(at 464.82 36.83 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -23858,7 +24289,7 @@
 		)
 		(uuid "24434179-6ced-4164-b6c6-9cad7357876c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 455.0011 36.83 0)
+			(at 449.9211 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24035,6 +24466,28 @@
 		(uuid "2910ae11-9af6-47c9-b622-19de63870e72")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 510.5786 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "AAM_CAN_RD"
+		(shape input)
+		(at 492.76 246.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "2b0fa8a8-30a6-44f0-9243-6371f302ce93")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 492.76 261.1581 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24684,7 +25137,7 @@
 	)
 	(global_label "AAM_INTRPT_RX"
 		(shape bidirectional)
-		(at 133.35 86.36 0)
+		(at 139.7 86.36 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24694,7 +25147,7 @@
 		)
 		(uuid "462841ed-262e-4a11-9c60-f33d28ee83e6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 151.9003 86.36 0)
+			(at 158.2503 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24717,6 +25170,28 @@
 		(uuid "46807abb-d256-4db8-95c7-22c99d28ca63")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 399.5216 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "DSM_CAN_RD"
+		(shape input)
+		(at 492.76 289.56 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "472bc7d4-e90a-4f33-a0b2-207d1a48ed3e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 492.76 304.6404 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24772,7 +25247,7 @@
 	)
 	(global_label "AAM_FMC_NOE"
 		(shape bidirectional)
-		(at 97.79 144.78 180)
+		(at 104.14 144.78 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24782,7 +25257,7 @@
 		)
 		(uuid "48c5358f-7971-4f45-b861-26c6648ee656")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 80.5097 144.78 0)
+			(at 86.8597 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24970,7 +25445,7 @@
 	)
 	(global_label "AAM_FMC_NL"
 		(shape bidirectional)
-		(at 97.79 101.6 180)
+		(at 104.14 101.6 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24980,7 +25455,7 @@
 		)
 		(uuid "548fc40f-9b65-48bb-8e57-bc0c85d20342")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 81.9611 101.6 0)
+			(at 88.3111 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25047,6 +25522,28 @@
 		(uuid "55774ecd-c79f-4f52-8648-061a7245a397")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 630.0796 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "AAM_CMD_RX"
+		(shape input)
+		(at 91.44 119.38 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "56092b07-a51b-44be-b977-a474560e63a4")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 76.4201 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25190,7 +25687,7 @@
 	)
 	(global_label "AAM_FMC_NBL1"
 		(shape bidirectional)
-		(at 133.35 81.28 0)
+		(at 139.7 81.28 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -25200,7 +25697,7 @@
 		)
 		(uuid "60b9a152-9684-4566-b4fd-f4f8a9730b4d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 151.6584 81.28 0)
+			(at 158.0084 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25254,6 +25751,28 @@
 			)
 		)
 	)
+	(global_label "AAM_CMD_RX"
+		(shape input)
+		(at 416.56 107.95 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "63d6f36a-10e0-4783-a9d5-ae37ee4a9280")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 401.5401 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "ACM_FMC_D15"
 		(shape bidirectional)
 		(at 424.18 87.63 0)
@@ -25276,9 +25795,9 @@
 			)
 		)
 	)
-	(global_label "AAM_CAN_RD"
+	(global_label "TDM_CAN_RD"
 		(shape input)
-		(at 495.3 243.84 270)
+		(at 755.65 57.15 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -25286,9 +25805,9 @@
 			)
 			(justify right)
 		)
-		(uuid "673569ed-b556-424a-9a8e-5a44377a82ac")
+		(uuid "68a61953-c783-4e19-91f6-e2ab8243f72e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 495.3 258.6181 90)
+			(at 740.8115 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25320,24 +25839,24 @@
 			)
 		)
 	)
-	(global_label "UUM_CAN_RD"
+	(global_label "ACM_CMD_RX"
 		(shape input)
-		(at 495.3 201.93 270)
+		(at 425.45 107.95 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
-		(uuid "69872038-cd00-48e4-b6e6-f21e38598dad")
+		(uuid "6aeccc5a-23e2-4fee-82f5-ed01f8f16f2e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 495.3 217.1919 90)
+			(at 440.6513 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -25514,28 +26033,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "UUM_CAN_TD"
-		(shape output)
-		(at 492.76 204.47 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "71cc0aa7-2c00-4a04-a21a-0deb2a8b40da")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 492.76 219.4295 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 				(hide yes)
 			)
 		)
@@ -25784,7 +26281,7 @@
 	)
 	(global_label "AAM_DBG_RX"
 		(shape input)
-		(at 97.79 139.7 180)
+		(at 104.14 139.7 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -25794,7 +26291,7 @@
 		)
 		(uuid "7ebc330c-b425-4a94-bc94-c4f7fd578ecf")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 82.9515 139.7 0)
+			(at 89.3015 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26046,28 +26543,6 @@
 			)
 		)
 	)
-	(global_label "TDM_CAN_RD"
-		(shape input)
-		(at 495.3 330.2 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "8d3618c2-97a0-4808-b477-6e30acdfd1c7")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 495.3 345.0385 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "UUM_SPI1_SCLK"
 		(shape bidirectional)
 		(at 591.82 240.03 180)
@@ -26246,7 +26721,7 @@
 	)
 	(global_label "AAM_FMC_D3"
 		(shape bidirectional)
-		(at 97.79 137.16 180)
+		(at 104.14 137.16 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -26256,7 +26731,7 @@
 		)
 		(uuid "92407be4-dbe5-43c8-9e0f-88962b3c29ad")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 81.8402 137.16 0)
+			(at 88.1902 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26398,6 +26873,28 @@
 			)
 		)
 	)
+	(global_label "UUM_CAN_RD"
+		(shape input)
+		(at 492.76 204.47 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "9574734d-f3bb-4d80-9846-e823228c9110")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 492.76 219.7319 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "TDM_VDD"
 		(shape input)
 		(at 815.34 43.18 0)
@@ -26444,7 +26941,7 @@
 	)
 	(global_label "ACM_FMC_CLK"
 		(shape bidirectional)
-		(at 97.79 142.24 180)
+		(at 104.14 142.24 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -26454,7 +26951,7 @@
 		)
 		(uuid "9c033e53-fc55-413a-a0ff-18062e231c44")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 80.5702 142.24 0)
+			(at 86.9202 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26728,6 +27225,28 @@
 			)
 		)
 	)
+	(global_label "AAM_CAN_RD"
+		(shape input)
+		(at 309.88 87.63 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "a18b78d1-d604-48ef-9475-6972de7bdb91")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 295.1019 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "ACM_FMC_D8"
 		(shape bidirectional)
 		(at 424.18 69.85 0)
@@ -26746,6 +27265,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "TDM_CAN_TD"
+		(shape output)
+		(at 755.65 59.69 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "a5a63d2e-b246-46a0-878e-07d73eaccc60")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 741.1139 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -26796,7 +27337,7 @@
 	)
 	(global_label "AAM_FMC_NWE"
 		(shape bidirectional)
-		(at 97.79 147.32 180)
+		(at 104.14 147.32 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -26806,7 +27347,7 @@
 		)
 		(uuid "aa3200de-78c3-43fc-b63f-4d4643ac8f6d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 80.3888 147.32 0)
+			(at 86.7388 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26970,6 +27511,28 @@
 			)
 		)
 	)
+	(global_label "DSM_CAN_TD"
+		(shape output)
+		(at 304.8 297.18 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b1465155-deff-4663-ad8f-e5c66168db16")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 290.022 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "AAM_INTRPT_TX"
 		(shape bidirectional)
 		(at 215.9 210.82 180)
@@ -27005,28 +27568,6 @@
 		(uuid "b19e3776-021f-4e68-9da1-9e5b481bad43")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 402.0011 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "DSM_CAN_RD"
-		(shape input)
-		(at 495.3 287.02 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "b1bdc959-1c72-477e-8c2d-32145b525089")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 495.3 302.1004 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27126,7 +27667,7 @@
 	)
 	(global_label "ACM_CMD_RX"
 		(shape input)
-		(at 469.9 39.37 180)
+		(at 464.82 39.37 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -27136,7 +27677,7 @@
 		)
 		(uuid "b52d9530-c976-45e1-9aea-340b24d47be5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 454.6987 39.37 0)
+			(at 449.6187 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27192,7 +27733,7 @@
 	)
 	(global_label "AAM_DBG_TX"
 		(shape input)
-		(at 97.79 121.92 180)
+		(at 104.14 121.92 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -27202,7 +27743,7 @@
 		)
 		(uuid "b77b805f-6246-4837-a640-6b967e7ad98a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 83.2539 121.92 0)
+			(at 89.6039 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27214,7 +27755,7 @@
 	)
 	(global_label "AAM_DAC_R"
 		(shape bidirectional)
-		(at 97.79 86.36 180)
+		(at 104.14 86.36 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -27224,7 +27765,7 @@
 		)
 		(uuid "ba487589-8a8d-4a07-a069-46920f8d82fd")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 83.2311 86.36 0)
+			(at 89.5811 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27300,6 +27841,28 @@
 			)
 		)
 	)
+	(global_label "DSM_CAN_TD"
+		(shape output)
+		(at 502.92 287.02 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "bbec4867-0d7a-4778-bc5f-f627fd7bfd9e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 502.92 301.798 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "AAM_FMC_D10"
 		(shape bidirectional)
 		(at 358.14 82.55 0)
@@ -27335,6 +27898,28 @@
 		(uuid "be91095c-c369-4401-be60-aa1b5c0a2e24")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 768.933 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "TDM_CAN_RD"
+		(shape input)
+		(at 492.76 332.74 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c1dda10a-b39c-442e-a131-0836be4c9eaf")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 492.76 347.5785 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27454,6 +28039,28 @@
 			)
 		)
 	)
+	(global_label "DSM_CAN_RD"
+		(shape input)
+		(at 304.8 294.64 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c9073d28-2a9a-42c7-aadf-8249c3c9f89f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 289.7196 294.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "DSM_I2C1_SDA"
 		(shape bidirectional)
 		(at 222.25 391.16 180)
@@ -27498,24 +28105,24 @@
 			)
 		)
 	)
-	(global_label "AAM_CAN_TD"
+	(global_label "ACM_CMD_TX"
 		(shape output)
-		(at 492.76 246.38 270)
+		(at 425.45 105.41 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
-		(uuid "c9e7b55d-3d7a-41f0-a355-426271d97119")
+		(uuid "cbb68935-c8ab-4759-bceb-f9d943df84a7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 492.76 260.8557 90)
+			(at 440.3489 105.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -27648,28 +28255,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "TDM_CAN_TD"
-		(shape output)
-		(at 492.76 332.74 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "d077df6d-de29-47be-a740-78f980ea5d2b")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 492.76 347.2761 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 				(hide yes)
 			)
 		)
@@ -27828,9 +28413,9 @@
 			)
 		)
 	)
-	(global_label "DSM_CAN_TD"
+	(global_label "AAM_CMD_TX"
 		(shape output)
-		(at 492.76 289.56 270)
+		(at 91.44 116.84 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -27838,9 +28423,31 @@
 			)
 			(justify right)
 		)
-		(uuid "d774f611-c19d-4ae5-a6e9-17378b3f8a64")
+		(uuid "d737ffbb-d798-4eb1-8a91-0e33e59fde48")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 492.76 304.338 90)
+			(at 76.7225 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "TDM_CAN_TD"
+		(shape output)
+		(at 502.92 330.2 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "d79d4b25-4539-4ba2-aa6e-decfd01d114c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 502.92 344.7361 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27868,6 +28475,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "AAM_CAN_TD"
+		(shape output)
+		(at 502.92 243.84 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "dbfee306-bc1b-4cc1-911d-62d205a8be0a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 502.92 258.3157 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -28048,6 +28677,28 @@
 			)
 		)
 	)
+	(global_label "UUM_CAN_RD"
+		(shape input)
+		(at 675.64 196.85 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "e4ec39d0-3ecb-4a4c-899f-af467a3d098f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 660.3781 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "DSM_LED_WARN"
 		(shape input)
 		(at 139.7 398.78 180)
@@ -28160,7 +28811,7 @@
 	)
 	(global_label "AAM_INTRPT_TX"
 		(shape bidirectional)
-		(at 133.35 93.98 0)
+		(at 139.7 93.98 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -28170,7 +28821,7 @@
 		)
 		(uuid "ed7ed317-6f97-4413-89ae-021ae72ff3ed")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 151.5979 93.98 0)
+			(at 157.9479 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28470,7 +29121,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 637.54 132.08 0)
 			(effects
 				(font
@@ -30352,7 +31003,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 582.93 132.08 0)
 			(effects
 				(font
@@ -31630,7 +32281,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 144.78 179.07 0)
 			(effects
 				(font
@@ -32157,7 +32808,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 161.29 386.08 0)
 			(effects
 				(font
@@ -33144,7 +33795,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 504.19 93.98 0)
 			(effects
 				(font
@@ -33263,7 +33914,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 264.16 49.53 0)
+		(at 270.51 57.15 0)
 		(unit 5)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -33272,7 +33923,7 @@
 		(fields_autoplaced yes)
 		(uuid "2237a759-0a36-449f-bcc0-26e9067ea74b")
 		(property "Reference" "U1"
-			(at 264.16 21.59 0)
+			(at 270.51 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33280,7 +33931,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 264.16 24.13 0)
+			(at 270.51 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33288,7 +33939,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 264.16 49.53 0)
+			(at 270.51 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33298,7 +33949,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 264.16 49.53 0)
+			(at 270.51 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33307,7 +33958,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 264.16 49.53 0)
+			(at 270.51 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33316,7 +33967,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 264.16 49.53 0)
+			(at 270.51 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33326,7 +33977,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 264.16 49.53 0)
+			(at 270.51 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33336,7 +33987,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 264.16 49.53 0)
+			(at 270.51 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33346,7 +33997,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 264.16 49.53 0)
+			(at 270.51 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33356,7 +34007,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 264.16 49.53 0)
+			(at 270.51 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33366,7 +34017,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 264.16 49.53 0)
+			(at 270.51 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33376,7 +34027,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 264.16 49.53 0)
+			(at 270.51 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33386,7 +34037,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 264.16 49.53 0)
+			(at 270.51 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33396,7 +34047,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 264.16 49.53 0)
+			(at 270.51 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33406,7 +34057,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 264.16 49.53 0)
+			(at 270.51 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33416,7 +34067,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 264.16 49.53 0)
+			(at 270.51 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34282,7 +34933,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 787.4 116.84 0)
 			(effects
 				(font
@@ -34603,7 +35254,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 539.75 128.27 0)
 			(effects
 				(font
@@ -34682,7 +35333,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 524.51 93.98 0)
 			(effects
 				(font
@@ -35847,7 +36498,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 115.57 109.22 0)
+		(at 121.92 109.22 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -35856,7 +36507,7 @@
 		(fields_autoplaced yes)
 		(uuid "3851c0fa-33b1-4bcf-850d-037b5f7d21fc")
 		(property "Reference" "U1"
-			(at 115.57 48.26 0)
+			(at 121.92 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35864,7 +36515,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 115.57 50.8 0)
+			(at 121.92 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35872,7 +36523,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 115.57 109.22 0)
+			(at 121.92 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35882,7 +36533,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 115.57 109.22 0)
+			(at 121.92 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35891,7 +36542,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 115.57 109.22 0)
+			(at 121.92 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35900,7 +36551,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 115.57 109.22 0)
+			(at 121.92 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35910,7 +36561,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 115.57 109.22 0)
+			(at 121.92 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35920,7 +36571,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 115.57 109.22 0)
+			(at 121.92 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35930,7 +36581,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 115.57 109.22 0)
+			(at 121.92 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35940,7 +36591,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 115.57 109.22 0)
+			(at 121.92 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35950,7 +36601,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 115.57 109.22 0)
+			(at 121.92 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35960,7 +36611,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 115.57 109.22 0)
+			(at 121.92 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35970,7 +36621,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 115.57 109.22 0)
+			(at 121.92 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35980,7 +36631,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 115.57 109.22 0)
+			(at 121.92 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35990,7 +36641,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 115.57 109.22 0)
+			(at 121.92 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36000,7 +36651,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 115.57 109.22 0)
+			(at 121.92 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36776,7 +37427,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 637.54 91.44 0)
 			(effects
 				(font
@@ -36853,7 +37504,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 582.93 91.44 0)
 			(effects
 				(font
@@ -36932,7 +37583,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 670.56 267.97 0)
 			(effects
 				(font
@@ -38134,7 +38785,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 647.7 29.21 0)
 			(effects
 				(font
@@ -38358,7 +39009,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 627.38 224.79 0)
 			(effects
 				(font
@@ -39167,7 +39818,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 165.1 179.07 0)
 			(effects
 				(font
@@ -41459,7 +42110,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 104.14 179.07 0)
 			(effects
 				(font
@@ -41683,7 +42334,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 681.99 332.74 0)
 			(effects
 				(font
@@ -41809,7 +42460,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 185.42 106.68 0)
+		(at 196.85 113.03 0)
 		(unit 4)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -41818,7 +42469,7 @@
 		(fields_autoplaced yes)
 		(uuid "5ef6e02d-5612-4b08-a1b8-276ffbca8719")
 		(property "Reference" "U1"
-			(at 185.42 73.66 0)
+			(at 196.85 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41826,7 +42477,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 185.42 76.2 0)
+			(at 196.85 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41834,7 +42485,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 185.42 106.68 0)
+			(at 196.85 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41844,7 +42495,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 185.42 106.68 0)
+			(at 196.85 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41853,7 +42504,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 185.42 106.68 0)
+			(at 196.85 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41862,7 +42513,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 185.42 106.68 0)
+			(at 196.85 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41872,7 +42523,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 185.42 106.68 0)
+			(at 196.85 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41882,7 +42533,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 185.42 106.68 0)
+			(at 196.85 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41892,7 +42543,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 185.42 106.68 0)
+			(at 196.85 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41902,7 +42553,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 185.42 106.68 0)
+			(at 196.85 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41912,7 +42563,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 185.42 106.68 0)
+			(at 196.85 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41922,7 +42573,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 185.42 106.68 0)
+			(at 196.85 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41932,7 +42583,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 185.42 106.68 0)
+			(at 196.85 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41942,7 +42593,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 185.42 106.68 0)
+			(at 196.85 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41952,7 +42603,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 185.42 106.68 0)
+			(at 196.85 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41962,7 +42613,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 185.42 106.68 0)
+			(at 196.85 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43092,7 +43743,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 100.33 386.08 0)
 			(effects
 				(font
@@ -43828,7 +44479,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 135.89 160.02 0)
+		(at 142.24 160.02 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -43837,7 +44488,7 @@
 		(fields_autoplaced yes)
 		(uuid "6eda8cad-bf25-4d85-9524-2dfea10575c4")
 		(property "Reference" "#PWR0101"
-			(at 135.89 166.37 0)
+			(at 142.24 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43846,7 +44497,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 135.89 165.1 0)
+			(at 142.24 165.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43854,7 +44505,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 135.89 160.02 0)
+			(at 142.24 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43863,7 +44514,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 135.89 160.02 0)
+			(at 142.24 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43872,7 +44523,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 135.89 160.02 0)
+			(at 142.24 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44389,7 +45040,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 271.78 115.57 0)
+		(at 266.7 133.35 0)
 		(unit 6)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -44398,7 +45049,7 @@
 		(fields_autoplaced yes)
 		(uuid "76a9cb95-f5cb-4893-b2fa-759f000b16bc")
 		(property "Reference" "U1"
-			(at 271.78 77.47 0)
+			(at 266.7 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44406,7 +45057,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 271.78 80.01 0)
+			(at 266.7 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44414,7 +45065,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 271.78 115.57 0)
+			(at 266.7 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44424,7 +45075,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 271.78 115.57 0)
+			(at 266.7 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44433,7 +45084,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 271.78 115.57 0)
+			(at 266.7 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44442,7 +45093,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 271.78 115.57 0)
+			(at 266.7 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44452,7 +45103,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 271.78 115.57 0)
+			(at 266.7 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44462,7 +45113,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 271.78 115.57 0)
+			(at 266.7 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44472,7 +45123,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 271.78 115.57 0)
+			(at 266.7 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44482,7 +45133,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 271.78 115.57 0)
+			(at 266.7 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44492,7 +45143,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 271.78 115.57 0)
+			(at 266.7 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44502,7 +45153,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 271.78 115.57 0)
+			(at 266.7 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44512,7 +45163,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 271.78 115.57 0)
+			(at 266.7 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44522,7 +45173,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 271.78 115.57 0)
+			(at 266.7 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44532,7 +45183,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 271.78 115.57 0)
+			(at 266.7 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44542,7 +45193,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 271.78 115.57 0)
+			(at 266.7 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -45651,7 +46302,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 124.46 179.07 0)
 			(effects
 				(font
@@ -46457,7 +47108,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 669.29 238.76 0)
 			(effects
 				(font
@@ -47018,7 +47669,7 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 135.89 60.96 0)
+		(at 142.24 60.96 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -47027,7 +47678,7 @@
 		(fields_autoplaced yes)
 		(uuid "8c576192-ff9a-4153-84ac-1dfb151c0941")
 		(property "Reference" "#PWR0100"
-			(at 135.89 64.77 0)
+			(at 142.24 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -47036,7 +47687,7 @@
 			)
 		)
 		(property "Value" "5V_AAM"
-			(at 135.89 55.88 0)
+			(at 142.24 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -47044,7 +47695,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 135.89 60.96 0)
+			(at 142.24 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -47053,7 +47704,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 135.89 60.96 0)
+			(at 142.24 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -47062,7 +47713,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 135.89 60.96 0)
+			(at 142.24 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -47108,7 +47759,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 593.09 29.21 0)
 			(effects
 				(font
@@ -47176,7 +47827,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 647.7 69.85 0)
 			(effects
 				(font
@@ -47312,7 +47963,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 767.08 116.84 0)
 			(effects
 				(font
@@ -47457,7 +48108,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 807.72 116.84 0)
 			(effects
 				(font
@@ -47668,7 +48319,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 483.87 93.98 0)
 			(effects
 				(font
@@ -47817,7 +48468,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 120.65 386.08 0)
 			(effects
 				(font
@@ -50558,7 +51209,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 593.09 110.49 0)
 			(effects
 				(font
@@ -51217,7 +51868,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 266.7 322.58 0)
+		(at 250.19 328.93 0)
 		(unit 6)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -51226,7 +51877,7 @@
 		(fields_autoplaced yes)
 		(uuid "a78482bc-8ca7-48de-86e6-4c4ac50953c2")
 		(property "Reference" "U17"
-			(at 266.7 284.48 0)
+			(at 250.19 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51234,7 +51885,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 266.7 287.02 0)
+			(at 250.19 293.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51242,7 +51893,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 266.7 322.58 0)
+			(at 250.19 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51252,7 +51903,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 266.7 322.58 0)
+			(at 250.19 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51261,7 +51912,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 266.7 322.58 0)
+			(at 250.19 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51270,7 +51921,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 266.7 322.58 0)
+			(at 250.19 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51280,7 +51931,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 266.7 322.58 0)
+			(at 250.19 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51290,7 +51941,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 266.7 322.58 0)
+			(at 250.19 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51300,7 +51951,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 266.7 322.58 0)
+			(at 250.19 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51310,7 +51961,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 266.7 322.58 0)
+			(at 250.19 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51320,7 +51971,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 266.7 322.58 0)
+			(at 250.19 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51330,7 +51981,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 266.7 322.58 0)
+			(at 250.19 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51340,7 +51991,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 266.7 322.58 0)
+			(at 250.19 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51350,7 +52001,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 266.7 322.58 0)
+			(at 250.19 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51360,7 +52011,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 266.7 322.58 0)
+			(at 250.19 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51370,7 +52021,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 266.7 322.58 0)
+			(at 250.19 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54280,7 +54931,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 627.38 167.64 0)
 			(effects
 				(font
@@ -54587,7 +55238,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 593.09 69.85 0)
 			(effects
 				(font
@@ -54631,7 +55282,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 179.07 52.07 0)
+		(at 190.5 58.42 0)
 		(unit 3)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -54640,7 +55291,7 @@
 		(fields_autoplaced yes)
 		(uuid "bfdc779f-2385-4a72-9dfb-d013e9c5ce4e")
 		(property "Reference" "U1"
-			(at 179.07 24.13 0)
+			(at 190.5 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54648,7 +55299,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 179.07 26.67 0)
+			(at 190.5 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54656,7 +55307,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 179.07 52.07 0)
+			(at 190.5 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54666,7 +55317,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 179.07 52.07 0)
+			(at 190.5 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54675,7 +55326,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 179.07 52.07 0)
+			(at 190.5 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54684,7 +55335,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 179.07 52.07 0)
+			(at 190.5 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54694,7 +55345,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 179.07 52.07 0)
+			(at 190.5 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54704,7 +55355,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 179.07 52.07 0)
+			(at 190.5 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54714,7 +55365,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 179.07 52.07 0)
+			(at 190.5 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54724,7 +55375,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 179.07 52.07 0)
+			(at 190.5 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54734,7 +55385,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 179.07 52.07 0)
+			(at 190.5 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54744,7 +55395,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 179.07 52.07 0)
+			(at 190.5 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54754,7 +55405,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 179.07 52.07 0)
+			(at 190.5 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54764,7 +55415,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 179.07 52.07 0)
+			(at 190.5 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54774,7 +55425,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 179.07 52.07 0)
+			(at 190.5 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54784,7 +55435,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 179.07 52.07 0)
+			(at 190.5 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -55626,7 +56277,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 637.54 214.63 0)
 			(effects
 				(font
@@ -57949,7 +58600,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 647.7 110.49 0)
 			(effects
 				(font
@@ -59575,7 +60226,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 140.97 386.08 0)
 			(effects
 				(font
@@ -60203,7 +60854,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 637.54 50.8 0)
 			(effects
 				(font
@@ -60280,7 +60931,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 549.91 118.11 0)
 			(effects
 				(font
@@ -62033,7 +62684,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 544.83 93.98 0)
 			(effects
 				(font
@@ -62178,7 +62829,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 746.76 116.84 0)
 			(effects
 				(font
@@ -62321,7 +62972,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_Kingbright_KPBD-3224"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 582.93 50.8 0)
 			(effects
 				(font
@@ -62574,7 +63225,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 637.54 157.48 0)
 			(effects
 				(font
