@@ -18393,6 +18393,16 @@
 	)
 	(wire
 		(pts
+			(xy 764.54 292.1) (xy 764.54 293.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "263d4d2a-6ed9-41a7-ba00-1cb3a94dbdff")
+	)
+	(wire
+		(pts
 			(xy 595.63 110.49) (xy 599.44 110.49)
 		)
 		(stroke
@@ -18410,6 +18420,16 @@
 			(type default)
 		)
 		(uuid "27c5395a-ada3-41a5-9da7-e93fa3951207")
+	)
+	(wire
+		(pts
+			(xy 783.59 300.99) (xy 784.86 300.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "284954c5-6ad5-42d6-9ec8-025db4f5ba94")
 	)
 	(wire
 		(pts
@@ -18810,6 +18830,16 @@
 			(type default)
 		)
 		(uuid "36ee4cf5-a4b6-42bb-a0b2-43b776be8bed")
+	)
+	(wire
+		(pts
+			(xy 740.41 284.48) (xy 744.22 284.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3863bcee-e0b9-426b-af19-654c09984ee3")
 	)
 	(wire
 		(pts
@@ -19543,6 +19573,16 @@
 	)
 	(wire
 		(pts
+			(xy 742.95 300.99) (xy 744.22 300.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5a8b2fed-8103-41f8-a2b3-977226438688")
+	)
+	(wire
+		(pts
 			(xy 424.18 33.02) (xy 417.83 33.02)
 		)
 		(stroke
@@ -20130,6 +20170,16 @@
 			(type default)
 		)
 		(uuid "74344c8d-7fdf-48ad-89f3-ca4c68173280")
+	)
+	(wire
+		(pts
+			(xy 801.37 284.48) (xy 805.18 284.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7470802b-7d28-409c-b187-6b747e9d51bd")
 	)
 	(wire
 		(pts
@@ -20763,6 +20813,16 @@
 	)
 	(wire
 		(pts
+			(xy 744.22 292.1) (xy 744.22 293.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8e39d5e3-e886-4d5f-b31e-8c31dd4777cd")
+	)
+	(wire
+		(pts
 			(xy 492.76 289.56) (xy 488.95 289.56)
 		)
 		(stroke
@@ -20803,6 +20863,16 @@
 	)
 	(wire
 		(pts
+			(xy 803.91 300.99) (xy 805.18 300.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8f2e5832-9bbb-4eff-89b7-eb990721db73")
+	)
+	(wire
+		(pts
 			(xy 588.01 29.21) (xy 590.55 29.21)
 		)
 		(stroke
@@ -20810,6 +20880,16 @@
 			(type default)
 		)
 		(uuid "8f604247-0c9b-414d-8d02-82f82109cf24")
+	)
+	(wire
+		(pts
+			(xy 760.73 284.48) (xy 764.54 284.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8f759f38-e4d0-4312-b45f-882f189aaca5")
 	)
 	(wire
 		(pts
@@ -20883,6 +20963,16 @@
 	)
 	(wire
 		(pts
+			(xy 805.18 292.1) (xy 805.18 293.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "935524eb-6354-40f5-a477-64e7165304aa")
+	)
+	(wire
+		(pts
 			(xy 538.48 82.55) (xy 538.48 77.47)
 		)
 		(stroke
@@ -20890,6 +20980,16 @@
 			(type default)
 		)
 		(uuid "941c7725-2639-4a05-9686-5e781a2a7706")
+	)
+	(wire
+		(pts
+			(xy 781.05 284.48) (xy 784.86 284.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "952a3d0e-1e6f-49f9-b8e6-d68a2c3d8860")
 	)
 	(wire
 		(pts
@@ -21690,6 +21790,16 @@
 			(type default)
 		)
 		(uuid "b2f52358-269d-4276-a190-7fa1c60628dc")
+	)
+	(wire
+		(pts
+			(xy 763.27 300.99) (xy 764.54 300.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b2ff44d4-daee-43ae-906c-8e6d2661f60a")
 	)
 	(wire
 		(pts
@@ -23023,6 +23133,16 @@
 	)
 	(wire
 		(pts
+			(xy 784.86 292.1) (xy 784.86 293.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f5f9ed25-1b96-4e40-9d2d-533bfb7d1a31")
+	)
+	(wire
+		(pts
 			(xy 791.21 163.83) (xy 793.75 163.83)
 		)
 		(stroke
@@ -23600,6 +23720,28 @@
 			(justify left bottom)
 		)
 		(uuid "eca82dab-8aa9-4b9a-a040-c0b78aa659cf")
+	)
+	(global_label "UUM_LED_OK"
+		(shape input)
+		(at 763.27 300.99 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "01907dc7-9b0f-4ed3-910c-c2bbd223552a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 748.3711 300.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
 	)
 	(global_label "DSM_INTRPT_RX"
 		(shape bidirectional)
@@ -24371,6 +24513,28 @@
 			)
 		)
 	)
+	(global_label "UUM_LED_WARN"
+		(shape input)
+		(at 783.59 300.99 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "24e6813e-f14c-4e25-8a60-0924dd6d9463")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 766.1511 300.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "ACM_FMC_NBL0"
 		(shape bidirectional)
 		(at 469.9 77.47 180)
@@ -24987,6 +25151,28 @@
 			)
 		)
 	)
+	(global_label "UUM_LED_WARN"
+		(shape input)
+		(at 750.57 217.17 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "412ce5ee-6b78-4f2e-80b9-9e479adb71db")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 733.1311 217.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "TDM_VDD"
 		(shape output)
 		(at 588.01 44.45 180)
@@ -25154,6 +25340,28 @@
 		(uuid "4582a82a-1191-4b29-a726-027c2b3a32aa")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 401.8802 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "AAM_LED_FAIL"
+		(shape input)
+		(at 322.58 110.49 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "458c6e9d-0592-4805-ae03-1f87a572d743")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 306.4715 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25383,6 +25591,28 @@
 			)
 		)
 	)
+	(global_label "DSM_LED_OK"
+		(shape input)
+		(at 317.5 322.58 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "4f5efd9c-08e6-4995-bdba-10eb28bfb32b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 302.6011 322.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "UUM_DBG_TX"
 		(shape output)
 		(at 703.58 176.53 180)
@@ -25396,6 +25626,28 @@
 		(uuid "50dfd984-cc25-4d0b-b921-e84219f634f7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 688.5601 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "DSM_LED_FAIL"
+		(shape input)
+		(at 317.5 317.5 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "5174554c-77df-4fbc-bff3-bc01cc909b81")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 301.3915 317.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25682,6 +25934,28 @@
 		(uuid "56a7e287-b1d6-49b6-94c0-0f9a92c649df")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 571.6597 328.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "DSM_LED_WARN"
+		(shape input)
+		(at 317.5 320.04 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "57549348-1262-4e8f-9f3e-a55185f7a298")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 300.0611 320.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26505,6 +26779,28 @@
 			)
 		)
 	)
+	(global_label "UUM_VDD"
+		(shape input)
+		(at 742.95 300.99 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "893c9d88-ed18-4ed9-a0e5-13d61f046ab4")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 731.4377 300.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "UUM_DBG_TX"
 		(shape input)
 		(at 810.26 224.79 180)
@@ -26545,6 +26841,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "AAM_LED_WARN"
+		(shape input)
+		(at 322.58 113.03 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "8a8dec20-a7ec-447d-8490-6b35a43e80e5")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 305.1411 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -27891,6 +28209,28 @@
 			)
 		)
 	)
+	(global_label "AAM_LED_OK"
+		(shape input)
+		(at 322.58 115.57 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "bb80f062-fafc-49d6-b449-a6abb51f4340")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 307.6811 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "AAM_DAC_L"
 		(shape bidirectional)
 		(at 265.43 189.23 0)
@@ -28195,6 +28535,50 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "UUM_LED_FAIL"
+		(shape input)
+		(at 750.57 214.63 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "cc338fb7-df18-4fdc-81d6-be702b4f4f8b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 734.4615 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "UUM_LED_FAIL"
+		(shape input)
+		(at 803.91 300.99 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "cc5e688a-dba8-4f96-aeb3-6eab1aedac7f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 787.8015 300.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -28727,6 +29111,28 @@
 			)
 		)
 	)
+	(global_label "UUM_LED_OK"
+		(shape input)
+		(at 750.57 219.71 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "e25c8cd2-e77b-4c98-91ff-88a89ac61954")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 735.6711 219.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "VDD_UUM"
 		(shape output)
 		(at 624.84 214.63 180)
@@ -29164,6 +29570,94 @@
 				)
 				(justify right)
 				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 764.54 297.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0029d47c-e830-4f01-b7da-4be31449cda3")
+		(property "Reference" "R46"
+			(at 767.08 295.9099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "300"
+			(at 767.08 298.4499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 762.762 297.18 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 764.54 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 764.54 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
+			(at 764.54 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Price" "0.0129"
+			(at 764.54 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "fd1b2b76-34b4-43a3-a216-abc41e527ba8")
+		)
+		(pin "1"
+			(uuid "7b886e01-c948-4140-90e1-4731496c833e")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
+					(reference "R46")
+					(unit 1)
+				)
 			)
 		)
 	)
@@ -33986,7 +34480,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 270.51 57.15 0)
+		(at 267.97 57.15 0)
 		(unit 5)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -33995,7 +34489,7 @@
 		(fields_autoplaced yes)
 		(uuid "2237a759-0a36-449f-bcc0-26e9067ea74b")
 		(property "Reference" "U1"
-			(at 270.51 29.21 0)
+			(at 267.97 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34003,7 +34497,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 270.51 31.75 0)
+			(at 267.97 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34011,7 +34505,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 270.51 57.15 0)
+			(at 267.97 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34021,7 +34515,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 270.51 57.15 0)
+			(at 267.97 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34030,7 +34524,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 270.51 57.15 0)
+			(at 267.97 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34039,7 +34533,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 270.51 57.15 0)
+			(at 267.97 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34049,7 +34543,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 270.51 57.15 0)
+			(at 267.97 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34059,7 +34553,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 270.51 57.15 0)
+			(at 267.97 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34069,7 +34563,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 270.51 57.15 0)
+			(at 267.97 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34079,7 +34573,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 270.51 57.15 0)
+			(at 267.97 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34089,7 +34583,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 270.51 57.15 0)
+			(at 267.97 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34099,7 +34593,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 270.51 57.15 0)
+			(at 267.97 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34109,7 +34603,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 270.51 57.15 0)
+			(at 267.97 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34119,7 +34613,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 270.51 57.15 0)
+			(at 267.97 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34129,7 +34623,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 270.51 57.15 0)
+			(at 267.97 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34139,7 +34633,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 270.51 57.15 0)
+			(at 267.97 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40315,6 +40809,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 740.41 284.48 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4f8f47d3-fbf3-463f-980b-766a4e0cff0b")
+		(property "Reference" "#PWR0127"
+			(at 740.41 290.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 740.41 289.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 740.41 284.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 740.41 284.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 740.41 284.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3b328173-2749-443c-8c46-603148635773")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
+					(reference "#PWR0127")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+5V")
 		(at 807.72 31.75 0)
 		(unit 1)
@@ -41532,6 +42092,94 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 744.22 297.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "56757746-3a69-4fc1-b29d-c105f4016397")
+		(property "Reference" "R45"
+			(at 746.76 295.9099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "300"
+			(at 746.76 298.4499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 742.442 297.18 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 744.22 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 744.22 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
+			(at 744.22 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Price" "0.0129"
+			(at 744.22 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "b899dcaa-ba62-42e4-92fb-9bf0ecf910fa")
+		)
+		(pin "1"
+			(uuid "f44cb5d9-580d-448b-b560-30650b83c5c1")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
+					(reference "R45")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector_Generic:Conn_01x03")
 		(at 196.85 186.69 0)
 		(unit 1)
@@ -41665,6 +42313,85 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
 					(reference "#PWR032")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 805.18 288.29 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "598bcd07-cdbc-4c62-9b63-d82954d42cb1")
+		(property "Reference" "D31"
+			(at 807.72 285.4324 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LED_WARN"
+			(at 807.72 287.9724 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
+			(at 805.18 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 805.18 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 805.18 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 805.18 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c14400e2-6b43-4999-b044-ffd07e429a4d")
+		)
+		(pin "2"
+			(uuid "381197ba-4003-44a6-b25c-021464c89340")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
+					(reference "D31")
 					(unit 1)
 				)
 			)
@@ -44150,6 +44877,85 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
 					(reference "U22")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 764.54 288.29 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6996a012-51e8-42a0-a911-de89190ff481")
+		(property "Reference" "D29"
+			(at 767.08 285.4324 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LED_OK"
+			(at 767.08 287.9724 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
+			(at 764.54 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 764.54 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 764.54 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 764.54 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2627ec50-d034-4b18-89ae-b27a37a37fdd")
+		)
+		(pin "2"
+			(uuid "33899c5d-ad63-4fca-9803-c399d9938d30")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
+					(reference "D29")
 					(unit 1)
 				)
 			)
@@ -47453,6 +48259,72 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 760.73 284.48 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "87a9c177-064d-4177-be13-03a7461bdc7d")
+		(property "Reference" "#PWR0129"
+			(at 760.73 290.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 760.73 289.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 760.73 284.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 760.73 284.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 760.73 284.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a19492ec-4016-4353-827f-6c782c11b091")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
+					(reference "#PWR0129")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 697.23 107.95 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -48590,6 +49462,94 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 805.18 297.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "95df2d25-7e9e-4790-bf02-6b2d974dc42c")
+		(property "Reference" "R49"
+			(at 807.72 295.9099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "300"
+			(at 807.72 298.4499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 803.402 297.18 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 805.18 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 805.18 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
+			(at 805.18 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Price" "0.0129"
+			(at 805.18 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "23f52a86-966e-4eca-8af1-7752ea9227c1")
+		)
+		(pin "1"
+			(uuid "3405a6e9-551c-41ec-a1da-2bbcd824de3d")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
+					(reference "R49")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 100.33 175.26 0)
 		(unit 1)
@@ -48650,6 +49610,94 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
 					(reference "#PWR092")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 784.86 297.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "97740b3c-f3b3-4b76-bad3-092be8b8da53")
+		(property "Reference" "R48"
+			(at 787.4 295.9099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "300"
+			(at 787.4 298.4499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 783.082 297.18 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 784.86 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 784.86 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
+			(at 784.86 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Price" "0.0129"
+			(at 784.86 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "e2b5d651-2488-411e-8bad-07e71cd742f7")
+		)
+		(pin "1"
+			(uuid "f7f13fac-9249-4486-9a1c-59ac378963d2")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
+					(reference "R48")
 					(unit 1)
 				)
 			)
@@ -49813,6 +50861,85 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
 					(reference "#PWR035")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 784.86 288.29 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9e89a6a3-b8d9-4f0e-8cbd-65d98c7463da")
+		(property "Reference" "D30"
+			(at 787.4 285.4324 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LED_FAIL"
+			(at 787.4 287.9724 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
+			(at 784.86 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 784.86 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 784.86 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 784.86 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "768e06da-5142-4542-8cb8-6c87234fbd7e")
+		)
+		(pin "2"
+			(uuid "e7b3dc7c-fbf7-4fb2-b231-f560db51753c")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
+					(reference "D30")
 					(unit 1)
 				)
 			)
@@ -53342,6 +54469,85 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
 					(reference "#PWR011")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 744.22 288.29 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b2214014-1260-458e-87f5-670aee5662da")
+		(property "Reference" "D28"
+			(at 746.76 285.4324 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LED_PWR"
+			(at 746.76 287.9724 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
+			(at 744.22 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 744.22 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 744.22 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 744.22 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dd2b15de-f6d1-4f65-991b-381de6d7c3ae")
+		)
+		(pin "2"
+			(uuid "8167138f-4bcc-405f-96ab-9c7c54e2a59e")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
+					(reference "D28")
 					(unit 1)
 				)
 			)
@@ -58645,6 +59851,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 781.05 284.48 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "da5ae397-28dd-41ab-9d04-7e468399ae2f")
+		(property "Reference" "#PWR0130"
+			(at 781.05 290.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 781.05 289.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 781.05 284.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 781.05 284.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 781.05 284.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "24f98825-db21-44f8-ae14-23c7d69bb77a")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
+					(reference "#PWR0130")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 647.7 110.49 90)
 		(unit 1)
@@ -62867,6 +64139,72 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
 					(reference "#PWR085")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 801.37 284.48 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f3952b07-d5a5-4287-82d3-3046ccf1e656")
+		(property "Reference" "#PWR0131"
+			(at 801.37 290.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 801.37 289.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 801.37 284.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 801.37 284.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 801.37 284.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "00bf5573-009f-4283-a547-e1f5eada3dc8")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
+					(reference "#PWR0131")
 					(unit 1)
 				)
 			)

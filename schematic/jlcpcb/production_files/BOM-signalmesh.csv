@@ -132,3 +132,13 @@ MCP2551-I-P,U27,DIP-8_W7.62mm,,1
 10k,R3,R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,,1
 HDSP-7503,U18,HDSP-A151,,1
 INA219_CONFIG,J15,PinHeader_1x02_P1.00mm_Horizontal,,1
+LED_PWR,D28,LED_0603_1608Metric,,1
+LED_WARN,D31,LED_0603_1608Metric,,1
+LED_FAIL,D30,LED_0603_1608Metric,,1
+LED_OK,D29,LED_0603_1608Metric,,1
+300,R46,R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,,1
+300,R49,R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,,1
+300,R48,R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,,1
+300,R45,R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,,1
+TestPoint_Keystone_5019_Miniature,TDM_I2C1_SDA,TestPoint_Keystone_5019_Miniature,,1
+TestPoint_Keystone_5019_Miniature,TDM_I2C1_SCL,TestPoint_Keystone_5019_Miniature,,1

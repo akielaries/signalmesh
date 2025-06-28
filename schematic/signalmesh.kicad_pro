@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.8,
-          "height": 1.6,
-          "width": 1.6
+          "drill": 0.0,
+          "height": 2.0,
+          "width": 3.8
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -60,8 +60,20 @@
       ],
       "drc_exclusions": [
         [
-          "silk_over_copper|230989798|103103918|559d2e57-2c1c-4892-892c-cac554feeabc|00000000-0000-0000-0000-000000000000",
-          "I don't care about the silkscreen"
+          "clearance|381275000|188050000|6dfea2dc-3895-4097-bffa-0b7516556f3a|940e889c-0e86-4ed5-acdd-de54d834e892",
+          "the GND and VDD pins on the IC are like .225 apart and the rule is .25"
+        ],
+        [
+          "unconnected_items|201120000|164670000|eb98d17e-9760-410c-92d2-92eb95ba0893|51daab2f-5b42-4901-a052-9d7e3252a14d",
+          "overlapping grounds in symbol"
+        ],
+        [
+          "unconnected_items|201120000|167210000|0374d214-f26f-469f-9775-0c818ed9d9c1|eb98d17e-9760-410c-92d2-92eb95ba0893",
+          "overlapping grounds in symbol"
+        ],
+        [
+          "unconnected_items|206200000|164670000|f0cebb42-0544-439c-9161-5e6b967e0613|e9688247-167f-4b66-96ff-d16f144e1574",
+          "from schematic with overlapping grounds"
         ],
         [
           "unconnected_items|424000000|110740000|c316c375-1793-40fe-9d61-bf181eb0c845|dcecd257-2b8c-4849-acf9-5690602cee18",
