@@ -60,6 +60,10 @@
       ],
       "drc_exclusions": [
         [
+          "silk_over_copper|230989798|103103918|559d2e57-2c1c-4892-892c-cac554feeabc|00000000-0000-0000-0000-000000000000",
+          "I don't care about the silkscreen"
+        ],
+        [
           "unconnected_items|424000000|110740000|c316c375-1793-40fe-9d61-bf181eb0c845|dcecd257-2b8c-4849-acf9-5690602cee18",
           "the schematic library for this has two ground pins on top of eachother"
         ]
@@ -106,8 +110,8 @@
         "pth_inside_courtyard": "ignore",
         "shorting_items": "error",
         "silk_edge_clearance": "warning",
-        "silk_over_copper": "warning",
-        "silk_overlap": "warning",
+        "silk_over_copper": "ignore",
+        "silk_overlap": "ignore",
         "skew_out_of_range": "error",
         "solder_mask_bridge": "error",
         "starved_thermal": "error",
