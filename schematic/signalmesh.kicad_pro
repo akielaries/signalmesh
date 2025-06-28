@@ -58,7 +58,12 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "unconnected_items|424000000|110740000|c316c375-1793-40fe-9d61-bf181eb0c845|dcecd257-2b8c-4849-acf9-5690602cee18",
+          "the schematic library for this has two ground pins on top of eachother"
+        ]
+      ],
       "meta": {
         "version": 2
       },
