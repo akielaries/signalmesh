@@ -11256,8 +11256,8 @@
 		(uuid 38c547ba-7412-4195-a17f-d3348600991c)
 	)
 	(rectangle
-		(start 346.71 274.32)
-		(end 393.7 288.29)
+		(start 350.52 299.72)
+		(end 397.51 313.69)
 		(stroke
 			(width 0)
 			(type solid)
@@ -11384,18 +11384,6 @@
 		(uuid 8407c977-73ea-4fec-a669-d39e5ac916a6)
 	)
 	(rectangle
-		(start 76.2 292.1)
-		(end 388.62 495.3)
-		(stroke
-			(width 0)
-			(type solid)
-		)
-		(fill
-			(type none)
-		)
-		(uuid 86bcd03b-5b1b-49cf-ae8f-fe0b6e5996e6)
-	)
-	(rectangle
 		(start 629.92 21.59)
 		(end 684.53 62.23)
 		(stroke
@@ -11470,18 +11458,6 @@
 			(color 255 255 194 1)
 		)
 		(uuid b50332bb-796b-46ac-bebe-453efd2df63c)
-	)
-	(rectangle
-		(start 77.47 297.18)
-		(end 378.46 444.5)
-		(stroke
-			(width 0)
-			(type solid)
-		)
-		(fill
-			(type none)
-		)
-		(uuid bec99ac2-a8a8-4849-9961-0556333b6170)
 	)
 	(rectangle
 		(start 629.92 62.23)
@@ -11631,7 +11607,7 @@
 	)
 	(text "AAM -> DSM Record"
 		(exclude_from_sim no)
-		(at 382.778 275.844 0)
+		(at 386.588 301.244 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11728,16 +11704,6 @@
 			)
 		)
 		(uuid "c838399f-a843-4ad5-bfad-0fd91ffaf300")
-	)
-	(text "Data Siphon Module"
-		(exclude_from_sim no)
-		(at 369.824 294.894 0)
-		(effects
-			(font
-				(size 1.905 1.905)
-			)
-		)
-		(uuid "ca3161b4-9db6-4e1a-878c-f43b43848990")
 	)
 	(text "DSM CAN TLM"
 		(exclude_from_sim no)
@@ -13831,7 +13797,7 @@
 	)
 	(wire
 		(pts
-			(xy 374.65 283.21) (xy 365.76 283.21)
+			(xy 378.46 308.61) (xy 369.57 308.61)
 		)
 		(stroke
 			(width 0)
@@ -14901,7 +14867,7 @@
 	)
 	(wire
 		(pts
-			(xy 374.65 280.67) (xy 365.76 280.67)
+			(xy 378.46 306.07) (xy 369.57 306.07)
 		)
 		(stroke
 			(width 0)
@@ -15131,7 +15097,7 @@
 	)
 	(wire
 		(pts
-			(xy 374.65 278.13) (xy 365.76 278.13)
+			(xy 378.46 303.53) (xy 369.57 303.53)
 		)
 		(stroke
 			(width 0)
@@ -16981,7 +16947,7 @@
 	)
 	(wire
 		(pts
-			(xy 374.65 285.75) (xy 365.76 285.75)
+			(xy 378.46 311.15) (xy 369.57 311.15)
 		)
 		(stroke
 			(width 0)
@@ -19043,7 +19009,7 @@
 	)
 	(global_label "DSM_DAC_R"
 		(shape bidirectional)
-		(at 374.65 283.21 0)
+		(at 378.46 308.61 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -19053,7 +19019,7 @@
 		)
 		(uuid "283b7f94-924a-40cc-82a1-174ac4295bba")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 389.5112 283.21 0)
+			(at 393.3212 308.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20011,7 +19977,7 @@
 	)
 	(global_label "AAM_INTRPT_RX"
 		(shape bidirectional)
-		(at 365.76 278.13 180)
+		(at 369.57 303.53 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -20021,7 +19987,7 @@
 		)
 		(uuid "56a27807-a9ec-4862-a89f-fabfab87af3f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 347.2097 278.13 0)
+			(at 351.0197 303.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20253,7 +20219,7 @@
 	)
 	(global_label "DSM_INTRPT_TX"
 		(shape bidirectional)
-		(at 374.65 278.13 0)
+		(at 378.46 303.53 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -20263,7 +20229,7 @@
 		)
 		(uuid "6ba0fbbb-5fea-452e-8f10-39f03a028693")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 393.2002 278.13 0)
+			(at 397.0102 303.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20583,7 +20549,7 @@
 	)
 	(global_label "DSM_INTRPT_RX"
 		(shape bidirectional)
-		(at 374.65 280.67 0)
+		(at 378.46 306.07 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -20593,7 +20559,7 @@
 		)
 		(uuid "7e878844-9648-4301-aafd-15322ca5564f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 393.5026 280.67 0)
+			(at 397.3126 306.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21573,7 +21539,7 @@
 	)
 	(global_label "AAM_INTRPT_TX"
 		(shape bidirectional)
-		(at 365.76 280.67 180)
+		(at 369.57 306.07 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -21583,7 +21549,7 @@
 		)
 		(uuid "b18be5ae-2019-41bf-8ca6-44aa7c1baaac")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 347.5121 280.67 0)
+			(at 351.3221 306.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22475,7 +22441,7 @@
 	)
 	(global_label "AAM_DAC_L"
 		(shape bidirectional)
-		(at 365.76 285.75 180)
+		(at 369.57 311.15 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22485,7 +22451,7 @@
 		)
 		(uuid "e657f4b4-746d-4e8b-9435-406785759a85")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 351.443 285.75 0)
+			(at 355.253 311.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22497,7 +22463,7 @@
 	)
 	(global_label "DSM_DAC_L"
 		(shape bidirectional)
-		(at 374.65 285.75 0)
+		(at 378.46 311.15 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22507,7 +22473,7 @@
 		)
 		(uuid "e724b116-c4d3-48cf-99da-60cbcfea60ca")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 389.2693 285.75 0)
+			(at 393.0793 311.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22717,7 +22683,7 @@
 	)
 	(global_label "AAM_DAC_R"
 		(shape bidirectional)
-		(at 365.76 283.21 180)
+		(at 369.57 308.61 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22727,7 +22693,7 @@
 		)
 		(uuid "fc8258f6-1b72-448c-81a0-0cb1a054ceba")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 351.2011 283.21 0)
+			(at 355.0111 308.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44733,7 +44699,7 @@
 		)
 	)
 	(sheet
-		(at 340.36 212.09)
+		(at 368.3 292.1)
 		(size 12.7 3.81)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -44749,7 +44715,7 @@
 		)
 		(uuid "0125ec8c-bf97-4530-be23-1f3b075b267b")
 		(property "Sheetname" "AAM"
-			(at 340.36 211.3784 0)
+			(at 368.3 291.3884 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44758,7 +44724,7 @@
 			)
 		)
 		(property "Sheetfile" "AAM.kicad_sch"
-			(at 340.36 216.4846 0)
+			(at 368.3 296.4946 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44775,8 +44741,8 @@
 		)
 	)
 	(sheet
-		(at 388.62 411.48)
-		(size 12.7 17.78)
+		(at 368.3 317.5)
+		(size 12.7 3.81)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -44791,7 +44757,7 @@
 		)
 		(uuid "4391c51f-6ab5-4b63-a6de-56382e56f1df")
 		(property "Sheetname" "DSM"
-			(at 388.62 410.7684 0)
+			(at 368.3 316.7884 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44800,7 +44766,7 @@
 			)
 		)
 		(property "Sheetfile" "DSM.kicad_sch"
-			(at 388.62 429.8446 0)
+			(at 368.3 321.8946 0)
 			(effects
 				(font
 					(size 1.27 1.27)
