@@ -693,6 +693,22 @@
     [
       "fe7b15e9-f0ed-4338-9f03-dd7651dace13",
       "Root"
+    ],
+    [
+      "4391c51f-6ab5-4b63-a6de-56382e56f1df",
+      "DSM"
+    ],
+    [
+      "32ae1251-2c49-48eb-b8c0-9dba9e41ab50",
+      "DSM_peripherals"
+    ],
+    [
+      "0125ec8c-bf97-4530-be23-1f3b075b267b",
+      "AAM"
+    ],
+    [
+      "1454e800-86c5-4878-a0a6-aa194e868960",
+      "AAM_peripherals"
     ]
   ],
   "text_variables": {}
