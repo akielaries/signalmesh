@@ -17666,7 +17666,7 @@
 	)
 	(rectangle
 		(start 76.2 292.1)
-		(end 388.62 476.25)
+		(end 388.62 495.3)
 		(stroke
 			(width 0)
 			(type solid)
@@ -17790,6 +17790,18 @@
 		(uuid c58267a0-7dac-4aae-b1da-be7fde1235e4)
 	)
 	(rectangle
+		(start 334.01 447.04)
+		(end 378.46 482.6)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid e83b779d-78af-4002-bb43-d03e88c294dc)
+	)
+	(rectangle
 		(start 629.92 102.87)
 		(end 684.53 143.51)
 		(stroke
@@ -17897,6 +17909,16 @@
 			)
 		)
 		(uuid "4929c37b-169d-44ac-834e-987152a176d1")
+	)
+	(text "MIDI USB2.0 INPUT"
+		(exclude_from_sim no)
+		(at 355.6 449.072 0)
+		(effects
+			(font
+				(size 1.905 1.905)
+			)
+		)
+		(uuid "578ee861-9396-4a7c-9e67-404ced4af6fc")
 	)
 	(text "UUM writes to both SPI flashes\nat once but can only read from\n1 at a time via a GPIO-ctrl'd\nswitch"
 		(exclude_from_sim no)
@@ -18251,6 +18273,12 @@
 		(uuid "3121b48e-45e6-4275-855d-c186efb754fe")
 	)
 	(junction
+		(at 360.68 459.74)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "33c54757-facb-4f0a-a473-1e43ba0fb41a")
+	)
+	(junction
 		(at 476.25 34.29)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -18429,6 +18457,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7126f2f7-f31e-41b0-b066-8421aa3201cb")
+	)
+	(junction
+		(at 350.52 476.25)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "71434632-feb8-4cbf-b01d-7a8237d1103e")
 	)
 	(junction
 		(at 525.78 36.83)
@@ -19218,6 +19252,16 @@
 	)
 	(wire
 		(pts
+			(xy 360.68 459.74) (xy 358.14 459.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "092daa57-c759-409e-8b96-8851e7635d17")
+	)
+	(wire
+		(pts
 			(xy 807.72 229.87) (xy 810.26 229.87)
 		)
 		(stroke
@@ -19978,6 +20022,16 @@
 	)
 	(wire
 		(pts
+			(xy 360.68 459.74) (xy 363.22 459.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2647b26b-01a8-42c6-b102-a0dc6181055a")
+	)
+	(wire
+		(pts
 			(xy 595.63 110.49) (xy 599.44 110.49)
 		)
 		(stroke
@@ -20355,6 +20409,16 @@
 			(type default)
 		)
 		(uuid "345c3bef-0737-422b-8817-bcc6744a5953")
+	)
+	(wire
+		(pts
+			(xy 350.52 476.25) (xy 350.52 474.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "34f67967-5e65-41ea-8248-f914db6b2d7b")
 	)
 	(wire
 		(pts
@@ -21048,6 +21112,16 @@
 	)
 	(wire
 		(pts
+			(xy 339.09 454.66) (xy 339.09 458.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "531f703d-0cbe-4352-80f2-0898084dc9e0")
+	)
+	(wire
+		(pts
 			(xy 102.87 226.06) (xy 100.33 226.06)
 		)
 		(stroke
@@ -21085,6 +21159,16 @@
 			(type default)
 		)
 		(uuid "53f1a0ce-97bf-4fd6-a0c6-f5ea6ffa0310")
+	)
+	(wire
+		(pts
+			(xy 360.68 454.66) (xy 360.68 459.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5402460e-21e7-4e88-807c-4a18413bf03a")
 	)
 	(wire
 		(pts
@@ -22185,6 +22269,16 @@
 			(type default)
 		)
 		(uuid "805be2fb-6b7d-4991-a160-d03b4d3fc96e")
+	)
+	(wire
+		(pts
+			(xy 339.09 476.25) (xy 339.09 473.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "81000e1e-a94d-4d81-b5c3-9eb26a3647ea")
 	)
 	(wire
 		(pts
@@ -24568,6 +24662,16 @@
 	)
 	(wire
 		(pts
+			(xy 350.52 476.25) (xy 339.09 476.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e2949ad5-2c6d-41f9-b694-cde4d2bc91ab")
+	)
+	(wire
+		(pts
 			(xy 93.98 247.65) (xy 82.55 247.65)
 		)
 		(stroke
@@ -25115,6 +25219,16 @@
 			(type default)
 		)
 		(uuid "f82b0667-e5ac-4c88-bdf5-02d284794b10")
+	)
+	(wire
+		(pts
+			(xy 360.68 454.66) (xy 339.09 454.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f85f23c8-91ea-4576-872e-33937860a617")
 	)
 	(wire
 		(pts
@@ -26409,6 +26523,28 @@
 		(uuid "2474e8ac-5526-4bfd-a3aa-b71342489733")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 745.2926 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "AAM_USB_D+"
+		(shape bidirectional)
+		(at 358.14 464.82 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2480add7-a0d9-473a-8462-8536d10d0150")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 374.4527 464.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30136,6 +30272,28 @@
 			)
 		)
 	)
+	(global_label "AAM_VDD"
+		(shape input)
+		(at 363.22 459.74 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b66ba687-bf5b-4119-903f-f8deea6a8136")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 374.43 459.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "AAM_FMC_D5"
 		(shape bidirectional)
 		(at 358.14 69.85 0)
@@ -30484,6 +30642,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "AAM_USB_D-"
+		(shape bidirectional)
+		(at 358.14 467.36 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c762ebfc-3828-464d-b443-1920057cf632")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 374.4527 467.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -42521,6 +42701,72 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 350.52 476.25 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "44a7a165-01d8-403f-a2db-d24d582e2442")
+		(property "Reference" "#PWR0140"
+			(at 350.52 482.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 350.52 481.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 350.52 476.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 350.52 476.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 350.52 476.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2c14cb77-0d7d-45e5-a3a8-4dccf6ab9f14")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
+					(reference "#PWR0140")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 656.59 215.9 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -52462,6 +52708,94 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 339.09 462.28 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9349f9a7-24a2-4888-a9bc-cf152380f72c")
+		(property "Reference" "R56"
+			(at 341.63 461.0099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "300"
+			(at 341.63 463.5499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 340.868 462.28 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 339.09 462.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 339.09 462.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
+			(at 339.09 462.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Price" "0.0129"
+			(at 339.09 462.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "46294b2f-2447-4aa9-975e-6325d321fb78")
+		)
+		(pin "1"
+			(uuid "677e7183-7b9a-47c6-9ce0-d78f62dc5870")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
+					(reference "R56")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:LED")
 		(at 483.87 93.98 270)
 		(unit 1)
@@ -54001,6 +54335,85 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
 					(reference "J16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 339.09 469.9 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9d3d88be-00d6-4c60-a917-fa71e93f0e64")
+		(property "Reference" "D37"
+			(at 342.9 470.2174 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "LED_PWR"
+			(at 342.9 472.7574 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
+			(at 339.09 469.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 339.09 469.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 339.09 469.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 339.09 469.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "23bd977d-c245-4314-bd7b-c3f9b6407a1c")
+		)
+		(pin "2"
+			(uuid "b547e962-ed4e-47fa-b0db-8d0833f270bf")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
+					(reference "D37")
 					(unit 1)
 				)
 			)
@@ -68505,6 +68918,83 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
 					(reference "D5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:USB_A")
+		(at 350.52 464.82 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f6c4abc8-dc5d-49d8-ab22-4ab5007a1afe")
+		(property "Reference" "J22"
+			(at 350.52 452.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "USB_A"
+			(at 350.52 454.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_USB:USB_A_CNCTech_1001-011-01101_Horizontal"
+			(at 354.33 466.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 354.33 466.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "USB Type A connector"
+			(at 350.52 464.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "f375b45c-a36e-4b00-b7e3-5b49d9c54770")
+		)
+		(pin "5"
+			(uuid "ff295370-4052-4213-bc43-bd6258ca963f")
+		)
+		(pin "1"
+			(uuid "cbe82463-d8b2-43d6-8545-3267872a0160")
+		)
+		(pin "3"
+			(uuid "6be87680-4c12-43bd-ac1b-610ed37ddc9d")
+		)
+		(pin "4"
+			(uuid "3b68cfe3-28fe-441f-af9d-4ad50a3b2d8b")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
+					(reference "J22")
 					(unit 1)
 				)
 			)
