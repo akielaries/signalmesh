@@ -699,16 +699,28 @@
       "DSM"
     ],
     [
-      "32ae1251-2c49-48eb-b8c0-9dba9e41ab50",
-      "DSM_peripherals"
-    ],
-    [
       "0125ec8c-bf97-4530-be23-1f3b075b267b",
       "AAM"
     ],
     [
-      "1454e800-86c5-4878-a0a6-aa194e868960",
-      "AAM_peripherals"
+      "2a8263b6-de73-49ce-bd78-9ccd79fb8d35",
+      "AAM_debug"
+    ],
+    [
+      "03344240-0515-4f71-8710-40bd9ead88e4",
+      "7SDD"
+    ],
+    [
+      "611fa31e-8b8a-419f-be1e-27301f4ddd3e",
+      "AAM_midi"
+    ],
+    [
+      "e25d3e2c-36b2-45de-b96b-ba3851b7ad18",
+      "DSM_debug"
+    ],
+    [
+      "5e884b91-e33f-41af-8f06-387ea8f63e1e",
+      "DSM_media"
     ]
   ],
   "text_variables": {}

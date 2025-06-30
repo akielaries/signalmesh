@@ -4,6 +4,10 @@
 	(generator_version "9.0")
 	(uuid "c282a14b-ae25-49d4-905f-8e6815b5e69a")
 	(paper "A4")
+	(title_block
+		(date "2025-06")
+		(rev "2")
+	)
 	(lib_symbols
 		(symbol "Connector:USB_A"
 			(pin_names
