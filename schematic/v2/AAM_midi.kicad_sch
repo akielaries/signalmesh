@@ -856,50 +856,6 @@
 		)
 		(uuid "e0687e78-10c6-431e-8541-e654359aad17")
 	)
-	(global_label "AAM_USB_D-"
-		(shape bidirectional)
-		(at 146.05 100.33 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "33755904-62bf-468d-96e4-1ef899546ca1")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 162.3627 100.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "AAM_USB_D+"
-		(shape bidirectional)
-		(at 146.05 97.79 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "648653c7-6185-4fc9-8c77-99dff4e66b21")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 162.3627 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "AAM_VDD"
 		(shape input)
 		(at 151.13 92.71 0)
@@ -921,6 +877,28 @@
 				(hide yes)
 			)
 		)
+	)
+	(hierarchical_label "AAM_USB_D+"
+		(shape bidirectional)
+		(at 146.05 97.79 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9625bef3-23a6-4863-8bd2-d95341def453")
+	)
+	(hierarchical_label "AAM_USB_D-"
+		(shape bidirectional)
+		(at 146.05 100.33 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b7df223a-ce90-4ec6-b855-467e30931685")
 	)
 	(symbol
 		(lib_id "Device:LED")

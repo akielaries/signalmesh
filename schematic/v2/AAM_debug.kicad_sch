@@ -1671,6 +1671,16 @@
 	)
 	(wire
 		(pts
+			(xy 179.07 113.03) (xy 191.77 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0ae2ba17-5af3-4f6a-8049-22ca6cbcf7cf")
+	)
+	(wire
+		(pts
 			(xy 142.24 72.39) (xy 144.78 72.39)
 		)
 		(stroke
@@ -1891,6 +1901,16 @@
 	)
 	(wire
 		(pts
+			(xy 179.07 110.49) (xy 191.77 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c0b8e58b-f0f1-42e2-b86b-92bff84c056d")
+	)
+	(wire
+		(pts
 			(xy 127 48.26) (xy 127 52.07)
 		)
 		(stroke
@@ -1999,27 +2019,25 @@
 		)
 		(uuid "f5b35b13-000e-4aea-b23d-15b84f227086")
 	)
-	(global_label "AAM_DBG_RX"
-		(shape input)
-		(at 191.77 113.03 180)
-		(fields_autoplaced yes)
+	(label "AAM_DBG_RX"
+		(at 179.07 113.03 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left bottom)
 		)
-		(uuid "445e95ec-eb22-49e7-a616-be58b7085dde")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 176.6292 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
+		(uuid "20d09263-d067-4420-bafc-3f026d266ef7")
+	)
+	(label "AAM_DBG_TX"
+		(at 179.07 110.49 0)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify left bottom)
 		)
+		(uuid "6673d60a-6d9b-403f-b04e-09ce0c6bbf12")
 	)
 	(global_label "AAM_VDD"
 		(shape input)
@@ -2039,28 +2057,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "AAM_DBG_TX"
-		(shape input)
-		(at 191.77 110.49 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "8e27627c-91dd-4c29-9901-4814bb7a32b4")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 176.9316 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 				(hide yes)
 			)
 		)

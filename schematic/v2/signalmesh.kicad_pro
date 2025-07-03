@@ -695,12 +695,12 @@
       "Root"
     ],
     [
-      "4391c51f-6ab5-4b63-a6de-56382e56f1df",
-      "DSM"
-    ],
-    [
       "0125ec8c-bf97-4530-be23-1f3b075b267b",
       "AAM"
+    ],
+    [
+      "4391c51f-6ab5-4b63-a6de-56382e56f1df",
+      "DSM"
     ],
     [
       "2a8263b6-de73-49ce-bd78-9ccd79fb8d35",
@@ -715,12 +715,12 @@
       "AAM_midi"
     ],
     [
-      "e25d3e2c-36b2-45de-b96b-ba3851b7ad18",
-      "DSM_debug"
-    ],
-    [
       "5e884b91-e33f-41af-8f06-387ea8f63e1e",
       "DSM_media"
+    ],
+    [
+      "e25d3e2c-36b2-45de-b96b-ba3851b7ad18",
+      "DSM_debug"
     ]
   ],
   "text_variables": {}

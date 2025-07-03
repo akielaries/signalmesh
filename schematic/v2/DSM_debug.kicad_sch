@@ -2589,7 +2589,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3b251f0e-12be-4cab-aa19-90163b31c709")
-		(property "Reference" "#PWR0147"
+		(property "Reference" "#PWR0137"
 			(at 153.67 78.74 0)
 			(effects
 				(font
@@ -2639,7 +2639,7 @@
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/4391c51f-6ab5-4b63-a6de-56382e56f1df/e25d3e2c-36b2-45de-b96b-ba3851b7ad18"
-					(reference "#PWR0147")
+					(reference "#PWR0137")
 					(unit 1)
 				)
 			)
@@ -2656,7 +2656,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3fcfe08e-f47b-415d-9c88-b1ab7c456393")
-		(property "Reference" "#PWR0142"
+		(property "Reference" "#PWR0138"
 			(at 107.95 99.06 0)
 			(effects
 				(font
@@ -2706,7 +2706,7 @@
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/4391c51f-6ab5-4b63-a6de-56382e56f1df/e25d3e2c-36b2-45de-b96b-ba3851b7ad18"
-					(reference "#PWR0142")
+					(reference "#PWR0138")
 					(unit 1)
 				)
 			)
@@ -2723,7 +2723,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4fabe30c-bcc2-4fa7-b5d2-f000741d8c43")
-		(property "Reference" "#PWR0146"
+		(property "Reference" "#PWR0136"
 			(at 153.67 66.04 0)
 			(effects
 				(font
@@ -2773,7 +2773,7 @@
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/4391c51f-6ab5-4b63-a6de-56382e56f1df/e25d3e2c-36b2-45de-b96b-ba3851b7ad18"
-					(reference "#PWR0146")
+					(reference "#PWR0136")
 					(unit 1)
 				)
 			)
@@ -2789,7 +2789,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7e45a1d1-4c48-406e-b0b7-06a5377c6390")
-		(property "Reference" "#PWR098"
+		(property "Reference" "#PWR0135"
 			(at 189.23 121.92 0)
 			(effects
 				(font
@@ -2840,7 +2840,7 @@
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/4391c51f-6ab5-4b63-a6de-56382e56f1df/e25d3e2c-36b2-45de-b96b-ba3851b7ad18"
-					(reference "#PWR098")
+					(reference "#PWR0135")
 					(unit 1)
 				)
 			)
@@ -2856,7 +2856,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "855a56ec-1d10-455d-bf9a-703f12920f9d")
-		(property "Reference" "#PWR0141"
+		(property "Reference" "#PWR0134"
 			(at 88.9 85.09 0)
 			(effects
 				(font
@@ -2906,7 +2906,7 @@
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/4391c51f-6ab5-4b63-a6de-56382e56f1df/e25d3e2c-36b2-45de-b96b-ba3851b7ad18"
-					(reference "#PWR0141")
+					(reference "#PWR0134")
 					(unit 1)
 				)
 			)
@@ -3236,7 +3236,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a5a6572b-3fdf-4073-a871-7a920301a941")
-		(property "Reference" "#PWR0145"
+		(property "Reference" "#PWR0139"
 			(at 129.54 91.44 0)
 			(effects
 				(font
@@ -3286,7 +3286,7 @@
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/4391c51f-6ab5-4b63-a6de-56382e56f1df/e25d3e2c-36b2-45de-b96b-ba3851b7ad18"
-					(reference "#PWR0145")
+					(reference "#PWR0139")
 					(unit 1)
 				)
 			)
@@ -3303,7 +3303,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "aac9b0b4-7edd-4a2f-9fe2-022365054ed0")
-		(property "Reference" "#PWR0144"
+		(property "Reference" "#PWR0148"
 			(at 115.57 99.06 0)
 			(effects
 				(font
@@ -3353,7 +3353,7 @@
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/4391c51f-6ab5-4b63-a6de-56382e56f1df/e25d3e2c-36b2-45de-b96b-ba3851b7ad18"
-					(reference "#PWR0144")
+					(reference "#PWR0148")
 					(unit 1)
 				)
 			)
@@ -3673,7 +3673,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "dabe7b95-10d6-4cc9-b731-bcac40f9d257")
-		(property "Reference" "#PWR0143"
+		(property "Reference" "#PWR0133"
 			(at 109.22 58.42 0)
 			(effects
 				(font
@@ -3723,7 +3723,7 @@
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/4391c51f-6ab5-4b63-a6de-56382e56f1df/e25d3e2c-36b2-45de-b96b-ba3851b7ad18"
-					(reference "#PWR0143")
+					(reference "#PWR0133")
 					(unit 1)
 				)
 			)
