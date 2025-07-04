@@ -5647,16 +5647,6 @@
 	)
 	(wire
 		(pts
-			(xy 214.63 69.85) (xy 208.28 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "074290b2-d884-47b0-85a1-9d00fb4a4695")
-	)
-	(wire
-		(pts
 			(xy 90.17 175.26) (xy 92.71 175.26)
 		)
 		(stroke
@@ -5687,6 +5677,16 @@
 	)
 	(wire
 		(pts
+			(xy 77.47 172.72) (xy 92.71 172.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2460c1b0-bd39-4587-ae89-517671548150")
+	)
+	(wire
+		(pts
 			(xy 45.72 57.15) (xy 59.69 57.15)
 		)
 		(stroke
@@ -5707,16 +5707,6 @@
 	)
 	(wire
 		(pts
-			(xy 214.63 90.17) (xy 208.28 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "31383863-2bb0-431f-a749-8d4bfc301075")
-	)
-	(wire
-		(pts
 			(xy 144.78 167.64) (xy 144.78 168.91)
 		)
 		(stroke
@@ -5727,6 +5717,26 @@
 	)
 	(wire
 		(pts
+			(xy 77.47 170.18) (xy 92.71 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "34666741-9c3f-46f3-8dd2-e8707b47d3b8")
+	)
+	(wire
+		(pts
+			(xy 139.7 87.63) (xy 124.46 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "36d799a9-6650-4cb1-9892-f8fcc3967c44")
+	)
+	(wire
+		(pts
 			(xy 45.72 60.96) (xy 59.69 60.96)
 		)
 		(stroke
@@ -5734,26 +5744,6 @@
 			(type default)
 		)
 		(uuid "3b87a029-6665-484f-9419-8a066b3fb5ee")
-	)
-	(wire
-		(pts
-			(xy 76.2 143.51) (xy 88.9 143.51)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "44b0107b-e04d-4f82-bc2a-b82e51a6909d")
-	)
-	(wire
-		(pts
-			(xy 129.54 74.93) (xy 124.46 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "52b960d3-c5c2-4404-b81e-3fedc12f9fc4")
 	)
 	(wire
 		(pts
@@ -5807,33 +5797,13 @@
 	)
 	(wire
 		(pts
-			(xy 129.54 69.85) (xy 124.46 69.85)
+			(xy 139.7 90.17) (xy 124.46 90.17)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "622df902-8ba0-438c-b348-3bee3cd8b742")
-	)
-	(wire
-		(pts
-			(xy 76.2 105.41) (xy 88.9 105.41)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "679b88d3-7bc6-44ea-b2b9-bed842046608")
-	)
-	(wire
-		(pts
-			(xy 76.2 123.19) (xy 88.9 123.19)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6913b98b-fee6-4649-8a01-45cb9212fab8")
+		(uuid "651d3df7-66e9-4fce-ba7e-0a2ddd963037")
 	)
 	(wire
 		(pts
@@ -5847,26 +5817,6 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 128.27) (xy 172.72 128.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6ccc3c73-e737-488e-a8bf-87ce19ad3f6a")
-	)
-	(wire
-		(pts
-			(xy 160.02 100.33) (xy 172.72 100.33)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6fa152ee-841b-4674-879d-fc13fd245657")
-	)
-	(wire
-		(pts
 			(xy 57.15 170.18) (xy 44.45 170.18)
 		)
 		(stroke
@@ -5877,16 +5827,6 @@
 	)
 	(wire
 		(pts
-			(xy 214.63 85.09) (xy 208.28 85.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "71c3f722-d6f5-4c4b-b4e1-9e2929d75a79")
-	)
-	(wire
-		(pts
 			(xy 149.86 176.53) (xy 165.1 176.53)
 		)
 		(stroke
@@ -5894,46 +5834,6 @@
 			(type default)
 		)
 		(uuid "7377b069-7fa8-407f-83fe-5cde330bd510")
-	)
-	(wire
-		(pts
-			(xy 214.63 67.31) (xy 208.28 67.31)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7382552f-6f61-4a72-9c41-c73b52f425a5")
-	)
-	(wire
-		(pts
-			(xy 76.2 130.81) (xy 88.9 130.81)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "73d0dec1-84be-4254-9a07-e4c2d1c1bb14")
-	)
-	(wire
-		(pts
-			(xy 214.63 57.15) (xy 208.28 57.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7a6f4692-b4a3-4750-a62b-3b9e9dafb205")
-	)
-	(wire
-		(pts
-			(xy 76.2 133.35) (xy 88.9 133.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "80255b17-6a47-4e0b-9430-9225d55e5c22")
 	)
 	(wire
 		(pts
@@ -5957,7 +5857,7 @@
 	)
 	(wire
 		(pts
-			(xy 157.48 125.73) (xy 172.72 125.73)
+			(xy 142.24 125.73) (xy 157.48 125.73)
 		)
 		(stroke
 			(width 0)
@@ -5967,97 +5867,7 @@
 	)
 	(wire
 		(pts
-			(xy 214.63 87.63) (xy 208.28 87.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8d38cd49-487e-4a8c-8f24-19bf9ebea795")
-	)
-	(wire
-		(pts
-			(xy 214.63 54.61) (xy 208.28 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "92600913-c168-446f-b844-38c53dfff149")
-	)
-	(wire
-		(pts
-			(xy 129.54 82.55) (xy 124.46 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "96da17b2-812c-45ea-9b72-d3828486f5b9")
-	)
-	(wire
-		(pts
-			(xy 214.63 80.01) (xy 208.28 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "973c3221-d8fa-491c-ab7d-fdb7b6c1d2b0")
-	)
-	(wire
-		(pts
-			(xy 160.02 97.79) (xy 172.72 97.79)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9fdbf645-b675-46f3-bbef-74b30fdc2182")
-	)
-	(wire
-		(pts
-			(xy 76.2 90.17) (xy 88.9 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a649f095-a9be-4253-a75e-aa151e836083")
-	)
-	(wire
-		(pts
-			(xy 76.2 135.89) (xy 88.9 135.89)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a67abf70-bf05-4418-8370-74c1630981f1")
-	)
-	(wire
-		(pts
-			(xy 214.63 92.71) (xy 208.28 92.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b0492e31-6f7d-4b52-8dfa-02a9b3b19575")
-	)
-	(wire
-		(pts
-			(xy 76.2 107.95) (xy 88.9 107.95)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b0581050-4f13-4b97-a511-bb4a34798478")
-	)
-	(wire
-		(pts
-			(xy 157.48 120.65) (xy 172.72 120.65)
+			(xy 142.24 120.65) (xy 157.48 120.65)
 		)
 		(stroke
 			(width 0)
@@ -6067,17 +5877,7 @@
 	)
 	(wire
 		(pts
-			(xy 214.63 95.25) (xy 208.28 95.25)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b5ea30e9-0877-4430-a83d-6852a6872f1a")
-	)
-	(wire
-		(pts
-			(xy 171.45 59.69) (xy 172.72 59.69)
+			(xy 156.21 59.69) (xy 157.48 59.69)
 		)
 		(stroke
 			(width 0)
@@ -6094,16 +5894,6 @@
 			(type default)
 		)
 		(uuid "b65e82ab-bd1c-40e2-b62d-835c6329cd05")
-	)
-	(wire
-		(pts
-			(xy 214.63 82.55) (xy 208.28 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bcd69407-0792-48fa-96fd-5b2d64a36d09")
 	)
 	(wire
 		(pts
@@ -6157,7 +5947,7 @@
 	)
 	(wire
 		(pts
-			(xy 157.48 123.19) (xy 172.72 123.19)
+			(xy 142.24 123.19) (xy 157.48 123.19)
 		)
 		(stroke
 			(width 0)
@@ -6177,7 +5967,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 77.47) (xy 172.72 77.47)
+			(xy 143.51 77.47) (xy 157.48 77.47)
 		)
 		(stroke
 			(width 0)
@@ -6197,43 +5987,13 @@
 	)
 	(wire
 		(pts
-			(xy 214.63 77.47) (xy 208.28 77.47)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e9115d52-d9a3-4219-95ce-a6100705e9e2")
-	)
-	(wire
-		(pts
-			(xy 76.2 125.73) (xy 88.9 125.73)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "eff6c28e-47cd-4320-8f6f-020981443dc9")
-	)
-	(wire
-		(pts
-			(xy 158.75 74.93) (xy 172.72 74.93)
+			(xy 143.51 74.93) (xy 157.48 74.93)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "f22657f5-e07a-4dae-9bd8-f6fe68d33b5e")
-	)
-	(wire
-		(pts
-			(xy 214.63 74.93) (xy 208.28 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f3e03d10-3834-44c1-ac79-a36d67efe44d")
 	)
 	(wire
 		(pts
@@ -6265,17 +6025,7 @@
 		)
 		(uuid "f7a98a71-c6ac-4fec-b960-9b879741d8eb")
 	)
-	(wire
-		(pts
-			(xy 214.63 97.79) (xy 208.28 97.79)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fffa0b1c-f217-47f0-9a27-5009bfdaa47f")
-	)
-	(label "AAM_USB_D+"
+	(label "APM_USB_D+"
 		(at 58.42 93.98 180)
 		(effects
 			(font
@@ -6295,7 +6045,7 @@
 		)
 		(uuid "13763bb6-28b2-4f09-9afe-0691c2141d73")
 	)
-	(label "AAM_DBG_TX"
+	(label "APM_DBG_TX"
 		(at 76.2 110.49 0)
 		(effects
 			(font
@@ -6305,8 +6055,8 @@
 		)
 		(uuid "15ed2a88-3726-4ece-8ad5-4b87bf93d1ee")
 	)
-	(label "AAM_USB_D-"
-		(at 158.75 77.47 0)
+	(label "APM_USB_D-"
+		(at 143.51 77.47 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6315,7 +6065,7 @@
 		)
 		(uuid "17866cfc-74f6-460f-ad26-79d8ffe0489c")
 	)
-	(label "AAM_LED_WARN"
+	(label "APM_LED_WARN"
 		(at 149.86 176.53 0)
 		(effects
 			(font
@@ -6325,8 +6075,8 @@
 		)
 		(uuid "235fa9fe-7602-48b8-9e7b-4b94b1a44116")
 	)
-	(label "AAM_USB_D+"
-		(at 158.75 74.93 0)
+	(label "APM_USB_D+"
+		(at 143.51 74.93 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6335,7 +6085,7 @@
 		)
 		(uuid "3763a497-d682-4772-adb1-b222a01a92ce")
 	)
-	(label "AAM_DBG_TX"
+	(label "APM_DBG_TX"
 		(at 58.42 80.01 180)
 		(effects
 			(font
@@ -6355,7 +6105,7 @@
 		)
 		(uuid "5454c926-9fc3-4fd9-ae97-1e910c2c7deb")
 	)
-	(label "AAM_LED_OK"
+	(label "APM_LED_OK"
 		(at 130.81 176.53 0)
 		(effects
 			(font
@@ -6365,8 +6115,8 @@
 		)
 		(uuid "63a45e18-c4f7-4e1a-a609-b61b7dd18604")
 	)
-	(label "AAM_LED_WARN"
-		(at 157.48 123.19 0)
+	(label "APM_LED_WARN"
+		(at 142.24 123.19 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6375,7 +6125,7 @@
 		)
 		(uuid "6c8c40bd-e8a3-4559-8d81-786613b86c4b")
 	)
-	(label "AAM_DBG_RX"
+	(label "APM_DBG_RX"
 		(at 58.42 76.2 180)
 		(effects
 			(font
@@ -6385,7 +6135,37 @@
 		)
 		(uuid "6e0b93b6-7249-4941-8d7e-f52c57354c8b")
 	)
-	(label "AAM_LED_FAIL"
+	(label "APM_I2C1_SDA"
+		(at 139.7 87.63 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "76ba5db5-2a5a-4144-b89e-3a6dd422763c")
+	)
+	(label "APM_I2C1_SCL"
+		(at 77.47 172.72 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "779e941a-04da-44ea-bc88-22991f9cbc4d")
+	)
+	(label "APM_I2C1_SDA"
+		(at 77.47 170.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7cf40811-5e23-4a20-b03a-98f26dfc2cd2")
+	)
+	(label "APM_LED_FAIL"
 		(at 171.45 176.53 0)
 		(effects
 			(font
@@ -6395,8 +6175,8 @@
 		)
 		(uuid "9fd516f0-40bc-484d-b8c1-523df3071516")
 	)
-	(label "AAM_LED_FAIL"
-		(at 157.48 120.65 0)
+	(label "APM_LED_FAIL"
+		(at 142.24 120.65 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6405,8 +6185,8 @@
 		)
 		(uuid "a38194f7-4df8-45c1-b1fc-7cfbf262eb70")
 	)
-	(label "AAM_LED_OK"
-		(at 157.48 125.73 0)
+	(label "APM_LED_OK"
+		(at 142.24 125.73 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6415,7 +6195,7 @@
 		)
 		(uuid "a6c35929-1a55-40ad-84f2-916eaea9f33f")
 	)
-	(label "AAM_DAC_R"
+	(label "APM_DAC_R"
 		(at 57.15 170.18 180)
 		(effects
 			(font
@@ -6425,7 +6205,17 @@
 		)
 		(uuid "acc16b59-8d5b-46c1-bd17-4a6f47c4f12b")
 	)
-	(label "AAM_USB_D-"
+	(label "APM_I2C1_SCL"
+		(at 139.7 90.17 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b7e9dc65-dfef-47c3-8152-ca3199449286")
+	)
+	(label "APM_USB_D-"
 		(at 58.42 97.79 180)
 		(effects
 			(font
@@ -6435,7 +6225,7 @@
 		)
 		(uuid "b805e67d-5a17-440c-bba9-b083bb83bc5d")
 	)
-	(label "AAM_DBG_RX"
+	(label "APM_DBG_RX"
 		(at 76.2 128.27 0)
 		(effects
 			(font
@@ -6445,7 +6235,7 @@
 		)
 		(uuid "dcee8e50-98a7-4304-87c8-b68a54c0aba0")
 	)
-	(label "AAM_DAC_L"
+	(label "APM_DAC_L"
 		(at 57.15 172.72 180)
 		(effects
 			(font
@@ -6455,7 +6245,7 @@
 		)
 		(uuid "ded274bb-b5cc-4abc-9eae-f1e35da1888f")
 	)
-	(global_label "AAM_VDD"
+	(global_label "APM_VDD"
 		(shape input)
 		(at 123.19 176.53 180)
 		(fields_autoplaced yes)
@@ -6477,29 +6267,7 @@
 			)
 		)
 	)
-	(global_label "AAM_I2C1_SCL"
-		(shape bidirectional)
-		(at 92.71 172.72 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "467c3277-0917-4d4c-8153-6047a20b8812")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 75.2483 172.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "AAM_VDD"
+	(global_label "APM_VDD"
 		(shape input)
 		(at 88.9 165.1 180)
 		(fields_autoplaced yes)
@@ -6521,86 +6289,9 @@
 			)
 		)
 	)
-	(global_label "AAM_I2C1_SDA"
-		(shape bidirectional)
-		(at 92.71 170.18 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "f08ca233-c076-4dfd-bf5f-98a2195b91c7")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 75.1878 170.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(hierarchical_label "AAM_FMC_D11"
-		(shape bidirectional)
-		(at 214.63 95.25 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "10d4d451-9ba3-41b8-ae04-f5836eebb810")
-	)
-	(hierarchical_label "AAM_FMC_NBL0"
-		(shape bidirectional)
-		(at 214.63 74.93 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "15b3daaa-7cb9-408c-b953-cccdb1227f5e")
-	)
-	(hierarchical_label "AAM_FMC_D12"
-		(shape bidirectional)
-		(at 214.63 97.79 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "161e7661-cc6d-49ef-b462-61f89c8b3a45")
-	)
-	(hierarchical_label "AAM_FMC_D15"
-		(shape bidirectional)
-		(at 214.63 57.15 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "242ddb45-0d37-4143-bb1f-a57b233dca88")
-	)
-	(hierarchical_label "AAM_FMC_D14"
-		(shape bidirectional)
-		(at 76.2 143.51 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "27e23fb3-b801-4314-9845-f6b4231229dc")
-	)
-	(hierarchical_label "AAM_CMD_RX"
+	(hierarchical_label "APM_CMD_RX"
 		(shape input)
-		(at 76.2 107.95 180)
+		(at 88.9 107.95 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6609,86 +6300,9 @@
 		)
 		(uuid "286c0c5c-9dd5-495f-97bc-6eaba98abb54")
 	)
-	(hierarchical_label "AAM_FMC_NBL1"
-		(shape bidirectional)
-		(at 129.54 69.85 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "30c93d0d-7fd1-4ee6-99e6-3a98ef6e5d53")
-	)
-	(hierarchical_label "AAM_FMC_NWE"
-		(shape bidirectional)
-		(at 76.2 135.89 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "39a34619-8939-4ea1-b218-b40d36596d01")
-	)
-	(hierarchical_label "AAM_FMC_D0"
-		(shape bidirectional)
-		(at 214.63 67.31 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "3a35eea8-71d6-410a-a549-86f438230950")
-	)
-	(hierarchical_label "AAM_FMC_D8"
-		(shape bidirectional)
-		(at 214.63 87.63 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "41b6174d-977e-4d82-af26-c34e323a4a7d")
-	)
-	(hierarchical_label "AAM_FMC_D5"
-		(shape bidirectional)
-		(at 214.63 80.01 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "490fd3fb-0d3f-401c-850c-8aff6b7f109c")
-	)
-	(hierarchical_label "AAM_FMC_D6"
-		(shape bidirectional)
-		(at 214.63 82.55 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "4a67e6b5-e8c7-43e9-8b64-71a9782341cf")
-	)
-	(hierarchical_label "AAM_FMC_D9"
-		(shape bidirectional)
-		(at 214.63 90.17 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "4f6c7229-d618-44d9-9f3d-749fd4e5dec5")
-	)
-	(hierarchical_label "AAM_INTRPT_RX"
+	(hierarchical_label "APM_INTRPT_RX"
 		(shape input)
-		(at 129.54 74.93 0)
+		(at 124.46 74.93 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6697,9 +6311,9 @@
 		)
 		(uuid "52f5aa2b-b108-400c-9d82-a4bf4b33512a")
 	)
-	(hierarchical_label "AAM_DAC_L"
-		(shape bidirectional)
-		(at 171.45 59.69 180)
+	(hierarchical_label "APM_DAC_L"
+		(shape output)
+		(at 156.21 59.69 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6708,53 +6322,9 @@
 		)
 		(uuid "553754df-5607-474f-879f-dc4201654cfc")
 	)
-	(hierarchical_label "AAM_FMC_D7"
-		(shape bidirectional)
-		(at 214.63 85.09 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "5a429605-48bd-4bdf-87a0-91e2dd24433b")
-	)
-	(hierarchical_label "AAM_FMC_D10"
-		(shape bidirectional)
-		(at 214.63 92.71 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "5f6da08c-e49c-4da1-a68c-585f4d7f4050")
-	)
-	(hierarchical_label "AAM_FMC_NE"
-		(shape bidirectional)
-		(at 160.02 128.27 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "83d98ec8-e734-4c4a-9c7a-d5fe8ecbdd93")
-	)
-	(hierarchical_label "AAM_FMC_D1"
-		(shape bidirectional)
-		(at 214.63 69.85 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "882e68aa-b76f-49e7-88ac-376874e7df3e")
-	)
-	(hierarchical_label "AAM_CMD_TX"
+	(hierarchical_label "APM_CMD_TX"
 		(shape output)
-		(at 76.2 105.41 180)
+		(at 88.9 105.41 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6763,9 +6333,9 @@
 		)
 		(uuid "8ae139e2-e8b5-4fad-8773-d1795fa19be0")
 	)
-	(hierarchical_label "AAM_CAN_TD"
+	(hierarchical_label "APM_CAN_TD"
 		(shape output)
-		(at 160.02 100.33 180)
+		(at 157.48 100.33 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6774,8 +6344,8 @@
 		)
 		(uuid "8d3b3657-7b49-4122-a951-d930f0eba219")
 	)
-	(hierarchical_label "AAM_DAC_R"
-		(shape input)
+	(hierarchical_label "APM_DAC_R"
+		(shape output)
 		(at 87.63 74.93 180)
 		(effects
 			(font
@@ -6785,31 +6355,9 @@
 		)
 		(uuid "8d3e0f42-b374-4719-a781-b900eddffae9")
 	)
-	(hierarchical_label "AAM_FMC_NOE"
-		(shape bidirectional)
-		(at 76.2 133.35 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "93b480b4-b07c-458f-9ed4-87f8d8fb8f0f")
-	)
-	(hierarchical_label "AAM_FMC_NL"
-		(shape bidirectional)
-		(at 76.2 90.17 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "93d2e71d-7e20-48c3-b5ed-5d573c00dc05")
-	)
-	(hierarchical_label "AAM_INTRPT_TX"
+	(hierarchical_label "APM_INTRPT_TX"
 		(shape output)
-		(at 129.54 82.55 0)
+		(at 124.46 82.55 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6818,64 +6366,9 @@
 		)
 		(uuid "9974e29d-7447-4eed-b49c-6a78502c75d1")
 	)
-	(hierarchical_label "AAM_FMC_D2"
-		(shape bidirectional)
-		(at 76.2 123.19 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "9e99d10b-2afc-4388-8e0b-5984e6eee6b6")
-	)
-	(hierarchical_label "AAM_FMC_D13"
-		(shape bidirectional)
-		(at 214.63 54.61 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "acf51881-a310-4e7b-b9b4-b92c8afdf47b")
-	)
-	(hierarchical_label "AAM_FMC_D4"
-		(shape bidirectional)
-		(at 214.63 77.47 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "c01c5465-ae3a-4b30-8055-7b03a92b9f24")
-	)
-	(hierarchical_label "AAM_FMC_D3"
-		(shape bidirectional)
-		(at 76.2 125.73 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "c2cb7b89-633a-400e-beae-aea194663c11")
-	)
-	(hierarchical_label "AAM_FMC_CLK"
-		(shape bidirectional)
-		(at 76.2 130.81 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "e66e898a-686f-4e80-97cf-b4ae8c30ddbb")
-	)
-	(hierarchical_label "AAM_CAN_RD"
+	(hierarchical_label "APM_CAN_RD"
 		(shape input)
-		(at 160.02 97.79 180)
+		(at 157.48 97.79 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7405,7 +6898,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "5V_AAM"
+		(property "Value" "5V_APM"
 			(at 129.54 48.2599 0)
 			(effects
 				(font
@@ -7455,7 +6948,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 288.29 121.92 0)
+		(at 246.38 119.38 0)
 		(unit 4)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7464,7 +6957,7 @@
 		(fields_autoplaced yes)
 		(uuid "66edc597-9474-4583-bd30-1d97728040c9")
 		(property "Reference" "U1"
-			(at 288.29 88.9 0)
+			(at 246.38 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7472,7 +6965,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 288.29 91.44 0)
+			(at 246.38 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7480,7 +6973,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 288.29 121.92 0)
+			(at 246.38 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7490,7 +6983,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 288.29 121.92 0)
+			(at 246.38 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7499,7 +6992,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 288.29 121.92 0)
+			(at 246.38 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7508,7 +7001,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 288.29 121.92 0)
+			(at 246.38 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7518,7 +7011,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 288.29 121.92 0)
+			(at 246.38 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7528,7 +7021,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 288.29 121.92 0)
+			(at 246.38 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7538,7 +7031,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 288.29 121.92 0)
+			(at 246.38 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7548,7 +7041,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 288.29 121.92 0)
+			(at 246.38 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7558,7 +7051,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 288.29 121.92 0)
+			(at 246.38 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7568,7 +7061,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 288.29 121.92 0)
+			(at 246.38 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7578,7 +7071,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 288.29 121.92 0)
+			(at 246.38 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7588,7 +7081,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 288.29 121.92 0)
+			(at 246.38 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7598,7 +7091,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 288.29 121.92 0)
+			(at 246.38 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7608,7 +7101,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 288.29 121.92 0)
+			(at 246.38 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9344,7 +8837,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 502.92 102.87 0)
+		(at 318.77 53.34 0)
 		(unit 5)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9353,7 +8846,7 @@
 		(fields_autoplaced yes)
 		(uuid "92d158e5-2975-4784-b373-d2298ebaf4fd")
 		(property "Reference" "U1"
-			(at 502.92 74.93 0)
+			(at 318.77 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9361,7 +8854,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 502.92 77.47 0)
+			(at 318.77 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9369,7 +8862,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 502.92 102.87 0)
+			(at 318.77 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9379,7 +8872,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 502.92 102.87 0)
+			(at 318.77 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9388,7 +8881,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 502.92 102.87 0)
+			(at 318.77 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9397,7 +8890,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 502.92 102.87 0)
+			(at 318.77 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9407,7 +8900,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 502.92 102.87 0)
+			(at 318.77 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9417,7 +8910,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 502.92 102.87 0)
+			(at 318.77 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9427,7 +8920,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 502.92 102.87 0)
+			(at 318.77 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9437,7 +8930,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 502.92 102.87 0)
+			(at 318.77 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9447,7 +8940,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 502.92 102.87 0)
+			(at 318.77 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9457,7 +8950,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 502.92 102.87 0)
+			(at 318.77 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9467,7 +8960,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 502.92 102.87 0)
+			(at 318.77 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9477,7 +8970,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 502.92 102.87 0)
+			(at 318.77 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9487,7 +8980,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 502.92 102.87 0)
+			(at 318.77 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9497,7 +8990,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 502.92 102.87 0)
+			(at 318.77 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10575,7 +10068,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 501.65 179.07 0)
+		(at 317.5 129.54 0)
 		(unit 6)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10584,7 +10077,7 @@
 		(fields_autoplaced yes)
 		(uuid "aa456df2-bbe8-4216-a7e6-0516115d2d08")
 		(property "Reference" "U1"
-			(at 501.65 140.97 0)
+			(at 317.5 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10592,7 +10085,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 501.65 143.51 0)
+			(at 317.5 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10600,7 +10093,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 501.65 179.07 0)
+			(at 317.5 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10610,7 +10103,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 501.65 179.07 0)
+			(at 317.5 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10619,7 +10112,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 501.65 179.07 0)
+			(at 317.5 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10628,7 +10121,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 501.65 179.07 0)
+			(at 317.5 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10638,7 +10131,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 501.65 179.07 0)
+			(at 317.5 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10648,7 +10141,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 501.65 179.07 0)
+			(at 317.5 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10658,7 +10151,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 501.65 179.07 0)
+			(at 317.5 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10668,7 +10161,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 501.65 179.07 0)
+			(at 317.5 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10678,7 +10171,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 501.65 179.07 0)
+			(at 317.5 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10688,7 +10181,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 501.65 179.07 0)
+			(at 317.5 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10698,7 +10191,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 501.65 179.07 0)
+			(at 317.5 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10708,7 +10201,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 501.65 179.07 0)
+			(at 317.5 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10718,7 +10211,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 501.65 179.07 0)
+			(at 317.5 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10728,7 +10221,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 501.65 179.07 0)
+			(at 317.5 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11480,7 +10973,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 190.5 97.79 0)
+		(at 175.26 97.79 0)
 		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11489,7 +10982,7 @@
 		(fields_autoplaced yes)
 		(uuid "aa7f005f-244a-4e83-9d50-95a08166ab62")
 		(property "Reference" "U1"
-			(at 190.5 36.83 0)
+			(at 175.26 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11497,7 +10990,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 190.5 39.37 0)
+			(at 175.26 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11505,7 +10998,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 190.5 97.79 0)
+			(at 175.26 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11515,7 +11008,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 190.5 97.79 0)
+			(at 175.26 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11524,7 +11017,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 190.5 97.79 0)
+			(at 175.26 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11533,7 +11026,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 190.5 97.79 0)
+			(at 175.26 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11543,7 +11036,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 190.5 97.79 0)
+			(at 175.26 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11553,7 +11046,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 190.5 97.79 0)
+			(at 175.26 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11563,7 +11056,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 190.5 97.79 0)
+			(at 175.26 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11573,7 +11066,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 190.5 97.79 0)
+			(at 175.26 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11583,7 +11076,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 190.5 97.79 0)
+			(at 175.26 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11593,7 +11086,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 190.5 97.79 0)
+			(at 175.26 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11603,7 +11096,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 190.5 97.79 0)
+			(at 175.26 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11613,7 +11106,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 190.5 97.79 0)
+			(at 175.26 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11623,7 +11116,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 190.5 97.79 0)
+			(at 175.26 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11633,7 +11126,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 190.5 97.79 0)
+			(at 175.26 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12683,7 +12176,7 @@
 	)
 	(symbol
 		(lib_id "NUCLEO-H753ZI:NUCLEO-H753ZI")
-		(at 281.94 67.31 0)
+		(at 240.03 64.77 0)
 		(unit 3)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12692,7 +12185,7 @@
 		(fields_autoplaced yes)
 		(uuid "f9f4b361-6dd6-4284-94e9-3ababdda252c")
 		(property "Reference" "U1"
-			(at 281.94 39.37 0)
+			(at 240.03 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12700,7 +12193,7 @@
 			)
 		)
 		(property "Value" "NUCLEO-H753ZI"
-			(at 281.94 41.91 0)
+			(at 240.03 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12708,7 +12201,7 @@
 			)
 		)
 		(property "Footprint" "NUCLEO-H753ZI:MODULE_NUCLEO-H753ZI"
-			(at 281.94 67.31 0)
+			(at 240.03 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12718,7 +12211,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 281.94 67.31 0)
+			(at 240.03 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12727,7 +12220,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 281.94 67.31 0)
+			(at 240.03 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12736,7 +12229,7 @@
 			)
 		)
 		(property "MF" "STMicroelectronics"
-			(at 281.94 67.31 0)
+			(at 240.03 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12746,7 +12239,7 @@
 			)
 		)
 		(property "Description_1" "STM32H753ZI Nucleo-144 STM32H7 ARM® Cortex®-M7 MCU 32-Bit Embedded Evaluation Board"
-			(at 281.94 67.31 0)
+			(at 240.03 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12756,7 +12249,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 281.94 67.31 0)
+			(at 240.03 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12766,7 +12259,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 281.94 67.31 0)
+			(at 240.03 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12776,7 +12269,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=eda"
-			(at 281.94 67.31 0)
+			(at 240.03 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12786,7 +12279,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 281.94 67.31 0)
+			(at 240.03 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12796,7 +12289,7 @@
 			)
 		)
 		(property "PARTREV" "Rev. 2"
-			(at 281.94 67.31 0)
+			(at 240.03 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12806,7 +12299,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/NUCLEO-H753ZI/STMicroelectronics/view-part/?ref=snap"
-			(at 281.94 67.31 0)
+			(at 240.03 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12816,7 +12309,7 @@
 			)
 		)
 		(property "MP" "NUCLEO-H753ZI"
-			(at 281.94 67.31 0)
+			(at 240.03 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12826,7 +12319,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 281.94 67.31 0)
+			(at 240.03 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12836,7 +12329,7 @@
 			)
 		)
 		(property "MANUFACTURER" "STMicroelectronics"
-			(at 281.94 67.31 0)
+			(at 240.03 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13666,8 +13159,8 @@
 		)
 	)
 	(sheet
-		(at 26.67 53.34)
-		(size 19.05 12.7)
+		(at 30.48 53.34)
+		(size 15.24 12.7)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -13682,7 +13175,7 @@
 		)
 		(uuid "03344240-0515-4f71-8710-40bd9ead88e4")
 		(property "Sheetname" "7SDD"
-			(at 26.67 52.6284 0)
+			(at 30.48 52.6284 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13691,7 +13184,7 @@
 			)
 		)
 		(property "Sheetfile" "7SDD.kicad_sch"
-			(at 26.67 66.6246 0)
+			(at 30.48 66.6246 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13728,8 +13221,8 @@
 		)
 	)
 	(sheet
-		(at 26.67 72.39)
-		(size 19.05 11.43)
+		(at 30.48 72.39)
+		(size 15.24 11.43)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -13743,8 +13236,8 @@
 			(color 0 0 0 0.0000)
 		)
 		(uuid "2a8263b6-de73-49ce-bd78-9ccd79fb8d35")
-		(property "Sheetname" "AAM_debug"
-			(at 26.67 71.6784 0)
+		(property "Sheetname" "APM_debug"
+			(at 30.48 71.6784 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13752,8 +13245,8 @@
 				(justify left bottom)
 			)
 		)
-		(property "Sheetfile" "AAM_debug.kicad_sch"
-			(at 26.67 84.4046 0)
+		(property "Sheetfile" "APM_debug.kicad_sch"
+			(at 30.48 84.4046 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13761,7 +13254,7 @@
 				(justify left top)
 			)
 		)
-		(pin "AAM_DBG_TX" output
+		(pin "APM_DBG_TX" output
 			(at 45.72 76.2 0)
 			(uuid "7a978932-50cd-4105-ab72-635bd4454d2e")
 			(effects
@@ -13771,7 +13264,7 @@
 				(justify right)
 			)
 		)
-		(pin "AAM_DBG_RX" input
+		(pin "APM_DBG_RX" input
 			(at 45.72 80.01 0)
 			(uuid "452d9330-7200-4fee-866a-60a849bfd253")
 			(effects
@@ -13790,8 +13283,8 @@
 		)
 	)
 	(sheet
-		(at 26.67 90.17)
-		(size 19.05 11.43)
+		(at 30.48 90.17)
+		(size 15.24 11.43)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -13805,8 +13298,8 @@
 			(color 0 0 0 0.0000)
 		)
 		(uuid "611fa31e-8b8a-419f-be1e-27301f4ddd3e")
-		(property "Sheetname" "AAM_midi"
-			(at 26.67 89.4584 0)
+		(property "Sheetname" "APM_midi"
+			(at 30.48 89.4584 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13814,8 +13307,8 @@
 				(justify left bottom)
 			)
 		)
-		(property "Sheetfile" "AAM_midi.kicad_sch"
-			(at 26.67 102.1846 0)
+		(property "Sheetfile" "APM_midi.kicad_sch"
+			(at 30.48 102.1846 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13823,7 +13316,7 @@
 				(justify left top)
 			)
 		)
-		(pin "AAM_USB_D+" bidirectional
+		(pin "APM_USB_D+" bidirectional
 			(at 45.72 93.98 0)
 			(uuid "0a96cdc2-3082-4d44-b7d4-ef4346d8a93b")
 			(effects
@@ -13833,7 +13326,7 @@
 				(justify right)
 			)
 		)
-		(pin "AAM_USB_D-" bidirectional
+		(pin "APM_USB_D-" bidirectional
 			(at 45.72 97.79 0)
 			(uuid "a94a7bdb-a9d5-40fc-9ba1-cd134ef7a261")
 			(effects

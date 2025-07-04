@@ -856,7 +856,7 @@
 		)
 		(uuid "e0687e78-10c6-431e-8541-e654359aad17")
 	)
-	(global_label "AAM_VDD"
+	(global_label "APM_VDD"
 		(shape input)
 		(at 151.13 92.71 0)
 		(fields_autoplaced yes)
@@ -878,7 +878,7 @@
 			)
 		)
 	)
-	(hierarchical_label "AAM_USB_D+"
+	(hierarchical_label "APM_USB_D+"
 		(shape bidirectional)
 		(at 146.05 97.79 0)
 		(effects
@@ -889,7 +889,7 @@
 		)
 		(uuid "9625bef3-23a6-4863-8bd2-d95341def453")
 	)
-	(hierarchical_label "AAM_USB_D-"
+	(hierarchical_label "APM_USB_D-"
 		(shape bidirectional)
 		(at 146.05 100.33 0)
 		(effects

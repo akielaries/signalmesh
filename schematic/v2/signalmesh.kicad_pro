@@ -696,27 +696,19 @@
     ],
     [
       "0125ec8c-bf97-4530-be23-1f3b075b267b",
-      "AAM"
+      "APM"
     ],
     [
       "4391c51f-6ab5-4b63-a6de-56382e56f1df",
       "DSM"
     ],
     [
-      "2a8263b6-de73-49ce-bd78-9ccd79fb8d35",
-      "AAM_debug"
-    ],
-    [
-      "03344240-0515-4f71-8710-40bd9ead88e4",
-      "7SDD"
-    ],
-    [
-      "611fa31e-8b8a-419f-be1e-27301f4ddd3e",
-      "AAM_midi"
-    ],
-    [
       "5e884b91-e33f-41af-8f06-387ea8f63e1e",
       "DSM_media"
+    ],
+    [
+      "c5977503-4ab2-47b6-bfc3-7f974cfcf6ea",
+      "ACM"
     ],
     [
       "e25d3e2c-36b2-45de-b96b-ba3851b7ad18",

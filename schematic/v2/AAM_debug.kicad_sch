@@ -1611,7 +1611,7 @@
 		)
 		(uuid e7380b2f-5dee-41bd-a001-6d69b235f741)
 	)
-	(text "AAM USB2.0 DBG PORT"
+	(text "APM USB2.0 DBG PORT"
 		(exclude_from_sim no)
 		(at 92.456 42.164 0)
 		(effects
@@ -2019,7 +2019,7 @@
 		)
 		(uuid "f5b35b13-000e-4aea-b23d-15b84f227086")
 	)
-	(label "AAM_DBG_RX"
+	(label "APM_DBG_RX"
 		(at 179.07 113.03 0)
 		(effects
 			(font
@@ -2029,7 +2029,7 @@
 		)
 		(uuid "20d09263-d067-4420-bafc-3f026d266ef7")
 	)
-	(label "AAM_DBG_TX"
+	(label "APM_DBG_TX"
 		(at 179.07 110.49 0)
 		(effects
 			(font
@@ -2039,7 +2039,7 @@
 		)
 		(uuid "6673d60a-6d9b-403f-b04e-09ce0c6bbf12")
 	)
-	(global_label "AAM_VDD"
+	(global_label "APM_VDD"
 		(shape input)
 		(at 127 48.26 0)
 		(fields_autoplaced yes)
@@ -2061,7 +2061,7 @@
 			)
 		)
 	)
-	(global_label "AAM_VDD"
+	(global_label "APM_VDD"
 		(shape input)
 		(at 97.79 62.23 0)
 		(fields_autoplaced yes)
@@ -2083,7 +2083,7 @@
 			)
 		)
 	)
-	(hierarchical_label "AAM_DBG_TX"
+	(hierarchical_label "APM_DBG_TX"
 		(shape output)
 		(at 156.21 87.63 0)
 		(effects
@@ -2094,7 +2094,7 @@
 		)
 		(uuid "b61b2356-2e54-4b4e-87bc-8e5e713eaa97")
 	)
-	(hierarchical_label "AAM_DBG_RX"
+	(hierarchical_label "APM_DBG_RX"
 		(shape input)
 		(at 156.21 90.17 0)
 		(effects
@@ -2177,10 +2177,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "f5c9ce83-347a-4602-8e08-45c1e543265a")
+			(uuid "f2b4f970-6fe0-4dd4-bda7-bf78e4a43197")
 		)
 		(pin "1"
-			(uuid "02604357-2ad9-4265-9ed3-c4677183d3ad")
+			(uuid "0a5c9ed1-ae37-48df-8903-9f09af4006c6")
 		)
 		(instances
 			(project "signalmesh"
@@ -2245,10 +2245,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "6ee6fbba-3944-438e-929e-69f5761b2796")
+			(uuid "c05ceb67-7cf4-48ee-9e4e-4710dcaad640")
 		)
 		(pin "2"
-			(uuid "ec205df2-33ee-46ba-b511-863228d941fb")
+			(uuid "4e26cd32-0274-4554-90e2-1edd1948d237")
 		)
 		(instances
 			(project "signalmesh"
@@ -2323,10 +2323,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "c1a74e1b-f48c-4814-a11d-3c88d7796eef")
+			(uuid "c2e13684-101f-40f2-ae0c-db215d102cf9")
 		)
 		(pin "2"
-			(uuid "8beb2ecb-6756-4838-927f-3bed40ac307d")
+			(uuid "62bf9c6a-fd5c-4a4c-adee-b72f77c54207")
 		)
 		(instances
 			(project "signalmesh"
@@ -2394,52 +2394,52 @@
 			)
 		)
 		(pin "11"
-			(uuid "135d6bd5-091f-4640-999a-4b80997cba80")
+			(uuid "c8c006d8-a62d-4737-82f2-e432389d3506")
 		)
 		(pin "2"
-			(uuid "a2ba96c0-7b3b-4117-aa73-f03c618c0bf9")
+			(uuid "fdf6d75c-7926-41f1-be89-0fa0b4d6ffb4")
 		)
 		(pin "9"
-			(uuid "059cafed-485f-44ec-a0ad-6938f2593e1c")
+			(uuid "47023b18-5bcc-42d9-a67c-63c862ae9163")
 		)
 		(pin "10"
-			(uuid "da798916-9745-4d04-afd7-1cc569bece14")
+			(uuid "f75785f3-7637-4ba6-9829-f244276a00ae")
 		)
 		(pin "8"
-			(uuid "7ca3196c-a293-4218-8e04-ca9d9d951003")
+			(uuid "10d5fd23-399d-4eb1-991c-d55feecd4dd1")
 		)
 		(pin "7"
-			(uuid "cd3d0ad5-7135-48a9-8fb7-227df82ff1da")
+			(uuid "7e939da8-df91-4755-9533-5462585aab37")
 		)
 		(pin "15"
-			(uuid "387d03b5-58cb-4180-8d00-b7862094b076")
+			(uuid "181b2ea8-22ce-4582-bf43-3ae6629d0639")
 		)
 		(pin "6"
-			(uuid "34f8617a-d2a4-43f1-9087-fe080322f508")
+			(uuid "d0cb4b03-3e34-49a2-828e-c2e51e1a3720")
 		)
 		(pin "5"
-			(uuid "811b9530-c0ff-4a9a-9de3-16dcbee45be8")
+			(uuid "4e728ba2-8d78-47c6-ba7b-6fda6a1421d7")
 		)
 		(pin "14"
-			(uuid "2123e61a-6241-4ea7-968b-31557e84c01f")
+			(uuid "4492fad9-233c-474b-91b3-93db93f529df")
 		)
 		(pin "4"
-			(uuid "1f9ae9d9-d99c-4c98-9c43-69c69c785ac6")
+			(uuid "96907687-cabc-4a90-ac39-3d5ff7c211e5")
 		)
 		(pin "3"
-			(uuid "5b1b2b87-acf1-435d-af05-f83c7b30db74")
+			(uuid "d77f4eae-7e70-4088-8e32-2c49157b540b")
 		)
 		(pin "13"
-			(uuid "b998ea25-e74b-48ee-b701-81574d01540e")
+			(uuid "db940550-987b-4baa-8cd0-b37b38f86261")
 		)
 		(pin "1"
-			(uuid "7b3dd4da-e7d6-4f0a-9a6d-e34feec9ebf1")
+			(uuid "632b0ea3-2e4c-4dae-8db1-c31577bd5f24")
 		)
 		(pin "12"
-			(uuid "1e6d13e3-822b-4e42-ab7a-88968cfe7d3b")
+			(uuid "afb9362d-288d-488e-9bde-aa056b02ae97")
 		)
 		(pin "16"
-			(uuid "ea2f6af8-2654-4a0c-9411-a9a49ca5177b")
+			(uuid "2928323d-061f-4dd8-9c65-6063ca54b7e3")
 		)
 		(instances
 			(project "signalmesh"
@@ -2522,10 +2522,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "875ad928-b7d9-487d-b701-e871dd93c33a")
+			(uuid "447f2cee-e967-4e3b-aad5-4f83e10731a7")
 		)
 		(pin "1"
-			(uuid "7bbeace4-cc4f-4fe4-9181-f38977596d99")
+			(uuid "47fc509e-e98c-4972-add0-bfcdaedc3ae3")
 		)
 		(instances
 			(project "signalmesh"
@@ -2592,7 +2592,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "9bf07771-f5d9-4756-8ea5-9e73278ff24e")
+			(uuid "3885facd-5006-4391-9886-1b9aa7f66463")
 		)
 		(instances
 			(project "signalmesh"
@@ -2659,7 +2659,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "786c3b8c-1d18-4be2-87a0-6cb6e11e3dd1")
+			(uuid "1516e6a2-1f8a-4860-9cb8-e092b3fa7994")
 		)
 		(instances
 			(project "signalmesh"
@@ -2726,7 +2726,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "b0f06331-cc9a-44ff-a724-83a1d2cae0e6")
+			(uuid "edf0d8e9-a2ec-461f-8151-1b75d11aa298")
 		)
 		(instances
 			(project "signalmesh"
@@ -2793,7 +2793,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "829dbe70-4e09-428e-9d28-b898610a61ec")
+			(uuid "690930a2-481d-4283-be3e-57fdf61a0fd1")
 		)
 		(instances
 			(project "signalmesh"
@@ -2859,7 +2859,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "ecf8e9f1-11ee-44c6-8201-b9be882afece")
+			(uuid "b233de64-789e-4f7f-bc18-7bbfb634c4aa")
 		)
 		(instances
 			(project "signalmesh"
@@ -2933,10 +2933,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "8f49d794-2b7d-497c-a1e8-1c68157a7860")
+			(uuid "4db19c8c-0ed6-4b57-87f9-762bea9b36b4")
 		)
 		(pin "2"
-			(uuid "8b231558-aab7-49a8-aa01-f6c796feac82")
+			(uuid "8e5898a0-329b-49e4-b9c3-f9645956ca21")
 		)
 		(instances
 			(project "signalmesh"
@@ -3019,10 +3019,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "6a10ff3f-9181-4bf1-878b-4573a47098e2")
+			(uuid "db930526-f1a2-4cc3-b96c-3b664d786130")
 		)
 		(pin "1"
-			(uuid "e7f456ca-f1dc-4c3d-816d-940d8220c939")
+			(uuid "404b1fc5-f5e6-4307-8ecc-9db22bd96617")
 		)
 		(instances
 			(project "signalmesh"
@@ -3096,10 +3096,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "00906fc2-0744-4311-ba6f-09a0fa1426c5")
+			(uuid "d44fae6f-c696-46a8-b582-98d8a0fabd0b")
 		)
 		(pin "2"
-			(uuid "8fd56661-c609-400f-91e4-e91db64ac03c")
+			(uuid "9579404e-00cc-4cf9-ae59-6edf85e8f66c")
 		)
 		(instances
 			(project "signalmesh"
@@ -3129,7 +3129,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "AAM_DBG"
+		(property "Value" "APM_DBG"
 			(at 199.39 114.2999 0)
 			(effects
 				(font
@@ -3166,13 +3166,13 @@
 			)
 		)
 		(pin "2"
-			(uuid "52dcd173-5be3-4048-a411-d2ff9af252a9")
+			(uuid "de4cd0e9-1fc1-4559-898e-84a51f3ec7a5")
 		)
 		(pin "3"
-			(uuid "a0642bfb-68e9-4fff-bb56-39e1ebe27d69")
+			(uuid "3f6de22b-f615-45a0-aff6-f0608fefc78b")
 		)
 		(pin "1"
-			(uuid "c12185b3-e5ad-4c0a-a1c4-24083c1eae34")
+			(uuid "2f0e7e2c-4bb4-4d8f-93c4-ec59cf25d69e")
 		)
 		(instances
 			(project "signalmesh"
@@ -3239,7 +3239,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "b197eed1-4577-4fee-8d3e-26b7a92c95af")
+			(uuid "35bd03c4-e0f7-4c79-a66d-057a7116fe04")
 		)
 		(instances
 			(project "signalmesh"
@@ -3306,7 +3306,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "21156d37-24db-41d1-aae7-56eec0ba7444")
+			(uuid "ae38feca-c8cc-4bcf-bc54-6bc8d2c32da2")
 		)
 		(instances
 			(project "signalmesh"
@@ -3373,10 +3373,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "72302caf-629f-4245-85de-a5ec17d96263")
+			(uuid "5e0d2f85-84bb-48e9-8d0d-f16b003dd323")
 		)
 		(pin "2"
-			(uuid "75c48b23-ff82-471b-b855-bc11ff82cdc0")
+			(uuid "d32698b2-176c-4d8f-8f00-2c8eff540c0d")
 		)
 		(instances
 			(project "signalmesh"
@@ -3441,19 +3441,19 @@
 			)
 		)
 		(pin "2"
-			(uuid "c2b6c607-9158-41e4-b8ee-158fb4ef581f")
+			(uuid "f72c6f9a-7887-4136-998e-014b7d14980b")
 		)
 		(pin "5"
-			(uuid "435e1ee3-f99e-45ae-bdf7-7b8948de9ddd")
+			(uuid "e571333d-531f-426d-8a09-9ce48fc980da")
 		)
 		(pin "1"
-			(uuid "924bf25c-6e35-43fe-b4c6-d3489f36130f")
+			(uuid "0c3a27df-3a1c-402d-8608-702cfce15163")
 		)
 		(pin "3"
-			(uuid "aff8e204-5494-4001-9365-ab38f67cda84")
+			(uuid "3d03836c-ce70-4bbd-a3ca-c87d457b4f2a")
 		)
 		(pin "4"
-			(uuid "a1a53278-a173-421c-b4a7-4f4ef5da6d0c")
+			(uuid "637a6815-22d5-40e7-b19e-d10703429f88")
 		)
 		(instances
 			(project "signalmesh"
@@ -3536,10 +3536,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "9210498d-1045-4d7b-b366-51f4afd6bbee")
+			(uuid "f0e24688-ec64-406f-b9e4-3748765f7ba2")
 		)
 		(pin "1"
-			(uuid "f65f15ce-1e00-4615-915c-d98779882348")
+			(uuid "f9fc403a-7bad-4b29-95da-2df78aef7472")
 		)
 		(instances
 			(project "signalmesh"
@@ -3606,10 +3606,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "36877e04-bdaa-4745-a619-99c905d4fe2e")
+			(uuid "3bbb89d7-66dd-4ee5-961c-12a1ead542d7")
 		)
 		(pin "2"
-			(uuid "f8b84935-4a0d-466e-a499-e38b7260f825")
+			(uuid "8f3bbe73-c1e4-43fd-90fe-50c2d58e4673")
 		)
 		(instances
 			(project "signalmesh"
@@ -3676,7 +3676,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "c93f1902-0cc5-4611-9774-dfa64e909a72")
+			(uuid "60ee5e29-7d6b-414b-aae6-6d88d31e5d95")
 		)
 		(instances
 			(project "signalmesh"
@@ -3750,10 +3750,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "f9ad49f8-8cfd-4ced-a343-1a62d0a985a6")
+			(uuid "c47effae-824b-41f0-8a9e-0902891e475d")
 		)
 		(pin "2"
-			(uuid "82d752eb-5823-4da2-9a8f-69bf95519104")
+			(uuid "5f3e47cc-f27f-429e-bfd8-3cf785e0c3e7")
 		)
 		(instances
 			(project "signalmesh"
@@ -3837,10 +3837,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "8b602db9-fc58-4b18-81be-83b321ba2438")
+			(uuid "6e49eecf-33d9-4e65-99e2-07475cdfaa4c")
 		)
 		(pin "1"
-			(uuid "8765cd69-09a0-418c-b12d-8b50bca55f0b")
+			(uuid "cf77fc64-3a38-4741-96b6-66f36857414f")
 		)
 		(instances
 			(project "signalmesh"
@@ -3907,10 +3907,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "abab737b-91f7-4b34-a073-f1e0e8f005e9")
+			(uuid "2a527de8-a9da-4d8d-81e9-c0c754423113")
 		)
 		(pin "2"
-			(uuid "4039ef8a-6eec-4ce6-a047-700531e46443")
+			(uuid "f576dbd5-0050-472f-8d4e-559691dac864")
 		)
 		(instances
 			(project "signalmesh"

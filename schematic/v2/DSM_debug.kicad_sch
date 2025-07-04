@@ -1677,6 +1677,16 @@
 	)
 	(wire
 		(pts
+			(xy 179.07 110.49) (xy 191.77 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "02e422f8-31bc-475e-916c-3e198601fbe5")
+	)
+	(wire
+		(pts
 			(xy 142.24 72.39) (xy 144.78 72.39)
 		)
 		(stroke
@@ -1967,6 +1977,16 @@
 	)
 	(wire
 		(pts
+			(xy 179.07 113.03) (xy 191.77 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dcd18bfb-e347-4ef9-aa29-5d49a62dd211")
+	)
+	(wire
+		(pts
 			(xy 144.78 87.63) (xy 148.59 87.63)
 		)
 		(stroke
@@ -2015,49 +2035,25 @@
 		)
 		(uuid "f5b35b13-000e-4aea-b23d-15b84f227086")
 	)
-	(global_label "DSM_DBG_RX"
-		(shape input)
-		(at 191.77 113.03 180)
-		(fields_autoplaced yes)
+	(label "DSM_DBG_RX"
+		(at 179.07 113.03 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left bottom)
 		)
-		(uuid "445e95ec-eb22-49e7-a616-be58b7085dde")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 176.6292 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
+		(uuid "3d4f7841-875a-4c96-9fc8-cf62deee057b")
 	)
-	(global_label "DSM_DBG_RX"
-		(shape input)
-		(at 156.21 90.17 0)
-		(fields_autoplaced yes)
+	(label "DSM_DBG_TX"
+		(at 179.07 110.49 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify left bottom)
 		)
-		(uuid "75a85504-e3a9-4d79-a030-8f4e1a81fa7f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 171.0485 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
+		(uuid "f9b1a4ee-f274-4284-bedd-0ea4c23361c1")
 	)
 	(global_label "DSM_VDD"
 		(shape input)
@@ -2072,50 +2068,6 @@
 		(uuid "85b91d7a-e943-4d67-b3fe-108a2b3dec1a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 138.21 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "DSM_DBG_TX"
-		(shape input)
-		(at 191.77 110.49 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "8e27627c-91dd-4c29-9901-4814bb7a32b4")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 176.9316 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "DSM_DBG_TX"
-		(shape input)
-		(at 156.21 87.63 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "94d7050a-7342-455d-ad84-0402e33d4258")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 170.7461 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2146,6 +2098,28 @@
 				(hide yes)
 			)
 		)
+	)
+	(hierarchical_label "DSM_DBG_RX"
+		(shape input)
+		(at 156.21 90.17 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "06af555a-ee4b-4324-8bdd-944de96fed4e")
+	)
+	(hierarchical_label "DSM_DBG_TX"
+		(shape input)
+		(at 156.21 87.63 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9cfa45e0-1ee2-4e10-b6af-5508cf970a0c")
 	)
 	(symbol
 		(lib_id "Device:R")
