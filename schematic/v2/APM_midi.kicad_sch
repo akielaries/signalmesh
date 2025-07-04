@@ -743,7 +743,7 @@
 		)
 	)
 	(rectangle
-		(start 121.92 80.01)
+		(start 107.95 80.01)
 		(end 166.37 115.57)
 		(stroke
 			(width 0)
@@ -778,7 +778,7 @@
 	)
 	(wire
 		(pts
-			(xy 148.59 87.63) (xy 127 87.63)
+			(xy 148.59 87.63) (xy 119.38 87.63)
 		)
 		(stroke
 			(width 0)
@@ -798,7 +798,7 @@
 	)
 	(wire
 		(pts
-			(xy 127 109.22) (xy 127 106.68)
+			(xy 119.38 109.22) (xy 119.38 106.68)
 		)
 		(stroke
 			(width 0)
@@ -818,7 +818,7 @@
 	)
 	(wire
 		(pts
-			(xy 127 87.63) (xy 127 91.44)
+			(xy 119.38 87.63) (xy 119.38 91.44)
 		)
 		(stroke
 			(width 0)
@@ -848,7 +848,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 109.22) (xy 127 109.22)
+			(xy 138.43 109.22) (xy 119.38 109.22)
 		)
 		(stroke
 			(width 0)
@@ -902,7 +902,7 @@
 	)
 	(symbol
 		(lib_id "Device:LED")
-		(at 127 102.87 90)
+		(at 119.38 102.87 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -911,7 +911,7 @@
 		(fields_autoplaced yes)
 		(uuid "388c676d-c468-4168-8544-b056a8a506a9")
 		(property "Reference" "D32"
-			(at 130.81 103.1874 90)
+			(at 123.19 103.1874 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -920,7 +920,7 @@
 			)
 		)
 		(property "Value" "LED_PWR"
-			(at 130.81 105.7274 90)
+			(at 123.19 105.7274 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -929,7 +929,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
-			(at 127 102.87 0)
+			(at 119.38 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -938,7 +938,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 127 102.87 0)
+			(at 119.38 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -947,7 +947,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode"
-			(at 127 102.87 0)
+			(at 119.38 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -956,7 +956,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 127 102.87 0)
+			(at 119.38 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1058,7 +1058,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 127 95.25 180)
+		(at 119.38 95.25 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1067,7 +1067,7 @@
 		(fields_autoplaced yes)
 		(uuid "ccc7531e-012d-4cdf-99e6-f35343faf0b5")
 		(property "Reference" "R50"
-			(at 129.54 93.9799 0)
+			(at 121.92 93.9799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1076,7 +1076,7 @@
 			)
 		)
 		(property "Value" "300"
-			(at 129.54 96.5199 0)
+			(at 121.92 96.5199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1085,7 +1085,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 128.778 95.25 90)
+			(at 121.158 95.25 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1094,7 +1094,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 127 95.25 0)
+			(at 119.38 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1103,7 +1103,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 127 95.25 0)
+			(at 119.38 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1112,7 +1112,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
-			(at 127 95.25 0)
+			(at 119.38 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1121,7 +1121,7 @@
 			)
 		)
 		(property "Price" "0.0129"
-			(at 127 95.25 0)
+			(at 119.38 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)

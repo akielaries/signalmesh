@@ -703,6 +703,18 @@
       "DSM"
     ],
     [
+      "2a8263b6-de73-49ce-bd78-9ccd79fb8d35",
+      "APM_debug"
+    ],
+    [
+      "03344240-0515-4f71-8710-40bd9ead88e4",
+      "7SDD"
+    ],
+    [
+      "611fa31e-8b8a-419f-be1e-27301f4ddd3e",
+      "APM_midi"
+    ],
+    [
       "5e884b91-e33f-41af-8f06-387ea8f63e1e",
       "DSM_media"
     ],
@@ -711,8 +723,28 @@
       "ACM"
     ],
     [
+      "90a0d358-0ee2-4073-87e5-cf0b25256f35",
+      "ACM_debug"
+    ],
+    [
       "e25d3e2c-36b2-45de-b96b-ba3851b7ad18",
       "DSM_debug"
+    ],
+    [
+      "52eb9806-6870-4745-9578-aa7c5e7ab85b",
+      "ACM_spiflash"
+    ],
+    [
+      "442c7b41-f8c0-48e5-8b80-63d502cac366",
+      "TDM"
+    ],
+    [
+      "3e15aa38-e071-402c-a18d-97def628e870",
+      "TDM_debug"
+    ],
+    [
+      "c9161959-85ce-4cf5-b3d5-3776fec616f5",
+      "TDM_pwr_mon"
     ]
   ],
   "text_variables": {}
