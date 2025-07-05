@@ -770,7 +770,7 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 186.69) (xy 198.12 186.69)
+			(xy 102.87 185.42) (xy 115.57 185.42)
 		)
 		(stroke
 			(width 0)
@@ -820,7 +820,7 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 208.28) (xy 198.12 208.28)
+			(xy 181.61 165.1) (xy 194.31 165.1)
 		)
 		(stroke
 			(width 0)
@@ -1320,7 +1320,7 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 184.15) (xy 198.12 184.15)
+			(xy 102.87 182.88) (xy 115.57 182.88)
 		)
 		(stroke
 			(width 0)
@@ -1620,7 +1620,7 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 210.82) (xy 198.12 210.82)
+			(xy 181.61 167.64) (xy 194.31 167.64)
 		)
 		(stroke
 			(width 0)
@@ -1919,7 +1919,7 @@
 		(uuid "4397d6c6-8975-4a42-a780-e3e19ddc1dc5")
 	)
 	(label "TDM_CAN_RD"
-		(at 185.42 184.15 0)
+		(at 102.87 182.88 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2039,7 +2039,7 @@
 		(uuid "62123282-d1eb-40d7-8c44-b19deb5c4073")
 	)
 	(label "UUM_CAN_RD"
-		(at 185.42 208.28 0)
+		(at 181.61 165.1 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2119,7 +2119,7 @@
 		(uuid "7498bc27-d62e-4746-89b4-08bd128150b4")
 	)
 	(label "UUM_CAN_TD"
-		(at 185.42 210.82 0)
+		(at 181.61 167.64 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2359,7 +2359,7 @@
 		(uuid "bd024518-cd49-457f-a5ad-a1eabc87a984")
 	)
 	(label "TDM_CAN_TD"
-		(at 185.42 186.69 0)
+		(at 102.87 185.42 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4770,8 +4770,8 @@
 		)
 	)
 	(sheet
-		(at 198.12 162.56)
-		(size 31.75 27.94)
+		(at 115.57 161.29)
+		(size 38.1 27.94)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -4786,7 +4786,7 @@
 		)
 		(uuid "442c7b41-f8c0-48e5-8b80-63d502cac366")
 		(property "Sheetname" "TDM"
-			(at 198.12 161.8484 0)
+			(at 115.57 160.5784 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4795,7 +4795,7 @@
 			)
 		)
 		(property "Sheetfile" "TDM.kicad_sch"
-			(at 198.12 191.0846 0)
+			(at 115.57 189.8146 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4804,7 +4804,7 @@
 			)
 		)
 		(property "Field2" ""
-			(at 198.12 162.56 0)
+			(at 115.57 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4812,7 +4812,7 @@
 			)
 		)
 		(pin "TDM_CAN_TD" output
-			(at 198.12 186.69 180)
+			(at 115.57 185.42 180)
 			(uuid "02b62e38-b7a9-46c6-960d-517cafcafe6c")
 			(effects
 				(font
@@ -4822,7 +4822,7 @@
 			)
 		)
 		(pin "TDM_CAN_RD" input
-			(at 198.12 184.15 180)
+			(at 115.57 182.88 180)
 			(uuid "33d94982-aa72-4d58-8c58-82dc3ff5ffa7")
 			(effects
 				(font
@@ -4832,7 +4832,7 @@
 			)
 		)
 		(pin "UUM_VDD" output
-			(at 229.87 179.07 0)
+			(at 153.67 177.8 0)
 			(uuid "0ab907b4-59f9-4e74-8ccf-1f993f0355f0")
 			(effects
 				(font
@@ -4842,7 +4842,7 @@
 			)
 		)
 		(pin "ACM_VDD" output
-			(at 229.87 168.91 0)
+			(at 153.67 167.64 0)
 			(uuid "76b34d72-ee84-4db7-8254-5fa31fee2a3e")
 			(effects
 				(font
@@ -4852,7 +4852,7 @@
 			)
 		)
 		(pin "7SDD_VDD" output
-			(at 229.87 166.37 0)
+			(at 153.67 165.1 0)
 			(uuid "a95ef58c-5d0d-4cbd-9d06-9cca2dace41b")
 			(effects
 				(font
@@ -4862,7 +4862,7 @@
 			)
 		)
 		(pin "TDM_VDD" output
-			(at 229.87 176.53 0)
+			(at 153.67 175.26 0)
 			(uuid "900892b9-cc89-46ad-81dc-4b2284b8d8b6")
 			(effects
 				(font
@@ -4872,7 +4872,7 @@
 			)
 		)
 		(pin "APM_VDD" output
-			(at 229.87 171.45 0)
+			(at 153.67 170.18 0)
 			(uuid "9deb7546-0f8f-45db-8eb8-e6d25a3d3bae")
 			(effects
 				(font
@@ -4882,7 +4882,7 @@
 			)
 		)
 		(pin "DSM_VDD" output
-			(at 229.87 173.99 0)
+			(at 153.67 172.72 0)
 			(uuid "d64459cd-1ea5-4fe2-b8b2-4e877a105a15")
 			(effects
 				(font
@@ -5192,8 +5192,8 @@
 		)
 	)
 	(sheet
-		(at 198.12 204.47)
-		(size 31.75 12.7)
+		(at 194.31 161.29)
+		(size 38.1 27.94)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -5208,7 +5208,7 @@
 		)
 		(uuid "e0c3e94a-d1d6-4c70-a171-e825d34fc315")
 		(property "Sheetname" "UUM"
-			(at 198.12 203.7584 0)
+			(at 194.31 160.5784 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5217,7 +5217,7 @@
 			)
 		)
 		(property "Sheetfile" "UUM.kicad_sch"
-			(at 198.12 217.7546 0)
+			(at 194.31 189.8146 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5226,7 +5226,7 @@
 			)
 		)
 		(pin "UUM_CAN_RD" input
-			(at 198.12 208.28 180)
+			(at 194.31 165.1 180)
 			(uuid "4422ffb9-b7c0-4a96-beb1-8b0f395865fa")
 			(effects
 				(font
@@ -5236,7 +5236,7 @@
 			)
 		)
 		(pin "UUM_CAN_TD" output
-			(at 198.12 210.82 180)
+			(at 194.31 167.64 180)
 			(uuid "5a025a27-f0cb-483e-b3c4-c3e66a171d74")
 			(effects
 				(font
