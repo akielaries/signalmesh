@@ -1611,6 +1611,19 @@
 		)
 		(uuid e7380b2f-5dee-41bd-a001-6d69b235f741)
 	)
+	(text "APM Debug Port"
+		(exclude_from_sim no)
+		(at 18.796 23.368 0)
+		(effects
+			(font
+				(size 5.9944 5.9944)
+				(thickness 1.1989)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+		(uuid "7b387529-bb19-486a-8511-005be511cb95")
+	)
 	(text "APM USB2.0 DBG PORT"
 		(exclude_from_sim no)
 		(at 92.456 42.164 0)
@@ -1621,17 +1634,21 @@
 		)
 		(uuid "c3a1b11f-263f-4eab-a743-9ef18daeae81")
 	)
+	(text "UART debug messages avaiable via a\nUSB port and a 3 pin jumper for \nTX, RX, and GND UART connections"
+		(exclude_from_sim no)
+		(at 36.576 32.766 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "e98696c8-a9c0-40c7-92a2-26528d9f377a")
+	)
 	(junction
 		(at 127 52.07)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "522714a5-e86a-47fb-9738-8f634a345414")
-	)
-	(junction
-		(at 95.25 57.15)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "57e5de01-5dfe-49e8-8bdc-125e9f92a43d")
+		(uuid "3a90a580-5324-4bed-9881-917dfefbe572")
 	)
 	(junction
 		(at 142.24 72.39)
@@ -1640,10 +1657,16 @@
 		(uuid "5a67652f-2ca4-463c-9006-4a2800fae87d")
 	)
 	(junction
-		(at 107.95 90.17)
+		(at 144.78 72.39)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "7813d7d7-2e0f-40e2-ab6d-f488e1d262a0")
+		(uuid "7d413f9f-6790-4adb-b407-98f92a5d9b84")
+	)
+	(junction
+		(at 95.25 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8e99e384-689b-454f-9914-b1442f1cbb61")
 	)
 	(junction
 		(at 88.9 78.74)
@@ -1652,22 +1675,58 @@
 		(uuid "95242f6a-8d63-44f3-a358-f993e4e572f8")
 	)
 	(junction
+		(at 107.95 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "adfaea8f-b758-4ab7-b5ac-d5ccd7e25bd1")
+	)
+	(junction
 		(at 115.57 90.17)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a3ee262d-61dd-4ac5-8807-eb540a3bdd4f")
+		(uuid "bf37e2ed-1718-41cb-8455-5be5e1bebaf4")
 	)
 	(junction
 		(at 144.78 59.69)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a9027d59-92a3-446b-b200-e03b61b6bd3c")
+		(uuid "d5de6f8e-c4fe-43e9-8c2b-7771ab742e40")
 	)
-	(junction
-		(at 115.57 87.63)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f7ec0e85-2a51-46b5-931a-805c00204f98")
+	(no_connect
+		(at 139.7 74.93)
+		(uuid "30f07895-5aad-49ab-9c87-114af6023f64")
+	)
+	(no_connect
+		(at 139.7 72.39)
+		(uuid "3bf47bf4-7dc5-4e69-aecb-3039e8df9686")
+	)
+	(no_connect
+		(at 139.7 77.47)
+		(uuid "a12188eb-6691-4a35-a13f-57fd22d65020")
+	)
+	(no_connect
+		(at 139.7 69.85)
+		(uuid "a3af48b8-88c9-4f2f-b03a-7c110e5d2cb1")
+	)
+	(no_connect
+		(at 139.7 80.01)
+		(uuid "c46224ed-b221-41bf-83c8-19c7c98b4783")
+	)
+	(no_connect
+		(at 86.36 77.47)
+		(uuid "cc54a45d-e067-4d9b-a3fa-eeb5da342a0a")
+	)
+	(no_connect
+		(at 119.38 62.23)
+		(uuid "d6b09a95-c8a6-4571-a2dd-c0db94789d92")
+	)
+	(no_connect
+		(at 139.7 67.31)
+		(uuid "d98912ad-36ef-4b0f-baf4-4af533525818")
+	)
+	(no_connect
+		(at 129.54 54.61)
+		(uuid "ed90b2ba-3448-4f52-ab11-1f315554ce63")
 	)
 	(wire
 		(pts
@@ -1691,27 +1750,17 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 86.36) (xy 107.95 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1068e139-68b8-4bfe-b84c-fd0e5477761e")
-	)
-	(wire
-		(pts
 			(xy 127 52.07) (xy 127 54.61)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "1bc73901-41bd-4ba3-83d5-4e0bf67b3ed5")
+		(uuid "1160c477-5500-4077-b12b-dcb4206a9fdd")
 	)
 	(wire
 		(pts
-			(xy 95.25 57.15) (xy 77.47 57.15)
+			(xy 77.47 57.15) (xy 95.25 57.15)
 		)
 		(stroke
 			(width 0)
@@ -1791,6 +1840,16 @@
 	)
 	(wire
 		(pts
+			(xy 107.95 90.17) (xy 107.95 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5a9b2d6f-811f-4506-9107-bfb4be7ac397")
+	)
+	(wire
+		(pts
 			(xy 107.95 74.93) (xy 107.95 81.28)
 		)
 		(stroke
@@ -1811,6 +1870,16 @@
 	)
 	(wire
 		(pts
+			(xy 91.44 52.07) (xy 95.25 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "74042900-55c4-422f-b29e-ca140542e891")
+	)
+	(wire
+		(pts
 			(xy 142.24 62.23) (xy 142.24 72.39)
 		)
 		(stroke
@@ -1821,13 +1890,23 @@
 	)
 	(wire
 		(pts
-			(xy 115.57 90.17) (xy 115.57 92.71)
+			(xy 144.78 72.39) (xy 144.78 87.63)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "7a3e20d1-d358-4455-b084-be057f81ac22")
+		(uuid "79803685-d86d-4d41-a1cb-1feb0312ac15")
+	)
+	(wire
+		(pts
+			(xy 115.57 86.36) (xy 115.57 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7b24619e-12f2-4513-adb7-9eae898a8c1d")
 	)
 	(wire
 		(pts
@@ -1861,7 +1940,7 @@
 	)
 	(wire
 		(pts
-			(xy 115.57 80.01) (xy 115.57 82.55)
+			(xy 115.57 80.01) (xy 115.57 81.28)
 		)
 		(stroke
 			(width 0)
@@ -1878,16 +1957,6 @@
 			(type default)
 		)
 		(uuid "9d4d01ef-d4dc-4468-9790-3b7879901edf")
-	)
-	(wire
-		(pts
-			(xy 97.79 57.15) (xy 95.25 57.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9e1c2285-8e58-4ef5-80fb-4d316c307357")
 	)
 	(wire
 		(pts
@@ -1931,33 +2000,23 @@
 	)
 	(wire
 		(pts
-			(xy 115.57 87.63) (xy 115.57 90.17)
+			(xy 95.25 57.15) (xy 97.79 57.15)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ce3d3524-0c70-455e-97af-e1cd3d336241")
+		(uuid "cae0d0d0-1edc-47dc-a24e-7054a537329a")
 	)
 	(wire
 		(pts
-			(xy 144.78 59.69) (xy 144.78 87.63)
+			(xy 144.78 59.69) (xy 144.78 72.39)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "d6c27e5f-67ac-4525-9c51-1c56f50563fd")
-	)
-	(wire
-		(pts
-			(xy 115.57 86.36) (xy 115.57 87.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d9ba6cda-fa1c-4cce-8624-959d364959aa")
 	)
 	(wire
 		(pts
@@ -2001,7 +2060,17 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 92.71) (xy 107.95 90.17)
+			(xy 115.57 90.17) (xy 115.57 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f15063f5-daf9-46ec-8621-04a4e14669e8")
+	)
+	(wire
+		(pts
+			(xy 107.95 86.36) (xy 107.95 90.17)
 		)
 		(stroke
 			(width 0)
@@ -2049,9 +2118,9 @@
 			)
 			(justify left)
 		)
-		(uuid "85b91d7a-e943-4d67-b3fe-108a2b3dec1a")
+		(uuid "e168cf5c-6a03-422d-bb68-8ffb0f3ce723")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 138.21 48.26 0)
+			(at 138.3914 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2071,9 +2140,9 @@
 			)
 			(justify left)
 		)
-		(uuid "a1d55cef-4ea6-4b87-afd5-7e26db2463ef")
+		(uuid "f828a1ba-deee-4f78-8b80-e80b3d9615d9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 109 62.23 0)
+			(at 109.1814 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2106,6 +2175,821 @@
 		(uuid "e6e82fe8-c354-4926-9dd6-08604a1c5b4b")
 	)
 	(symbol
+		(lib_id "Connector_Generic:Conn_01x03")
+		(at 196.85 113.03 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0fc8ee04-e725-4bad-8ca8-01e8975c1d8a")
+		(property "Reference" "J26"
+			(at 199.39 111.7599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "APM_DBG"
+			(at 199.39 114.2999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_1.00mm:PinHeader_1x03_P1.00mm_Horizontal"
+			(at 196.85 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 196.85 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 196.85 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "5cfc1209-31a3-49bc-998f-ec1f6f48fbdf")
+		)
+		(pin "3"
+			(uuid "3e4a1926-df24-4341-9e14-abf9c57b402b")
+		)
+		(pin "1"
+			(uuid "f3d37437-1ba7-47e2-843c-bc4ed5620fa7")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
+					(reference "J26")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 91.44 52.07 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "22f104c2-af4a-4dc1-98ca-97ff0e8a09e9")
+		(property "Reference" "#PWR0177"
+			(at 91.44 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 91.44 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 91.44 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 91.44 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 91.44 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f6260cdb-3964-45d6-86e0-211eb0fc82bc")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
+					(reference "#PWR0177")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 152.4 87.63 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "38e1d99f-f52f-494e-abd4-5fa25804e171")
+		(property "Reference" "R81"
+			(at 152.4 81.28 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1k5"
+			(at 152.4 83.82 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 152.4 89.408 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 152.4 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 152.4 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
+			(at 152.4 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Price" "0.0129"
+			(at 152.4 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "bb62ba7f-5f15-428b-9f3a-73f59c6fa6fb")
+		)
+		(pin "1"
+			(uuid "6221145a-03ba-4a36-b32b-f4db05b12ced")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
+					(reference "R81")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 148.59 59.69 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "456377fe-4d71-4cd6-81de-d2bdccddc573")
+		(property "Reference" "R80"
+			(at 148.59 53.34 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "300"
+			(at 148.59 55.88 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 148.59 61.468 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 148.59 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 148.59 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
+			(at 148.59 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Price" "0.0129"
+			(at 148.59 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "66feda0d-f075-4e30-8f2c-41eb8d4f3d8c")
+		)
+		(pin "1"
+			(uuid "fbe9d800-6c7c-4874-8ed2-6d0488d1966a")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
+					(reference "R80")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 156.21 72.39 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "474f0a04-58f5-448a-bb0f-f9ca60c1f840")
+		(property "Reference" "D54"
+			(at 157.7975 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "RXD"
+			(at 157.7975 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
+			(at 156.21 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 156.21 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 156.21 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 156.21 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7bc4fc56-e8e0-4eed-a640-f318d55c4b47")
+		)
+		(pin "2"
+			(uuid "71ce6736-411e-4e2c-9030-15670b537c7e")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
+					(reference "D54")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 77.47 64.77 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "50153091-d175-4d03-87fd-24d9625bfac5")
+		(property "Reference" "R72"
+			(at 80.01 63.4999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "300"
+			(at 80.01 66.0399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 79.248 64.77 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 77.47 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 77.47 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
+			(at 77.47 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Price" "0.0129"
+			(at 77.47 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "db2d8b0d-9ecf-4bd7-8af3-7ca192b7c258")
+		)
+		(pin "1"
+			(uuid "6e1b12ba-9c79-4162-9b37-3a9eb040d581")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
+					(reference "R72")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 95.25 54.61 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "53401991-b9ce-4b91-819b-548282ba2659")
+		(property "Reference" "C25"
+			(at 97.79 53.3462 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22pf"
+			(at 97.79 55.8862 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 95.25 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 95.25 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 95.25 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e336760d-6ddc-4532-89e3-44eab2cb32b4")
+		)
+		(pin "2"
+			(uuid "150684aa-5a64-4b57-a9aa-1991b09e99b3")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
+					(reference "C25")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 107.95 83.82 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "56ab5d3b-b23b-4217-a5dc-d878b0934f51")
+		(property "Reference" "C24"
+			(at 110.49 82.5562 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22pf"
+			(at 110.49 85.0962 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 107.95 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 107.95 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 107.95 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a504d318-d1f3-42e5-aa3f-dd98c77db9c6")
+		)
+		(pin "2"
+			(uuid "dc9b9e5a-64b9-4654-998b-d87759307aee")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
+					(reference "C24")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 189.23 115.57 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5f059083-361c-4e81-bb0b-87fbd7ba446b")
+		(property "Reference" "#PWR098"
+			(at 189.23 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 189.23 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 189.23 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 189.23 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 189.23 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "690930a2-481d-4283-be3e-57fdf61a0fd1")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
+					(reference "#PWR098")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 107.95 92.71 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "61bb2192-6545-4fdd-8a18-b46140a0aee0")
+		(property "Reference" "#PWR0142"
+			(at 107.95 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 107.95 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 107.95 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 107.95 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 107.95 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1516e6a2-1f8a-4860-9cb8-e092b3fa7994")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
+					(reference "#PWR0142")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 88.9 78.74 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "68341fcd-672f-471e-97d4-484a952e5dec")
+		(property "Reference" "#PWR0141"
+			(at 88.9 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 88.9 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 88.9 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 88.9 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 88.9 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b233de64-789e-4f7f-bc18-7bbfb634c4aa")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
+					(reference "#PWR0141")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 148.59 72.39 90)
 		(unit 1)
@@ -2114,8 +2998,8 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "001fb953-34b5-47b5-9429-a09b1a847951")
-		(property "Reference" "R60"
+		(uuid "6b44cb79-db5c-41ab-83c3-d61caec0cc36")
+		(property "Reference" "R82"
 			(at 148.59 66.04 90)
 			(effects
 				(font
@@ -2177,40 +3061,42 @@
 			)
 		)
 		(pin "2"
-			(uuid "f2b4f970-6fe0-4dd4-bda7-bf78e4a43197")
+			(uuid "6cef12f5-752b-48ed-b239-ddbddc17a5f2")
 		)
 		(pin "1"
-			(uuid "0a5c9ed1-ae37-48df-8903-9f09af4006c6")
+			(uuid "16039726-2af6-46dc-9a7e-3678770cabb3")
 		)
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "R60")
+					(reference "R82")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Device:Crystal")
-		(at 111.76 90.17 0)
+		(lib_id "power:GND")
+		(at 115.57 92.71 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "0dbb7046-b8b1-459d-b687-87dfc2873aba")
-		(property "Reference" "Y2"
-			(at 111.76 82.55 0)
+		(uuid "781ecc07-f481-4eb7-bcc8-4611c0e16a3e")
+		(property "Reference" "#PWR0144"
+			(at 115.57 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Value" "Crystal"
-			(at 111.76 85.09 0)
+		(property "Value" "GND"
+			(at 115.57 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2218,7 +3104,72 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 111.76 90.17 0)
+			(at 115.57 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 115.57 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 115.57 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ae38feca-c8cc-4bcf-bc54-6bc8d2c32da2")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
+					(reference "#PWR0144")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 123.19 52.07 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "79939db3-20b8-4978-9172-1da4f6b5a33e")
+		(property "Reference" "R79"
+			(at 123.19 45.72 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "300"
+			(at 123.19 48.26 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 123.19 53.848 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2227,7 +3178,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 111.76 90.17 0)
+			(at 123.19 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2235,8 +3186,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Two pin crystal"
-			(at 111.76 90.17 0)
+		(property "Description" "Resistor"
+			(at 123.19 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2244,16 +3195,34 @@
 				(hide yes)
 			)
 		)
-		(pin "1"
-			(uuid "c05ceb67-7cf4-48ee-9e4e-4710dcaad640")
+		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
+			(at 123.19 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Price" "0.0129"
+			(at 123.19 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "2"
-			(uuid "4e26cd32-0274-4554-90e2-1edd1948d237")
+			(uuid "37ceaab0-19bb-472b-bea8-c11dc73d6d8f")
+		)
+		(pin "1"
+			(uuid "aab54dc0-9731-4d8e-8514-ab7dcf4767b5")
 		)
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "Y2")
+					(reference "R79")
 					(unit 1)
 				)
 			)
@@ -2267,7 +3236,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "1b1661cf-6943-4d79-84b7-f6ddad83760d")
+		(fields_autoplaced yes)
+		(uuid "7be6b81e-4607-4241-ab36-b04f737173a9")
 		(property "Reference" "D38"
 			(at 81.28 72.7074 90)
 			(effects
@@ -2338,852 +3308,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Interface_USB:CH340G")
-		(at 129.54 69.85 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "2e912a22-16cb-4591-84ca-f4dda6092921")
-		(property "Reference" "U33"
-			(at 131.6833 85.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "CH340G"
-			(at 131.6833 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm"
-			(at 130.81 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.datasheet5.com/pdf-local-2195953"
-			(at 120.65 49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "USB serial converter, UART, SOIC-16"
-			(at 129.54 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "11"
-			(uuid "c8c006d8-a62d-4737-82f2-e432389d3506")
-		)
-		(pin "2"
-			(uuid "fdf6d75c-7926-41f1-be89-0fa0b4d6ffb4")
-		)
-		(pin "9"
-			(uuid "47023b18-5bcc-42d9-a67c-63c862ae9163")
-		)
-		(pin "10"
-			(uuid "f75785f3-7637-4ba6-9829-f244276a00ae")
-		)
-		(pin "8"
-			(uuid "10d5fd23-399d-4eb1-991c-d55feecd4dd1")
-		)
-		(pin "7"
-			(uuid "7e939da8-df91-4755-9533-5462585aab37")
-		)
-		(pin "15"
-			(uuid "181b2ea8-22ce-4582-bf43-3ae6629d0639")
-		)
-		(pin "6"
-			(uuid "d0cb4b03-3e34-49a2-828e-c2e51e1a3720")
-		)
-		(pin "5"
-			(uuid "4e728ba2-8d78-47c6-ba7b-6fda6a1421d7")
-		)
-		(pin "14"
-			(uuid "4492fad9-233c-474b-91b3-93db93f529df")
-		)
-		(pin "4"
-			(uuid "96907687-cabc-4a90-ac39-3d5ff7c211e5")
-		)
-		(pin "3"
-			(uuid "d77f4eae-7e70-4088-8e32-2c49157b540b")
-		)
-		(pin "13"
-			(uuid "db940550-987b-4baa-8cd0-b37b38f86261")
-		)
-		(pin "1"
-			(uuid "632b0ea3-2e4c-4dae-8db1-c31577bd5f24")
-		)
-		(pin "12"
-			(uuid "afb9362d-288d-488e-9bde-aa056b02ae97")
-		)
-		(pin "16"
-			(uuid "2928323d-061f-4dd8-9c65-6063ca54b7e3")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "U33")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 152.4 87.63 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "3890003f-ea80-466f-8cc0-e1e6645dd78c")
-		(property "Reference" "R61"
-			(at 152.4 81.28 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1k5"
-			(at 152.4 83.82 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 152.4 89.408 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 152.4 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 152.4 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
-			(at 152.4 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Price" "0.0129"
-			(at 152.4 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "447f2cee-e967-4e3b-aad5-4f83e10731a7")
-		)
-		(pin "1"
-			(uuid "47fc509e-e98c-4972-add0-bfcdaedc3ae3")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "R61")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 160.02 78.74 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "3b251f0e-12be-4cab-aa19-90163b31c709")
-		(property "Reference" "#PWR0147"
-			(at 153.67 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 158.75 74.93 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 160.02 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 160.02 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 160.02 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "3885facd-5006-4391-9886-1b9aa7f66463")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "#PWR0147")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 107.95 92.71 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "3fcfe08e-f47b-415d-9c88-b1ab7c456393")
-		(property "Reference" "#PWR0142"
-			(at 107.95 99.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 107.95 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 107.95 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 107.95 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 107.95 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "1516e6a2-1f8a-4860-9cb8-e092b3fa7994")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "#PWR0142")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 160.02 66.04 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "4fabe30c-bcc2-4fa7-b5d2-f000741d8c43")
-		(property "Reference" "#PWR0146"
-			(at 153.67 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 158.75 62.23 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 160.02 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 160.02 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 160.02 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "edf0d8e9-a2ec-461f-8151-1b75d11aa298")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "#PWR0146")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 189.23 115.57 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "7e45a1d1-4c48-406e-b0b7-06a5377c6390")
-		(property "Reference" "#PWR098"
-			(at 189.23 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 191.77 116.8399 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 189.23 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 189.23 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 189.23 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "690930a2-481d-4283-be3e-57fdf61a0fd1")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "#PWR098")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 88.9 78.74 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "855a56ec-1d10-455d-bf9a-703f12920f9d")
-		(property "Reference" "#PWR0141"
-			(at 88.9 85.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 88.9 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 88.9 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 88.9 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 88.9 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b233de64-789e-4f7f-bc18-7bbfb634c4aa")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "#PWR0141")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:LED")
-		(at 156.21 59.69 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "85d15aa0-79ff-4738-8f37-d75e92b52e57")
-		(property "Reference" "D40"
-			(at 157.7975 52.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "TXD"
-			(at 157.7975 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
-			(at 156.21 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 156.21 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Light emitting diode"
-			(at 156.21 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 156.21 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "4db19c8c-0ed6-4b57-87f9-762bea9b36b4")
-		)
-		(pin "2"
-			(uuid "8e5898a0-329b-49e4-b9c3-f9645956ca21")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "D40")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 148.59 59.69 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "8ca61903-582d-43d7-9d62-6923ed58a81b")
-		(property "Reference" "R59"
-			(at 148.59 53.34 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "300"
-			(at 148.59 55.88 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 148.59 61.468 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 148.59 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 148.59 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
-			(at 148.59 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Price" "0.0129"
-			(at 148.59 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "db930526-f1a2-4cc3-b96c-3b664d786130")
-		)
-		(pin "1"
-			(uuid "404b1fc5-f5e6-4307-8ecc-9db22bd96617")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "R59")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:LED")
-		(at 156.21 72.39 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "98cbeef6-4247-40f3-8e36-fa3d5ba987de")
-		(property "Reference" "D41"
-			(at 157.7975 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "RXD"
-			(at 157.7975 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
-			(at 156.21 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 156.21 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Light emitting diode"
-			(at 156.21 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 156.21 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d44fae6f-c696-46a8-b582-98d8a0fabd0b")
-		)
-		(pin "2"
-			(uuid "9579404e-00cc-4cf9-ae59-6edf85e8f66c")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "D41")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector_Generic:Conn_01x03")
-		(at 196.85 113.03 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "9d334df9-2a4e-40d6-a262-19efa5447c68")
-		(property "Reference" "J16"
-			(at 199.39 111.7599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "APM_DBG"
-			(at 199.39 114.2999 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_1.00mm:PinHeader_1x03_P1.00mm_Horizontal"
-			(at 196.85 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 196.85 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 196.85 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "de4cd0e9-1fc1-4559-898e-84a51f3ec7a5")
-		)
-		(pin "3"
-			(uuid "3f6de22b-f615-45a0-aff6-f0608fefc78b")
-		)
-		(pin "1"
-			(uuid "2f0e7e2c-4bb4-4d8f-93c4-ec59cf25d69e")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "J16")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 129.54 85.09 0)
 		(mirror y)
@@ -3193,7 +3317,7 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "a5a6572b-3fdf-4073-a871-7a920301a941")
+		(uuid "80be005a-8a9b-4098-93ae-a5ed4c133e43")
 		(property "Reference" "#PWR0145"
 			(at 129.54 91.44 0)
 			(effects
@@ -3251,27 +3375,25 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 115.57 92.71 0)
-		(mirror y)
+		(lib_id "Device:Crystal")
+		(at 111.76 90.17 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "aac9b0b4-7edd-4a2f-9fe2-022365054ed0")
-		(property "Reference" "#PWR0144"
-			(at 115.57 99.06 0)
+		(uuid "875189f4-3f5a-4f6f-8ac1-e9816f495caa")
+		(property "Reference" "Y5"
+			(at 111.76 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Value" "GND"
-			(at 115.57 97.79 0)
+		(property "Value" "Crystal"
+			(at 111.76 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3279,74 +3401,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 115.57 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 115.57 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 115.57 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ae38feca-c8cc-4bcf-bc54-6bc8d2c32da2")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "#PWR0144")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Small")
-		(at 95.25 54.61 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "b47c2683-a773-4a20-9a8d-230a68900dc5")
-		(property "Reference" "C14"
-			(at 97.79 53.3462 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "22pf"
-			(at 97.79 55.8862 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 95.25 54.61 0)
+			(at 111.76 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3355,7 +3410,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 95.25 54.61 0)
+			(at 111.76 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3363,8 +3418,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 95.25 54.61 0)
+		(property "Description" "Two pin crystal"
+			(at 111.76 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3373,15 +3428,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "5e0d2f85-84bb-48e9-8d0d-f16b003dd323")
+			(uuid "3189604a-bd20-47eb-a103-dc426e689013")
 		)
 		(pin "2"
-			(uuid "d32698b2-176c-4d8f-8f00-2c8eff540c0d")
+			(uuid "298e3368-b636-4ef3-a849-177f0028a908")
 		)
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "C14")
+					(reference "Y5")
 					(unit 1)
 				)
 			)
@@ -3396,8 +3451,8 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "ba1f7ba2-363c-40b0-a960-d6775eeb2021")
-		(property "Reference" "J20"
+		(uuid "8f4fc34c-5a8b-4303-8445-61c35c132c2b")
+		(property "Reference" "J25"
 			(at 88.9 54.61 0)
 			(effects
 				(font
@@ -3441,110 +3496,24 @@
 			)
 		)
 		(pin "2"
-			(uuid "f72c6f9a-7887-4136-998e-014b7d14980b")
+			(uuid "f8cf9cc8-91e7-4107-8a81-f7f226019074")
 		)
 		(pin "5"
-			(uuid "e571333d-531f-426d-8a09-9ce48fc980da")
+			(uuid "67d1a57d-8b14-4c58-9d2f-e68e2c6caa92")
 		)
 		(pin "1"
-			(uuid "0c3a27df-3a1c-402d-8608-702cfce15163")
+			(uuid "ecab8d75-2ef8-4faa-b87b-29992f87985e")
 		)
 		(pin "3"
-			(uuid "3d03836c-ce70-4bbd-a3ca-c87d457b4f2a")
+			(uuid "18ab06b1-db3f-4506-b6b4-ed0d00dc0476")
 		)
 		(pin "4"
-			(uuid "637a6815-22d5-40e7-b19e-d10703429f88")
+			(uuid "6f51def2-fb07-4822-85bf-5597ae98fe25")
 		)
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "J20")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 123.19 52.07 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "bb348ee1-2cc3-459b-9d89-52058a2a22e4")
-		(property "Reference" "R58"
-			(at 123.19 45.72 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "300"
-			(at 123.19 48.26 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 123.19 53.848 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 123.19 52.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 123.19 52.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
-			(at 123.19 52.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Price" "0.0129"
-			(at 123.19 52.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "f0e24688-ec64-406f-b9e4-3748765f7ba2")
-		)
-		(pin "1"
-			(uuid "f9fc403a-7bad-4b29-95da-2df78aef7472")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "R58")
+					(reference "J25")
 					(unit 1)
 				)
 			)
@@ -3552,16 +3521,16 @@
 	)
 	(symbol
 		(lib_id "Device:C_Small")
-		(at 107.95 83.82 0)
+		(at 115.57 83.82 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "c39f2ec4-8601-4d3c-9402-7f5464a57724")
-		(property "Reference" "C15"
-			(at 110.49 82.5562 0)
+		(uuid "8fe99161-742a-42ae-9c81-6490f35c33e7")
+		(property "Reference" "C23"
+			(at 118.11 82.5562 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3570,7 +3539,7 @@
 			)
 		)
 		(property "Value" "22pf"
-			(at 110.49 85.0962 0)
+			(at 118.11 85.0962 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3579,7 +3548,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 107.95 83.82 0)
+			(at 115.57 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3588,7 +3557,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 107.95 83.82 0)
+			(at 115.57 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3597,7 +3566,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 107.95 83.82 0)
+			(at 115.57 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3606,15 +3575,92 @@
 			)
 		)
 		(pin "1"
-			(uuid "3bbb89d7-66dd-4ee5-961c-12a1ead542d7")
+			(uuid "ab9523f5-b8e1-44f5-b9df-37cc4ae26f35")
 		)
 		(pin "2"
-			(uuid "8f3bbe73-c1e4-43fd-90fe-50c2d58e4673")
+			(uuid "5fae237c-2c83-4e13-8f21-7fc3f13c505a")
 		)
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "C15")
+					(reference "C23")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 156.21 59.69 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9d6fa0d9-63a8-44e5-93d7-7577e4ba7887")
+		(property "Reference" "D55"
+			(at 157.7975 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "TXD"
+			(at 157.7975 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
+			(at 156.21 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 156.21 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 156.21 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 156.21 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e3b77345-546f-4a0f-9d21-48e44325cf10")
+		)
+		(pin "2"
+			(uuid "af7e5697-e030-4455-8f2d-ceb2708e065b")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
+					(reference "D55")
 					(unit 1)
 				)
 			)
@@ -3630,7 +3676,7 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "dabe7b95-10d6-4cc9-b731-bcac40f9d257")
+		(uuid "b9285954-eca1-4efc-9505-7c6f0ac93547")
 		(property "Reference" "#PWR0143"
 			(at 109.22 58.42 0)
 			(effects
@@ -3688,6 +3734,119 @@
 		)
 	)
 	(symbol
+		(lib_id "Interface_USB:CH340G")
+		(at 129.54 69.85 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c7c20807-c139-44ca-9477-ad7186bf254d")
+		(property "Reference" "U19"
+			(at 131.6833 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "CH340G"
+			(at 131.6833 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm"
+			(at 130.81 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.datasheet5.com/pdf-local-2195953"
+			(at 120.65 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "USB serial converter, UART, SOIC-16"
+			(at 129.54 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "11"
+			(uuid "ee493f17-4e6d-4adb-abe5-be32d333ab17")
+		)
+		(pin "2"
+			(uuid "5fbcfbd6-bf29-49de-9848-aad3b930159b")
+		)
+		(pin "9"
+			(uuid "8b33e83d-b82d-496f-bd79-642f60edf2ed")
+		)
+		(pin "10"
+			(uuid "10a92d0b-e2f5-4502-8ce6-c2eff2ef63b3")
+		)
+		(pin "8"
+			(uuid "db61dfc7-238d-4135-b959-8ee51d0dec0c")
+		)
+		(pin "7"
+			(uuid "1cbf951a-7cfc-4050-9f6b-dcc8940cef71")
+		)
+		(pin "15"
+			(uuid "eff89b21-76b4-4c29-aef6-f98602c225e4")
+		)
+		(pin "6"
+			(uuid "3fac4e6c-6002-4b1f-9613-4b0d77f3f4b7")
+		)
+		(pin "5"
+			(uuid "53d0ff82-9831-4d66-a5c1-cd1a893c0988")
+		)
+		(pin "14"
+			(uuid "90baf343-427c-45ca-a257-8d3b85683e06")
+		)
+		(pin "4"
+			(uuid "3e88febd-8af2-4d6f-879e-8d8a89096e35")
+		)
+		(pin "3"
+			(uuid "f2b7cc9f-ac65-41ab-9510-b2062cc839e1")
+		)
+		(pin "13"
+			(uuid "6d406ebd-3dcd-410f-a9b4-64088113286c")
+		)
+		(pin "1"
+			(uuid "e7857357-c88b-4d9c-a0ca-36f9a24ca662")
+		)
+		(pin "12"
+			(uuid "f23406a2-c939-4c45-bafb-f6d55d73e67a")
+		)
+		(pin "16"
+			(uuid "5fb2b71c-bcf3-41d1-9855-d08f4bc74a50")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
+					(reference "U19")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:LED")
 		(at 115.57 52.07 0)
 		(unit 1)
@@ -3696,8 +3855,8 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "ddd79df2-7cf3-4ce9-8014-cf779d6c6983")
-		(property "Reference" "D39"
+		(uuid "d49318f5-7e05-4eef-88be-28ecaaf0e813")
+		(property "Reference" "D53"
 			(at 113.9825 45.72 0)
 			(effects
 				(font
@@ -3750,137 +3909,33 @@
 			)
 		)
 		(pin "1"
-			(uuid "c47effae-824b-41f0-8a9e-0902891e475d")
+			(uuid "f0c0786d-7449-4b59-b3a3-0a8d34d7c82a")
 		)
 		(pin "2"
-			(uuid "5f3e47cc-f27f-429e-bfd8-3cf785e0c3e7")
+			(uuid "0b907e8c-5c49-4041-8a15-8ce139f3c65e")
 		)
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "D39")
+					(reference "D53")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 77.47 64.77 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "e1d167ab-c48d-475c-a945-753cd79c9c16")
-		(property "Reference" "R57"
-			(at 80.01 63.4999 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "300"
-			(at 80.01 66.0399 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 79.248 64.77 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 77.47 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 77.47 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
-			(at 77.47 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Price" "0.0129"
-			(at 77.47 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "6e49eecf-33d9-4e65-99e2-07475cdfaa4c")
-		)
-		(pin "1"
-			(uuid "cf77fc64-3a38-4741-96b6-66f36857414f")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "R57")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Small")
-		(at 115.57 85.09 0)
+		(lib_id "power:GND")
+		(at 160.02 66.04 270)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "e833d96c-4212-46e4-95c9-30f5bb13a1fd")
-		(property "Reference" "C16"
-			(at 118.11 83.8262 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "22pf"
-			(at 118.11 86.3662 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 115.57 85.09 0)
+		(uuid "e23318d0-bdbe-4bc5-bc4e-5f9da9124170")
+		(property "Reference" "#PWR0146"
+			(at 153.67 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3888,8 +3943,17 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 115.57 85.09 0)
+		(property "Value" "GND"
+			(at 156.21 66.0399 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 160.02 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3897,8 +3961,17 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 115.57 85.09 0)
+		(property "Datasheet" ""
+			(at 160.02 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 160.02 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3907,15 +3980,80 @@
 			)
 		)
 		(pin "1"
-			(uuid "2a527de8-a9da-4d8d-81e9-c0c754423113")
-		)
-		(pin "2"
-			(uuid "f576dbd5-0050-472f-8d4e-559691dac864")
+			(uuid "edf0d8e9-a2ec-461f-8151-1b75d11aa298")
 		)
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
-					(reference "C16")
+					(reference "#PWR0146")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 160.02 78.74 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "fa2b1240-2feb-4f5a-861e-86daa56a9e4f")
+		(property "Reference" "#PWR0147"
+			(at 153.67 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 156.21 78.7399 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 160.02 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 160.02 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 160.02 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3885facd-5006-4391-9886-1b9aa7f66463")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/2a8263b6-de73-49ce-bd78-9ccd79fb8d35"
+					(reference "#PWR0147")
 					(unit 1)
 				)
 			)

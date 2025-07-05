@@ -1598,6 +1598,107 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "power:PWR_FLAG"
+			(power)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#FLG"
+				(at 0 1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "PWR_FLAG"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Special symbol for telling ERC where power comes from"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "flag power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "PWR_FLAG_0_0"
+				(pin power_out line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "PWR_FLAG_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(rectangle
 		(start 106.68 58.42)
@@ -1620,6 +1721,41 @@
 			)
 		)
 		(uuid "004c1cb3-8560-42f0-a01e-ac1185f925d4")
+	)
+	(text "UART debug messages avaiable via a\nUSB port and a 3 pin jumper for \nTX, RX, and GND UART connections"
+		(exclude_from_sim no)
+		(at 40.64 33.274 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "12fb8709-2f50-425e-88c5-b708414c40b1")
+	)
+	(text "ACM Debug Port"
+		(exclude_from_sim no)
+		(at 22.86 23.876 0)
+		(effects
+			(font
+				(size 5.9944 5.9944)
+				(thickness 1.1989)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+		(uuid "dd7f6a44-cc45-41ab-83cc-bda85a9bbc0b")
+	)
+	(junction
+		(at 147.32 109.22)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "02b0773f-fe42-414d-8261-f67e9dd0e18e")
+	)
+	(junction
+		(at 129.54 81.28)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0519bc35-f7ff-4c76-9445-8e5b99d93da0")
 	)
 	(junction
 		(at 176.53 78.74)
@@ -1652,28 +1788,58 @@
 		(uuid "6e114d3f-f1d6-4668-81fd-89e69a9d1c5a")
 	)
 	(junction
-		(at 147.32 109.22)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ab4b1c49-874b-4fcb-a721-e64e1f2f8b77")
-	)
-	(junction
 		(at 176.53 91.44)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b1662779-5387-42f8-a465-7a297e1dde5b")
 	)
 	(junction
-		(at 147.32 106.68)
+		(at 132.08 81.28)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "b5030564-f304-4b0d-a24a-93d8c5a97647")
+		(uuid "c64da030-bf88-4e8d-ad8d-6c0e22ce84c9")
 	)
 	(junction
 		(at 139.7 109.22)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "cdcde424-f035-4664-8e00-842e649af804")
+	)
+	(no_connect
+		(at 118.11 96.52)
+		(uuid "01bba7c0-23a9-47fe-9896-7d930a9da117")
+	)
+	(no_connect
+		(at 171.45 91.44)
+		(uuid "0e6bd5d4-1292-437a-aa74-eed6a46edc07")
+	)
+	(no_connect
+		(at 161.29 73.66)
+		(uuid "1aba35db-86ab-45be-a351-ff8e7af50dbc")
+	)
+	(no_connect
+		(at 171.45 86.36)
+		(uuid "3758f549-a234-44b9-93dd-fbf4547446af")
+	)
+	(no_connect
+		(at 171.45 99.06)
+		(uuid "3adc0fec-eaf2-4b93-8b66-3e4163115874")
+	)
+	(no_connect
+		(at 171.45 93.98)
+		(uuid "42c93e6d-81ab-4168-b9ec-616f35e7c6be")
+	)
+	(no_connect
+		(at 151.13 81.28)
+		(uuid "51b45b2f-5c99-4f1a-a627-979923ff252d")
+	)
+	(no_connect
+		(at 171.45 96.52)
+		(uuid "c36159bb-3a74-4481-bd79-a67bbe1377f4")
+	)
+	(no_connect
+		(at 171.45 88.9)
+		(uuid "d4481274-7327-486e-9a4f-edbdb91f646e")
 	)
 	(wire
 		(pts
@@ -1697,13 +1863,13 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 86.36) (xy 151.13 86.36)
+			(xy 123.19 71.12) (xy 127 71.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "26c3e8a2-3d60-4891-a1c4-ca6566122dae")
+		(uuid "22e72aa5-a4b9-4d73-a4ad-62e71eaa8aa3")
 	)
 	(wire
 		(pts
@@ -1713,7 +1879,17 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2828df1b-3982-4381-a9e0-339fd1cc8f4e")
+		(uuid "258df6ff-12e4-43b2-ab1d-85849fe3b2fd")
+	)
+	(wire
+		(pts
+			(xy 128.27 86.36) (xy 151.13 86.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "26c3e8a2-3d60-4891-a1c4-ca6566122dae")
 	)
 	(wire
 		(pts
@@ -1787,6 +1963,16 @@
 	)
 	(wire
 		(pts
+			(xy 129.54 81.28) (xy 132.08 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f617583-b2c8-43dc-8959-92a5a86a459a")
+	)
+	(wire
+		(pts
 			(xy 171.45 78.74) (xy 176.53 78.74)
 		)
 		(stroke
@@ -1837,7 +2023,7 @@
 	)
 	(wire
 		(pts
-			(xy 139.7 105.41) (xy 139.7 109.22)
+			(xy 139.7 106.68) (xy 139.7 109.22)
 		)
 		(stroke
 			(width 0)
@@ -1864,16 +2050,6 @@
 			(type default)
 		)
 		(uuid "b23fe0bd-fc93-4102-8f5d-99bb88c2908b")
-	)
-	(wire
-		(pts
-			(xy 147.32 105.41) (xy 147.32 106.68)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b9901ccd-3899-428a-8c5f-5972cd93f8a0")
 	)
 	(wire
 		(pts
@@ -1957,6 +2133,16 @@
 	)
 	(wire
 		(pts
+			(xy 132.08 81.28) (xy 134.62 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e4165418-d876-45dc-8986-5c0dde87ad4a")
+	)
+	(wire
+		(pts
 			(xy 147.32 109.22) (xy 147.32 111.76)
 		)
 		(stroke
@@ -1987,7 +2173,7 @@
 	)
 	(wire
 		(pts
-			(xy 139.7 93.98) (xy 139.7 100.33)
+			(xy 139.7 93.98) (xy 139.7 101.6)
 		)
 		(stroke
 			(width 0)
@@ -2057,7 +2243,7 @@
 	)
 	(global_label "ACM_VDD"
 		(shape input)
-		(at 129.54 81.28 0)
+		(at 134.62 81.28 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2065,9 +2251,9 @@
 			)
 			(justify left)
 		)
-		(uuid "23f2d41d-014b-4fb2-aabc-c673941cbda2")
+		(uuid "0ca98f45-59f9-46d3-ba6b-daf05c6731c4")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 140.75 81.28 0)
+			(at 145.83 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2123,7 +2309,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Small")
-		(at 139.7 102.87 0)
+		(at 139.7 104.14 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2132,7 +2318,7 @@
 		(fields_autoplaced yes)
 		(uuid "0028eb24-427f-4c16-9ddb-be34cc91e559")
 		(property "Reference" "C12"
-			(at 142.24 101.6062 0)
+			(at 142.24 102.8762 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2141,7 +2327,7 @@
 			)
 		)
 		(property "Value" "22pf"
-			(at 142.24 104.1462 0)
+			(at 142.24 105.4162 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2150,7 +2336,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 139.7 102.87 0)
+			(at 139.7 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2159,7 +2345,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 139.7 102.87 0)
+			(at 139.7 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2168,7 +2354,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 139.7 102.87 0)
+			(at 139.7 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2253,76 +2439,6 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/c5977503-4ab2-47b6-bfc3-7f974cfcf6ea/90a0d358-0ee2-4073-87e5-cf0b25256f35"
 					(reference "#PWR0153")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Small")
-		(at 147.32 104.14 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "09f49f1d-553f-4003-bcee-39595941d06b")
-		(property "Reference" "C13"
-			(at 149.86 102.8762 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "22pf"
-			(at 149.86 105.4162 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 147.32 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 147.32 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 147.32 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "fe5493e9-5c60-4134-abac-d84b94afd564")
-		)
-		(pin "2"
-			(uuid "b09fd86a-a9dc-4adc-8b08-06badc243c16")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/c5977503-4ab2-47b6-bfc3-7f974cfcf6ea/90a0d358-0ee2-4073-87e5-cf0b25256f35"
-					(reference "C13")
 					(unit 1)
 				)
 			)
@@ -2958,6 +3074,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 132.08 81.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5d868010-021e-47d5-82de-3aebac94dad5")
+		(property "Reference" "#FLG04"
+			(at 132.08 79.375 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 132.08 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 132.08 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 132.08 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 132.08 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "08d6a7d4-1f17-4234-b332-f5dbb770700b")
+		)
+		(instances
+			(project ""
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/c5977503-4ab2-47b6-bfc3-7f974cfcf6ea/90a0d358-0ee2-4073-87e5-cf0b25256f35"
+					(reference "#FLG04")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Interface_USB:CH340G")
 		(at 161.29 88.9 0)
 		(unit 1)
@@ -3065,6 +3247,76 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/c5977503-4ab2-47b6-bfc3-7f974cfcf6ea/90a0d358-0ee2-4073-87e5-cf0b25256f35"
 					(reference "U32")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 147.32 104.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "68793958-c5d8-4bb3-bb65-9a7740ebea00")
+		(property "Reference" "C13"
+			(at 149.86 102.8762 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22pf"
+			(at 149.86 105.4162 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 147.32 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 147.32 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 147.32 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ff50e58d-d9bb-49ef-b0cb-c44d25b77bc1")
+		)
+		(pin "2"
+			(uuid "a7293453-35d3-4971-a022-8e054625559b")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/c5977503-4ab2-47b6-bfc3-7f974cfcf6ea/90a0d358-0ee2-4073-87e5-cf0b25256f35"
+					(reference "C13")
 					(unit 1)
 				)
 			)
@@ -3476,6 +3728,72 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/c5977503-4ab2-47b6-bfc3-7f974cfcf6ea/90a0d358-0ee2-4073-87e5-cf0b25256f35"
 					(reference "R55")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 123.19 71.12 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "bcf7fd9c-0c94-4fd4-858a-1f1e31bac7c8")
+		(property "Reference" "#PWR0175"
+			(at 123.19 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 123.19 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 123.19 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 123.19 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 123.19 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8ea2c809-b4df-457c-9db2-3d6bc16dede7")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/c5977503-4ab2-47b6-bfc3-7f974cfcf6ea/90a0d358-0ee2-4073-87e5-cf0b25256f35"
+					(reference "#PWR0175")
 					(unit 1)
 				)
 			)

@@ -316,37 +316,30 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Display_Character:HDSP-7503"
+		(symbol "Display_Character:SM420561N"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "U"
-				(at -3.81 13.97 0)
+				(at -2.54 13.97 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify right)
 				)
 			)
-			(property "Value" "HDSP-7503"
-				(at 6.35 13.97 0)
+			(property "Value" "SM420561N"
+				(at 1.27 13.97 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 				)
 			)
-			(property "Footprint" "Display_7Segment:HDSP-A151"
-				(at 0 -13.97 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://docs.broadcom.com/docs/AV02-2553EN"
-				(at -10.16 13.97 0)
+			(property "Footprint" "Display_7Segment:7SegmentLED_LTS6760_LTS6780"
+				(at 1.27 -15.24 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -354,7 +347,17 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "One digit 7 segment high efficiency red, common cathode"
+			(property "Datasheet" "https://datasheet.lcsc.com/szlcsc/Wuxi-ARK-Tech-Elec-SM420561N_C141367.pdf"
+				(at -12.7 12.065 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "One digit 7 segment blue LED, common cathode"
 				(at 0 0 0)
 				(effects
 					(font
@@ -372,7 +375,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "HDSP?A151*"
+			(property "ki_fp_filters" "7SegmentLED?LTS6760?LTS6780*"
 				(at 0 0 0)
 				(effects
 					(font
@@ -381,9 +384,9 @@
 					(hide yes)
 				)
 			)
-			(symbol "HDSP-7503_1_0"
+			(symbol "SM420561N_0_0"
 				(text "E"
-					(at -2.54 -1.397 0)
+					(at -2.54 1.778 0)
 					(effects
 						(font
 							(size 0.508 0.508)
@@ -391,7 +394,7 @@
 					)
 				)
 				(text "F"
-					(at -2.286 1.651 0)
+					(at -2.286 4.826 0)
 					(effects
 						(font
 							(size 0.508 0.508)
@@ -399,7 +402,7 @@
 					)
 				)
 				(text "D"
-					(at -0.254 -2.159 0)
+					(at -0.254 1.016 0)
 					(effects
 						(font
 							(size 0.508 0.508)
@@ -407,7 +410,7 @@
 					)
 				)
 				(text "G"
-					(at 0 0.889 0)
+					(at 0 4.064 0)
 					(effects
 						(font
 							(size 0.508 0.508)
@@ -415,7 +418,7 @@
 					)
 				)
 				(text "A"
-					(at 0.254 2.413 0)
+					(at 0.254 5.588 0)
 					(effects
 						(font
 							(size 0.508 0.508)
@@ -423,7 +426,7 @@
 					)
 				)
 				(text "C"
-					(at 2.286 -1.397 0)
+					(at 2.286 1.778 0)
 					(effects
 						(font
 							(size 0.508 0.508)
@@ -431,7 +434,7 @@
 					)
 				)
 				(text "B"
-					(at 2.54 1.651 0)
+					(at 2.54 4.826 0)
 					(effects
 						(font
 							(size 0.508 0.508)
@@ -439,7 +442,7 @@
 					)
 				)
 				(text "DP"
-					(at 3.556 -2.921 0)
+					(at 3.556 0.254 0)
 					(effects
 						(font
 							(size 0.508 0.508)
@@ -447,7 +450,7 @@
 					)
 				)
 			)
-			(symbol "HDSP-7503_1_1"
+			(symbol "SM420561N_0_1"
 				(rectangle
 					(start -5.08 12.7)
 					(end 5.08 -12.7)
@@ -461,7 +464,7 @@
 				)
 				(polyline
 					(pts
-						(xy -1.524 -0.381) (xy -1.778 -2.413)
+						(xy -1.524 2.794) (xy -1.778 0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -473,7 +476,7 @@
 				)
 				(polyline
 					(pts
-						(xy -1.27 2.667) (xy -1.524 0.635)
+						(xy -1.27 5.842) (xy -1.524 3.81)
 					)
 					(stroke
 						(width 0.508)
@@ -485,7 +488,7 @@
 				)
 				(polyline
 					(pts
-						(xy -1.27 -2.921) (xy 0.762 -2.921)
+						(xy -1.27 0.254) (xy 0.762 0.254)
 					)
 					(stroke
 						(width 0.508)
@@ -497,7 +500,7 @@
 				)
 				(polyline
 					(pts
-						(xy -1.016 0.127) (xy 1.016 0.127)
+						(xy -1.016 3.302) (xy 1.016 3.302)
 					)
 					(stroke
 						(width 0.508)
@@ -509,7 +512,7 @@
 				)
 				(polyline
 					(pts
-						(xy -0.762 3.175) (xy 1.27 3.175)
+						(xy -0.762 6.35) (xy 1.27 6.35)
 					)
 					(stroke
 						(width 0.508)
@@ -521,7 +524,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.524 -0.381) (xy 1.27 -2.413)
+						(xy 1.524 2.794) (xy 1.27 0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -533,7 +536,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.778 2.667) (xy 1.524 0.635)
+						(xy 1.778 5.842) (xy 1.524 3.81)
 					)
 					(stroke
 						(width 0.508)
@@ -545,7 +548,7 @@
 				)
 				(polyline
 					(pts
-						(xy 2.54 -2.921) (xy 2.54 -2.921)
+						(xy 2.54 0.254) (xy 2.54 0.254)
 					)
 					(stroke
 						(width 0.508)
@@ -555,6 +558,8 @@
 						(type none)
 					)
 				)
+			)
+			(symbol "SM420561N_1_1"
 				(pin input line
 					(at -7.62 7.62 0)
 					(length 2.54)
@@ -565,7 +570,7 @@
 							)
 						)
 					)
-					(number "10"
+					(number "7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -583,7 +588,7 @@
 							)
 						)
 					)
-					(number "9"
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -601,7 +606,7 @@
 							)
 						)
 					)
-					(number "8"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -619,7 +624,7 @@
 							)
 						)
 					)
-					(number "5"
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -637,7 +642,7 @@
 							)
 						)
 					)
-					(number "4"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -655,7 +660,7 @@
 							)
 						)
 					)
-					(number "2"
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -673,7 +678,7 @@
 							)
 						)
 					)
-					(number "3"
+					(number "10"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -691,7 +696,7 @@
 							)
 						)
 					)
-					(number "7"
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -709,7 +714,7 @@
 							)
 						)
 					)
-					(number "1"
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -727,7 +732,7 @@
 							)
 						)
 					)
-					(number "6"
+					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2544,6 +2549,107 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "power:PWR_FLAG"
+			(power)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#FLG"
+				(at 0 1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "PWR_FLAG"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Special symbol for telling ERC where power comes from"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "flag power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "PWR_FLAG_0_0"
+				(pin power_out line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "PWR_FLAG_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(rectangle
 		(start 87.63 55.118)
@@ -2588,6 +2694,60 @@
 			)
 		)
 		(uuid "63597aec-11e4-4afd-951b-742b7eaf04fb")
+	)
+	(junction
+		(at 102.87 102.87)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a0dd6dc2-8eef-4142-a428-15386244bd84")
+	)
+	(no_connect
+		(at 104.14 59.69)
+		(uuid "03fb369b-dc9e-4334-a4e3-9e9ec2401e01")
+	)
+	(no_connect
+		(at 144.78 64.77)
+		(uuid "2c717f32-517d-48b3-961c-3e2fef98d6d8")
+	)
+	(no_connect
+		(at 104.14 67.31)
+		(uuid "32cdb2cc-1c58-4bc5-9b27-d54bb3994229")
+	)
+	(no_connect
+		(at 144.78 105.41)
+		(uuid "42bb1b0a-08da-4061-9d1f-5238e09f624d")
+	)
+	(no_connect
+		(at 104.14 69.85)
+		(uuid "5c8b2524-31c9-454b-afe2-38fbd6412a0a")
+	)
+	(no_connect
+		(at 104.14 105.41)
+		(uuid "638205b1-775f-4d7b-953f-8fae0c297a7a")
+	)
+	(no_connect
+		(at 144.78 107.95)
+		(uuid "69a0ea23-bd7f-48a7-ba86-90c1ab205ab4")
+	)
+	(no_connect
+		(at 144.78 67.31)
+		(uuid "9bd6bdbe-82eb-4baf-8392-d852b533472e")
+	)
+	(no_connect
+		(at 104.14 107.95)
+		(uuid "accf5e60-5990-47ef-9ac5-10f32c64c303")
+	)
+	(no_connect
+		(at 144.78 62.23)
+		(uuid "bf20703c-3fbd-4506-89ef-f89011df416e")
+	)
+	(no_connect
+		(at 104.14 64.77)
+		(uuid "c83719cb-b09a-4bc6-b60a-a8fc1dbb6ee1")
+	)
+	(no_connect
+		(at 104.14 62.23)
+		(uuid "f852b8c4-10ee-427f-9f41-890b13c6ae36")
 	)
 	(wire
 		(pts
@@ -3481,6 +3641,16 @@
 	)
 	(wire
 		(pts
+			(xy 102.87 72.39) (xy 104.14 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1409a29-afda-4a9a-8d70-6cb14c60e3f2")
+	)
+	(wire
+		(pts
 			(xy 119.38 138.43) (xy 119.38 121.92)
 		)
 		(stroke
@@ -3624,7 +3794,7 @@
 	)
 	(hierarchical_label "7SDD_CMD_TX"
 		(shape output)
-		(at 104.14 72.39 180)
+		(at 102.87 72.39 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3722,98 +3892,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Display_Character:HDSP-7503")
-		(at 194.31 130.81 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "0611257c-df6a-499e-afd5-2f53b3b8c915")
-		(property "Reference" "U19"
-			(at 194.31 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "HDSP-7503"
-			(at 194.31 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Display_7Segment:HDSP-A151"
-			(at 194.31 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://docs.broadcom.com/docs/AV02-2553EN"
-			(at 184.15 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "One digit 7 segment high efficiency red, common cathode"
-			(at 194.31 130.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "8"
-			(uuid "b7f19994-1ae5-4c7b-a292-c65000878487")
-		)
-		(pin "2"
-			(uuid "a71c5046-69e1-4cdc-86f7-c897c1eda2f9")
-		)
-		(pin "4"
-			(uuid "2e477b22-270a-4c18-8024-20f433472e45")
-		)
-		(pin "5"
-			(uuid "63ce77d1-b331-42c4-ac48-9ea4240d5d12")
-		)
-		(pin "6"
-			(uuid "b7ed8ce3-a110-4e58-868c-257e980a1064")
-		)
-		(pin "9"
-			(uuid "70514fb1-9e1c-4211-9d3f-2b4ffb530ce1")
-		)
-		(pin "7"
-			(uuid "25c8424f-606c-48f1-b19b-2d70a4e8df98")
-		)
-		(pin "1"
-			(uuid "9fc8faeb-4210-4ccf-97d9-d57c9b36dd1b")
-		)
-		(pin "10"
-			(uuid "54058c21-a959-4c9b-8ab8-ede037b248ab")
-		)
-		(pin "3"
-			(uuid "4544f5e5-c4b9-4049-96ed-e24302a5ad64")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/03344240-0515-4f71-8710-40bd9ead88e4"
-					(reference "U19")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 149.86 59.69 0)
 		(unit 1)
@@ -3881,7 +3959,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Display_Character:HDSP-7503")
+		(lib_id "Display_Character:SM420561N")
 		(at 165.1 130.81 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3889,8 +3967,8 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "19affeba-0c7f-43ad-a93a-9acaa8f0beb9")
-		(property "Reference" "U18"
+		(uuid "36c93269-db54-48e0-8a79-674e9e74b449")
+		(property "Reference" "U2"
 			(at 165.1 113.03 0)
 			(effects
 				(font
@@ -3898,7 +3976,7 @@
 				)
 			)
 		)
-		(property "Value" "HDSP-7503"
+		(property "Value" "SM420561N"
 			(at 165.1 115.57 0)
 			(effects
 				(font
@@ -3906,8 +3984,8 @@
 				)
 			)
 		)
-		(property "Footprint" "Display_7Segment:HDSP-A151"
-			(at 165.1 144.78 0)
+		(property "Footprint" "Display_7Segment:7SegmentLED_LTS6760_LTS6780"
+			(at 166.37 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3915,16 +3993,17 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://docs.broadcom.com/docs/AV02-2553EN"
-			(at 154.94 116.84 0)
+		(property "Datasheet" "https://datasheet.lcsc.com/szlcsc/Wuxi-ARK-Tech-Elec-SM420561N_C141367.pdf"
+			(at 152.4 118.745 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)
-		(property "Description" "One digit 7 segment high efficiency red, common cathode"
+		(property "Description" "One digit 7 segment blue LED, common cathode"
 			(at 165.1 130.81 0)
 			(effects
 				(font
@@ -3933,40 +4012,40 @@
 				(hide yes)
 			)
 		)
-		(pin "8"
-			(uuid "f5640b6f-5f92-486f-8320-ffb634adc8dc")
-		)
-		(pin "2"
-			(uuid "81c520a5-5d98-4fd6-a16b-e978edf42eea")
-		)
-		(pin "4"
-			(uuid "ece3937d-9ff1-499d-926e-67d52314c61c")
-		)
-		(pin "5"
-			(uuid "ef5778a4-3147-43f6-a54f-6ca48ac6ebd0")
-		)
 		(pin "6"
-			(uuid "06147e3f-e780-4e69-bdcb-4c40a3bbc748")
-		)
-		(pin "9"
-			(uuid "753e2345-80c9-4ea0-89da-90433a857987")
+			(uuid "787cf155-c91d-484a-8e2a-d15d70bb843b")
 		)
 		(pin "7"
-			(uuid "9bde9147-2a20-4ffc-97aa-7a74aadffe55")
+			(uuid "4f3a87e3-fed1-4a72-954f-24e09c538b28")
+		)
+		(pin "5"
+			(uuid "fca3699a-8585-4cd0-a02f-6741e8006655")
+		)
+		(pin "4"
+			(uuid "d54de378-3b5f-484a-852e-2d7d3efb0497")
+		)
+		(pin "9"
+			(uuid "24448c62-9985-4756-90df-b563ef67194a")
 		)
 		(pin "1"
-			(uuid "af0df1f1-69f8-4594-b4a4-a87d9961cb3c")
+			(uuid "b5ee1cb6-5c79-4361-a793-b548659dd878")
 		)
-		(pin "10"
-			(uuid "4a0579f1-be61-494a-b75c-31c400f6b268")
+		(pin "2"
+			(uuid "4c69b99f-d613-470f-be37-2d887678d160")
 		)
 		(pin "3"
-			(uuid "067562b4-e164-4e16-b30b-29590dc1c0b5")
+			(uuid "1cf8df3c-4dec-41cd-a8bd-fc9139c0d37f")
+		)
+		(pin "8"
+			(uuid "d952d2f2-6c81-40ac-ae5f-dfac83e380f1")
+		)
+		(pin "10"
+			(uuid "fef921f4-263f-434d-8c80-6d22247760ec")
 		)
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/03344240-0515-4f71-8710-40bd9ead88e4"
-					(reference "U18")
+					(reference "U2")
 					(unit 1)
 				)
 			)
@@ -4034,98 +4113,6 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/03344240-0515-4f71-8710-40bd9ead88e4"
 					(reference "#PWR010")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Display_Character:HDSP-7503")
-		(at 135.89 130.81 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "53e4d248-97a4-4444-ad9e-74eaa3c58b05")
-		(property "Reference" "U2"
-			(at 135.89 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "HDSP-7503"
-			(at 135.89 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Display_7Segment:HDSP-A151"
-			(at 135.89 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://docs.broadcom.com/docs/AV02-2553EN"
-			(at 125.73 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "One digit 7 segment high efficiency red, common cathode"
-			(at 135.89 130.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "8"
-			(uuid "a685bb17-cf85-4bcb-9019-816941598c70")
-		)
-		(pin "2"
-			(uuid "dd067917-6c84-4b84-9a9d-91be2989e901")
-		)
-		(pin "4"
-			(uuid "b6e46915-cdbd-49d3-bf76-3b5f4e2a0002")
-		)
-		(pin "5"
-			(uuid "f86c8938-8b1f-4dfe-bdb4-537cdf6e2eea")
-		)
-		(pin "6"
-			(uuid "ad127aff-74ea-4c46-9400-466f5daa8299")
-		)
-		(pin "9"
-			(uuid "aa3b3dde-dfb4-412f-a742-bfb48a1f6a30")
-		)
-		(pin "7"
-			(uuid "58541eec-bbf7-403b-a2c8-55192edbdb01")
-		)
-		(pin "1"
-			(uuid "371866ec-5878-4cf2-8957-761b95275efd")
-		)
-		(pin "10"
-			(uuid "8cf3aa9c-f4c1-4fad-b7de-34c93e770f41")
-		)
-		(pin "3"
-			(uuid "ab5a8f82-65d4-4e2a-a914-58d6c541e967")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/03344240-0515-4f71-8710-40bd9ead88e4"
-					(reference "U2")
 					(unit 1)
 				)
 			)
@@ -4339,6 +4326,99 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/03344240-0515-4f71-8710-40bd9ead88e4"
 					(reference "#PWR014")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Display_Character:SM420561N")
+		(at 135.89 130.81 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "849cb5f4-91de-41de-8ae9-7a99ded8fdaf")
+		(property "Reference" "U36"
+			(at 135.89 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SM420561N"
+			(at 135.89 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Display_7Segment:7SegmentLED_LTS6760_LTS6780"
+			(at 137.16 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://datasheet.lcsc.com/szlcsc/Wuxi-ARK-Tech-Elec-SM420561N_C141367.pdf"
+			(at 123.19 118.745 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "One digit 7 segment blue LED, common cathode"
+			(at 135.89 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "6"
+			(uuid "6d685c80-fa2d-487d-baa6-eaa120de5a4f")
+		)
+		(pin "7"
+			(uuid "31df750b-6fd8-4c4a-be36-6075df6d4ef9")
+		)
+		(pin "5"
+			(uuid "26d4912d-361b-4ed4-9ccc-de65f228b8ee")
+		)
+		(pin "4"
+			(uuid "5d2e5f92-5a7e-4459-be0c-6e3e3746bcd7")
+		)
+		(pin "9"
+			(uuid "3a5638d0-98b8-490a-8042-ac0b477b9489")
+		)
+		(pin "1"
+			(uuid "55fcd557-af2f-48fd-8dd3-2ddb5af76ab2")
+		)
+		(pin "2"
+			(uuid "14eb9820-102e-4ffb-9a31-bf9d8ad0a6e7")
+		)
+		(pin "3"
+			(uuid "ed47bd0c-ac70-44d4-956c-c860aab08386")
+		)
+		(pin "8"
+			(uuid "4d9f4f72-6e63-4bc0-8404-2299c839724f")
+		)
+		(pin "10"
+			(uuid "bce4eba4-6ea9-4737-85f1-79fa222bcc4f")
+		)
+		(instances
+			(project ""
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/03344240-0515-4f71-8710-40bd9ead88e4"
+					(reference "U36")
 					(unit 1)
 				)
 			)
@@ -4613,6 +4693,99 @@
 		)
 	)
 	(symbol
+		(lib_id "Display_Character:SM420561N")
+		(at 194.31 130.81 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "cf4d906a-150b-4038-986e-90acd2fbdf95")
+		(property "Reference" "U18"
+			(at 194.31 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SM420561N"
+			(at 194.31 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Display_7Segment:7SegmentLED_LTS6760_LTS6780"
+			(at 195.58 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://datasheet.lcsc.com/szlcsc/Wuxi-ARK-Tech-Elec-SM420561N_C141367.pdf"
+			(at 181.61 118.745 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "One digit 7 segment blue LED, common cathode"
+			(at 194.31 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "6"
+			(uuid "70324997-191d-4214-a4b4-06f6df83f9f4")
+		)
+		(pin "7"
+			(uuid "c30feb9d-7d44-4b96-9c91-6fd8af0f271f")
+		)
+		(pin "5"
+			(uuid "c4b40d84-1d98-4ea5-bed1-780ae065fc42")
+		)
+		(pin "4"
+			(uuid "f2b0e2ea-7510-420f-b4c5-9c9d8a6f9542")
+		)
+		(pin "9"
+			(uuid "18af831e-c9e7-4f7f-aef4-8783a5533aa7")
+		)
+		(pin "1"
+			(uuid "de2e79b7-e377-4e0c-b1ab-a5f81527ed0c")
+		)
+		(pin "2"
+			(uuid "de6c1248-b42f-4aee-9bd2-3fc4fc07135f")
+		)
+		(pin "3"
+			(uuid "7646e98a-f84c-4189-80db-e18b26014e27")
+		)
+		(pin "8"
+			(uuid "1e3f8e9a-d912-495f-90b3-f8c12abedc15")
+		)
+		(pin "10"
+			(uuid "dd8c0174-e153-47ef-b1b9-81682a12fac4")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/03344240-0515-4f71-8710-40bd9ead88e4"
+					(reference "U18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "YAAJ_BluePill_Part_Like:YAAJ_BluePill_Part_Like")
 		(at 124.46 82.55 0)
 		(unit 1)
@@ -4857,6 +5030,73 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/03344240-0515-4f71-8710-40bd9ead88e4"
 					(reference "#PWR09")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 102.87 102.87 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "fbb30cd5-88c7-41b0-a9f0-3a15ed9bfe8d")
+		(property "Reference" "#FLG08"
+			(at 100.965 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 99.06 102.8699 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 102.87 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 102.87 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 102.87 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dc2aa8b8-66c0-4f51-be24-5e61283225b1")
+		)
+		(instances
+			(project ""
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b/03344240-0515-4f71-8710-40bd9ead88e4"
+					(reference "#FLG08")
 					(unit 1)
 				)
 			)
