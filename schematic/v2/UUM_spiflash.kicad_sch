@@ -3162,7 +3162,7 @@
 		(uuid "d38a1ad8-a3e6-4545-ac0c-099fd35042fa")
 	)
 	(global_label "UUM_3v3"
-		(shape output)
+		(shape input)
 		(at 90.17 123.19 180)
 		(fields_autoplaced yes)
 		(effects
@@ -3184,7 +3184,7 @@
 		)
 	)
 	(global_label "UUM_3v3"
-		(shape output)
+		(shape input)
 		(at 123.19 82.55 270)
 		(fields_autoplaced yes)
 		(effects
@@ -3206,7 +3206,7 @@
 		)
 	)
 	(global_label "UUM_VDD"
-		(shape output)
+		(shape input)
 		(at 109.22 45.72 180)
 		(fields_autoplaced yes)
 		(effects
@@ -3228,7 +3228,7 @@
 		)
 	)
 	(global_label "UUM_VDD"
-		(shape output)
+		(shape input)
 		(at 109.22 102.87 180)
 		(fields_autoplaced yes)
 		(effects
@@ -3272,7 +3272,7 @@
 		)
 	)
 	(global_label "UUM_3v3"
-		(shape output)
+		(shape input)
 		(at 123.19 139.7 270)
 		(fields_autoplaced yes)
 		(effects
@@ -3294,7 +3294,7 @@
 		)
 	)
 	(global_label "UUM_3v3"
-		(shape output)
+		(shape input)
 		(at 90.17 66.04 180)
 		(fields_autoplaced yes)
 		(effects
