@@ -60,24 +60,16 @@
       ],
       "drc_exclusions": [
         [
-          "clearance|381275000|188050000|6dfea2dc-3895-4097-bffa-0b7516556f3a|940e889c-0e86-4ed5-acdd-de54d834e892",
-          "the GND and VDD pins on the IC are like .225 apart and the rule is .25"
+          "clearance|180655000|133939937|cfbda8c0-ae1f-4393-9f07-ef6115f362ce|c2ecf417-a8e5-4922-9955-80bf96212789",
+          "jumpers come like this"
         ],
         [
-          "unconnected_items|201120000|164670000|eb98d17e-9760-410c-92d2-92eb95ba0893|51daab2f-5b42-4901-a052-9d7e3252a14d",
-          "overlapping grounds in symbol"
+          "clearance|262505000|134155000|fe81dcd2-1ef0-4c3b-9a42-2c505b3db926|e2ad9427-7686-4b12-a841-475d3d6849e9",
+          "jumpers come like this"
         ],
         [
-          "unconnected_items|201120000|167210000|0374d214-f26f-469f-9775-0c818ed9d9c1|eb98d17e-9760-410c-92d2-92eb95ba0893",
-          "overlapping grounds in symbol"
-        ],
-        [
-          "unconnected_items|206200000|164670000|f0cebb42-0544-439c-9161-5e6b967e0613|e9688247-167f-4b66-96ff-d16f144e1574",
-          "from schematic with overlapping grounds"
-        ],
-        [
-          "unconnected_items|424000000|110740000|c316c375-1793-40fe-9d61-bf181eb0c845|dcecd257-2b8c-4849-acf9-5690602cee18",
-          "the schematic library for this has two ground pins on top of eachother"
+          "clearance|397155000|134155000|84a9a688-ce8a-46d5-a890-9c484732cd92|62ad8896-b5b5-4f15-bba1-f3a8e848fac0",
+          "jumpers come like this"
         ]
       ],
       "meta": {
@@ -160,7 +152,7 @@
         "min_track_width": 0.0,
         "min_via_annular_width": 0.1,
         "min_via_diameter": 0.5,
-        "solder_mask_to_copper_clearance": 0.0,
+        "solder_mask_to_copper_clearance": 0.005,
         "use_height_for_length_calcs": true
       },
       "teardrop_options": [
@@ -821,16 +813,16 @@
       "Root"
     ],
     [
-      "0125ec8c-bf97-4530-be23-1f3b075b267b",
-      "APM"
+      "2282e00c-15ba-40dd-9d7d-f6e43d606450",
+      "USB_debug_ACM"
     ],
     [
       "4391c51f-6ab5-4b63-a6de-56382e56f1df",
       "DSM"
     ],
     [
-      "2a8263b6-de73-49ce-bd78-9ccd79fb8d35",
-      "APM_debug"
+      "0125ec8c-bf97-4530-be23-1f3b075b267b",
+      "APM"
     ],
     [
       "03344240-0515-4f71-8710-40bd9ead88e4",
@@ -849,24 +841,12 @@
       "ACM"
     ],
     [
-      "90a0d358-0ee2-4073-87e5-cf0b25256f35",
-      "ACM_debug"
-    ],
-    [
-      "e25d3e2c-36b2-45de-b96b-ba3851b7ad18",
-      "DSM_debug"
-    ],
-    [
       "52eb9806-6870-4745-9578-aa7c5e7ab85b",
       "ACM_spiflash"
     ],
     [
       "442c7b41-f8c0-48e5-8b80-63d502cac366",
       "TDM"
-    ],
-    [
-      "3e15aa38-e071-402c-a18d-97def628e870",
-      "TDM_debug"
     ],
     [
       "c9161959-85ce-4cf5-b3d5-3776fec616f5",
@@ -877,16 +857,28 @@
       "UUM"
     ],
     [
-      "6ca91b78-c21d-453e-b265-69dc1e96013e",
-      "UUM_debug"
-    ],
-    [
       "aec72de0-4b02-4950-b28a-568b29f9c641",
       "UUM_spiflash"
     ],
     [
       "244b618e-a317-4047-813e-875f0d0163d1",
       "TDM_crashtable"
+    ],
+    [
+      "d0ab1b72-de30-4331-867e-c7903921c924",
+      "USB_debug_APM"
+    ],
+    [
+      "4fb93cd5-57a5-4bc3-8c51-81d85b0e2d76",
+      "USB_debug_DSM"
+    ],
+    [
+      "ed769519-77fb-471d-b08a-c1ff2f68c1cc",
+      "USB_debug_UUM"
+    ],
+    [
+      "e54f5744-532c-49d4-a48d-395de0127d56",
+      "USB_debug_TDM"
     ]
   ],
   "text_variables": {}

@@ -1967,16 +1967,6 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 44.45) (xy 71.12 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "02e344c6-80ea-49fa-b727-97ed187f0f59")
-	)
-	(wire
-		(pts
 			(xy 173.99 30.48) (xy 168.91 30.48)
 		)
 		(stroke
@@ -2247,7 +2237,7 @@
 	)
 	(wire
 		(pts
-			(xy 104.14 40.64) (xy 119.38 40.64)
+			(xy 118.11 40.64) (xy 119.38 40.64)
 		)
 		(stroke
 			(width 0)
@@ -2284,16 +2274,6 @@
 			(type default)
 		)
 		(uuid "3c75efeb-e253-4545-97ad-a1e96b776b43")
-	)
-	(wire
-		(pts
-			(xy 85.09 40.64) (xy 71.12 40.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3f251516-a40b-4f71-bc75-b07323ba7ada")
 	)
 	(wire
 		(pts
@@ -2597,7 +2577,7 @@
 	)
 	(wire
 		(pts
-			(xy 104.14 43.18) (xy 119.38 43.18)
+			(xy 118.11 43.18) (xy 119.38 43.18)
 		)
 		(stroke
 			(width 0)
@@ -2967,6 +2947,16 @@
 	)
 	(wire
 		(pts
+			(xy 196.85 73.66) (xy 199.39 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d304b49c-c86c-49b4-bd33-e7000f088c6a")
+	)
+	(wire
+		(pts
 			(xy 196.85 88.9) (xy 196.85 87.63)
 		)
 		(stroke
@@ -3165,16 +3155,6 @@
 		)
 		(uuid "13b81bf1-f4b1-4a75-a855-50293d79b044")
 	)
-	(label "ACM_DBG_RX"
-		(at 85.09 40.64 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "223deb30-8986-4748-9ed8-b09bb5144d23")
-	)
 	(label "ACM_SPI_SCLK"
 		(at 86.36 66.04 180)
 		(effects
@@ -3215,16 +3195,6 @@
 		)
 		(uuid "4c58f447-a790-49e9-b1a5-71255b454355")
 	)
-	(label "ACM_DBG_TX"
-		(at 85.09 44.45 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "9acd5956-6252-4438-8edb-0ae8f2427d9b")
-	)
 	(label "ACM_SPI_MOSI"
 		(at 86.36 68.58 180)
 		(effects
@@ -3234,16 +3204,6 @@
 			(justify right bottom)
 		)
 		(uuid "9c4baf1b-e33d-46f4-85bc-eab025385dee")
-	)
-	(label "ACM_DBG_TX"
-		(at 104.14 40.64 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b0d6d235-3598-4d0e-9707-38b580bbbf9e")
 	)
 	(label "ACM_SPI_MOSI"
 		(at 104.14 33.02 0)
@@ -3324,16 +3284,6 @@
 			(justify left bottom)
 		)
 		(uuid "f6b6d80d-fcde-426c-8e8a-5f3e60b77485")
-	)
-	(label "ACM_DBG_RX"
-		(at 104.14 43.18 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "fed19ab8-ff3f-4ebb-91ac-40f4c4c95199")
 	)
 	(global_label "ACM_VDD"
 		(shape input)
@@ -3434,6 +3384,17 @@
 		)
 		(uuid "42671ff4-3ca8-487d-9589-b085118fce80")
 	)
+	(hierarchical_label "ACM_DBG_TX"
+		(shape output)
+		(at 118.11 40.64 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "446bdeaa-b58f-4b28-b2d1-42e1674ef459")
+	)
 	(hierarchical_label "ACM_FMC_D14"
 		(shape bidirectional)
 		(at 173.99 66.04 0)
@@ -3444,6 +3405,17 @@
 			(justify left)
 		)
 		(uuid "4556bad2-bf0c-467a-ac8b-916be532df50")
+	)
+	(hierarchical_label "ACM_DBG_RX"
+		(shape input)
+		(at 118.11 43.18 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "4595b6cf-3827-4ae2-ae21-0b49469529f3")
 	)
 	(hierarchical_label "ACM_FMC_D9"
 		(shape bidirectional)
@@ -3477,6 +3449,17 @@
 			(justify left)
 		)
 		(uuid "5661109e-6c8d-4715-abe2-cd97324eccb8")
+	)
+	(hierarchical_label "ACM_VDD"
+		(shape output)
+		(at 199.39 73.66 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "71eb4b53-fe43-4662-8fdd-b2c6f15f9990")
 	)
 	(hierarchical_label "ACM_FMC_NWE"
 		(shape bidirectional)
@@ -5671,68 +5654,6 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/c5977503-4ab2-47b6-bfc3-7f974cfcf6ea"
 					(page "11")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 49.53 35.56)
-		(size 21.59 12.7)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0.0000)
-		)
-		(uuid "90a0d358-0ee2-4073-87e5-cf0b25256f35")
-		(property "Sheetname" "ACM_debug"
-			(at 49.53 34.8484 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "ACM_debug.kicad_sch"
-			(at 49.53 48.8446 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "ACM_DBG_RX" input
-			(at 71.12 44.45 0)
-			(uuid "62fd9ef0-e5bf-43eb-9345-7fabd8d3d2a2")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "ACM_DBG_TX" input
-			(at 71.12 40.64 0)
-			(uuid "a0216c6e-97a1-4004-a31f-53a142b6ea6f")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/c5977503-4ab2-47b6-bfc3-7f974cfcf6ea"
-					(page "10")
 				)
 			)
 		)

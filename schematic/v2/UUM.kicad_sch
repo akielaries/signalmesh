@@ -2714,7 +2714,7 @@
 		(uuid "09f6087e-435a-4119-bd2a-b972a503c62f")
 	)
 	(junction
-		(at 220.98 44.45)
+		(at 220.98 40.64)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b64a06fb-636c-4961-94bc-ae65cc90a4e7")
@@ -2825,16 +2825,6 @@
 	)
 	(wire
 		(pts
-			(xy 104.14 76.2) (xy 87.63 76.2)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "09f33a4e-cf3a-453e-b315-f84f21d4b77c")
-	)
-	(wire
-		(pts
 			(xy 157.48 115.57) (xy 171.45 115.57)
 		)
 		(stroke
@@ -2852,16 +2842,6 @@
 			(type default)
 		)
 		(uuid "1a95f027-e4fd-4ce9-98aa-7acd0b11c58a")
-	)
-	(wire
-		(pts
-			(xy 212.09 44.45) (xy 220.98 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "284b7e0c-fc83-4cdf-aea3-6b8a9cbafefc")
 	)
 	(wire
 		(pts
@@ -2945,6 +2925,16 @@
 	)
 	(wire
 		(pts
+			(xy 212.09 40.64) (xy 220.98 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "69d01a10-f027-41bd-8300-11569fb71503")
+	)
+	(wire
+		(pts
 			(xy 104.14 114.3) (xy 87.63 114.3)
 		)
 		(stroke
@@ -2965,7 +2955,17 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 57.15) (xy 124.46 57.15)
+			(xy 212.09 40.64) (xy 212.09 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "79378f1f-529e-4ed8-8a78-95f1732d77a7")
+	)
+	(wire
+		(pts
+			(xy 121.92 57.15) (xy 124.46 57.15)
 		)
 		(stroke
 			(width 0)
@@ -2975,23 +2975,13 @@
 	)
 	(wire
 		(pts
-			(xy 220.98 44.45) (xy 222.25 44.45)
+			(xy 220.98 40.64) (xy 222.25 40.64)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "83c0115a-9fff-43e8-877e-03ccfb4a5718")
-	)
-	(wire
-		(pts
-			(xy 104.14 78.74) (xy 87.63 78.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "87227ae0-6b8e-4a61-bf97-5088623d4288")
 	)
 	(wire
 		(pts
@@ -3012,6 +3002,16 @@
 			(type default)
 		)
 		(uuid "96816851-0da1-496f-bbae-25d0aaa4761f")
+	)
+	(wire
+		(pts
+			(xy 215.9 46.99) (xy 218.44 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9b143645-9a87-4974-a752-b7d3982bb5ca")
 	)
 	(wire
 		(pts
@@ -3075,7 +3075,7 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 59.69) (xy 124.46 59.69)
+			(xy 121.92 59.69) (xy 124.46 59.69)
 		)
 		(stroke
 			(width 0)
@@ -3303,16 +3303,6 @@
 		)
 		(uuid "b4fc444f-8067-4e22-bf3e-88980cdb6c09")
 	)
-	(label "UUM_DBG_RX"
-		(at 107.95 59.69 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "bf55a918-0de5-450a-b843-998826c3d421")
-	)
 	(label "UUM_SPI1_MISO"
 		(at 104.14 104.14 180)
 		(effects
@@ -3322,16 +3312,6 @@
 			(justify right bottom)
 		)
 		(uuid "c28e4cc7-a0a7-4495-91d9-7d922d608c7f")
-	)
-	(label "UUM_DBG_TX"
-		(at 107.95 57.15 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d7acf9f5-5885-4bcf-b99d-7f39f5949159")
 	)
 	(label "UUM_SPI1_MOSI"
 		(at 107.95 67.31 0)
@@ -3352,26 +3332,6 @@
 			(justify left bottom)
 		)
 		(uuid "e41ab8f5-c9ce-431a-8750-8196516831b9")
-	)
-	(label "UUM_DBG_TX"
-		(at 104.14 78.74 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "e492b277-aff2-4588-9b79-07c3d9c31769")
-	)
-	(label "UUM_DBG_RX"
-		(at 104.14 76.2 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "fd822166-5dca-4732-aaac-a8aaae9d9dc1")
 	)
 	(global_label "UUM_VDD"
 		(shape input)
@@ -3397,7 +3357,7 @@
 	)
 	(global_label "UUM_3v3"
 		(shape output)
-		(at 222.25 44.45 0)
+		(at 222.25 40.64 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3407,7 +3367,7 @@
 		)
 		(uuid "ee3bb112-79f3-48ae-9f43-ace0f0d7085d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 233.7018 44.45 0)
+			(at 233.7018 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3438,6 +3398,39 @@
 			(justify right)
 		)
 		(uuid "4ab617d4-81de-4b9a-bcc0-ba4b334a0962")
+	)
+	(hierarchical_label "UUM_DBG_TX"
+		(shape output)
+		(at 121.92 57.15 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "4e9832c9-5683-4f53-aff7-6a7a50fcfa42")
+	)
+	(hierarchical_label "UUM_VDD"
+		(shape output)
+		(at 218.44 46.99 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a33a2a09-0002-4f43-89cd-a8c039c2293e")
+	)
+	(hierarchical_label "UUM_DBG_RX"
+		(shape input)
+		(at 121.92 59.69 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "f06568b7-e2d4-4bc5-aa9c-19b032f734c0")
 	)
 	(symbol
 		(lib_id "Device:R")
@@ -6725,7 +6718,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 220.98 44.45 180)
+		(at 220.98 40.64 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6734,7 +6727,7 @@
 		(fields_autoplaced yes)
 		(uuid "cd094590-0791-40fc-a284-8cfeef0551b4")
 		(property "Reference" "#FLG07"
-			(at 220.98 46.355 0)
+			(at 220.98 42.545 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6743,7 +6736,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 220.98 49.53 0)
+			(at 220.98 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6751,7 +6744,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 220.98 44.45 0)
+			(at 220.98 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6760,7 +6753,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 220.98 44.45 0)
+			(at 220.98 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6769,7 +6762,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 220.98 44.45 0)
+			(at 220.98 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7535,68 +7528,6 @@
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/e0c3e94a-d1d6-4c70-a171-e825d34fc315"
 					(reference "#PWR025")
 					(unit 1)
-				)
-			)
-		)
-	)
-	(sheet
-		(at 71.12 72.39)
-		(size 16.51 10.16)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0.0000)
-		)
-		(uuid "6ca91b78-c21d-453e-b265-69dc1e96013e")
-		(property "Sheetname" "UUM_debug"
-			(at 71.12 71.6784 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "UUM_debug.kicad_sch"
-			(at 71.12 83.1346 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "UUM_DBG_RX" input
-			(at 87.63 78.74 0)
-			(uuid "cdbda39d-b2d8-49ef-9171-02803544a1d2")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "UUM_DBG_TX" input
-			(at 87.63 76.2 0)
-			(uuid "2f906052-2a3f-4c67-b6d5-26cb02ceee82")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/e0c3e94a-d1d6-4c70-a171-e825d34fc315"
-					(page "16")
 				)
 			)
 		)

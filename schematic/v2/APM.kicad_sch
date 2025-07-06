@@ -5838,6 +5838,16 @@
 	)
 	(wire
 		(pts
+			(xy 127 49.53) (xy 129.54 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2db74f03-e947-4847-bcc2-55b6351511bc")
+	)
+	(wire
+		(pts
 			(xy 45.72 57.15) (xy 59.69 57.15)
 		)
 		(stroke
@@ -5845,16 +5855,6 @@
 			(type default)
 		)
 		(uuid "2e03fff9-7074-405e-9e27-b2857792b6ad")
-	)
-	(wire
-		(pts
-			(xy 76.2 110.49) (xy 88.9 110.49)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2f28ee9c-2fab-48ad-8785-ab956e32682d")
 	)
 	(wire
 		(pts
@@ -5898,26 +5898,6 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 76.2) (xy 58.42 76.2)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5619b79f-ead5-4693-b373-8847d05caf1b")
-	)
-	(wire
-		(pts
-			(xy 76.2 128.27) (xy 88.9 128.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5e9a5441-a9ca-406a-a709-e7e30e988802")
-	)
-	(wire
-		(pts
 			(xy 124.46 148.59) (xy 127 148.59)
 		)
 		(stroke
@@ -5925,16 +5905,6 @@
 			(type default)
 		)
 		(uuid "5eeae0c0-cb02-442b-b7d9-0f28ed944757")
-	)
-	(wire
-		(pts
-			(xy 45.72 80.01) (xy 58.42 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "61a2e14b-969b-45f5-b421-63afb5274963")
 	)
 	(wire
 		(pts
@@ -6216,16 +6186,6 @@
 		)
 		(uuid "13763bb6-28b2-4f09-9afe-0691c2141d73")
 	)
-	(label "APM_DBG_TX"
-		(at 76.2 110.49 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "15ed2a88-3726-4ece-8ad5-4b87bf93d1ee")
-	)
 	(label "APM_USB_D-"
 		(at 143.51 77.47 0)
 		(effects
@@ -6255,16 +6215,6 @@
 			(justify left bottom)
 		)
 		(uuid "3763a497-d682-4772-adb1-b222a01a92ce")
-	)
-	(label "APM_DBG_TX"
-		(at 58.42 80.01 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "4f707b4e-91b9-4fa9-81dd-4e683a5be914")
 	)
 	(label "7SDD_CMD_TX"
 		(at 59.69 60.96 180)
@@ -6305,16 +6255,6 @@
 			(justify left bottom)
 		)
 		(uuid "6c8c40bd-e8a3-4559-8d81-786613b86c4b")
-	)
-	(label "APM_DBG_RX"
-		(at 58.42 76.2 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "6e0b93b6-7249-4941-8d7e-f52c57354c8b")
 	)
 	(label "APM_I2C1_SDA"
 		(at 139.7 87.63 180)
@@ -6406,16 +6346,6 @@
 		)
 		(uuid "b805e67d-5a17-440c-bba9-b083bb83bc5d")
 	)
-	(label "APM_DBG_RX"
-		(at 76.2 128.27 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "dcee8e50-98a7-4304-87c8-b68a54c0aba0")
-	)
 	(label "APM_DAC_L"
 		(at 57.15 172.72 180)
 		(effects
@@ -6480,6 +6410,17 @@
 			)
 		)
 	)
+	(hierarchical_label "APM_DBG_TX"
+		(shape output)
+		(at 88.9 110.49 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "1a42e7d6-27c6-47c9-8b48-79ad27a6b0ea")
+	)
 	(hierarchical_label "APM_CMD_RX"
 		(shape input)
 		(at 88.9 107.95 180)
@@ -6513,6 +6454,17 @@
 		)
 		(uuid "553754df-5607-474f-879f-dc4201654cfc")
 	)
+	(hierarchical_label "APM_DBG_RX"
+		(shape input)
+		(at 88.9 128.27 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "59c88fd2-4bba-4d9f-b6eb-0a3bd565c104")
+	)
 	(hierarchical_label "APM_CMD_TX"
 		(shape output)
 		(at 88.9 105.41 180)
@@ -6545,6 +6497,17 @@
 			(justify right)
 		)
 		(uuid "8d3e0f42-b374-4719-a781-b900eddffae9")
+	)
+	(hierarchical_label "APM_VDD"
+		(shape output)
+		(at 129.54 49.53 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "94a4f64e-8ae0-4161-a381-8a9bc7a43f72")
 	)
 	(hierarchical_label "APM_INTRPT_TX"
 		(shape output)
@@ -6797,6 +6760,82 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b"
 					(reference "D15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x04")
+		(at 97.79 170.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2df2c1ee-f285-4a39-b5fb-7733e47df400")
+		(property "Reference" "J4"
+			(at 100.33 170.1799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LCD_display"
+			(at 100.33 172.7199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_1.00mm:PinHeader_1x04_P1.00mm_Horizontal"
+			(at 97.79 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 97.79 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 97.79 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "f2f3bacc-8eb5-4293-9303-2919b90092dc")
+		)
+		(pin "4"
+			(uuid "600e58cc-adef-40b5-9cc4-e693db29ec16")
+		)
+		(pin "2"
+			(uuid "35c9e381-f164-40d0-ae70-7c7ac8f51cdc")
+		)
+		(pin "1"
+			(uuid "0340b864-6f89-4c4f-8bd4-06380e521160")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b"
+					(reference "J4")
 					(unit 1)
 				)
 			)
@@ -9574,82 +9613,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector_Generic:Conn_01x04")
-		(at 97.79 170.18 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "e8c03d61-b3ce-4c50-9119-0eb33020cec1")
-		(property "Reference" "J3"
-			(at 100.33 170.1799 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "LCD_display"
-			(at 100.33 172.7199 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_1.00mm:PinHeader_1x04_P1.00mm_Vertical_SMD_Pin1Left"
-			(at 97.79 170.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 97.79 170.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 97.79 170.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "15d2b346-7713-47a0-b004-4516d334c4c4")
-		)
-		(pin "4"
-			(uuid "48734e7b-9c82-401e-803d-4c5c2ddf7f53")
-		)
-		(pin "2"
-			(uuid "24ea5d0c-9c1f-40c6-b564-02f6ff4b83eb")
-		)
-		(pin "1"
-			(uuid "6e7e55da-bf2a-4680-8040-815ac07c4526")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b"
-					(reference "J3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 127 148.59 0)
 		(unit 1)
@@ -9853,68 +9816,6 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b"
 					(page "7")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 30.48 72.39)
-		(size 15.24 11.43)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0.0000)
-		)
-		(uuid "2a8263b6-de73-49ce-bd78-9ccd79fb8d35")
-		(property "Sheetname" "APM_debug"
-			(at 30.48 71.6784 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "APM_debug.kicad_sch"
-			(at 30.48 84.4046 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "APM_DBG_TX" output
-			(at 45.72 76.2 0)
-			(uuid "7a978932-50cd-4105-ab72-635bd4454d2e")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "APM_DBG_RX" input
-			(at 45.72 80.01 0)
-			(uuid "452d9330-7200-4fee-866a-60a849bfd253")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b"
-					(page "6")
 				)
 			)
 		)

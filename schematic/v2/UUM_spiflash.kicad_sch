@@ -3725,7 +3725,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "LED_PWR"
+		(property "Value" "SPI_SEL"
 			(at 189.23 80.9624 90)
 			(effects
 				(font

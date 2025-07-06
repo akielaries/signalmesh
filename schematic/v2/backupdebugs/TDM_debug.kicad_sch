@@ -1651,16 +1651,16 @@
 		(uuid "01eed327-bf7d-4a74-b550-b9ac83d0a617")
 	)
 	(junction
+		(at 116.84 73.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "10dcbca0-99e9-4713-bc24-dc643293fefa")
+	)
+	(junction
 		(at 143.51 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1e1e028c-f9ff-4681-9fdf-5eb47e0cb64d")
-	)
-	(junction
-		(at 116.84 81.28)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "351c1a28-bc24-41c8-b5d9-e9f2041a1593")
 	)
 	(junction
 		(at 90.17 69.85)
@@ -1687,16 +1687,16 @@
 		(uuid "b43c647c-8f7b-4303-8324-f9e8ad0c56fa")
 	)
 	(junction
-		(at 109.22 81.28)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "bb6844b1-0a26-4ddb-9872-0ac7f3ce24fa")
-	)
-	(junction
 		(at 146.05 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e664c5eb-4e4b-48bb-90e5-6148090e2d55")
+	)
+	(junction
+		(at 109.22 73.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "feebdbed-b3c7-4f49-bf40-26a2fbf0569e")
 	)
 	(no_connect
 		(at 140.97 68.58)
@@ -1922,6 +1922,16 @@
 	)
 	(wire
 		(pts
+			(xy 116.84 73.66) (xy 116.84 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "773fe4ee-03d1-4538-b899-adba6dfe37a5")
+	)
+	(wire
+		(pts
 			(xy 99.06 53.34) (xy 106.68 53.34)
 		)
 		(stroke
@@ -1962,7 +1972,7 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 83.82) (xy 109.22 81.28)
+			(xy 109.22 82.55) (xy 109.22 83.82)
 		)
 		(stroke
 			(width 0)
@@ -1979,16 +1989,6 @@
 			(type default)
 		)
 		(uuid "a8852b4c-49ee-4ff8-8c7d-ea18ca881269")
-	)
-	(wire
-		(pts
-			(xy 109.22 78.74) (xy 109.22 81.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "aaa9d017-32b8-4af6-a818-afebf2bea913")
 	)
 	(wire
 		(pts
@@ -2012,17 +2012,7 @@
 	)
 	(wire
 		(pts
-			(xy 116.84 78.74) (xy 116.84 81.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b266fdf4-8154-4706-881d-5fc27d21dd40")
-	)
-	(wire
-		(pts
-			(xy 116.84 81.28) (xy 116.84 83.82)
+			(xy 116.84 82.55) (xy 116.84 83.82)
 		)
 		(stroke
 			(width 0)
@@ -2099,6 +2089,16 @@
 			(type default)
 		)
 		(uuid "eceae05c-5a0c-4d28-80bf-5620dc1c73d6")
+	)
+	(wire
+		(pts
+			(xy 109.22 73.66) (xy 109.22 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fe1da224-f89b-41e6-9f76-082ed65910da")
 	)
 	(label "TDM_DBG_TX"
 		(at 153.67 93.98 0)
@@ -2185,6 +2185,74 @@
 			(justify left)
 		)
 		(uuid "265a84f8-ec08-4709-98e8-94a25f633835")
+	)
+	(symbol
+		(lib_id "Device:Crystal")
+		(at 113.03 73.66 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "05e57154-1d0e-4b11-817f-1c7649c44ed1")
+		(property "Reference" "Y3"
+			(at 113.03 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "12MHz"
+			(at 113.03 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Crystal:Crystal_C26-LF_D2.1mm_L6.5mm_Horizontal"
+			(at 113.03 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 113.03 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Two pin crystal"
+			(at 113.03 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6621663e-d6ee-48d1-ad81-1b3064fcb9e1")
+		)
+		(pin "2"
+			(uuid "0d6f34c2-3c7c-4032-990a-fa86d54ae19f")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366/3e15aa38-e071-402c-a18d-97def628e870"
+					(reference "Y3")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "Device:LED")
@@ -2850,7 +2918,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Small")
-		(at 116.84 76.2 0)
+		(at 116.84 80.01 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2859,7 +2927,7 @@
 		(fields_autoplaced yes)
 		(uuid "75aaa4a4-8283-4cec-8b1c-e8c00c0e4b62")
 		(property "Reference" "C19"
-			(at 119.38 74.9362 0)
+			(at 119.38 78.7462 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2868,7 +2936,7 @@
 			)
 		)
 		(property "Value" "22pf"
-			(at 119.38 77.4762 0)
+			(at 119.38 81.2862 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2877,7 +2945,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 116.84 76.2 0)
+			(at 116.84 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2886,7 +2954,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 116.84 76.2 0)
+			(at 116.84 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2895,7 +2963,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 116.84 76.2 0)
+			(at 116.84 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3147,74 +3215,6 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366/3e15aa38-e071-402c-a18d-97def628e870"
 					(reference "R62")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:Crystal")
-		(at 113.03 81.28 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "8f821805-0510-431a-a57b-4413b3c6b4f5")
-		(property "Reference" "Y3"
-			(at 113.03 73.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Crystal"
-			(at 113.03 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 113.03 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 113.03 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Two pin crystal"
-			(at 113.03 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f63a7b79-c849-4db8-9632-2b46874634d0")
-		)
-		(pin "2"
-			(uuid "4b49aed4-8753-4d2d-b60a-304408e01e62")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366/3e15aa38-e071-402c-a18d-97def628e870"
-					(reference "Y3")
 					(unit 1)
 				)
 			)
@@ -3813,7 +3813,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Small")
-		(at 109.22 76.2 0)
+		(at 109.22 80.01 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3822,7 +3822,7 @@
 		(fields_autoplaced yes)
 		(uuid "e98217da-e051-42d9-84ea-55a61306678d")
 		(property "Reference" "C18"
-			(at 111.76 74.9362 0)
+			(at 111.76 78.7462 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3831,7 +3831,7 @@
 			)
 		)
 		(property "Value" "22pf"
-			(at 111.76 77.4762 0)
+			(at 111.76 81.2862 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3840,7 +3840,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 109.22 76.2 0)
+			(at 109.22 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3849,7 +3849,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 109.22 76.2 0)
+			(at 109.22 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3858,7 +3858,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 109.22 76.2 0)
+			(at 109.22 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
