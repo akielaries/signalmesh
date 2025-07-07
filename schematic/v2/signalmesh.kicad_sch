@@ -721,28 +721,12 @@
 		(uuid "47ce7944-57e9-4fed-8928-829ce71586ae")
 	)
 	(no_connect
-		(at 354.33 100.33)
-		(uuid "7fcb6e91-6ab2-4edc-9d1e-11a07be14547")
-	)
-	(no_connect
-		(at 354.33 143.51)
-		(uuid "86164bda-08d5-49c6-a2e7-b69a1a466a59")
-	)
-	(no_connect
 		(at 153.67 172.72)
 		(uuid "8933b52f-335f-449a-805e-f879eafa0eb7")
 	)
 	(no_connect
 		(at 153.67 170.18)
 		(uuid "95bbbeea-b24c-4613-af5d-c48d31a4fac2")
-	)
-	(no_connect
-		(at 354.33 186.69)
-		(uuid "d62c8451-2f4b-4c73-b4c9-f581d1dc02d3")
-	)
-	(no_connect
-		(at 354.33 58.42)
-		(uuid "dd20a3d6-728b-4ca2-bf3d-ddf77685cf54")
 	)
 	(no_connect
 		(at 153.67 167.64)
