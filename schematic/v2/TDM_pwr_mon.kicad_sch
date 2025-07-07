@@ -1314,12 +1314,6 @@
 		(uuid "fcb5843d-4fcb-4979-961d-e63629f68926")
 	)
 	(junction
-		(at 156.21 48.26)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "010b9e30-05fd-4918-948d-efd28489c051")
-	)
-	(junction
 		(at 186.69 93.98)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1374,6 +1368,18 @@
 		(uuid "5cadac37-5705-4de0-a166-9f099d5fc3c1")
 	)
 	(junction
+		(at 101.6 129.54)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "68522b53-2eea-42d4-a8e0-a4ace989bc5d")
+	)
+	(junction
+		(at 156.21 88.9)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6a797033-8eea-4e02-80ff-35cc4698fc7e")
+	)
+	(junction
 		(at 132.08 96.52)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1402,6 +1408,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8ea3b77f-d095-46d3-89a0-d2f7ce49562b")
+	)
+	(junction
+		(at 156.21 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "96049aac-d2e9-4a29-8d16-63cbee4865d2")
 	)
 	(junction
 		(at 132.08 55.88)
@@ -1476,6 +1488,18 @@
 		(uuid "d0b1e15b-dcf3-40e5-9ace-41eb8b6039c4")
 	)
 	(junction
+		(at 101.6 88.9)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d32e6d94-4bd0-4cce-bd9c-34d1362480c3")
+	)
+	(junction
+		(at 101.6 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dd0d7ff2-e67b-44fc-baee-0abb6e903d70")
+	)
+	(junction
 		(at 132.08 134.62)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1492,6 +1516,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f21c3211-5305-42ba-87db-f45497f31b61")
+	)
+	(junction
+		(at 156.21 129.54)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f7814f28-5363-4752-b927-df5d7b5926a4")
 	)
 	(junction
 		(at 132.08 53.34)
@@ -1518,16 +1548,6 @@
 			(type default)
 		)
 		(uuid "024c0f1a-333c-4ca6-a193-6fc4c671b9fe")
-	)
-	(wire
-		(pts
-			(xy 153.67 48.26) (xy 156.21 48.26)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "06b45e8c-326f-4041-a056-f0b80c77d846")
 	)
 	(wire
 		(pts
@@ -1581,7 +1601,7 @@
 	)
 	(wire
 		(pts
-			(xy 156.21 48.26) (xy 157.48 48.26)
+			(xy 153.67 48.26) (xy 156.21 48.26)
 		)
 		(stroke
 			(width 0)
@@ -1691,6 +1711,16 @@
 	)
 	(wire
 		(pts
+			(xy 156.21 129.54) (xy 157.48 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "26012209-49e1-4efe-9ede-3852403c6411")
+	)
+	(wire
+		(pts
 			(xy 167.64 142.24) (xy 167.64 143.51)
 		)
 		(stroke
@@ -1731,7 +1761,7 @@
 	)
 	(wire
 		(pts
-			(xy 99.06 48.26) (xy 102.87 48.26)
+			(xy 99.06 48.26) (xy 101.6 48.26)
 		)
 		(stroke
 			(width 0)
@@ -1748,6 +1778,16 @@
 			(type default)
 		)
 		(uuid "2ba0f80a-621e-48ca-94bf-ad963511e4d9")
+	)
+	(wire
+		(pts
+			(xy 101.6 129.54) (xy 102.87 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2dbbb9ae-19dc-49b3-ba34-1d8dc3dca26a")
 	)
 	(wire
 		(pts
@@ -1881,7 +1921,7 @@
 	)
 	(wire
 		(pts
-			(xy 99.06 88.9) (xy 102.87 88.9)
+			(xy 99.06 88.9) (xy 101.6 88.9)
 		)
 		(stroke
 			(width 0)
@@ -1991,6 +2031,16 @@
 	)
 	(wire
 		(pts
+			(xy 101.6 48.26) (xy 102.87 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "62a2ae02-393e-4c64-aa13-d26e9a62f019")
+	)
+	(wire
+		(pts
 			(xy 91.44 100.33) (xy 92.71 100.33)
 		)
 		(stroke
@@ -2041,7 +2091,7 @@
 	)
 	(wire
 		(pts
-			(xy 99.06 129.54) (xy 102.87 129.54)
+			(xy 99.06 129.54) (xy 101.6 129.54)
 		)
 		(stroke
 			(width 0)
@@ -2231,6 +2281,16 @@
 	)
 	(wire
 		(pts
+			(xy 101.6 88.9) (xy 102.87 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "962f8b0f-94c4-4b85-80b0-4a661a78935f")
+	)
+	(wire
+		(pts
 			(xy 100.33 91.44) (xy 101.6 91.44)
 		)
 		(stroke
@@ -2238,6 +2298,16 @@
 			(type default)
 		)
 		(uuid "9678e497-497e-4037-ab7f-18ab49aae056")
+	)
+	(wire
+		(pts
+			(xy 156.21 48.26) (xy 157.48 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "98478d08-82c3-427b-b51c-1d8805f8fb46")
 	)
 	(wire
 		(pts
@@ -2371,7 +2441,7 @@
 	)
 	(wire
 		(pts
-			(xy 153.67 129.54) (xy 157.48 129.54)
+			(xy 153.67 129.54) (xy 156.21 129.54)
 		)
 		(stroke
 			(width 0)
@@ -2411,7 +2481,7 @@
 	)
 	(wire
 		(pts
-			(xy 153.67 88.9) (xy 157.48 88.9)
+			(xy 153.67 88.9) (xy 156.21 88.9)
 		)
 		(stroke
 			(width 0)
@@ -2488,6 +2558,16 @@
 			(type default)
 		)
 		(uuid "d3d9799e-f23e-4bcc-8938-53392971d069")
+	)
+	(wire
+		(pts
+			(xy 156.21 88.9) (xy 157.48 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d47d4102-81db-49ae-839c-5c3c0298783b")
 	)
 	(wire
 		(pts
@@ -3832,72 +3912,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 156.21 48.26 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "26a7d57b-5361-4cc2-bc4a-51c1c663b3c1")
-		(property "Reference" "#FLG012"
-			(at 156.21 46.355 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 156.21 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 156.21 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 156.21 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 156.21 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6057efc0-c893-4fc0-8f5f-957d48b5976b")
-		)
-		(instances
-			(project ""
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366/c9161959-85ce-4cf5-b3d5-3776fec616f5"
-					(reference "#FLG012")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+5V")
 		(at 113.03 77.47 0)
 		(unit 1)
@@ -4113,6 +4127,72 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366/c9161959-85ce-4cf5-b3d5-3776fec616f5"
 					(reference "D6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 156.21 48.26 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3b85ae62-0bf6-4141-bcc3-6d640141b783")
+		(property "Reference" "#FLG011"
+			(at 156.21 46.355 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 156.21 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 156.21 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 156.21 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 156.21 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "06d9be05-96fe-429d-91d2-898ac8f62090")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366/c9161959-85ce-4cf5-b3d5-3776fec616f5"
+					(reference "#FLG011")
 					(unit 1)
 				)
 			)
@@ -4856,6 +4936,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 101.6 48.26 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "55d2981a-7732-43d6-9253-c30fb81c4e11")
+		(property "Reference" "#FLG010"
+			(at 101.6 46.355 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 101.6 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 101.6 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 101.6 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 101.6 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a0d52f83-ea48-4c69-9975-a4d41122641e")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366/c9161959-85ce-4cf5-b3d5-3776fec616f5"
+					(reference "#FLG010")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector_Generic:Conn_01x02")
 		(at 195.58 53.34 0)
 		(unit 1)
@@ -5458,6 +5604,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 101.6 129.54 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7561fdcb-16cd-43ed-abc4-b7d89d7e4e87")
+		(property "Reference" "#FLG012"
+			(at 101.6 127.635 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 101.6 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 101.6 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 101.6 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 101.6 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fca25d2b-772c-4d08-bc36-abfa77ceba1e")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366/c9161959-85ce-4cf5-b3d5-3776fec616f5"
+					(reference "#FLG012")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 91.44 144.78 0)
 		(unit 1)
@@ -5810,6 +6022,72 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366/c9161959-85ce-4cf5-b3d5-3776fec616f5"
 					(reference "C4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 156.21 129.54 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8fa160c8-54c9-495e-a5fe-19810c07bbd8")
+		(property "Reference" "#FLG015"
+			(at 156.21 127.635 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 156.21 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 156.21 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 156.21 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 156.21 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7060adaf-ae8b-4e26-899f-e5fc6c4f6c03")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366/c9161959-85ce-4cf5-b3d5-3776fec616f5"
+					(reference "#FLG015")
 					(unit 1)
 				)
 			)
@@ -8376,6 +8654,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 156.21 88.9 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "de44247a-eed0-4c94-aa90-72f49504862a")
+		(property "Reference" "#FLG06"
+			(at 156.21 86.995 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 156.21 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 156.21 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 156.21 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 156.21 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "daf5ba27-8626-4e82-9cbc-419f18a5cdf1")
+		)
+		(instances
+			(project ""
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366/c9161959-85ce-4cf5-b3d5-3776fec616f5"
+					(reference "#FLG06")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 91.44 104.14 0)
 		(unit 1)
@@ -8437,6 +8781,72 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366/c9161959-85ce-4cf5-b3d5-3776fec616f5"
 					(reference "#PWR075")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 101.6 88.9 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e32f690f-efb0-419f-9b79-5af774c36045")
+		(property "Reference" "#FLG09"
+			(at 101.6 86.995 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 101.6 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 101.6 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 101.6 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 101.6 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "895f2d76-d6d4-4424-99fc-acc0cf0e1969")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366/c9161959-85ce-4cf5-b3d5-3776fec616f5"
+					(reference "#FLG09")
 					(unit 1)
 				)
 			)
