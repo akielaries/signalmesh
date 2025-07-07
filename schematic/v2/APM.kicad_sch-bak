@@ -9,27 +9,20 @@
 		(rev "2")
 	)
 	(lib_symbols
-		(symbol "Connector:TestPoint"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0.762)
-				(hide yes)
-			)
+		(symbol "Connector_Audio:AudioJack3"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "TP"
-				(at 0 6.858 0)
+			(property "Reference" "J"
+				(at 0 8.89 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Value" "TestPoint"
-				(at 0 5.08 0)
+			(property "Value" "AudioJack3"
+				(at 0 6.35 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -37,7 +30,7 @@
 				)
 			)
 			(property "Footprint" ""
-				(at 5.08 0 0)
+				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -46,15 +39,6 @@
 				)
 			)
 			(property "Datasheet" "~"
-				(at 5.08 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "test point"
 				(at 0 0 0)
 				(effects
 					(font
@@ -63,7 +47,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "test point tp"
+			(property "Description" "Audio Jack, 3 Poles (Stereo / TRS)"
 				(at 0 0 0)
 				(effects
 					(font
@@ -72,7 +56,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "Pin* Test*"
+			(property "ki_keywords" "audio jack receptacle stereo headphones phones TRS connector"
 				(at 0 0 0)
 				(effects
 					(font
@@ -81,12 +65,68 @@
 					(hide yes)
 				)
 			)
-			(symbol "TestPoint_0_1"
-				(circle
-					(center 0 3.302)
-					(radius 0.762)
+			(property "ki_fp_filters" "Jack*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "AudioJack3_0_1"
+				(rectangle
+					(start -5.08 -5.08)
+					(end -6.35 -2.54)
 					(stroke
-						(width 0)
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.905 -2.54) (xy -1.27 -3.175) (xy -0.635 -2.54) (xy -0.635 0) (xy 2.54 0)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -2.54) (xy 0.635 -3.175) (xy 1.27 -2.54) (xy 2.54 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 2.54 3.81)
+					(end -5.08 -5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 2.54) (xy -2.54 2.54) (xy -2.54 -2.54) (xy -3.175 -3.175) (xy -3.81 -2.54)
+					)
+					(stroke
+						(width 0.254)
 						(type default)
 					)
 					(fill
@@ -94,18 +134,54 @@
 					)
 				)
 			)
-			(symbol "TestPoint_1_1"
+			(symbol "AudioJack3_1_1"
 				(pin passive line
-					(at 0 0 90)
+					(at 5.08 2.54 180)
 					(length 2.54)
-					(name "1"
+					(name "~"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "1"
+					(number "S"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "R"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "T"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5700,10 +5776,6 @@
 		(at 124.46 54.61)
 		(uuid "d1f78084-ff2f-43b2-a71f-c79e44b7d994")
 	)
-	(no_connect
-		(at 43.18 193.04)
-		(uuid "e35c3bc9-d589-44aa-8ebe-5ff8d2f81e09")
-	)
 	(wire
 		(pts
 			(xy 45.72 97.79) (xy 58.42 97.79)
@@ -5866,6 +5938,16 @@
 	)
 	(wire
 		(pts
+			(xy 57.15 170.18) (xy 44.45 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6faf4633-6bf4-43d5-9982-916e4d9460fe")
+	)
+	(wire
+		(pts
 			(xy 149.86 176.53) (xy 165.1 176.53)
 		)
 		(stroke
@@ -5916,16 +5998,6 @@
 	)
 	(wire
 		(pts
-			(xy 50.8 190.5) (xy 43.18 190.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a54ad2ae-200c-4952-8c17-06417ecb6fc3")
-	)
-	(wire
-		(pts
 			(xy 124.46 118.11) (xy 138.43 118.11)
 		)
 		(stroke
@@ -5966,13 +6038,13 @@
 	)
 	(wire
 		(pts
-			(xy 55.88 187.96) (xy 43.18 187.96)
+			(xy 57.15 172.72) (xy 44.45 172.72)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "bc4129a3-4f01-4052-aa25-50f924b59f7e")
+		(uuid "c3599482-f2d4-4122-a894-d78cf787bed2")
 	)
 	(wire
 		(pts
@@ -6056,16 +6128,6 @@
 	)
 	(wire
 		(pts
-			(xy 43.18 185.42) (xy 60.96 185.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "edb903f7-cd5f-4fcb-9e43-caacae3a28b8")
-	)
-	(wire
-		(pts
 			(xy 143.51 74.93) (xy 157.48 74.93)
 		)
 		(stroke
@@ -6093,6 +6155,16 @@
 			(type default)
 		)
 		(uuid "f7392ddf-8489-46b7-8ccc-02dda1fc5405")
+	)
+	(wire
+		(pts
+			(xy 44.45 167.64) (xy 62.23 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f7a98a71-c6ac-4fec-b960-9b879741d8eb")
 	)
 	(label "APM_USB_D+"
 		(at 58.42 93.98 180)
@@ -6184,16 +6256,6 @@
 		)
 		(uuid "6c8c40bd-e8a3-4559-8d81-786613b86c4b")
 	)
-	(label "APM_DAC_L"
-		(at 50.8 190.5 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "6ebd8e9f-fac0-4c38-9ae4-cb01a7da6d48")
-	)
 	(label "APM_I2C1_SDA"
 		(at 139.7 87.63 180)
 		(effects
@@ -6223,16 +6285,6 @@
 			(justify left bottom)
 		)
 		(uuid "7cf40811-5e23-4a20-b03a-98f26dfc2cd2")
-	)
-	(label "APM_DAC_R"
-		(at 55.88 187.96 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "9d16154d-1eaf-4c15-ae1d-229b3ece5fcd")
 	)
 	(label "APM_LED_FAIL"
 		(at 171.45 176.53 0)
@@ -6264,6 +6316,16 @@
 		)
 		(uuid "a6c35929-1a55-40ad-84f2-916eaea9f33f")
 	)
+	(label "APM_DAC_R"
+		(at 57.15 170.18 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "acc16b59-8d5b-46c1-bd17-4a6f47c4f12b")
+	)
 	(label "APM_I2C1_SCL"
 		(at 139.7 90.17 180)
 		(effects
@@ -6283,6 +6345,16 @@
 			(justify right bottom)
 		)
 		(uuid "b805e67d-5a17-440c-bba9-b083bb83bc5d")
+	)
+	(label "APM_DAC_L"
+		(at 57.15 172.72 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ded274bb-b5cc-4abc-9eae-f1e35da1888f")
 	)
 	(label "7SDD_CMD_RX"
 		(at 138.43 118.11 180)
@@ -6460,73 +6532,6 @@
 		(uuid "f55bcf24-44d5-4e6c-91c0-f11f0bc836c3")
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 60.96 185.42 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "070332f3-84d0-437d-b7a7-116351f4be6c")
-		(property "Reference" "#PWR045"
-			(at 60.96 191.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 63.5 186.6899 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 60.96 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 60.96 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 60.96 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "bcdb3e94-45f4-457d-8c1e-29145b39f22c")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b"
-					(reference "#PWR045")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 185.42 172.72 0)
 		(unit 1)
@@ -6609,73 +6614,6 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b"
 					(reference "R41")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 55.88 187.96 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "105e5b17-6fa2-47f1-b276-374b583f6edf")
-		(property "Reference" "TP2"
-			(at 58.42 189.9919 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "DAC_L_TP"
-			(at 58.42 192.5319 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm"
-			(at 50.8 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 50.8 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "test point"
-			(at 55.88 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "bf176a67-6239-4e9e-a89a-89045b2d913c")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b"
-					(reference "TP2")
 					(unit 1)
 				)
 			)
@@ -6822,80 +6760,6 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b"
 					(reference "D15")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector_Generic:Conn_01x04")
-		(at 38.1 190.5 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "270100b8-8265-4a54-a0ee-714dbb1f894b")
-		(property "Reference" "J12"
-			(at 38.1 179.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "AUDIO_OUT"
-			(at 38.1 181.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector:NS-Tech_Grove_1x04_P2mm_Vertical"
-			(at 38.1 190.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 38.1 190.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 38.1 190.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "204be498-e91e-41e4-9d9e-55e8de5ecb55")
-		)
-		(pin "4"
-			(uuid "0f57171f-03e7-4f9c-824e-fc923d22f5fa")
-		)
-		(pin "2"
-			(uuid "22fbb18a-9673-4f04-9305-656fed1bb190")
-		)
-		(pin "1"
-			(uuid "4a840fba-fcc8-42a1-a10c-5115aaa4e5da")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b"
-					(reference "J12")
 					(unit 1)
 				)
 			)
@@ -7173,6 +7037,73 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b"
 					(reference "#PWR095")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 62.23 167.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4e687c7d-12dc-4e70-9b85-31bb75ca7ed9")
+		(property "Reference" "#PWR0128"
+			(at 62.23 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 64.77 168.9099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 62.23 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 62.23 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 62.23 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "de8bc135-7316-4ce5-a814-7b43fb0660e0")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b"
+					(reference "#PWR0128")
 					(unit 1)
 				)
 			)
@@ -8397,6 +8328,77 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector_Audio:AudioJack3")
+		(at 39.37 170.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a0094b60-15ce-47cd-a842-5942ad467393")
+		(property "Reference" "J19"
+			(at 37.465 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AudioJack3"
+			(at 37.465 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_Audio:Jack_3.5mm_CUI_SJ-3523-SMT_Horizontal"
+			(at 39.37 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 39.37 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Audio Jack, 3 Poles (Stereo / TRS)"
+			(at 39.37 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "T"
+			(uuid "a4b6c8d7-89cb-4c89-a05b-dcfc07541bde")
+		)
+		(pin "S"
+			(uuid "1e0c0636-9a92-4dd3-8391-b2844952f3e7")
+		)
+		(pin "R"
+			(uuid "388e5f5c-a397-4138-9e87-ecad1cb626af")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b"
+					(reference "J19")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 124.46 172.72 0)
 		(unit 1)
@@ -9451,73 +9453,6 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b"
 					(reference "#PWR01")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 50.8 190.5 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "b99c6222-c4d3-4392-86af-844d1cd36101")
-		(property "Reference" "TP1"
-			(at 53.34 192.5319 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "DAC_R_TP"
-			(at 53.34 195.0719 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm"
-			(at 45.72 190.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 45.72 190.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "test point"
-			(at 50.8 190.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "43388329-9afd-49bb-9a57-291d46aeb367")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/0125ec8c-bf97-4530-be23-1f3b075b267b"
-					(reference "TP1")
 					(unit 1)
 				)
 			)

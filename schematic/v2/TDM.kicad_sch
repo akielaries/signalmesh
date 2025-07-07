@@ -3342,16 +3342,6 @@
 	)
 	(wire
 		(pts
-			(xy 276.86 22.86) (xy 275.59 22.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0a9e005a-a29d-40c9-8251-5b1755eee5e3")
-	)
-	(wire
-		(pts
 			(xy 219.71 152.4) (xy 218.44 152.4)
 		)
 		(stroke
@@ -3359,16 +3349,6 @@
 			(type default)
 		)
 		(uuid "0cf88ac8-85ad-4210-a2d1-2bd8eb4689a0")
-	)
-	(wire
-		(pts
-			(xy 238.76 22.86) (xy 237.49 22.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "146a82fc-afd6-4434-bf38-a480ddc0fe58")
 	)
 	(wire
 		(pts
@@ -3652,16 +3632,6 @@
 	)
 	(wire
 		(pts
-			(xy 267.97 22.86) (xy 265.43 22.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7d15af63-6c33-458b-a2bd-5fc3250e0d5a")
-	)
-	(wire
-		(pts
 			(xy 149.86 44.45) (xy 153.67 44.45)
 		)
 		(stroke
@@ -3769,16 +3739,6 @@
 			(type default)
 		)
 		(uuid "91114067-bf30-4b98-9512-81580d7f4be8")
-	)
-	(wire
-		(pts
-			(xy 229.87 22.86) (xy 227.33 22.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "91647f56-33ae-45b2-a197-3eea3b566e92")
 	)
 	(wire
 		(pts
@@ -3952,16 +3912,6 @@
 	)
 	(wire
 		(pts
-			(xy 191.77 22.86) (xy 189.23 22.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c913aa52-553a-4944-9ebe-d8abaa052fc9")
-	)
-	(wire
-		(pts
 			(xy 53.34 58.42) (xy 53.34 54.61)
 		)
 		(stroke
@@ -3999,16 +3949,6 @@
 			(type default)
 		)
 		(uuid "d0be1914-1d7e-48a9-9821-2c9eaa0e39f9")
-	)
-	(wire
-		(pts
-			(xy 200.66 22.86) (xy 199.39 22.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d3c73b7b-0a3a-42a4-bbdb-4067c1554b7e")
 	)
 	(wire
 		(pts
@@ -4332,28 +4272,6 @@
 	)
 	(global_label "TDM_VDD"
 		(shape input)
-		(at 276.86 22.86 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "3db96bd7-ff44-4c2a-8174-9f60adae93fc")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 288.1304 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "TDM_VDD"
-		(shape input)
 		(at 229.87 134.62 0)
 		(fields_autoplaced yes)
 		(effects
@@ -4365,28 +4283,6 @@
 		(uuid "4c033f2e-7aa3-4daf-9a5d-b2a933566c57")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 241.1404 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "TDM_VDD"
-		(shape input)
-		(at 238.76 22.86 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "4c52d883-6e4b-4a2a-9c2b-5cd41f24f0cf")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 250.0304 22.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4480,28 +4376,6 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "TDM_VDD"
-		(shape input)
-		(at 200.66 22.86 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "ce0267eb-2428-4a9c-8396-9758aff5310c")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 211.9304 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 				(hide yes)
 			)
 		)
@@ -5131,7 +5005,7 @@
 				)
 			)
 		)
-		(property "Footprint" "OptoDevice:R_LDR_4.9x4.2mm_P2.54mm_Vertical"
+		(property "Footprint" "Package_TO_SOT_THT:Heraeus_TO-92-2"
 			(at 213.36 134.62 0)
 			(effects
 				(font
@@ -5242,8 +5116,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 233.68 22.86 90)
+		(lib_id "Device:Thermistor")
+		(at 213.36 143.51 90)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5251,9 +5125,9 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "42a05d2d-16b3-4d47-9cdf-d5c1d52783a8")
-		(property "Reference" "R51"
-			(at 233.68 16.51 90)
+		(uuid "3f266157-269a-4a64-9bff-7f7a33a32650")
+		(property "Reference" "TH1"
+			(at 213.36 137.16 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5261,15 +5135,15 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 233.68 19.05 90)
+			(at 213.36 139.7 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 233.68 21.082 90)
+		(property "Footprint" "Package_TO_SOT_THT:Heraeus_TO-92-2"
+			(at 213.36 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5278,7 +5152,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 233.68 22.86 0)
+			(at 213.36 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5286,26 +5160,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor"
-			(at 233.68 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
-			(at 233.68 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Price" "0.0129"
-			(at 233.68 22.86 0)
+		(property "Description" "Temperature dependent resistor"
+			(at 213.36 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5314,15 +5170,15 @@
 			)
 		)
 		(pin "2"
-			(uuid "b22165fc-6bf8-4247-95c9-73542606751b")
+			(uuid "f8364252-efca-441e-8514-97a9f8ad21ad")
 		)
 		(pin "1"
-			(uuid "ea4eabe4-8080-46a9-bfd7-bea7ea205002")
+			(uuid "be21c52f-ec41-466a-b9f9-0692debb87a0")
 		)
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366"
-					(reference "R51")
+					(reference "TH1")
 					(unit 1)
 				)
 			)
@@ -5559,6 +5415,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "52e83a6a-7ecf-44b4-a9ff-a38dd329c833")
 		(property "Reference" "#PWR023"
 			(at 153.67 45.72 0)
@@ -5753,75 +5610,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:Thermistor")
-		(at 260.35 22.86 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "5ae8ab08-d7d3-44e7-8e7e-635198df072f")
-		(property "Reference" "TH3"
-			(at 260.35 16.51 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k"
-			(at 260.35 19.05 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "OptoDevice:R_LDR_4.9x4.2mm_P2.54mm_Vertical"
-			(at 260.35 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 260.35 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Temperature dependent resistor"
-			(at 260.35 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "393fd44d-c091-4a3c-92e3-a1dad02c6405")
-		)
-		(pin "1"
-			(uuid "ad3f298d-07e7-427a-8c93-ed4d418ef2ba")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366"
-					(reference "TH3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 33.02 36.83 0)
 		(unit 1)
@@ -5950,162 +5738,6 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366"
 					(reference "#PWR044")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 195.58 22.86 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6a470f7f-fe69-40d2-833e-acefb3745aba")
-		(property "Reference" "R19"
-			(at 195.58 16.51 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k"
-			(at 195.58 19.05 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 195.58 21.082 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 195.58 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 195.58 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
-			(at 195.58 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Price" "0.0129"
-			(at 195.58 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "8f3a8c0b-7b7b-461b-8ad8-fc40e6b01588")
-		)
-		(pin "1"
-			(uuid "abc22082-2a2b-415b-9ddb-9712505b7989")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366"
-					(reference "R19")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:Thermistor")
-		(at 213.36 152.4 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6c668659-5316-4109-9e71-7f63ed16b8fe")
-		(property "Reference" "TH6"
-			(at 213.36 146.05 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k"
-			(at 213.36 148.59 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "OptoDevice:R_LDR_4.9x4.2mm_P2.54mm_Vertical"
-			(at 213.36 152.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 213.36 152.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Temperature dependent resistor"
-			(at 213.36 152.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "f7169f87-2981-499d-a63a-619a3846a5b8")
-		)
-		(pin "1"
-			(uuid "a89c9bce-8367-4644-bcd1-cdcb82653303")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366"
-					(reference "TH6")
 					(unit 1)
 				)
 			)
@@ -6844,8 +6476,8 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "8cf51631-4bdc-4c14-9242-2bfc9eb5a324")
-		(property "Reference" "TH7"
+		(uuid "8fbc681f-d757-44a0-a924-29d223faf87f")
+		(property "Reference" "TH3"
 			(at 213.36 154.94 90)
 			(effects
 				(font
@@ -6861,7 +6493,7 @@
 				)
 			)
 		)
-		(property "Footprint" "OptoDevice:R_LDR_4.9x4.2mm_P2.54mm_Vertical"
+		(property "Footprint" "Package_TO_SOT_THT:Heraeus_TO-92-2"
 			(at 213.36 161.29 0)
 			(effects
 				(font
@@ -6889,15 +6521,15 @@
 			)
 		)
 		(pin "2"
-			(uuid "56162ebf-23d9-4151-ac09-145b51ef7a43")
+			(uuid "8d74dc6d-64e4-4349-8e1b-a7e1ebe6f5ee")
 		)
 		(pin "1"
-			(uuid "6cde596a-9024-4fc8-af68-aaa90995fd7c")
+			(uuid "a402ea70-cf36-4d6d-95ce-50aa586f6854")
 		)
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366"
-					(reference "TH7")
+					(reference "TH3")
 					(unit 1)
 				)
 			)
@@ -7391,75 +7023,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:Thermistor")
-		(at 184.15 22.86 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "9f3aee19-f23f-4a2e-bd3b-97b76ee72302")
-		(property "Reference" "TH1"
-			(at 184.15 16.51 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k"
-			(at 184.15 19.05 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "OptoDevice:R_LDR_4.9x4.2mm_P2.54mm_Vertical"
-			(at 184.15 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 184.15 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Temperature dependent resistor"
-			(at 184.15 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "c9aa69f4-0a9b-44e7-b3a0-c3d92ac671f3")
-		)
-		(pin "1"
-			(uuid "3bea25b7-578b-4ed2-8f42-49ceef796ab1")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366"
-					(reference "TH1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 106.68 91.44 180)
 		(unit 1)
@@ -7722,144 +7285,8 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 179.07 22.86 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "cf3276ac-c0d2-4577-9229-494c079f0ffc")
-		(property "Reference" "#PWR045"
-			(at 179.07 29.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 176.53 24.1299 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 179.07 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 179.07 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 179.07 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "980b80d5-b414-4959-9465-fa3bdadb011f")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366"
-					(reference "#PWR045")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 217.17 22.86 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "d82d0386-e561-4af5-b814-89203f4b30f8")
-		(property "Reference" "#PWR047"
-			(at 217.17 29.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 214.63 24.1299 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 217.17 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 217.17 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 217.17 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "70e87243-e472-4a50-9ecf-247e23cacbbf")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366"
-					(reference "#PWR047")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:Thermistor")
-		(at 222.25 22.86 90)
+		(at 213.36 152.4 90)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -7867,9 +7294,9 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "d832b874-8b24-4dea-b1cb-f870d6153407")
+		(uuid "be140356-d091-410f-b25d-874916da71f8")
 		(property "Reference" "TH2"
-			(at 222.25 16.51 90)
+			(at 213.36 146.05 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7877,15 +7304,15 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 222.25 19.05 90)
+			(at 213.36 148.59 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "OptoDevice:R_LDR_4.9x4.2mm_P2.54mm_Vertical"
-			(at 222.25 22.86 0)
+		(property "Footprint" "Package_TO_SOT_THT:Heraeus_TO-92-2"
+			(at 213.36 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7894,7 +7321,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 222.25 22.86 0)
+			(at 213.36 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7903,7 +7330,7 @@
 			)
 		)
 		(property "Description" "Temperature dependent resistor"
-			(at 222.25 22.86 0)
+			(at 213.36 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7912,102 +7339,15 @@
 			)
 		)
 		(pin "2"
-			(uuid "eec23d91-63ab-4820-822e-eff3eb505178")
+			(uuid "e5494b24-9d02-4ae4-88ff-5d292f0b3b22")
 		)
 		(pin "1"
-			(uuid "6a8df23c-bf7f-42bf-afd7-2f4717e2facc")
+			(uuid "2a2588e4-57fe-4a27-bc93-fc1071152464")
 		)
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366"
 					(reference "TH2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 271.78 22.86 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "dc5e80ea-c979-4aca-b5dc-2e6c7e6ad843")
-		(property "Reference" "R52"
-			(at 271.78 16.51 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k"
-			(at 271.78 19.05 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 271.78 21.082 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 271.78 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 271.78 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
-			(at 271.78 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Price" "0.0129"
-			(at 271.78 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "d56c0f7c-adc9-4d54-bfcf-d340cd2397c0")
-		)
-		(pin "1"
-			(uuid "c92e9c0f-2130-405b-8255-0e63be9142dd")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366"
-					(reference "R52")
 					(unit 1)
 				)
 			)
@@ -8075,74 +7415,6 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366"
 					(reference "#PWR043")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 255.27 22.86 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "de33223d-4b59-41f3-825d-6483772e7530")
-		(property "Reference" "#PWR069"
-			(at 255.27 29.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 252.73 24.1299 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 255.27 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 255.27 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 255.27 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "98dcbbe6-6a77-4ec3-ae4e-97d80b678e3d")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366"
-					(reference "#PWR069")
 					(unit 1)
 				)
 			)
@@ -8629,75 +7901,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:Thermistor")
-		(at 213.36 143.51 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "e1f9605d-b019-4c8a-8371-9fb549b3014a")
-		(property "Reference" "TH5"
-			(at 213.36 137.16 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k"
-			(at 213.36 139.7 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "OptoDevice:R_LDR_4.9x4.2mm_P2.54mm_Vertical"
-			(at 213.36 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 213.36 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Temperature dependent resistor"
-			(at 213.36 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "276902c9-c6ba-4dd5-a338-ce5687fcfb67")
-		)
-		(pin "1"
-			(uuid "158a83f1-2fd4-4870-a212-397df40da0be")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/442c7b41-f8c0-48e5-8b80-63d502cac366"
-					(reference "TH5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 224.79 134.62 90)
 		(mirror x)
@@ -9014,6 +8217,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "fb5368ab-00b9-406b-a6b9-b047bba8e11c")
 		(property "Reference" "#FLG05"
 			(at 153.67 46.355 0)
