@@ -2,7 +2,7 @@
 - [Details](#details)
   * [Modules](#modules)
     + [Audio Creation Module (ACM)](#audio-creation-module--acm-)
-    + [Audio Acquisition Module (AAM)](#audio-acquisition-module--aam-)
+    + [Audio Peripheral Module (APM)](#audio-peripheral-module--aam-)
     + [Data Siphon Module (DSM)](#data-siphon-module--dsm-)
     + [Update and Upload Module (UUM)](#update-and-upload-module--uum-)
     + [Telemetry and Debug Module (TDM)](#telemetry-and-debug-module--tdm-)
@@ -16,7 +16,7 @@ hardware/software project
 # Details
 ## Modules
 There are 5 boards active in the **signalmesh** circuit. Three of which are concerned
-with sound (ACM, AAM, DSM) and the remaining two (UUM, TDM) are related to health,
+with sound (ACM, APM, DSM) and the remaining two (UUM, TDM) are related to health,
 updating, and other housekeeping related items.
 
 ### Audio Creation Module (ACM)
@@ -24,7 +24,7 @@ GWIN-9R Tangnano9k FPGA
 * Responsible for sound generation
 
 
-### Audio Acquisition Module (AAM)
+### Audio Peripheral Module (APM)
 STM32H755
 
 * Takes potentiometers, switches, etc. for sound parameters.
@@ -37,7 +37,7 @@ STM32H755
 STM32H753
 
 * If external media is present and recording is enabled, the played data will be
-siphoned from the AAM and to the external media.
+siphoned from the APM and to the external media.
 
 ### Update and Upload Module (UUM)
 STM32F446
