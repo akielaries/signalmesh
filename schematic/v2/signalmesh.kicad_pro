@@ -821,10 +821,6 @@
       "Root"
     ],
     [
-      "2282e00c-15ba-40dd-9d7d-f6e43d606450",
-      "USB_debug_ACM"
-    ],
-    [
       "4391c51f-6ab5-4b63-a6de-56382e56f1df",
       "DSM"
     ],
@@ -873,12 +869,12 @@
       "TDM_crashtable"
     ],
     [
-      "d0ab1b72-de30-4331-867e-c7903921c924",
-      "USB_debug_APM"
-    ],
-    [
       "efaed419-869d-40eb-a2fb-6d0497919989",
       "AFFM"
+    ],
+    [
+      "3643ceed-ee0d-41e0-81b5-fe02d10c6311",
+      "AFFM_filters"
     ],
     [
       "4fb93cd5-57a5-4bc3-8c51-81d85b0e2d76",
@@ -891,6 +887,14 @@
     [
       "e54f5744-532c-49d4-a48d-395de0127d56",
       "USB_debug_TDM"
+    ],
+    [
+      "2282e00c-15ba-40dd-9d7d-f6e43d606450",
+      "USB_debug_ACM"
+    ],
+    [
+      "d0ab1b72-de30-4331-867e-c7903921c924",
+      "USB_debug_APM"
     ]
   ],
   "text_variables": {}

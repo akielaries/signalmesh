@@ -3629,19 +3629,21 @@
 		(fields_autoplaced yes)
 		(uuid "121b96e1-36e0-45a2-b54a-f92a842279ec")
 		(property "Reference" "H3"
-			(at 372.11 237.49 0)
+			(at 369.57 242.5699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 372.11 240.03 0)
+			(at 369.57 245.1099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
@@ -5380,7 +5382,7 @@
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
-					(page "2")
+					(page "23")
 				)
 			)
 		)
@@ -6358,7 +6360,7 @@
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13"
-					(page "19")
+					(page "24")
 				)
 			)
 		)
@@ -6601,11 +6603,12 @@
 	)
 	(sheet
 		(at 157.48 163.83)
-		(size 33.02 17.78)
+		(size 33.02 30.48)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
 			(type solid)
@@ -6615,7 +6618,7 @@
 		)
 		(uuid "efaed419-869d-40eb-a2fb-6d0497919989")
 		(property "Sheetname" "AFFM"
-			(at 185.674 183.388 0)
+			(at 157.48 163.1184 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6624,7 +6627,7 @@
 			)
 		)
 		(property "Sheetfile" "AFFM.kicad_sch"
-			(at 157.48 182.1946 0)
+			(at 157.48 194.8946 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6665,6 +6668,46 @@
 		(pin "STEREO_IN_L" input
 			(at 157.48 168.91 180)
 			(uuid "f9a7f20b-36e7-4c4c-9d5e-ddbc363a833f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "AFFM_HPF_TOGGLE" input
+			(at 157.48 176.53 180)
+			(uuid "f73e338a-b84c-465f-9263-1b9daf55fa09")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "AFFM_BSF_TOGGLE" input
+			(at 157.48 179.07 180)
+			(uuid "66b44c34-f176-4db1-a4fc-eb331f0a023b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "AFFM_LPF_TOGGLE" input
+			(at 157.48 181.61 180)
+			(uuid "1651c9ea-0182-4da6-a1f7-67e39ca929e2")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "AFFM_BPF_TOGGLE" input
+			(at 157.48 184.15 180)
+			(uuid "f14be590-d71a-415f-9140-642649f6a11f")
 			(effects
 				(font
 					(size 1.27 1.27)
