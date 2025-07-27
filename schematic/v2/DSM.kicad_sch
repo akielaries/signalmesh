@@ -9200,13 +9200,12 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "5V_APM"
-			(at 148.59 99.0599 0)
+		(property "Value" "5V_DSM"
+			(at 146.05 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""

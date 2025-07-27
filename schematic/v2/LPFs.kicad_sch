@@ -1127,8 +1127,21 @@
 		)
 	)
 	(rectangle
-		(start 118.11 137.16)
-		(end 172.72 194.31)
+		(start 71.12 39.37)
+		(end 104.14 58.42)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type color)
+			(color 255 255 194 1)
+		)
+		(uuid 5c19cab2-7f5e-4a81-af94-d67c5ccd28e6)
+	)
+	(rectangle
+		(start 118.11 132.08)
+		(end 161.29 186.69)
 		(stroke
 			(width 0)
 			(type solid)
@@ -1159,6 +1172,16 @@
 		)
 		(uuid "324b56d1-cc2c-41bf-af05-824b2f6cebd0")
 	)
+	(text "Volume balance"
+		(exclude_from_sim no)
+		(at 76.454 66.802 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "430af943-9a0e-446b-ab52-485ab68b182e")
+	)
 	(text "Low Pass Filters"
 		(exclude_from_sim no)
 		(at 19.304 23.114 0)
@@ -1172,7 +1195,7 @@
 		)
 		(uuid "495d9190-3d3b-4979-b58c-bcf39eaa11fc")
 	)
-	(text "This sheet has a couple of LPF implementations\nchoosable via a DIP switch. \n- Standard \"1 pole\" passive RC LPF implementation\n- Opamp implementaition"
+	(text "This sheet has a couple of LPF implementations\nchoosable via a DIP switch. \n- Standard \"1 pole\" passive RC LPF implementation\n- 4 pole active op amp implementation"
 		(exclude_from_sim no)
 		(at 21.082 33.782 0)
 		(effects
@@ -1187,7 +1210,7 @@
 	)
 	(text "Passive RC LPF"
 		(exclude_from_sim no)
-		(at 76.454 62.484 0)
+		(at 96.012 56.896 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1197,7 +1220,7 @@
 	)
 	(text "Alternative feedback path\nClipped Feedback MS-20"
 		(exclude_from_sim no)
-		(at 131.318 191.516 0)
+		(at 131.064 181.102 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1218,7 +1241,7 @@
 		(uuid "1b181823-7379-47a3-859f-fec429594490")
 	)
 	(junction
-		(at 147.32 177.8)
+		(at 147.32 172.72)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1ba95e10-2a4c-48c4-9eb7-0c9b8588641d")
@@ -1236,18 +1259,6 @@
 		(uuid "2a64f9af-8cf5-4018-9b21-d62f486046ae")
 	)
 	(junction
-		(at 60.96 38.1)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "385eb901-574f-4adb-84b1-c7fa13e803ce")
-	)
-	(junction
-		(at 125.73 101.6)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "3c182dae-7e95-425c-b992-d78e3b73fcd8")
-	)
-	(junction
 		(at 125.73 74.93)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1260,13 +1271,13 @@
 		(uuid "49f820fd-91fb-43f7-bfc2-f5d66f0c87ee")
 	)
 	(junction
-		(at 144.78 115.57)
+		(at 144.78 118.11)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "49fc164e-7030-4c76-9f7b-99cebfdc4bbe")
 	)
 	(junction
-		(at 151.13 162.56)
+		(at 151.13 157.48)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4d79c09a-b7ee-4ab2-9250-2c046dfe017a")
@@ -1290,28 +1301,34 @@
 		(uuid "7f926977-38fa-443e-baa1-351ef7c70ae2")
 	)
 	(junction
-		(at 128.27 162.56)
+		(at 128.27 157.48)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ae7b52e1-8d81-42aa-9506-ea2279dc9bb3")
 	)
 	(junction
-		(at 128.27 148.59)
+		(at 128.27 143.51)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c11f932f-2110-4e97-bce8-ed1a5bf2d4c6")
 	)
 	(junction
-		(at 128.27 171.45)
+		(at 128.27 166.37)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d632caf9-5b6a-4531-b436-01587f663de9")
 	)
 	(junction
-		(at 151.13 171.45)
+		(at 151.13 166.37)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d66d6a59-4a7f-440f-8cfb-dbbe587814c2")
+	)
+	(junction
+		(at 132.08 104.14)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e24fc280-16a4-4eb7-9414-c340d76527b1")
 	)
 	(junction
 		(at 193.04 74.93)
@@ -1319,15 +1336,19 @@
 		(color 0 0 0 0)
 		(uuid "f17b683a-60ca-4498-8c4e-712e0680c263")
 	)
-	(junction
-		(at 132.08 101.6)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f56b6607-e01a-4c51-8f51-1c6f61ab28fd")
+	(wire
+		(pts
+			(xy 133.35 88.9) (xy 151.13 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "00b90f2b-47e3-46b3-a5ac-c68748c844c1")
 	)
 	(wire
 		(pts
-			(xy 144.78 115.57) (xy 142.24 115.57)
+			(xy 144.78 118.11) (xy 142.24 118.11)
 		)
 		(stroke
 			(width 0)
@@ -1347,7 +1368,7 @@
 	)
 	(wire
 		(pts
-			(xy 80.01 48.26) (xy 96.52 48.26)
+			(xy 86.36 43.18) (xy 226.06 43.18)
 		)
 		(stroke
 			(width 0)
@@ -1357,7 +1378,17 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 148.59) (xy 128.27 148.59)
+			(xy 146.05 30.48) (xy 138.43 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0e5c2872-2b43-428b-9cd6-9097f461f5c9")
+	)
+	(wire
+		(pts
+			(xy 123.19 143.51) (xy 128.27 143.51)
 		)
 		(stroke
 			(width 0)
@@ -1377,23 +1408,13 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 177.8) (xy 147.32 177.8)
+			(xy 151.13 172.72) (xy 147.32 172.72)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "12b54124-8d76-4f20-95b0-42e6b7f38bb1")
-	)
-	(wire
-		(pts
-			(xy 50.8 38.1) (xy 60.96 38.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "149059e2-455e-4070-a832-ae8c477a33f7")
 	)
 	(wire
 		(pts
@@ -1407,7 +1428,17 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 151.13) (xy 151.13 162.56)
+			(xy 142.24 91.44) (xy 142.24 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "18436049-ac20-4512-9b88-6a819a5b15cd")
+	)
+	(wire
+		(pts
+			(xy 151.13 146.05) (xy 151.13 157.48)
 		)
 		(stroke
 			(width 0)
@@ -1417,7 +1448,17 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 148.59) (xy 128.27 162.56)
+			(xy 99.06 87.63) (xy 99.06 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "194d8c4e-3b3e-44b5-8c42-9d678b3c2a14")
+	)
+	(wire
+		(pts
+			(xy 128.27 143.51) (xy 128.27 157.48)
 		)
 		(stroke
 			(width 0)
@@ -1437,7 +1478,7 @@
 	)
 	(wire
 		(pts
-			(xy 129.54 177.8) (xy 128.27 177.8)
+			(xy 129.54 172.72) (xy 128.27 172.72)
 		)
 		(stroke
 			(width 0)
@@ -1447,7 +1488,7 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 148.59) (xy 132.08 148.59)
+			(xy 128.27 143.51) (xy 132.08 143.51)
 		)
 		(stroke
 			(width 0)
@@ -1457,7 +1498,7 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 177.8) (xy 128.27 171.45)
+			(xy 128.27 172.72) (xy 128.27 166.37)
 		)
 		(stroke
 			(width 0)
@@ -1467,13 +1508,23 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 101.6) (xy 125.73 148.59)
+			(xy 142.24 116.84) (xy 142.24 111.76)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "301b3e7e-b1f4-45c7-a09b-0795a197b5e8")
+		(uuid "30c1737f-4495-46fb-b9eb-ef238a4afc40")
+	)
+	(wire
+		(pts
+			(xy 128.27 104.14) (xy 132.08 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "30ebeacc-ebcb-418f-9904-9d9a30412650")
 	)
 	(wire
 		(pts
@@ -1484,6 +1535,26 @@
 			(type default)
 		)
 		(uuid "31a8e88a-e20e-49bf-834a-67c356219b0d")
+	)
+	(wire
+		(pts
+			(xy 226.06 43.18) (xy 226.06 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "39ca255d-8a77-486b-925c-0588d1485478")
+	)
+	(wire
+		(pts
+			(xy 60.96 58.42) (xy 60.96 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3ab61201-1c19-414c-b8d1-a8df2378b014")
 	)
 	(wire
 		(pts
@@ -1507,7 +1578,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 123.19) (xy 158.75 146.05)
+			(xy 158.75 123.19) (xy 158.75 140.97)
 		)
 		(stroke
 			(width 0)
@@ -1537,7 +1608,7 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 177.8) (xy 137.16 177.8)
+			(xy 147.32 172.72) (xy 137.16 172.72)
 		)
 		(stroke
 			(width 0)
@@ -1557,13 +1628,33 @@
 	)
 	(wire
 		(pts
-			(xy 97.79 30.48) (xy 114.3 30.48)
+			(xy 60.96 53.34) (xy 60.96 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "64fc89d5-c266-4dc4-aebc-e1285fd24f68")
+	)
+	(wire
+		(pts
+			(xy 226.06 60.96) (xy 242.57 60.96)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "67e1dabc-ff3e-441f-81b0-47fbe54a50e9")
+	)
+	(wire
+		(pts
+			(xy 142.24 156.21) (xy 142.24 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "68faa2f1-e495-4a90-866b-652de37c77ba")
 	)
 	(wire
 		(pts
@@ -1597,7 +1688,17 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 162.56) (xy 151.13 171.45)
+			(xy 140.97 87.63) (xy 140.97 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "77aedd5a-ab7d-4c01-b8a3-f5da989d730e")
+	)
+	(wire
+		(pts
+			(xy 151.13 157.48) (xy 151.13 166.37)
 		)
 		(stroke
 			(width 0)
@@ -1607,7 +1708,7 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 38.1) (xy 76.2 38.1)
+			(xy 60.96 38.1) (xy 82.55 38.1)
 		)
 		(stroke
 			(width 0)
@@ -1637,7 +1738,17 @@
 	)
 	(wire
 		(pts
-			(xy 149.86 104.14) (xy 147.32 104.14)
+			(xy 39.37 55.88) (xy 43.18 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7b4adb22-ae1e-4096-9f69-59f030ed1697")
+	)
+	(wire
+		(pts
+			(xy 149.86 106.68) (xy 147.32 106.68)
 		)
 		(stroke
 			(width 0)
@@ -1657,7 +1768,7 @@
 	)
 	(wire
 		(pts
-			(xy 97.79 25.4) (xy 114.3 25.4)
+			(xy 226.06 55.88) (xy 242.57 55.88)
 		)
 		(stroke
 			(width 0)
@@ -1667,13 +1778,23 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 99.06) (xy 158.75 118.11)
+			(xy 158.75 101.6) (xy 158.75 118.11)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "854b5395-85b0-43f8-9147-870288ff01ff")
+	)
+	(wire
+		(pts
+			(xy 140.97 62.23) (xy 140.97 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "87f72e5c-2633-41e6-8186-6221fdb31122")
 	)
 	(wire
 		(pts
@@ -1687,7 +1808,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 115.57) (xy 149.86 115.57)
+			(xy 144.78 118.11) (xy 149.86 118.11)
 		)
 		(stroke
 			(width 0)
@@ -1727,13 +1848,23 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 115.57) (xy 132.08 101.6)
+			(xy 132.08 118.11) (xy 132.08 104.14)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "96ebdcd6-6410-43b3-bf53-ae253d254ab5")
+	)
+	(wire
+		(pts
+			(xy 142.24 130.81) (xy 142.24 135.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a2b21ec-d5da-457a-869d-65f77103344b")
 	)
 	(wire
 		(pts
@@ -1757,16 +1888,6 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 101.6) (xy 132.08 101.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a2b0dc54-8ab4-4f41-87fe-31ff4f458452")
-	)
-	(wire
-		(pts
 			(xy 190.5 99.06) (xy 195.58 99.06)
 		)
 		(stroke
@@ -1777,7 +1898,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 99.06) (xy 147.32 99.06)
+			(xy 158.75 101.6) (xy 147.32 101.6)
 		)
 		(stroke
 			(width 0)
@@ -1797,7 +1918,17 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 74.93) (xy 224.79 74.93)
+			(xy 53.34 58.42) (xy 60.96 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aa092720-108b-475a-a50e-505ebd734470")
+	)
+	(wire
+		(pts
+			(xy 208.28 74.93) (xy 226.06 74.93)
 		)
 		(stroke
 			(width 0)
@@ -1807,7 +1938,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 146.05) (xy 147.32 146.05)
+			(xy 158.75 140.97) (xy 147.32 140.97)
 		)
 		(stroke
 			(width 0)
@@ -1867,17 +1998,7 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 88.9) (xy 151.13 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c01d90f3-45c2-4c06-8f91-3801073611b3")
-	)
-	(wire
-		(pts
-			(xy 147.32 151.13) (xy 151.13 151.13)
+			(xy 147.32 146.05) (xy 151.13 146.05)
 		)
 		(stroke
 			(width 0)
@@ -1897,6 +2018,26 @@
 	)
 	(wire
 		(pts
+			(xy 182.88 62.23) (xy 182.88 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c4f97087-c20e-4e07-9ec5-aff636c830b7")
+	)
+	(wire
+		(pts
+			(xy 128.27 96.52) (xy 128.27 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c5245326-cecf-43c7-80c9-420756e946c5")
+	)
+	(wire
+		(pts
 			(xy 167.64 72.39) (xy 167.64 74.93)
 		)
 		(stroke
@@ -1907,13 +2048,23 @@
 	)
 	(wire
 		(pts
-			(xy 134.62 115.57) (xy 132.08 115.57)
+			(xy 134.62 118.11) (xy 132.08 118.11)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "c67be459-c5ed-4b96-8f3b-20ad88e51061")
+	)
+	(wire
+		(pts
+			(xy 53.34 53.34) (xy 60.96 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c7a06b3f-84ed-4ab0-9722-4c3412d6f992")
 	)
 	(wire
 		(pts
@@ -1927,7 +2078,17 @@
 	)
 	(wire
 		(pts
-			(xy 76.2 38.1) (xy 76.2 44.45)
+			(xy 99.06 62.23) (xy 99.06 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d2f50c65-2d67-4a8a-920e-18a322a04e94")
+	)
+	(wire
+		(pts
+			(xy 82.55 38.1) (xy 82.55 39.37)
 		)
 		(stroke
 			(width 0)
@@ -1957,23 +2118,23 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 82.55) (xy 125.73 101.6)
+			(xy 226.06 74.93) (xy 226.06 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e08ccdb5-8297-44f5-b447-ab6f71694688")
+	)
+	(wire
+		(pts
+			(xy 125.73 82.55) (xy 125.73 86.36)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "e56e1de7-6f4b-4539-90bc-72cc9bb77452")
-	)
-	(wire
-		(pts
-			(xy 60.96 72.39) (xy 60.96 38.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e6020daa-6120-4af2-a9e0-a8a7d7e250e6")
 	)
 	(wire
 		(pts
@@ -1987,7 +2148,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 171.45) (xy 151.13 177.8)
+			(xy 151.13 166.37) (xy 151.13 172.72)
 		)
 		(stroke
 			(width 0)
@@ -2007,7 +2168,7 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 162.56) (xy 128.27 171.45)
+			(xy 128.27 157.48) (xy 128.27 166.37)
 		)
 		(stroke
 			(width 0)
@@ -2027,6 +2188,36 @@
 	)
 	(wire
 		(pts
+			(xy 182.88 87.63) (xy 182.88 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f29b6d21-13fa-4323-8c75-08e43c6cc253")
+	)
+	(wire
+		(pts
+			(xy 123.19 96.52) (xy 123.19 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f31682ef-149a-46cd-88bc-2c652b7a930c")
+	)
+	(wire
+		(pts
+			(xy 146.05 33.02) (xy 138.43 33.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f400b752-ea6f-4290-8f21-7294372fbc6f")
+	)
+	(wire
+		(pts
 			(xy 180.34 120.65) (xy 190.5 120.65)
 		)
 		(stroke
@@ -2037,7 +2228,7 @@
 	)
 	(wire
 		(pts
-			(xy 149.86 104.14) (xy 149.86 115.57)
+			(xy 149.86 106.68) (xy 149.86 118.11)
 		)
 		(stroke
 			(width 0)
@@ -2056,7 +2247,7 @@
 		(uuid "0b9fc7b9-2ef6-4161-9d67-4c2af227c103")
 	)
 	(label "PASSIVE_LPF_OUT"
-		(at 97.79 25.4 0)
+		(at 226.06 55.88 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2075,8 +2266,18 @@
 		)
 		(uuid "4303b399-5237-47bc-8195-b9d0acc4f073")
 	)
+	(label "12V+"
+		(at 142.24 91.44 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "46b7a6cc-c41e-492a-9c96-a2a8a515fbcb")
+	)
 	(label "RFBACK_OUT"
-		(at 132.08 101.6 180)
+		(at 132.08 104.14 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2096,7 +2297,7 @@
 		(uuid "71a985c4-d90b-44f0-9cc8-7fcc83c701b3")
 	)
 	(label "CFBACK_IN"
-		(at 158.75 146.05 180)
+		(at 158.75 140.97 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2105,8 +2306,18 @@
 		)
 		(uuid "9d9c1426-8f74-4c19-92f6-c0162c7ab706")
 	)
+	(label "12V-"
+		(at 146.05 33.02 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a43fe6dd-0847-4b1e-a21c-c93b577e53eb")
+	)
 	(label "PASSIVE_LPF_OUT"
-		(at 96.52 48.26 180)
+		(at 102.87 43.18 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2115,8 +2326,18 @@
 		)
 		(uuid "ac418ef3-82b8-47c3-97de-a4589c38268b")
 	)
+	(label "12V+"
+		(at 99.06 62.23 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "af591abf-cd70-4961-92a3-90e5f19a88ce")
+	)
 	(label "CFBACK_OUT"
-		(at 125.73 148.59 180)
+		(at 123.19 143.51 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2125,8 +2346,38 @@
 		)
 		(uuid "b082438e-1910-40a1-a09e-a74d27d3a7f5")
 	)
+	(label "12V+"
+		(at 140.97 62.23 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b3dba77b-6a52-4eb4-8bb3-98fab01366c7")
+	)
+	(label "12V-"
+		(at 140.97 87.63 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b4a8e3de-2b2b-4055-a6b5-c6b509320e52")
+	)
+	(label "12V-"
+		(at 182.88 87.63 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b7fd02ed-ebba-478a-b16e-702dc2296a09")
+	)
 	(label "ACTIVE_LPF_OUT"
-		(at 97.79 30.48 0)
+		(at 226.06 60.96 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2134,6 +2385,16 @@
 			(justify left bottom)
 		)
 		(uuid "bbeb43af-e891-4b0f-a5ad-3a6126b655d4")
+	)
+	(label "12V+"
+		(at 146.05 30.48 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c3279d11-f85c-414d-a369-19e2fc00c479")
 	)
 	(label "CFBACK_OUT"
 		(at 158.75 123.19 0)
@@ -2145,6 +2406,56 @@
 		)
 		(uuid "ca6bae32-7719-4d85-ab84-0e4b7e2c5846")
 	)
+	(label "12V-"
+		(at 142.24 116.84 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cca3ad0a-e913-4bdc-9925-45128f01a769")
+	)
+	(label "12V-"
+		(at 142.24 156.21 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d6f6eb27-0f93-4dc4-ac15-3e5f7ef7f543")
+	)
+	(label "12V+"
+		(at 142.24 130.81 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e3e90df3-eafb-4555-96a0-59ad2ba2acc0")
+	)
+	(label "12V+"
+		(at 182.88 62.23 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e7022100-2196-4dc7-a85b-5d88bd6ef51c")
+	)
+	(label "12V-"
+		(at 99.06 87.63 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e99b8144-2568-41e5-8924-e2f42be203e3")
+	)
 	(label "ACTIVE_LPF_OUT"
 		(at 224.79 74.93 180)
 		(effects
@@ -2155,20 +2466,53 @@
 		)
 		(uuid "f4452513-bc92-40f1-b4b3-f302a0a35297")
 	)
-	(hierarchical_label "MONO_IN"
+	(hierarchical_label "12V-"
 		(shape input)
-		(at 50.8 38.1 180)
+		(at 138.43 33.02 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right)
 		)
-		(uuid "c1fd8c40-e617-4bc7-a060-26a94f07b194")
+		(uuid "30d58daa-5a4e-462c-b7a4-6ab00e6bf3ea")
+	)
+	(hierarchical_label "LPF_MONO_OUT"
+		(shape output)
+		(at 252.73 58.42 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8552c10e-89f5-4e90-a4fe-f33c129d0d8d")
+	)
+	(hierarchical_label "12V+"
+		(shape input)
+		(at 138.43 30.48 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c11f7b0f-8a90-4849-82da-3270fef63750")
+	)
+	(hierarchical_label "MONO_IN"
+		(shape input)
+		(at 39.37 55.88 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c6d754bf-289f-4781-93a8-57646fd62062")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 147.32 185.42 0)
+		(at 147.32 180.34 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2178,7 +2522,7 @@
 		(fields_autoplaced yes)
 		(uuid "0305ef13-d0d0-4395-a812-d632d6ee4645")
 		(property "Reference" "#PWR0153"
-			(at 147.32 191.77 0)
+			(at 147.32 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2187,7 +2531,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 147.32 190.5 0)
+			(at 147.32 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2195,7 +2539,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 147.32 185.42 0)
+			(at 147.32 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2204,7 +2548,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 147.32 185.42 0)
+			(at 147.32 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2213,7 +2557,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 147.32 185.42 0)
+			(at 147.32 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2244,21 +2588,21 @@
 		(fields_autoplaced yes)
 		(uuid "04260185-3ae8-4374-8e9e-28ee6262b854")
 		(property "Reference" "R67"
-			(at 72.39 77.4699 0)
+			(at 67.31 77.4699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
 		(property "Value" "200k"
-			(at 72.39 80.0099 0)
+			(at 67.31 80.0099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
@@ -2323,7 +2667,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 76.2 57.15 0)
+		(at 82.55 52.07 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2332,7 +2676,7 @@
 		(fields_autoplaced yes)
 		(uuid "05e1f7e0-8b6f-4409-a3a8-c4d3efaba9f0")
 		(property "Reference" "#PWR0120"
-			(at 76.2 63.5 0)
+			(at 82.55 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2341,16 +2685,15 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 78.74 58.4199 0)
+			(at 82.55 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 76.2 57.15 0)
+			(at 82.55 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2359,7 +2702,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 76.2 57.15 0)
+			(at 82.55 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2368,7 +2711,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 76.2 57.15 0)
+			(at 82.55 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2524,7 +2867,7 @@
 	)
 	(symbol
 		(lib_id "Diode:1N4001")
-		(at 139.7 162.56 0)
+		(at 139.7 157.48 0)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2534,7 +2877,7 @@
 		(fields_autoplaced yes)
 		(uuid "19229910-4691-4a2b-95f8-8a90d19f5acf")
 		(property "Reference" "D40"
-			(at 139.7 156.21 0)
+			(at 139.7 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2542,7 +2885,7 @@
 			)
 		)
 		(property "Value" "1N4001"
-			(at 139.7 158.75 0)
+			(at 139.7 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2550,7 +2893,7 @@
 			)
 		)
 		(property "Footprint" "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal"
-			(at 139.7 162.56 0)
+			(at 139.7 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2559,7 +2902,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.vishay.com/docs/88503/1n4001.pdf"
-			(at 139.7 162.56 0)
+			(at 139.7 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2568,7 +2911,7 @@
 			)
 		)
 		(property "Description" "50V 1A General Purpose Rectifier Diode, DO-41"
-			(at 139.7 162.56 0)
+			(at 139.7 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2577,7 +2920,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 139.7 162.56 0)
+			(at 139.7 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2586,7 +2929,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 139.7 162.56 0)
+			(at 139.7 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2679,7 +3022,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 144.78 119.38 180)
+		(at 144.78 121.92 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2688,15 +3031,6 @@
 		(fields_autoplaced yes)
 		(uuid "1bb2432e-7a80-48fc-8e04-fbe544a3cf7d")
 		(property "Reference" "R71"
-			(at 147.32 118.1099 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "6k8"
 			(at 147.32 120.6499 0)
 			(effects
 				(font
@@ -2705,8 +3039,17 @@
 				(justify right)
 			)
 		)
+		(property "Value" "6k8"
+			(at 147.32 123.1899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 146.558 119.38 90)
+			(at 146.558 121.92 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2715,7 +3058,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 144.78 119.38 0)
+			(at 144.78 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2724,7 +3067,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 144.78 119.38 0)
+			(at 144.78 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2733,7 +3076,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
-			(at 144.78 119.38 0)
+			(at 144.78 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2742,7 +3085,7 @@
 			)
 		)
 		(property "Price" "0.0129"
-			(at 144.78 119.38 0)
+			(at 144.78 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2767,7 +3110,7 @@
 	)
 	(symbol
 		(lib_id "Diode:1N4001")
-		(at 139.7 171.45 0)
+		(at 139.7 166.37 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2777,7 +3120,7 @@
 		(fields_autoplaced yes)
 		(uuid "22f9f3bc-d551-4ebb-ac13-9cc1f4c261bd")
 		(property "Reference" "D43"
-			(at 139.7 165.1 0)
+			(at 139.7 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2785,7 +3128,7 @@
 			)
 		)
 		(property "Value" "1N4001"
-			(at 139.7 167.64 0)
+			(at 139.7 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2793,7 +3136,7 @@
 			)
 		)
 		(property "Footprint" "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal"
-			(at 139.7 171.45 0)
+			(at 139.7 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2802,7 +3145,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.vishay.com/docs/88503/1n4001.pdf"
-			(at 139.7 171.45 0)
+			(at 139.7 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2811,7 +3154,7 @@
 			)
 		)
 		(property "Description" "50V 1A General Purpose Rectifier Diode, DO-41"
-			(at 139.7 171.45 0)
+			(at 139.7 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2820,7 +3163,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 139.7 171.45 0)
+			(at 139.7 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2829,7 +3172,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 139.7 171.45 0)
+			(at 139.7 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3011,8 +3354,79 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R_Potentiometer")
+		(at 76.2 72.39 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "341e525b-840a-4236-a33f-3ae735cd9836")
+		(property "Reference" "VOL_BALANCE"
+			(at 76.2 76.2 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100k"
+			(at 76.2 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Potentiometer_THT:Potentiometer_Alps_RK09Y11_Single_Horizontal"
+			(at 76.2 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 76.2 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Potentiometer"
+			(at 76.2 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "be7b1d13-0efb-4f3d-98a4-f7b412674cc9")
+		)
+		(pin "3"
+			(uuid "d154079e-7e9c-4182-ad96-f1e1b1397ccd")
+		)
+		(pin "2"
+			(uuid "dfda8292-8b7a-4479-8375-3ffcc14044a7")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/efaed419-869d-40eb-a2fb-6d0497919989/3643ceed-ee0d-41e0-81b5-fe02d10c6311/e8034c24-bd87-4fd1-a620-1fb2c370dc15"
+					(reference "VOL_BALANCE")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
-		(at 144.78 123.19 0)
+		(at 144.78 125.73 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3021,7 +3435,7 @@
 		(fields_autoplaced yes)
 		(uuid "38390312-8573-4b18-a56e-41187fbd9c22")
 		(property "Reference" "#PWR0160"
-			(at 144.78 129.54 0)
+			(at 144.78 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3030,7 +3444,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 144.78 128.27 0)
+			(at 144.78 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3038,7 +3452,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 144.78 123.19 0)
+			(at 144.78 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3047,7 +3461,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 144.78 123.19 0)
+			(at 144.78 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3056,7 +3470,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 144.78 123.19 0)
+			(at 144.78 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3215,7 +3629,7 @@
 	)
 	(symbol
 		(lib_id "Amplifier_Operational:OPA196xDGK")
-		(at 139.7 148.59 0)
+		(at 139.7 143.51 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3225,7 +3639,7 @@
 		(fields_autoplaced yes)
 		(uuid "5e1cbfcb-1ae6-42ca-af59-85d03a672bcc")
 		(property "Reference" "U33"
-			(at 145.3581 138.43 0)
+			(at 145.3581 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3234,7 +3648,7 @@
 			)
 		)
 		(property "Value" "OPA196xDGK"
-			(at 145.3581 140.97 0)
+			(at 145.3581 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3243,15 +3657,6 @@
 			)
 		)
 		(property "Footprint" "Package_SO:VSSOP-8_3x3mm_P0.65mm"
-			(at 139.7 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/opa4196.pdf"
 			(at 139.7 143.51 0)
 			(effects
 				(font
@@ -3260,8 +3665,17 @@
 				(hide yes)
 			)
 		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/opa4196.pdf"
+			(at 139.7 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(property "Description" "Single, Low-Power, Low Offset Voltage, Rail-to-Rail Operational Amplifier, VSSOP-8"
-			(at 139.7 148.59 0)
+			(at 139.7 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3297,138 +3711,6 @@
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/efaed419-869d-40eb-a2fb-6d0497919989/3643ceed-ee0d-41e0-81b5-fe02d10c6311/e8034c24-bd87-4fd1-a620-1fb2c370dc15"
 					(reference "U33")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 99.06 82.55 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6288b3b3-98c9-4482-bf1b-6eb383d1762c")
-		(property "Reference" "#PWR069"
-			(at 99.06 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 99.06 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 99.06 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 99.06 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 99.06 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2469eec4-6714-4037-89d6-1aee6e1ba795")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/efaed419-869d-40eb-a2fb-6d0497919989/3643ceed-ee0d-41e0-81b5-fe02d10c6311/e8034c24-bd87-4fd1-a620-1fb2c370dc15"
-					(reference "#PWR069")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 182.88 82.55 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "708d0f54-9cdf-4f43-977b-b73f60eb1ee5")
-		(property "Reference" "#PWR0154"
-			(at 182.88 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 182.88 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 182.88 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 182.88 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 182.88 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "e4666192-ae19-4f77-be43-7978595f1633")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/efaed419-869d-40eb-a2fb-6d0497919989/3643ceed-ee0d-41e0-81b5-fe02d10c6311/e8034c24-bd87-4fd1-a620-1fb2c370dc15"
-					(reference "#PWR0154")
 					(unit 1)
 				)
 			)
@@ -3612,7 +3894,7 @@
 	)
 	(symbol
 		(lib_id "Diode:1N4001")
-		(at 132.08 171.45 0)
+		(at 132.08 166.37 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3622,7 +3904,7 @@
 		(fields_autoplaced yes)
 		(uuid "8d9195fd-6ae6-4c64-9223-79a8f51225d9")
 		(property "Reference" "D42"
-			(at 132.08 165.1 0)
+			(at 132.08 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3630,7 +3912,7 @@
 			)
 		)
 		(property "Value" "1N4001"
-			(at 132.08 167.64 0)
+			(at 132.08 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3638,7 +3920,7 @@
 			)
 		)
 		(property "Footprint" "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal"
-			(at 132.08 171.45 0)
+			(at 132.08 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3647,7 +3929,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.vishay.com/docs/88503/1n4001.pdf"
-			(at 132.08 171.45 0)
+			(at 132.08 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3656,7 +3938,7 @@
 			)
 		)
 		(property "Description" "50V 1A General Purpose Rectifier Diode, DO-41"
-			(at 132.08 171.45 0)
+			(at 132.08 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3665,7 +3947,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 132.08 171.45 0)
+			(at 132.08 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3674,7 +3956,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 132.08 171.45 0)
+			(at 132.08 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3786,92 +4068,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 76.2 72.39 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "95208116-ed58-4251-8299-29fc587df0b8")
-		(property "Reference" "R68"
-			(at 76.2 66.04 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100k"
-			(at 76.2 68.58 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 76.2 70.612 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 76.2 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 76.2 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
-			(at 76.2 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Price" "0.0129"
-			(at 76.2 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "d3d96b8c-aec8-4064-aa37-0fe2af5e8771")
-		)
-		(pin "1"
-			(uuid "8a29a678-41c5-4589-8336-710349f1e041")
-		)
-		(instances
-			(project "signalmesh"
-				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/efaed419-869d-40eb-a2fb-6d0497919989/3643ceed-ee0d-41e0-81b5-fe02d10c6311/e8034c24-bd87-4fd1-a620-1fb2c370dc15"
-					(reference "R68")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Amplifier_Operational:OPA196xDGK")
 		(at 185.42 74.93 0)
 		(unit 1)
@@ -3961,7 +4157,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Nidec_CAS-120A1")
-		(at 119.38 27.94 180)
+		(at 247.65 58.42 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3970,15 +4166,15 @@
 		(fields_autoplaced yes)
 		(uuid "9e0f1f56-c644-4321-80d9-ad4c088061e6")
 		(property "Reference" "SW4"
-			(at 119.38 19.05 0)
+			(at 247.65 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "SW_Nidec_CAS-120A1"
-			(at 119.38 21.59 0)
+		(property "Value" "LPF_OUT_SW"
+			(at 247.65 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3986,7 +4182,7 @@
 			)
 		)
 		(property "Footprint" "Button_Switch_SMD:Nidec_Copal_CAS-120A"
-			(at 119.38 17.78 0)
+			(at 247.65 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3995,7 +4191,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.nidec-components.com/e/catalog/switch/cas.pdf"
-			(at 119.38 20.32 0)
+			(at 247.65 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4004,7 +4200,7 @@
 			)
 		)
 		(property "Description" "Switch, single pole double throw"
-			(at 119.38 27.94 0)
+			(at 247.65 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4031,8 +4227,81 @@
 		)
 	)
 	(symbol
+		(lib_id "Switch:SW_Nidec_CAS-120A1")
+		(at 125.73 91.44 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a979257f-d513-4f34-bcee-1b70a92246a2")
+		(property "Reference" "SW1"
+			(at 130.81 90.1699 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LPF_FBCK_OUT"
+			(at 130.81 92.7099 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Button_Switch_SMD:Nidec_Copal_CAS-120A"
+			(at 115.57 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.nidec-components.com/e/catalog/switch/cas.pdf"
+			(at 118.11 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Switch, single pole double throw"
+			(at 125.73 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "70660ad8-7ee3-4d0d-a257-ea0557d4f3fd")
+		)
+		(pin "2"
+			(uuid "e8db921f-5db4-48da-b55e-b756004a0744")
+		)
+		(pin "3"
+			(uuid "10f72405-22c1-400d-8500-e16bb41ea50d")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/efaed419-869d-40eb-a2fb-6d0497919989/3643ceed-ee0d-41e0-81b5-fe02d10c6311/e8034c24-bd87-4fd1-a620-1fb2c370dc15"
+					(reference "SW1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Diode:1N4001")
-		(at 132.08 162.56 0)
+		(at 132.08 157.48 0)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4042,7 +4311,7 @@
 		(fields_autoplaced yes)
 		(uuid "b0b67e5d-a5ed-43e6-ab93-92ea855368d5")
 		(property "Reference" "D41"
-			(at 132.08 156.21 0)
+			(at 132.08 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4050,7 +4319,7 @@
 			)
 		)
 		(property "Value" "1N4001"
-			(at 132.08 158.75 0)
+			(at 132.08 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4058,7 +4327,7 @@
 			)
 		)
 		(property "Footprint" "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal"
-			(at 132.08 162.56 0)
+			(at 132.08 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4067,7 +4336,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.vishay.com/docs/88503/1n4001.pdf"
-			(at 132.08 162.56 0)
+			(at 132.08 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4076,7 +4345,7 @@
 			)
 		)
 		(property "Description" "50V 1A General Purpose Rectifier Diode, DO-41"
-			(at 132.08 162.56 0)
+			(at 132.08 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4085,7 +4354,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 132.08 162.56 0)
+			(at 132.08 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4094,7 +4363,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 132.08 162.56 0)
+			(at 132.08 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4185,7 +4454,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 133.35 177.8 270)
+		(at 133.35 172.72 270)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4195,7 +4464,7 @@
 		(fields_autoplaced yes)
 		(uuid "b43a634b-f5b5-48c3-a173-fd4f08830292")
 		(property "Reference" "R64"
-			(at 133.35 171.45 90)
+			(at 133.35 166.37 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4203,7 +4472,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 133.35 173.99 90)
+			(at 133.35 168.91 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4211,7 +4480,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 133.35 179.578 90)
+			(at 133.35 174.498 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4220,7 +4489,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 133.35 177.8 0)
+			(at 133.35 172.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4229,7 +4498,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 133.35 177.8 0)
+			(at 133.35 172.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4238,7 +4507,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
-			(at 133.35 177.8 0)
+			(at 133.35 172.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4247,7 +4516,7 @@
 			)
 		)
 		(property "Price" "0.0129"
-			(at 133.35 177.8 0)
+			(at 133.35 172.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4272,7 +4541,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Potentiometer")
-		(at 76.2 48.26 0)
+		(at 82.55 43.18 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4280,8 +4549,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b457caff-e65f-496b-ae42-20f664f176e2")
-		(property "Reference" "RV1"
-			(at 73.66 46.9899 0)
+		(property "Reference" "PASS_LPF_CUTOFF"
+			(at 80.01 41.9099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4290,7 +4559,7 @@
 			)
 		)
 		(property "Value" "100k"
-			(at 73.66 49.5299 0)
+			(at 80.01 44.4499 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4299,7 +4568,7 @@
 			)
 		)
 		(property "Footprint" "Potentiometer_THT:Potentiometer_Alps_RK09Y11_Single_Horizontal"
-			(at 76.2 48.26 0)
+			(at 82.55 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4308,7 +4577,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 76.2 48.26 0)
+			(at 82.55 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4317,7 +4586,7 @@
 			)
 		)
 		(property "Description" "Potentiometer"
-			(at 76.2 48.26 0)
+			(at 82.55 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4337,7 +4606,7 @@
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/efaed419-869d-40eb-a2fb-6d0497919989/3643ceed-ee0d-41e0-81b5-fe02d10c6311/e8034c24-bd87-4fd1-a620-1fb2c370dc15"
-					(reference "RV1")
+					(reference "PASS_LPF_CUTOFF")
 					(unit 1)
 				)
 			)
@@ -4345,7 +4614,7 @@
 	)
 	(symbol
 		(lib_id "Diode:1N4001")
-		(at 147.32 171.45 0)
+		(at 147.32 166.37 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4355,7 +4624,7 @@
 		(fields_autoplaced yes)
 		(uuid "b45e335d-9106-4b57-998b-c76e68df8aad")
 		(property "Reference" "D44"
-			(at 147.32 165.1 0)
+			(at 147.32 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4363,7 +4632,7 @@
 			)
 		)
 		(property "Value" "1N4001"
-			(at 147.32 167.64 0)
+			(at 147.32 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4371,7 +4640,7 @@
 			)
 		)
 		(property "Footprint" "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal"
-			(at 147.32 171.45 0)
+			(at 147.32 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4380,7 +4649,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.vishay.com/docs/88503/1n4001.pdf"
-			(at 147.32 171.45 0)
+			(at 147.32 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4389,7 +4658,7 @@
 			)
 		)
 		(property "Description" "50V 1A General Purpose Rectifier Diode, DO-41"
-			(at 147.32 171.45 0)
+			(at 147.32 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4398,7 +4667,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 147.32 171.45 0)
+			(at 147.32 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4407,7 +4676,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 147.32 171.45 0)
+			(at 147.32 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4432,7 +4701,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 138.43 115.57 90)
+		(at 138.43 118.11 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4441,14 +4710,6 @@
 		(fields_autoplaced yes)
 		(uuid "b4b9d2ed-889a-464d-aa06-26f9ccdeaa8f")
 		(property "Reference" "R70"
-			(at 138.43 119.38 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k"
 			(at 138.43 121.92 90)
 			(effects
 				(font
@@ -4456,8 +4717,16 @@
 				)
 			)
 		)
+		(property "Value" "10k"
+			(at 138.43 124.46 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 138.43 117.348 90)
+			(at 138.43 119.888 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4466,7 +4735,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 138.43 115.57 0)
+			(at 138.43 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4475,7 +4744,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 138.43 115.57 0)
+			(at 138.43 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4484,7 +4753,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
-			(at 138.43 115.57 0)
+			(at 138.43 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4493,7 +4762,7 @@
 			)
 		)
 		(property "Price" "0.0129"
-			(at 138.43 115.57 0)
+			(at 138.43 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4524,6 +4793,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "bad5f98a-4e01-46ce-90a2-00cac4c54f96")
 		(property "Reference" "SW5"
 			(at 175.26 127 0)
@@ -4533,7 +4803,7 @@
 				)
 			)
 		)
-		(property "Value" "SW_Nidec_CAS-120A1"
+		(property "Value" "LPF_FBCK_IN"
 			(at 175.26 129.54 0)
 			(effects
 				(font
@@ -4588,7 +4858,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Small")
-		(at 76.2 54.61 180)
+		(at 82.55 49.53 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4597,25 +4867,25 @@
 		(fields_autoplaced yes)
 		(uuid "bfebd081-7d2f-4e27-960c-2f9cddd7696f")
 		(property "Reference" "C14"
-			(at 73.66 53.3335 0)
+			(at 85.09 48.2535 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "0.1uf"
-			(at 73.66 55.8735 0)
+			(at 85.09 50.7935 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 76.2 54.61 0)
+			(at 82.55 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4624,7 +4894,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 76.2 54.61 0)
+			(at 82.55 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4633,7 +4903,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 76.2 54.61 0)
+			(at 82.55 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5019,7 +5289,7 @@
 	)
 	(symbol
 		(lib_id "Diode:1N4001")
-		(at 147.32 162.56 0)
+		(at 147.32 157.48 0)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5029,7 +5299,7 @@
 		(fields_autoplaced yes)
 		(uuid "f0a53936-7693-4215-b3c9-c33c5a7f63ff")
 		(property "Reference" "D39"
-			(at 147.32 156.21 0)
+			(at 147.32 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5037,7 +5307,7 @@
 			)
 		)
 		(property "Value" "1N4001"
-			(at 147.32 158.75 0)
+			(at 147.32 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5045,7 +5315,7 @@
 			)
 		)
 		(property "Footprint" "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal"
-			(at 147.32 162.56 0)
+			(at 147.32 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5054,7 +5324,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.vishay.com/docs/88503/1n4001.pdf"
-			(at 147.32 162.56 0)
+			(at 147.32 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5063,7 +5333,7 @@
 			)
 		)
 		(property "Description" "50V 1A General Purpose Rectifier Diode, DO-41"
-			(at 147.32 162.56 0)
+			(at 147.32 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5072,7 +5342,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 147.32 162.56 0)
+			(at 147.32 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5081,7 +5351,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 147.32 162.56 0)
+			(at 147.32 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5105,17 +5375,33 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 140.97 82.55 0)
+		(lib_id "Switch:SW_Nidec_CAS-120A1")
+		(at 48.26 55.88 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "f1a9ab8e-8807-4ee9-acbe-65bb36780200")
-		(property "Reference" "#PWR0158"
-			(at 140.97 88.9 0)
+		(uuid "f0e83356-0237-45a0-8a32-35312163b2fc")
+		(property "Reference" "SW2"
+			(at 48.26 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LPF_IN_SW"
+			(at 48.26 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Button_Switch_SMD:Nidec_Copal_CAS-120A"
+			(at 48.26 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5123,16 +5409,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "GND"
-			(at 140.97 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 140.97 82.55 0)
+		(property "Datasheet" "https://www.nidec-components.com/e/catalog/switch/cas.pdf"
+			(at 48.26 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5140,17 +5418,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
-			(at 140.97 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 140.97 82.55 0)
+		(property "Description" "Switch, single pole double throw"
+			(at 48.26 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5159,12 +5428,18 @@
 			)
 		)
 		(pin "1"
-			(uuid "f662ca29-9f16-490f-8373-a07b773f2f98")
+			(uuid "38a348c1-84c1-4691-88e1-243a90f24867")
+		)
+		(pin "2"
+			(uuid "6bf95d3e-0540-46cd-af50-8f41c0b1c8b3")
+		)
+		(pin "3"
+			(uuid "187513fb-680d-4654-8ef7-764e867f6778")
 		)
 		(instances
 			(project "signalmesh"
 				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/efaed419-869d-40eb-a2fb-6d0497919989/3643ceed-ee0d-41e0-81b5-fe02d10c6311/e8034c24-bd87-4fd1-a620-1fb2c370dc15"
-					(reference "#PWR0158")
+					(reference "SW2")
 					(unit 1)
 				)
 			)
@@ -5172,7 +5447,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 147.32 181.61 0)
+		(at 147.32 176.53 0)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5182,7 +5457,7 @@
 		(fields_autoplaced yes)
 		(uuid "f2b1566a-ade3-4a43-9738-80f9374dc78d")
 		(property "Reference" "R65"
-			(at 144.78 180.3399 0)
+			(at 144.78 175.2599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5191,7 +5466,7 @@
 			)
 		)
 		(property "Value" "6k8"
-			(at 144.78 182.8799 0)
+			(at 144.78 177.7999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5200,7 +5475,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 145.542 181.61 90)
+			(at 145.542 176.53 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5209,7 +5484,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 147.32 181.61 0)
+			(at 147.32 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5218,7 +5493,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 147.32 181.61 0)
+			(at 147.32 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5227,7 +5502,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" "311-10.0KCRCT-ND"
-			(at 147.32 181.61 0)
+			(at 147.32 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5236,7 +5511,7 @@
 			)
 		)
 		(property "Price" "0.0129"
-			(at 147.32 181.61 0)
+			(at 147.32 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5261,7 +5536,7 @@
 	)
 	(symbol
 		(lib_id "Amplifier_Operational:OPA196xDGK")
-		(at 139.7 101.6 0)
+		(at 139.7 104.14 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5271,15 +5546,6 @@
 		(fields_autoplaced yes)
 		(uuid "f8203e6a-2cea-4ddc-a57b-f71f62565c84")
 		(property "Reference" "U35"
-			(at 145.3581 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "OPA196xDGK"
 			(at 145.3581 93.98 0)
 			(effects
 				(font
@@ -5288,8 +5554,17 @@
 				(justify right)
 			)
 		)
+		(property "Value" "OPA196xDGK"
+			(at 145.3581 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
 		(property "Footprint" "Package_SO:VSSOP-8_3x3mm_P0.65mm"
-			(at 139.7 101.6 0)
+			(at 139.7 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5298,7 +5573,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/opa4196.pdf"
-			(at 139.7 96.52 0)
+			(at 139.7 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5307,7 +5582,7 @@
 			)
 		)
 		(property "Description" "Single, Low-Power, Low Offset Voltage, Rail-to-Rail Operational Amplifier, VSSOP-8"
-			(at 139.7 101.6 0)
+			(at 139.7 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
