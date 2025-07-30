@@ -481,6 +481,191 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Switch:SW_Nidec_CAS-120A1"
+			(pin_names
+				(offset 1)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "SW"
+				(at 0 4.318 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "SW_Nidec_CAS-120A1"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Button_Switch_SMD:Nidec_Copal_CAS-120A"
+				(at 0 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.nidec-components.com/e/catalog/switch/cas.pdf"
+				(at 0 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Switch, single pole double throw"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "switch single-pole double-throw spdt ON-ON"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*Nidec?Copal?CAS?120A*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "SW_Nidec_CAS-120A1_0_1"
+				(circle
+					(center -2.032 0)
+					(radius 0.4572)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.651 0.254) (xy 1.651 2.286)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.032 2.54)
+					(radius 0.4572)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.032 -2.54)
+					(radius 0.4572)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "SW_Nidec_CAS-120A1_1_1"
+				(rectangle
+					(start -3.175 3.81)
+					(end 3.175 -3.81)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 2.54 180)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 2.54)
+					(name "C"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(text "This adapter board takes in a stereo input\nand converts it to mono for FX application\nthen converted to stereo output."
 		(exclude_from_sim no)
@@ -515,16 +700,34 @@
 		(uuid "08fe612e-8a1d-4758-8f09-4022c855c200")
 	)
 	(junction
+		(at 154.94 144.78)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0a820d7e-b8cb-4fcd-b4aa-d24304ce8f7d")
+	)
+	(junction
 		(at 92.71 71.12)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "21130ced-9781-498d-b215-a467fda3ae41")
 	)
 	(junction
+		(at 144.78 144.78)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3f612edf-c90e-4498-b183-add88a22a978")
+	)
+	(junction
 		(at 212.09 71.12)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "43780504-3f52-4f8c-9c72-5014899cfe12")
+	)
+	(junction
+		(at 166.37 144.78)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5add9fd6-dd39-46c1-94bb-77800c51c373")
 	)
 	(junction
 		(at 195.58 69.85)
@@ -545,18 +748,44 @@
 		(uuid "e94dcfde-904c-446d-9386-02a27d338463")
 	)
 	(no_connect
+		(at 142.24 119.38)
+		(uuid "57acd966-2362-4134-8ea8-76ea1f3f4436")
+	)
+	(no_connect
+		(at 120.65 119.38)
+		(uuid "8e4a5947-41f4-4a68-999c-ac331c99e7fe")
+	)
+	(no_connect
+		(at 163.83 119.38)
+		(uuid "aed2a328-3785-4b96-8af0-1bd8b6339668")
+	)
+	(no_connect
 		(at 152.4 73.66)
 		(uuid "c7b89cc9-e127-4ff7-9e75-edd38e55d1d4")
 	)
+	(no_connect
+		(at 185.42 119.38)
+		(uuid "da3940a8-e28f-487e-8711-9183c4029a89")
+	)
 	(wire
 		(pts
-			(xy 190.5 95.25) (xy 190.5 69.85)
+			(xy 190.5 90.17) (xy 190.5 69.85)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "0167d535-bf39-420b-ab16-abace218d7a1")
+	)
+	(wire
+		(pts
+			(xy 158.75 73.66) (xy 158.75 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0b240276-530c-4633-928d-fae178d7fe41")
 	)
 	(wire
 		(pts
@@ -600,17 +829,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 73.66) (xy 158.75 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2368c545-6c3d-4902-89a3-94d6fb844b7e")
-	)
-	(wire
-		(pts
-			(xy 168.91 100.33) (xy 166.37 100.33)
+			(xy 166.37 100.33) (xy 190.5 100.33)
 		)
 		(stroke
 			(width 0)
@@ -620,7 +839,7 @@
 	)
 	(wire
 		(pts
-			(xy 114.3 95.25) (xy 138.43 95.25)
+			(xy 114.3 90.17) (xy 138.43 90.17)
 		)
 		(stroke
 			(width 0)
@@ -650,6 +869,16 @@
 	)
 	(wire
 		(pts
+			(xy 168.91 102.87) (xy 168.91 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4a3c2f44-b8c4-4a4c-9251-1dc2c192bd72")
+	)
+	(wire
+		(pts
 			(xy 212.09 63.5) (xy 212.09 68.58)
 		)
 		(stroke
@@ -657,6 +886,16 @@
 			(type default)
 		)
 		(uuid "4abdad33-96fa-4815-ac9f-bf77056294dd")
+	)
+	(wire
+		(pts
+			(xy 166.37 144.78) (xy 166.37 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4d48ad9d-969d-4aea-a021-dd8c1ad0d827")
 	)
 	(wire
 		(pts
@@ -670,13 +909,13 @@
 	)
 	(wire
 		(pts
-			(xy 135.89 100.33) (xy 138.43 100.33)
+			(xy 123.19 144.78) (xy 123.19 129.54)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5bea5799-7ec1-44b8-83d7-95d05c7b3ae3")
+		(uuid "5c4ac4d9-b2dc-4caf-989d-42814bf799a5")
 	)
 	(wire
 		(pts
@@ -687,6 +926,16 @@
 			(type default)
 		)
 		(uuid "608ba60d-1692-4f00-a59e-a7cdf1f5a29c")
+	)
+	(wire
+		(pts
+			(xy 187.96 129.54) (xy 187.96 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "61264fef-c4e9-4d92-af47-82fec56afcec")
 	)
 	(wire
 		(pts
@@ -710,13 +959,33 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 95.25) (xy 190.5 95.25)
+			(xy 166.37 90.17) (xy 190.5 90.17)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "69028a10-b72f-481c-84ef-c1f6447d38ba")
+	)
+	(wire
+		(pts
+			(xy 190.5 100.33) (xy 190.5 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "69929912-09c3-4c57-bda2-9e4336418787")
+	)
+	(wire
+		(pts
+			(xy 154.94 152.4) (xy 154.94 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "69cda6e4-60bf-4757-b8f2-7ba1fb85ebf6")
 	)
 	(wire
 		(pts
@@ -730,6 +999,16 @@
 	)
 	(wire
 		(pts
+			(xy 154.94 144.78) (xy 166.37 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "72ce6b06-2974-43df-9185-4df3d62313c3")
+	)
+	(wire
+		(pts
 			(xy 93.98 68.58) (xy 92.71 68.58)
 		)
 		(stroke
@@ -737,6 +1016,26 @@
 			(type default)
 		)
 		(uuid "76072e66-57a2-4f0b-a223-dafdc5926691")
+	)
+	(wire
+		(pts
+			(xy 144.78 144.78) (xy 123.19 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "763d5aca-ba83-4da8-bb94-90c209f3b294")
+	)
+	(wire
+		(pts
+			(xy 144.78 144.78) (xy 144.78 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7780f464-ff05-404d-a33c-80ad093bea56")
 	)
 	(wire
 		(pts
@@ -770,6 +1069,16 @@
 	)
 	(wire
 		(pts
+			(xy 144.78 144.78) (xy 154.94 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9b9239a0-0ceb-4b8e-bae0-7e7283a7536a")
+	)
+	(wire
+		(pts
 			(xy 195.58 69.85) (xy 195.58 76.2)
 		)
 		(stroke
@@ -777,6 +1086,16 @@
 			(type default)
 		)
 		(uuid "9cf9fc84-db28-4e54-9e43-50d8c79eb323")
+	)
+	(wire
+		(pts
+			(xy 187.96 144.78) (xy 166.37 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9e4b34a2-7c4d-42c7-8bfa-c5e677294a76")
 	)
 	(wire
 		(pts
@@ -790,7 +1109,17 @@
 	)
 	(wire
 		(pts
-			(xy 114.3 95.25) (xy 114.3 69.85)
+			(xy 138.43 100.33) (xy 125.73 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a7a7d1b9-832d-4891-aef5-af288db4d1ed")
+	)
+	(wire
+		(pts
+			(xy 114.3 90.17) (xy 114.3 69.85)
 		)
 		(stroke
 			(width 0)
@@ -880,6 +1209,36 @@
 	)
 	(wire
 		(pts
+			(xy 147.32 115.57) (xy 147.32 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ce190be3-a22e-46b4-86b8-653cabaa0ea8")
+	)
+	(wire
+		(pts
+			(xy 135.89 115.57) (xy 147.32 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d0a2c79c-e432-403a-bbea-30cbcb13a370")
+	)
+	(wire
+		(pts
+			(xy 135.89 102.87) (xy 135.89 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d13e35a0-059e-4886-aa2f-d9b6b2de85ad")
+	)
+	(wire
+		(pts
 			(xy 209.55 71.12) (xy 212.09 71.12)
 		)
 		(stroke
@@ -908,6 +1267,16 @@
 		)
 		(uuid "ebe8ae23-eeee-4406-84e7-f5b4495a2eea")
 	)
+	(wire
+		(pts
+			(xy 125.73 100.33) (xy 125.73 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fc0b2d87-5f21-4e5a-bd69-4811390fd8d0")
+	)
 	(hierarchical_label "STEREO_OUT_R"
 		(shape output)
 		(at 213.36 68.58 0)
@@ -930,49 +1299,16 @@
 		)
 		(uuid "14935510-ee32-4afe-b4b4-8fc7e97df0dc")
 	)
-	(hierarchical_label "AFFM_HPF_TOGGLE"
+	(hierarchical_label "5V_IN"
 		(shape input)
-		(at 168.91 102.87 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "16766304-fad5-4b71-91ff-3ca9f5d84fb5")
-	)
-	(hierarchical_label "AFFM_LPF_TOGGLE"
-		(shape input)
-		(at 168.91 100.33 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "604eb128-400d-4c0a-ae85-2abbebece6d6")
-	)
-	(hierarchical_label "AFFM_BSF_TOGGLE"
-		(shape input)
-		(at 135.89 102.87 180)
+		(at 154.94 152.4 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right)
 		)
-		(uuid "8e90d99c-d00a-42ac-82ca-c9c0f0d9a769")
-	)
-	(hierarchical_label "AFFM_BPF_TOGGLE"
-		(shape input)
-		(at 135.89 100.33 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "ca2a779c-d330-4c41-96da-5d40242d4211")
+		(uuid "db8dfad8-7e7b-413e-b4bd-a6a96fe01704")
 	)
 	(hierarchical_label "STEREO_IN_R"
 		(shape input)
@@ -1145,6 +1481,79 @@
 		)
 	)
 	(symbol
+		(lib_id "Switch:SW_Nidec_CAS-120A1")
+		(at 166.37 124.46 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "22e560b3-2c5e-4368-89ae-3e6cd6041782")
+		(property "Reference" "SW7"
+			(at 171.45 123.1899 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "HPF_TOGGLE"
+			(at 171.45 125.7299 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Button_Switch_SMD:Nidec_Copal_CAS-120A"
+			(at 176.53 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.nidec-components.com/e/catalog/switch/cas.pdf"
+			(at 173.99 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Switch, single pole double throw"
+			(at 166.37 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e38d6dc0-fda8-4ae4-a035-0e04f01232cf")
+		)
+		(pin "2"
+			(uuid "4a9f9ed0-8fd1-404e-ad7d-a8190739245f")
+		)
+		(pin "3"
+			(uuid "362e5e0b-4ec3-4af9-aee7-859451731ca6")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/efaed419-869d-40eb-a2fb-6d0497919989"
+					(reference "SW7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 204.47 63.5 270)
 		(unit 1)
@@ -1231,8 +1640,82 @@
 		)
 	)
 	(symbol
+		(lib_id "Switch:SW_Nidec_CAS-120A1")
+		(at 123.19 124.46 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "377d5d10-4172-4404-8762-8deb8ab4811b")
+		(property "Reference" "SW3"
+			(at 128.27 123.1899 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "BPF_TOGGLE"
+			(at 128.27 125.7299 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Button_Switch_SMD:Nidec_Copal_CAS-120A"
+			(at 133.35 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.nidec-components.com/e/catalog/switch/cas.pdf"
+			(at 130.81 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Switch, single pole double throw"
+			(at 123.19 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b9336491-cd0f-4ac6-bdb2-d513232b3981")
+		)
+		(pin "2"
+			(uuid "2b1c56ca-f576-49d3-9561-f5477eb2440a")
+		)
+		(pin "3"
+			(uuid "b13810ba-f7ce-4c47-8a4c-a2cc80b6467c")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/efaed419-869d-40eb-a2fb-6d0497919989"
+					(reference "SW3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x01_Socket")
-		(at 152.4 68.58 90)
+		(at 158.75 68.58 270)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1241,25 +1724,25 @@
 		(fields_autoplaced yes)
 		(uuid "4385962b-fa94-43a2-9c26-a1c795d99bb2")
 		(property "Reference" "J16"
-			(at 153.67 67.9449 90)
+			(at 160.02 67.9449 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
 		(property "Value" "12V-"
-			(at 153.67 70.4849 90)
+			(at 160.02 70.4849 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
 		(property "Footprint" "Connector:Banana_Jack_1Pin"
-			(at 152.4 68.58 0)
+			(at 158.75 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1268,7 +1751,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 152.4 68.58 0)
+			(at 158.75 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1277,7 +1760,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x01, script generated"
-			(at 152.4 68.58 0)
+			(at 158.75 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1286,7 +1769,7 @@
 			)
 		)
 		(property "Field5" ""
-			(at 152.4 68.58 90)
+			(at 158.75 68.58 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1611,6 +2094,152 @@
 		)
 	)
 	(symbol
+		(lib_id "Switch:SW_Nidec_CAS-120A1")
+		(at 144.78 124.46 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9eabf5e2-800c-471a-9542-ae679ba251fa")
+		(property "Reference" "SW6"
+			(at 149.86 123.1899 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "BSF_TOGGLE"
+			(at 149.86 125.7299 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Button_Switch_SMD:Nidec_Copal_CAS-120A"
+			(at 154.94 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.nidec-components.com/e/catalog/switch/cas.pdf"
+			(at 152.4 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Switch, single pole double throw"
+			(at 144.78 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fd264fbb-f1e7-4aea-b0c1-e98b3b3f4cec")
+		)
+		(pin "2"
+			(uuid "30129798-a3e0-4e78-bc9d-cb1937a1acbe")
+		)
+		(pin "3"
+			(uuid "0290fabb-0b09-4b67-93fa-ada2c47a8932")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/efaed419-869d-40eb-a2fb-6d0497919989"
+					(reference "SW6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Nidec_CAS-120A1")
+		(at 187.96 124.46 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b29e9075-3d86-49f1-82d3-bb4ef3433729")
+		(property "Reference" "SW8"
+			(at 193.04 123.1899 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "LPF_TOGGLE"
+			(at 193.04 125.7299 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Button_Switch_SMD:Nidec_Copal_CAS-120A"
+			(at 198.12 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.nidec-components.com/e/catalog/switch/cas.pdf"
+			(at 195.58 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Switch, single pole double throw"
+			(at 187.96 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5b41c71d-680c-4a0b-a56b-c279a1e5c07b")
+		)
+		(pin "2"
+			(uuid "b8fe4de6-7ad7-43a5-9e13-b97a08ad5288")
+		)
+		(pin "3"
+			(uuid "461c4125-9c92-435e-9202-6f637e5a03bd")
+		)
+		(instances
+			(project "signalmesh"
+				(path "/fe7b15e9-f0ed-4338-9f03-dd7651dace13/efaed419-869d-40eb-a2fb-6d0497919989"
+					(reference "SW8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Mechanical:MountingHole")
 		(at 269.24 177.8 0)
 		(unit 1)
@@ -1817,21 +2446,19 @@
 		(fields_autoplaced yes)
 		(uuid "dc31a764-8ea3-4466-9577-a5c9541b42ac")
 		(property "Reference" "J19"
-			(at 147.32 67.9449 90)
+			(at 146.05 63.5 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
 			)
 		)
 		(property "Value" "12V+"
-			(at 147.32 70.4849 90)
+			(at 146.05 66.04 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
 			)
 		)
 		(property "Footprint" "Connector:Banana_Jack_1Pin"
@@ -1884,7 +2511,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x01_Socket")
-		(at 158.75 68.58 90)
+		(at 152.4 68.58 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1893,7 +2520,7 @@
 		(fields_autoplaced yes)
 		(uuid "f1fc1768-783c-4947-bed9-5c104148f902")
 		(property "Reference" "J17"
-			(at 160.02 67.9449 90)
+			(at 153.67 67.9449 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1902,7 +2529,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 160.02 70.4849 90)
+			(at 153.67 70.4849 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1911,7 +2538,7 @@
 			)
 		)
 		(property "Footprint" "Connector:Banana_Jack_1Pin"
-			(at 158.75 68.58 0)
+			(at 152.4 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1920,7 +2547,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 158.75 68.58 0)
+			(at 152.4 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1929,7 +2556,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x01, script generated"
-			(at 158.75 68.58 0)
+			(at 152.4 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1938,7 +2565,7 @@
 			)
 		)
 		(property "Field5" ""
-			(at 158.75 68.58 90)
+			(at 152.4 68.58 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2013,7 +2640,7 @@
 			)
 		)
 		(pin "MONO_IN" input
-			(at 138.43 95.25 180)
+			(at 138.43 90.17 180)
 			(uuid "9b43b931-1732-4d51-9f45-202797d99250")
 			(effects
 				(font
@@ -2033,7 +2660,7 @@
 			)
 		)
 		(pin "MONO_OUT" output
-			(at 166.37 95.25 0)
+			(at 166.37 90.17 0)
 			(uuid "cbf99980-e285-4255-a91f-7eeb7082d7af")
 			(effects
 				(font
