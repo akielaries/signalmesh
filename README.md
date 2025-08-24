@@ -8,6 +8,7 @@
     + [Telemetry and Debug Module (TDM)](#telemetry-and-debug-module--tdm-)
 - [Development](#development)
 
+CAD work going on here right now: https://github.com/akielaries/signalmesh_CAD/
 
 # signalmesh
 **signalmesh** aims to be a digital synthesizer and open source
