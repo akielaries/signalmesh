@@ -79,7 +79,7 @@ static const DACConversionGroup dacgrpcfg1 = {
  * GPT6 configuration.
  */
 static const GPTConfig gpt6cfg1 = {
-  .frequency    = 1000000U,
+  .frequency    = 3000000U,
   .callback     = NULL,
   .cr2          = TIM_CR2_MMS_1,    /* MMS = 010 = TRGO on Update Event.    */
   .dier         = 0U
@@ -138,7 +138,7 @@ int main(void) {
   dacStartConversion(&DACD1, &dacgrpcfg1,
                      (dacsample_t *)dac_buffer, DAC_BUFFER_SIZE);
 
-  float frequency_hz = 640.0f;
+  float frequency_hz = 855.0f;
   const uint32_t num_samples = DAC_BUFFER_SIZE;
   uint32_t dac_update_rate = (uint32_t)(frequency_hz * num_samples);
 
