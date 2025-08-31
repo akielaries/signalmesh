@@ -5,7 +5,8 @@
 
 #include "portab.h"
 
-#define DAC_BUFFER_SIZE 360
+
+#define DAC_BUFFER_SIZE 400
 
 
 static dacsample_t dac_buffer[DAC_BUFFER_SIZE] __attribute__((aligned(32)));
@@ -79,7 +80,7 @@ static const DACConversionGroup dacgrpcfg1 = {
  * GPT6 configuration.
  */
 static const GPTConfig gpt6cfg1 = {
-  .frequency    = 3000000U,
+  .frequency    = 6000000U,
   .callback     = NULL,
   .cr2          = TIM_CR2_MMS_1,    /* MMS = 010 = TRGO on Update Event.    */
   .dier         = 0U
@@ -112,13 +113,15 @@ int main(void) {
   palSetPadMode(GPIOC, GPIOC_PIN12, PAL_MODE_ALTERNATE(8));
   palSetPadMode(GPIOD, GPIOD_PIN2, PAL_MODE_ALTERNATE(8));
   sdStart(&SD5, &uart5_cfg);
-  chprintf(chp, "Starting...\r\n");
-  chprintf(chp, "System tick freq: %u Hz\n\r", CH_CFG_ST_FREQUENCY);
+  chprintf(chp, "\r\n...Starting...\r\n\r\n");
+  chprintf(chp, "System tick freq: %u Hz\r\n", CH_CFG_ST_FREQUENCY);
 
+  chprintf(chp, "Setting GPIOA PIN 3-5 modes\r\n");
   palSetPadMode(GPIOA, GPIOA_PIN3, PAL_STM32_MODE_OUTPUT);
   palSetPadMode(GPIOA, GPIOA_PIN4, PAL_STM32_MODE_ANALOG);
   palSetPadMode(GPIOA, GPIOA_PIN5, PAL_STM32_MODE_ANALOG);
 
+  chprintf(chp, "Blinking on boot\r\n");
   for (uint8_t i = 0; i < 5; i++) {
     palSetPad(GPIOA, GPIOA_PIN3);
     chThdSleepMilliseconds(100);
@@ -126,25 +129,31 @@ int main(void) {
     chThdSleepMilliseconds(100);
   }
 
+  chprintf(chp, "Creating sine wave DAC buffer\r\n");
   generate_dac_buffer(dac_buffer, DAC_BUFFER_SIZE);
+  chprintf(chp, "Cleaning DCACHE\r\n");
   SCB_CleanDCache_by_Addr((uint32_t*)dac_buffer, DAC_BUFFER_SIZE * sizeof(dacsample_t));
   /* Starting DAC1 driver.*/
+  chprintf(chp, "Starting DAC1 driver\r\n");
   dacStart(&DACD1, &dac1cfg1);
 
   /* Starting GPT6 driver, it is used for triggering the DAC.*/
+  chprintf(chp, "Starting GPT6 driver\r\n");
   gptStart(&GPTD6, &gpt6cfg1);
 
   /* Starting a continuous conversion.*/
+  chprintf(chp, "Starting DAC conversion\r\n");
   dacStartConversion(&DACD1, &dacgrpcfg1,
                      (dacsample_t *)dac_buffer, DAC_BUFFER_SIZE);
 
-  float frequency_hz = 855.0f;
+  float frequency_hz = 744.0f;
   const uint32_t num_samples = DAC_BUFFER_SIZE;
   uint32_t dac_update_rate = (uint32_t)(frequency_hz * num_samples);
 
   chprintf(chp, "freq: %f hz\r\n", frequency_hz);
   chprintf(chp, "samples: %ld\r\n", num_samples);
   chprintf(chp, "DAC rate: %ld\r\n", dac_update_rate);
+  chprintf(chp, "TIM6 clock: %u Hz\r\n", STM32_TIMCLK1);
 
 
 
@@ -160,7 +169,7 @@ int main(void) {
       dacStopConversion(&DACD1);
     }
     chThdSleepMilliseconds(500);
-    chprintf(chp, "arggg....\r\n");
+    //chprintf(chp, "arggg....\r\n");
   }
   return 0;
 }
