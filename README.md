@@ -15,6 +15,13 @@ CAD work going on here right now: https://github.com/akielaries/signalmesh_CAD/
 hardware/software project
 
 # Details
+Don't forget to initialize submodules. ChibiOS is the RTOS used in this project
+
+```
+git submodule init
+git submodule update
+```
+
 ## Modules
 There are 5 boards active in the **signalmesh** circuit. Three of which are concerned
 with sound (ACM, APM, DSM) and the remaining two (UUM, TDM) are related to health,
