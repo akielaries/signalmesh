@@ -40,6 +40,13 @@
 
 #define PORTAB_DAC_TRIG             5
 
+#define PORTAB_GPT1                 GPTD4
+#define PORTAB_ADC1                 ADCD1
+
+#define ADC_GRP1_NUM_CHANNELS       1
+#define ADC_GRP2_NUM_CHANNELS       1
+
+
 /*===========================================================================*/
 /* Module pre-compile time settings.                                         */
 /*===========================================================================*/
@@ -59,6 +66,12 @@
 /*===========================================================================*/
 /* External declarations.                                                    */
 /*===========================================================================*/
+extern const GPTConfig portab_gptcfg1;
+extern const ADCConfig portab_adccfg1;
+extern const ADCConversionGroup portab_adcgrpcfg1;
+extern const ADCConversionGroup portab_adcgrpcfg2;
+
+extern BaseSequentialStream *chp;
 
 #ifdef __cplusplus
 extern "C" {

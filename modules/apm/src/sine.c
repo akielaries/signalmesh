@@ -87,6 +87,35 @@ static const GPTConfig gpt6cfg1 = {
   .dier         = 0U
 };
 
+#define ADC_GRP_NUM_CHANNELS   1
+#define ADC_GRP_BUF_DEPTH      1
+
+static adcsample_t adc_buf[ADC_GRP_NUM_CHANNELS * ADC_GRP_BUF_DEPTH];
+
+/*
+static const ADCConversionGroup adcgrpcfg = {
+    .circular = false,     // one-shot conversion
+    .num_channels = 1,     // we only read one channel
+    .end_cb = NULL,        // no callback
+    .error_cb = NULL       // no error callback
+};
+*/
+static const ADCConversionGroup adcgrpcfg = {
+    .circular = false,
+    .num_channels = ADC_GRP_NUM_CHANNELS,
+    .end_cb = NULL,
+    .error_cb = NULL,
+    .CR1 = 0,
+    .cr2 = ADC_CR2_SWSTART,  // software trigger
+    .smpr1 = 0,
+    .smpr2 = ADC_SMPR2_SMP_AN12(3), // sample time for IN12 (PA7)
+    .httr = 0,
+    .ltr = 0,
+    .sqr1 = 0,
+    .sqr2 = 0,
+    .sqr3 = ADC_SQR3_SQ10_N(ADC_CHANNEL_IN12)     // first in sequence is IN12
+};
+
 
 void play_sine_wave(float frequency_hz) {
     const uint32_t num_samples = DAC_BUFFER_SIZE;
@@ -122,6 +151,10 @@ int main(void) {
   palSetPadMode(GPIOA, GPIOA_PIN3, PAL_STM32_MODE_OUTPUT);
   palSetPadMode(GPIOA, GPIOA_PIN4, PAL_STM32_MODE_ANALOG);
   palSetPadMode(GPIOA, GPIOA_PIN5, PAL_STM32_MODE_ANALOG);
+  chprintf(chp, "Setting GPIOA PIN 7 potentiometer\r\n");
+  palSetPadMode(GPIOA, 7, PAL_MODE_INPUT_ANALOG);
+  chprintf(chp, "Starting ADC\r\n");
+  adcStart(&ADCD1, NULL);
 
   chprintf(chp, "Blinking on boot\r\n");
   for (uint8_t i = 0; i < 5; i++) {
@@ -148,29 +181,39 @@ int main(void) {
   dacStartConversion(&DACD1, &dacgrpcfg1,
                      (dacsample_t *)dac_buffer, DAC_BUFFER_SIZE);
 
-  float frequency_hz = 744.0f;
-  const uint32_t num_samples = DAC_BUFFER_SIZE;
-  uint32_t dac_update_rate = (uint32_t)(frequency_hz * num_samples);
+  /* Start GPT6 timer; initial period can be 1 to avoid division by zero */
+  gptStart(&GPTD6, &gpt6cfg1);
+  gptStartContinuous(&GPTD6, 1); // temporary small period
 
-  chprintf(chp, "freq: %f hz\r\n", frequency_hz);
-  chprintf(chp, "samples: %ld\r\n", num_samples);
-  chprintf(chp, "DAC rate: %ld\r\n", dac_update_rate);
+  chprintf(chp, "Starting main loop...\r\n");
 
-
-
-  gptStartContinuous(&GPTD6, gpt6cfg1.frequency / dac_update_rate); // this will change the freq
-
-  /*
-   * Normal main() thread activity, if the button is pressed then the DAC
-   * transfer is stopped.
-   */
   while (true) {
+    // Read ADC
+    adcConvert(&ADCD1, &adcgrpcfg, adc_buf, 1);
+    uint16_t adc_value = adc_buf[0];
+
+    // Map ADC to frequency range 100–2000 Hz
+    float freq = 100.0f + ((adc_value / 4095.0f) * (2000.0f - 100.0f));
+
+    // Compute DAC update rate (samples per second)
+    uint32_t dac_update_rate = (uint32_t)(freq * DAC_BUFFER_SIZE);
+
+    // Update GPT timer period for new frequency
+    // GPT period = GPT clock / DAC update rate
+    if (dac_update_rate > 0) {
+      gptChangeInterval(&GPTD6, gpt6cfg1.frequency / dac_update_rate);
+    }
+
+    // Print ADC and frequency
+    chprintf(chp, "ADC: %u  =>  freq: %.2f Hz\r\n", adc_value, freq);
+
+    // Stop DAC if button pressed
     if (palReadLine(PORTAB_LINE_BUTTON) == PORTAB_BUTTON_PRESSED) {
       gptStopTimer(&GPTD6);
       dacStopConversion(&DACD1);
+      chprintf(chp, "DAC stopped by button press\r\n");
     }
-    chThdSleepMilliseconds(500);
-    //chprintf(chp, "arggg....\r\n");
+
+    chThdSleepMilliseconds(50); // update every 50 ms
   }
-  return 0;
 }

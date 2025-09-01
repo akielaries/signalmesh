@@ -122,7 +122,7 @@ LDSCRIPT= $(STARTUPLD)/STM32H755xI_M7.ld
 CSRC = $(ALLCSRC) \
        $(TESTSRC) \
 			 $(CONFDIR)/portab.c \
-       src/sine.c
+       src/adc.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
