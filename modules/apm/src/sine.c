@@ -14,7 +14,7 @@ static dacsample_t dac_buffer[DAC_BUFFER_SIZE] __attribute__((aligned(32)));
 
 static BaseSequentialStream *chp = (BaseSequentialStream *)&SD5;
 static const SerialConfig uart5_cfg = {
-  .speed = 1000000, 
+  .speed = 1000000,
   .cr1   = 0,
   .cr2   = USART_CR2_STOP1_BITS,
   .cr3   = 0,
@@ -80,7 +80,8 @@ static const DACConversionGroup dacgrpcfg1 = {
  * GPT6 configuration.
  */
 static const GPTConfig gpt6cfg1 = {
-  .frequency    = 6000000U,
+  //.frequency    = 6000000U,
+  .frequency    = 7500000U,
   .callback     = NULL,
   .cr2          = TIM_CR2_MMS_1,    /* MMS = 010 = TRGO on Update Event.    */
   .dier         = 0U
@@ -115,6 +116,7 @@ int main(void) {
   sdStart(&SD5, &uart5_cfg);
   chprintf(chp, "\r\n...Starting...\r\n\r\n");
   chprintf(chp, "System tick freq: %u Hz\r\n", CH_CFG_ST_FREQUENCY);
+  chprintf(chp, "GPT6 clock: %u Hz\r\n",gpt6cfg1.frequency);
 
   chprintf(chp, "Setting GPIOA PIN 3-5 modes\r\n");
   palSetPadMode(GPIOA, GPIOA_PIN3, PAL_STM32_MODE_OUTPUT);
@@ -153,7 +155,6 @@ int main(void) {
   chprintf(chp, "freq: %f hz\r\n", frequency_hz);
   chprintf(chp, "samples: %ld\r\n", num_samples);
   chprintf(chp, "DAC rate: %ld\r\n", dac_update_rate);
-  chprintf(chp, "TIM6 clock: %u Hz\r\n", STM32_TIMCLK1);
 
 
 
