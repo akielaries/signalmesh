@@ -14,13 +14,12 @@
 #include "oslib_test_root.h"
 
 
-
 static SerialConfig const uart5_cfg = {
   //.speed = 115200,
   .speed = 1000000,
-  .cr1 = 0,
-  .cr2 = USART_CR2_STOP1_BITS,
-  .cr3 = 0,
+  .cr1   = 0,
+  .cr2   = USART_CR2_STOP1_BITS,
+  .cr3   = 0,
 };
 
 /*
@@ -87,13 +86,13 @@ int main(void) {
    * Activates the serial driver 1 using the driver default configuration.
    */
   palSetPadMode(GPIOC, GPIOC_PIN12, PAL_MODE_ALTERNATE(8)); // TX
-  palSetPadMode(GPIOD, GPIOD_PIN2,  PAL_MODE_ALTERNATE(8)); // RX
-  palSetPadMode(GPIOG, GPIOG_PIN3, PAL_MODE_INPUT); // ext push button
-  palSetPadMode(GPIOA, GPIOA_PIN3, PAL_STM32_MODE_OUTPUT); // blue LED?
+  palSetPadMode(GPIOD, GPIOD_PIN2, PAL_MODE_ALTERNATE(8));  // RX
+  palSetPadMode(GPIOG, GPIOG_PIN3, PAL_MODE_INPUT);         // ext push button
+  palSetPadMode(GPIOA, GPIOA_PIN3, PAL_STM32_MODE_OUTPUT);  // blue LED?
 
   sdStart(&SD3, NULL);
   sdStart(&SD5, &uart5_cfg);
-  BaseSequentialStream* chp = (BaseSequentialStream*) &SD5;
+  BaseSequentialStream *chp = (BaseSequentialStream *)&SD5;
 
   chprintf(chp, "start of program...\r\n");
   // flash some leds to signal the start
@@ -107,7 +106,11 @@ int main(void) {
   /*
    * Creates the example thread.
    */
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO+1, Thread1, NULL);
+  chThdCreateStatic(waThread1,
+                    sizeof(waThread1),
+                    NORMALPRIO + 1,
+                    Thread1,
+                    NULL);
 
   /*
    * Normal main() thread activity, in this demo it does nothing except

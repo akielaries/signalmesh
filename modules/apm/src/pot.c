@@ -1,40 +1,80 @@
+/*
+    ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+
 #include "ch.h"
 #include "hal.h"
 #include "ccportab.h"
 #include "chprintf.h"
+
+
 #include "portab.h"
 
 /*===========================================================================*/
 /* ADC driver related.                                                       */
 /*===========================================================================*/
 
-#define ADC_GRP2_BUF_DEPTH      1   // one sample per callback for simplicity
+#define ADC_GRP1_BUF_DEPTH 1
+#define ADC_GRP2_BUF_DEPTH 64
+#define TS_CAL1_ADDR       ((uint16_t *)0x1FF1E820)
+#define TS_CAL2_ADDR       ((uint16_t *)0x1FF1E840)
 
-/* Buffer for ADC samples */
+
+float adc_to_temperature(uint16_t ts_data) {
+  const float ts_cal1_temp = 30.0f;  // °C
+  const float ts_cal2_temp = 130.0f; // °C
+
+  uint16_t ts_cal1 = *TS_CAL1_ADDR; // raw ADC at 30°C
+  uint16_t ts_cal2 = *TS_CAL2_ADDR; // raw ADC at 130°C
+
+  // float seq1 = (ts_cal2 - ts_cal1);
+
+  float temp = ts_cal1_temp + ((float)(ts_data - ts_cal1)) *
+                                (ts_cal2_temp - ts_cal1_temp) /
+                                (float)(ts_cal2 - ts_cal1);
+  return temp;
+}
+
+
+/* Buffers are allocated with size and address aligned to the cache
+   line size.*/
 #if CACHE_LINE_SIZE > 0
 CC_ALIGN_DATA(CACHE_LINE_SIZE)
 #endif
-adcsample_t samples2[CACHE_SIZE_ALIGN(adcsample_t, ADC_GRP2_NUM_CHANNELS * ADC_GRP2_BUF_DEPTH)];
+adcsample_t
+  samples1[CACHE_SIZE_ALIGN(adcsample_t,
+                            ADC_GRP1_NUM_CHANNELS *ADC_GRP1_BUF_DEPTH)];
 
-/* Latest ADC value */
-volatile uint16_t raw_adc = 0;
-
-/*===========================================================================*/
-/* ADC callbacks                                                             */
-/*===========================================================================*/
+#if CACHE_LINE_SIZE > 0
+CC_ALIGN_DATA(CACHE_LINE_SIZE)
+#endif
+adcsample_t
+  samples2[CACHE_SIZE_ALIGN(adcsample_t,
+                            ADC_GRP2_NUM_CHANNELS *ADC_GRP2_BUF_DEPTH)];
 
 /*
  * ADC streaming callback.
  */
-size_t n= 0, nx = 0, ny = 0;
+size_t n = 0, nx = 0, ny = 0;
 void adccallback(ADCDriver *adcp) {
 
   /* Updating counters.*/
   n++;
   if (adcIsBufferComplete(adcp)) {
     nx += 1;
-  }
-  else {
+  } else {
     ny += 1;
   }
 
@@ -57,10 +97,14 @@ void adcerrorcallback(ADCDriver *adcp, adcerror_t err) {
 }
 
 /*===========================================================================*/
-/* LED blinking thread                                                       */
+/* Application code.                                                         */
 /*===========================================================================*/
 
-static THD_WORKING_AREA(waThread1, 512);
+/*
+ * This is a periodic thread that does absolutely nothing except flashing
+ * a LED attached to TP1.
+ */
+static THD_WORKING_AREA(waThread1, 128);
 static THD_FUNCTION(Thread1, arg) {
 
   (void)arg;
@@ -73,58 +117,82 @@ static THD_FUNCTION(Thread1, arg) {
   }
 }
 
-/*===========================================================================*/
-/* Main                                                                      */
-/*===========================================================================*/
-
+/*
+ * Application entry point.
+ */
 int main(void) {
-    halInit();
-    chSysInit();
 
-    palSetPadMode(GPIOC, GPIOC_PIN12, PAL_MODE_ALTERNATE(8));
-    palSetPadMode(GPIOD, GPIOD_PIN2, PAL_MODE_ALTERNATE(8));
-    sdStart(&SD5, &uart5_cfg);
-    chprintf(chp, "\r\nStarting continuous ADC test...\r\n");
+  /*
+   * System initializations.
+   * - HAL initialization, this also initializes the configured device drivers
+   *   and performs the board-specific initializations.
+   * - Kernel initialization, the main() function becomes a thread and the
+   *   RTOS is active.
+   */
+  halInit();
+  chSysInit();
 
-    /* Board setup */
-    portab_setup();
+  /* Board-dependent GPIO setup code.*/
+  portab_setup();
+  chprintf(chp, "\r\n...Starting...\r\n\r\n");
+
+  /*
+   * Creates the example thread.
+   */
+  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
+
+  /*
+   * Starting PORTAB_ADC1 driver and the temperature sensor.
+   */
+  adcStart(&PORTAB_ADC1, &portab_adccfg1);
+  adcSTM32EnableVREF(&PORTAB_ADC1);
+  adcSTM32EnableTS(&PORTAB_ADC1);
+
+  /* Performing a one-shot conversion on two channels.*/
+  adcConvert(&PORTAB_ADC1, &portab_adcgrpcfg1, samples1, ADC_GRP1_BUF_DEPTH);
+  cacheBufferInvalidate(samples1, sizeof(samples1) / sizeof(adcsample_t));
+
+  /*
+   * Starting PORTAB_GPT1 driver, it is used for triggering the ADC.
+   */
+  gptStart(&PORTAB_GPT1, &portab_gptcfg1);
+
+  /*
+   * Starting an ADC continuous conversion triggered with a period of
+   * 1/10000 second.
+   */
+  adcStartConversion(&PORTAB_ADC1,
+                     &portab_adcgrpcfg2,
+                     samples2,
+                     ADC_GRP2_BUF_DEPTH);
+
+  gptStartContinuous(&PORTAB_GPT1, 100U);
+
+  chprintf(chp, "ADC1[%lu]: %u\r\n", 0, (unsigned)samples1[0]);
+
+  /*
+   * Normal main() thread activity, if the button is pressed then the
+   * conversion is stopped.
+   */
+  while (true) {
+    cacheBufferInvalidate(samples2, sizeof(samples2) / sizeof(adcsample_t));
     chprintf(chp, "counters - nx: %d ny: %d n: %d\r\n", nx, ny, n);
+    /*
+        for (size_t i = 0; i < ADC_GRP1_BUF_DEPTH; i++) {
+          //float temp = adc_to_temperature(samples1[i]);
 
-    /* Start LED blinking thread */
-    chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
-
-    /* Start ADC driver */
-    adcStart(&PORTAB_ADC1, &portab_adccfg1);
-
-    /* No need to enable temperature sensor or VREF for potentiometer */
-    // adcSTM32EnableVREF(&PORTAB_ADC1);
-    // adcSTM32EnableTS(&PORTAB_ADC1);
-  adcConvert(&PORTAB_ADC1, &portab_adcgrpcfg1, samples2, ADC_GRP2_BUF_DEPTH);
-  cacheBufferInvalidate(samples2, sizeof (samples2) / sizeof (adcsample_t));
-
-    /* Start GPT1 timer (used for triggering ADC) */
-    gptStart(&PORTAB_GPT1, &portab_gptcfg1);
-
-    /* Start continuous ADC conversion on PA0 */
-    adcStartConversion(&PORTAB_ADC1, &portab_adcgrpcfg2,
-                       samples2, ADC_GRP2_BUF_DEPTH);
-    gptStartContinuous(&PORTAB_GPT1, 100U);
-
-    /* Main loop: print latest ADC value safely */
-    while (true) {
-      for (size_t i = 0; i < ADC_GRP2_BUF_DEPTH; i++) {
-        chprintf(chp, "ADC1[%lu]: %u\r\n", i, (unsigned)samples2[i]);
-      }
-
-
-        chprintf(chp, "Latest ADC: %u\r\n", raw_adc);
-        chThdSleepMilliseconds(500);
-
-        /* Stop ADC if button pressed */
-        if (palReadLine(PORTAB_LINE_BUTTON) == PORTAB_BUTTON_PRESSED) {
-            gptStopTimer(&PORTAB_GPT1);
-            adcStopConversion(&PORTAB_ADC1);
+          chprintf(chp, "ADC1[%lu]: %u\r\n", i, (unsigned)samples1[i]);
         }
+    */
+    for (size_t i = 0; i < 1; i++) {
+      chprintf(chp, "ADC2[%lu]: %u\r\n", i, (unsigned)samples2[i]);
     }
-}
 
+    if (palReadLine(PORTAB_LINE_BUTTON) == PORTAB_BUTTON_PRESSED) {
+      gptStopTimer(&PORTAB_GPT1);
+      adcStopConversion(&PORTAB_ADC1);
+    }
+    chThdSleepMilliseconds(500);
+  }
+  return 0;
+}

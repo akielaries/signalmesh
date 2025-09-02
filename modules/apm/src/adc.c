@@ -59,6 +59,28 @@ CC_ALIGN_DATA(CACHE_LINE_SIZE)
 #endif
 adcsample_t samples2[CACHE_SIZE_ALIGN(adcsample_t, ADC_GRP2_NUM_CHANNELS * ADC_GRP2_BUF_DEPTH)];
 
+
+/*
+uint16_t adc_value(int ix) {
+  if (ix < 0 || ix >= 2) return 0;
+  return (int16_t)samples2[ix];
+}
+*/
+
+uint16_t adc_value(int ix) {
+  if (ix < 0 || ix >= ADC_GRP2_NUM_CHANNELS) return 0;
+
+  /* number of full pairs in the circular DMA buffer */
+  uint32_t samples_per_channel = ADC_GRP2_BUF_DEPTH / ADC_GRP2_NUM_CHANNELS;
+  uint32_t sum = 0;
+
+  for (uint32_t i = 0; i < samples_per_channel; i++) {
+    /* buffer is interleaved: [ch0,ch1,ch0,ch1,...] where ch0==TEMP, ch1==POT */
+    sum += samples2[i * ADC_GRP2_NUM_CHANNELS + ix];
+  }
+  return (uint16_t)(sum / samples_per_channel);
+}
+
 /*
  * ADC streaming callback.
  */
@@ -159,6 +181,7 @@ int main(void) {
    */
   adcStartConversion(&PORTAB_ADC1, &portab_adcgrpcfg2,
                      samples2, ADC_GRP2_BUF_DEPTH);
+
   gptStartContinuous(&PORTAB_GPT1, 100U);
 
   chprintf(chp, "ADC1[%lu]: %u\r\n", 0, (unsigned)samples1[0]);
@@ -168,17 +191,24 @@ int main(void) {
    * conversion is stopped.
    */
   while (true) {
-    chprintf(chp, "counters - nx: %d ny: %d n: %d\r\n", nx, ny, n);
-/*
-    for (size_t i = 0; i < ADC_GRP1_BUF_DEPTH; i++) {
-      //float temp = adc_to_temperature(samples1[i]);
+    cacheBufferInvalidate(samples2, sizeof(samples2)/sizeof(adcsample_t));
+    int pot, temp;
 
-      chprintf(chp, "ADC1[%lu]: %u\r\n", i, (unsigned)samples1[i]);
+    pot = adc_value(0);
+    temp = adc_value(1);
+
+/*
+    chprintf(chp, "Full buffer:\r\n");
+    for (uint32_t i = 0; i < ADC_GRP2_BUF_DEPTH; i++) {
+      chprintf(chp, "%u\r\n", samples2[i]);
     }
 */
-    for (size_t i = 0; i < ADC_GRP2_BUF_DEPTH; i++) {
-      chprintf(chp, "ADC2[%lu]: %u\r\n", i, (unsigned)samples2[i]);
-    }
+    chprintf(chp, "Pot: %u  Temp raw: %u  Temp C: %.1f\r\n",
+             pot,
+             temp,
+             adc_to_temperature(temp));
+
+    chprintf(chp, "counters - nx: %d ny: %d n: %d\r\n", nx, ny, n);
 
     if (palReadLine(PORTAB_LINE_BUTTON) == PORTAB_BUTTON_PRESSED) {
       gptStopTimer(&PORTAB_GPT1);
@@ -186,5 +216,6 @@ int main(void) {
     }
     chThdSleepMilliseconds(500);
   }
+
   return 0;
 }

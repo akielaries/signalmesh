@@ -59,7 +59,7 @@ const ADCConversionGroup portab_adcgrpcfg1 = {
   .cfgr         = 0U,
   .cfgr2        = 0U,
   .ccr          = 0U,
-  .pcsel        = ADC_SELMASK_IN18,//ADC_SELMASK_IN5,
+  .pcsel        = ADC_SELMASK_IN10,//ADC_SELMASK_IN5,
   .ltr1         = 0x00000000U,
   .htr1         = 0x03FFFFFFU,
   .ltr2         = 0x00000000U,
@@ -74,7 +74,7 @@ const ADCConversionGroup portab_adcgrpcfg1 = {
   .sqr          = {
     //ADC_SQR1_SQ1_N(ADC_CHANNEL_IN0) |
       //ADC_SQR1_SQ2_N(ADC_CHANNEL_IN5) |
-      ADC_SQR1_SQ1_N(ADC_CHANNEL_IN18),
+      ADC_SQR1_SQ1_N(ADC_CHANNEL_IN10),
     0U,
     0U,
     0U
@@ -91,11 +91,14 @@ const ADCConversionGroup portab_adcgrpcfg2 = {
   .num_channels = ADC_GRP2_NUM_CHANNELS,
   .end_cb       = adccallback,
   .error_cb     = adcerrorcallback,
-  .cfgr         = ADC_CFGR_CONT_ENABLED /*| ADC_CFGR_EXTEN_RISING |
-					  ADC_CFGR_EXTSEL_SRC(12)*/,  /* TIM4_TRGO */
+  .cfgr         =
+            ADC_CFGR_CONT_ENABLED,/* |
+            ADC_CFGR_EXTEN_RISING |
+					  ADC_CFGR_EXTSEL_SRC(12),*/  /* TIM4_TRGO */
   .cfgr2        = 0U,
   .ccr          = 0U,
-  .pcsel        = ADC_SELMASK_IN16,
+  .pcsel        = ADC_SELMASK_IN16 | // PA0 POT
+                  ADC_SELMASK_IN5,  // TEMP SENSOR
   .ltr1         = 0x00000000U,
   .htr1         = 0x03FFFFFFU,
   .ltr2         = 0x00000000U,
@@ -103,16 +106,13 @@ const ADCConversionGroup portab_adcgrpcfg2 = {
   .ltr3         = 0x00000000U,
   .htr3         = 0x03FFFFFFU,
   .smpr         = {
-    //ADC_SMPR2_SMP_AN16(ADC_SMPR_SMP_384P5),
+    //ADC_SMPR2_SMP_AN16(ADC_SMPR_SMP_64P5),
     ADC_SMPR2_SMP_AN16(ADC_SMPR_SMP_810P5),
-
-    0U
+      ADC_SMPR2_SMP_AN12(ADC_SMPR_SMP_810P5),
   },
   .sqr          = {
-    ADC_SQR1_SQ1_N(ADC_CHANNEL_IN16),
-    0U,
-    0U,
-    0U
+    ADC_SQR1_SQ1_N(ADC_CHANNEL_IN16) |
+      ADC_SQR1_SQ2_N(ADC_CHANNEL_IN12),
   }
 };
 
@@ -145,8 +145,15 @@ void portab_setup(void) {
   palSetPadMode(GPIOC, GPIOC_PIN12, PAL_MODE_ALTERNATE(8));
   palSetPadMode(GPIOD, GPIOD_PIN2, PAL_MODE_ALTERNATE(8));
   sdStart(&SD5, &uart5_cfg);
+  chprintf(chp, "booting...");
+  for (uint8_t i = 0; i < 4; i++) {
+    chprintf(chp, ".");
+    chThdSleepMilliseconds(500);
+  }
+  chprintf(chp, "\r\n");
   /* ADC inputs.*/
   palSetPadMode(GPIOA, 0, PAL_MODE_INPUT_ANALOG);
+  palSetPadMode(GPIOF, 12,PAL_MODE_INPUT_ANALOG);
   palSetPadMode(GPIOB, 1, PAL_MODE_INPUT_ANALOG);
 
   /* Setting up the output pin as analog as suggested

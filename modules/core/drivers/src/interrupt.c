@@ -3,7 +3,7 @@
 #include "chprintf.h"
 
 
-#define LINE_EXT_BUTTON PAL_LINE(GPIOE, 3)
+#define LINE_EXT_BUTTON  PAL_LINE(GPIOE, 3)
 #define LINE_TRIGGER_OUT PAL_LINE(GPIOE, 6)
 
 
@@ -41,7 +41,7 @@ static void button_cb(void *arg) {
   (void)arg;
   palToggleLine(LINE_LED1);
   chSysLockFromISR();
-  chBSemSignalI(&buttonSem);  // Notify main thread
+  chBSemSignalI(&buttonSem); // Notify main thread
   /* Disabling the event on the line and setting a timer to
      re-enable it. */
   palDisableLineEventI(LINE_EXT_BUTTON);
@@ -55,7 +55,7 @@ int main(void) {
   halInit();
   chSysInit();
   chVTObjectInit(&vt);
-  chBSemObjectInit(&buttonSem, true);  // Initialize semaphore
+  chBSemObjectInit(&buttonSem, true); // Initialize semaphore
 
   // init UART
   palSetPadMode(GPIOC, GPIOC_PIN12, PAL_MODE_ALTERNATE(8));
@@ -106,5 +106,4 @@ int main(void) {
     palClearLine(LINE_LED2);
     chThdSleepMilliseconds(200);
   }
-
 }

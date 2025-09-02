@@ -4,19 +4,19 @@
 
 
 #define DMA_STREAM_ID STM32_DMA_STREAM_ID(1, 2)
-#define DMA_CHANNEL      3                                            // Channel tied to TIM2_UP (check your MCU RM)
-#define DMA_PRIORITY     2
+#define DMA_CHANNEL   3 // Channel tied to TIM2_UP (check your MCU RM)
+#define DMA_PRIORITY  2
 
 static BaseSequentialStream *chp = (BaseSequentialStream *)&SD5;
 
 static const SerialConfig uart5_cfg = {
   .speed = 1000000,
-  .cr1 = 0,
-  .cr2 = 0,
-  .cr3 = 0,
+  .cr1   = 0,
+  .cr2   = 0,
+  .cr3   = 0,
 };
 
-static uint16_t samples[64];    // DMA destination buffer
+static uint16_t samples[64]; // DMA destination buffer
 static volatile bool dmaComplete = false;
 
 /* DMA ISR handler */
@@ -37,17 +37,15 @@ static void dmaStart(void) {
   b = dmaStreamAlloc(DMA_STREAM, DMA_PRIORITY, dmaCompleteISR, NULL);
   osalDbgAssert(!b, "DMA already allocated");
 
-  dmaStreamSetPeripheral(DMA_STREAM, &TIM2->CNT);  // Source: timer counter
-  dmaStreamSetMemory0(DMA_STREAM, samples);        // Destination: RAM buffer
+  dmaStreamSetPeripheral(DMA_STREAM, &TIM2->CNT); // Source: timer counter
+  dmaStreamSetMemory0(DMA_STREAM, samples);       // Destination: RAM buffer
   dmaStreamSetTransactionSize(DMA_STREAM, 64);
 
   uint32_t mode = STM32_DMA_CR_CHSEL(DMA_CHANNEL) |
-                  STM32_DMA_CR_PL(DMA_PRIORITY) |
-                  STM32_DMA_CR_DIR_P2M |
+                  STM32_DMA_CR_PL(DMA_PRIORITY) | STM32_DMA_CR_DIR_P2M |
                   STM32_DMA_CR_MSIZE_HWORD | STM32_DMA_CR_PSIZE_HWORD |
-                  STM32_DMA_CR_MINC |
-                  STM32_DMA_CR_TCIE |
-                  STM32_DMA_CR_DMEIE | STM32_DMA_CR_TEIE;
+                  STM32_DMA_CR_MINC | STM32_DMA_CR_TCIE | STM32_DMA_CR_DMEIE |
+                  STM32_DMA_CR_TEIE;
 
   dmaStreamSetMode(DMA_STREAM, mode);
   dmaStreamEnable(DMA_STREAM);
@@ -88,10 +86,13 @@ int main(void) {
 
   dmaStart();
 
-  chThdCreateStatic(waBlinker, sizeof(waBlinker), NORMALPRIO, ThreadBlinker, NULL);
+  chThdCreateStatic(waBlinker,
+                    sizeof(waBlinker),
+                    NORMALPRIO,
+                    ThreadBlinker,
+                    NULL);
 
   while (true) {
     chThdSleep(TIME_INFINITE);
   }
 }
-

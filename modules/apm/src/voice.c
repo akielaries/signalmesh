@@ -9,30 +9,135 @@
 
 
 typedef enum {
-  NOTE_C0, NOTE_CS0, NOTE_D0, NOTE_DS0, NOTE_E0, NOTE_F0, NOTE_FS0, NOTE_G0, NOTE_GS0, NOTE_A0, NOTE_AS0, NOTE_B0,
-  NOTE_C1, NOTE_CS1, NOTE_D1, NOTE_DS1, NOTE_E1, NOTE_F1, NOTE_FS1, NOTE_G1, NOTE_GS1, NOTE_A1, NOTE_AS1, NOTE_B1,
-  NOTE_C2, NOTE_CS2, NOTE_D2, NOTE_DS2, NOTE_E2, NOTE_F2, NOTE_FS2, NOTE_G2, NOTE_GS2, NOTE_A2, NOTE_AS2, NOTE_B2,
-  NOTE_C3, NOTE_CS3, NOTE_D3, NOTE_DS3, NOTE_E3, NOTE_F3, NOTE_FS3, NOTE_G3, NOTE_GS3, NOTE_A3, NOTE_AS3, NOTE_B3,
-  NOTE_C4, NOTE_CS4, NOTE_D4, NOTE_DS4, NOTE_E4, NOTE_F4, NOTE_FS4, NOTE_G4, NOTE_GS4, NOTE_A4, NOTE_AS4, NOTE_B4,
-  NOTE_C5, NOTE_CS5, NOTE_D5, NOTE_DS5, NOTE_E5, NOTE_F5, NOTE_FS5, NOTE_G5, NOTE_GS5, NOTE_A5, NOTE_AS5, NOTE_B5,
-  NOTE_C6, NOTE_CS6, NOTE_D6, NOTE_DS6, NOTE_E6, NOTE_F6, NOTE_FS6, NOTE_G6, NOTE_GS6, NOTE_A6, NOTE_AS6, NOTE_B6,
-  NOTE_C7, NOTE_CS7, NOTE_D7, NOTE_DS7, NOTE_E7, NOTE_F7, NOTE_FS7, NOTE_G7, NOTE_GS7, NOTE_A7, NOTE_AS7, NOTE_B7,
-  NOTE_C8, NOTE_CS8, NOTE_D8, NOTE_DS8, NOTE_E8, NOTE_F8, NOTE_FS8, NOTE_G8, NOTE_GS8, NOTE_A8, NOTE_AS8, NOTE_B8,
+  NOTE_C0,
+  NOTE_CS0,
+  NOTE_D0,
+  NOTE_DS0,
+  NOTE_E0,
+  NOTE_F0,
+  NOTE_FS0,
+  NOTE_G0,
+  NOTE_GS0,
+  NOTE_A0,
+  NOTE_AS0,
+  NOTE_B0,
+  NOTE_C1,
+  NOTE_CS1,
+  NOTE_D1,
+  NOTE_DS1,
+  NOTE_E1,
+  NOTE_F1,
+  NOTE_FS1,
+  NOTE_G1,
+  NOTE_GS1,
+  NOTE_A1,
+  NOTE_AS1,
+  NOTE_B1,
+  NOTE_C2,
+  NOTE_CS2,
+  NOTE_D2,
+  NOTE_DS2,
+  NOTE_E2,
+  NOTE_F2,
+  NOTE_FS2,
+  NOTE_G2,
+  NOTE_GS2,
+  NOTE_A2,
+  NOTE_AS2,
+  NOTE_B2,
+  NOTE_C3,
+  NOTE_CS3,
+  NOTE_D3,
+  NOTE_DS3,
+  NOTE_E3,
+  NOTE_F3,
+  NOTE_FS3,
+  NOTE_G3,
+  NOTE_GS3,
+  NOTE_A3,
+  NOTE_AS3,
+  NOTE_B3,
+  NOTE_C4,
+  NOTE_CS4,
+  NOTE_D4,
+  NOTE_DS4,
+  NOTE_E4,
+  NOTE_F4,
+  NOTE_FS4,
+  NOTE_G4,
+  NOTE_GS4,
+  NOTE_A4,
+  NOTE_AS4,
+  NOTE_B4,
+  NOTE_C5,
+  NOTE_CS5,
+  NOTE_D5,
+  NOTE_DS5,
+  NOTE_E5,
+  NOTE_F5,
+  NOTE_FS5,
+  NOTE_G5,
+  NOTE_GS5,
+  NOTE_A5,
+  NOTE_AS5,
+  NOTE_B5,
+  NOTE_C6,
+  NOTE_CS6,
+  NOTE_D6,
+  NOTE_DS6,
+  NOTE_E6,
+  NOTE_F6,
+  NOTE_FS6,
+  NOTE_G6,
+  NOTE_GS6,
+  NOTE_A6,
+  NOTE_AS6,
+  NOTE_B6,
+  NOTE_C7,
+  NOTE_CS7,
+  NOTE_D7,
+  NOTE_DS7,
+  NOTE_E7,
+  NOTE_F7,
+  NOTE_FS7,
+  NOTE_G7,
+  NOTE_GS7,
+  NOTE_A7,
+  NOTE_AS7,
+  NOTE_B7,
+  NOTE_C8,
+  NOTE_CS8,
+  NOTE_D8,
+  NOTE_DS8,
+  NOTE_E8,
+  NOTE_F8,
+  NOTE_FS8,
+  NOTE_G8,
+  NOTE_GS8,
+  NOTE_A8,
+  NOTE_AS8,
+  NOTE_B8,
   NOTE_COUNT
 } note_t;
 
 // Frequency table (in Hz) for the corresponding note enum
 static const float note_frequencies[NOTE_COUNT] = {
-  16.35f, 17.32f, 18.35f, 19.45f, 20.60f, 21.83f, 23.12f, 24.50f, 25.96f, 27.50f, 29.14f, 30.87f,
-  32.70f, 34.65f, 36.71f, 38.89f, 41.20f, 43.65f, 46.25f, 49.00f, 51.91f, 55.00f, 58.27f, 61.74f,
-  65.41f, 69.30f, 73.42f, 77.78f, 82.41f, 87.31f, 92.50f, 98.00f, 103.83f, 110.00f, 116.54f, 123.47f,
-  130.81f, 138.59f, 146.83f, 155.56f, 164.81f, 174.61f, 185.00f, 196.00f, 207.65f, 220.00f, 233.08f, 246.94f,
-  261.63f, 277.18f, 293.66f, 311.13f, 329.63f, 349.23f, 369.99f, 392.00f, 415.30f, 440.00f, 466.16f, 493.88f,
-  523.25f, 554.37f, 587.33f, 622.25f, 659.25f, 698.46f, 739.99f, 783.99f, 830.61f, 880.00f, 932.33f, 987.77f,
-  1046.50f, 1108.73f, 1174.66f, 1244.51f, 1318.51f, 1396.91f, 1479.98f, 1567.98f, 1661.22f, 1760.00f, 1864.66f, 1975.53f,
-  2093.00f, 2217.46f, 2349.32f, 2489.02f, 2637.02f, 2793.83f, 2959.96f, 3135.96f, 3322.44f, 3520.00f, 3729.31f, 3951.07f,
-  4186.01f, 4434.92f, 4698.63f, 4978.03f, 5274.04f, 5587.65f, 5919.91f, 6271.93f, 6644.88f, 7040.00f, 7458.62f, 7902.13f
-};
+  16.35f,   17.32f,   18.35f,   19.45f,   20.60f,   21.83f,   23.12f,
+  24.50f,   25.96f,   27.50f,   29.14f,   30.87f,   32.70f,   34.65f,
+  36.71f,   38.89f,   41.20f,   43.65f,   46.25f,   49.00f,   51.91f,
+  55.00f,   58.27f,   61.74f,   65.41f,   69.30f,   73.42f,   77.78f,
+  82.41f,   87.31f,   92.50f,   98.00f,   103.83f,  110.00f,  116.54f,
+  123.47f,  130.81f,  138.59f,  146.83f,  155.56f,  164.81f,  174.61f,
+  185.00f,  196.00f,  207.65f,  220.00f,  233.08f,  246.94f,  261.63f,
+  277.18f,  293.66f,  311.13f,  329.63f,  349.23f,  369.99f,  392.00f,
+  415.30f,  440.00f,  466.16f,  493.88f,  523.25f,  554.37f,  587.33f,
+  622.25f,  659.25f,  698.46f,  739.99f,  783.99f,  830.61f,  880.00f,
+  932.33f,  987.77f,  1046.50f, 1108.73f, 1174.66f, 1244.51f, 1318.51f,
+  1396.91f, 1479.98f, 1567.98f, 1661.22f, 1760.00f, 1864.66f, 1975.53f,
+  2093.00f, 2217.46f, 2349.32f, 2489.02f, 2637.02f, 2793.83f, 2959.96f,
+  3135.96f, 3322.44f, 3520.00f, 3729.31f, 3951.07f, 4186.01f, 4434.92f,
+  4698.63f, 4978.03f, 5274.04f, 5587.65f, 5919.91f, 6271.93f, 6644.88f,
+  7040.00f, 7458.62f, 7902.13f};
 
 
 // Simple voice structure
@@ -72,13 +177,16 @@ void dac_write(int dac, int16_t val) {
   }
 }
 
-void test_dac_write(int16_t right, int16_t left){
+void test_dac_write(int16_t right, int16_t left) {
   float dac1_volt = (right / (pow(2, 12)) * 3.3);
   float dac2_volt = (left / (pow(2, 12)) * 3.3);
 
-  chprintf(chp, "writing %d (%f v) to DAC1 %d (%f v) to DAC2\r\n",
-           right, dac1_volt,
-           left, dac2_volt);
+  chprintf(chp,
+           "writing %d (%f v) to DAC1 %d (%f v) to DAC2\r\n",
+           right,
+           dac1_volt,
+           left,
+           dac2_volt);
   dac_write(1, right);
   dac_write(2, left);
 }
@@ -168,12 +276,15 @@ void test_c_major_chord(int waveform) {
       }
     }
 
-    // something about clamping the signal to prevent distortion but this doesn't work!
+    // something about clamping the signal to prevent distortion but this
+    // doesn't work!
     if (active_count > 0) {
       mixed_sample /= active_count;
     }
-    if (mixed_sample > 1.0f) mixed_sample = 1.0f;
-    if (mixed_sample < -1.0f) mixed_sample = -1.0f;
+    if (mixed_sample > 1.0f)
+      mixed_sample = 1.0f;
+    if (mixed_sample < -1.0f)
+      mixed_sample = -1.0f;
 
     // Convert to DAC sample
     dacsample_t dac_sample = (dacsample_t)(mixed_sample * AMPLITUDE + OFFSET);
@@ -230,12 +341,15 @@ void test_b_major_chord(int waveform) {
       }
     }
 
-    // something about clamping the signal to prevent distortion but this doesn't work!
+    // something about clamping the signal to prevent distortion but this
+    // doesn't work!
     if (active_count > 0) {
       mixed_sample /= active_count;
     }
-    if (mixed_sample > 1.0f) mixed_sample = 1.0f;
-    if (mixed_sample < -1.0f) mixed_sample = -1.0f;
+    if (mixed_sample > 1.0f)
+      mixed_sample = 1.0f;
+    if (mixed_sample < -1.0f)
+      mixed_sample = -1.0f;
 
     // Convert to DAC sample
     dacsample_t dac_sample = (dacsample_t)(mixed_sample * AMPLITUDE + OFFSET);
