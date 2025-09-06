@@ -52,7 +52,7 @@ float adc_to_temperature(uint16_t ts_data) {
 #if CACHE_LINE_SIZE > 0
 CC_ALIGN_DATA(CACHE_LINE_SIZE)
 #endif
-adcsample_t samples1[CACHE_SIZE_ALIGN(adcsample_t, ADC_GRP1_NUM_CHANNELS * ADC_GRP1_BUF_DEPTH)];
+//adcsample_t samples1[CACHE_SIZE_ALIGN(adcsample_t, ADC_GRP1_NUM_CHANNELS * ADC_GRP1_BUF_DEPTH)];
 
 #if CACHE_LINE_SIZE > 0
 CC_ALIGN_DATA(CACHE_LINE_SIZE)
@@ -60,26 +60,26 @@ CC_ALIGN_DATA(CACHE_LINE_SIZE)
 adcsample_t samples2[CACHE_SIZE_ALIGN(adcsample_t, ADC_GRP2_NUM_CHANNELS * ADC_GRP2_BUF_DEPTH)];
 
 
-/*
 uint16_t adc_value(int ix) {
-  if (ix < 0 || ix >= 2) return 0;
+  if (ix < 0 || ix >= ADC_GRP2_NUM_CHANNELS) return 0;
   return (int16_t)samples2[ix];
 }
-*/
 
+/*
 uint16_t adc_value(int ix) {
   if (ix < 0 || ix >= ADC_GRP2_NUM_CHANNELS) return 0;
 
-  /* number of full pairs in the circular DMA buffer */
+  // number of full pairs in the circular DMA buffer
   uint32_t samples_per_channel = ADC_GRP2_BUF_DEPTH / ADC_GRP2_NUM_CHANNELS;
   uint32_t sum = 0;
 
   for (uint32_t i = 0; i < samples_per_channel; i++) {
-    /* buffer is interleaved: [ch0,ch1,ch0,ch1,...] where ch0==TEMP, ch1==POT */
+    // buffer is interleaved: [ch0,ch1,ch0,ch1,...] where ch0==TEMP, ch1==POT
     sum += samples2[i * ADC_GRP2_NUM_CHANNELS + ix];
   }
   return (uint16_t)(sum / samples_per_channel);
 }
+*/
 
 /*
  * ADC streaming callback.
@@ -167,8 +167,8 @@ int main(void) {
   adcSTM32EnableTS(&PORTAB_ADC1);
 
   /* Performing a one-shot conversion on two channels.*/
-  adcConvert(&PORTAB_ADC1, &portab_adcgrpcfg1, samples1, ADC_GRP1_BUF_DEPTH);
-  cacheBufferInvalidate(samples1, sizeof (samples1) / sizeof (adcsample_t));
+  //adcConvert(&PORTAB_ADC1, &portab_adcgrpcfg1, samples1, ADC_GRP1_BUF_DEPTH);
+  //cacheBufferInvalidate(samples1, sizeof (samples1) / sizeof (adcsample_t));
 
   /*
    * Starting PORTAB_GPT1 driver, it is used for triggering the ADC.
@@ -184,7 +184,7 @@ int main(void) {
 
   gptStartContinuous(&PORTAB_GPT1, 100U);
 
-  chprintf(chp, "ADC1[%lu]: %u\r\n", 0, (unsigned)samples1[0]);
+  //chprintf(chp, "ADC1[%lu]: %u\r\n", 0, (unsigned)samples1[0]);
 
   /*
    * Normal main() thread activity, if the button is pressed then the
@@ -192,10 +192,11 @@ int main(void) {
    */
   while (true) {
     cacheBufferInvalidate(samples2, sizeof(samples2)/sizeof(adcsample_t));
-    int pot, temp;
+    int pot1, pot2, pot3;
 
-    pot = adc_value(0);
-    temp = adc_value(1);
+    pot1 = adc_value(0);
+    pot2 = adc_value(1);
+    pot3 = adc_value(2);
 
 /*
     chprintf(chp, "Full buffer:\r\n");
@@ -203,10 +204,10 @@ int main(void) {
       chprintf(chp, "%u\r\n", samples2[i]);
     }
 */
-    chprintf(chp, "Pot: %u  Temp raw: %u  Temp C: %.1f\r\n",
-             pot,
-             temp,
-             adc_to_temperature(temp));
+    chprintf(chp, "Pot1: %u  Pot2: %u Pot3: %u\r\n\r\n",
+             pot1,
+             pot2,
+             pot3);
 
     chprintf(chp, "counters - nx: %d ny: %d n: %d\r\n", nx, ny, n);
 

@@ -59,7 +59,7 @@ const ADCConversionGroup portab_adcgrpcfg1 = {
   .cfgr         = 0U,
   .cfgr2        = 0U,
   .ccr          = 0U,
-  .pcsel        = ADC_SELMASK_IN10,//ADC_SELMASK_IN5,
+  .pcsel        = ADC_SELMASK_IN2,//ADC_SELMASK_IN5,
   .ltr1         = 0x00000000U,
   .htr1         = 0x03FFFFFFU,
   .ltr2         = 0x00000000U,
@@ -68,18 +68,20 @@ const ADCConversionGroup portab_adcgrpcfg1 = {
   .htr3         = 0x03FFFFFFU,
   .smpr         = {
     //ADC_SMPR1_SMP_AN0(ADC_SMPR_SMP_384P5) |
-    ADC_SMPR2_SMP_AN18(ADC_SMPR_SMP_810P5),
+    ADC_SMPR1_SMP_AN2(ADC_SMPR_SMP_810P5),
     0U
   },
   .sqr          = {
     //ADC_SQR1_SQ1_N(ADC_CHANNEL_IN0) |
       //ADC_SQR1_SQ2_N(ADC_CHANNEL_IN5) |
-      ADC_SQR1_SQ1_N(ADC_CHANNEL_IN10),
+      ADC_SQR1_SQ1_N(ADC_CHANNEL_IN2),
     0U,
     0U,
     0U
   }
 };
+
+
 
 /*
  * ADC conversion group 2.
@@ -92,13 +94,14 @@ const ADCConversionGroup portab_adcgrpcfg2 = {
   .end_cb       = adccallback,
   .error_cb     = adcerrorcallback,
   .cfgr         =
-            ADC_CFGR_CONT_ENABLED,/* |
-            ADC_CFGR_EXTEN_RISING |
-					  ADC_CFGR_EXTSEL_SRC(12),*/  /* TIM4_TRGO */
+            ADC_CFGR_CONT_ENABLED,// |
+            //ADC_CFGR_EXTEN_RISING |
+					  //ADC_CFGR_EXTSEL_SRC(12),  //TIM4_TRGO
   .cfgr2        = 0U,
   .ccr          = 0U,
-  .pcsel        = ADC_SELMASK_IN16 | // PA0 POT
-                  ADC_SELMASK_IN5,  // TEMP SENSOR
+  .pcsel        = ADC_SELMASK_IN10  | // pot1
+                  ADC_SELMASK_IN13  | // pot2
+                  ADC_SELMASK_IN15,   // pot3
   .ltr1         = 0x00000000U,
   .htr1         = 0x03FFFFFFU,
   .ltr2         = 0x00000000U,
@@ -106,15 +109,19 @@ const ADCConversionGroup portab_adcgrpcfg2 = {
   .ltr3         = 0x00000000U,
   .htr3         = 0x03FFFFFFU,
   .smpr         = {
-    //ADC_SMPR2_SMP_AN16(ADC_SMPR_SMP_64P5),
-    ADC_SMPR2_SMP_AN16(ADC_SMPR_SMP_810P5),
-      ADC_SMPR2_SMP_AN12(ADC_SMPR_SMP_810P5),
+    0U,
+    ADC_SMPR2_SMP_AN10(ADC_SMPR_SMP_384P5)    |
+      ADC_SMPR2_SMP_AN13(ADC_SMPR_SMP_384P5)  |
+      ADC_SMPR2_SMP_AN15(ADC_SMPR_SMP_384P5),
   },
   .sqr          = {
-    ADC_SQR1_SQ1_N(ADC_CHANNEL_IN16) |
-      ADC_SQR1_SQ2_N(ADC_CHANNEL_IN12),
+    ADC_SQR1_SQ1_N(ADC_CHANNEL_IN10)    |
+      ADC_SQR1_SQ2_N(ADC_CHANNEL_IN13)  |
+      ADC_SQR1_SQ3_N(ADC_CHANNEL_IN15),
   }
 };
+
+
 
 BaseSequentialStream *chp = (BaseSequentialStream *)&SD5;
 static const SerialConfig uart5_cfg = {
@@ -123,6 +130,8 @@ static const SerialConfig uart5_cfg = {
   .cr2   = USART_CR2_STOP1_BITS,
   .cr3   = 0,
 };
+
+
 
 /*===========================================================================*/
 /* Module local types.                                                       */
@@ -142,6 +151,7 @@ static const SerialConfig uart5_cfg = {
 
 
 void portab_setup(void) {
+  // debug UART config
   palSetPadMode(GPIOC, GPIOC_PIN12, PAL_MODE_ALTERNATE(8));
   palSetPadMode(GPIOD, GPIOD_PIN2, PAL_MODE_ALTERNATE(8));
   sdStart(&SD5, &uart5_cfg);
@@ -151,14 +161,20 @@ void portab_setup(void) {
     chThdSleepMilliseconds(500);
   }
   chprintf(chp, "\r\n");
+
   /* ADC inputs.*/
-  palSetPadMode(GPIOA, 0, PAL_MODE_INPUT_ANALOG);
-  palSetPadMode(GPIOF, 12,PAL_MODE_INPUT_ANALOG);
-  palSetPadMode(GPIOB, 1, PAL_MODE_INPUT_ANALOG);
+  //palSetPadMode(GPIOF, 12,PAL_MODE_INPUT_ANALOG);
+  // should switch to PA3 ADC channel 15?
+  //palSetPadMode(GPIOB, 1, PAL_MODE_INPUT_ANALOG); // PB1, ADC channel 5
+  //palSetPadMode(GPIOB, 1, PAL_MODE_INPUT_ANALOG); // PB1, ADC channel 5
+  palSetPadMode(GPIOA, 3, PAL_MODE_INPUT_ANALOG); // PA3, ADC channel 15
+  palSetPadMode(GPIOC, 0, PAL_MODE_INPUT_ANALOG); // PC0, ADC channel 10
+  palSetPadMode(GPIOC, 3, PAL_MODE_INPUT_ANALOG); // PC3, ADC channel 13
+  //palSetPadMode(GPIOC, 2, PAL_MODE_INPUT_ANALOG); // PC2, ADC channel 12
 
   /* Setting up the output pin as analog as suggested
      by the Reference Manual.*/
-  palSetPadMode(GPIOA, 4, PAL_MODE_INPUT_ANALOG);
+  //palSetPadMode(GPIOA, 4, PAL_MODE_INPUT_ANALOG);
 }
 
 /** @} */
