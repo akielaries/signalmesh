@@ -38,6 +38,8 @@ float adc_to_temperature(uint16_t ts_data) {
 
     uint16_t ts_cal1 = *TS_CAL1_ADDR;    // raw ADC at 30°C
     uint16_t ts_cal2 = *TS_CAL2_ADDR;    // raw ADC at 130°C
+    ts_cal1 = (*TS_CAL1_ADDR) << 4;  // scale 12-bit value to 16-bit
+    ts_cal2 = (*TS_CAL2_ADDR) << 4;
 
     //float seq1 = (ts_cal2 - ts_cal1);
 
@@ -65,21 +67,6 @@ uint16_t adc_value(int ix) {
   return (int16_t)samples2[ix];
 }
 
-/*
-uint16_t adc_value(int ix) {
-  if (ix < 0 || ix >= ADC_GRP2_NUM_CHANNELS) return 0;
-
-  // number of full pairs in the circular DMA buffer
-  uint32_t samples_per_channel = ADC_GRP2_BUF_DEPTH / ADC_GRP2_NUM_CHANNELS;
-  uint32_t sum = 0;
-
-  for (uint32_t i = 0; i < samples_per_channel; i++) {
-    // buffer is interleaved: [ch0,ch1,ch0,ch1,...] where ch0==TEMP, ch1==POT
-    sum += samples2[i * ADC_GRP2_NUM_CHANNELS + ix];
-  }
-  return (uint16_t)(sum / samples_per_channel);
-}
-*/
 
 /*
  * ADC streaming callback.
@@ -139,14 +126,6 @@ static THD_FUNCTION(Thread1, arg) {
  * Application entry point.
  */
 int main(void) {
-
-  /*
-   * System initializations.
-   * - HAL initialization, this also initializes the configured device drivers
-   *   and performs the board-specific initializations.
-   * - Kernel initialization, the main() function becomes a thread and the
-   *   RTOS is active.
-   */
   halInit();
   chSysInit();
 
@@ -165,10 +144,6 @@ int main(void) {
   adcStart(&PORTAB_ADC1, &portab_adccfg1);
   adcSTM32EnableVREF(&PORTAB_ADC1);
   adcSTM32EnableTS(&PORTAB_ADC1);
-
-  /* Performing a one-shot conversion on two channels.*/
-  //adcConvert(&PORTAB_ADC1, &portab_adcgrpcfg1, samples1, ADC_GRP1_BUF_DEPTH);
-  //cacheBufferInvalidate(samples1, sizeof (samples1) / sizeof (adcsample_t));
 
   /*
    * Starting PORTAB_GPT1 driver, it is used for triggering the ADC.
@@ -192,11 +167,14 @@ int main(void) {
    */
   while (true) {
     cacheBufferInvalidate(samples2, sizeof(samples2)/sizeof(adcsample_t));
-    int pot1, pot2, pot3;
+    int pot1, pot2, pot3, therm1, intrn_temp;
 
-    pot1 = adc_value(0);
-    pot2 = adc_value(1);
-    pot3 = adc_value(2);
+    // probably worth some enums huh
+    intrn_temp = adc_value(0);
+    pot1 = adc_value(1);
+    pot2 = adc_value(2);
+    pot3 = adc_value(3);
+    therm1 = adc_value(4);
 
 /*
     chprintf(chp, "Full buffer:\r\n");
@@ -204,12 +182,23 @@ int main(void) {
       chprintf(chp, "%u\r\n", samples2[i]);
     }
 */
-    chprintf(chp, "Pot1: %u  Pot2: %u Pot3: %u\r\n\r\n",
+    chprintf(chp, "Pot1: %u  Pot2: %u Pot3: %u \r\n",
              pot1,
              pot2,
              pot3);
 
-    chprintf(chp, "counters - nx: %d ny: %d n: %d\r\n", nx, ny, n);
+    chprintf(chp, "Therm1: %u (%f C / %f F) IntTemp: %u (%f C / %f F)\r\n\r\n",
+             therm1,
+             adc_to_temperature(therm1),
+             ((adc_to_temperature(therm1) * 9 / 5) + 32),
+             intrn_temp,
+             adc_to_temperature(intrn_temp),
+             ((adc_to_temperature(intrn_temp) * 9 / 5) + 32));
+
+    chprintf(chp, "Raw TS: %u, Cal1: %u, Cal2: %u\r\n",
+        intrn_temp, *TS_CAL1_ADDR, *TS_CAL2_ADDR);
+
+    //chprintf(chp, "counters - nx: %d ny: %d n: %d\r\n", nx, ny, n);
 
     if (palReadLine(PORTAB_LINE_BUTTON) == PORTAB_BUTTON_PRESSED) {
       gptStopTimer(&PORTAB_GPT1);

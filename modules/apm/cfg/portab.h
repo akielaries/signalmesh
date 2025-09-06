@@ -45,7 +45,7 @@
 #define PORTAB_ADC3 ADCD3
 
 #define ADC_GRP1_NUM_CHANNELS 1
-#define ADC_GRP2_NUM_CHANNELS 3
+#define ADC_GRP2_NUM_CHANNELS 5
 
 
 /*===========================================================================*/
