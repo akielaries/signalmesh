@@ -84,17 +84,17 @@ const ADCConversionGroup portab_adcgrpcfg1 = {
 
 
 /*
- * ADC conversion group 2.
- * Mode:        Continuous, 1 channels, HW triggered by GPT4-TRGO.
- * Channels:    IN0.
+ * ADC conversion group
+ * Mode:        Continuous, 5 channels, HW triggered by GPT4-TRGO.
+ * Channels:    IN18, IN10, IN13, IN15, IN5
  */
 const ADCConversionGroup portab_adcgrpcfg2 = {
   .circular     = true,
   .num_channels = ADC_GRP2_NUM_CHANNELS,
   .end_cb       = adccallback,
   .error_cb     = adcerrorcallback,
-  .cfgr         =
-            ADC_CFGR_CONT_ENABLED,// |
+  .cfgr         = ADC_CFGR_CONT_ENABLED |
+                  ADC_CFGR_RES_16BITS,
             //ADC_CFGR_EXTEN_RISING |
 					  //ADC_CFGR_EXTSEL_SRC(12),  //TIM4_TRGO
   .cfgr2        = 0U,
@@ -115,7 +115,7 @@ const ADCConversionGroup portab_adcgrpcfg2 = {
     ADC_SMPR2_SMP_AN18(ADC_SMPR_SMP_384P5)    |
       ADC_SMPR2_SMP_AN10(ADC_SMPR_SMP_384P5)  |
       ADC_SMPR2_SMP_AN13(ADC_SMPR_SMP_384P5)  |
-      ADC_SMPR2_SMP_AN15(ADC_SMPR_SMP_1P5),
+      ADC_SMPR2_SMP_AN15(ADC_SMPR_SMP_384P5),
   },
   .sqr          = {
     ADC_SQR1_SQ1_N(ADC_CHANNEL_IN18)    |

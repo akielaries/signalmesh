@@ -1,19 +1,4 @@
-/*
-    ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-*/
-
+#include <math.h>
 #include "ch.h"
 #include "hal.h"
 #include "ccportab.h"
@@ -30,24 +15,41 @@
 #define ADC_GRP2_BUF_DEPTH      64
 #define TS_CAL1_ADDR ((uint16_t*)0x1FF1E820)
 #define TS_CAL2_ADDR ((uint16_t*)0x1FF1E840)
+// Parameters for a 10k NTC, Beta = 3950
+#define THERMISTOR_NOMINAL   10000.0f  // resistance at 25 °C
+#define TEMPERATURE_NOMINAL  25.0f     // reference temperature
+#define B_COEFFICIENT        3950.0f   // Beta constant
+#define SERIES_RESISTOR      10000.0f  // your fixed resistor
 
+float adc_to_steinhart(uint16_t adc_value) {
+  float v_ratio = (float)adc_value / 65535.0f;   // for 16-bit ADC
+  float r_therm = SERIES_RESISTOR * (1.0f / v_ratio - 1.0f);
 
-float adc_to_temperature(uint16_t ts_data) {
-    const float ts_cal1_temp = 30.0f;    // °C
-    const float ts_cal2_temp = 130.0f;   // °C
-
-    uint16_t ts_cal1 = *TS_CAL1_ADDR;    // raw ADC at 30°C
-    uint16_t ts_cal2 = *TS_CAL2_ADDR;    // raw ADC at 130°C
-    ts_cal1 = (*TS_CAL1_ADDR) << 4;  // scale 12-bit value to 16-bit
-    ts_cal2 = (*TS_CAL2_ADDR) << 4;
-
-    //float seq1 = (ts_cal2 - ts_cal1);
-
-    float temp = ts_cal1_temp +
-                 ((float)(ts_data - ts_cal1)) * (ts_cal2_temp - ts_cal1_temp) / (float)(ts_cal2 - ts_cal1);
-    return temp;
+  float steinhart;
+  steinhart = r_therm / THERMISTOR_NOMINAL;      // (R/R0)
+  steinhart = logf(steinhart);                   // ln(R/R0)
+  steinhart /= B_COEFFICIENT;                    // 1/B * ln(R/R0)
+  steinhart += 1.0f / (TEMPERATURE_NOMINAL + 273.15f); // + (1/T0)
+  steinhart = 1.0f / steinhart;                  // invert
+  steinhart -= 273.15f;                          // Kelvin -> °C
+  return steinhart;
 }
 
+float adc_to_vsense(uint16_t ts_data) {
+  const float ts_cal1_temp = 30.0f;
+  const float ts_cal2_temp = 130.0f;
+
+  uint16_t ts_cal1 = *TS_CAL1_ADDR;   // factory calib @ 30 °C
+  uint16_t ts_cal2 = *TS_CAL2_ADDR;   // factory calib @ 130 °C
+  ts_cal1 = (*TS_CAL1_ADDR) << 4;     // scale 12?-bit value to 16-bit
+  ts_cal2 = (*TS_CAL2_ADDR) << 4;
+
+  float temp = ts_cal1_temp +
+               ((float)(ts_data - ts_cal1)) *
+                (ts_cal2_temp - ts_cal1_temp) /
+                (float)(ts_cal2 - ts_cal1);
+  return temp;
+}
 
 /* Buffers are allocated with size and address aligned to the cache
    line size.*/
@@ -189,11 +191,11 @@ int main(void) {
 
     chprintf(chp, "Therm1: %d (%f C / %f F) IntTemp: %d (%f C / %f F)\r\n\r\n",
              therm1,
-             adc_to_temperature(therm1),
-             ((adc_to_temperature(therm1) * 9 / 5) + 32),
+             adc_to_steinhart(therm1),
+             ((adc_to_steinhart(therm1) * 9 / 5) + 32),
              intrn_temp,
-             adc_to_temperature(intrn_temp),
-             ((adc_to_temperature(intrn_temp) * 9 / 5) + 32));
+             adc_to_vsense(intrn_temp),
+             ((adc_to_vsense(intrn_temp) * 9 / 5) + 32));
 
     chprintf(chp, "Raw TS: %d, Cal1: %d, Cal2: %d\r\n",
         intrn_temp, *TS_CAL1_ADDR, *TS_CAL2_ADDR);
