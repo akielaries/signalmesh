@@ -159,7 +159,7 @@ int main(void) {
 
   gptStartContinuous(&PORTAB_GPT1, 100U);
 
-  //chprintf(chp, "ADC1[%lu]: %u\r\n", 0, (unsigned)samples1[0]);
+  //chprintf(chp, "ADC1[%lu]: %d\r\n", 0, (unsigned)samples1[0]);
 
   /*
    * Normal main() thread activity, if the button is pressed then the
@@ -179,15 +179,15 @@ int main(void) {
 /*
     chprintf(chp, "Full buffer:\r\n");
     for (uint32_t i = 0; i < ADC_GRP2_BUF_DEPTH; i++) {
-      chprintf(chp, "%u\r\n", samples2[i]);
+      chprintf(chp, "%d\r\n", samples2[i]);
     }
 */
-    chprintf(chp, "Pot1: %u  Pot2: %u Pot3: %u \r\n",
+    chprintf(chp, "Pot1: %d  Pot2: %d Pot3: %d \r\n",
              pot1,
              pot2,
              pot3);
 
-    chprintf(chp, "Therm1: %u (%f C / %f F) IntTemp: %u (%f C / %f F)\r\n\r\n",
+    chprintf(chp, "Therm1: %d (%f C / %f F) IntTemp: %d (%f C / %f F)\r\n\r\n",
              therm1,
              adc_to_temperature(therm1),
              ((adc_to_temperature(therm1) * 9 / 5) + 32),
@@ -195,7 +195,7 @@ int main(void) {
              adc_to_temperature(intrn_temp),
              ((adc_to_temperature(intrn_temp) * 9 / 5) + 32));
 
-    chprintf(chp, "Raw TS: %u, Cal1: %u, Cal2: %u\r\n",
+    chprintf(chp, "Raw TS: %d, Cal1: %d, Cal2: %d\r\n",
         intrn_temp, *TS_CAL1_ADDR, *TS_CAL2_ADDR);
 
     //chprintf(chp, "counters - nx: %d ny: %d n: %d\r\n", nx, ny, n);
