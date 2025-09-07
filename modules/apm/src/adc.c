@@ -245,9 +245,9 @@ int main(void) {
              adc_to_vsense(v_sense),
              ((adc_to_vsense(v_sense) * 9 / 5) + 32));
 
-    chprintf(chp, "Raw TS: %d, Cal1: %d, Cal2: %d\r\n",
+    chprintf(chp, "V_SENSE: %d, Cal1: %d, Cal2: %d\r\n",
         v_sense, *TS_CAL1_ADDR, *TS_CAL2_ADDR);
-    chprintf(chp, "Raw VREF: %d VREF_CAL: %d VDDA: %f V\r\n",
+    chprintf(chp, "VREF: %d VREF_CAL: %d VDDA: %f V\r\n",
                   v_ref,
                   *VREFINT_CAL_ADDR,
                   adc_to_vdda(v_ref));
