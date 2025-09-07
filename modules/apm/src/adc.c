@@ -199,6 +199,8 @@ int main(void) {
    */
   adcStartConversion(&PORTAB_ADC1, &portab_adcgrpcfg2,
                      samples2, ADC_GRP2_BUF_DEPTH);
+  adcStartConversion(&PORTAB_ADC3, &portab_adcgrpcfg3,
+                     samples3, ADC_GRP2_BUF_DEPTH);
 
   gptStartContinuous(&PORTAB_GPT1, 100U);
 
@@ -210,7 +212,7 @@ int main(void) {
    */
   while (true) {
     cacheBufferInvalidate(samples2, sizeof(samples2)/sizeof(adcsample_t));
-    //cacheBufferInvalidate(samples3, sizeof(samples3)/sizeof(adcsample_t));
+    cacheBufferInvalidate(samples3, sizeof(samples3)/sizeof(adcsample_t));
     int pot1, pot2, pot3, therm1, v_sense, v_ref;
 
     // probably worth some enums huh
