@@ -7,19 +7,24 @@
 
 #include "portab.h"
 
+
 /*===========================================================================*/
 /* ADC driver related.                                                       */
 /*===========================================================================*/
 
+
 #define ADC_GRP1_BUF_DEPTH      1
 #define ADC_GRP2_BUF_DEPTH      64
-#define TS_CAL1_ADDR ((uint16_t*)0x1FF1E820)
-#define TS_CAL2_ADDR ((uint16_t*)0x1FF1E840)
+#define TS_CAL1_ADDR            ((uint16_t*)0x1FF1E820)
+#define TS_CAL2_ADDR            ((uint16_t*)0x1FF1E840)
+#define VREFINT_CAL_ADDR        ((uint16_t*)0x1FF1E860)
 // Parameters for a 10k NTC, Beta = 3950
 #define THERMISTOR_NOMINAL   10000.0f  // resistance at 25 °C
 #define TEMPERATURE_NOMINAL  25.0f     // reference temperature
 #define B_COEFFICIENT        3950.0f   // Beta constant
 #define SERIES_RESISTOR      10000.0f  // your fixed resistor
+
+
 
 float adc_to_steinhart(uint16_t adc_value) {
   float v_ratio = (float)adc_value / 65535.0f;   // for 16-bit ADC
@@ -35,14 +40,15 @@ float adc_to_steinhart(uint16_t adc_value) {
   return steinhart;
 }
 
+/*
 float adc_to_vsense(uint16_t ts_data) {
   const float ts_cal1_temp = 30.0f;
   const float ts_cal2_temp = 130.0f;
 
   uint16_t ts_cal1 = *TS_CAL1_ADDR;   // factory calib @ 30 °C
   uint16_t ts_cal2 = *TS_CAL2_ADDR;   // factory calib @ 130 °C
-  ts_cal1 = (*TS_CAL1_ADDR) << 4;     // scale 12?-bit value to 16-bit
-  ts_cal2 = (*TS_CAL2_ADDR) << 4;
+  ts_cal1 = (*TS_CAL1_ADDR);     // scale 12?-bit value to 16-bit? comes in as 16 bit anyways...
+  ts_cal2 = (*TS_CAL2_ADDR);
 
   float temp = ts_cal1_temp +
                ((float)(ts_data - ts_cal1)) *
@@ -50,25 +56,59 @@ float adc_to_vsense(uint16_t ts_data) {
                 (float)(ts_cal2 - ts_cal1);
   return temp;
 }
+*/
+
+float adc_to_vsense(uint16_t ts_data) {
+  const float ts_cal1_temp = 30.0f;
+  const float ts_cal2_temp = 130.0f;
+
+  uint16_t ts_cal1 = *TS_CAL1_ADDR >> 4;  // convert to 12-bit
+  uint16_t ts_cal2 = *TS_CAL2_ADDR >> 4;
+  uint16_t ts_data_12bit = ts_data >> 4;
+
+  float temp = ts_cal1_temp +
+               ((float)(ts_data_12bit - ts_cal1)) *
+                (ts_cal2_temp - ts_cal1_temp) /
+                (float)(ts_cal2 - ts_cal1);
+
+  return temp;
+}
+
+
+float adc_to_vdda(uint16_t vref_data) {
+  // Factory calibration constant (12-bit stored in 16-bit word).
+  uint32_t vrefint_cal = (uint32_t)(*VREFINT_CAL_ADDR);// << 4; // scale to 16-bit space
+
+  if (vref_data == 0) return 0.0f; // avoid div/0
+
+  // Factory reference voltage for calibration is 3.3 V on most STM32s.
+  // Check your part’s datasheet: some L4/L5 parts use 3.0 V.
+  const float VREFINT_CAL_VOLT = 3.3f;
+
+  float vdda = VREFINT_CAL_VOLT * ((float)vrefint_cal / (float)vref_data);
+  return vdda;
+}
 
 /* Buffers are allocated with size and address aligned to the cache
    line size.*/
-#if CACHE_LINE_SIZE > 0
-CC_ALIGN_DATA(CACHE_LINE_SIZE)
-#endif
 //adcsample_t samples1[CACHE_SIZE_ALIGN(adcsample_t, ADC_GRP1_NUM_CHANNELS * ADC_GRP1_BUF_DEPTH)];
 
 #if CACHE_LINE_SIZE > 0
 CC_ALIGN_DATA(CACHE_LINE_SIZE)
 #endif
 adcsample_t samples2[CACHE_SIZE_ALIGN(adcsample_t, ADC_GRP2_NUM_CHANNELS * ADC_GRP2_BUF_DEPTH)];
+adcsample_t samples3[CACHE_SIZE_ALIGN(adcsample_t, ADC_GRP3_NUM_CHANNELS * ADC_GRP2_BUF_DEPTH)];
 
 
-uint16_t adc_value(int ix) {
+uint16_t adc_value_a(int ix) {
   if (ix < 0 || ix >= ADC_GRP2_NUM_CHANNELS) return 0;
   return (int16_t)samples2[ix];
 }
 
+uint16_t adc_value_b(int ix) {
+  if (ix < 0 || ix >= ADC_GRP3_NUM_CHANNELS) return 0;
+  return (int16_t)samples3[ix];
+}
 
 /*
  * ADC streaming callback.
@@ -144,8 +184,9 @@ int main(void) {
    * Starting PORTAB_ADC1 driver and the temperature sensor.
    */
   adcStart(&PORTAB_ADC1, &portab_adccfg1);
-  adcSTM32EnableVREF(&PORTAB_ADC1);
-  adcSTM32EnableTS(&PORTAB_ADC1);
+  adcStart(&PORTAB_ADC3, &portab_adccfg1);
+  adcSTM32EnableVREF(&PORTAB_ADC3);
+  adcSTM32EnableTS(&PORTAB_ADC3);
 
   /*
    * Starting PORTAB_GPT1 driver, it is used for triggering the ADC.
@@ -169,14 +210,17 @@ int main(void) {
    */
   while (true) {
     cacheBufferInvalidate(samples2, sizeof(samples2)/sizeof(adcsample_t));
-    int pot1, pot2, pot3, therm1, intrn_temp;
+    //cacheBufferInvalidate(samples3, sizeof(samples3)/sizeof(adcsample_t));
+    int pot1, pot2, pot3, therm1, v_sense, v_ref;
 
     // probably worth some enums huh
-    intrn_temp = adc_value(0);
-    pot1 = adc_value(1);
-    pot2 = adc_value(2);
-    pot3 = adc_value(3);
-    therm1 = adc_value(4);
+    v_sense = adc_value_b(0);
+    v_ref = adc_value_b(1);
+
+    pot1 = adc_value_a(0);
+    pot2 = adc_value_a(1);
+    pot3 = adc_value_a(2);
+    therm1 = adc_value_a(3);
 
 /*
     chprintf(chp, "Full buffer:\r\n");
@@ -189,16 +233,22 @@ int main(void) {
              pot2,
              pot3);
 
-    chprintf(chp, "Therm1: %d (%f C / %f F) IntTemp: %d (%f C / %f F)\r\n\r\n",
+    chprintf(chp, "IntVolt: %d\r\n", v_ref);
+
+    chprintf(chp, "Therm1: %d (%f C / %f F) V_SENSE: %d (%f C / %f F)\r\n\r\n",
              therm1,
              adc_to_steinhart(therm1),
              ((adc_to_steinhart(therm1) * 9 / 5) + 32),
-             intrn_temp,
-             adc_to_vsense(intrn_temp),
-             ((adc_to_vsense(intrn_temp) * 9 / 5) + 32));
+             v_sense,
+             adc_to_vsense(v_sense),
+             ((adc_to_vsense(v_sense) * 9 / 5) + 32));
 
     chprintf(chp, "Raw TS: %d, Cal1: %d, Cal2: %d\r\n",
-        intrn_temp, *TS_CAL1_ADDR, *TS_CAL2_ADDR);
+        v_sense, *TS_CAL1_ADDR, *TS_CAL2_ADDR);
+    chprintf(chp, "Raw VREF: %d VREF_CAL: %d VDDA: %f V\r\n",
+                  v_ref,
+                  *VREFINT_CAL_ADDR,
+                  adc_to_vdda(v_ref));
 
     //chprintf(chp, "counters - nx: %d ny: %d n: %d\r\n", nx, ny, n);
 

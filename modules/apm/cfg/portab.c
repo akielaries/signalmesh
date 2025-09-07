@@ -86,7 +86,7 @@ const ADCConversionGroup portab_adcgrpcfg1 = {
 /*
  * ADC conversion group
  * Mode:        Continuous, 5 channels, HW triggered by GPT4-TRGO.
- * Channels:    IN18, IN10, IN13, IN15, IN5
+ * Channels:    IN10, IN13, IN15, IN5
  */
 const ADCConversionGroup portab_adcgrpcfg2 = {
   .circular     = true,
@@ -99,8 +99,7 @@ const ADCConversionGroup portab_adcgrpcfg2 = {
 					  //ADC_CFGR_EXTSEL_SRC(12),  //TIM4_TRGO
   .cfgr2        = 0U,
   .ccr          = 0U,
-  .pcsel        = ADC_SELMASK_IN18  | // internal temp sensor
-                  ADC_SELMASK_IN10  | // pot1
+  .pcsel        = ADC_SELMASK_IN10  | // pot1
                   ADC_SELMASK_IN13  | // pot2
                   ADC_SELMASK_IN15  | // pot3
                   ADC_SELMASK_IN5,    // therm1
@@ -112,17 +111,51 @@ const ADCConversionGroup portab_adcgrpcfg2 = {
   .htr3         = 0x03FFFFFFU,
   .smpr         = {
     ADC_SMPR1_SMP_AN5(ADC_SMPR_SMP_384P5),
-    ADC_SMPR2_SMP_AN18(ADC_SMPR_SMP_384P5)    |
-      ADC_SMPR2_SMP_AN10(ADC_SMPR_SMP_384P5)  |
+    ADC_SMPR2_SMP_AN10(ADC_SMPR_SMP_384P5)    |
       ADC_SMPR2_SMP_AN13(ADC_SMPR_SMP_384P5)  |
       ADC_SMPR2_SMP_AN15(ADC_SMPR_SMP_384P5),
   },
   .sqr          = {
+    ADC_SQR1_SQ1_N(ADC_CHANNEL_IN10)    |
+      ADC_SQR1_SQ2_N(ADC_CHANNEL_IN13)  |
+      ADC_SQR1_SQ3_N(ADC_CHANNEL_IN15)  |
+      ADC_SQR1_SQ4_N(ADC_CHANNEL_IN5),
+  }
+};
+
+
+/*
+ * ADC conversion group
+ * Mode:        Continuous, 2 channels, HW triggered by GPT4-TRGO.
+ * Channels:    IN18, IN19
+ */
+const ADCConversionGroup portab_adcgrpcfg3 = {
+  .circular     = true,
+  .num_channels = ADC_GRP3_NUM_CHANNELS,
+  .end_cb       = adccallback,
+  .error_cb     = adcerrorcallback,
+  .cfgr         = ADC_CFGR_CONT_ENABLED |
+                  ADC_CFGR_RES_16BITS,
+            //ADC_CFGR_EXTEN_RISING |
+            //ADC_CFGR_EXTSEL_SRC(12),  //TIM4_TRGO
+  .cfgr2        = 0U,
+  .ccr          = 0U,
+  .pcsel        = ADC_SELMASK_IN18  | // internal temp sensor
+                  ADC_SELMASK_IN19,   // internal reference voltage
+  .ltr1         = 0x00000000U,
+  .htr1         = 0x03FFFFFFU,
+  .ltr2         = 0x00000000U,
+  .htr2         = 0x03FFFFFFU,
+  .ltr3         = 0x00000000U,
+  .htr3         = 0x03FFFFFFU,
+  .smpr         = {
+    0U,
+    ADC_SMPR2_SMP_AN18(ADC_SMPR_SMP_384P5)    |
+      ADC_SMPR2_SMP_AN19(ADC_SMPR_SMP_384P5),
+  },
+  .sqr          = {
     ADC_SQR1_SQ1_N(ADC_CHANNEL_IN18)    |
-      ADC_SQR1_SQ2_N(ADC_CHANNEL_IN10)  |
-      ADC_SQR1_SQ3_N(ADC_CHANNEL_IN13)  |
-      ADC_SQR1_SQ4_N(ADC_CHANNEL_IN15),
-    ADC_SQR2_SQ5_N(ADC_CHANNEL_IN5),
+      ADC_SQR1_SQ2_N(ADC_CHANNEL_IN19),
   }
 };
 

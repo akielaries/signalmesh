@@ -45,7 +45,8 @@
 #define PORTAB_ADC3 ADCD3
 
 #define ADC_GRP1_NUM_CHANNELS 1
-#define ADC_GRP2_NUM_CHANNELS 5
+#define ADC_GRP2_NUM_CHANNELS 4
+#define ADC_GRP3_NUM_CHANNELS 2
 
 
 /*===========================================================================*/
@@ -71,6 +72,7 @@ extern const GPTConfig portab_gptcfg1;
 extern const ADCConfig portab_adccfg1;
 extern const ADCConversionGroup portab_adcgrpcfg1;
 extern const ADCConversionGroup portab_adcgrpcfg2;
+extern const ADCConversionGroup portab_adcgrpcfg3;
 
 extern BaseSequentialStream *chp;
 
