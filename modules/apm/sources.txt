@@ -1,0 +1,3 @@
+../../import/ChibiOS/os/common/ports/ARMv7-M/compilers/GCC/chcoreasm.S
+../../import/ChibiOS/os/common/startup/ARMCMx/compilers/GCC/crt0_v7m.S
+../../import/ChibiOS/os/common/startup/ARMCMx/compilers/GCC/vectors.S

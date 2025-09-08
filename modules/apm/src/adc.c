@@ -22,7 +22,7 @@
 #define THERMISTOR_NOMINAL   10000.0f  // resistance at 25 °C
 #define TEMPERATURE_NOMINAL  25.0f     // reference temperature
 #define B_COEFFICIENT        3950.0f   // Beta constant
-#define SERIES_RESISTOR      10000.0f  // your fixed resistor
+#define SERIES_RESISTOR      10000.0f  // fixed resistor, 10k NTC, 10k resistor
 
 
 
