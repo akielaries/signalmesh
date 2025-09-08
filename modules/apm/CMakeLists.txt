@@ -4,10 +4,25 @@ project(audio_peripheral_module C ASM)
 set(CMAKE_C_COMPILER arm-none-eabi-gcc)
 set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
 
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD 99)
+
+set(STM32_CHIP STM32H755)
+message(STATUS "Building Audio Peripheral Module (APM) on ${STM32_CHIP}")
+
+set(SIGNALMESH_ROOT "../..")
+set(TOOLCHAIN "${SIGNALMESH_ROOT}/toolchain")
+set(CMAKE_TOOLCHAIN_FILE ${TOOLCHAIN}/gcc_stm32.cmake)
+set(CMAKE_MODULE_PATH ${TOOLCHAIN})
+#list(APPEND CMAKE_MODULE_PATH "${TOOLCHAIN}")
+include(${TOOLCHAIN}/gcc_stm32.cmake)
+
+message(STATUS "")
 
 # Compiler flags
-set(COMMON_FLAGS "-mcpu=cortex-m7 -mthumb -O2 -ggdb -fomit-frame-pointer -falign-functions=16 -ffunction-sections -fdata-sections -fno-common -flto=auto")
+set(COMMON_FLAGS "-mcpu=cortex-m7 -mthumb -O2 -ggdb -fomit-frame-pointer \
+                  -falign-functions=16 -ffunction-sections -fdata-sections \
+                  -fno-common -flto=auto"
+)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMMON_FLAGS}")
 set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} ${COMMON_FLAGS}")
 
@@ -151,4 +166,7 @@ target_link_options(${PROJECT_NAME}.elf PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME}.elf PRIVATE m)
+
+STM32_ADD_HEX_BIN_TARGETS(${CMAKE_PROJECT_NAME}.elf)
+STM32_PRINT_SIZE_OF_TARGETS(${CMAKE_PROJECT_NAME}.elf)
 
