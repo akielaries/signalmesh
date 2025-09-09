@@ -5,6 +5,13 @@ set(CMAKE_C_COMPILER arm-none-eabi-gcc)
 set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
 
 set(CMAKE_C_STANDARD 99)
+# Compiler flags
+set(COMMON_FLAGS "-mcpu=cortex-m7 -mthumb -O2 -ggdb -fomit-frame-pointer \
+                  -falign-functions=16 -ffunction-sections -fdata-sections \
+                  -fno-common -flto=auto"
+)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMMON_FLAGS}")
+set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} ${COMMON_FLAGS}")
 
 set(STM32_CHIP STM32H755)
 message(STATUS "Building Audio Peripheral Module (APM) on ${STM32_CHIP}")
@@ -14,17 +21,16 @@ set(TOOLCHAIN "${SIGNALMESH_ROOT}/toolchain")
 set(CMAKE_TOOLCHAIN_FILE ${TOOLCHAIN}/gcc_stm32.cmake)
 set(CMAKE_MODULE_PATH ${TOOLCHAIN})
 #list(APPEND CMAKE_MODULE_PATH "${TOOLCHAIN}")
+set(CHIBIOS_ROOT "${SIGNALMESH_ROOT}/import/ChibiOS")
+
+include(${TOOLCHAIN}/chibiOS_rt.cmake)
 include(${TOOLCHAIN}/gcc_stm32.cmake)
 
 message(STATUS "")
 
-# Compiler flags
-set(COMMON_FLAGS "-mcpu=cortex-m7 -mthumb -O2 -ggdb -fomit-frame-pointer \
-                  -falign-functions=16 -ffunction-sections -fdata-sections \
-                  -fno-common -flto=auto"
-)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMMON_FLAGS}")
-set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} ${COMMON_FLAGS}")
+# create a static library libchibios_rt.a
+add_chibios_rt_library(chibios_rt TYPE STATIC)
+
 
 # Include directories
 include_directories(
@@ -67,10 +73,6 @@ include_directories(
     ../../import/ChibiOS/os/hal/ports/common/ARMCMx
     ../../import/ChibiOS/os/license
     ../../import/ChibiOS/os/oslib/include
-    ../../import/ChibiOS/os/rt/include
-    ../../import/ChibiOS/os/test/include
-    ../../import/ChibiOS/test/oslib/source/test
-    ../../import/ChibiOS/test/rt/source/test
     ./cfg
 )
 
@@ -132,22 +134,6 @@ set(SOURCES
     ../../import/ChibiOS/os/oslib/src/chmempools.c
     ../../import/ChibiOS/os/oslib/src/chobjcaches.c
     ../../import/ChibiOS/os/oslib/src/chpipes.c
-    ../../import/ChibiOS/os/rt/src/chcond.c
-    ../../import/ChibiOS/os/rt/src/chdebug.c
-    ../../import/ChibiOS/os/rt/src/chdynamic.c
-    ../../import/ChibiOS/os/rt/src/chevents.c
-    ../../import/ChibiOS/os/rt/src/chinstances.c
-    ../../import/ChibiOS/os/rt/src/chmsg.c
-    ../../import/ChibiOS/os/rt/src/chmtx.c
-    ../../import/ChibiOS/os/rt/src/chregistry.c
-    ../../import/ChibiOS/os/rt/src/chrfcu.c
-    ../../import/ChibiOS/os/rt/src/chschd.c
-    ../../import/ChibiOS/os/rt/src/chsem.c
-    ../../import/ChibiOS/os/rt/src/chsys.c
-    ../../import/ChibiOS/os/rt/src/chthreads.c
-    ../../import/ChibiOS/os/rt/src/chtm.c
-    ../../import/ChibiOS/os/rt/src/chtrace.c
-    ../../import/ChibiOS/os/rt/src/chvt.c
     ./cfg/portab.c
     src/adc.c
 )
@@ -165,7 +151,10 @@ target_link_options(${PROJECT_NAME}.elf PRIVATE
     -Wl,--defsym=__main_stack_size__=0x400
 )
 
-target_link_libraries(${PROJECT_NAME}.elf PRIVATE m)
+target_link_libraries(${PROJECT_NAME}.elf PRIVATE
+  m
+  chibios_rt
+)
 
 STM32_ADD_HEX_BIN_TARGETS(${CMAKE_PROJECT_NAME}.elf)
 STM32_PRINT_SIZE_OF_TARGETS(${CMAKE_PROJECT_NAME}.elf)
