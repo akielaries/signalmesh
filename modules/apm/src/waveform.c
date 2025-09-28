@@ -14,17 +14,57 @@
 static dacsample_t dac_buffer[DAC_BUFFER_SIZE] __attribute__((aligned(32)));
 
 
-void generate_dac_buffer(dacsample_t* buffer, size_t size) {
-    const float amplitude = 2047.0;  // Half of 4095 (max 12-bit)
-    const float offset = 2047.0;     // Center offset
-    const float two_pi = 6.283185307179586;
+void make_sine_wave(dacsample_t* buffer, size_t size) {
+  const float amplitude = 2047.0;  // Half of 4095 (max 12-bit)
+  const float offset = 2047.0;     // Center offset
+  const float two_pi = 6.283185307179586;
 
-    for (size_t i = 0; i < size; i++) {
-        float angle = two_pi * i / size;
-        float value = offset + amplitude * sin(angle);
-        buffer[i] = (dacsample_t)(value + 0.5); // round to nearest integer
-    }
+  for (size_t i = 0; i < size; i++) {
+    float angle = two_pi * i / size;
+    float value = offset + amplitude * sin(angle);
+    buffer[i] = (dacsample_t)(value + 0.5); // round to nearest integer
+  }
 }
+
+void make_square_wave(dacsample_t* buffer, size_t size) {
+  const dacsample_t high = 4095;  // Maximum 12-bit value
+  const dacsample_t low = 0;      // Minimum value
+
+  for (size_t i = 0; i < size; i++) {
+    // First half of the cycle: high, second half: low
+    if (i < size / 2) {
+      buffer[i] = high;
+    } else {
+      buffer[i] = low;
+    }
+  }
+}
+
+void make_sawtooth_wave(dacsample_t* buffer, size_t size) {
+  const dacsample_t max_value = 4095;  // Maximum 12-bit value
+
+  for (size_t i = 0; i < size; i++) {
+    // Linear ramp from 0 to max_value
+    buffer[i] = (dacsample_t)((max_value * i) / size);
+  }
+}
+
+void make_triangle_wave(dacsample_t* buffer, size_t size) {
+  const dacsample_t max_value = 4095;  // Maximum 12-bit value
+  size_t half_size = size / 2;
+
+  for (size_t i = 0; i < size; i++) {
+    if (i < half_size) {
+      // Rising edge: 0 to max_value
+      buffer[i] = (dacsample_t)((max_value * i) / half_size);
+    } else {
+      // Falling edge: max_value to 0
+      buffer[i] = (dacsample_t)(max_value - (max_value * (i - half_size)) / half_size);
+    }
+  }
+}
+
+
 
 /*
  * DAC streaming callback.
@@ -81,11 +121,11 @@ static const GPTConfig gpt6cfg1 = {
 };
 
 
-void play_sine_wave(float frequency_hz) {
+void play_waveform(float frequency_hz) {
     const uint32_t num_samples = DAC_BUFFER_SIZE;
     uint32_t dac_update_rate = (uint32_t)(frequency_hz * num_samples);
 
-    chprintf(chp, "Setting sine wave frequency: %.2f Hz (DAC update rate: %u Hz)\r\n",
+    chprintf(chp, "Setting waveform frequency: %.2f Hz (DAC update rate: %u Hz)\r\n",
              frequency_hz, dac_update_rate);
 
     gptStopTimer(&GPTD6);
@@ -122,7 +162,9 @@ int main(void) {
   }
 
   chprintf(chp, "Creating sine wave DAC buffer\r\n");
-  generate_dac_buffer(dac_buffer, DAC_BUFFER_SIZE);
+  //make_sine_wave(dac_buffer, DAC_BUFFER_SIZE);
+  //make_square_wave(dac_buffer, DAC_BUFFER_SIZE);
+  make_sawtooth_wave(dac_buffer, DAC_BUFFER_SIZE);
   chprintf(chp, "Cleaning DCACHE\r\n");
   SCB_CleanDCache_by_Addr((uint32_t*)dac_buffer, DAC_BUFFER_SIZE * sizeof(dacsample_t));
   /* Starting DAC1 driver.*/
@@ -138,7 +180,7 @@ int main(void) {
   dacStartConversion(&DACD1, &dacgrpcfg1,
                      (dacsample_t *)dac_buffer, DAC_BUFFER_SIZE);
 
-  float frequency_hz = 744.0f;
+  float frequency_hz = 200.0f;
   const uint32_t num_samples = DAC_BUFFER_SIZE;
   uint32_t dac_update_rate = (uint32_t)(frequency_hz * num_samples);
 

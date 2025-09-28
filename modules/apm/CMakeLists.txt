@@ -50,7 +50,7 @@ add_definitions(
 set(SOURCES
     ./cfg/portab.c
     #src/adc.c
-    src/sine.c
+    src/waveform.c
 )
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})
