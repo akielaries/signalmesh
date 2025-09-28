@@ -163,8 +163,9 @@ int main(void) {
 
   chprintf(chp, "Creating sine wave DAC buffer\r\n");
   //make_sine_wave(dac_buffer, DAC_BUFFER_SIZE);
-  //make_square_wave(dac_buffer, DAC_BUFFER_SIZE);
-  make_sawtooth_wave(dac_buffer, DAC_BUFFER_SIZE);
+  make_square_wave(dac_buffer, DAC_BUFFER_SIZE);
+  //make_sawtooth_wave(dac_buffer, DAC_BUFFER_SIZE);
+  //make_triangle_wave(dac_buffer, DAC_BUFFER_SIZE);
   chprintf(chp, "Cleaning DCACHE\r\n");
   SCB_CleanDCache_by_Addr((uint32_t*)dac_buffer, DAC_BUFFER_SIZE * sizeof(dacsample_t));
   /* Starting DAC1 driver.*/
