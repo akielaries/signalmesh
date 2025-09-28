@@ -49,7 +49,8 @@ add_definitions(
 # Sources
 set(SOURCES
     ./cfg/portab.c
-    src/adc.c
+    #src/adc.c
+    src/sine.c
 )
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})
