@@ -69,11 +69,13 @@
 /*===========================================================================*/
 /* External declarations.                                                    */
 /*===========================================================================*/
+// TODO these should be more verbose
 extern const GPTConfig portab_gptcfg1;
 extern const ADCConfig portab_adccfg1;
 extern const ADCConversionGroup portab_adcgrpcfg1;
 extern const ADCConversionGroup portab_adcgrpcfg2;
 extern const ADCConversionGroup portab_adcgrpcfg3;
+extern const PWMConfig portabpwmgrpcfg1;
 
 extern BaseSequentialStream *chp;
 

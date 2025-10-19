@@ -159,8 +159,7 @@ const ADCConversionGroup portab_adcgrpcfg3 = {
   }
 };
 
-
-
+/* this is the debug port configuration we're using */
 BaseSequentialStream *chp = (BaseSequentialStream *)&SD5;
 static const SerialConfig uart5_cfg = {
   .speed = 1000000,
@@ -169,6 +168,20 @@ static const SerialConfig uart5_cfg = {
   .cr3   = 0,
 };
 
+/* mg966r servo motor PWM config */
+const PWMConfig portabpwmgrpcfg1 = {
+  .frequency  = 1000000, // 1MHz
+  .period     = 20000,   // 20ms / 50hz period for mg996r servo
+  .callback   = NULL,
+  .channels   = {
+    {PWM_OUTPUT_DISABLED, NULL},             /* CH1 mode and callback.         */
+    {PWM_OUTPUT_DISABLED, NULL},             /* CH2 mode and callback.         */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL},          /* CH3 mode and callback.         */
+    {PWM_OUTPUT_DISABLED, NULL}              /* CH4 mode and callback.         */
+  },
+  .cr2        = 0,
+  .dier       = 0,
+};
 
 
 /*===========================================================================*/
@@ -206,6 +219,10 @@ void portab_setup(void) {
   palSetPadMode(GPIOC, 0, PAL_MODE_INPUT_ANALOG); // PC0, ADC channel 10
   palSetPadMode(GPIOC, 3, PAL_MODE_INPUT_ANALOG); // PC3, ADC channel 13
   //palSetPadMode(GPIOC, 2, PAL_MODE_INPUT_ANALOG); // PC2, ADC channel 12
+
+  // PWM on PC8, channel 3?
+  palSetPadMode(GPIOC, 8, PAL_MODE_ALTERNATE(1));
+  //palSetPadMode(GPIOC, 8, PAL_MODE_STM32_ALTERNATE_PUSHPULL);
 
   /* Setting up the output pin as analog as suggested
      by the Reference Manual.*/
