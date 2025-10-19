@@ -39,6 +39,7 @@ function(add_chibios_stm32h7_library target)
     "${_chibios_root}/os/hal/ports/STM32/LLD/SPIv3/hal_spi_v2_lld.c"
     "${_chibios_root}/os/hal/ports/STM32/LLD/SYSTICKv1/hal_st_lld.c"
     "${_chibios_root}/os/hal/ports/STM32/LLD/TIMv1/hal_gpt_lld.c"
+    "${_chibios_root}/os/hal/ports/STM32/LLD/TIMv1/hal_pwm_lld.c"
     "${_chibios_root}/os/hal/ports/STM32/LLD/USARTv3/hal_serial_lld.c"
     "${_chibios_root}/os/hal/ports/STM32/STM32H7xx/hal_lld.c"
     "${_chibios_root}/os/hal/ports/STM32/STM32H7xx/stm32_isr.c"
