@@ -5,7 +5,6 @@ set(CMAKE_C_COMPILER arm-none-eabi-gcc)
 set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
 
 set(CMAKE_C_STANDARD 99)
-# Compiler flags
 set(COMMON_FLAGS "-mcpu=cortex-m7 -mthumb -O2 -ggdb -fomit-frame-pointer \
                   -falign-functions=16 -ffunction-sections -fdata-sections \
                   -fno-common -flto=auto"
@@ -32,30 +31,26 @@ message(STATUS "")
 # create static libraries for some chibios components
 #add_chibios_common_library(chibios_common TYPE STATIC)
 add_chibios_stm32h7_library(chibios_stm32h7 TYPE STATIC)
-
-# Include directories
 include_directories(
     .
     ./cfg
 )
 
-# Preprocessor definitions
 add_definitions(
     -DCHPRINTF_USE_FLOAT=1
     -DCORE_CM7
     -DCORTEX_USE_FPU=FALSE
 )
 
-# Sources
 set(SOURCES
     ./cfg/portab.c
     #src/adc.c
-    src/waveform.c
+    #src/waveform.c
+    src/mg996r_servo.c
 )
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})
 
-# Linker flags
 target_link_options(${PROJECT_NAME}.elf PRIVATE
     -nostartfiles
     -Wl,-Map=${CMAKE_BINARY_DIR}/stm32h755_aam.map,--cref,--no-warn-mismatch
