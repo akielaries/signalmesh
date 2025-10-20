@@ -7,6 +7,12 @@
 
 #include "portab.h"
 
+void servo_set_pos(uint16_t us) {
+  if (us < 1000) us = 1000;
+  if (us > 2000) us = 2000;
+  // 1mhz base = microsecond width?
+  pwmEnableChannel(&PWMD1, 1, PWM_FRACTION_TO_WIDTH(&PWMD1, 1000000, us));
+}
 
 // blinky thread
 static THD_WORKING_AREA(waThread1, 128);
@@ -18,25 +24,7 @@ static THD_FUNCTION(Thread1, arg) {
     chThdSleepMilliseconds(100);
     palClearLine(PORTAB_LINE_LED1);
     chThdSleepMilliseconds(100);
-
-    palSetLine(PORTAB_LINE_LED2);
-    chThdSleepMilliseconds(100);
-    palClearLine(PORTAB_LINE_LED2);
-    chThdSleepMilliseconds(100);
-
-    palSetLine(PORTAB_LINE_LED3);
-    chThdSleepMilliseconds(100);
-    palClearLine(PORTAB_LINE_LED3);
-    chThdSleepMilliseconds(100);
   }
-}
-
-// Example function
-void servo_set_pos(uint16_t us) {
-  if (us < 1000) us = 1000;
-  if (us > 2000) us = 2000;
-  // 1mhz base = microsecond width?
-  pwmEnableChannel(&PWMD3, 3, PWM_FRACTION_TO_WIDTH(&PWMD3, 1000000, us));
 }
 
 
@@ -56,7 +44,10 @@ int main(void) {
   chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
 
   // start pwm driver
-  pwmStart(&PWMD3, &portabpwmgrpcfg1);
+  pwmStart(&PWMD1, &portabpwmgrpcfg1);
+  palSetPadMode(GPIOE, 11, PAL_MODE_ALTERNATE(1));
+
+
 
   chprintf(chp, "moving to 0 deg\r\n");
   servo_set_pos(1000); // 0°
@@ -71,11 +62,21 @@ int main(void) {
   chThdSleepMilliseconds(10000);
 
 
+  chprintf(chp, "starting PWM channel 1\r\n");
+
+  //pwmEnableChannel(&PWMD1, 0, portabpwmgrpcfg1.period / 2);
+
+  // 50% duty cycle
+  //pwmEnableChannel(&PWMD1, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 5000));
+  //chThdSleepMilliseconds(3000);
+  //chprintf(chp, "done sleeping\r\n");
+
+  //pwmEnablePeriodicNotification(&PWMD1);
+
+  // It enables the periodic callback at the end of pulse
+  //pwmEnableChannelNotification(&PWMD1,0);
+
   while (true) {
-    if (palReadLine(PORTAB_LINE_BUTTON) == PORTAB_BUTTON_PRESSED) {
-      gptStopTimer(&GPTD6);
-      dacStopConversion(&DACD1);
-    }
     chThdSleepMilliseconds(500);
     //chprintf(chp, "arggg....\r\n");
   }

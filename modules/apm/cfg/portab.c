@@ -168,19 +168,31 @@ static const SerialConfig uart5_cfg = {
   .cr3   = 0,
 };
 
+static void pwmpcb(PWMDriver *pwmp) {
+  (void)pwmp;
+  palSetLine(PORTAB_LINE_LED2);
+}
+
+static void pwmc1cb(PWMDriver *pwmp) {
+  (void)pwmp;
+  palClearLine(PORTAB_LINE_LED2);
+}
+
 /* mg966r servo motor PWM config */
 const PWMConfig portabpwmgrpcfg1 = {
-  .frequency  = 1000000, // 1MHz
+  .frequency  = 100000, // 1MHz
   .period     = 20000,   // 20ms / 50hz period for mg996r servo
+
   .callback   = NULL,
   .channels   = {
-    {PWM_OUTPUT_DISABLED, NULL},             /* CH1 mode and callback.         */
-    {PWM_OUTPUT_DISABLED, NULL},             /* CH2 mode and callback.         */
-    {PWM_OUTPUT_ACTIVE_HIGH, NULL},          /* CH3 mode and callback.         */
-    {PWM_OUTPUT_DISABLED, NULL}              /* CH4 mode and callback.         */
+    {PWM_OUTPUT_DISABLED, NULL},       /* CH1 mode and callback.         */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL},          /* CH2 mode and callback.         */
+    {PWM_OUTPUT_DISABLED, NULL},          /* CH3 mode and callback.         */
+    {PWM_OUTPUT_DISABLED, NULL}           /* CH4 mode and callback.         */
   },
   .cr2        = 0,
   .dier       = 0,
+  //.bdtr = TIM_BDTR_MOE,
 };
 
 
@@ -203,6 +215,7 @@ const PWMConfig portabpwmgrpcfg1 = {
 
 void portab_setup(void) {
   // debug UART config
+  // these come from the Port <port #> alternate functions
   palSetPadMode(GPIOC, GPIOC_PIN12, PAL_MODE_ALTERNATE(8));
   palSetPadMode(GPIOD, GPIOD_PIN2, PAL_MODE_ALTERNATE(8));
   sdStart(&SD5, &uart5_cfg);
@@ -220,9 +233,8 @@ void portab_setup(void) {
   palSetPadMode(GPIOC, 3, PAL_MODE_INPUT_ANALOG); // PC3, ADC channel 13
   //palSetPadMode(GPIOC, 2, PAL_MODE_INPUT_ANALOG); // PC2, ADC channel 12
 
-  // PWM on PC8, channel 3?
-  palSetPadMode(GPIOC, 8, PAL_MODE_ALTERNATE(1));
-  //palSetPadMode(GPIOC, 8, PAL_MODE_STM32_ALTERNATE_PUSHPULL);
+  // PWM on PE11, timer 1 channel 2?
+  //palSetPadMode(GPIOE, 11, PAL_MODE_ALTERNATE(1));
 
   /* Setting up the output pin as analog as suggested
      by the Reference Manual.*/
