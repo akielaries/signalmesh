@@ -180,7 +180,7 @@ static void pwmc1cb(PWMDriver *pwmp) {
 
 /* mg966r servo motor PWM config */
 const PWMConfig portabpwmgrpcfg1 = {
-  .frequency  = 100000, // 1MHz
+  .frequency  = 1000000, // 1MHz
   .period     = 20000,   // 20ms / 50hz period for mg996r servo
 
   .callback   = NULL,
@@ -192,7 +192,6 @@ const PWMConfig portabpwmgrpcfg1 = {
   },
   .cr2        = 0,
   .dier       = 0,
-  //.bdtr = TIM_BDTR_MOE,
 };
 
 
@@ -234,11 +233,8 @@ void portab_setup(void) {
   //palSetPadMode(GPIOC, 2, PAL_MODE_INPUT_ANALOG); // PC2, ADC channel 12
 
   // PWM on PE11, timer 1 channel 2?
-  //palSetPadMode(GPIOE, 11, PAL_MODE_ALTERNATE(1));
+  palSetPadMode(GPIOE, 11, PAL_MODE_ALTERNATE(1));
 
-  /* Setting up the output pin as analog as suggested
-     by the Reference Manual.*/
-  //palSetPadMode(GPIOA, 4, PAL_MODE_INPUT_ANALOG);
 }
 
 /** @} */

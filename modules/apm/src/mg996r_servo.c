@@ -10,10 +10,8 @@
 void servo_set_pos(uint16_t us) {
   if (us < 1000) us = 1000;
   if (us > 2000) us = 2000;
-  // 1mhz base = microsecond width?
-  pwmEnableChannel(&PWMD1, 1, PWM_FRACTION_TO_WIDTH(&PWMD1, 1000000, us));
+  pwmEnableChannel(&PWMD1, 1, us);
 }
-
 // blinky thread
 static THD_WORKING_AREA(waThread1, 128);
 static THD_FUNCTION(Thread1, arg) {
@@ -45,32 +43,30 @@ int main(void) {
 
   // start pwm driver
   pwmStart(&PWMD1, &portabpwmgrpcfg1);
-  palSetPadMode(GPIOE, 11, PAL_MODE_ALTERNATE(1));
-
-
+  chprintf(chp, "starting PWM channel 1 @%dkHz / %dmHz\r\n",
+           portabpwmgrpcfg1.frequency / 1000,
+           portabpwmgrpcfg1.frequency / 1000 / 1000);
 
   chprintf(chp, "moving to 0 deg\r\n");
   servo_set_pos(1000); // 0°
-  chThdSleepMilliseconds(10000);
+  chThdSleepMilliseconds(3000);
 
   chprintf(chp, "moving to 90 deg\r\n");
   servo_set_pos(1500); // 90°
-  chThdSleepMilliseconds(10000);
+  chThdSleepMilliseconds(3000);
 
   chprintf(chp, "moving to 180 deg?\r\n");
   servo_set_pos(2000); // 180°
-  chThdSleepMilliseconds(10000);
+  chThdSleepMilliseconds(3000);
+  servo_set_pos(2500); // 180°
+  chThdSleepMilliseconds(3000);
 
-
-  chprintf(chp, "starting PWM channel 1\r\n");
-
-  //pwmEnableChannel(&PWMD1, 0, portabpwmgrpcfg1.period / 2);
-
+/*
   // 50% duty cycle
-  //pwmEnableChannel(&PWMD1, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 5000));
-  //chThdSleepMilliseconds(3000);
-  //chprintf(chp, "done sleeping\r\n");
-
+  pwmEnableChannel(&PWMD1, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 5000));
+  chThdSleepMilliseconds(3000);
+  chprintf(chp, "done sleeping\r\n");
+*/
   //pwmEnablePeriodicNotification(&PWMD1);
 
   // It enables the periodic callback at the end of pulse
