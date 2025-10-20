@@ -7,11 +7,24 @@
 
 #include "portab.h"
 
+
+#define SERVO_MIN_US 600
+#define SERVO_MAX_US 2400
+
 void servo_set_pos(uint16_t us) {
-  if (us < 1000) us = 1000;
-  if (us > 2000) us = 2000;
+  if (us < SERVO_MIN_US) us = SERVO_MIN_US;
+  if (us > SERVO_MAX_US) us = SERVO_MAX_US;
   pwmEnableChannel(&PWMD1, 1, us);
 }
+
+void servo_set_angle(float degrees) {
+  if (degrees < 0) degrees = 0;
+  if (degrees > 180) degrees = 180;
+  
+  uint16_t us = SERVO_MIN_US + (degrees / 180.0f) * (SERVO_MAX_US - SERVO_MIN_US);
+  servo_set_pos(us);
+}
+
 // blinky thread
 static THD_WORKING_AREA(waThread1, 128);
 static THD_FUNCTION(Thread1, arg) {
@@ -47,19 +60,24 @@ int main(void) {
            portabpwmgrpcfg1.frequency / 1000,
            portabpwmgrpcfg1.frequency / 1000 / 1000);
 
-  chprintf(chp, "moving to 0 deg\r\n");
-  servo_set_pos(1000); // 0°
-  chThdSleepMilliseconds(3000);
+  for (uint8_t i = 0; i < 5; i++) {
+    chprintf(chp, "moving to 0 deg\r\n");
+    servo_set_angle(0);
+    chThdSleepMilliseconds(3000);
 
-  chprintf(chp, "moving to 90 deg\r\n");
-  servo_set_pos(1500); // 90°
-  chThdSleepMilliseconds(3000);
+    chprintf(chp, "moving to 90 deg\r\n");
+    servo_set_angle(90);
+    chThdSleepMilliseconds(3000);
 
-  chprintf(chp, "moving to 180 deg?\r\n");
-  servo_set_pos(2000); // 180°
-  chThdSleepMilliseconds(3000);
-  servo_set_pos(2500); // 180°
-  chThdSleepMilliseconds(3000);
+    chprintf(chp, "moving to 180 deg?\r\n");
+    servo_set_angle(180);
+    chThdSleepMilliseconds(3000);
+  }
+
+  chprintf(chp, "disabling PWM\r\n");
+  pwmDisableChannel(&PWMD1, 1);
+  pwmStop(&PWMD1);
+
 
 /*
   // 50% duty cycle
