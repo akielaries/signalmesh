@@ -38,6 +38,18 @@ static THD_FUNCTION(Thread1, arg) {
   }
 }
 
+static THD_WORKING_AREA(waThread2, 128);
+static THD_FUNCTION(Thread2, arg) {
+  (void)arg;
+  chRegSetThreadName("blinker2");
+  while (true) {
+    palSetLine(PORTAB_LINE_LED3);
+    chThdSleepMilliseconds(300);
+    palClearLine(PORTAB_LINE_LED3);
+    chThdSleepMilliseconds(300);
+  }
+}
+
 
 /*
  * Application entry point.
@@ -53,6 +65,7 @@ int main(void) {
 
   chprintf(chp, "Blinking on boot\r\n");
   chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
+  chThdCreateStatic(waThread2, sizeof(waThread2), NORMALPRIO, Thread2, NULL);
 
   // start pwm driver
   pwmStart(&PWMD1, &portabpwmgrpcfg1);
@@ -60,18 +73,22 @@ int main(void) {
            portabpwmgrpcfg1.frequency / 1000,
            portabpwmgrpcfg1.frequency / 1000 / 1000);
 
-  for (uint8_t i = 0; i < 5; i++) {
+  for (uint8_t i = 0; i < 3; i++) {
     chprintf(chp, "moving to 0 deg\r\n");
     servo_set_angle(0);
-    chThdSleepMilliseconds(3000);
+    chThdSleepMilliseconds(500);
 
-    chprintf(chp, "moving to 90 deg\r\n");
-    servo_set_angle(90);
-    chThdSleepMilliseconds(3000);
+    chprintf(chp, "moving to 360 deg\r\n");
+    servo_set_angle(360);
+    chThdSleepMilliseconds(500);
 
     chprintf(chp, "moving to 180 deg?\r\n");
     servo_set_angle(180);
-    chThdSleepMilliseconds(3000);
+    chThdSleepMilliseconds(500);
+
+    chprintf(chp, "moving to 90 deg?\r\n");
+    servo_set_angle(90);
+    chThdSleepMilliseconds(500);
   }
 
   chprintf(chp, "disabling PWM\r\n");
