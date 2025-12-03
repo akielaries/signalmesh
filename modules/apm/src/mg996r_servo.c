@@ -1,11 +1,22 @@
 #include <math.h>
-#include "ch.h"
-#include "hal.h"
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "ccportab.h"
 #include "chprintf.h"
-
-
+#include "ch.h"
+#include "hal.h"
 #include "portab.h"
+
+#ifdef __cplusplus
+}
+#endif
+
+
+
 
 
 #define SERVO_MIN_US 600

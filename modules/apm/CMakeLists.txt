@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(audio_peripheral_module C ASM)
-
-set(CMAKE_C_COMPILER arm-none-eabi-gcc)
-set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
+project(audio_peripheral_module C CXX ASM)
 
 set(CMAKE_C_STANDARD 99)
 set(COMMON_FLAGS "-mcpu=cortex-m7 -mthumb -O2 -ggdb -fomit-frame-pointer \
@@ -33,7 +30,7 @@ message(STATUS "")
 add_chibios_stm32h7_library(chibios_stm32h7 TYPE STATIC)
 include_directories(
     .
-    ./cfg
+    ./bsp
 )
 
 add_definitions(
@@ -43,7 +40,7 @@ add_definitions(
 )
 
 set(SOURCES
-    ./cfg/portab.c
+    ./bsp/portab.c
     #src/adc.c
     #src/waveform.c
     src/mg996r_servo.c
