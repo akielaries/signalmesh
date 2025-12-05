@@ -7,6 +7,7 @@ set(COMMON_FLAGS "-mcpu=cortex-m7 -mthumb -O2 -ggdb -fomit-frame-pointer \
                   -fno-common -flto=auto"
 )
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMMON_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMMON_FLAGS}")
 set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} ${COMMON_FLAGS}")
 
 set(STM32_CHIP STM32H755)
