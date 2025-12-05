@@ -6,7 +6,7 @@ set(COMMON_FLAGS "-mcpu=cortex-m7 -mthumb -O2 -ggdb -fomit-frame-pointer \
                   -falign-functions=16 -ffunction-sections -fdata-sections \
                   -fno-common -flto=auto"
 )
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMMON_FLAGS}")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMMON_FLAGS} -I${CMAKE_SOURCE_DIR}/bsp")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMMON_FLAGS}")
 set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} ${COMMON_FLAGS}")
 
@@ -32,6 +32,11 @@ add_chibios_stm32h7_library(chibios_stm32h7 TYPE STATIC)
 include_directories(
     .
     ./bsp
+    ./app
+    ./tests
+    ./bsp/configs
+    ./bsp/utils
+    ./drivers
 )
 
 add_definitions(
@@ -41,10 +46,16 @@ add_definitions(
 )
 
 set(SOURCES
-    ./bsp/portab.c
-    #src/adc.c
-    #src/waveform.c
-    src/mg996r_servo.c
+    ./bsp/bsp.c
+    ./bsp/configs/bsp_uart_config.c
+    ./bsp/configs/bsp_gpt_config.c
+    ./bsp/configs/bsp_adc_config.c
+    ./bsp/configs/bsp_pwm_config.c
+    ./bsp/utils/bsp_print.c
+    ./bsp/utils/bsp_gpt.c
+    ./drivers/adc.c
+    ./drivers/servo.c
+    ./app/main.c
 )
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})
@@ -64,6 +75,8 @@ target_link_libraries(${PROJECT_NAME}.elf PRIVATE
   #chibios_common
   chibios_stm32h7
 )
+
+target_include_directories(chibios_stm32h7 PUBLIC ${CMAKE_SOURCE_DIR}/bsp)
 
 STM32_ADD_HEX_BIN_TARGETS(${CMAKE_PROJECT_NAME}.elf)
 STM32_PRINT_SIZE_OF_TARGETS(${CMAKE_PROJECT_NAME}.elf)
