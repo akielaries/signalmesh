@@ -16,8 +16,8 @@
 
 #include "ch.h"
 #include "hal.h"
+#include "bsp/utils/bsp_io.h"
 #include "ccportab.h"
-#include "chprintf.h"
 
 
 #include "portab.h"
@@ -134,7 +134,7 @@ int main(void) {
 
   /* Board-dependent GPIO setup code.*/
   portab_setup();
-  chprintf(chp, "\r\n...Starting...\r\n\r\n");
+  bsp_printf("\n...Starting...\n\n");
 
   /*
    * Creates the example thread.
@@ -168,7 +168,8 @@ int main(void) {
 
   gptStartContinuous(&PORTAB_GPT1, 100U);
 
-  chprintf(chp, "ADC1[%lu]: %u\r\n", 0, (unsigned)samples1[0]);
+
+  bsp_printf("ADC1[%lu]: %u\n", 0, (unsigned)samples1[0]);
 
   /*
    * Normal main() thread activity, if the button is pressed then the
@@ -176,16 +177,16 @@ int main(void) {
    */
   while (true) {
     cacheBufferInvalidate(samples2, sizeof(samples2) / sizeof(adcsample_t));
-    chprintf(chp, "counters - nx: %d ny: %d n: %d\r\n", nx, ny, n);
+    bsp_printf("counters - nx: %d ny: %d n: %d\n", nx, ny, n);
     /*
         for (size_t i = 0; i < ADC_GRP1_BUF_DEPTH; i++) {
           //float temp = adc_to_temperature(samples1[i]);
 
-          chprintf(chp, "ADC1[%lu]: %u\r\n", i, (unsigned)samples1[i]);
+          bsp_printf( "ADC1[%lu]: %u\n", i, (unsigned)samples1[i]);
         }
     */
     for (size_t i = 0; i < 1; i++) {
-      chprintf(chp, "ADC2[%lu]: %u\r\n", i, (unsigned)samples2[i]);
+      bsp_printf("ADC2[%lu]: %u\n", i, (unsigned)samples2[i]);
     }
 
     if (palReadLine(PORTAB_LINE_BUTTON) == PORTAB_BUTTON_PRESSED) {

@@ -43,3 +43,18 @@ function(STM32_PRINT_SIZE_OF_TARGETS TARGET)
     )
 endfunction()
 
+function(STM32_PRINT_SIZE_DIFF TARGET)
+    if (EXECUTABLE_OUTPUT_PATH)
+        set(FILENAME "${EXECUTABLE_OUTPUT_PATH}/${TARGET}")
+    else()
+        set(FILENAME "${TARGET}")
+    endif()
+
+    add_custom_command(
+        TARGET ${TARGET}
+        POST_BUILD
+        COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/../../toolchain/size_diff.sh ${FILENAME}
+        COMMENT "Size diff for ${TARGET}"
+    )
+endfunction()
+

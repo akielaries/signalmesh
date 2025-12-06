@@ -1,20 +1,12 @@
 #include "ch.h"
 #include "hal.h"
-#include "chprintf.h"
+#include "bsp/utils/bsp_io.h"
+#include "bsp/bsp.h"
 
 
 #define DMA_STREAM_ID STM32_DMA_STREAM_ID(1, 2)
 #define DMA_CHANNEL   3 // Channel tied to TIM2_UP (check your MCU RM)
 #define DMA_PRIORITY  2
-
-static BaseSequentialStream *chp = (BaseSequentialStream *)&SD5;
-
-static const SerialConfig uart5_cfg = {
-  .speed = 1000000,
-  .cr1   = 0,
-  .cr2   = 0,
-  .cr3   = 0,
-};
 
 static uint16_t samples[64]; // DMA destination buffer
 static volatile bool dmaComplete = false;
@@ -59,12 +51,12 @@ static THD_FUNCTION(ThreadBlinker, arg) {
 
   while (!dmaComplete) {
     chThdSleepMilliseconds(100);
-    chprintf(chp, "Waiting for DMA...\r\n");
+    bsp_printf("Waiting for DMA...\n");
   }
 
-  chprintf(chp, "DMA complete. Values:\r\n");
+  bsp_printf("DMA complete. Values:\n");
   for (int i = 0; i < 64; ++i) {
-    chprintf(chp, "samples[%d] = %u\r\n", i, samples[i]);
+    bsp_printf("samples[%d] = %u\n", i, samples[i]);
   }
 
   while (true) {

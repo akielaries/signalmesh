@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 project(audio_peripheral_module C CXX ASM)
 
 set(CMAKE_C_STANDARD 99)
-set(COMMON_FLAGS "-mcpu=cortex-m7 -mthumb -O2 -ggdb -fomit-frame-pointer \
+set(COMMON_FLAGS "-mcpu=cortex-m7 -mthumb -O1 -ggdb -fomit-frame-pointer \
                   -falign-functions=16 -ffunction-sections -fdata-sections \
                   -fno-common -flto=auto"
 )
@@ -36,7 +36,6 @@ include_directories(
     ./tests
     ./bsp/configs
     ./bsp/utils
-    ./drivers
 )
 
 add_definitions(
@@ -51,11 +50,12 @@ set(SOURCES
     ./bsp/configs/bsp_gpt_config.c
     ./bsp/configs/bsp_adc_config.c
     ./bsp/configs/bsp_pwm_config.c
-    ./bsp/utils/bsp_print.c
     ./bsp/utils/bsp_gpt.c
+    ./bsp/utils/bsp_io.c
     ./drivers/adc.c
     ./drivers/servo.c
-    ./app/main.c
+    #./app/main.c
+    ./tests/test_servo.c
 )
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})
@@ -80,4 +80,4 @@ target_include_directories(chibios_stm32h7 PUBLIC ${CMAKE_SOURCE_DIR}/bsp)
 
 STM32_ADD_HEX_BIN_TARGETS(${CMAKE_PROJECT_NAME}.elf)
 STM32_PRINT_SIZE_OF_TARGETS(${CMAKE_PROJECT_NAME}.elf)
-
+STM32_PRINT_SIZE_DIFF(${CMAKE_PROJECT_NAME}.elf)

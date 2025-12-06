@@ -1,9 +1,12 @@
 #pragma once
 
 #include "hal.h"
-#include "bsp/configs/bsp_pins.h"
 #include "drivers/adc.h" // Include adc.h for adc_group_id_t definition
 
+typedef struct {
+    ioportid_t port;
+    uint16_t pad;
+} bsp_pin_t;
 
 // This struct defines a complete ADC conversion group for the HAL interface
 typedef struct {
