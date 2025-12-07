@@ -7,7 +7,7 @@ SIZE_PREV="${FILE}.size.prev"
 arm-none-eabi-size "$FILE" > "$SIZE_FILE"
 
 echo ""
-echo "=== Size Change ==="
+echo "=== size diff ==="
 
 if [[ -f "$SIZE_PREV" ]]; then
     prev_line=$(tail -n 1 "$SIZE_PREV")

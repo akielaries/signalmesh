@@ -21,7 +21,7 @@ int main() {
   //bsp_printf("stopped I2C2\n");
 
   // 100KHz from 50MHz PCLK
-  static const I2CConfig i2c1_config = {.timingr = 0x10707dbc, // 100kHz timing
+  static const I2CConfig i2c1_config = {.timingr = 0x00C0EAFF, // 100kHz timing
                                         .cr1     = 0,
                                         .cr2     = 0};
   static const I2CConfig i2c2_config = {.timingr = 0x00C0EAFF, // 100kHz timing
