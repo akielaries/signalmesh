@@ -4,15 +4,13 @@
 #include <string.h>
 
 void bsp_io_init(void) {
-  // Configure GPIOs for the debug UART
-  palSetPadMode(BSP_DEBUG_UART_TX_PORT,
-                BSP_DEBUG_UART_TX_PIN,
-                PAL_MODE_ALTERNATE(BSP_DEBUG_UART_AF));
-  palSetPadMode(BSP_DEBUG_UART_RX_PORT,
-                BSP_DEBUG_UART_RX_PIN,
-                PAL_MODE_ALTERNATE(BSP_DEBUG_UART_AF));
-
-  // Start the serial driver
+  // these come from the Port <port #> alternate functions in datasheet/stm32h753vi.pdf
+  palSetPadMode(GPIOC,
+                12,
+                PAL_MODE_ALTERNATE(8));
+  palSetPadMode(GPIOD,
+                2,
+                PAL_MODE_ALTERNATE(8));
   sdStart(bsp_debug_uart_driver, &bsp_debug_uart_config);
 }
 

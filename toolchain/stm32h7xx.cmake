@@ -21,14 +21,14 @@ function(add_chibios_stm32h7_library target)
     "${_chibios_root}/os/oslib/src/*.c"
     "${_chibios_root}/os/hal/lib/streams/*.c"
     "${_chibios_root}/os/common/oop/src/oop_base_object.c"
-
     "${_chibios_root}/os/common/ports/ARMv7-M/compilers/GCC/chcoreasm.S"
+    "${_chibios_root}/os/common/ports/ARMv7-M/chcore.c"
     "${_chibios_root}/os/common/startup/ARMCMx/compilers/GCC/crt0_v7m.S"
     "${_chibios_root}/os/common/startup/ARMCMx/compilers/GCC/vectors.S"
-    "${_chibios_root}/os/common/oop/src/oop_base_object.c"
-    "${_chibios_root}/os/common/ports/ARMv7-M/chcore.c"
     "${_chibios_root}/os/common/startup/ARMCMx/compilers/GCC/crt1.c"
+
     "${_chibios_root}/os/hal/boards/ST_NUCLEO144_H755ZI/board.c"
+
     "${_chibios_root}/os/hal/ports/STM32/LLD/ADCv4/hal_adc_lld.c"
     "${_chibios_root}/os/hal/ports/STM32/LLD/BDMAv1/stm32_bdma.c"
     "${_chibios_root}/os/hal/ports/STM32/LLD/DACv1/hal_dac_lld.c"
@@ -41,6 +41,8 @@ function(add_chibios_stm32h7_library target)
     "${_chibios_root}/os/hal/ports/STM32/LLD/TIMv1/hal_gpt_lld.c"
     "${_chibios_root}/os/hal/ports/STM32/LLD/TIMv1/hal_pwm_lld.c"
     "${_chibios_root}/os/hal/ports/STM32/LLD/USARTv3/hal_serial_lld.c"
+    "${_chibios_root}/os/hal/ports/STM32/LLD/I2Cv3/hal_i2c_lld.c"
+
     "${_chibios_root}/os/hal/ports/STM32/STM32H7xx/hal_lld.c"
     "${_chibios_root}/os/hal/ports/STM32/STM32H7xx/stm32_isr.c"
     "${_chibios_root}/os/hal/ports/common/ARMCMx/nvic.c"
@@ -93,6 +95,7 @@ function(add_chibios_stm32h7_library target)
     "${_chibios_root}/os/hal/ports/STM32/LLD/USART"
     "${_chibios_root}/os/hal/ports/STM32/LLD/USARTv3"
     "${_chibios_root}/os/hal/ports/STM32/LLD/xWDGv1"
+    #"${_chibios_root}/os/hal/ports/STM32/LLD/I2Cv4"
     "${_chibios_root}/os/hal/ports/STM32/STM32H7xx"
     "${_chibios_root}/os/hal/ports/common/ARMCMx"
   )
@@ -100,4 +103,3 @@ function(add_chibios_stm32h7_library target)
 
   set_target_properties(${target} PROPERTIES POSITION_INDEPENDENT_CODE OFF)
 endfunction()
-

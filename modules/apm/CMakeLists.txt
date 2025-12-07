@@ -50,12 +50,14 @@ set(SOURCES
     ./bsp/configs/bsp_gpt_config.c
     ./bsp/configs/bsp_adc_config.c
     ./bsp/configs/bsp_pwm_config.c
+    ./bsp/configs/bsp_i2c_config.c
     ./bsp/utils/bsp_gpt.c
     ./bsp/utils/bsp_io.c
     ./drivers/adc.c
     ./drivers/servo.c
     #./app/main.c
-    ./tests/test_servo.c
+    #./tests/test_servo.c
+    ./tests/test_ina219.c
 )
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})
