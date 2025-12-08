@@ -33,4 +33,4 @@ const I2CConfig bsp_i2c_config = {
 };
 
 // Use I2C2 as the default I2C driver
-I2CDriver *const bsp_i2c_driver = &I2CD2;
+I2CDriver *const bsp_i2c_driver = &I2CD1;

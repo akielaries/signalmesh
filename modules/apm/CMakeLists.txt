@@ -57,7 +57,7 @@ set(SOURCES
     ./drivers/servo.c
     #./app/main.c
     #./tests/test_servo.c
-    ./tests/test_ina219.c
+    ./tests/test_i2c_lb.c
 )
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})
