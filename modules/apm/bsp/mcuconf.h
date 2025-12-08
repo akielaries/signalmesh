@@ -305,7 +305,7 @@
 #define STM32_I2C_I2C3_DMA_PRIORITY    3
 #define STM32_I2C_I2C4_DMA_PRIORITY    3
 #define STM32_I2C_DMA_ERROR_HOOK(i2cp) osalSysHalt("DMA failure")
-
+//#define STM32_I2C_USE_DMA                   FALSE
 /*
  * ICU driver system settings.
  */

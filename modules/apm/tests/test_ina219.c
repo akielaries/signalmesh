@@ -1,124 +1,126 @@
 #include <math.h>
+
 #include "ch.h"
 #include "hal.h"
 #include "bsp/bsp.h"
-#include "bsp/configs/bsp_uart_config.h"
-#include "bsp/configs/bsp_i2c_config.h"
 #include "bsp/utils/bsp_io.h"
-
+#include "bsp/configs/bsp_uart_config.h"
+#include "bsp/include/bsp_defs.h"
 #include "drivers/ina219.h"
 
+#define MASTER_SUCCESS_LED APM_BSP_OK
+#define MASTER_ERROR_LED APM_BSP_ERR
+#define SLAVE_ACTIVITY_LED APM_BSP_WARN
 
-int main() {
-  bsp_init();
+#define I2C_LOOPBACK_SLAVE_ADDR 0x52
 
-  bsp_printf("--- Starting I2C Debug Test ---\r\n");
-  bsp_printf("Testing I2C startup step by step\r\n");
-  bsp_printf("Press button to stop.\r\n\r\n");
+// 100KHz from 50MHz PCLK
+static const I2CConfig i2c_config = {.timingr = 0x00C0EAFF, // 100kHz timing
+                                     .cr1     = 0,
+                                     .cr2     = 0};
 
-  // Step 1: Test I2C2 only (your original working config)
-  //i2cStop(&I2CD2);
-  //bsp_printf("stopped I2C2\n");
+// Master Thread
+static THD_WORKING_AREA(waMasterThread, 256);
+static THD_FUNCTION(MasterThread, arg) {
+  (void)arg;
+  chRegSetThreadName("I2C Master");
+  uint8_t tx_byte = 0xA0;
+  uint8_t rx_byte;
 
-  // 100KHz from 50MHz PCLK
-  static const I2CConfig i2c1_config = {.timingr = 0x00C0EAFF, // 100kHz timing
-                                        .cr1     = 0,
-                                        .cr2     = 0};
-  static const I2CConfig i2c2_config = {.timingr = 0x00C0EAFF, // 100kHz timing
-                                        .cr1     = 0,
-                                        .cr2     = 0};
-
-  // Step 2: Try I2C1 GPIO config only (no start yet)
-  bsp_printf("Configuring I2C1 GPIO...\r\n");
-  palSetPadMode(GPIOB, 8, PAL_MODE_ALTERNATE(4)); // PB6 = I2C1_SCL
-  palSetPadMode(GPIOB, 9, PAL_MODE_ALTERNATE(4)); // PB7 = I2C1_SDA
-  bsp_printf("I2C1 GPIO configured\r\n");
-
-  bsp_printf("Starting I2C1 only...\n");
-  chThdSleepMilliseconds(100);
-  rccEnableI2C1(true);
-  i2cStart(&I2CD1, &i2c1_config);
-  bsp_printf("I2C1 started successfully\r\n");
-
-  // Small delay
-  chThdSleepMilliseconds(100);
-
-  bsp_printf("Starting I2C2...\r\n");
-  rccEnableI2C2(true);
-  i2cStart(&I2CD2, &i2c2_config);
-  bsp_printf("I2C2 started successfully\r\n");
-
-  // If we get here, both I2C drivers are working
-  bsp_printf("Both I2C drivers started successfully!\r\n");
-
-  // Loopback test
   while (true) {
-    static uint8_t test_data = 0x55; // Alternating pattern
-    uint8_t rx_data[2];
-
-    // I2C1 as master, I2C2 as slave (or vice versa)
     msg_t msg = i2cMasterTransmitTimeout(&I2CD1,
-                                         0x52,
-                                         &test_data,
+                                         I2C_LOOPBACK_SLAVE_ADDR,
+                                         &tx_byte,
                                          1,
-                                         rx_data,
+                                         &rx_byte,
                                          1,
-                                         TIME_MS2I(1000));
+                                         TIME_MS2I(100));
 
-    if (msg == MSG_OK) {
-      bsp_printf("I2C1->I2C2: TX:0x%02X RX:0x%02X\r\n", test_data, rx_data[0]);
+    if (msg == MSG_OK && rx_byte == tx_byte) {
+      palToggleLine(MASTER_SUCCESS_LED);
     } else {
-      bsp_printf("I2C Error: %d\r\n", msg);
+      bsp_printf("master err: %d\n", msg);
+      i2cGetErrors(&I2CD1);
+      palToggleLine(MASTER_ERROR_LED);
     }
 
-    test_data++; // Change test data each time
-
-    // Check for button press to stop
-    if (palReadLine(LINE_BUTTON) == PAL_HIGH) {
-      bsp_printf("Test stopped.\r\n");
-      break;
-    }
-
-    chThdSleepMilliseconds(500);
+    tx_byte++;
+    chThdSleepMilliseconds(250); // Faster toggling
   }
+}
 
-  bsp_printf("starting i2c driver\n");
-  chThdSleepMilliseconds(100);
-
-  i2cStart(&I2CD2, &bsp_i2c_config);
-  bsp_printf("i2c driver started\n");
-
+// Slave Thread
+static THD_WORKING_AREA(waSlaveThread, 256);
+static THD_FUNCTION(SlaveThread, arg) {
+  (void)arg;
+  chRegSetThreadName("I2C Slave");
+  uint8_t buffer[1];
 
   while (true) {
-    unsigned i;
-    msg_t msg;
-    static const uint8_t cmd[] = {0, 0};
-    uint8_t data[16];
+    msg_t rx_msg = i2cSlaveReceiveTimeout(&I2CD2, buffer, 1, TIME_INFINITE);
 
-    msg = i2cMasterTransmitTimeout(&I2CD2,
-                                   0x52,
-                                   cmd,
-                                   sizeof(cmd),
-                                   data,
-                                   sizeof(data),
-                                   TIME_INFINITE);
-    if (msg != MSG_OK) {
-      bsp_printf("bad xmit\n");
-    }
-
-    for (i = 0; i < 256; i++) {
-      msg = i2cMasterReceiveTimeout(&I2CD2,
-                                    0x52,
-                                    data,
-                                    sizeof(data),
-                                    TIME_INFINITE);
-      if (msg != MSG_OK) {
-        bsp_printf("bad recv\n");
+    if (rx_msg == MSG_OK) {
+      palToggleLine(SLAVE_ACTIVITY_LED);
+      msg_t tx_msg = i2cSlaveTransmitTimeout(&I2CD2, buffer, 1, TIME_INFINITE);
+      if (tx_msg != MSG_OK) {
+        // If slave tx fails, toggle the error led
+        bsp_printf("slave err: %d\n", tx_msg);
+        i2cGetErrors(&I2CD2);
+        palToggleLine(MASTER_ERROR_LED);
       }
     }
-    chThdSleepMilliseconds(500);
   }
+}
 
+int main(void) {
+  // System initializations.
+  halInit();
+  chSysInit();
+  bsp_init();
+
+  bsp_printf("--- Starting I2C Loopback Test ---\r\n");
+  bsp_printf("I2C1 (Master) <--> I2C2 (Slave @ 0x%02X)\r\n",
+             I2C_LOOPBACK_SLAVE_ADDR);
+  bsp_printf(
+      "Green LED: Master OK | Red LED: Error | Yellow LED: Slave RX\r\n");
+
+  // Configure I2C1 (Master) pins: PB8 = SCL, PB9 = SDA
+  palSetPadMode(
+      GPIOB, 8, PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
+  palSetPadMode(
+      GPIOB, 9, PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
+
+  // Configure I2C2 (Slave) pins: PF1 = SCL, PF0 = SDA
+  palSetPadMode(
+      GPIOF, 1, PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
+  palSetPadMode(
+      GPIOF, 0, PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
+
+  // Enable I2C peripheral clocks.
+  rccEnableI2C1(true);
+  rccEnableI2C2(true);
+
+  // Start I2C drivers
+  i2cStart(&I2CD1, &i2c_config);
+  i2cStart(&I2CD2, &i2c_config);
+
+  // Configure I2CD2 as a slave device
+  //i2cAcquireBus(&I2CD2);
+  //I2CD2.i2c->OAR1 = (I2C_LOOPBACK_SLAVE_ADDR << 1) | I2C_OAR1_OA1EN;
+  //i2cReleaseBus(&I2CD2);
+
+  bsp_printf("I2C Peripherals started and configured.\r\n");
+
+  // Start threads
+  chThdCreateStatic(
+      waSlaveThread, sizeof(waSlaveThread), NORMALPRIO + 2, SlaveThread, NULL);
+  chThdCreateStatic(
+      waMasterThread, sizeof(waMasterThread), NORMALPRIO + 1, MasterThread, NULL);
+
+  // main() thread does nothing but sleep.
+  while (true) {
+    chThdSleepMilliseconds(1000);
+  }
   return 0;
 }
 
@@ -194,4 +196,3 @@ int foo(void) {
 
   return 0;
 }
-
