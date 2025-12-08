@@ -19,6 +19,22 @@ static const I2CConfig i2c_config = {.timingr = 0x00C0EAFF, // 100kHz timing
                                      .cr1     = 0,
                                      .cr2     = 0};
 
+
+void handle_i2c_err(int err) {
+  if (err & I2C_BUS_ERROR) {
+    bsp_printf("BUS ERROR!\n");
+  } else if (err & I2C_ARBITRATION_LOST) {
+    bsp_printf("ARBITRATION LOST!\n");
+  } else if (err & I2C_ACK_FAILURE) {
+    bsp_printf("I2C ACK FAILURE!\n");
+  } else if (err & I2C_OVERRUN) {
+    bsp_printf("I2C OVERRUN!\n");
+  } else {
+    bsp_printf("some other failure!\n");
+  }
+
+}
+
 // Master Thread
 static THD_WORKING_AREA(waMasterThread, 256);
 static THD_FUNCTION(MasterThread, arg) {
@@ -40,7 +56,10 @@ static THD_FUNCTION(MasterThread, arg) {
       palToggleLine(MASTER_SUCCESS_LED);
     } else {
       bsp_printf("master err: %d\n", msg);
-      i2cGetErrors(&I2CD1);
+      int ret = i2cGetErrors(&I2CD1);
+      bsp_printf("i2c errs: %d\n", ret);
+      handle_i2c_err(ret);
+
       palToggleLine(MASTER_ERROR_LED);
     }
 
@@ -65,7 +84,8 @@ static THD_FUNCTION(SlaveThread, arg) {
       if (tx_msg != MSG_OK) {
         // If slave tx fails, toggle the error led
         bsp_printf("slave err: %d\n", tx_msg);
-        i2cGetErrors(&I2CD2);
+        int ret = i2cGetErrors(&I2CD2);
+        bsp_printf("i2c errs: %d\n", ret);
         palToggleLine(MASTER_ERROR_LED);
       }
     }
