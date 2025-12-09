@@ -109,7 +109,6 @@ static THD_FUNCTION(MasterThread, arg) {
 
       if (master_rx[0] == counter) {
         palToggleLine(MASTER_SUCCESS_LED);
-        bsp_printf("success! rx == cnt!\n");
       } else {
         bsp_printf("master: rx mismatch (sent 0x%02X got 0x%02X)\n",
                    counter, master_rx[0]);
@@ -152,7 +151,6 @@ static THD_FUNCTION(SlaveThread, arg) {
       slave_tx[0] = rx_b;
 
       palToggleLine(SLAVE_ACTIVITY_LED);
-      bsp_printf("slave active!\n");
 
       /* flush slave_tx so DMA sees CPU changes */
       cacheBufferFlush(slave_tx, 1);
@@ -183,7 +181,7 @@ int main(void) {
   //rccEnableAHB4(STM32_GPIO_EN_MASK, true);
   bsp_init();
 
-  bsp_printf("--- Starting I2C Loopback Test (ROLES SWAPPED) ---\r\n");
+  bsp_printf("--- Starting I2C Loopback Test ---\r\n");
   bsp_printf("I2C1 (Master) <--> I2C4 (Slave @ 0x%02X)\r\n", I2C_LOOPBACK_SLAVE_ADDR);
   bsp_printf("Green LED: Master OK | Red LED: Error | Yellow LED: Slave RX\r\n");
 
@@ -192,30 +190,27 @@ int main(void) {
   palSetPadMode(GPIOB, 9,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
                           PAL_STM32_PUPDR_PULLUP); /* I2C1 SDA */
 
-  //palSetPadMode(GPIOF, 1,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN); /* I2C4 SCL */
-  //palSetPadMode(GPIOF, 0,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN); /* I2C4 SDA */
-  /* Slave I2C4 SCL on PD12, SDA on PD13 */
+  /* slave I2C4 SCL on PD12, SDA on PD13 */
   palSetPadMode(GPIOD, 12, PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
                           PAL_STM32_PUPDR_PULLUP);
   palSetPadMode(GPIOD, 13, PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
                           PAL_STM32_PUPDR_PULLUP);
 
-  /* Enable clocks */
+  // reset clock control enable clocks
   rccEnableI2C1(true);
   rccEnableI2C4(true);
 
-  /* Start I2C drivers */
+  // start I2C drivers
   i2cStart(&I2CD1, &i2c_config); /* Master */
   i2cStart(&I2CD4, &i2c_config); /* Slave */
 
   chThdSleepMilliseconds(50);
 
-  /* IMPORTANT: bind the slave address so the peripheral will ACK master's address */
+  // bind the slave address so the peripheral will ACK master's address */
   i2cSlaveMatchAddress(&I2CD4, I2C_LOOPBACK_SLAVE_ADDR);
 
   bsp_printf("I2C Peripherals started and configured.\r\n");
 
-  /* Create threads */
   chThdCreateStatic(waSlaveThread, sizeof(waSlaveThread), NORMALPRIO, SlaveThread, NULL);
   chThdCreateStatic(waMasterThread, sizeof(waMasterThread), NORMALPRIO, MasterThread, NULL);
 
