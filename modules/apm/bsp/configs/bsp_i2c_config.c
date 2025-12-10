@@ -25,11 +25,11 @@
 
 // I2C configuration based on STM32CubeH7 example
 // Using timing from CubeH7 example (0x00901954 for 400kHz at 100MHz APB1)
-const I2CConfig bsp_i2c_config = { 
+const I2CConfig bsp_i2c_config = {
   //.timingr = 0x00901954, // CubeH7 timing for i2C2
   .timingr = 0x00C0EAFF,  // 100KHz from 50MHz PCLK
   .cr1 = 0,
-  .cr2 = 0 
+  .cr2 = 0
 };
 
 // Use I2C2 as the default I2C driver

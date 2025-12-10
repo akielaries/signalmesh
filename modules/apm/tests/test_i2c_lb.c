@@ -190,7 +190,7 @@ int main(void) {
   palSetPadMode(GPIOB, 9,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
                           PAL_STM32_PUPDR_PULLUP); /* I2C1 SDA */
 
-  /* slave I2C4 SCL on PD12, SDA on PD13 */
+  // slave I2C4 SCL on PD12, SDA on PD13
   palSetPadMode(GPIOD, 12, PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
                           PAL_STM32_PUPDR_PULLUP);
   palSetPadMode(GPIOD, 13, PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
@@ -201,12 +201,12 @@ int main(void) {
   rccEnableI2C4(true);
 
   // start I2C drivers
-  i2cStart(&I2CD1, &i2c_config); /* Master */
-  i2cStart(&I2CD4, &i2c_config); /* Slave */
+  i2cStart(&I2CD1, &i2c_config); // master
+  i2cStart(&I2CD4, &i2c_config); // slave
 
   chThdSleepMilliseconds(50);
 
-  // bind the slave address so the peripheral will ACK master's address */
+  // bind the slave address so the peripheral will ACK master's address
   i2cSlaveMatchAddress(&I2CD4, I2C_LOOPBACK_SLAVE_ADDR);
 
   bsp_printf("I2C Peripherals started and configured.\r\n");

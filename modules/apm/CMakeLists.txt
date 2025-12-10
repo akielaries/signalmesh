@@ -55,9 +55,12 @@ set(SOURCES
     ./bsp/utils/bsp_io.c
     ./drivers/adc.c
     ./drivers/servo.c
+    #./drivers/ina219.c
     #./app/main.c
     #./tests/test_servo.c
-    ./tests/test_i2c_lb.c
+    #./tests/test_i2c_lb.c
+    #./tests/test_ina219.c
+    ./tests/test_i2c_scan.c
 )
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})

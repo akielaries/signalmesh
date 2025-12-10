@@ -9,6 +9,17 @@
 #include "drivers/ina219.h"
 
 
+/* 100KHz timing: keep your timing value if it works on your board */
+static const I2CConfig i2c_config = {
+  .timingr = 0x00C0EAFF, // 100kHz example
+  //.timingr =   STM32_TIMINGR_PRESC(0x3U) |
+  //STM32_TIMINGR_SCLDEL(0x7U) | STM32_TIMINGR_SDADEL(0x0U) |
+  //STM32_TIMINGR_SCLH(0x75U)  | STM32_TIMINGR_SCLL(0xB1U),
+  //.timingr = 0x10C0ECFF,
+  .cr1 = 0,
+  .cr2 = 0
+};
+
 int main(void) {
   bsp_init();
 
@@ -16,9 +27,19 @@ int main(void) {
   bsp_printf("Testing INA219 current/power sensor.\r\n");
   bsp_printf("Press button to stop.\r\n\r\n");
   chThdSleepMilliseconds(100);
+  bsp_printf("PCLK1 = %u Hz\n", STM32_PCLK1);
 
   // Initialize I2C interface
-  ina219_init();
+  palSetPadMode(GPIOB, 8,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
+  palSetPadMode(GPIOB, 9,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
+
+  // reset clock control enable clocks
+  rccEnableI2C1(true);
+
+  // start I2C drivers
+  i2cStart(&I2CD1, &i2c_config);
+
+  chThdSleepMilliseconds(50);
 
   // Configure INA219 device
   ina219_t ina219_dev;

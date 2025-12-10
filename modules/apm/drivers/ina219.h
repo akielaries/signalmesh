@@ -99,10 +99,7 @@ typedef struct {
   uint16_t calibration_value;
 } ina219_t;
 
-/**
- * @brief Initialize the INA219 driver and configure the I2C interface.
- */
-void ina219_init(void);
+
 
 /**
  * @brief Initialize an INA219 device with the given configuration.
