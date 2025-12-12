@@ -13,17 +13,17 @@ void bsp_init(void) {
   bsp_io_init();
 
   bsp_printf("booting...");
-  for (uint8_t i = 0; i < 4; i++) {
+  for (uint8_t i = 0; i < 3; i++) {
     bsp_printf(".");
-    chThdSleepMilliseconds(500);
+    chThdSleepMilliseconds(250);
   }
   bsp_printf("\n");
 
   bsp_printf("\n...Starting...\n\n");
   bsp_printf("System tick freq: %u Hz\n", CH_CFG_ST_FREQUENCY);
-  bsp_printf("DBGMCU->IDCODE: 0x%08lX\r\n", DBGMCU->IDCODE);    
-  bsp_printf("REV_ID: 0x%X\r\nDEV_ID: 0x%X\n", DBGMCU->IDCODE >> 16,    
-                                            DBGMCU->IDCODE & 0xFFF);    
+  bsp_printf("DBGMCU->IDCODE: 0x%08lX\r\n", DBGMCU->IDCODE);
+  bsp_printf("REV_ID: 0x%X\r\nDEV_ID: 0x%X\n", DBGMCU->IDCODE >> 16,
+                                            DBGMCU->IDCODE & 0xFFF);
 
   /* ADC inputs.*/
   palSetPadMode(GPIOB, 1, PAL_MODE_INPUT_ANALOG); // PB1, ADC channel 5

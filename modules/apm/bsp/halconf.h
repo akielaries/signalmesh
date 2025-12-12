@@ -309,7 +309,7 @@
  * @brief   Enables the I2C slave subsystem.
  */
 #if !defined(I2C_SUPPORTS_SLAVE_MODE) || defined(__DOXYGEN__)
-#define I2C_SUPPORTS_SLAVE_MODE TRUE
+#define I2C_SUPPORTS_SLAVE_MODE FALSE
 #endif
 
 /**

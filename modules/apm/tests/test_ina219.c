@@ -26,18 +26,30 @@ int main(void) {
   bsp_printf("--- Starting INA219 Test ---\r\n");
   bsp_printf("Testing INA219 current/power sensor.\r\n");
   bsp_printf("Press button to stop.\r\n\r\n");
-  chThdSleepMilliseconds(100);
   bsp_printf("PCLK1 = %u Hz\n", STM32_PCLK1);
 
-  // Initialize I2C interface
-  palSetPadMode(GPIOB, 8,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
-  palSetPadMode(GPIOB, 9,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
+  // I2CD1
+  //palSetPadMode(GPIOB, 8,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
+  //palSetPadMode(GPIOB, 9,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
+
+  // I2CD4
+  palSetPadMode(GPIOD, 12,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
+  palSetPadMode(GPIOD, 13,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
+
 
   // reset clock control enable clocks
-  rccEnableI2C1(true);
+  rccEnableI2C4(true);
+
+  if (I2CD4.state != I2C_READY) {
+    bsp_printf("I2C4 not ready (state=%d). Resetting...\n", I2CD4.state);
+    i2cStop(&I2CD4);
+    chThdSleepMilliseconds(2);
+    i2cStart(&I2CD4, &i2c_config);
+    chThdSleepMilliseconds(2);
+  }
 
   // start I2C drivers
-  i2cStart(&I2CD1, &i2c_config);
+  //i2cStart(&I2CD4, &i2c_config);
 
   chThdSleepMilliseconds(50);
 

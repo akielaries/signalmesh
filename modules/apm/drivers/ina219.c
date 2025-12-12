@@ -23,6 +23,10 @@ void handle_i2c_err(I2CDriver *i2c_driver, const char* context) {
           bsp_printf("unknown error code: 0x%02X\n", err);
       }
   }
+
+  //i2cStop(i2c_driver);
+  //i2cStart(i2c_driver, i2c_driver->config);
+  //bsp_printf("I2C bus recovered (%s)\n", context);
 }
 
 
@@ -72,15 +76,15 @@ static bool ina219_write_register(ina219_t *dev, uint8_t reg, uint16_t value) {
     tx[1] = (value >> 8);
     tx[2] = (value & 0xFF);
 
-    i2cAcquireBus(&I2CD1);
-    msg_t msg = i2cMasterTransmitTimeout(&I2CD1,
+    //i2cAcquireBus(&I2CD4);
+    msg_t msg = i2cMasterTransmitTimeout(&I2CD4,
                                          dev->i2c_address,
                                          tx, 3,
                                          NULL, 0,
-                                         TIME_MS2I(10));
-    i2cReleaseBus(&I2CD1);
+                                         TIME_MS2I(100));
+    //i2cReleaseBus(&I2CD4);
     if (msg != MSG_OK) {
-        handle_i2c_err(&I2CD1, "ina219_write_register");
+        handle_i2c_err(&I2CD4, "ina219_write_register");
         return false;
     }
 
@@ -88,21 +92,28 @@ static bool ina219_write_register(ina219_t *dev, uint8_t reg, uint16_t value) {
 }
 
 static bool ina219_read_register(ina219_t *dev, uint8_t reg, uint16_t *value) {
-    uint8_t rx[2];
     uint8_t tx = reg;
+    uint8_t rx[2];
 
-    msg_t msg = i2cMasterTransmitTimeout(&I2CD1,
-                                         dev->i2c_address,
-                                         &tx, 1,
-                                         rx, 2,
-                                         TIME_MS2I(10));
+    msg_t msg = i2cMasterTransmitTimeout(
+        &I2CD4,
+        dev->i2c_address,
+        &tx,
+        1,
+        rx,
+        2,
+        TIME_MS2I(100)
+    );
 
     if (msg != MSG_OK) {
-        handle_i2c_err(&I2CD1, "ina219_read_register");
+        bsp_printf("read error: 0x%X\n", msg);
+        handle_i2c_err(&I2CD4, "ina219_read_register");
         return false;
     }
 
+    // INA219 uses big-endian registers
     *value = ((uint16_t)rx[0] << 8) | rx[1];
+
     return true;
 }
 
@@ -132,11 +143,16 @@ bool ina219_device_init(ina219_t *dev, const ina219_config_t *config) {
   // Add small delay after reset like reference code
   chThdSleepMilliseconds(1);
 */
-uint16_t val;
-if (ina219_read_register(dev, 0x00, &val))
+  uint16_t val;
+  if (ina219_read_register(dev, 0x00, &val)) {
     bsp_printf("Reg0 = 0x%04X\n", val);
-else
+    return true;
+  }
+  else {
     bsp_printf("Reg0 read failed\n");
+    return false;
+  }
+
 
 
   // Write calibration register first
