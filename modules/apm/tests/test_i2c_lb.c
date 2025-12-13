@@ -24,18 +24,18 @@
 /* 100KHz timing: keep your timing value if it works on your board */
 static const I2CConfig i2c_config = {
   //.timingr = 0x00C0EAFF, // 100kHz example
-  .timingr =   STM32_TIMINGR_PRESC(0x3U) |
-  STM32_TIMINGR_SCLDEL(0x7U) | STM32_TIMINGR_SDADEL(0x0U) |
-  STM32_TIMINGR_SCLH(0x75U)  | STM32_TIMINGR_SCLL(0xB1U),
+  .timingr = STM32_TIMINGR_PRESC(0x3U) | STM32_TIMINGR_SCLDEL(0x7U) |
+             STM32_TIMINGR_SDADEL(0x0U) | STM32_TIMINGR_SCLH(0x75U) |
+             STM32_TIMINGR_SCLL(0xB1U),
   .cr1 = 0,
-  .cr2 = 0
-};
+  .cr2 = 0};
 
 /* Buffer sizes */
-#define LB_BUF_SIZE  32
+#define LB_BUF_SIZE 32
 
 /* Buffers (aligned / placed normally). The ChibiOS sample uses special macros
- * for cache alignment/placement. We'll use the same idea but keep it portable. */
+ * for cache alignment/placement. We'll use the same idea but keep it portable.
+ */
 #if CACHE_LINE_SIZE > 0
 CC_ALIGN_DATA(CACHE_LINE_SIZE)
 #endif
@@ -59,9 +59,10 @@ static uint8_t slave_rx[LB_BUF_SIZE];
 /* Cache helpers: if your project already defines cacheBufferFlush/invalidate
  * these macros will resolve to them. Otherwise they become no-ops. On STM32H7
  * projects with D-Cache enabled you should map these to the CMSIS functions
- * (SCB_CleanDCache_by_Addr / SCB_InvalidateDCache_by_Addr) or use non-cacheable memory. */
+ * (SCB_CleanDCache_by_Addr / SCB_InvalidateDCache_by_Addr) or use non-cacheable
+ * memory. */
 #ifndef cacheBufferFlush
-#define cacheBufferFlush(buf, len)    /* implement if needed */
+#define cacheBufferFlush(buf, len) /* implement if needed */
 #endif
 #ifndef cacheBufferInvalidate
 #define cacheBufferInvalidate(buf, len) /* implement if needed */
@@ -81,7 +82,8 @@ void handle_i2c_err(int err) {
   }
 }
 
-/* Master thread: does Transmit-then-Receive operation similar to chibios test */
+/* Master thread: does Transmit-then-Receive operation similar to chibios test
+ */
 static THD_WORKING_AREA(waMasterThread, 512);
 static THD_FUNCTION(MasterThread, arg) {
   (void)arg;
@@ -99,8 +101,10 @@ static THD_FUNCTION(MasterThread, arg) {
     /* Do a transmit-then-receive operation (1 byte each here). */
     msg_t msg = i2cMasterTransmitTimeout(&I2CD1,
                                          I2C_LOOPBACK_SLAVE_ADDR,
-                                         master_tx, 1,
-                                         master_rx, 1,
+                                         master_tx,
+                                         1,
+                                         master_rx,
+                                         1,
                                          TIME_MS2I(200)); /* 200ms timeout */
 
     if (msg == MSG_OK) {
@@ -111,7 +115,8 @@ static THD_FUNCTION(MasterThread, arg) {
         palToggleLine(MASTER_SUCCESS_LED);
       } else {
         bsp_printf("master: rx mismatch (sent 0x%02X got 0x%02X)\n",
-                   counter, master_rx[0]);
+                   counter,
+                   master_rx[0]);
         palToggleLine(MASTER_ERROR_LED);
       }
     } else {
@@ -127,7 +132,8 @@ static THD_FUNCTION(MasterThread, arg) {
   }
 }
 
-/* Slave thread: waits for master transfer and, if master expects reply, sends it */
+/* Slave thread: waits for master transfer and, if master expects reply, sends
+ * it */
 static THD_WORKING_AREA(waSlaveThread, 512);
 static THD_FUNCTION(SlaveThread, arg) {
   (void)arg;
@@ -148,7 +154,7 @@ static THD_FUNCTION(SlaveThread, arg) {
 
       /* the received byte we will echo back */
       uint8_t rx_b = slave_rx[0];
-      slave_tx[0] = rx_b;
+      slave_tx[0]  = rx_b;
 
       palToggleLine(SLAVE_ACTIVITY_LED);
 
@@ -157,7 +163,8 @@ static THD_FUNCTION(SlaveThread, arg) {
 
       /* If the master will read back (i2cSlaveIsAnswerRequired) then respond */
       if (i2cSlaveIsAnswerRequired(&I2CD4)) {
-        msg_t tx_msg = i2cSlaveTransmitTimeout(&I2CD4, slave_tx, 1, TIME_INFINITE);
+        msg_t tx_msg =
+          i2cSlaveTransmitTimeout(&I2CD4, slave_tx, 1, TIME_INFINITE);
         if (tx_msg != MSG_OK) {
           bsp_printf("slave tx err: %d\n", tx_msg);
           int ret = i2cGetErrors(&I2CD4);
@@ -177,24 +184,34 @@ static THD_FUNCTION(SlaveThread, arg) {
 
 int main(void) {
   // seems this has no impact?
-  //rccResetAHB4(STM32_GPIO_EN_MASK);
-  //rccEnableAHB4(STM32_GPIO_EN_MASK, true);
+  // rccResetAHB4(STM32_GPIO_EN_MASK);
+  // rccEnableAHB4(STM32_GPIO_EN_MASK, true);
   bsp_init();
 
   bsp_printf("--- Starting I2C Loopback Test ---\r\n");
-  bsp_printf("I2C1 (Master) <--> I2C4 (Slave @ 0x%02X)\r\n", I2C_LOOPBACK_SLAVE_ADDR);
-  bsp_printf("Green LED: Master OK | Red LED: Error | Yellow LED: Slave RX\r\n");
+  bsp_printf("I2C1 (Master) <--> I2C4 (Slave @ 0x%02X)\r\n",
+             I2C_LOOPBACK_SLAVE_ADDR);
+  bsp_printf(
+    "Green LED: Master OK | Red LED: Error | Yellow LED: Slave RX\r\n");
 
-  palSetPadMode(GPIOB, 8,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
-                          PAL_STM32_PUPDR_PULLUP); /* I2C1 SCL (example) */
-  palSetPadMode(GPIOB, 9,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
-                          PAL_STM32_PUPDR_PULLUP); /* I2C1 SDA */
+  palSetPadMode(GPIOB,
+                8,
+                PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
+                  PAL_STM32_PUPDR_PULLUP); /* I2C1 SCL (example) */
+  palSetPadMode(GPIOB,
+                9,
+                PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
+                  PAL_STM32_PUPDR_PULLUP); /* I2C1 SDA */
 
   // slave I2C4 SCL on PD12, SDA on PD13
-  palSetPadMode(GPIOD, 12, PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
-                          PAL_STM32_PUPDR_PULLUP);
-  palSetPadMode(GPIOD, 13, PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
-                          PAL_STM32_PUPDR_PULLUP);
+  palSetPadMode(GPIOD,
+                12,
+                PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
+                  PAL_STM32_PUPDR_PULLUP);
+  palSetPadMode(GPIOD,
+                13,
+                PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
+                  PAL_STM32_PUPDR_PULLUP);
 
   // reset clock control enable clocks
   rccEnableI2C1(true);
@@ -211,12 +228,19 @@ int main(void) {
 
   bsp_printf("I2C Peripherals started and configured.\r\n");
 
-  chThdCreateStatic(waSlaveThread, sizeof(waSlaveThread), NORMALPRIO, SlaveThread, NULL);
-  chThdCreateStatic(waMasterThread, sizeof(waMasterThread), NORMALPRIO, MasterThread, NULL);
+  chThdCreateStatic(waSlaveThread,
+                    sizeof(waSlaveThread),
+                    NORMALPRIO,
+                    SlaveThread,
+                    NULL);
+  chThdCreateStatic(waMasterThread,
+                    sizeof(waMasterThread),
+                    NORMALPRIO,
+                    MasterThread,
+                    NULL);
 
   while (true) {
     chThdSleepMilliseconds(1000);
   }
   return 0;
 }
-

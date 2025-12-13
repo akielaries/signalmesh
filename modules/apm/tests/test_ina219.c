@@ -13,12 +13,11 @@
 static const I2CConfig i2c_config = {
   .timingr = 0x00C0EAFF, // 100kHz example
   //.timingr =   STM32_TIMINGR_PRESC(0x3U) |
-  //STM32_TIMINGR_SCLDEL(0x7U) | STM32_TIMINGR_SDADEL(0x0U) |
-  //STM32_TIMINGR_SCLH(0x75U)  | STM32_TIMINGR_SCLL(0xB1U),
+  // STM32_TIMINGR_SCLDEL(0x7U) | STM32_TIMINGR_SDADEL(0x0U) |
+  // STM32_TIMINGR_SCLH(0x75U)  | STM32_TIMINGR_SCLL(0xB1U),
   //.timingr = 0x10C0ECFF,
   .cr1 = 0,
-  .cr2 = 0
-};
+  .cr2 = 0};
 
 int main(void) {
   bsp_init();
@@ -29,12 +28,13 @@ int main(void) {
   bsp_printf("PCLK1 = %u Hz\n", STM32_PCLK1);
 
   // I2CD1
-  //palSetPadMode(GPIOB, 8,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
-  //palSetPadMode(GPIOB, 9,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
+  // palSetPadMode(GPIOB, 8,  PAL_MODE_ALTERNATE(4) |
+  // PAL_STM32_OTYPE_OPENDRAIN); palSetPadMode(GPIOB, 9,  PAL_MODE_ALTERNATE(4)
+  // | PAL_STM32_OTYPE_OPENDRAIN);
 
   // I2CD4
-  palSetPadMode(GPIOD, 12,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
-  palSetPadMode(GPIOD, 13,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
+  palSetPadMode(GPIOD, 12, PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
+  palSetPadMode(GPIOD, 13, PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN);
 
 
   // reset clock control enable clocks
@@ -49,7 +49,7 @@ int main(void) {
   }
 
   // start I2C drivers
-  //i2cStart(&I2CD4, &i2c_config);
+  // i2cStart(&I2CD4, &i2c_config);
 
   chThdSleepMilliseconds(50);
 
@@ -97,8 +97,7 @@ int main(void) {
         float load_ohms = load_voltage_v / (current_ma / 1000.0f);
         bsp_printf("Load Resistance: %.2f ohm\n", load_ohms);
       }
-    }
-    else {
+    } else {
       bsp_printf("Failed to read INA219 measurements!\n");
     }
 
@@ -115,4 +114,3 @@ int main(void) {
 
   return 0;
 }
-

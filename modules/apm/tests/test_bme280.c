@@ -15,11 +15,9 @@ extern const size_t num_board_devices;
 
 
 /* 100KHz timing: keep your timing value if it works on your board */
-static const I2CConfig i2c_config = {
-  .timingr = 0x00C0EAFF, // 100kHz example
-  .cr1 = 0,
-  .cr2 = 0
-};
+static const I2CConfig i2c_config = {.timingr = 0x00C0EAFF, // 100kHz example
+                                     .cr1     = 0,
+                                     .cr2     = 0};
 
 int main(void) {
   bsp_init();
@@ -29,34 +27,42 @@ int main(void) {
   bsp_printf("Press button to stop.\r\n\r\n");
 
   // I2CD4
-  palSetPadMode(GPIOD, 12,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN | PAL_STM32_PUPDR_PULLUP);
-  palSetPadMode(GPIOD, 13,  PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN | PAL_STM32_PUPDR_PULLUP);
+  palSetPadMode(GPIOD,
+                12,
+                PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
+                  PAL_STM32_PUPDR_PULLUP);
+  palSetPadMode(GPIOD,
+                13,
+                PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
+                  PAL_STM32_PUPDR_PULLUP);
 
   // reset clock control enable clocks
   rccEnableI2C4(true);
 
   // start I2C drivers
   i2cStart(&I2CD4, &i2c_config);
-  
+
   // Find the bme280 device
   device_t *bme280_dev = NULL;
   for (size_t i = 0; i < num_board_devices; i++) {
-      if (strcmp(board_devices[i].name, "bme280") == 0) {
-          bme280_dev = &board_devices[i];
-          break;
-      }
-  }
-  
-  if (bme280_dev == NULL) {
-      bsp_printf("BME280 device not found!\n");
-      while(1);
+    if (strcmp(board_devices[i].name, "bme280") == 0) {
+      bme280_dev = &board_devices[i];
+      break;
+    }
   }
 
-  if(bme280_dev->driver->probe) {
-      if(bme280_dev->driver->probe(bme280_dev) != DRIVER_OK) {
-          bsp_printf("BME280 probe failed!\n");
-          while(1);
-      }
+  if (bme280_dev == NULL) {
+    bsp_printf("BME280 device not found!\n");
+    while (1)
+      ;
+  }
+
+  if (bme280_dev->driver->probe) {
+    if (bme280_dev->driver->probe(bme280_dev) != DRIVER_OK) {
+      bsp_printf("BME280 probe failed!\n");
+      while (1)
+        ;
+    }
   }
 
 
@@ -67,9 +73,9 @@ int main(void) {
       bsp_printf("BME280 test stopped.\n");
       break;
     }
-    
+
     if (bme280_dev->driver->poll) {
-        bme280_dev->driver->poll(bme280_dev);
+      bme280_dev->driver->poll(bme280_dev);
     }
 
     chThdSleepMilliseconds(1000);
