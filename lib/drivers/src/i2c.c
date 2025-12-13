@@ -1,9 +1,10 @@
 #include <stdint.h>
 #include <string.h> // For memcpy
 #include "hal.h"
-#include "drivers/driver_api.h" // For DRV_OK, DRV_EIO
+#include "drivers/driver_api.h"
 #include "drivers/i2c.h"
-#include "bsp/utils/bsp_io.h" // For bsp_printf
+#include "bsp/utils/bsp_io.h"
+
 
 // General purpose I2C error handler
 void i2c_handle_error(I2CDriver *i2c_driver, const char *context) {
