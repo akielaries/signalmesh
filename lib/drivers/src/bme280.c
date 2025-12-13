@@ -1,17 +1,35 @@
+/**
+ * @file bme280.c
+ * @brief BME280 environmental sensor driver implementation
+ *
+ * This file implements the BME280 driver using the standard device
+ * driver interface. It provides temperature, pressure, and humidity
+ * sensing capabilities over I2C.
+ *
+ * The driver supports both legacy direct function calls and the new
+ * device registry framework for maximum compatibility.
+ */
+
 #include "hal.h"
 #include "ch.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include "bsp/utils/bsp_io.h"
 #include "drivers/bme280.h"
-#include "drivers/i2c.h" // Include the new i2c driver
+#include "drivers/i2c.h"
 
-// Static helper functions
+/* Static helper functions */
 static bool bme280_read_reg_helper(uint8_t reg, uint8_t *val);
 static bool bme280_write_reg_helper(uint8_t reg, uint8_t val);
 static uint32_t bme280_read_pressure_helper(void);
 static uint32_t bme280_read_temperature_helper(void);
 
+/**
+ * @brief Initialize BME280 device
+ *
+ * @param dev Pointer to device structure
+ * @return DRIVER_OK on success, error code on failure
+ */
 static int bme280_init_fn(device_t *dev) {
   (void)dev;
   // BME280 initialization logic

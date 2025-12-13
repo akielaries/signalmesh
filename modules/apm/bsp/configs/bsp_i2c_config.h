@@ -13,6 +13,8 @@
 extern const I2CConfig bsp_i2c_config;
 extern I2CDriver *const bsp_i2c_driver;
 
+void bsp_i2c_init(void);
+
 // Convenience macros for GPIO pins
 #define bsp_i2c_scl_port BSP_I2C2_SCL_PORT
 #define bsp_i2c_scl_pin  BSP_I2C2_SCL_PIN

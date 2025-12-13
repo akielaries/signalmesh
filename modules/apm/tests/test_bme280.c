@@ -14,33 +14,12 @@ extern device_t board_devices[];
 extern const size_t num_board_devices;
 
 
-/* 100KHz timing: keep your timing value if it works on your board */
-static const I2CConfig i2c_config = {.timingr = 0x00C0EAFF, // 100kHz example
-                                     .cr1     = 0,
-                                     .cr2     = 0};
-
 int main(void) {
   bsp_init();
 
   bsp_printf("--- Starting BME280 Test ---\r\n");
   bsp_printf("Testing BME280 sensor.\r\n");
   bsp_printf("Press button to stop.\r\n\r\n");
-
-  // I2CD4
-  palSetPadMode(GPIOD,
-                12,
-                PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
-                  PAL_STM32_PUPDR_PULLUP);
-  palSetPadMode(GPIOD,
-                13,
-                PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
-                  PAL_STM32_PUPDR_PULLUP);
-
-  // reset clock control enable clocks
-  rccEnableI2C4(true);
-
-  // start I2C drivers
-  i2cStart(&I2CD4, &i2c_config);
 
   // Find the bme280 device
   device_t *bme280_dev = NULL;

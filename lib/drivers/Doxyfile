@@ -1,0 +1,43 @@
+# Doxygen configuration file for driver library
+
+PROJECT_NAME           = "Driver Library"
+PROJECT_NUMBER         = "1.0"
+PROJECT_BRIEF          = "Generic device driver framework and implementations"
+
+OUTPUT_DIRECTORY       = "docs"
+OUTPUT_LANGUAGE        = English
+OPTIMIZE_OUTPUT_FOR_C  = YES
+
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+
+INPUT                 = include/
+RECURSIVE             = YES
+FILE_PATTERNS         = *.h *.c
+
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_COLORSTYLE_HUE    = 220
+
+GENERATE_LATEX         = NO
+GENERATE_XML           = NO
+GENERATE_MAN           = NO
+
+QUIET                 = NO
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
+
+# Include paths
+INCLUDE_PATH           = include/
+
+# Preprocessor macros for better documentation
+PREDEFINED             = "__attribute__(x)="
+
+# Example path for source code
+EXAMPLE_PATH           = ../modules/apm/tests/
+
+# Tab size for code examples
+TAB_SIZE               = 4

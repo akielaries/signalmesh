@@ -9,6 +9,7 @@
 #include "drivers/bme280.h"
 #include "drivers/servo.h"
 #include "drivers/driver_registry.h"
+#include "bsp/configs/bsp_i2c_config.h" // For bsp_i2c_init()
 #include <stddef.h>
 
 // private data for ina219
@@ -19,7 +20,7 @@ static ina219_t ina219_dev_data;
 // static servo_t servo_dev_data; // Servo driver doesn't have a private data struct
 
 
-// Array of devices present on BOARD A
+// Array of devices present on APM
 device_t board_devices[] = {
     {
         .name = "ina219", // This name must match the driver name
@@ -42,10 +43,9 @@ device_t board_devices[] = {
         .priv = NULL,
         .is_active = false
     }
-    // Add other devices for BOARD A here
 };
 
-// Number of devices on BOARD A
+// Number of devices on APM
 const size_t num_board_devices = sizeof(board_devices) / sizeof(board_devices[0]);
 
 void bsp_init(void) {
@@ -63,7 +63,7 @@ void bsp_init(void) {
   bsp_printf("\n");
 
   init_devices();
-
+  bsp_i2c_init();
   bsp_printf("\n...Starting...\n\n");
   bsp_printf("System tick freq: %u Hz\n", CH_CFG_ST_FREQUENCY);
   bsp_printf("DBGMCU->IDCODE: 0x%08lX\r\n", DBGMCU->IDCODE);
