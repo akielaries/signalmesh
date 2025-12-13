@@ -8,11 +8,8 @@
 #include "bsp/configs/bsp_uart_config.h"
 #include "bsp/include/bsp_defs.h"
 #include "drivers/driver_api.h"
-
-// Forward declaration of board-specific devices
-extern device_t board_devices[];
-extern const size_t num_board_devices;
-
+#include "drivers/driver_registry.h" // For find_device()
+#include "drivers/driver_readings.h" // For driver_reading_t
 
 int main(void) {
   bsp_init();
@@ -21,31 +18,18 @@ int main(void) {
   bsp_printf("Testing BME280 sensor.\r\n");
   bsp_printf("Press button to stop.\r\n\r\n");
 
-  // Find the bme280 device
-  device_t *bme280_dev = NULL;
-  for (size_t i = 0; i < num_board_devices; i++) {
-    if (strcmp(board_devices[i].name, "bme280") == 0) {
-      bme280_dev = &board_devices[i];
-      break;
-    }
-  }
-
+  int ret;
+  // find the bme280 device
+  device_t *bme280_dev = find_device("bme280");
   if (bme280_dev == NULL) {
     bsp_printf("BME280 device not found!\n");
-    while (1)
-      ;
+    return -1;
   }
 
-  if (bme280_dev->driver->probe) {
-    if (bme280_dev->driver->probe(bme280_dev) != DRIVER_OK) {
-      bsp_printf("BME280 probe failed!\n");
-      while (1)
-        ;
-    }
-  }
+  bsp_printf("BME280 device found and initialized.\n");
 
-
-  bsp_printf("finished probe\n");
+  driver_reading_t bme280_readings[2]; // Assuming 2 readings: Temp and Pressure
+  uint32_t num_readings_to_get = 2;
 
   while (true) {
     if (palReadLine(LINE_BUTTON) == PAL_HIGH) {
@@ -53,9 +37,23 @@ int main(void) {
       break;
     }
 
-    if (bme280_dev->driver->poll) {
-      bme280_dev->driver->poll(bme280_dev);
+    ret = bme280_dev->driver->poll(bme280_dev, num_readings_to_get, bme280_readings);
+    if (ret != DRIVER_OK) {
+      bsp_printf("poll failed: 0x%X\n", ret);
+    } else {
+      bsp_printf("BME280 Readings:\n");
+      for (uint32_t i = 0; i < num_readings_to_get; ++i) {
+        if (bme280_readings[i].type == READING_VALUE_TYPE_UINT32) {
+          bsp_printf("  %s: %lu\n",
+                     bme280_dev->driver->readings_directory->channels[i].name,
+                     bme280_readings[i].value.u32_val);
+        } else {
+          bsp_printf("  %s: Unknown type\n",
+                     bme280_dev->driver->readings_directory->channels[i].name);
+        }
+      }
     }
+
 
     chThdSleepMilliseconds(1000);
   }

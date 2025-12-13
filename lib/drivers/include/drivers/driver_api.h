@@ -12,6 +12,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
+#include "driver_readings.h" // Include the new readings definitions
 
 /**
  * @brief Forward declaration of device structure
@@ -75,19 +76,18 @@ struct driver {
   /** @brief Human-readable driver name */
   const char *name;
 
+  /** @brief Directory of readings provided by this driver */
+  const driver_readings_directory_t *readings_directory;
+
+  /** @brief Size of the driver's private data structure (context) */
+  size_t num_data_bytes;
+
   /**
    * @brief Initialize the device
    * @param dev Pointer to device structure
    * @return DRIVER_OK on success, error code on failure
    */
   int (*init)(device_t *dev);
-
-  /**
-   * @brief Probe for device presence
-   * @param dev Pointer to device structure
-   * @return DRIVER_OK if device found, error code otherwise
-   */
-  int (*probe)(device_t *dev);
 
   /**
    * @brief Remove device and clean up resources
@@ -106,9 +106,13 @@ struct driver {
   int (*ioctl)(device_t *dev, uint32_t cmd, void *arg);
 
   /**
-   * @brief Poll device for new data
-   * @param dev Pointer to device structure
+   * @brief Function called when a device is being polled
+   * @param device_id The ID of the device being polled
+   * @param num_readings The number of readings to retrieve
+   * @param readings Pointer to an array of driver_reading_t to fill
    * @return DRIVER_OK on success, error code on failure
    */
-  int (*poll)(device_t *dev);
+  int (*poll)(device_id_t device_id,
+              uint32_t num_readings,
+              driver_reading_t *readings);
 };

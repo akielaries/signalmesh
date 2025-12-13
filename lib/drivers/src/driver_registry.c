@@ -9,12 +9,7 @@
 #include "drivers/ina219.h"
 #include "drivers/servo.h"
 
-/**
- * @brief Board-specific device array
- *
- * This must be defined in board-specific code. Each board defines
- * the devices that are present on that particular hardware configuration.
- */
+// External declarations for board devices (defined in bsp.c)
 extern device_t board_devices[];
 extern const size_t num_board_devices;
 
@@ -26,8 +21,8 @@ extern const size_t num_board_devices;
  */
 const driver_t *drivers[] = {
   &bme280_driver,
-  //&ina219_driver,
-  //&servo_driver,
+  &ina219_driver,
+  &servo_driver,
 };
 
 /** @brief Number of drivers in the system */
@@ -60,4 +55,19 @@ void init_devices(void) {
       }
     }
   }
+}
+
+/**
+ * @brief Finds a device by name in the board_devices array.
+ *
+ * @param name The name of the device to find.
+ * @return A pointer to the device_t structure if found, or NULL if not found.
+ */
+device_t *find_device(const char *name) {
+  for (size_t i = 0; i < num_board_devices; i++) {
+    if (strcmp(board_devices[i].name, name) == 0) {
+      return &board_devices[i];
+    }
+  }
+  return NULL;
 }

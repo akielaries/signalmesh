@@ -6,37 +6,38 @@
 #include "drivers/ina219.h"
 #include "ch.h"
 #include "hal.h"
+#include "drivers/driver_readings.h" // Include the new readings definitions
 
-// Static helper functions
-static void handle_i2c_err_helper(I2CDriver *i2c_driver, const char *context);
-static uint16_t
-ina219_adc_resolution_to_bits_helper(ina219_adc_resolution_t resolution);
-static uint16_t ina219_gain_to_bits_helper(ina219_gain_t gain);
-static uint16_t ina219_bus_range_to_bits_helper(ina219_bus_range_t range);
-static uint16_t ina219_mode_to_bits_helper(ina219_mode_t mode);
-static bool
-ina219_write_register_helper(ina219_t *dev_data, uint8_t reg, uint16_t value);
-static bool
-ina219_read_register_helper(ina219_t *dev_data, uint8_t reg, uint16_t *value);
+// Macro to calculate the size of an array
+#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
+
+// Static helper functions prototypes
 static bool ina219_device_init_helper(ina219_t *dev_data,
                                       const ina219_config_t *config);
-static bool ina219_reset_helper(ina219_t *dev_data);
-static bool ina219_configure_helper(ina219_t *dev_data,
-                                    const ina219_config_t *config);
-static bool ina219_read_shunt_voltage_helper(ina219_t *dev_data,
-                                             float *shunt_voltage_mv);
-static bool ina219_read_bus_voltage_helper(ina219_t *dev_data,
-                                           float *bus_voltage_v);
-static bool ina219_read_current_helper(ina219_t *dev_data, float *current_ma);
-static bool ina219_read_power_helper(ina219_t *dev_data, float *power_mw);
 static bool ina219_read_all_helper(ina219_t *dev_data,
                                    float *shunt_voltage_mv,
                                    float *bus_voltage_v,
                                    float *current_ma,
                                    float *power_mw);
+static bool ina219_configure_helper(ina219_t *dev_data,
+                                    const ina219_config_t *config);
+
+// INA219 specific reading channels
+static const driver_reading_channel_t ina219_reading_channels[] = {
+  {.name = "shunt_voltage_mv", .type = READING_VALUE_TYPE_FLOAT},
+  {.name = "bus_voltage_v", .type = READING_VALUE_TYPE_FLOAT},
+  {.name = "current_ma", .type = READING_VALUE_TYPE_FLOAT},
+  {.name = "power_mw", .type = READING_VALUE_TYPE_FLOAT},
+};
+
+// INA219 readings directory
+static const driver_readings_directory_t ina219_readings_directory = {
+  .num_readings = ARRAY_SIZE(ina219_reading_channels),
+  .channels     = ina219_reading_channels,
+};
 
 
-static int ina219_init_fn(device_t *dev) {
+static int ina219_init(device_t *dev) {
   if (dev->priv == NULL) {
     return DRIVER_ERROR; // Private data not allocated
   }
@@ -58,73 +59,93 @@ static int ina219_init_fn(device_t *dev) {
   return DRIVER_OK;
 }
 
-static int ina219_probe_fn(device_t *dev) {
-  (void)dev;
-  // Probe logic, currently handled by ina219_device_init_helper
-  return DRIVER_OK;
-}
-
-static int ina219_remove_fn(device_t *dev) {
+static int ina219_remove(device_t *dev) {
   (void)dev;
   // Add removal logic
   return DRIVER_OK;
 }
 
-static int ina219_ioctl_fn(device_t *dev, uint32_t cmd, void *arg) {
+static int ina219_ioctl(device_t *dev, uint32_t cmd, void *arg) {
   (void)dev;
   (void)cmd;
   (void)arg;
   return DRIVER_NOT_FOUND;
 }
 
-static int ina219_poll_fn(device_t *dev) {
-  // Add polling logic
-  (void)dev;
-  // Example: Read current and voltage
-  float shunt_v, bus_v, current_ma, power_mw;
-  ina219_t *ina_dev_data = (ina219_t *)dev->priv;
-  if (ina219_read_all_helper(ina_dev_data,
-                             &shunt_v,
-                             &bus_v,
-                             &current_ma,
-                             &power_mw)) {
-    bsp_printf("INA219 (%s) - Shunt: %.2fmV, Bus: %.2fV, Current: %.2fmA, "
-               "Power: %.2fmW\n",
-               dev->name,
-               shunt_v,
-               bus_v,
-               current_ma,
-               power_mw);
-    return DRIVER_OK;
+static int ina219_poll(device_id_t device_id,
+                       uint32_t num_readings,
+                       driver_reading_t *readings) {
+  if (device_id == NULL || readings == NULL || num_readings == 0) {
+    return DRIVER_INVALID_PARAM;
   }
-  return DRIVER_ERROR;
+
+  if (num_readings > ina219_readings_directory.num_readings) {
+    return DRIVER_INVALID_PARAM; // Caller asked for more readings than
+                                 // available
+  }
+
+  ina219_t *ina_dev_data = (ina219_t *)device_id->priv;
+  float shunt_v, bus_v, current_ma, power_mw;
+
+  if (!ina219_read_all_helper(ina_dev_data,
+                              &shunt_v,
+                              &bus_v,
+                              &current_ma,
+                              &power_mw)) {
+    return DRIVER_ERROR;
+  }
+
+  // Populate readings array
+  for (uint32_t i = 0; i < num_readings; ++i) {
+    if (strcmp(ina219_readings_directory.channels[i].name,
+               "shunt_voltage_mv") == 0) {
+      readings[i].type            = READING_VALUE_TYPE_FLOAT;
+      readings[i].value.float_val = shunt_v;
+    } else if (strcmp(ina219_readings_directory.channels[i].name,
+                      "bus_voltage_v") == 0) {
+      readings[i].type            = READING_VALUE_TYPE_FLOAT;
+      readings[i].value.float_val = bus_v;
+    } else if (strcmp(ina219_readings_directory.channels[i].name,
+                      "current_ma") == 0) {
+      readings[i].type            = READING_VALUE_TYPE_FLOAT;
+      readings[i].value.float_val = current_ma;
+    } else if (strcmp(ina219_readings_directory.channels[i].name, "power_mw") ==
+               0) {
+      readings[i].type            = READING_VALUE_TYPE_FLOAT;
+      readings[i].value.float_val = power_mw;
+    } else {
+      return DRIVER_ERROR; // Unknown channel
+    }
+  }
+
+  return DRIVER_OK;
 }
 
 
 const driver_t ina219_driver __attribute__((used)) = {
-  .name   = "ina219",
-  .init   = ina219_init_fn,
-  .probe  = ina219_probe_fn,
-  .remove = ina219_remove_fn,
-  .ioctl  = ina219_ioctl_fn,
-  .poll   = ina219_poll_fn,
+  .name               = "ina219",
+  .init               = ina219_init,
+  .remove             = ina219_remove,
+  .ioctl              = ina219_ioctl,
+  .poll               = ina219_poll,
+  .readings_directory = &ina219_readings_directory,
 };
 
 static void handle_i2c_err_helper(I2CDriver *i2c_driver, const char *context) {
   i2cflags_t err = i2cGetErrors(i2c_driver);
   if (err != I2C_NO_ERROR) {
-    bsp_printf("INA219 I2C error in %s: ", context);
-    if (err & I2C_BUS_ERROR) {
-      bsp_printf("BUS ERROR\n");
-    } else if (err & I2C_ARBITRATION_LOST) {
-      bsp_printf("ARBITRATION LOST\n");
-    } else if (err & I2C_ACK_FAILURE) {
-      bsp_printf("I2C ACK FAILURE\n");
-    } else if (err & I2C_OVERRUN) {
-      bsp_printf("I2C OVERRUN\n");
-    } else {
-      bsp_printf("unknown error code: 0x%02X\n", err);
-    }
+    // bsp_printf("INA219 I2C error in %s: ", context);
+    // if (err & I2C_BUS_ERROR) {
+    //   bsp_printf("BUS ERROR\n");
+    // } else if (err & I2C_ARBITRATION_LOST) {
+    //   bsp_printf("ARBITRATION LOST\n");
+    // } else if (err & I2C_ACK_FAILURE) {
+    //   bsp_printf("I2C ACK FAILURE\n");
+    // } else if (err & I2C_OVERRUN) {
+    //   bsp_printf("I2C OVERRUN\n");
+    // } else {
+    //   bsp_printf("unknown error code: 0x%02X\n", err);
+    // }
   }
 
   // i2cStop(i2c_driver);
@@ -211,7 +232,7 @@ ina219_read_register_helper(ina219_t *dev_data, uint8_t reg, uint16_t *value) {
                                        TIME_MS2I(100));
 
   if (msg != MSG_OK) {
-    bsp_printf("read error: 0x%X\n", msg);
+    // bsp_printf("read error: 0x%X\n", msg);
     handle_i2c_err_helper(&I2CD4, "ina219_read_register");
     return false;
   }
@@ -236,13 +257,13 @@ static bool ina219_device_init_helper(ina219_t *dev_data,
   dev_data->calibration_value = 4096;
   dev_data->current_lsb       = 0.0001f; // 100uA per bit
   dev_data->power_lsb         = 0.002f;  // 2mW per bit
-  bsp_printf("INA219 using address 0x%02X\n", dev_data->i2c_address);
+  // bsp_printf("INA219 using address 0x%02X\n", dev_data->i2c_address);
 
   /*
     // Reset the device first
-    bsp_printf("Resetting INA219...\n");
+    // bsp_printf("Resetting INA219...\n");
     if (!ina219_reset_helper(dev_data)) {
-      bsp_printf("Failed to reset INA219\n");
+      // bsp_printf("Failed to reset INA219\n");
       return false;
     }
 
@@ -251,26 +272,26 @@ static bool ina219_device_init_helper(ina219_t *dev_data,
   */
   uint16_t val;
   if (ina219_read_register_helper(dev_data, 0x00, &val)) {
-    bsp_printf("Reg0 = 0x%04X\n", val);
+    // bsp_printf("Reg0 = 0x%04X\n", val);
     return true;
   } else {
-    bsp_printf("Reg0 read failed\n");
+    // bsp_printf("Reg0 read failed\n");
     return false;
   }
 
   // Write calibration register first
-  bsp_printf("Writing INA219 calibration...\n");
+  // bsp_printf("Writing INA219 calibration...\n");
   if (!ina219_write_register_helper(dev_data,
                                     INA219_REG_CALIBRATION,
                                     dev_data->calibration_value)) {
-    bsp_printf("Failed to write INA219 calibration\n");
+    // bsp_printf("Failed to write INA219 calibration\n");
     return false;
   }
 
   // Configure the device
-  bsp_printf("Configuring INA219...\n");
+  // bsp_printf("Configuring INA219...\n");
   if (!ina219_configure_helper(dev_data, config)) {
-    bsp_printf("Failed to configure INA219\n");
+    // bsp_printf("Failed to configure INA219\n");
     return false;
   }
   return true;

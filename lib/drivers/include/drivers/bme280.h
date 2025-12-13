@@ -53,27 +53,3 @@
  * device registry system.
  */
 extern const driver_t bme280_driver;
-
-/**
- * @brief Legacy probe function for standalone testing
- *
- * This function is provided for compatibility with existing test code.
- * New code should use the driver framework instead.
- *
- * @return true if probe successful, false otherwise
- */
-bool bme280_probe(void);
-
-/**
- * @brief Read raw pressure value
- *
- * @return 20-bit pressure measurement value, 0 on error
- */
-uint32_t bme280_read_pressure(void);
-
-/**
- * @brief Read raw temperature value
- *
- * @return 20-bit temperature measurement value, 0 on error
- */
-uint32_t bme280_read_temperature(void);

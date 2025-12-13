@@ -52,8 +52,10 @@ void bsp_init(void) {
   halInit();
   chSysInit();
 
-  // Initialize the debug UART using bsp_io
+  // initialize debug UART
   bsp_io_init();
+
+  bsp_printf("\n...Starting...\n\n");
 
   bsp_printf("booting...");
   for (uint8_t i = 0; i < 3; i++) {
@@ -62,9 +64,11 @@ void bsp_init(void) {
   }
   bsp_printf("\n");
 
-  init_devices();
   bsp_i2c_init();
-  bsp_printf("\n...Starting...\n\n");
+  bsp_printf("I2C initialized\n");
+  init_devices();
+  bsp_printf("initialized devices\n");
+
   bsp_printf("System tick freq: %u Hz\n", CH_CFG_ST_FREQUENCY);
   bsp_printf("DBGMCU->IDCODE: 0x%08lX\r\n", DBGMCU->IDCODE);
   bsp_printf("REV_ID: 0x%X\r\nDEV_ID: 0x%X\n", DBGMCU->IDCODE >> 16,

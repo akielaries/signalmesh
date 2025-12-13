@@ -26,6 +26,7 @@ extern "C" {
  * registered and board devices are defined.
  */
 void init_devices(void);
+device_t *find_device(const char *name);
 
 #ifdef __cplusplus
 }
