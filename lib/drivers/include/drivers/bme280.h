@@ -3,6 +3,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "drivers/driver_api.h"
+
 #define BME280_I2C_ADDR 0x77
 #define BME280_CHIP_ID  0x60
 
@@ -19,6 +21,11 @@
 #define BME280_REG_PRESS_SIZE 3
 #define BME280_REG_TEMP_ADDR  0xFA
 #define BME280_REG_TEMP_SIZE  3
+
+
+extern const driver_t bme280_driver;
+
+
 
 
 bool bme280_probe(void);

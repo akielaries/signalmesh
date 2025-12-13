@@ -4,6 +4,49 @@
 #include "bsp/configs/bsp_uart_config.h" // For bsp_debug_stream and bsp_debug_uart_config
 #include "bsp/utils/bsp_gpt.h"
 #include "bsp/utils/bsp_io.h"
+#include "drivers/driver_api.h"
+#include "drivers/ina219.h"
+#include "drivers/bme280.h"
+#include "drivers/servo.h"
+#include "drivers/driver_registry.h"
+#include <stddef.h>
+
+// private data for ina219
+static ina219_t ina219_dev_data;
+// private data for bme280
+// static bme280_t bme280_dev_data; // BME280 driver doesn't have a private data struct
+// private data for servo
+// static servo_t servo_dev_data; // Servo driver doesn't have a private data struct
+
+
+// Array of devices present on BOARD A
+device_t board_devices[] = {
+    {
+        .name = "ina219", // This name must match the driver name
+        .driver = &ina219_driver,
+        .bus = &I2CD4, // Bus instance
+        .priv = &ina219_dev_data, // Private data for the device
+        .is_active = false
+    },
+    {
+        .name = "bme280",
+        .driver = &bme280_driver,
+        .bus = &I2CD4,
+        .priv = NULL,
+        .is_active = false
+    },
+    {
+        .name = "servo",
+        .driver = &servo_driver,
+        .bus = NULL,
+        .priv = NULL,
+        .is_active = false
+    }
+    // Add other devices for BOARD A here
+};
+
+// Number of devices on BOARD A
+const size_t num_board_devices = sizeof(board_devices) / sizeof(board_devices[0]);
 
 void bsp_init(void) {
   halInit();
@@ -18,6 +61,8 @@ void bsp_init(void) {
     chThdSleepMilliseconds(250);
   }
   bsp_printf("\n");
+
+  init_devices();
 
   bsp_printf("\n...Starting...\n\n");
   bsp_printf("System tick freq: %u Hz\n", CH_CFG_ST_FREQUENCY);

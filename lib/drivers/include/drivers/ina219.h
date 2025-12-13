@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "drivers/driver_api.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -178,6 +179,8 @@ bool ina219_read_all(ina219_t *dev,
                      float *bus_voltage_v,
                      float *current_ma,
                      float *power_mw);
+
+extern const driver_t ina219_driver;
 
 #ifdef __cplusplus
 }

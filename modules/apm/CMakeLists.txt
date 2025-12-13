@@ -29,6 +29,10 @@ message(STATUS "")
 # create static libraries for some chibios components
 #add_chibios_common_library(chibios_common TYPE STATIC)
 add_chibios_stm32h7_library(chibios_stm32h7 TYPE STATIC)
+
+set(DRIVERS_SRC_DIR ../../lib/drivers/src)
+set(DRIVERS_INCLUDE_DIR ../../lib/drivers/include)
+
 include_directories(
     .
     ./bsp
@@ -36,6 +40,7 @@ include_directories(
     ./tests
     ./bsp/configs
     ./bsp/utils
+    ${DRIVERS_INCLUDE_DIR}
 )
 
 add_definitions(
@@ -53,12 +58,15 @@ set(SOURCES
     ./bsp/configs/bsp_i2c_config.c
     ./bsp/utils/bsp_gpt.c
     ./bsp/utils/bsp_io.c
-    ./drivers/adc.c
-    ./drivers/servo.c
-    ./drivers/ina219.c
-    ./drivers/bme280.c
+    ${DRIVERS_SRC_DIR}/adc.c
+    ${DRIVERS_SRC_DIR}/servo.c
+    ${DRIVERS_SRC_DIR}/ina219.c
+    ${DRIVERS_SRC_DIR}/bme280.c
+    ${DRIVERS_SRC_DIR}/i2c.c
+    #${DRIVERS_SRC_DIR}/driver_manager.c
+    ${DRIVERS_SRC_DIR}/driver_registry.c
     #./app/main.c
-    #./tests/test_servo.c
+    #./tests/.c
     #./tests/test_i2c_lb.c
     #./tests/test_ina219.c
     #./tests/test_i2c_scan.c
