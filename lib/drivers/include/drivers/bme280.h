@@ -26,8 +26,6 @@
 extern const driver_t bme280_driver;
 
 
-
-
 bool bme280_probe(void);
 uint32_t bme280_read_pressure(void);
 uint32_t bme280_read_temperature(void);

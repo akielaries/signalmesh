@@ -12,80 +12,80 @@ static uint32_t bme280_read_pressure_helper(void);
 static uint32_t bme280_read_temperature_helper(void);
 
 static int bme280_init_fn(device_t *dev) {
-    (void)dev;
-    // BME280 initialization logic
-    return DRIVER_OK;
+  (void)dev;
+  // BME280 initialization logic
+  return DRIVER_OK;
 }
 
 static int bme280_probe_fn(device_t *dev) {
-    (void)dev;
-    uint8_t id;
+  (void)dev;
+  uint8_t id;
 
-    bsp_printf("Probing at 0x%02X...\n", BME280_I2C_ADDR);
+  bsp_printf("Probing at 0x%02X...\n", BME280_I2C_ADDR);
 
-    // verify we can talk
-    if (!bme280_read_reg_helper(BME280_REG_ID, &id)) {
-        bsp_printf("Failed to read chip ID!\n");
-        return DRIVER_ERROR;
-    }
-    bsp_printf("Chip ID: 0x%02X\n", id);
+  // verify we can talk
+  if (!bme280_read_reg_helper(BME280_REG_ID, &id)) {
+    bsp_printf("Failed to read chip ID!\n");
+    return DRIVER_ERROR;
+  }
+  bsp_printf("Chip ID: 0x%02X\n", id);
 
-    // reset
-    if (!bme280_write_reg_helper(BME280_REG_RESET, BME280_SOFT_RESET)) {
-        return DRIVER_ERROR;
-    }
-    bsp_printf("reset finished\n");
+  // reset
+  if (!bme280_write_reg_helper(BME280_REG_RESET, BME280_SOFT_RESET)) {
+    return DRIVER_ERROR;
+  }
+  bsp_printf("reset finished\n");
 
-    // read original config
-    uint8_t config;
-    if (!bme280_read_reg_helper(BME280_REG_CONFIG, &config)) {
-        return DRIVER_ERROR;
-    }
-    bsp_printf("Original config: 0x%02X\n", config);
+  // read original config
+  uint8_t config;
+  if (!bme280_read_reg_helper(BME280_REG_CONFIG, &config)) {
+    return DRIVER_ERROR;
+  }
+  bsp_printf("Original config: 0x%02X\n", config);
 
-    if (!bme280_write_reg_helper(BME280_REG_CONFIG, BME280_CONFIG_10_MS)) {
-        bsp_printf("Failed to write config!\n");
-        return DRIVER_ERROR;
-    }
+  if (!bme280_write_reg_helper(BME280_REG_CONFIG, BME280_CONFIG_10_MS)) {
+    bsp_printf("Failed to write config!\n");
+    return DRIVER_ERROR;
+  }
 
-    // read back to verify
-    uint8_t verify_config;
-    if (!bme280_read_reg_helper(BME280_REG_CONFIG, &verify_config)) {
-        return DRIVER_ERROR;
-    }
-    bsp_printf("Verified config: 0x%02X\n", verify_config);
+  // read back to verify
+  uint8_t verify_config;
+  if (!bme280_read_reg_helper(BME280_REG_CONFIG, &verify_config)) {
+    return DRIVER_ERROR;
+  }
+  bsp_printf("Verified config: 0x%02X\n", verify_config);
 
-    return DRIVER_OK;
+  return DRIVER_OK;
 }
 
 static int bme280_remove_fn(device_t *dev) {
-    (void)dev;
-    // Add removal logic
-    return DRIVER_OK;
+  (void)dev;
+  // Add removal logic
+  return DRIVER_OK;
 }
 
 static int bme280_ioctl_fn(device_t *dev, uint32_t cmd, void *arg) {
-    (void)dev;
-    (void)cmd;
-    (void)arg;
-    return DRIVER_NOT_FOUND;
+  (void)dev;
+  (void)cmd;
+  (void)arg;
+  return DRIVER_NOT_FOUND;
 }
 
 static int bme280_poll_fn(device_t *dev) {
-    (void)dev;
-    // Add polling logic
-    return DRIVER_OK;
+  (void)dev;
+  // Add polling logic
+  return DRIVER_OK;
 }
 
 
 // Define the driver_t instance for BME280
 const driver_t bme280_driver __attribute__((used)) = {
-    .name = "bme280",
-    .init = bme280_init_fn,
-    .probe = bme280_probe_fn,
-    .remove = bme280_remove_fn,
-    .ioctl = bme280_ioctl_fn,
-    .poll = bme280_poll_fn,
+  .name   = "bme280",
+  .init   = bme280_init_fn,
+  .probe  = bme280_probe_fn,
+  .remove = bme280_remove_fn,
+  .ioctl  = bme280_ioctl_fn,
+  .poll   = bme280_poll_fn,
 };
 
 static bool bme280_read_reg_helper(uint8_t reg, uint8_t *val) {

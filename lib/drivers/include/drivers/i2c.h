@@ -12,4 +12,7 @@ typedef struct {
 
 
 int i2c_bus_read_reg(i2c_bus_t *bus, uint8_t reg, uint8_t *buf, size_t len);
-int i2c_bus_write_reg(i2c_bus_t *bus, uint8_t reg, const uint8_t *buf, size_t len);
+int i2c_bus_write_reg(i2c_bus_t *bus,
+                      uint8_t reg,
+                      const uint8_t *buf,
+                      size_t len);

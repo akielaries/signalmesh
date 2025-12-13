@@ -101,7 +101,6 @@ typedef struct {
 } ina219_t;
 
 
-
 /**
  * @brief Initialize an INA219 device with the given configuration.
  *
