@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "bsp/utils/bsp_io.h"
 #include "drivers/bme280.h"
+#include "drivers/i2c.h" // Include the new i2c driver
 
 // Static helper functions
 static bool bme280_read_reg_helper(uint8_t reg, uint8_t *val);
@@ -89,16 +90,13 @@ const driver_t bme280_driver __attribute__((used)) = {
 };
 
 static bool bme280_read_reg_helper(uint8_t reg, uint8_t *val) {
-  msg_t msg = i2cMasterTransmitTimeout(&I2CD4,
-                                       BME280_I2C_ADDR,
-                                       &reg,
-                                       1,
-                                       val,
-                                       1,
-                                       TIME_MS2I(1000));
+  uint8_t txbuf = reg;
+  msg_t msg = i2c_master_transmit(&I2CD4, BME280_I2C_ADDR, &txbuf, 1, val, 1);
 
   if (msg != MSG_OK) {
-    bsp_printf("[BME280] read_reg error: 0x%X\n", msg);
+    bsp_printf("[BME280] read_reg error: 0x%X\n",
+               msg); // This bsp_printf should be removed later if
+                     // i2c_handle_error is sufficient
     return false;
   }
 
@@ -106,18 +104,12 @@ static bool bme280_read_reg_helper(uint8_t reg, uint8_t *val) {
 }
 
 static bool bme280_write_reg_helper(uint8_t reg, uint8_t val) {
-  uint8_t tx[2] = {reg, val};
-
-  msg_t msg = i2cMasterTransmitTimeout(&I2CD4,
-                                       BME280_I2C_ADDR,
-                                       tx,
-                                       2,
-                                       NULL,
-                                       0,
-                                       TIME_MS2I(1000));
+  uint8_t tx_data[2] = {reg, val};
+  msg_t msg = i2c_master_transmit(&I2CD4, BME280_I2C_ADDR, tx_data, 2, NULL, 0);
 
   if (msg != MSG_OK) {
-    bsp_printf("[BME280] write_reg error: 0x%X\n", msg);
+    bsp_printf("[BME280] write_reg error: 0x%X\n",
+               msg); // This bsp_printf should be removed later
     return false;
   }
 
