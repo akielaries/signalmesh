@@ -5,15 +5,25 @@
 
 /**
  * @brief Enum for common reading value types.
- * Add more as needed.
  */
 typedef enum {
   READING_VALUE_TYPE_UNKNOWN = 0,
   READING_VALUE_TYPE_UINT32,
   READING_VALUE_TYPE_INT32,
   READING_VALUE_TYPE_FLOAT,
-  // Add other types like INT32, BOOL, etc.
 } reading_value_type_t;
+
+typedef enum {
+  READING_CHANNEL_TYPE_TEMPERATURE_C,
+  READING_CHANNEL_TYPE_TEMPERATURE_F,
+  READING_CHANNEL_TYPE_PRESSURE_PA,
+  READING_CHANNEL_TYPE_PRESSURE_PSI,
+  READING_CHANNEL_TYPE_PRESSURE_INHG,
+  READING_CHANNEL_TYPE_HUMIDITY,
+  READING_CHANNEL_TYPE_VOLTAGE,
+  READING_CHANNEL_TYPE_CURRENT,
+  READING_CHANNEL_TYPE_POWER,
+} reading_channel_type_t;
 
 /**
  * @brief Structure to hold a single driver reading.
@@ -25,7 +35,6 @@ typedef struct {
     uint32_t u32_val;
     int32_t i32_val;
     float float_val;
-    // Add other members for different types
   } value;
 } driver_reading_t;
 
@@ -34,8 +43,8 @@ typedef struct {
  * directory.
  */
 typedef struct {
+  reading_channel_type_t channel_type;
   const char *name;
-  const char *unit;
   reading_value_type_t type;
 } driver_reading_channel_t;
 

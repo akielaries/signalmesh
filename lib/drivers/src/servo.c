@@ -60,8 +60,7 @@ static int servo_ioctl(device_t *dev, uint32_t cmd, void *arg) {
         degrees = 0;
       if (degrees > 180)
         degrees = 180;
-      uint16_t us = SERVO_MIN_US + (uint16_t)((degrees / 180.0f) *
-                                              (SERVO_MAX_US - SERVO_MIN_US));
+      uint16_t us = SERVO_MIN_US + (uint16_t)((degrees / 180.0f) * (SERVO_MAX_US - SERVO_MIN_US));
       pwmEnableChannel(bsp_servo_pwm_driver, BSP_SERVO_PWM_CHANNEL, us);
       break;
     }
@@ -76,9 +75,7 @@ static int servo_ioctl(device_t *dev, uint32_t cmd, void *arg) {
   return DRIVER_OK;
 }
 
-static int servo_poll(device_id_t device_id,
-                      uint32_t num_readings,
-                      driver_reading_t *readings) {
+static int servo_poll(device_id_t device_id, uint32_t num_readings, driver_reading_t *readings) {
   // (void)device_id; // Unused for now
   if (device_id == NULL || readings == NULL || num_readings == 0) {
     return DRIVER_INVALID_PARAM;
@@ -99,8 +96,8 @@ static int servo_poll(device_id_t device_id,
   // servo_t struct and assigning it to dev->priv. Since that's not present,
   // we'll return an error if a reading is actually requested.
 
-  if (num_readings == 1 && strcmp(servo_readings_directory.channels[0].name,
-                                  "commanded_position_us") == 0) {
+  if (num_readings == 1 &&
+      strcmp(servo_readings_directory.channels[0].name, "commanded_position_us") == 0) {
     // Here, you would retrieve the actual commanded position from
     // device_id->priv and assign it to readings[0].value.u32_val For now,
     // returning DRIVER_NOT_FOUND as we don't store it.

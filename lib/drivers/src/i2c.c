@@ -38,13 +38,7 @@ msg_t i2c_master_transmit(I2CDriver *i2cp,
                           size_t rxbytes) {
   msg_t msg;
   i2cAcquireBus(i2cp);
-  msg = i2cMasterTransmitTimeout(i2cp,
-                                 addr,
-                                 txbuf,
-                                 txbytes,
-                                 rxbuf,
-                                 rxbytes,
-                                 TIME_MS2I(100));
+  msg = i2cMasterTransmitTimeout(i2cp, addr, txbuf, txbytes, rxbuf, rxbytes, TIME_MS2I(100));
   i2cReleaseBus(i2cp);
   if (msg != MSG_OK) {
     i2c_handle_error(i2cp, "i2c_master_transmit");
@@ -53,10 +47,7 @@ msg_t i2c_master_transmit(I2CDriver *i2cp,
 }
 
 // Generic I2C Master Receive function
-msg_t i2c_master_receive(I2CDriver *i2cp,
-                         i2caddr_t addr,
-                         uint8_t *rxbuf,
-                         size_t rxbytes) {
+msg_t i2c_master_receive(I2CDriver *i2cp, i2caddr_t addr, uint8_t *rxbuf, size_t rxbytes) {
   msg_t msg;
   i2cAcquireBus(i2cp);
   msg = i2cMasterReceiveTimeout(i2cp, addr, rxbuf, rxbytes, TIME_MS2I(100));
@@ -75,14 +66,10 @@ int i2c_bus_read_reg(i2c_bus_t *bus, uint8_t reg, uint8_t *buf, size_t len) {
   return (msg == MSG_OK) ? DRV_OK : DRV_EIO;
 }
 
-int i2c_bus_write_reg(i2c_bus_t *bus,
-                      uint8_t reg,
-                      const uint8_t *buf,
-                      size_t len) {
+int i2c_bus_write_reg(i2c_bus_t *bus, uint8_t reg, const uint8_t *buf, size_t len) {
   uint8_t tx_buf[len + 1];
   tx_buf[0] = reg;
   memcpy(&tx_buf[1], buf, len);
-  msg_t msg =
-    i2c_master_transmit(bus->i2c, bus->addr, tx_buf, len + 1, NULL, 0);
+  msg_t msg = i2c_master_transmit(bus->i2c, bus->addr, tx_buf, len + 1, NULL, 0);
   return (msg == MSG_OK) ? DRV_OK : DRV_EIO;
 }

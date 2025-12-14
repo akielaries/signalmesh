@@ -35,24 +35,24 @@ static int bme280_poll(device_id_t device_id, uint32_t num_readings, driver_read
 // BME280 specific reading channels
 static const driver_reading_channel_t bme280_reading_channels[] = {
   {
-    .name = "temperature",
-    .unit = "C",
-    .type = READING_VALUE_TYPE_FLOAT,
+    .channel_type = READING_CHANNEL_TYPE_TEMPERATURE_F,
+    .name         = "temperature",
+    .type         = READING_VALUE_TYPE_FLOAT,
   },
   {
-    .name = "pressure",
-    .unit = "Pa",
-    .type = READING_VALUE_TYPE_FLOAT,
+    .channel_type = READING_CHANNEL_TYPE_PRESSURE_PSI,
+    .name         = "pressure",
+    .type         = READING_VALUE_TYPE_FLOAT,
   },
   {
-    .name = "pressure",
-    .unit = "inHg",
-    .type = READING_VALUE_TYPE_FLOAT,
+    .channel_type = READING_CHANNEL_TYPE_PRESSURE_INHG,
+    .name         = "pressure",
+    .type         = READING_VALUE_TYPE_FLOAT,
   },
   {
-    .name = "humidity",
-    .unit = "%RH",
-    .type = READING_VALUE_TYPE_FLOAT,
+    .channel_type = READING_CHANNEL_TYPE_HUMIDITY,
+    .name         = "humidity",
+    .type         = READING_VALUE_TYPE_FLOAT,
   },
 };
 
@@ -331,18 +331,31 @@ static int bme280_poll(device_id_t device_id, uint32_t num_readings, driver_read
 
   // Populate readings array based on directory
   for (uint32_t i = 0; i < num_readings; ++i) {
-    if (strcmp(bme280_readings_directory.channels[i].name, "temperature") == 0) {
-      readings[i].type            = READING_VALUE_TYPE_FLOAT;
-      readings[i].value.float_val = compensated_temp / 100.0f;
-    } else if (strcmp(bme280_readings_directory.channels[i].name, "pressure") == 0) {
-      readings[i].type            = READING_VALUE_TYPE_FLOAT;
-      readings[i].value.float_val = compensated_press / 256.0f;
-    } else if (strcmp(bme280_readings_directory.channels[i].name, "humidity") == 0) {
-      readings[i].type            = READING_VALUE_TYPE_FLOAT;
-      readings[i].value.float_val = compensated_hum / 1024.0f;
-    } else {
-      // Handle unknown channel or error
-      return DRIVER_ERROR;
+    switch (bme280_readings_directory.channels[i].channel_type) {
+      case READING_CHANNEL_TYPE_TEMPERATURE_F: {
+        float celsius               = compensated_temp / 100.0f;
+        readings[i].type            = READING_VALUE_TYPE_FLOAT;
+        readings[i].value.float_val = celsius * 1.8f + 32.0f;
+        break;
+      }
+      case READING_CHANNEL_TYPE_PRESSURE_PSI: {
+        float pascals               = compensated_press / 256.0f;
+        readings[i].type            = READING_VALUE_TYPE_FLOAT;
+        readings[i].value.float_val = pascals * 0.0001450377f;
+        break;
+      }
+      case READING_CHANNEL_TYPE_PRESSURE_INHG: {
+        float pascals               = compensated_press / 256.0f;
+        readings[i].type            = READING_VALUE_TYPE_FLOAT;
+        readings[i].value.float_val = pascals * 0.0002953f;
+        break;
+      }
+      case READING_CHANNEL_TYPE_HUMIDITY:
+        readings[i].type            = READING_VALUE_TYPE_FLOAT;
+        readings[i].value.float_val = compensated_hum / 1024.0f;
+        break;
+      default:
+        return DRIVER_ERROR;
     }
   }
 

@@ -64,6 +64,7 @@ set(SOURCES
     ${DRIVERS_SRC_DIR}/ina219.c
     ${DRIVERS_SRC_DIR}/bme280.c
     ${DRIVERS_SRC_DIR}/i2c.c
+    ${DRIVERS_SRC_DIR}/units.c
     #${DRIVERS_SRC_DIR}/driver_manager.c
     ${DRIVERS_SRC_DIR}/driver_registry.c
     #./app/main.c

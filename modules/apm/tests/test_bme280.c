@@ -10,6 +10,7 @@
 #include "drivers/driver_api.h"
 #include "drivers/driver_registry.h" // For find_device()
 #include "drivers/driver_readings.h" // For driver_reading_t
+#include "drivers/units.h"
 
 int main(void) {
   bsp_init();
@@ -28,8 +29,8 @@ int main(void) {
 
   bsp_printf("BME280 device found and initialized.\n");
 
-  driver_reading_t bme280_readings[3]; // Temp, Pressure, Humidity
-  uint32_t num_readings_to_get = 3;
+  driver_reading_t bme280_readings[4];
+  uint32_t num_readings_to_get = 4;
 
   while (true) {
     if (palReadLine(LINE_BUTTON) == PAL_HIGH) {
@@ -48,22 +49,10 @@ int main(void) {
         const driver_reading_channel_t *channel =
           &bme280_dev->driver->readings_directory->channels[i];
         if (bme280_readings[i].type == READING_VALUE_TYPE_FLOAT) {
-          if (strcmp(channel->name, "temperature") == 0) {
-            float celsius    = bme280_readings[i].value.float_val;
-            float fahrenheit = celsius * 1.8f + 32.0f;
-            bsp_printf("  temperature: %.2f F\n", fahrenheit);
-          } else if (strcmp(channel->name, "pressure") == 0) {
-            float pascals = bme280_readings[i].value.float_val;
-            float psi     = pascals * 0.0001450377f;
-            float inhg    = pascals * 0.0002953f;
-            bsp_printf("  pressure: %.2f PSI\n", psi);
-            bsp_printf("  pressure: %.2f inHg\n", inhg);
-          } else {
             bsp_printf("  %s: %.2f %s\n",
                        channel->name,
                        bme280_readings[i].value.float_val,
-                       channel->unit);
-          }
+                       get_unit_for_reading(channel->channel_type));
         } else {
           bsp_printf("  %s: Unknown type\n", channel->name);
         }

@@ -7,9 +7,7 @@
 void adc_init(void) {
   // Configure GPIOs for analog inputs
   for (uint32_t i = 0; i < bsp_adc_pins_num; i++) {
-    palSetPadMode(bsp_adc_pins[i].port,
-                  bsp_adc_pins[i].pad,
-                  PAL_MODE_INPUT_ANALOG);
+    palSetPadMode(bsp_adc_pins[i].port, bsp_adc_pins[i].pad, PAL_MODE_INPUT_ANALOG);
   }
 
   // Start ADC peripherals (handling multiple groups on the same peripheral)
@@ -57,8 +55,7 @@ void adc_stop_continuous(uint32_t group_mask) {
   }
 }
 
-uint32_t
-adc_get_samples(adc_group_id_t group_id, uint16_t *buffer, uint32_t len) {
+uint32_t adc_get_samples(adc_group_id_t group_id, uint16_t *buffer, uint32_t len) {
   if (group_id >= ADC_GROUP_COUNT || buffer == NULL) {
     return 0;
   }
@@ -67,9 +64,7 @@ adc_get_samples(adc_group_id_t group_id, uint16_t *buffer, uint32_t len) {
   uint32_t num_channels    = group->config->num_channels;
   uint32_t copy_len        = len < num_channels ? len : num_channels;
 
-  cacheBufferInvalidate(group->buffer,
-                        group->buffer_depth * num_channels *
-                          sizeof(adcsample_t));
+  cacheBufferInvalidate(group->buffer, group->buffer_depth * num_channels * sizeof(adcsample_t));
 
   // For simplicity, we copy just the first sample of each channel.
   memcpy(buffer, group->buffer, copy_len * sizeof(uint16_t));
