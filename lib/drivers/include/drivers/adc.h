@@ -7,11 +7,7 @@ extern "C" {
 #endif
 
 // Define abstract identifiers for the ADC groups
-typedef enum {
-  ADC_GROUP_POTS,
-  ADC_GROUP_INTERNAL,
-  ADC_GROUP_COUNT
-} adc_group_id_t;
+typedef enum { ADC_GROUP_POTS, ADC_GROUP_INTERNAL, ADC_GROUP_COUNT } adc_group_id_t;
 
 /**
  * @brief Initializes the ADC driver and configures the necessary GPIOs.
@@ -39,8 +35,7 @@ void adc_stop_continuous(uint32_t group_mask);
  * @param len The length of the buffer.
  * @return The number of samples copied.
  */
-uint32_t
-adc_get_samples(adc_group_id_t group_id, uint16_t *buffer, uint32_t len);
+uint32_t adc_get_samples(adc_group_id_t group_id, uint16_t *buffer, uint32_t len);
 
 
 #ifdef __cplusplus

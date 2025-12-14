@@ -27,8 +27,7 @@ typedef struct {
     float float_val;
     // Add other members for different types
   } value;
-}
-driver_reading_t;
+} driver_reading_t;
 
 /**
  * @brief Structure to describe a single channel in the driver readings

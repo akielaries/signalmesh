@@ -113,9 +113,7 @@ struct driver {
    * @param readings Pointer to an array of driver_reading_t to fill
    * @return DRIVER_OK on success, error code on failure
    */
-  int (*poll)(device_id_t device_id,
-              uint32_t num_readings,
-              driver_reading_t *readings);
+  int (*poll)(device_id_t device_id, uint32_t num_readings, driver_reading_t *readings);
 
   /** @brief Directory of readings provided by this driver */
   const driver_readings_directory_t *readings_directory;

@@ -62,10 +62,7 @@ msg_t i2c_master_transmit(I2CDriver *i2cp,
  * @param rxbytes Number of bytes to receive
  * @return MSG_OK on success, error code on failure
  */
-msg_t i2c_master_receive(I2CDriver *i2cp,
-                         i2caddr_t addr,
-                         uint8_t *rxbuf,
-                         size_t rxbytes);
+msg_t i2c_master_receive(I2CDriver *i2cp, i2caddr_t addr, uint8_t *rxbuf, size_t rxbytes);
 
 /**
  * @brief Handle and report I2C communication errors
@@ -106,7 +103,4 @@ int i2c_bus_read_reg(i2c_bus_t *bus, uint8_t reg, uint8_t *buf, size_t len);
  * @param len Number of bytes to write
  * @return 0 on success, negative error code on failure
  */
-int i2c_bus_write_reg(i2c_bus_t *bus,
-                      uint8_t reg,
-                      const uint8_t *buf,
-                      size_t len);
+int i2c_bus_write_reg(i2c_bus_t *bus, uint8_t reg, const uint8_t *buf, size_t len);

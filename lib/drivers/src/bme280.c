@@ -25,9 +25,7 @@
 static int bme280_init(device_t *dev);
 static int bme280_remove(device_t *dev);
 static int bme280_ioctl(device_t *dev, uint32_t cmd, void *arg);
-static int bme280_poll(device_id_t device_id,
-                       uint32_t num_readings,
-                       driver_reading_t *readings);
+static int bme280_poll(device_id_t device_id, uint32_t num_readings, driver_reading_t *readings);
 
 
 /******************************************************************************/
@@ -47,6 +45,11 @@ static const driver_reading_channel_t bme280_reading_channels[] = {
     .type = READING_VALUE_TYPE_FLOAT,
   },
   {
+    .name = "pressure",
+    .unit = "inHg",
+    .type = READING_VALUE_TYPE_FLOAT,
+  },
+  {
     .name = "humidity",
     .unit = "%RH",
     .type = READING_VALUE_TYPE_FLOAT,
@@ -56,8 +59,7 @@ static const driver_reading_channel_t bme280_reading_channels[] = {
 // BME280 readings directory
 static const driver_readings_directory_t bme280_readings_directory = {
   .num_readings = ARRAY_SIZE(bme280_reading_channels),
-  .channels     = bme280_reading_channels
-};
+  .channels     = bme280_reading_channels};
 
 // Define driver_t instance for BME280
 const driver_t bme280_driver __attribute__((used)) = {
@@ -74,32 +76,24 @@ const driver_t bme280_driver __attribute__((used)) = {
 // Local driver helper functions
 /******************************************************************************/
 
-static int bme280_read_registers(bme280_t *bme_dev,
-                                 uint8_t reg,
-                                 uint8_t *buf,
-                                 size_t len) {
+static int bme280_read_registers(bme280_t *bme_dev, uint8_t reg, uint8_t *buf, size_t len) {
   return i2c_bus_read_reg(&bme_dev->bus, reg, buf, len);
 }
 
-static int bme280_write_register(bme280_t *bme_dev,
-                                 uint8_t reg,
-                                 const uint8_t *buf,
-                                 size_t len) {
+static int bme280_write_register(bme280_t *bme_dev, uint8_t reg, const uint8_t *buf, size_t len) {
   return i2c_bus_write_reg(&bme_dev->bus, reg, buf, len);
 }
 
 static uint32_t bme280_read_pressure_raw(bme280_t *bme_dev) {
   uint8_t data[3];
   bme280_read_registers(bme_dev, BME280_REG_PRESS_MSB, data, 3);
-  return ((uint32_t)data[0] << 12) | ((uint32_t)data[1] << 4) |
-         ((uint32_t)data[2] >> 4);
+  return ((uint32_t)data[0] << 12) | ((uint32_t)data[1] << 4) | ((uint32_t)data[2] >> 4);
 }
 
 static uint32_t bme280_read_temperature_raw(bme280_t *bme_dev) {
   uint8_t data[3];
   bme280_read_registers(bme_dev, BME280_REG_TEMP_MSB, data, 3);
-  return ((uint32_t)data[0] << 12) | ((uint32_t)data[1] << 4) |
-         ((uint32_t)data[2] >> 4);
+  return ((uint32_t)data[0] << 12) | ((uint32_t)data[1] << 4) | ((uint32_t)data[2] >> 4);
 }
 
 static uint32_t bme280_read_humidity_raw(bme280_t *bme_dev) {
@@ -118,31 +112,22 @@ static bool bme280_read_calib_params(bme280_t *bme_dev) {
 
   bme_dev->calib_params.dig_P1 = (uint16_t)(((uint16_t)data[7] << 8) | data[6]);
   bme_dev->calib_params.dig_P2 = (int16_t)(((int16_t)data[9] << 8) | data[8]);
-  bme_dev->calib_params.dig_P3 =
-    (int16_t)(((int16_t)data[11] << 8) | data[10]);
-  bme_dev->calib_params.dig_P4 =
-    (int16_t)(((int16_t)data[13] << 8) | data[12]);
-  bme_dev->calib_params.dig_P5 =
-    (int16_t)(((int16_t)data[15] << 8) | data[14]);
-  bme_dev->calib_params.dig_P6 =
-    (int16_t)(((int16_t)data[17] << 8) | data[16]);
-  bme_dev->calib_params.dig_P7 =
-    (int16_t)(((int16_t)data[19] << 8) | data[18]);
-  bme_dev->calib_params.dig_P8 =
-    (int16_t)(((int16_t)data[21] << 8) | data[20]);
-  bme_dev->calib_params.dig_P9 =
-    (int16_t)(((int16_t)data[23] << 8) | data[22]);
+  bme_dev->calib_params.dig_P3 = (int16_t)(((int16_t)data[11] << 8) | data[10]);
+  bme_dev->calib_params.dig_P4 = (int16_t)(((int16_t)data[13] << 8) | data[12]);
+  bme_dev->calib_params.dig_P5 = (int16_t)(((int16_t)data[15] << 8) | data[14]);
+  bme_dev->calib_params.dig_P6 = (int16_t)(((int16_t)data[17] << 8) | data[16]);
+  bme_dev->calib_params.dig_P7 = (int16_t)(((int16_t)data[19] << 8) | data[18]);
+  bme_dev->calib_params.dig_P8 = (int16_t)(((int16_t)data[21] << 8) | data[20]);
+  bme_dev->calib_params.dig_P9 = (int16_t)(((int16_t)data[23] << 8) | data[22]);
 
   bme280_read_registers(bme_dev, 0xA1, &bme_dev->calib_params.dig_H1, 1);
 
   uint8_t hum_data[7];
   bme280_read_registers(bme_dev, 0xE1, hum_data, 7);
 
-  bme_dev->calib_params.dig_H2 =
-    (int16_t)(((int16_t)hum_data[1] << 8) | hum_data[0]);
+  bme_dev->calib_params.dig_H2 = (int16_t)(((int16_t)hum_data[1] << 8) | hum_data[0]);
   bme_dev->calib_params.dig_H3 = hum_data[2];
-  bme_dev->calib_params.dig_H4 =
-    (int16_t)(((int16_t)hum_data[3] << 4) | (hum_data[4] & 0x0F));
+  bme_dev->calib_params.dig_H4 = (int16_t)(((int16_t)hum_data[3] << 4) | (hum_data[4] & 0x0F));
   bme_dev->calib_params.dig_H5 =
     (int16_t)(((int16_t)hum_data[5] << 4) | ((hum_data[4] >> 4) & 0x0F));
   bme_dev->calib_params.dig_H6 = (int8_t)hum_data[6];
@@ -152,8 +137,7 @@ static bool bme280_read_calib_params(bme280_t *bme_dev) {
 
 // Returns temperature in DegC, resolution is 0.01 DegC. Output value of 5123
 // equals 51.23 DegC. t_fine carries fine temperature as global value
-static int32_t bme280_compensate_temperature_int32(int32_t adc_T,
-                                                   bme280_t *bme_dev) {
+static int32_t bme280_compensate_temperature_int32(int32_t adc_T, bme280_t *bme_dev) {
   int32_t var1, var2, T;
   var1 = ((((adc_T >> 3) - ((int32_t)bme_dev->calib_params.dig_T1 << 1))) *
           ((int32_t)bme_dev->calib_params.dig_T2)) >>
@@ -171,8 +155,7 @@ static int32_t bme280_compensate_temperature_int32(int32_t adc_T,
 // Returns pressure in Pa as unsigned 32 bit integer in Q24.8 format (24 integer
 // bits and 8 fractional bits). Output value of 24674867 equals 24674867/256 =
 // 96386.2 Pa = 963.862 hPa
-static uint32_t bme280_compensate_pressure_int64(int32_t adc_P,
-                                                 bme280_t *bme_dev) {
+static uint32_t bme280_compensate_pressure_int64(int32_t adc_P, bme280_t *bme_dev) {
   int64_t var1, var2, p;
   var1 = ((int64_t)bme_dev->t_fine) - 128000;
   var2 = var1 * var1 * (int64_t)bme_dev->calib_params.dig_P6;
@@ -180,26 +163,22 @@ static uint32_t bme280_compensate_pressure_int64(int32_t adc_P,
   var2 = var2 + (((int64_t)bme_dev->calib_params.dig_P4) << 35);
   var1 = ((var1 * var1 * (int64_t)bme_dev->calib_params.dig_P3) >> 8) +
          ((var1 * (int64_t)bme_dev->calib_params.dig_P2) << 12);
-  var1 =
-    (((((int64_t)1) << 47) + var1)) * ((int64_t)bme_dev->calib_params.dig_P1) >>
-    33;
+  var1 = (((((int64_t)1) << 47) + var1)) * ((int64_t)bme_dev->calib_params.dig_P1) >> 33;
   if (var1 == 0) {
     return 0; // avoid exception caused by division by zero
   }
-  p = 1048576 - adc_P;
-  p = (((p << 31) - var2) * 3125) / var1;
-  var1 =
-    (((int64_t)bme_dev->calib_params.dig_P9) * (p >> 13) * (p >> 13)) >> 25;
+  p    = 1048576 - adc_P;
+  p    = (((p << 31) - var2) * 3125) / var1;
+  var1 = (((int64_t)bme_dev->calib_params.dig_P9) * (p >> 13) * (p >> 13)) >> 25;
   var2 = (((int64_t)bme_dev->calib_params.dig_P8) * p) >> 19;
-  p = ((p + var1 + var2) >> 8) + (((int64_t)bme_dev->calib_params.dig_P7) << 4);
+  p    = ((p + var1 + var2) >> 8) + (((int64_t)bme_dev->calib_params.dig_P7) << 4);
   return (uint32_t)p;
 }
 
 // Returns humidity in %RH as unsigned 32 bit integer in Q22.10 format (22
 // integer and 10 fractional bits). Output value of 47445 equals 47445/1024
 // = 46.333 %RH
-static uint32_t bme280_compensate_humidity_int32(int32_t adc_H,
-                                                 bme280_t *bme_dev) {
+static uint32_t bme280_compensate_humidity_int32(int32_t adc_H, bme280_t *bme_dev) {
   int32_t v_x1_u32r;
   v_x1_u32r = (bme_dev->t_fine - ((int32_t)76800));
   v_x1_u32r =
@@ -208,16 +187,16 @@ static uint32_t bme280_compensate_humidity_int32(int32_t adc_H,
        ((int32_t)16384)) >>
       15) *
      (((((((v_x1_u32r * ((int32_t)bme_dev->calib_params.dig_H6)) >> 10) *
-          (((v_x1_u32r * ((int32_t)bme_dev->calib_params.dig_H3)) >> 11) +
-           ((int32_t)32768))) >>
+          (((v_x1_u32r * ((int32_t)bme_dev->calib_params.dig_H3)) >> 11) + ((int32_t)32768))) >>
          10) +
         ((int32_t)2097152)) *
          ((int32_t)bme_dev->calib_params.dig_H2) +
        8192) >>
       14));
-  v_x1_u32r = (v_x1_u32r - (((((v_x1_u32r >> 15) * (v_x1_u32r >> 15)) >> 7) *
-                             ((int32_t)bme_dev->calib_params.dig_H1)) >>
-                            4));
+  v_x1_u32r =
+    (v_x1_u32r -
+     (((((v_x1_u32r >> 15) * (v_x1_u32r >> 15)) >> 7) * ((int32_t)bme_dev->calib_params.dig_H1)) >>
+      4));
   v_x1_u32r = (v_x1_u32r < 0 ? 0 : v_x1_u32r);
   v_x1_u32r = (v_x1_u32r > 419430400 ? 419430400 : v_x1_u32r);
   return (uint32_t)(v_x1_u32r >> 12);
@@ -245,7 +224,7 @@ static int bme280_init(device_t *dev) {
   dev->priv = bme_dev;
 
   // Initialize I2C bus
-  bme_dev->bus.i2c = (I2CDriver *)dev->bus;
+  bme_dev->bus.i2c  = (I2CDriver *)dev->bus;
   bme_dev->bus.addr = BME280_I2C_ADDR;
 
   // Read calibration parameters
@@ -286,10 +265,9 @@ static int bme280_init(device_t *dev) {
 
   // Configure pressure oversampling, temperature oversampling and set to normal
   // mode
-  uint8_t ctrl_meas_val =
-    (BME280_OVERSAMPLING_X16 << BME280_CTRL_MEAS_OSRS_T_POS) |
-    (BME280_OVERSAMPLING_X16 << BME280_CTRL_MEAS_OSRS_P_POS) |
-    (BME280_MODE_NORMAL << BME280_CTRL_MEAS_MODE_POS);
+  uint8_t ctrl_meas_val = (BME280_OVERSAMPLING_X16 << BME280_CTRL_MEAS_OSRS_T_POS) |
+                          (BME280_OVERSAMPLING_X16 << BME280_CTRL_MEAS_OSRS_P_POS) |
+                          (BME280_MODE_NORMAL << BME280_CTRL_MEAS_MODE_POS);
   if (bme280_write_register(bme_dev, BME280_REG_CTRL_MEAS, &ctrl_meas_val, 1) != 0) {
     return DRIVER_ERROR;
   }
@@ -329,9 +307,7 @@ static int bme280_ioctl(device_t *dev, uint32_t cmd, void *arg) {
  * @param readings Array to store reading data
  * @return DRIVER_OK on success, error code on failure
  */
-static int bme280_poll(device_id_t device_id,
-                       uint32_t num_readings,
-                       driver_reading_t *readings) {
+static int bme280_poll(device_id_t device_id, uint32_t num_readings, driver_reading_t *readings) {
   bme280_t *bme_dev = (bme280_t *)device_id->priv;
 
   if (bme_dev == NULL || readings == NULL || num_readings == 0) {
@@ -349,25 +325,20 @@ static int bme280_poll(device_id_t device_id,
   int32_t hum_raw   = bme280_read_humidity_raw(bme_dev);
 
   // Compensate values
-  int32_t compensated_temp =
-    bme280_compensate_temperature_int32(temp_raw, bme_dev);
-  uint32_t compensated_press =
-    bme280_compensate_pressure_int64(press_raw, bme_dev);
-  uint32_t compensated_hum = bme280_compensate_humidity_int32(hum_raw, bme_dev);
+  int32_t compensated_temp   = bme280_compensate_temperature_int32(temp_raw, bme_dev);
+  uint32_t compensated_press = bme280_compensate_pressure_int64(press_raw, bme_dev);
+  uint32_t compensated_hum   = bme280_compensate_humidity_int32(hum_raw, bme_dev);
 
   // Populate readings array based on directory
   for (uint32_t i = 0; i < num_readings; ++i) {
-    if (strcmp(bme280_readings_directory.channels[i].name, "temperature") ==
-        0) {
-      readings[i].type = READING_VALUE_TYPE_FLOAT;
+    if (strcmp(bme280_readings_directory.channels[i].name, "temperature") == 0) {
+      readings[i].type            = READING_VALUE_TYPE_FLOAT;
       readings[i].value.float_val = compensated_temp / 100.0f;
-    } else if (strcmp(bme280_readings_directory.channels[i].name, "pressure") ==
-               0) {
-      readings[i].type = READING_VALUE_TYPE_FLOAT;
+    } else if (strcmp(bme280_readings_directory.channels[i].name, "pressure") == 0) {
+      readings[i].type            = READING_VALUE_TYPE_FLOAT;
       readings[i].value.float_val = compensated_press / 256.0f;
-    } else if (strcmp(bme280_readings_directory.channels[i].name, "humidity") ==
-               0) {
-      readings[i].type = READING_VALUE_TYPE_FLOAT;
+    } else if (strcmp(bme280_readings_directory.channels[i].name, "humidity") == 0) {
+      readings[i].type            = READING_VALUE_TYPE_FLOAT;
       readings[i].value.float_val = compensated_hum / 1024.0f;
     } else {
       // Handle unknown channel or error
