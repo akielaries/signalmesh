@@ -36,7 +36,7 @@ driver_reading_t;
  */
 typedef struct {
   const char *name;
-
+  const char *unit;
   reading_value_type_t type;
 } driver_reading_channel_t;
 

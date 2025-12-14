@@ -44,15 +44,18 @@ static int bme280_poll(device_id_t device_id,
 static const driver_reading_channel_t bme280_reading_channels[] = {
   {
     .name = "temperature",
-    .type = READING_VALUE_TYPE_UINT32,
+    .unit = "C",
+    .type = READING_VALUE_TYPE_FLOAT,
   },
   {
     .name = "pressure",
-    .type = READING_VALUE_TYPE_UINT32,
+    .unit = "Pa",
+    .type = READING_VALUE_TYPE_FLOAT,
   },
   {
     .name = "humidity",
-    .type = READING_VALUE_TYPE_UINT32,
+    .unit = "%RH",
+    .type = READING_VALUE_TYPE_FLOAT,
   },
 };
 
@@ -390,18 +393,16 @@ static int bme280_poll(device_id_t device_id,
   for (uint32_t i = 0; i < num_readings; ++i) {
     if (strcmp(bme280_readings_directory.channels[i].name, "temperature") ==
         0) {
-      readings[i].type =
-        READING_VALUE_TYPE_UINT32; // Temporary: Changed to UINT32 for output
-                                   // visibility
-      readings[i].value.u32_val = (uint32_t)compensated_temp;
+      readings[i].type = READING_VALUE_TYPE_FLOAT;
+      readings[i].value.float_val = compensated_temp / 100.0f;
     } else if (strcmp(bme280_readings_directory.channels[i].name, "pressure") ==
                0) {
-      readings[i].type          = READING_VALUE_TYPE_UINT32;
-      readings[i].value.u32_val = compensated_press;
+      readings[i].type = READING_VALUE_TYPE_FLOAT;
+      readings[i].value.float_val = compensated_press / 256.0f;
     } else if (strcmp(bme280_readings_directory.channels[i].name, "humidity") ==
                0) {
-      readings[i].type          = READING_VALUE_TYPE_UINT32;
-      readings[i].value.u32_val = compensated_hum;
+      readings[i].type = READING_VALUE_TYPE_FLOAT;
+      readings[i].value.float_val = compensated_hum / 1024.0f;
     } else {
       // Handle unknown channel or error
       return DRIVER_ERROR;
