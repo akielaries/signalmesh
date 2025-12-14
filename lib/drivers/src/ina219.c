@@ -8,6 +8,7 @@
 #include "hal.h"
 #include "drivers/driver_readings.h" // Include the new readings definitions
 
+
 // Macro to calculate the size of an array
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 
@@ -22,12 +23,31 @@ static bool ina219_read_all_helper(ina219_t *dev_data,
 static bool ina219_configure_helper(ina219_t *dev_data,
                                     const ina219_config_t *config);
 
+static int ina219_init(device_t *dev);
+static int ina219_remove(device_t *dev);
+static int ina219_ioctl(device_t *dev, uint32_t cmd, void *arg);
+static int ina219_poll(device_id_t device_id,
+                       uint32_t num_readings,
+                       driver_reading_t *readings);
+
 // INA219 specific reading channels
 static const driver_reading_channel_t ina219_reading_channels[] = {
-  {.name = "shunt_voltage_mv", .type = READING_VALUE_TYPE_FLOAT},
-  {.name = "bus_voltage_v", .type = READING_VALUE_TYPE_FLOAT},
-  {.name = "current_ma", .type = READING_VALUE_TYPE_FLOAT},
-  {.name = "power_mw", .type = READING_VALUE_TYPE_FLOAT},
+  {
+    .name = "shunt_voltage_mv",
+    .type = READING_VALUE_TYPE_FLOAT,
+  },
+  {
+    .name = "bus_voltage_v",
+    .type = READING_VALUE_TYPE_FLOAT,
+  },
+  {
+    .name = "current_ma",
+    .type = READING_VALUE_TYPE_FLOAT,
+  },
+  {
+    .name = "power_mw",
+    .type = READING_VALUE_TYPE_FLOAT,
+  },
 };
 
 // INA219 readings directory
@@ -36,6 +56,14 @@ static const driver_readings_directory_t ina219_readings_directory = {
   .channels     = ina219_reading_channels,
 };
 
+const driver_t ina219_driver __attribute__((used)) = {
+  .name               = "ina219",
+  .init               = ina219_init,
+  .remove             = ina219_remove,
+  .ioctl              = ina219_ioctl,
+  .poll               = ina219_poll,
+  .readings_directory = &ina219_readings_directory,
+};
 
 static int ina219_init(device_t *dev) {
   if (dev->priv == NULL) {
@@ -121,15 +149,6 @@ static int ina219_poll(device_id_t device_id,
   return DRIVER_OK;
 }
 
-
-const driver_t ina219_driver __attribute__((used)) = {
-  .name               = "ina219",
-  .init               = ina219_init,
-  .remove             = ina219_remove,
-  .ioctl              = ina219_ioctl,
-  .poll               = ina219_poll,
-  .readings_directory = &ina219_readings_directory,
-};
 
 static void handle_i2c_err_helper(I2CDriver *i2c_driver, const char *context) {
   i2cflags_t err = i2cGetErrors(i2c_driver);

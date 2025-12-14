@@ -37,18 +37,36 @@ static int bme280_poll(device_id_t device_id,
                        uint32_t num_readings,
                        driver_reading_t *readings);
 
+
 // BME280 specific reading channels
 static const driver_reading_channel_t bme280_reading_channels[] = {
-  {.name = "temperature", .type = READING_VALUE_TYPE_UINT32},
-  {.name = "pressure", .type = READING_VALUE_TYPE_UINT32},
-  // Add humidity here when implemented
+  {
+    .name = "temperature",
+    .type = READING_VALUE_TYPE_UINT32,
+  },
+  {
+    .name = "pressure",
+    .type = READING_VALUE_TYPE_UINT32,
+  },
 };
 
 // BME280 readings directory
 static const driver_readings_directory_t bme280_readings_directory = {
   .num_readings = ARRAY_SIZE(bme280_reading_channels),
-  .channels     = bme280_reading_channels};
+  .channels     = bme280_reading_channels
 
+};
+
+// Define driver_t instance for BME280
+const driver_t bme280_driver __attribute__((used)) = {
+  .name               = "bme280",
+  .num_data_bytes     = 0, // No specific context struct for now
+  .init               = bme280_init,
+  .remove             = bme280_remove,
+  .ioctl              = bme280_ioctl,
+  .poll               = bme280_poll,
+  .readings_directory = &bme280_readings_directory,
+};
 /*****************************************************************************/
 
 // Local driver helper functions
@@ -141,6 +159,12 @@ static int bme280_init(device_t *dev) {
     return DRIVER_ERROR;
   }
 
+  // configure pressure oversampling
+
+  // configure temperature oversampling
+
+  // configure humidity oversampling
+
   return DRIVER_OK;
 }
 
@@ -214,13 +238,3 @@ static int bme280_poll(device_id_t device_id,
   return DRIVER_OK;
 }
 
-// Define driver_t instance for BME280
-const driver_t bme280_driver __attribute__((used)) = {
-  .name               = "bme280",
-  .num_data_bytes     = 0, // No specific context struct for now
-  .init               = bme280_init,
-  .remove             = bme280_remove,
-  .ioctl              = bme280_ioctl,
-  .poll               = bme280_poll,
-  .readings_directory = &bme280_readings_directory,
-};

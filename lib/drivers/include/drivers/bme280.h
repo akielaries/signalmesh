@@ -46,6 +46,10 @@
 #define BME280_REG_TEMP_ADDR 0xFA
 #define BME280_REG_TEMP_SIZE 3
 
+/** @brief invalid oversampling? */
+#define BME280_INVALID_OVERSAMPLING 0x800000
+
+
 /**
  * @brief External driver instance declaration
  *
