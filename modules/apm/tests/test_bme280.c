@@ -28,8 +28,8 @@ int main(void) {
 
   bsp_printf("BME280 device found and initialized.\n");
 
-  driver_reading_t bme280_readings[2]; // Assuming 2 readings: Temp and Pressure
-  uint32_t num_readings_to_get = 2;
+  driver_reading_t bme280_readings[3]; // Temp, Pressure, Humidity
+  uint32_t num_readings_to_get = 3;
 
   while (true) {
     if (palReadLine(LINE_BUTTON) == PAL_HIGH) {
@@ -44,9 +44,24 @@ int main(void) {
       bsp_printf("BME280 Readings:\n");
       for (uint32_t i = 0; i < num_readings_to_get; ++i) {
         if (bme280_readings[i].type == READING_VALUE_TYPE_UINT32) {
-          bsp_printf("  %s: %lu\n",
-                     bme280_dev->driver->readings_directory->channels[i].name,
-                     bme280_readings[i].value.u32_val);
+          const char* name = bme280_dev->driver->readings_directory->channels[i].name;
+          uint32_t raw_val = bme280_readings[i].value.u32_val;
+          float value = 0.0f;
+          const char* unit = "";
+
+          if (strcmp(name, "temperature") == 0) {
+            value = raw_val / 100.0f;
+            unit = "C";
+          } else if (strcmp(name, "pressure") == 0) {
+            value = raw_val / 256.0f;
+            unit = "Pa";
+          } else if (strcmp(name, "humidity") == 0) {
+            value = raw_val / 1024.0f;
+            unit = "%RH";
+          }
+
+          bsp_printf("  %s: %.2f %s\n", name, value, unit);
+
         } else {
           bsp_printf("  %s: Unknown type\n",
                      bme280_dev->driver->readings_directory->channels[i].name);

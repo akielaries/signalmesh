@@ -12,7 +12,6 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
-#include "driver_readings.h" // Include the new readings definitions
 
 /**
  * @brief Forward declaration of device structure
@@ -66,6 +65,11 @@ struct device {
   bool is_active;
 };
 
+/** @brief Typedef for device ID, using device_t pointer */
+typedef device_t *device_id_t;
+
+#include "driver_readings.h" // Include the new readings definitions here, after device_id_t
+
 /**
  * @brief Driver descriptor structure
  *
@@ -75,9 +79,6 @@ struct device {
 struct driver {
   /** @brief Human-readable driver name */
   const char *name;
-
-  /** @brief Directory of readings provided by this driver */
-  const driver_readings_directory_t *readings_directory;
 
   /** @brief Size of the driver's private data structure (context) */
   size_t num_data_bytes;
@@ -115,4 +116,7 @@ struct driver {
   int (*poll)(device_id_t device_id,
               uint32_t num_readings,
               driver_reading_t *readings);
+
+  /** @brief Directory of readings provided by this driver */
+  const driver_readings_directory_t *readings_directory;
 };

@@ -2,10 +2,6 @@
 
 #include <stdint.h>
 
-// Forward declarations to break circular dependency
-typedef struct device device_t;
-typedef device_t *device_id_t;
-
 
 /**
  * @brief Enum for common reading value types.
@@ -14,6 +10,7 @@ typedef device_t *device_id_t;
 typedef enum {
   READING_VALUE_TYPE_UNKNOWN = 0,
   READING_VALUE_TYPE_UINT32,
+  READING_VALUE_TYPE_INT32,
   READING_VALUE_TYPE_FLOAT,
   // Add other types like INT32, BOOL, etc.
 } reading_value_type_t;
@@ -26,10 +23,12 @@ typedef struct {
   reading_value_type_t type;
   union {
     uint32_t u32_val;
+    int32_t i32_val;
     float float_val;
     // Add other members for different types
   } value;
-} driver_reading_t;
+}
+driver_reading_t;
 
 /**
  * @brief Structure to describe a single channel in the driver readings
