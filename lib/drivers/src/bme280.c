@@ -5,33 +5,23 @@
  * This file implements the BME280 driver using the standard device
  * driver interface. It provides temperature, pressure, and humidity
  * sensing capabilities over I2C.
- *
- * The driver supports both legacy direct function calls and the new
- * device registry framework for maximum compatibility.
  */
-
-#include "hal.h"
 #include "ch.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
 #include "bsp/utils/bsp_io.h"
 #include "drivers/bme280.h"
-#include "drivers/i2c.h"
 #include "drivers/driver_readings.h"
+#include "drivers/i2c.h"
 
 // Macro to calculate the size of an array
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 
-/* Static helper functions */
-static bool bme280_read_bytes(uint8_t reg, uint8_t *data, uint8_t len);
-static bool bme280_read_reg(uint8_t reg, uint8_t *val);
-static bool bme280_write_reg(uint8_t reg, uint8_t val);
-static uint32_t bme280_read_pressure_raw(void);
-static uint32_t bme280_read_temperature_raw(void);
-static uint32_t bme280_read_humidity_raw(void);
+/******************************************************************************/
+// Function prototypes
+/******************************************************************************/
 
-/* Function Prototypes */
 static int bme280_init(device_t *dev);
 static int bme280_remove(device_t *dev);
 static int bme280_ioctl(device_t *dev, uint32_t cmd, void *arg);
@@ -39,6 +29,10 @@ static int bme280_poll(device_id_t device_id,
                        uint32_t num_readings,
                        driver_reading_t *readings);
 
+
+/******************************************************************************/
+// Local types
+/******************************************************************************/
 
 // BME280 specific reading channels
 static const driver_reading_channel_t bme280_reading_channels[] = {
@@ -63,7 +57,6 @@ static const driver_reading_channel_t bme280_reading_channels[] = {
 static const driver_readings_directory_t bme280_readings_directory = {
   .num_readings = ARRAY_SIZE(bme280_reading_channels),
   .channels     = bme280_reading_channels
-
 };
 
 // Define driver_t instance for BME280
@@ -76,83 +69,48 @@ const driver_t bme280_driver __attribute__((used)) = {
   .poll               = bme280_poll,
   .readings_directory = &bme280_readings_directory,
 };
-/*****************************************************************************/
 
+/******************************************************************************/
 // Local driver helper functions
+/******************************************************************************/
 
-/*****************************************************************************/
-
-static bool bme280_read_bytes(uint8_t reg, uint8_t *data, uint8_t len) {
-  uint8_t txbuf = reg;
-  msg_t msg =
-    i2c_master_transmit(&I2CD4, BME280_I2C_ADDR, &txbuf, 1, data, len);
-
-  if (msg != MSG_OK) {
-    return false;
-  }
-
-  return true;
+static int bme280_read_registers(bme280_t *bme_dev,
+                                 uint8_t reg,
+                                 uint8_t *buf,
+                                 size_t len) {
+  return i2c_bus_read_reg(&bme_dev->bus, reg, buf, len);
 }
 
-static bool bme280_read_reg(uint8_t reg, uint8_t *val) {
-  return bme280_read_bytes(reg, val, 1);
+static int bme280_write_register(bme280_t *bme_dev,
+                                 uint8_t reg,
+                                 const uint8_t *buf,
+                                 size_t len) {
+  return i2c_bus_write_reg(&bme_dev->bus, reg, buf, len);
 }
 
-static bool bme280_write_reg(uint8_t reg, uint8_t val) {
-  uint8_t tx_data[2] = {reg, val};
-  msg_t msg = i2c_master_transmit(&I2CD4, BME280_I2C_ADDR, tx_data, 2, NULL, 0);
-
-  if (msg != MSG_OK) {
-    return false;
-  }
-
-  return true;
-}
-
-static uint32_t bme280_read_pressure_raw(void) {
+static uint32_t bme280_read_pressure_raw(bme280_t *bme_dev) {
   uint8_t data[3];
-
-  if (!bme280_read_reg(BME280_REG_PRESS_MSB, &data[0]) ||
-      !bme280_read_reg(BME280_REG_PRESS_MSB + 1, &data[1]) ||
-      !bme280_read_reg(BME280_REG_PRESS_MSB + 2, &data[2])) {
-    return 0;
-  }
-
-  // Combine 20-bit value: MSB (19:12) | LSB (11:4) | XLSB (3:0)
+  bme280_read_registers(bme_dev, BME280_REG_PRESS_MSB, data, 3);
   return ((uint32_t)data[0] << 12) | ((uint32_t)data[1] << 4) |
          ((uint32_t)data[2] >> 4);
 }
 
-static uint32_t bme280_read_temperature_raw(void) {
+static uint32_t bme280_read_temperature_raw(bme280_t *bme_dev) {
   uint8_t data[3];
-
-  if (!bme280_read_reg(BME280_REG_TEMP_MSB, &data[0]) ||
-      !bme280_read_reg(BME280_REG_TEMP_MSB + 1, &data[1]) ||
-      !bme280_read_reg(BME280_REG_TEMP_MSB + 2, &data[2])) {
-    return 0;
-  }
-
-  // Combine 20-bit value: MSB (19:12) | LSB (11:4) | XLSB (3:0)
+  bme280_read_registers(bme_dev, BME280_REG_TEMP_MSB, data, 3);
   return ((uint32_t)data[0] << 12) | ((uint32_t)data[1] << 4) |
          ((uint32_t)data[2] >> 4);
 }
 
-static uint32_t bme280_read_humidity_raw(void) {
+static uint32_t bme280_read_humidity_raw(bme280_t *bme_dev) {
   uint8_t data[2];
-
-  if (!bme280_read_reg(BME280_REG_HUM_MSB, &data[0]) ||
-      !bme280_read_reg(BME280_REG_HUM_LSB, &data[1])) {
-    return 0;
-  }
-
+  bme280_read_registers(bme_dev, BME280_REG_HUM_MSB, data, 2);
   return ((uint32_t)data[0] << 8) | (uint32_t)data[1];
 }
 
 static bool bme280_read_calib_params(bme280_t *bme_dev) {
-  uint8_t data[26]; // Max 26 bytes for T and P calibration
-  if (!bme280_read_bytes(0x88, data, 26)) { // Read dig_T1 to dig_P9
-    return false;
-  }
+  uint8_t data[26];
+  bme280_read_registers(bme_dev, 0x88, data, 26);
 
   bme_dev->calib_params.dig_T1 = (uint16_t)(((uint16_t)data[1] << 8) | data[0]);
   bme_dev->calib_params.dig_T2 = (int16_t)(((int16_t)data[3] << 8) | data[2]);
@@ -160,29 +118,34 @@ static bool bme280_read_calib_params(bme280_t *bme_dev) {
 
   bme_dev->calib_params.dig_P1 = (uint16_t)(((uint16_t)data[7] << 8) | data[6]);
   bme_dev->calib_params.dig_P2 = (int16_t)(((int16_t)data[9] << 8) | data[8]);
-  bme_dev->calib_params.dig_P3 = (int16_t)(((int16_t)data[11] << 8) | data[10]);
-  bme_dev->calib_params.dig_P4 = (int16_t)(((int16_t)data[13] << 8) | data[12]);
-  bme_dev->calib_params.dig_P5 = (int16_t)(((int16_t)data[15] << 8) | data[14]);
-  bme_dev->calib_params.dig_P6 = (int16_t)(((int16_t)data[17] << 8) | data[16]);
-  bme_dev->calib_params.dig_P7 = (int16_t)(((int16_t)data[19] << 8) | data[18]);
-  bme_dev->calib_params.dig_P8 = (int16_t)(((int16_t)data[21] << 8) | data[20]);
-  bme_dev->calib_params.dig_P9 = (int16_t)(((int16_t)data[23] << 8) | data[22]);
+  bme_dev->calib_params.dig_P3 =
+    (int16_t)(((int16_t)data[11] << 8) | data[10]);
+  bme_dev->calib_params.dig_P4 =
+    (int16_t)(((int16_t)data[13] << 8) | data[12]);
+  bme_dev->calib_params.dig_P5 =
+    (int16_t)(((int16_t)data[15] << 8) | data[14]);
+  bme_dev->calib_params.dig_P6 =
+    (int16_t)(((int16_t)data[17] << 8) | data[16]);
+  bme_dev->calib_params.dig_P7 =
+    (int16_t)(((int16_t)data[19] << 8) | data[18]);
+  bme_dev->calib_params.dig_P8 =
+    (int16_t)(((int16_t)data[21] << 8) | data[20]);
+  bme_dev->calib_params.dig_P9 =
+    (int16_t)(((int16_t)data[23] << 8) | data[22]);
 
-  if (!bme280_read_reg(0xA1, &bme_dev->calib_params.dig_H1)) { // Read dig_H1
-    return false;
-  }
+  bme280_read_registers(bme_dev, 0xA1, &bme_dev->calib_params.dig_H1, 1);
 
-  if (!bme280_read_bytes(0xE1, data, 7)) { // Read dig_H2 to dig_H6
-    return false;
-  }
+  uint8_t hum_data[7];
+  bme280_read_registers(bme_dev, 0xE1, hum_data, 7);
 
-  bme_dev->calib_params.dig_H2 = (int16_t)(((int16_t)data[1] << 8) | data[0]);
-  bme_dev->calib_params.dig_H3 = data[2];
+  bme_dev->calib_params.dig_H2 =
+    (int16_t)(((int16_t)hum_data[1] << 8) | hum_data[0]);
+  bme_dev->calib_params.dig_H3 = hum_data[2];
   bme_dev->calib_params.dig_H4 =
-    (int16_t)(((int16_t)data[3] << 4) | (data[4] & 0x0F));
+    (int16_t)(((int16_t)hum_data[3] << 4) | (hum_data[4] & 0x0F));
   bme_dev->calib_params.dig_H5 =
-    (int16_t)(((int16_t)data[5] << 4) | ((data[4] >> 4) & 0x0F));
-  bme_dev->calib_params.dig_H6 = (int8_t)data[6];
+    (int16_t)(((int16_t)hum_data[5] << 4) | ((hum_data[4] >> 4) & 0x0F));
+  bme_dev->calib_params.dig_H6 = (int8_t)hum_data[6];
 
   return true;
 }
@@ -260,7 +223,9 @@ static uint32_t bme280_compensate_humidity_int32(int32_t adc_H,
   return (uint32_t)(v_x1_u32r >> 12);
 }
 
-/*****************************************************************************/
+/******************************************************************************/
+// Exported driver functions
+/******************************************************************************/
 
 /**
  * @brief Initialize BME280 device
@@ -279,9 +244,9 @@ static int bme280_init(device_t *dev) {
   memset(bme_dev, 0, sizeof(bme280_t));
   dev->priv = bme_dev;
 
-  // Initialize I2C driver and address in the private data structure
-  bme_dev->i2c_driver  = (I2CDriver *)dev->bus;
-  bme_dev->i2c_address = BME280_I2C_ADDR;
+  // Initialize I2C bus
+  bme_dev->bus.i2c = (I2CDriver *)dev->bus;
+  bme_dev->bus.addr = BME280_I2C_ADDR;
 
   // Read calibration parameters
   if (!bme280_read_calib_params(bme_dev)) {
@@ -290,7 +255,8 @@ static int bme280_init(device_t *dev) {
   }
 
   // Perform soft reset
-  if (!bme280_write_reg(BME280_REG_RESET, BME280_SOFT_RESET)) {
+  uint8_t reset_cmd = BME280_SOFT_RESET;
+  if (bme280_write_register(bme_dev, BME280_REG_RESET, &reset_cmd, 1) != 0) {
     return DRIVER_ERROR;
   }
 
@@ -298,7 +264,7 @@ static int bme280_init(device_t *dev) {
 
   // Verify chip ID
   uint8_t chip_id;
-  if (!bme280_read_reg(BME280_REG_ID, &chip_id)) {
+  if (bme280_read_registers(bme_dev, BME280_REG_ID, &chip_id, 1) != 0) {
     return DRIVER_ERROR;
   }
 
@@ -307,14 +273,14 @@ static int bme280_init(device_t *dev) {
   }
 
   // Configure sensor (example: standby time 10ms, filter off)
-  if (!bme280_write_reg(BME280_REG_CONFIG, BME280_CONFIG_T_SB_10MS << 5)) {
+  uint8_t config = BME280_CONFIG_T_SB_10MS << 5;
+  if (bme280_write_register(bme_dev, BME280_REG_CONFIG, &config, 1) != 0) {
     return DRIVER_ERROR;
   }
 
   // Configure humidity oversampling
-  if (!bme280_write_reg(BME280_REG_CTRL_HUM,
-                        BME280_OVERSAMPLING_X16
-                          << BME280_CTRL_HUM_OSRS_H_POS)) {
+  uint8_t ctrl_hum = BME280_OVERSAMPLING_X16 << BME280_CTRL_HUM_OSRS_H_POS;
+  if (bme280_write_register(bme_dev, BME280_REG_CTRL_HUM, &ctrl_hum, 1) != 0) {
     return DRIVER_ERROR;
   }
 
@@ -324,7 +290,7 @@ static int bme280_init(device_t *dev) {
     (BME280_OVERSAMPLING_X16 << BME280_CTRL_MEAS_OSRS_T_POS) |
     (BME280_OVERSAMPLING_X16 << BME280_CTRL_MEAS_OSRS_P_POS) |
     (BME280_MODE_NORMAL << BME280_CTRL_MEAS_MODE_POS);
-  if (!bme280_write_reg(BME280_REG_CTRL_MEAS, ctrl_meas_val)) {
+  if (bme280_write_register(bme_dev, BME280_REG_CTRL_MEAS, &ctrl_meas_val, 1) != 0) {
     return DRIVER_ERROR;
   }
 
@@ -378,9 +344,9 @@ static int bme280_poll(device_id_t device_id,
   }
 
   // Read raw values
-  int32_t temp_raw  = bme280_read_temperature_raw();
-  int32_t press_raw = bme280_read_pressure_raw();
-  int32_t hum_raw   = bme280_read_humidity_raw();
+  int32_t temp_raw  = bme280_read_temperature_raw(bme_dev);
+  int32_t press_raw = bme280_read_pressure_raw(bme_dev);
+  int32_t hum_raw   = bme280_read_humidity_raw(bme_dev);
 
   // Compensate values
   int32_t compensated_temp =

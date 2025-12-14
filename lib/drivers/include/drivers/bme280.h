@@ -15,7 +15,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "driver_api.h"
-#include "hal.h" // For I2CDriver
+#include "i2c.h"
 
 /** @brief Default I2C address for BME280 */
 #define BME280_I2C_ADDR 0x77
@@ -123,8 +123,7 @@ typedef struct {
 typedef struct {
   bme280_calib_param_t calib_params;
   int32_t  t_fine; // Fine temperature for compensation
-  I2CDriver *i2c_driver; // Pointer to the I2C driver instance
-  uint8_t   i2c_address;  // I2C address of the device
+  i2c_bus_t bus;
 } bme280_t;
 
 /**

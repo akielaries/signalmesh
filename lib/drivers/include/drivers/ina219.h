@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "drivers/driver_api.h"
+#include "drivers/i2c.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -93,7 +94,7 @@ typedef struct {
 
 // INA219 device structure
 typedef struct {
-  uint8_t i2c_address;
+  i2c_bus_t bus;
   float shunt_resistance;
   float current_lsb;
   float power_lsb;
