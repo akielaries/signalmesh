@@ -33,11 +33,6 @@ int main(void) {
   uint32_t num_readings_to_get = 4;
 
   while (true) {
-    if (palReadLine(LINE_BUTTON) == PAL_HIGH) {
-      bsp_printf("BME280 test stopped.\n");
-      break;
-    }
-
     ret = bme280_dev->driver->poll(bme280_dev,
                                    num_readings_to_get,
                                    bme280_readings);
@@ -46,20 +41,17 @@ int main(void) {
     } else {
       bsp_printf("BME280 Readings:\n");
       for (uint32_t i = 0; i < num_readings_to_get; ++i) {
-        const driver_reading_channel_t *channel =
-          &bme280_dev->driver->readings_directory->channels[i];
-        if (bme280_readings[i].type == READING_VALUE_TYPE_FLOAT) {
-            bsp_printf("  %s: %.2f %s\n",
-                       channel->name,
-                       bme280_readings[i].value.float_val,
-                       get_unit_for_reading(channel->channel_type));
-        } else {
-          bsp_printf("  %s: Unknown type\n", channel->name);
-        }
+        const driver_reading_channel_t *channel = &bme280_dev->driver->readings_directory->channels[i];
+        bsp_printf("  %s: %.2f %s\n", channel->name,
+                                      bme280_readings[i].value.float_val,
+                                      get_unit_for_reading(channel->channel_type));
       }
     }
 
-
+    if (palReadLine(LINE_BUTTON) == PAL_HIGH) {
+      bsp_printf("BME280 test stopped.\n");
+      break;
+    }
     chThdSleepMilliseconds(1000);
   }
 
