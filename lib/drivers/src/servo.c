@@ -1,8 +1,9 @@
 #include "drivers/servo.h"
 #include "bsp/configs/bsp_pwm_config.h"
-#include "hal.h"                     // For palSetPadMode, pwmStart etc.
-#include <string.h>                  // For strcmp
+#include "hal.h" // For palSetPadMode, pwmStart etc.
+#include <string.h> // For strcmp
 #include "drivers/driver_readings.h" // Include the new readings definitions
+#include "drivers/units.h" // For get_channel_info and reading_channel_type_t
 
 // Macro to calculate the size of an array
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
@@ -13,7 +14,9 @@
 
 // Servo specific reading channels (commanded position in microseconds)
 static const driver_reading_channel_t servo_reading_channels[] = {
-  {.name = "commanded_position_us", .type = READING_VALUE_TYPE_UINT32},
+  {
+    .channel_type = READING_CHANNEL_TYPE_POSITION_US,
+  },
 };
 
 // Servo readings directory
@@ -23,7 +26,17 @@ static const driver_readings_directory_t servo_readings_directory = {
 };
 
 static int servo_init(device_t *dev) {
-  (void)dev;
+  if (dev == NULL) {
+    return DRIVER_INVALID_PARAM;
+  }
+
+  servo_t *servo_dev = (servo_t *)chHeapAlloc(NULL, sizeof(servo_t));
+  if (servo_dev == NULL) {
+    return DRIVER_ERROR;
+  }
+  memset(servo_dev, 0, sizeof(servo_t));
+  dev->priv = servo_dev;
+
   // Configure GPIO for PWM output
   palSetPadMode(BSP_SERVO_GPIO_PORT,
                 BSP_SERVO_GPIO_PIN,
@@ -31,6 +44,11 @@ static int servo_init(device_t *dev) {
 
   // Start the PWM driver
   pwmStart(bsp_servo_pwm_driver, &bsp_servo_pwm_config);
+
+  // Initialize with a default position (e.g., center)
+  servo_dev->last_commanded_position_us = (SERVO_MIN_US + SERVO_MAX_US) / 2;
+  pwmEnableChannel(bsp_servo_pwm_driver, BSP_SERVO_PWM_CHANNEL, servo_dev->last_commanded_position_us);
+
   return DRIVER_OK;
 }
 
@@ -42,7 +60,7 @@ static int servo_remove(device_t *dev) {
 }
 
 static int servo_ioctl(device_t *dev, uint32_t cmd, void *arg) {
-  (void)dev;
+  servo_t *servo_dev = (servo_t *)dev->priv;
 
   switch (cmd) {
     case SERVO_SET_POS_CMD: {
@@ -52,6 +70,7 @@ static int servo_ioctl(device_t *dev, uint32_t cmd, void *arg) {
       if (us > SERVO_MAX_US)
         us = SERVO_MAX_US;
       pwmEnableChannel(bsp_servo_pwm_driver, BSP_SERVO_PWM_CHANNEL, us);
+      servo_dev->last_commanded_position_us = us;
       break;
     }
     case SERVO_SET_ANGLE_CMD: {
@@ -62,10 +81,12 @@ static int servo_ioctl(device_t *dev, uint32_t cmd, void *arg) {
         degrees = 180;
       uint16_t us = SERVO_MIN_US + (uint16_t)((degrees / 180.0f) * (SERVO_MAX_US - SERVO_MIN_US));
       pwmEnableChannel(bsp_servo_pwm_driver, BSP_SERVO_PWM_CHANNEL, us);
+      servo_dev->last_commanded_position_us = us;
       break;
     }
     case SERVO_STOP_CMD: {
       pwmDisableChannel(bsp_servo_pwm_driver, BSP_SERVO_PWM_CHANNEL);
+      servo_dev->last_commanded_position_us = 0; // Indicate stopped
       break;
     }
     default:
@@ -76,7 +97,6 @@ static int servo_ioctl(device_t *dev, uint32_t cmd, void *arg) {
 }
 
 static int servo_poll(device_id_t device_id, uint32_t num_readings, driver_reading_t *readings) {
-  // (void)device_id; // Unused for now
   if (device_id == NULL || readings == NULL || num_readings == 0) {
     return DRIVER_INVALID_PARAM;
   }
@@ -86,25 +106,28 @@ static int servo_poll(device_id_t device_id, uint32_t num_readings, driver_readi
                                  // available
   }
 
-  // Currently, the servo driver does not maintain its state in dev->priv
-  // If it did, we would populate 'readings' here.
-  // For now, return DRIVER_OK if num_readings matches, but don't fill.
-  // Or, if no meaningful data is available, return DRIVER_NOT_FOUND.
+  servo_t *servo_dev = (servo_t *)device_id->priv;
 
-  // Assuming for now that we want to report the "commanded_position_us" if
-  // available This would require storing the last commanded 'us' value in a
-  // servo_t struct and assigning it to dev->priv. Since that's not present,
-  // we'll return an error if a reading is actually requested.
+  // Populate readings array based on directory
+  for (uint32_t i = 0; i < num_readings; ++i) {
+    const reading_channel_info_t *info = get_channel_info(servo_readings_directory.channels[i].channel_type);
 
-  if (num_readings == 1 &&
-      strcmp(servo_readings_directory.channels[0].name, "commanded_position_us") == 0) {
-    // Here, you would retrieve the actual commanded position from
-    // device_id->priv and assign it to readings[0].value.u32_val For now,
-    // returning DRIVER_NOT_FOUND as we don't store it.
-    return DRIVER_NOT_FOUND;
+    if (info == NULL) {
+        return DRIVER_ERROR; // Unknown channel type
+    }
+
+    readings[i].type = info->type;
+
+    switch (servo_readings_directory.channels[i].channel_type) {
+      case READING_CHANNEL_TYPE_POSITION_US:
+        readings[i].value.u32_val = servo_dev->last_commanded_position_us;
+        break;
+      default:
+        return DRIVER_ERROR; // Should not happen with current setup
+    }
   }
 
-  return DRIVER_NOT_FOUND; // Default if no specific reading could be provided
+  return DRIVER_OK;
 }
 
 const driver_t servo_driver __attribute__((used)) = {

@@ -2,7 +2,6 @@
 
 #include <stdint.h>
 
-
 /**
  * @brief Enum for common reading value types.
  */
@@ -14,20 +13,21 @@ typedef enum {
 } reading_value_type_t;
 
 typedef enum {
-  READING_CHANNEL_TYPE_TEMPERATURE_C,
-  READING_CHANNEL_TYPE_TEMPERATURE_F,
-  READING_CHANNEL_TYPE_PRESSURE_PA,
-  READING_CHANNEL_TYPE_PRESSURE_PSI,
-  READING_CHANNEL_TYPE_PRESSURE_INHG,
-  READING_CHANNEL_TYPE_HUMIDITY,
-  READING_CHANNEL_TYPE_VOLTAGE,
-  READING_CHANNEL_TYPE_CURRENT,
-  READING_CHANNEL_TYPE_POWER,
+    READING_CHANNEL_TYPE_TEMPERATURE_C,
+    READING_CHANNEL_TYPE_TEMPERATURE_F,
+    READING_CHANNEL_TYPE_PRESSURE_PA,
+    READING_CHANNEL_TYPE_PRESSURE_PSI,
+    READING_CHANNEL_TYPE_PRESSURE_INHG,
+    READING_CHANNEL_TYPE_HUMIDITY,
+    READING_CHANNEL_TYPE_VOLTAGE,
+    READING_CHANNEL_TYPE_CURRENT,
+    READING_CHANNEL_TYPE_POWER,
+    READING_CHANNEL_TYPE_POSITION_US,
+    READING_CHANNEL_TYPE_MAX, // Keep this last
 } reading_channel_type_t;
 
 /**
  * @brief Structure to hold a single driver reading.
- * Uses a union to support different data types.
  */
 typedef struct {
   reading_value_type_t type;
@@ -39,18 +39,24 @@ typedef struct {
 } driver_reading_t;
 
 /**
+ * @brief Structure for static channel information.
+ */
+typedef struct {
+  const char *name;
+  const char *unit;
+  reading_value_type_t type;
+} reading_channel_info_t;
+
+/**
  * @brief Structure to describe a single channel in the driver readings
  * directory.
  */
 typedef struct {
   reading_channel_type_t channel_type;
-  const char *name;
-  reading_value_type_t type;
 } driver_reading_channel_t;
 
 /**
  * @brief Structure for the driver readings directory.
- * Contains the number of readings and an array of channel descriptions.
  */
 typedef struct {
   uint32_t num_readings;

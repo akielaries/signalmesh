@@ -12,6 +12,10 @@ extern "C" {
 #define SERVO_SET_ANGLE_CMD 2
 #define SERVO_STOP_CMD      3
 
+typedef struct {
+    uint16_t last_commanded_position_us;
+} servo_t;
+
 extern const driver_t servo_driver;
 
 #ifdef __cplusplus

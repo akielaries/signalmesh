@@ -36,23 +36,15 @@ static int bme280_poll(device_id_t device_id, uint32_t num_readings, driver_read
 static const driver_reading_channel_t bme280_reading_channels[] = {
   {
     .channel_type = READING_CHANNEL_TYPE_TEMPERATURE_F,
-    .name         = "temperature",
-    .type         = READING_VALUE_TYPE_FLOAT,
   },
   {
     .channel_type = READING_CHANNEL_TYPE_PRESSURE_PSI,
-    .name         = "pressure",
-    .type         = READING_VALUE_TYPE_FLOAT,
   },
   {
     .channel_type = READING_CHANNEL_TYPE_PRESSURE_INHG,
-    .name         = "pressure",
-    .type         = READING_VALUE_TYPE_FLOAT,
   },
   {
     .channel_type = READING_CHANNEL_TYPE_HUMIDITY,
-    .name         = "humidity",
-    .type         = READING_VALUE_TYPE_FLOAT,
   },
 };
 

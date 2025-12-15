@@ -41,10 +41,18 @@ int main(void) {
     } else {
       bsp_printf("BME280 Readings:\n");
       for (uint32_t i = 0; i < num_readings_to_get; ++i) {
-        const driver_reading_channel_t *channel = &bme280_dev->driver->readings_directory->channels[i];
-        bsp_printf("  %s: %.2f %s\n", channel->name,
-                                      bme280_readings[i].value.float_val,
-                                      get_unit_for_reading(channel->channel_type));
+        const driver_reading_channel_t *channel =
+          &bme280_dev->driver->readings_directory->channels[i];
+        const reading_channel_info_t *info = get_channel_info(channel->channel_type);
+
+        if (info && bme280_readings[i].type == info->type) {
+            bsp_printf("  %s: %.2f %s\n",
+                       info->name,
+                       bme280_readings[i].value.float_val,
+                       info->unit);
+        } else {
+          bsp_printf("  Unknown channel type\n");
+        }
       }
     }
 

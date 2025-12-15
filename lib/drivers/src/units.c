@@ -1,31 +1,23 @@
 #include <stddef.h>
-
 #include "drivers/units.h"
 
-
-typedef struct {
-  reading_channel_type_t channel_type;
-  const char *unit_string;
-} unit_mapping_t;
-
-
-static const unit_mapping_t unit_mappings[] = {
-  {READING_CHANNEL_TYPE_TEMPERATURE_C, "C"},
-  {READING_CHANNEL_TYPE_TEMPERATURE_F, "F"},
-  {READING_CHANNEL_TYPE_PRESSURE_PA, "Pa"},
-  {READING_CHANNEL_TYPE_PRESSURE_PSI, "PSI"},
-  {READING_CHANNEL_TYPE_PRESSURE_INHG, "inHg"},
-  {READING_CHANNEL_TYPE_HUMIDITY, "%RH"},
-  {READING_CHANNEL_TYPE_VOLTAGE, "V"},
-  {READING_CHANNEL_TYPE_CURRENT, "mA"},
-  {READING_CHANNEL_TYPE_POWER, "mW"},
+static const reading_channel_info_t channel_info_table[READING_CHANNEL_TYPE_MAX] = {
+    [READING_CHANNEL_TYPE_TEMPERATURE_C] = { "temperature", "C", READING_VALUE_TYPE_FLOAT },
+    [READING_CHANNEL_TYPE_TEMPERATURE_F] = { "temperature", "F", READING_VALUE_TYPE_FLOAT },
+    [READING_CHANNEL_TYPE_PRESSURE_PA] = { "pressure", "Pa", READING_VALUE_TYPE_FLOAT },
+    [READING_CHANNEL_TYPE_PRESSURE_PSI] = { "pressure", "PSI", READING_VALUE_TYPE_FLOAT },
+    [READING_CHANNEL_TYPE_PRESSURE_INHG] = { "pressure", "inHg", READING_VALUE_TYPE_FLOAT },
+    [READING_CHANNEL_TYPE_HUMIDITY] = { "humidity", "%RH", READING_VALUE_TYPE_FLOAT },
+    [READING_CHANNEL_TYPE_VOLTAGE] = { "voltage", "V", READING_VALUE_TYPE_FLOAT },
+    [READING_CHANNEL_TYPE_CURRENT] = { "current", "mA", READING_VALUE_TYPE_FLOAT },
+    [READING_CHANNEL_TYPE_POWER] = { "power", "mW", READING_VALUE_TYPE_FLOAT },
+    [READING_CHANNEL_TYPE_POSITION_US] = { "position", "us", READING_VALUE_TYPE_UINT32 },
 };
 
-const char *get_unit_for_reading(reading_channel_type_t type) {
-  for (size_t i = 0; i < sizeof(unit_mappings) / sizeof(unit_mappings[0]); ++i) {
-    if (unit_mappings[i].channel_type == type) {
-      return unit_mappings[i].unit_string;
+const reading_channel_info_t* get_channel_info(reading_channel_type_t type) {
+    if (type < READING_CHANNEL_TYPE_MAX) {
+        return &channel_info_table[type];
     }
-  }
-  return "";
+    return NULL;
 }
+

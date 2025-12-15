@@ -7,6 +7,7 @@
 #include "hal.h"
 #include "drivers/driver_readings.h"
 #include "drivers/i2c.h"
+#include "drivers/units.h"
 
 // Macro to calculate the size of an array
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
@@ -44,124 +45,353 @@ static int ina219_write_register(ina219_t *dev, uint8_t reg, uint16_t val) {
 
 
 // INA219 specific reading channels
+
+
 static const driver_reading_channel_t ina219_reading_channels[] = {
+
+
   {
+
+
     .channel_type = READING_CHANNEL_TYPE_VOLTAGE,
-    .name         = "shunt_voltage",
-    .type         = READING_VALUE_TYPE_FLOAT,
+
+
   },
+
+
   {
+
+
     .channel_type = READING_CHANNEL_TYPE_VOLTAGE,
-    .name         = "bus_voltage",
-    .type         = READING_VALUE_TYPE_FLOAT,
+
+
   },
+
+
   {
+
+
     .channel_type = READING_CHANNEL_TYPE_CURRENT,
-    .name         = "current",
-    .type         = READING_VALUE_TYPE_FLOAT,
+
+
   },
+
+
   {
+
+
     .channel_type = READING_CHANNEL_TYPE_POWER,
-    .name         = "power",
-    .type         = READING_VALUE_TYPE_FLOAT,
+
+
   },
+
+
 };
+
+
+
+
 
 // INA219 readings directory
+
+
 static const driver_readings_directory_t ina219_readings_directory = {
+
+
   .num_readings = ARRAY_SIZE(ina219_reading_channels),
+
+
   .channels     = ina219_reading_channels,
+
+
 };
+
+
+
+
 
 const driver_t ina219_driver __attribute__((used)) = {
+
+
   .name               = "ina219",
+
+
   .init               = ina219_init,
+
+
   .remove             = ina219_remove,
+
+
   .ioctl              = ina219_ioctl,
+
+
   .poll               = ina219_poll,
+
+
   .readings_directory = &ina219_readings_directory,
+
+
 };
 
+
+
+
+
 static int ina219_init(device_t *dev) {
+
+
   if (dev->priv == NULL) {
+
+
     return DRIVER_ERROR; // Private data not allocated
+
+
   }
+
+
   ina219_t *ina_dev = (ina219_t *)dev->priv;
+
+
   // Assuming config comes from somewhere, for now hardcoding
+
+
   ina219_config_t config = {
+
+
     .i2c_address          = INA219_DEFAULT_ADDRESS,
+
+
     .shunt_resistance     = 0.1f, // Example value
+
+
     .bus_range            = INA219_BUS_RANGE_32V,
+
+
     .gain                 = INA219_GAIN_1_40MV,
+
+
     .bus_adc_resolution   = INA219_ADC_12BIT,
+
+
     .shunt_adc_resolution = INA219_ADC_12BIT,
+
+
     .mode                 = INA219_MODE_SHUNT_BUS_CONT,
+
+
   };
 
-  ina_dev->bus.i2c  = (I2CDriver *)dev->bus;
+
+
+
+
+  ina_dev->bus.i2c = (I2CDriver *)dev->bus;
+
+
   ina_dev->bus.addr = config.i2c_address;
 
+
+
+
+
   if (!ina219_device_init_helper(ina_dev, &config)) {
+
+
     return DRIVER_ERROR;
+
+
   }
+
+
   return DRIVER_OK;
+
+
 }
+
+
+
+
 
 static int ina219_remove(device_t *dev) {
+
+
   (void)dev;
+
+
   // Add removal logic
+
+
   return DRIVER_OK;
+
+
 }
+
+
+
+
 
 static int ina219_ioctl(device_t *dev, uint32_t cmd, void *arg) {
+
+
   (void)dev;
+
+
   (void)cmd;
+
+
   (void)arg;
+
+
   return DRIVER_NOT_FOUND;
+
+
 }
 
-static int ina219_poll(device_id_t device_id, uint32_t num_readings, driver_reading_t *readings) {
+
+
+
+
+static int ina219_poll(device_id_t device_id,
+
+
+                       uint32_t num_readings,
+
+
+                       driver_reading_t *readings) {
+
+
   if (device_id == NULL || readings == NULL || num_readings == 0) {
+
+
     return DRIVER_INVALID_PARAM;
+
+
   }
+
+
+
+
 
   if (num_readings > ina219_readings_directory.num_readings) {
+
+
     return DRIVER_INVALID_PARAM; // Caller asked for more readings than available
+
+
   }
+
+
+
+
 
   ina219_t *ina_dev_data = (ina219_t *)device_id->priv;
+
+
   float shunt_v, bus_v, current_ma, power_mw;
 
-  if (!ina219_read_all_helper(ina_dev_data, &shunt_v, &bus_v, &current_ma, &power_mw)) {
+
+
+
+
+  if (!ina219_read_all_helper(ina_dev_data,
+
+
+                              &shunt_v,
+
+
+                              &bus_v,
+
+
+                              &current_ma,
+
+
+                              &power_mw)) {
+
+
     return DRIVER_ERROR;
+
+
   }
+
+
+
+
 
   // Populate readings array
+
+
   for (uint32_t i = 0; i < num_readings; ++i) {
+
+
+    const reading_channel_info_t *info = get_channel_info(ina219_readings_directory.channels[i].channel_type);
+
+
+    readings[i].type = info->type;
+
+
+
+
+
     switch (ina219_readings_directory.channels[i].channel_type) {
+
+
       case READING_CHANNEL_TYPE_VOLTAGE:
-        if (strcmp(ina219_readings_directory.channels[i].name, "shunt_voltage") == 0) {
-          readings[i].type            = READING_VALUE_TYPE_FLOAT;
+
+
+        if (strcmp(info->name, "shunt_voltage") == 0) {
+
+
           readings[i].value.float_val = shunt_v;
-        } else if (strcmp(ina219_readings_directory.channels[i].name, "bus_voltage") == 0) {
-          readings[i].type            = READING_VALUE_TYPE_FLOAT;
+
+
+        } else if (strcmp(info->name, "bus_voltage") == 0) {
+
+
           readings[i].value.float_val = bus_v;
+
+
         }
+
+
         break;
+
+
       case READING_CHANNEL_TYPE_CURRENT:
-        readings[i].type            = READING_VALUE_TYPE_FLOAT;
+
+
         readings[i].value.float_val = current_ma;
+
+
         break;
+
+
       case READING_CHANNEL_TYPE_POWER:
-        readings[i].type            = READING_VALUE_TYPE_FLOAT;
+
+
         readings[i].value.float_val = power_mw;
+
+
         break;
+
+
       default:
+
+
         return DRIVER_ERROR;
+
+
     }
+
+
   }
 
+
+
+
+
   return DRIVER_OK;
+
+
 }
 
 static uint16_t ina219_adc_resolution_to_bits_helper(ina219_adc_resolution_t resolution) {
