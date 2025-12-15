@@ -38,21 +38,11 @@ typedef struct {
   } value;
 } driver_reading_t;
 
-/**
- * @brief Structure for static channel information.
- */
 typedef struct {
+  reading_channel_type_t channel_type;
   const char *name;
   const char *unit;
   reading_value_type_t type;
-} reading_channel_info_t;
-
-/**
- * @brief Structure to describe a single channel in the driver readings
- * directory.
- */
-typedef struct {
-  reading_channel_type_t channel_type;
 } driver_reading_channel_t;
 
 /**

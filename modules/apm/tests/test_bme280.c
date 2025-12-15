@@ -10,7 +10,7 @@
 #include "drivers/driver_api.h"
 #include "drivers/driver_registry.h" // For find_device()
 #include "drivers/driver_readings.h" // For driver_reading_t
-#include "drivers/units.h"
+
 
 int main(void) {
   bsp_init();
@@ -43,13 +43,12 @@ int main(void) {
       for (uint32_t i = 0; i < num_readings_to_get; ++i) {
         const driver_reading_channel_t *channel =
           &bme280_dev->driver->readings_directory->channels[i];
-        const reading_channel_info_t *info = get_channel_info(channel->channel_type);
 
-        if (info && bme280_readings[i].type == info->type) {
+        if (channel && bme280_readings[i].type == channel->type) {
             bsp_printf("  %s: %.2f %s\n",
-                       info->name,
+                       channel->name,
                        bme280_readings[i].value.float_val,
-                       info->unit);
+                       channel->unit);
         } else {
           bsp_printf("  Unknown channel type\n");
         }

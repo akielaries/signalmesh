@@ -6,11 +6,14 @@
  * driver interface. It provides temperature, pressure, and humidity
  * sensing capabilities over I2C.
  */
-#include "ch.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
+
+#include "ch.h"
+
 #include "bsp/utils/bsp_io.h"
+
 #include "drivers/bme280.h"
 #include "drivers/driver_readings.h"
 #include "drivers/i2c.h"
@@ -36,15 +39,27 @@ static int bme280_poll(device_id_t device_id, uint32_t num_readings, driver_read
 static const driver_reading_channel_t bme280_reading_channels[] = {
   {
     .channel_type = READING_CHANNEL_TYPE_TEMPERATURE_F,
+    .name         = "temperature",
+    .unit         = "F",
+    .type         = READING_VALUE_TYPE_FLOAT,
   },
   {
     .channel_type = READING_CHANNEL_TYPE_PRESSURE_PSI,
+    .name         = "pressure",
+    .unit         = "PSI",
+    .type         = READING_VALUE_TYPE_FLOAT,
   },
   {
     .channel_type = READING_CHANNEL_TYPE_PRESSURE_INHG,
+    .name         = "pressure",
+    .unit         = "inHg",
+    .type         = READING_VALUE_TYPE_FLOAT,
   },
   {
     .channel_type = READING_CHANNEL_TYPE_HUMIDITY,
+    .name         = "humidity",
+    .unit         = "%RH",
+    .type         = READING_VALUE_TYPE_FLOAT,
   },
 };
 

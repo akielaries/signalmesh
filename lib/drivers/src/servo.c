@@ -1,9 +1,9 @@
 #include "drivers/servo.h"
 #include "bsp/configs/bsp_pwm_config.h"
-#include "hal.h" // For palSetPadMode, pwmStart etc.
-#include <string.h> // For strcmp
+#include "hal.h"                     // For palSetPadMode, pwmStart etc.
+#include <string.h>                  // For strcmp
 #include "drivers/driver_readings.h" // Include the new readings definitions
-#include "drivers/units.h" // For get_channel_info and reading_channel_type_t
+
 
 // Macro to calculate the size of an array
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
@@ -16,6 +16,9 @@
 static const driver_reading_channel_t servo_reading_channels[] = {
   {
     .channel_type = READING_CHANNEL_TYPE_POSITION_US,
+    .name         = "position",
+    .unit         = "us",
+    .type         = READING_VALUE_TYPE_UINT32,
   },
 };
 
@@ -47,7 +50,9 @@ static int servo_init(device_t *dev) {
 
   // Initialize with a default position (e.g., center)
   servo_dev->last_commanded_position_us = (SERVO_MIN_US + SERVO_MAX_US) / 2;
-  pwmEnableChannel(bsp_servo_pwm_driver, BSP_SERVO_PWM_CHANNEL, servo_dev->last_commanded_position_us);
+  pwmEnableChannel(bsp_servo_pwm_driver,
+                   BSP_SERVO_PWM_CHANNEL,
+                   servo_dev->last_commanded_position_us);
 
   return DRIVER_OK;
 }
@@ -110,13 +115,13 @@ static int servo_poll(device_id_t device_id, uint32_t num_readings, driver_readi
 
   // Populate readings array based on directory
   for (uint32_t i = 0; i < num_readings; ++i) {
-    const reading_channel_info_t *info = get_channel_info(servo_readings_directory.channels[i].channel_type);
+    const driver_reading_channel_t *channel = &servo_readings_directory.channels[i];
 
-    if (info == NULL) {
-        return DRIVER_ERROR; // Unknown channel type
+    if (channel == NULL) { // Should not happen
+      return DRIVER_ERROR;
     }
 
-    readings[i].type = info->type;
+    readings[i].type = channel->type;
 
     switch (servo_readings_directory.channels[i].channel_type) {
       case READING_CHANNEL_TYPE_POSITION_US:
