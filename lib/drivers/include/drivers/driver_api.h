@@ -33,6 +33,7 @@ typedef struct driver driver_t;
 /** @brief Device or driver not found */
 #define DRIVER_NOT_FOUND -3
 
+// TODO: these could be more descriptive and live in an enum
 /** @brief Operation completed successfully (alias) */
 #define DRV_OK 0
 /** @brief Invalid argument (alias) */
