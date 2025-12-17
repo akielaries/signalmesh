@@ -28,12 +28,15 @@ static const driver_readings_directory_t servo_readings_directory = {
   .channels     = servo_reading_channels,
 };
 
+//TODO: this is specific to what ever mgr servo i'm using really
+servo_t gl_servo_dev = {0};
+
 static int servo_init(device_t *dev) {
   if (dev == NULL) {
     return DRIVER_INVALID_PARAM;
   }
 
-  servo_t *servo_dev = (servo_t *)chHeapAlloc(NULL, sizeof(servo_t));
+  servo_t *servo_dev = &gl_servo_dev;
   if (servo_dev == NULL) {
     return DRIVER_ERROR;
   }
