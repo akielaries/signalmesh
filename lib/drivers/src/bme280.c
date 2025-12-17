@@ -71,7 +71,7 @@ static const driver_readings_directory_t bme280_readings_directory = {
 };
 
 // Define driver device instance
-static bme280_t *gl_bme_dev = {0};
+static bme280_t gl_bme_dev = {0};
 
 // Define driver_t instance for BME280
 const driver_t bme280_driver __attribute__((used)) = {
@@ -228,11 +228,7 @@ static int bme280_init(device_t *dev) {
     return DRIVER_INVALID_PARAM;
   }
 
-  bme280_t *bme_dev = (bme280_t *)chHeapAlloc(NULL, sizeof(bme280_t));
-  //bme280_t *bme_dev = gl_bme_dev;
-  if (bme_dev == NULL) {
-    return DRIVER_ERROR;
-  }
+  bme280_t *bme_dev = &gl_bme_dev;
   memset(bme_dev, 0, sizeof(bme280_t));
   dev->priv = bme_dev;
 
@@ -242,7 +238,6 @@ static int bme280_init(device_t *dev) {
 
   // Read calibration parameters
   if (!bme280_read_calib_params(bme_dev)) {
-    chHeapFree(bme_dev);
     return DRIVER_ERROR;
   }
 
