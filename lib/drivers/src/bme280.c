@@ -18,6 +18,7 @@
 #include "drivers/driver_readings.h"
 #include "drivers/i2c.h"
 
+
 // Macro to calculate the size of an array
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 
@@ -66,7 +67,11 @@ static const driver_reading_channel_t bme280_reading_channels[] = {
 // BME280 readings directory
 static const driver_readings_directory_t bme280_readings_directory = {
   .num_readings = ARRAY_SIZE(bme280_reading_channels),
-  .channels     = bme280_reading_channels};
+  .channels     = bme280_reading_channels,
+};
+
+// Define driver device instance
+static bme280_t *gl_bme_dev = {0};
 
 // Define driver_t instance for BME280
 const driver_t bme280_driver __attribute__((used)) = {
@@ -83,27 +88,27 @@ const driver_t bme280_driver __attribute__((used)) = {
 // Local driver helper functions
 /******************************************************************************/
 
-static int bme280_read_registers(bme280_t *bme_dev, uint8_t reg, uint8_t *buf, size_t len) {
+static inline int bme280_read_registers(bme280_t *bme_dev, uint8_t reg, uint8_t *buf, size_t len) {
   return i2c_bus_read_reg(&bme_dev->bus, reg, buf, len);
 }
 
-static int bme280_write_register(bme280_t *bme_dev, uint8_t reg, const uint8_t *buf, size_t len) {
+static inline int bme280_write_register(bme280_t *bme_dev, uint8_t reg, const uint8_t *buf, size_t len) {
   return i2c_bus_write_reg(&bme_dev->bus, reg, buf, len);
 }
 
-static uint32_t bme280_read_pressure_raw(bme280_t *bme_dev) {
+static inline uint32_t bme280_read_pressure_raw(bme280_t *bme_dev) {
   uint8_t data[3];
   bme280_read_registers(bme_dev, BME280_REG_PRESS_MSB, data, 3);
   return ((uint32_t)data[0] << 12) | ((uint32_t)data[1] << 4) | ((uint32_t)data[2] >> 4);
 }
 
-static uint32_t bme280_read_temperature_raw(bme280_t *bme_dev) {
+static inline uint32_t bme280_read_temperature_raw(bme280_t *bme_dev) {
   uint8_t data[3];
   bme280_read_registers(bme_dev, BME280_REG_TEMP_MSB, data, 3);
   return ((uint32_t)data[0] << 12) | ((uint32_t)data[1] << 4) | ((uint32_t)data[2] >> 4);
 }
 
-static uint32_t bme280_read_humidity_raw(bme280_t *bme_dev) {
+static inline uint32_t bme280_read_humidity_raw(bme280_t *bme_dev) {
   uint8_t data[2];
   bme280_read_registers(bme_dev, BME280_REG_HUM_MSB, data, 2);
   return ((uint32_t)data[0] << 8) | (uint32_t)data[1];
@@ -224,6 +229,7 @@ static int bme280_init(device_t *dev) {
   }
 
   bme280_t *bme_dev = (bme280_t *)chHeapAlloc(NULL, sizeof(bme280_t));
+  //bme280_t *bme_dev = gl_bme_dev;
   if (bme_dev == NULL) {
     return DRIVER_ERROR;
   }
