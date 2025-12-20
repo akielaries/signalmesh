@@ -30,8 +30,8 @@ extern "C" {
 #define INA219_CONFIG_GAIN_MASK           0x1800
 #define INA219_CONFIG_GAIN_1_40MV         0x0000
 #define INA219_CONFIG_GAIN_2_80MV         0x0800
-#define INA219_CONFIG_GAIN_5_60MV         0x1000
-#define INA219_CONFIG_GAIN_11_20MV        0x1800
+#define INA219_CONFIG_GAIN_4_160MV        0x1000
+#define INA219_CONFIG_GAIN_8_320MV        0x1800
 
 #define INA219_CONFIG_BADCRES_MASK        0x0780
 
@@ -87,8 +87,8 @@ typedef enum {
 typedef enum {
   INA219_GAIN_1_40MV = 0x0,
   INA219_GAIN_2_80MV = 0x1,
-  INA219_GAIN_5_160MV = 0x2,
-  INA219_GAIN_11_320MV = 0x3
+  INA219_GAIN_4_160MV = 0x2,
+  INA219_GAIN_8_320MV = 0x3
 } ina219_gain_t;
 
 // ADC resolution settings
