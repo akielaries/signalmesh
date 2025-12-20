@@ -62,7 +62,8 @@ set(SOURCES
     ${DRIVERS_SRC_DIR}/driver_registry.c
     # ./app/main.c ./tests/test_i2c_lb.c ./tests/test_ina219.c
     # ./tests/test_i2c_scan.c
-    ./tests/test_bme280.c)
+    # ./tests/test_bme280.c)
+    ./tests/test_poll_all.c)
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})
 

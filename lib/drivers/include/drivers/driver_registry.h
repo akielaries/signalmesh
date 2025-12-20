@@ -27,6 +27,7 @@ extern "C" {
  */
 void init_devices(void);
 device_t *find_device(const char *name);
+device_t *get_board_devices(size_t *count);
 
 #ifdef __cplusplus
 }

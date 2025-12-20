@@ -13,6 +13,10 @@
 #include <stddef.h>
 #include <stdbool.h>
 
+
+#include "driver_readings.h"
+
+
 /**
  * @brief Forward declaration of device structure
  */
@@ -68,8 +72,6 @@ struct device {
 
 /** @brief Typedef for device ID, using device_t pointer */
 typedef device_t *device_id_t;
-
-#include "driver_readings.h" // Include the new readings definitions here, after device_id_t
 
 /**
  * @brief Driver descriptor structure

@@ -22,7 +22,7 @@ extern const size_t num_board_devices;
 const driver_t *drivers[] = {
   &bme280_driver,
   &ina219_driver,
-  &servo_driver,
+  //&servo_driver,
 };
 
 /** @brief Number of drivers in the system */
@@ -70,4 +70,15 @@ device_t *find_device(const char *name) {
     }
   }
   return NULL;
+}
+
+/**
+ * @brief Gets the list of all board devices.
+ *
+ * @param count Pointer to a size_t to store the number of devices.
+ * @return A pointer to the array of device_t structures.
+ */
+device_t *get_board_devices(size_t *count) {
+  *count = num_board_devices;
+  return board_devices;
 }

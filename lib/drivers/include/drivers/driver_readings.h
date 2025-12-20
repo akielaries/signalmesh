@@ -23,7 +23,7 @@ typedef enum {
     READING_CHANNEL_TYPE_CURRENT,
     READING_CHANNEL_TYPE_POWER,
     READING_CHANNEL_TYPE_POSITION_US,
-    READING_CHANNEL_TYPE_MAX, // Keep this last
+    READING_CHANNEL_TYPE_MAX,
 } reading_channel_type_t;
 
 /**
