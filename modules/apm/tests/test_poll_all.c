@@ -15,9 +15,8 @@
 int main(void) {
   bsp_init();
 
-  bsp_printf("--- Starting BME280 Test ---\r\n");
-  bsp_printf("Testing BME280 sensor.\r\n");
-  bsp_printf("Press button to stop.\r\n\r\n");
+  bsp_printf("--- Starting driver test ---\r\n");
+  bsp_printf("Press button to stop...\r\n\r\n");
 
   size_t num_devices;
   device_t *devices = get_board_devices(&num_devices);

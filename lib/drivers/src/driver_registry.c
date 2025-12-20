@@ -7,6 +7,7 @@
 #include "drivers/driver_registry.h"
 #include "drivers/bme280.h"
 #include "drivers/ina219.h"
+#include "drivers/ina3221.h"
 #include "drivers/servo.h"
 
 // External declarations for board devices (defined in bsp.c)
@@ -22,6 +23,7 @@ extern const size_t num_board_devices;
 const driver_t *drivers[] = {
   &bme280_driver,
   &ina219_driver,
+  &ina3221_driver,
   //&servo_driver,
 };
 

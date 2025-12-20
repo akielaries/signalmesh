@@ -57,13 +57,15 @@ set(SOURCES
     ${DRIVERS_SRC_DIR}/adc.c
     ${DRIVERS_SRC_DIR}/servo.c
     ${DRIVERS_SRC_DIR}/ina219.c
+    ${DRIVERS_SRC_DIR}/ina3221.c
     ${DRIVERS_SRC_DIR}/bme280.c
     ${DRIVERS_SRC_DIR}/i2c.c
     ${DRIVERS_SRC_DIR}/driver_registry.c
     # ./app/main.c ./tests/test_i2c_lb.c ./tests/test_ina219.c
-    # ./tests/test_i2c_scan.c
-    # ./tests/test_bme280.c)
-    ./tests/test_poll_all.c)
+    #./tests/test_i2c_scan.c
+    # ./tests/test_bme280.c
+    ./tests/test_poll_all.c
+)
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})
 

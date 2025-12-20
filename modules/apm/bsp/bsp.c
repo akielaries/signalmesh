@@ -6,6 +6,7 @@
 #include "bsp/utils/bsp_io.h"
 #include "drivers/driver_api.h"
 #include "drivers/ina219.h"
+#include "drivers/ina3221.h"
 #include "drivers/bme280.h"
 #include "drivers/servo.h"
 #include "drivers/driver_registry.h"
@@ -14,6 +15,8 @@
 
 // private data for ina219
 static ina219_t ina219_dev_data;
+// private data for ina3221
+static ina3221_t ina3221_dev_data;
 // private data for bme280
 // static bme280_t bme280_dev_data; // BME280 driver doesn't have a private data struct
 // private data for servo
@@ -27,6 +30,13 @@ device_t board_devices[] = {
         .driver = &ina219_driver,
         .bus = &I2CD4, // Bus instance
         .priv = &ina219_dev_data, // Private data for the device
+        .is_active = false
+    },
+    {
+        .name = "ina3221",
+        .driver = &ina3221_driver,
+        .bus = &I2CD4,
+        .priv = &ina3221_dev_data,
         .is_active = false
     },
     {
