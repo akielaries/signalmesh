@@ -17,7 +17,6 @@
 // Function prototypes
 /******************************************************************************/
 
-// Static helper functions prototypes
 static bool ina219_read_all_helper(ina219_t *dev_data,
                                    float *shunt_voltage_mv,
                                    float *bus_voltage_v,

@@ -60,6 +60,7 @@ set(SOURCES
     ${DRIVERS_SRC_DIR}/ina3221.c
     ${DRIVERS_SRC_DIR}/bme280.c
     ${DRIVERS_SRC_DIR}/bh1750.c
+    ${DRIVERS_SRC_DIR}/aht2x.c
     ${DRIVERS_SRC_DIR}/i2c.c
     ${DRIVERS_SRC_DIR}/driver_registry.c
     # ./app/main.c ./tests/test_i2c_lb.c ./tests/test_ina219.c

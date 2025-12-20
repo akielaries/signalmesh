@@ -4,13 +4,16 @@
 #include "bsp/configs/bsp_uart_config.h" // For bsp_debug_stream and bsp_debug_uart_config
 #include "bsp/utils/bsp_gpt.h"
 #include "bsp/utils/bsp_io.h"
+
+#include "drivers/driver_registry.h"
 #include "drivers/driver_api.h"
 #include "drivers/ina219.h"
 #include "drivers/ina3221.h"
 #include "drivers/bme280.h"
 #include "drivers/bh1750.h"
+#include "drivers/aht2x.h"
 #include "drivers/servo.h"
-#include "drivers/driver_registry.h"
+
 #include "bsp/configs/bsp_i2c_config.h" // For bsp_i2c_init()
 #include <stddef.h>
 
@@ -22,6 +25,7 @@ static ina3221_t ina3221_dev_data;
 // static bme280_t bme280_dev_data; // BME280 driver doesn't have a private data struct
 // private data for bh1750
 static bh1750_t bh1750_dev_data;
+static aht2x_t aht2x_dev_data;
 // private data for servo
 // static servo_t servo_dev_data; // Servo driver doesn't have a private data struct
 
@@ -40,6 +44,13 @@ device_t board_devices[] = {
         .driver = &ina3221_driver,
         .bus = &I2CD4,
         .priv = &ina3221_dev_data,
+        .is_active = false
+    },
+    {
+        .name = "aht2x",
+        .driver = &aht2x_driver,
+        .bus = &I2CD4,
+        .priv = &aht2x_dev_data,
         .is_active = false
     },
     {
