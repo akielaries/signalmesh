@@ -42,7 +42,7 @@ int main(void) {
         if (ret != DRIVER_OK) {
           bsp_printf("poll failed for %s: 0x%X\n", dev->name, ret);
         } else {
-          bsp_printf("%s Readings:\n", dev->name);
+          bsp_printf("\r\n%s Readings:\n", dev->name);
           for (uint32_t j = 0; j < dev->driver->readings_directory->num_readings; j++) {
             const driver_reading_channel_t *channel =
               &dev->driver->readings_directory->channels[j];
