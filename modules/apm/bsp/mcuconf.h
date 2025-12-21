@@ -43,6 +43,10 @@
 
 #define STM32H755xx
 
+#define STM32_BDMA_REQUIRED                 TRUE
+#define STM32_DMA_REQUIRED                  TRUE
+
+
 /*
  * General settings.
  */
@@ -431,6 +435,8 @@
 #define STM32_SPI_SPI5_IRQ_PRIORITY    10
 #define STM32_SPI_SPI6_IRQ_PRIORITY    10
 #define STM32_SPI_DMA_ERROR_HOOK(spip) osalSysHalt("DMA failure")
+#define STM32_SPI_BDMA_ERROR_HOOK_TX(spip)  osalSysHalt("BDMA TX failure")
+#define STM32_SPI_BDMA_ERROR_HOOK_RX(spip)  osalSysHalt("BDMA RX failure")
 
 /*
  * ST driver system settings.

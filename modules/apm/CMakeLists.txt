@@ -40,7 +40,11 @@ include_directories(
   ./tests
   ./bsp/configs
   ./bsp/utils
-  ${DRIVERS_INCLUDE_DIR})
+  ${DRIVERS_INCLUDE_DIR}
+  #${CHIBIOS_ROOT}/os/hal/include
+  #${CHIBIOS_ROOT}/os/rt/include
+
+)
 
 add_definitions(-DCHPRINTF_USE_FLOAT=1 -DCORE_CM7 -DCORTEX_USE_FPU=FALSE)
 
@@ -52,21 +56,32 @@ set(SOURCES
     ./bsp/configs/bsp_pwm_config.c
     # ./bsp/configs/bsp_i2c_config.c
     ./bsp/bsp_i2c.c
+    ./bsp/configs/bsp_spi_config.c
     ./bsp/utils/bsp_gpt.c
     ./bsp/utils/bsp_io.c
+
+    ${DRIVERS_SRC_DIR}/driver_registry.c
+
+    ${DRIVERS_SRC_DIR}/spi.c
+    ${DRIVERS_SRC_DIR}/i2c.c
     ${DRIVERS_SRC_DIR}/adc.c
     ${DRIVERS_SRC_DIR}/servo.c
+
     ${DRIVERS_SRC_DIR}/ina219.c
     ${DRIVERS_SRC_DIR}/ina3221.c
+
     ${DRIVERS_SRC_DIR}/bme280.c
     ${DRIVERS_SRC_DIR}/bh1750.c
     ${DRIVERS_SRC_DIR}/aht2x.c
-    ${DRIVERS_SRC_DIR}/i2c.c
-    ${DRIVERS_SRC_DIR}/driver_registry.c
-    # ./app/main.c ./tests/test_i2c_lb.c ./tests/test_ina219.c
+
+    ${DRIVERS_SRC_DIR}/24lc256.c
+    ${DRIVERS_SRC_DIR}/w25qxx.c
+        # ./app/main.c ./tests/test_i2c_lb.c ./tests/test_ina219.c
     #./tests/test_i2c_scan.c
     # ./tests/test_bme280.c
-    ./tests/test_poll_all.c
+    #./tests/test_poll_all.c
+    #./tests/test_storage.c
+    ./tests/bist_w25q64.c
 )
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})

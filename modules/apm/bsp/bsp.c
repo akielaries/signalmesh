@@ -12,11 +12,13 @@
 #include "drivers/bme280.h"
 #include "drivers/bh1750.h"
 #include "drivers/aht2x.h"
+#include "drivers/24lc256.h"
+#include "drivers/w25qxx.h"
 #include "drivers/servo.h"
 
 #include "bsp/configs/bsp_i2c_config.h" // For bsp_i2c_init()
+#include "bsp/configs/bsp_spi_config.h" // For bsp_spi_init()
 #include <stddef.h>
-
 // private data for ina219
 static ina219_t ina219_dev_data;
 // private data for ina3221
@@ -26,6 +28,9 @@ static ina3221_t ina3221_dev_data;
 // private data for bh1750
 static bh1750_t bh1750_dev_data;
 static aht2x_t aht2x_dev_data;
+static eeprom_24lc256_t eeprom_24lc256_dev_data;
+// private data for w25qxx
+static w25qxx_t w25qxx_dev_data;
 // private data for servo
 // static servo_t servo_dev_data; // Servo driver doesn't have a private data struct
 
@@ -65,6 +70,20 @@ device_t board_devices[] = {
         .driver = &bh1750_driver,
         .bus = &I2CD4,
         .priv = &bh1750_dev_data,
+        .is_active = false
+    },
+    {
+        .name = "24lc256",
+        .driver = &eeprom_24lc256_driver,
+        .bus = &I2CD4,
+        .priv = &eeprom_24lc256_dev_data,
+        .is_active = false
+    },
+    {
+        .name = "w25qxx",
+        .driver = &w25qxx_driver,
+        .bus = &spi1_bus_config,
+        .priv = &w25qxx_dev_data,
         .is_active = false
     },
     /*
@@ -107,6 +126,8 @@ void bsp_init(void) {
   // initialize i2c driver(s)
   bsp_i2c_init();
   bsp_printf("I2C initialized\n");
+  bsp_spi_init();
+  bsp_printf("SPI initialized\n");
   // initializer hardware drivers this board supports
   init_devices();
   bsp_printf("initialized devices\n");
@@ -121,4 +142,6 @@ void bsp_init(void) {
 
   // PWM on PE11, timer 1 channel 2?
   palSetPadMode(GPIOE, 11, PAL_MODE_ALTERNATE(1));
+
+  bsp_printf("End of BSP init\n\r\n");
 }

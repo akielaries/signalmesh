@@ -118,6 +118,26 @@ struct driver {
    */
   int (*poll)(device_id_t device_id, uint32_t num_readings, driver_reading_t *readings);
 
+  /**
+   * @brief Read data from a storage device
+   * @param dev Pointer to device structure
+   * @param offset The offset to start reading from
+   * @param buf The buffer to read data into
+   * @param count The number of bytes to read
+   * @return The number of bytes read, or a negative error code
+   */
+  int32_t (*read)(device_t *dev, uint32_t offset, void *buf, size_t count);
+
+  /**
+   * @brief Write data to a storage device
+   * @param dev Pointer to device structure
+   * @param offset The offset to start writing to
+   * @param buf The buffer to write data from
+   * @param count The number of bytes to write
+   * @return The number of bytes written, or a negative error code
+   */
+  int32_t (*write)(device_t *dev, uint32_t offset, const void *buf, size_t count);
+
   /** @brief Directory of readings provided by this driver */
   const driver_readings_directory_t *readings_directory;
 };

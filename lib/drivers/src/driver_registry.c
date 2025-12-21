@@ -10,6 +10,8 @@
 #include "drivers/ina3221.h"
 #include "drivers/bh1750.h"
 #include "drivers/aht2x.h"
+#include "drivers/24lc256.h"
+#include "drivers/w25qxx.h"
 #include "drivers/servo.h"
 
 // External declarations for board devices (defined in bsp.c)
@@ -28,6 +30,8 @@ const driver_t *drivers[] = {
   &ina3221_driver,
   &bh1750_driver,
   &aht2x_driver,
+  &eeprom_24lc256_driver,
+  &w25qxx_driver,
   //&servo_driver,
 };
 
