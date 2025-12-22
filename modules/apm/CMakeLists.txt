@@ -81,6 +81,7 @@ set(SOURCES
     # ./tests/test_bme280.c
     #./tests/test_poll_all.c
     #./tests/test_storage.c
+    #./tests/bist_24lc256.c
     ./tests/bist_w25q64.c
 )
 

@@ -16,6 +16,7 @@ static const SPIConfig spi1_hw_config = {
   .ssport           = GPIOA,
   .sspad            = 15U,
   .cfg1             = SPI_CFG1_MBR_DIV8 | SPI_CFG1_DSIZE_VALUE(7),
+  //.cfg1             = SPI_CFG1_MBR_DIV128 | SPI_CFG1_DSIZE_VALUE(7),
   .cfg2             = 0U
 };
 

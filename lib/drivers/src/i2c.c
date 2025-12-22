@@ -1,12 +1,12 @@
 #include <stdint.h>
-#include <string.h> // For memcpy
+#include <string.h> // for memcpy
 #include "hal.h"
 #include "drivers/driver_api.h"
 #include "drivers/i2c.h"
 #include "bsp/utils/bsp_io.h"
 
 
-// General purpose I2C error handler
+// general purpose I2C error handler
 void i2c_handle_error(I2CDriver *i2c_driver, const char *context) {
   i2cflags_t err = i2cGetErrors(i2c_driver);
   if (err != I2C_NO_ERROR) {
@@ -22,14 +22,14 @@ void i2c_handle_error(I2CDriver *i2c_driver, const char *context) {
     } else {
       bsp_printf("unknown error code: 0x%02X\n", err);
     }
-    // Attempt to recover the I2C bus
+    // attempt to recover the I2C bus
     // i2cStop(i2c_driver);
-    // i2cStart(i2c_driver, i2c_driver->config); // Requires driver config
+    // i2cStart(i2c_driver, i2c_driver->config); // requires driver config
     // access bsp_printf("I2C bus recovered (%s)\n", context);
   }
 }
 
-// Generic I2C Master Transmit function
+// generic I2C Master Transmit function
 msg_t i2c_master_transmit(I2CDriver *i2cp,
                           i2caddr_t addr,
                           const uint8_t *txbuf,
@@ -46,7 +46,7 @@ msg_t i2c_master_transmit(I2CDriver *i2cp,
   return msg;
 }
 
-// Generic I2C Master Receive function
+// generic I2C Master Receive function
 msg_t i2c_master_receive(I2CDriver *i2cp, i2caddr_t addr, uint8_t *rxbuf, size_t rxbytes) {
   msg_t msg;
   i2cAcquireBus(i2cp);
