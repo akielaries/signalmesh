@@ -3,28 +3,28 @@
 #include "drivers/w25qxx.h"
 #include "ch.h"
 #include "hal.h"
-#include "drivers/spi.h" // Include for spi_bus_acquire/release etc.
+#include "drivers/spi.h" // include for spi_bus_acquire/release etc.
 
 CC_ALIGN_DATA(32) static uint8_t dma_buffer[32];
 
-// Forward declarations for driver_t interface
+// forward declarations for driver_t interface
 static int w25qxx_init(device_t *dev);
 static int32_t w25qxx_read(device_t *dev, uint32_t offset, void *buf, size_t count);
 static int32_t w25qxx_write(device_t *dev, uint32_t offset, const void *buf, size_t count);
 
-// Forward declarations for internal helper functions and erase operations
+// forward declarations for internal helper functions and erase operations
 static int w25qxx_wait_busy(w25qxx_t *flash_dev);
 static int w25qxx_write_enable(w25qxx_t *flash_dev);
 static int w25qxx_write_disable(w25qxx_t *flash_dev);
 static uint8_t w25qxx_read_status_register(w25qxx_t *flash_dev, uint8_t reg_num);
 static int w25qxx_read_jedec_id(w25qxx_t *flash_dev, w25qxx_jedec_id_t *id);
 
-// Erase functions (exposed in w25qxx.h)
+// erase functions (exposed in w25qxx.h)
 int w25qxx_chip_erase(w25qxx_t *flash_dev);
 int w25qxx_sector_erase(w25qxx_t *flash_dev, uint32_t sector_addr);
 int w25qxx_block_erase(w25qxx_t *flash_dev, uint32_t block_addr, uint32_t block_size);
 
-// Driver descriptor
+// driver descriptor
 const driver_t w25qxx_driver __attribute__((used)) = {
   .name               = "w25qxx",
   .init               = w25qxx_init,
@@ -40,18 +40,18 @@ static int w25qxx_init(device_t *dev) {
   }
   w25qxx_t *flash_dev = (w25qxx_t *)dev->priv;
 
-  // Assign the SPI bus configuration
+  // assign the SPI bus configuration
   flash_dev->bus = *(spi_bus_t *)dev->bus;
   
-  // Release from deep power down
+  // release from deep power down
   dma_buffer[0] = W25QXX_CMD_RELEASE_DEEP_POWER_DOWN;
   spi_bus_acquire(&flash_dev->bus);
   spi_bus_send(&flash_dev->bus, dma_buffer, 1);
   spi_bus_release(&flash_dev->bus);
   
-  chThdSleepMicroseconds(30); // Wait tRES1 (min 30us)
+  chThdSleepMicroseconds(30); // wait tRES1 (min 30us)
 
-  // Read JEDEC ID to identify the device
+  // read JEDEC ID to identify the device
   w25qxx_jedec_id_t jedec_id;
   if (w25qxx_read_jedec_id(flash_dev, &jedec_id) != DRIVER_OK) {
     return DRIVER_ERROR;
@@ -60,7 +60,7 @@ static int w25qxx_init(device_t *dev) {
   flash_dev->manufacturer_id = jedec_id.manufacturer_id;
   flash_dev->device_id       = (jedec_id.device_id_high << 8) | jedec_id.device_id_low;
 
-  // Determine device size based on JEDEC ID
+  // determine device size based on JEDEC ID
   switch (flash_dev->device_id) {
     case 0x4015: // W25Q16
       flash_dev->size_bytes = W25Q16_SIZE_BYTES;
@@ -75,7 +75,7 @@ static int w25qxx_init(device_t *dev) {
       flash_dev->size_bytes = W25Q128_SIZE_BYTES;
       break;
     default:
-      flash_dev->size_bytes = W25Q64_SIZE_BYTES; // Default to 8MB if unknown
+      flash_dev->size_bytes = W25Q64_SIZE_BYTES; // default to 8MB if unknown
       break;
   }
 
@@ -90,17 +90,17 @@ static int32_t w25qxx_read(device_t *dev, uint32_t offset, void *buf, size_t cou
   if (offset + count > flash_dev->size_bytes)
     return DRIVER_INVALID_PARAM;
 
-  // Wait for device to be ready
+  // wait for device to be ready
   if (w25qxx_wait_busy(flash_dev) != DRIVER_OK)
     return DRIVER_ERROR;
 
-  // Build read command with 24-bit address in the DMA-safe buffer
+  // build read command with 24-bit address in the DMA-safe buffer
   dma_buffer[0] = W25QXX_CMD_READ_DATA;
   dma_buffer[1] = (uint8_t)(offset >> 16);
   dma_buffer[2] = (uint8_t)(offset >> 8);
   dma_buffer[3] = (uint8_t)(offset & 0xFF);
 
-  // Transmit command and address, then receive data
+  // transmit command and address, then receive data
   spi_bus_acquire(&flash_dev->bus);
   spi_bus_send(&flash_dev->bus, dma_buffer, 4);
   spi_bus_receive(&flash_dev->bus, (uint8_t *)buf, count);
@@ -133,13 +133,13 @@ static int32_t w25qxx_write(device_t *dev, uint32_t offset, const void *buf, siz
     uint32_t bytes_remaining = count - bytes_written;
     uint32_t chunk_size      = (page_space < bytes_remaining) ? page_space : bytes_remaining;
 
-    // Build page program command in the DMA-safe buffer
+    // build page program command in the DMA-safe buffer
     dma_buffer[0] = W25QXX_CMD_PAGE_PROGRAM;
     dma_buffer[1] = (uint8_t)(current_addr >> 16);
     dma_buffer[2] = (uint8_t)(current_addr >> 8);
     dma_buffer[3] = (uint8_t)(current_addr & 0xFF);
 
-    // Transmit command header, then the user data directly
+    // transmit command header, then the user data directly
     spi_bus_acquire(&flash_dev->bus);
     spi_bus_send(&flash_dev->bus, dma_buffer, 4);
     spi_bus_send(&flash_dev->bus, &data_ptr[bytes_written], chunk_size);
@@ -148,14 +148,14 @@ static int32_t w25qxx_write(device_t *dev, uint32_t offset, const void *buf, siz
     bytes_written += chunk_size;
   }
 
-  // Wait for the final write to complete
+  // wait for the final write to complete
   if (w25qxx_wait_busy(flash_dev) != DRIVER_OK)
     return bytes_written > 0 ? bytes_written : DRIVER_ERROR;
 
   return bytes_written;
 }
 
-// Helper function implementations
+// helper function implementations
 static int w25qxx_wait_busy(w25qxx_t *flash_dev) {
   uint32_t timeout    = 100000; // 100 second timeout
   uint32_t start_time = chVTGetSystemTimeX();
@@ -180,7 +180,7 @@ static int w25qxx_write_enable(w25qxx_t *flash_dev) {
 
   chThdSleepMicroseconds(10);
 
-  // Verify write enable bit is set
+  // verify write enable bit is set
   if ((w25qxx_read_status_register(flash_dev, 1) & W25QXX_STATUS_WEL) == 0) {
     bsp_printf("W25QXX: Failed to enable write (WEL not set).\n");
     return DRIVER_ERROR;
@@ -211,31 +211,31 @@ static uint8_t w25qxx_read_status_register(w25qxx_t *flash_dev, uint8_t reg_num)
       dma_buffer[0] = W25QXX_CMD_READ_STATUS_REG3;
       break;
     default:
-      return 0xFF; // Error indication
+      return 0xFF; // error indication
   }
 
-  dma_buffer[1] = 0xFF; // Dummy byte
+  dma_buffer[1] = 0xFF; // dummy byte
 
   spi_bus_acquire(&flash_dev->bus);
   spi_bus_exchange(&flash_dev->bus, dma_buffer, dma_buffer, 2);
   spi_bus_release(&flash_dev->bus);
   
-  // The first received byte is garbage, status is the second byte
+  // the first received byte is garbage, status is the second byte
   return dma_buffer[1];
 }
 
 static int w25qxx_read_jedec_id(w25qxx_t *flash_dev, w25qxx_jedec_id_t *id) {
-  // Command plus 3 dummy bytes to clock out the 3-byte ID
+  // command plus 3 dummy bytes to clock out the 3-byte ID
   dma_buffer[0] = W25QXX_CMD_READ_JEDEC_ID;
-  dma_buffer[1] = 0xFF; // Dummy
-  dma_buffer[2] = 0xFF; // Dummy
-  dma_buffer[3] = 0xFF; // Dummy
+  dma_buffer[1] = 0xFF; // dummy
+  dma_buffer[2] = 0xFF; // dummy
+  dma_buffer[3] = 0xFF; // dummy
 
   spi_bus_acquire(&flash_dev->bus);
   spi_bus_exchange(&flash_dev->bus, dma_buffer, dma_buffer, 4);
   spi_bus_release(&flash_dev->bus);
   
-  // The first received byte is garbage, ID is in bytes 2, 3, 4
+  // the first received byte is garbage, ID is in bytes 2, 3, 4
   id->manufacturer_id = dma_buffer[1];
   id->device_id_high  = dma_buffer[2];
   id->device_id_low   = dma_buffer[3];

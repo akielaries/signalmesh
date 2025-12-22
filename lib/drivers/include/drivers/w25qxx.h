@@ -2,8 +2,10 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+
 #include "drivers/driver_api.h"
 #include "drivers/spi.h"
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -40,7 +42,7 @@ extern "C" {
 #define W25QXX_CMD_RESET_ENABLE            0x66
 #define W25QXX_CMD_RESET_DEVICE            0x99
 
-// Status register bits
+// status register bits
 #define W25QXX_STATUS_BUSY 0x01
 #define W25QXX_STATUS_WEL  0x02
 #define W25QXX_STATUS_BP0  0x04
@@ -50,13 +52,13 @@ extern "C" {
 #define W25QXX_STATUS_SEC  0x40
 #define W25QXX_STATUS_SRP0 0x80
 
-// Device sizes (adjust based on specific variant)
+// device sizes (adjust based on specific variant)
 #define W25Q64_SIZE_BYTES  (8 * 1024 * 1024)  // 8MB
 #define W25Q128_SIZE_BYTES (16 * 1024 * 1024) // 16MB
 #define W25Q32_SIZE_BYTES  (4 * 1024 * 1024)  // 4MB
 #define W25Q16_SIZE_BYTES  (2 * 1024 * 1024)  // 2MB
 
-// Common page and sector sizes
+// common page and sector sizes
 #define W25QXX_PAGE_SIZE_BYTES    256
 #define W25QXX_SECTOR_SIZE_BYTES  (4 * 1024)  // 4KB
 #define W25QXX_BLOCK32_SIZE_BYTES (32 * 1024) // 32KB
