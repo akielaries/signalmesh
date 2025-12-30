@@ -82,7 +82,8 @@ set(SOURCES
     #./tests/test_poll_all.c
     #./tests/test_storage.c
     #./tests/bist_24lc256.c
-    ./tests/bist_w25q64.c
+    #./tests/bist_w25q64.c
+    ./tests/bist_spi_lb.c
 )
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})

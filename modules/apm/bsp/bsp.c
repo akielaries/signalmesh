@@ -1,12 +1,20 @@
+#include <stddef.h>
+
 #include "hal.h"
 #include "ch.h"
+
 #include "bsp/bsp.h"
-#include "bsp/configs/bsp_uart_config.h" // For bsp_debug_stream and bsp_debug_uart_config
+
 #include "bsp/utils/bsp_gpt.h"
 #include "bsp/utils/bsp_io.h"
 
+#include "bsp/configs/bsp_uart_config.h" // for bsp_debug_stream and bsp_debug_uart_config
+#include "bsp/configs/bsp_i2c_config.h" // for bsp_i2c_init()
+#include "bsp/configs/bsp_spi_config.h" // for bsp_spi_init()
+
 #include "drivers/driver_registry.h"
 #include "drivers/driver_api.h"
+
 #include "drivers/ina219.h"
 #include "drivers/ina3221.h"
 #include "drivers/bme280.h"
@@ -16,9 +24,8 @@
 #include "drivers/w25qxx.h"
 #include "drivers/servo.h"
 
-#include "bsp/configs/bsp_i2c_config.h" // For bsp_i2c_init()
-#include "bsp/configs/bsp_spi_config.h" // For bsp_spi_init()
-#include <stddef.h>
+
+
 // private data for ina219
 static ina219_t ina219_dev_data;
 // private data for ina3221
@@ -32,16 +39,16 @@ static eeprom_24lc256_t eeprom_24lc256_dev_data;
 // private data for w25qxx
 static w25qxx_t w25qxx_dev_data;
 // private data for servo
-// static servo_t servo_dev_data; // Servo driver doesn't have a private data struct
+// static servo_t servo_dev_data; // servo driver doesn't have a private data struct
 
 
-// Array of devices present on APM
+// array of devices present on APM
 device_t board_devices[] = {
     {
-        .name = "ina219", // This name must match the driver name
+        .name = "ina219", // this name must match the driver name
         .driver = &ina219_driver,
-        .bus = &I2CD4, // Bus instance
-        .priv = &ina219_dev_data, // Private data for the device
+        .bus = &I2CD4, // bus instance
+        .priv = &ina219_dev_data, // private data for the device
         .is_active = false
     },
     {

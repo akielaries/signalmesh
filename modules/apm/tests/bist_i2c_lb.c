@@ -56,16 +56,11 @@ CC_ALIGN_DATA(CACHE_LINE_SIZE)
 CC_SECTION(".ram4")
 static uint8_t slave_rx[LB_BUF_SIZE];
 
-/* Cache helpers: if your project already defines cacheBufferFlush/invalidate
- * these macros will resolve to them. Otherwise they become no-ops. On STM32H7
- * projects with D-Cache enabled you should map these to the CMSIS functions
- * (SCB_CleanDCache_by_Addr / SCB_InvalidateDCache_by_Addr) or use non-cacheable
- * memory. */
 #ifndef cacheBufferFlush
-#define cacheBufferFlush(buf, len) /* implement if needed */
+#define cacheBufferFlush(buf, len)
 #endif
 #ifndef cacheBufferInvalidate
-#define cacheBufferInvalidate(buf, len) /* implement if needed */
+#define cacheBufferInvalidate(buf, len)
 #endif
 
 void handle_i2c_err(int err) {
@@ -82,8 +77,6 @@ void handle_i2c_err(int err) {
   }
 }
 
-/* Master thread: does Transmit-then-Receive operation similar to chibios test
- */
 static THD_WORKING_AREA(waMasterThread, 512);
 static THD_FUNCTION(MasterThread, arg) {
   (void)arg;
