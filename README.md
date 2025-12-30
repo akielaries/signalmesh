@@ -1,18 +1,7 @@
-- [signalmesh](#signalmesh)
-- [Details](#details)
-  * [Modules](#modules)
-    + [Audio Creation Module (ACM)](#audio-creation-module--acm-)
-    + [Audio Peripheral Module (APM)](#audio-peripheral-module--aam-)
-    + [Data Siphon Module (DSM)](#data-siphon-module--dsm-)
-    + [Update and Upload Module (UUM)](#update-and-upload-module--uum-)
-    + [Telemetry and Debug Module (TDM)](#telemetry-and-debug-module--tdm-)
-- [Development](#development)
+# signalmesh
+*signalmesh* is a hybrid analog/digital synthesizer. For now it is a mess of reworked PCBs, perf/breadboards, and wires on my desk.
 
 CAD work going on here right now: https://github.com/akielaries/signalmesh_CAD/
-
-# signalmesh
-**signalmesh** aims to be a digital synthesizer and open source
-hardware/software project
 
 # Details
 Don't forget to initialize submodules. ChibiOS is the RTOS used in this project
@@ -23,51 +12,18 @@ git submodule update
 ```
 
 ## Modules
-There are 5 boards active in the **signalmesh** circuit. Three of which are concerned
-with sound (ACM, APM, DSM) and the remaining two (UUM, TDM) are related to health,
-updating, and other housekeeping related items.
-
-### Audio Creation Module (ACM)
-GWIN-9R Tangnano9k FPGA
-* Responsible for sound generation
-
-
-### Audio Peripheral Module (APM)
-STM32H755
-
-* Takes potentiometers, switches, etc. for sound parameters.
-* Sends audio creation parameters to the ACM via UART.
-* Receives the audio data from the FPGA via FMC.
-* Outputs the audio data over the DAC.
-
-
-### Data Siphon Module (DSM)
-STM32H753
-
-* If external media is present and recording is enabled, the played data will be
-siphoned from the APM and to the external media.
-
-### Update and Upload Module (UUM)
-STM32F446
-
-* Able to update and switch firmware versions of all on board devices.
-* Firmware packages can be made via `mkupdater.
-
-### Telemetry and Debug Module (TDM)
-STM32F334
-
-* Collects telemetry throughout the system via CAN and collects debug messages
-via UART. Ready to display via two USB 2.0 ports respectively.
-* Displays useful health/system information to one of the on board LCD screens.
+I anticipated having a few MCUs in the circuit but am starting off small for now with
+a single STM32H755 that will be doing all of the lifting. I'm doing all the development
+on this under `modules/apm`.
 
 # Development
-I debug port access is simple and there are several examples through the code. Use
+Debug port access is simple and there are several examples throughout the code. Use
 any USB -> Serial TTY converter and hook up the TX/RX pins to UART5 (`SD5`) on
-the STM32. I use `tio` to view the debug port activity at 1,000,000 BAUD.
+the STM32. I use `tio` to view the debug port activity at 1,000,000 baud.
 
 For development there is `tools/gdbserver.py` which is helpful for starting,
-killing, listing, and monitoring GDB server sessions for all of our board
-flavors.
+killing, listing, and monitoring GDB server sessions for different board flavors.
+It is worth noting the serial numbers/ST-link IDs are specific to my setup.
 ```
 $ ./tools/gdbserver.py --help
 usage: gdbserver.py [-h] [-s] [-m] [-k] [-l]
