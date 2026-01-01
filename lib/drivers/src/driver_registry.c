@@ -31,7 +31,7 @@ const driver_t *drivers[] = {
   &bh1750_driver,
   &aht2x_driver,
   &eeprom_24lc256_driver,
-  &w25qxx_driver,
+  //&w25qxx_driver,
   //&servo_driver,
 };
 

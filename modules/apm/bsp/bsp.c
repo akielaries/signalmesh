@@ -130,18 +130,21 @@ void bsp_init(void) {
   bsp_printf("DBGMCU->IDCODE: 0x%08lX\r\n", DBGMCU->IDCODE);
   bsp_printf("REV_ID: 0x%X\r\nDEV_ID: 0x%X\n", DBGMCU->IDCODE >> 16,
                                             DBGMCU->IDCODE & 0xFFF);
+
+/*
   // initialize i2c driver(s)
   bsp_i2c_init();
   bsp_printf("I2C initialized\n");
-  bsp_spi_init();
-  bsp_printf("SPI initialized\n");
+  //bsp_spi_init();
+  //bsp_printf("SPI initialized\n");
   // initializer hardware drivers this board supports
   init_devices();
   bsp_printf("initialized devices\n");
+*/
 
-
+/*
   // these should be configured more elegantly like how the i2c stuff is configured
-  /* ADC inputs.*/
+  // ADC inputs
   palSetPadMode(GPIOB, 1, PAL_MODE_INPUT_ANALOG); // PB1, ADC channel 5
   palSetPadMode(GPIOA, 3, PAL_MODE_INPUT_ANALOG); // PA3, ADC channel 15
   palSetPadMode(GPIOC, 0, PAL_MODE_INPUT_ANALOG); // PC0, ADC channel 10
@@ -149,6 +152,6 @@ void bsp_init(void) {
 
   // PWM on PE11, timer 1 channel 2?
   palSetPadMode(GPIOE, 11, PAL_MODE_ALTERNATE(1));
-
+*/
   bsp_printf("End of BSP init\n\r\n");
 }
