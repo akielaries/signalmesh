@@ -44,15 +44,15 @@ static int w25qxx_init(device_t *dev) {
   // assign the SPI bus configuration
   flash_dev->bus = *(spi_bus_t *)dev->bus;
 
+/*
   // release from deep power down
   dma_buffer[0] = W25QXX_CMD_RELEASE_DEEP_POWER_DOWN;
   spi_bus_acquire(&flash_dev->bus);
   spi_bus_send(&flash_dev->bus, dma_buffer, 1);
   spi_bus_release(&flash_dev->bus);
 
-  /*
   chThdSleepMicroseconds(30); // wait tRES1 (min 30us)
-
+*/
   // read JEDEC ID to identify the device
   w25qxx_jedec_id_t jedec_id;
   if (w25qxx_read_jedec_id(flash_dev, &jedec_id) != DRIVER_OK) {
@@ -61,7 +61,18 @@ static int w25qxx_init(device_t *dev) {
 
   flash_dev->manufacturer_id = jedec_id.manufacturer_id;
   flash_dev->device_id       = (jedec_id.device_id_high << 8) | jedec_id.device_id_low;
-  */
+
+  bsp_printf("mfg id: 0x%X\n", flash_dev->manufacturer_id);
+  bsp_printf("dev id: 0x%X\n", flash_dev->device_id);
+
+  switch (flash_dev->manufacturer_id) {
+    case W25QXX_MFG_WINBOND_ID:
+      bsp_printf("Windbond Serial Flash\n");
+      break;
+    default:
+      bsp_printf("unknown W25XX IC\n");
+      break;
+  }
 
   // determine device size based on JEDEC ID
   switch (flash_dev->device_id) {
@@ -73,6 +84,9 @@ static int w25qxx_init(device_t *dev) {
       break;
     case 0x4017: // W25Q64
       flash_dev->size_bytes = W25Q64_SIZE_BYTES;
+      bsp_printf("FLash IC: w25q64. %d bytes / %d mb\n",
+                    W25Q64_SIZE_BYTES,
+                    W25Q64_SIZE_BYTES / 1024 / 1024);
       break;
     case 0x4018: // W25Q128
       flash_dev->size_bytes = W25Q128_SIZE_BYTES;
@@ -82,8 +96,6 @@ static int w25qxx_init(device_t *dev) {
       break;
   }
 
-  bsp_printf("mfg id: 0x%X\n", flash_dev->manufacturer_id);
-  bsp_printf("dev id: 0x%X\n", flash_dev->device_id);
 
   return DRIVER_OK;
 }
@@ -231,20 +243,18 @@ static uint8_t w25qxx_read_status_register(w25qxx_t *flash_dev, uint8_t reg_num)
 }
 
 static int w25qxx_read_jedec_id(w25qxx_t *flash_dev, w25qxx_jedec_id_t *id) {
-  // command plus 3 dummy bytes to clock out the 3-byte ID
-  dma_buffer[0] = W25QXX_CMD_READ_JEDEC_ID;
-  dma_buffer[1] = 0xFF; // dummy
-  dma_buffer[2] = 0xFF; // dummy
-  dma_buffer[3] = 0xFF; // dummy
+  CC_ALIGN_DATA(32) static uint8_t cmd[3];
+  CC_ALIGN_DATA(32) static uint8_t reply[4];
+  cmd[0] = W25QXX_CMD_READ_JEDEC_ID;
 
-  spi_bus_acquire(&flash_dev->bus);
-  spi_bus_exchange(&flash_dev->bus, dma_buffer, dma_buffer, 4);
-  spi_bus_release(&flash_dev->bus);
+  //spi_bus_acquire(&flash_dev->bus);
+  spi_bus_exchange(&flash_dev->bus, cmd, reply, 4);
+  //spi_bus_release(&flash_dev->bus);
 
   // the first received byte is garbage, ID is in bytes 2, 3, 4
-  id->manufacturer_id = dma_buffer[1];
-  id->device_id_high  = dma_buffer[2];
-  id->device_id_low   = dma_buffer[3];
+  id->manufacturer_id = reply[1];
+  id->device_id_high  = reply[2];
+  id->device_id_low   = reply[3];
 
   return DRIVER_OK;
 }

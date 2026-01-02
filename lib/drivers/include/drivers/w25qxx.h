@@ -64,6 +64,8 @@ extern "C" {
 #define W25QXX_BLOCK32_SIZE_BYTES (32 * 1024) // 32KB
 #define W25QXX_BLOCK64_SIZE_BYTES (64 * 1024) // 64KB
 
+#define W25QXX_MFG_WINBOND_ID 0xEF
+
 // JEDEC ID information
 typedef struct {
   uint8_t manufacturer_id;
@@ -74,6 +76,7 @@ typedef struct {
 // W25QXX device private data structure
 typedef struct {
   spi_bus_t bus;
+  char device_name[16];
   uint32_t size_bytes;
   uint8_t manufacturer_id;
   uint16_t device_id;

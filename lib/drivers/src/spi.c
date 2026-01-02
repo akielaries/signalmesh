@@ -10,7 +10,7 @@
 
 
 void spi_bus_init(spi_bus_t *bus) {
-  if (bus == NULL || bus->spi_driver == NULL) {
+  if (bus == NULL || bus->spi_driver == NULL || bus->spi_config == NULL) {
     return;
   }
   spiStart(bus->spi_driver, bus->spi_config);
@@ -29,6 +29,7 @@ void spi_bus_acquire(spi_bus_t *bus) {
     return;
   }
   spiAcquireBus(bus->spi_driver);
+  spiStart(bus->spi_driver, bus->spi_config);
   spiSelect(bus->spi_driver);
 }
 
@@ -45,6 +46,7 @@ void spi_bus_release(spi_bus_t *bus) {
     return;
   }
   spiUnselect(bus->spi_driver);
+  spiStop(bus->spi_driver);
   spiReleaseBus(bus->spi_driver);
 }
 
@@ -63,7 +65,11 @@ void spi_bus_send(spi_bus_t *bus, const uint8_t *txbuf, size_t n) {
     return;
   }
   cacheBufferFlush(txbuf, n);
+  spiAcquireBus(bus->spi_driver);
+  spiSelect(bus->spi_driver);
   spiSend(bus->spi_driver, n, txbuf);
+  spiUnselect(bus->spi_driver);
+  spiReleaseBus(bus->spi_driver);
 }
 
 /**
@@ -109,5 +115,5 @@ void spi_bus_exchange(spi_bus_t *bus, const uint8_t *txbuf, uint8_t *rxbuf, size
   spiUnselect(bus->spi_driver);
   spiReleaseBus(bus->spi_driver);
   // invalidate the RX buffer in memory?
-  cacheBufferInvalidate(&rxbuf[0], n)
+  cacheBufferInvalidate(&rxbuf[0], n);
 }

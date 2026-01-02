@@ -41,6 +41,7 @@ void bsp_spi_init(void) {
 
   // start SPI1 driver
   spiStart(&SPID1, &spi1_hw_config);
+  //spi_bus_init(&spi1_bus_config);
 
   bsp_printf("SPI driver started\n");
 }
