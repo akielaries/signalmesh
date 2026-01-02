@@ -10,57 +10,12 @@
 #include "drivers/driver_registry.h"
 #include "drivers/w25qxx.h" // for W25QXX defines and driver
 
+#include "common/utils.h"
 
 // define the total size of the Flash and the chunk size for read/write
 #define FLASH_TOTAL_SIZE W25Q64_SIZE_BYTES
 #define WRITE_CHUNK_SIZE W25QXX_PAGE_SIZE_BYTES // use page size for writing (256 bytes)
 #define READ_CHUNK_SIZE  256                    // read in larger chunks
-
-
-// helper to convert a byte to its two-character hex representation
-static void byte_to_hex(uint8_t byte, char *hex_str) {
-  const char hex_chars[] = "0123456789abcdef";
-  hex_str[0]             = hex_chars[(byte >> 4) & 0x0F];
-  hex_str[1]             = hex_chars[byte & 0x0F];
-}
-
-void print_hexdump(const char *prefix, const uint8_t *data, size_t size) {
-  char line_buf[80];
-  char *ptr;
-
-  bsp_printf("%s (%d bytes):\n", prefix, size);
-  for (size_t i = 0; i < size; i += 16) {
-    ptr = line_buf;
-    // print address
-    ptr += chsnprintf(ptr, sizeof(line_buf) - (ptr - line_buf), "  %04X: ", i);
-
-    // print hex bytes
-    for (size_t j = 0; j < 16; j++) {
-      if (i + j < size) {
-        byte_to_hex(data[i + j], ptr);
-        ptr += 2;
-        *ptr++ = ' ';
-      } else {
-        *ptr++ = ' ';
-        *ptr++ = ' ';
-        *ptr++ = ' ';
-      }
-    }
-    ptr += chsnprintf(ptr, sizeof(line_buf) - (ptr - line_buf), " |");
-
-    // print ASCII representation
-    for (size_t j = 0; j < 16; j++) {
-      if (i + j < size) {
-        uint8_t c = data[i + j];
-        *ptr++    = (c >= 32 && c <= 126) ? c : '.';
-      } else {
-        *ptr++ = ' ';
-      }
-    }
-    ptr += chsnprintf(ptr, sizeof(line_buf) - (ptr - line_buf), "|\n");
-    bsp_printf("%s", line_buf);
-  }
-}
 
 
 int main(void) {
@@ -83,18 +38,6 @@ int main(void) {
   // local buffers for chunked R/W and verification
   uint8_t chunk_write_buf[WRITE_CHUNK_SIZE];
   uint8_t chunk_read_buf[WRITE_CHUNK_SIZE];
-
-  bsp_printf("Erasing W25Q64 chip (%lu bytes)...\n", (unsigned long)FLASH_TOTAL_SIZE);
-  systime_t erase_start_time = chVTGetSystemTimeX();
-  int res                    = w25qxx_chip_erase((w25qxx_t *)flash->priv);
-  if (res != DRIVER_OK) {
-    bsp_printf("ERROR: Chip erase failed!\n");
-    return -1;
-  }
-  systime_t erase_end_time   = chVTGetSystemTimeX();
-  uint32_t erase_duration_ms = TIME_MS2I(erase_end_time - erase_start_time);
-  bsp_printf("Chip erase duration: %lu ms\n", (unsigned long)erase_duration_ms);
-
 
   // no longer generating a full 8MB buffer. Data is generated per chunk.
   bsp_printf("\nGenerating test data pattern for %lu bytes...\n", (unsigned long)FLASH_TOTAL_SIZE);

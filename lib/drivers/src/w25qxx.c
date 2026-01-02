@@ -38,6 +38,7 @@ static int w25qxx_init(device_t *dev) {
   if (dev->priv == NULL) {
     return DRIVER_ERROR;
   }
+  bsp_printf("initializing W25QXX flash\n");
   w25qxx_t *flash_dev = (w25qxx_t *)dev->priv;
 
   // assign the SPI bus configuration
@@ -49,6 +50,7 @@ static int w25qxx_init(device_t *dev) {
   spi_bus_send(&flash_dev->bus, dma_buffer, 1);
   spi_bus_release(&flash_dev->bus);
 
+  /*
   chThdSleepMicroseconds(30); // wait tRES1 (min 30us)
 
   // read JEDEC ID to identify the device
@@ -59,6 +61,7 @@ static int w25qxx_init(device_t *dev) {
 
   flash_dev->manufacturer_id = jedec_id.manufacturer_id;
   flash_dev->device_id       = (jedec_id.device_id_high << 8) | jedec_id.device_id_low;
+  */
 
   // determine device size based on JEDEC ID
   switch (flash_dev->device_id) {
@@ -78,6 +81,9 @@ static int w25qxx_init(device_t *dev) {
       flash_dev->size_bytes = W25Q64_SIZE_BYTES; // default to 8MB if unknown
       break;
   }
+
+  bsp_printf("mfg id: 0x%X\n", flash_dev->manufacturer_id);
+  bsp_printf("dev id: 0x%X\n", flash_dev->device_id);
 
   return DRIVER_OK;
 }
