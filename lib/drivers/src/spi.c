@@ -10,10 +10,10 @@
 
 
 void spi_bus_init(spi_bus_t *bus) {
-  if (bus == NULL || bus->spi_driver == NULL || bus->spi_config == NULL) {
+  if (bus == NULL || bus->spi_driver == NULL) {
     return;
   }
-  spiStart(bus->spi_driver, bus->spi_config);
+  //spiStart(bus->spi_driver, bus->spi_config);
 }
 
 /**
@@ -29,7 +29,6 @@ void spi_bus_acquire(spi_bus_t *bus) {
     return;
   }
   spiAcquireBus(bus->spi_driver);
-  spiStart(bus->spi_driver, bus->spi_config);
   spiSelect(bus->spi_driver);
 }
 
@@ -46,15 +45,11 @@ void spi_bus_release(spi_bus_t *bus) {
     return;
   }
   spiUnselect(bus->spi_driver);
-  spiStop(bus->spi_driver);
   spiReleaseBus(bus->spi_driver);
 }
 
 /**
  * @brief Sends data over the SPI bus.
- *
- * This function assumes the bus has already been acquired and CS asserted
- * by `spi_bus_acquire()`.
  *
  * @param bus Pointer to SPI bus configuration.
  * @param txbuf Pointer to transmit buffer.
@@ -65,11 +60,13 @@ void spi_bus_send(spi_bus_t *bus, const uint8_t *txbuf, size_t n) {
     return;
   }
   cacheBufferFlush(txbuf, n);
+
+
   spiAcquireBus(bus->spi_driver);
   spiSelect(bus->spi_driver);
+
   spiSend(bus->spi_driver, n, txbuf);
-  spiUnselect(bus->spi_driver);
-  spiReleaseBus(bus->spi_driver);
+
 }
 
 /**
@@ -86,8 +83,14 @@ void spi_bus_receive(spi_bus_t *bus, uint8_t *rxbuf, size_t n) {
   if (bus == NULL || bus->spi_driver == NULL || rxbuf == NULL || n == 0) {
     return;
   }
+
+
   spiReceive(bus->spi_driver, n, rxbuf);
-  cacheBufferInvalidate(rxbuf, n);
+  spiUnselect(bus->spi_driver);
+  spiReleaseBus(bus->spi_driver);
+
+  cacheBufferInvalidate(&rxbuf[0], n);
+  //cacheBufferInvalidate(rxbuf, n);
 }
 
 /**

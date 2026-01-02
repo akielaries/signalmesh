@@ -38,7 +38,7 @@ static int w25qxx_init(device_t *dev) {
   if (dev->priv == NULL) {
     return DRIVER_ERROR;
   }
-  bsp_printf("initializing W25QXX flash\n");
+  bsp_printf("W25QXX: Initializing...\n");
   w25qxx_t *flash_dev = (w25qxx_t *)dev->priv;
 
   // assign the SPI bus configuration
@@ -84,7 +84,8 @@ static int w25qxx_init(device_t *dev) {
       break;
     case 0x4017: // W25Q64
       flash_dev->size_bytes = W25Q64_SIZE_BYTES;
-      bsp_printf("FLash IC: w25q64. %d bytes / %d mb\n",
+      bsp_printf("FLash IC ID 0x%X w25q64. %d bytes / %d mb\n",
+                    flash_dev->device_id,
                     W25Q64_SIZE_BYTES,
                     W25Q64_SIZE_BYTES / 1024 / 1024);
       break;
@@ -97,6 +98,7 @@ static int w25qxx_init(device_t *dev) {
   }
 
 
+  bsp_printf("W25QXX: Initialization complete.\n");
   return DRIVER_OK;
 }
 
@@ -243,13 +245,11 @@ static uint8_t w25qxx_read_status_register(w25qxx_t *flash_dev, uint8_t reg_num)
 }
 
 static int w25qxx_read_jedec_id(w25qxx_t *flash_dev, w25qxx_jedec_id_t *id) {
-  CC_ALIGN_DATA(32) static uint8_t cmd[3];
+  CC_ALIGN_DATA(32) static uint8_t cmd[1];
   CC_ALIGN_DATA(32) static uint8_t reply[4];
   cmd[0] = W25QXX_CMD_READ_JEDEC_ID;
 
-  //spi_bus_acquire(&flash_dev->bus);
   spi_bus_exchange(&flash_dev->bus, cmd, reply, 4);
-  //spi_bus_release(&flash_dev->bus);
 
   // the first received byte is garbage, ID is in bytes 2, 3, 4
   id->manufacturer_id = reply[1];
