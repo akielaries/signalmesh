@@ -23,6 +23,9 @@ typedef struct {
   SPIConfig *spi_config;
 } spi_bus_t;
 
+
+void spi_bus_init(spi_bus_t *bus);
+
 /**
  * @brief Acquires the SPI bus and asserts the Chip Select (CS) line.
  *

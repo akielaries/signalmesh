@@ -131,16 +131,14 @@ void bsp_init(void) {
   bsp_printf("REV_ID: 0x%X\r\nDEV_ID: 0x%X\n", DBGMCU->IDCODE >> 16,
                                             DBGMCU->IDCODE & 0xFFF);
 
-/*
   // initialize i2c driver(s)
   bsp_i2c_init();
   bsp_printf("I2C initialized\n");
-  //bsp_spi_init();
-  //bsp_printf("SPI initialized\n");
+  bsp_spi_init();
+  bsp_printf("SPI initialized\n");
   // initializer hardware drivers this board supports
   init_devices();
   bsp_printf("initialized devices\n");
-*/
 
 /*
   // these should be configured more elegantly like how the i2c stuff is configured

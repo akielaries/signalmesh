@@ -33,6 +33,9 @@ add_chibios_stm32h7_library(chibios_stm32h7 TYPE STATIC)
 set(DRIVERS_SRC_DIR ../../lib/drivers/src)
 set(DRIVERS_INCLUDE_DIR ../../lib/drivers/include)
 
+set(COMMON_SRC_DIR ../../lib/common/src)
+set(COMMON_INCLUDE_DIR ../../lib/common/include)
+
 include_directories(
   .
   ./bsp
@@ -41,6 +44,7 @@ include_directories(
   ./bsp/configs
   ./bsp/utils
   ${DRIVERS_INCLUDE_DIR}
+  ${COMMON_INCLUDE_DIR}
   #${CHIBIOS_ROOT}/os/hal/include
   #${CHIBIOS_ROOT}/os/rt/include
 
@@ -59,6 +63,8 @@ set(SOURCES
     ./bsp/configs/bsp_spi_config.c
     ./bsp/utils/bsp_gpt.c
     ./bsp/utils/bsp_io.c
+
+    ${COMMON_SRC_DIR}/utils.c
 
     ${DRIVERS_SRC_DIR}/driver_registry.c
 
@@ -84,7 +90,7 @@ set(SOURCES
     #./tests/bist_24lc256.c
     #./tests/bist_w25q64.c
     #./tests/bist_spi_lb.c
-    ./tests/spi_test2.c
+    ./tests/spi_test3.c
 )
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})

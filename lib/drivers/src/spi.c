@@ -1,6 +1,20 @@
-#include "drivers/spi.h"
+#include <stdint.h>
+
 #include "hal.h"
+#include "ch.h"
+
+
+#include "drivers/spi.h"
+
 #include "bsp/utils/bsp_io.h" // For bsp_printf
+
+
+void spi_bus_init(spi_bus_t *bus) {
+  if (bus == NULL || bus->spi_driver == NULL) {
+    return;
+  }
+  spiStart(bus->spi_driver, bus->spi_config);
+}
 
 /**
  * @brief Acquires the SPI bus and asserts the Chip Select (CS) line.
@@ -85,7 +99,15 @@ void spi_bus_exchange(spi_bus_t *bus, const uint8_t *txbuf, uint8_t *rxbuf, size
   if (bus == NULL || bus->spi_driver == NULL || n == 0) {
     return;
   }
-  cacheBufferFlush(txbuf, n);
+  // flush TX buffer in memory?
+  cacheBufferFlush(&txbuf[0], n);
+
+  spiAcquireBus(bus->spi_driver);
+  spiSelect(bus->spi_driver);
+  // perform the actual exchange
   spiExchange(bus->spi_driver, n, txbuf, rxbuf);
-  cacheBufferInvalidate(rxbuf, n);
+  spiUnselect(bus->spi_driver);
+  spiReleaseBus(bus->spi_driver);
+  // invalidate the RX buffer in memory?
+  cacheBufferInvalidate(&rxbuf[0], n)
 }
