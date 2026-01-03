@@ -108,8 +108,10 @@ void spi_bus_exchange(spi_bus_t *bus, const uint8_t *txbuf, uint8_t *rxbuf, size
   if (bus == NULL || bus->spi_driver == NULL || n == 0) {
     return;
   }
-  // flush TX buffer in memory?
-  cacheBufferFlush(&txbuf[0], n);
+  if (txbuf) {
+    // flush TX buffer in memory?
+    cacheBufferFlush(txbuf, n);
+  }
 
   spiAcquireBus(bus->spi_driver);
   spiSelect(bus->spi_driver);
@@ -117,6 +119,9 @@ void spi_bus_exchange(spi_bus_t *bus, const uint8_t *txbuf, uint8_t *rxbuf, size
   spiExchange(bus->spi_driver, n, txbuf, rxbuf);
   spiUnselect(bus->spi_driver);
   spiReleaseBus(bus->spi_driver);
-  // invalidate the RX buffer in memory?
-  cacheBufferInvalidate(&rxbuf[0], n);
+
+  if (rxbuf) {
+    // invalidate the RX buffer in memory?
+    cacheBufferInvalidate(rxbuf, n);
+  }
 }

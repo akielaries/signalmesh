@@ -34,6 +34,28 @@ const driver_t w25qxx_driver __attribute__((used)) = {
   .readings_directory = NULL,
 };
 
+static void w25qxx_reset(w25qxx_t *flash_dev) {
+  bsp_printf("performing reset\n");
+  CC_ALIGN_DATA(32) static uint8_t cmd[4];
+  CC_ALIGN_DATA(32) static uint8_t reply[4];
+
+  cmd[0] = W25QXX_CMD_RELEASE_DEEP_POWER_DOWN;
+  cmd[1] = 0xFF;
+  cmd[2] = 0xFF;
+  cmd[3] = 0xFF;
+  spi_bus_exchange(&flash_dev->bus, cmd, reply, 4);
+  bsp_printf("releasing from power down\n");
+
+  // perform a software reset
+  cmd[0] = W25QXX_CMD_RESET_ENABLE;
+  spi_bus_exchange(&flash_dev->bus, cmd, reply, 1);
+
+  cmd[0] = W25QXX_CMD_RESET_DEVICE;
+  spi_bus_exchange(&flash_dev->bus, cmd, reply, 1);
+
+  chThdSleepMilliseconds(10); // wait tRST
+}
+
 static int w25qxx_init(device_t *dev) {
   if (dev->priv == NULL) {
     return DRIVER_ERROR;
@@ -44,15 +66,9 @@ static int w25qxx_init(device_t *dev) {
   // assign the SPI bus configuration
   flash_dev->bus = *(spi_bus_t *)dev->bus;
 
-/*
-  // release from deep power down
-  dma_buffer[0] = W25QXX_CMD_RELEASE_DEEP_POWER_DOWN;
-  spi_bus_acquire(&flash_dev->bus);
-  spi_bus_send(&flash_dev->bus, dma_buffer, 1);
-  spi_bus_release(&flash_dev->bus);
+  w25qxx_reset(flash_dev);
 
-  chThdSleepMicroseconds(30); // wait tRES1 (min 30us)
-*/
+
   // read JEDEC ID to identify the device
   w25qxx_jedec_id_t jedec_id;
   if (w25qxx_read_jedec_id(flash_dev, &jedec_id) != DRIVER_OK) {
@@ -122,16 +138,17 @@ static int32_t w25qxx_read(device_t *dev, uint32_t offset, void *buf, size_t cou
 
   // transmit command and address, then receive data
   spi_bus_acquire(&flash_dev->bus);
-  spi_bus_send(&flash_dev->bus, dma_buffer, 4);
-  spi_bus_receive(&flash_dev->bus, (uint8_t *)buf, count);
+  spiSend(flash_dev->bus.spi_driver, 4, dma_buffer);
+  spiReceive(flash_dev->bus.spi_driver, count, buf);
   spi_bus_release(&flash_dev->bus);
 
   return count;
 }
 
 static int32_t w25qxx_write(device_t *dev, uint32_t offset, const void *buf, size_t count) {
-  if (dev == NULL || buf == NULL)
+  if (dev == NULL || buf == NULL) {
     return DRIVER_INVALID_PARAM;
+  }
 
   w25qxx_t *flash_dev = (w25qxx_t *)dev->priv;
   if (offset + count > flash_dev->size_bytes)
@@ -141,8 +158,6 @@ static int32_t w25qxx_write(device_t *dev, uint32_t offset, const void *buf, siz
   size_t bytes_written    = 0;
 
   while (bytes_written < count) {
-    if (w25qxx_wait_busy(flash_dev) != DRIVER_OK)
-      return bytes_written > 0 ? bytes_written : DRIVER_ERROR;
 
     if (w25qxx_write_enable(flash_dev) != DRIVER_OK)
       return bytes_written > 0 ? bytes_written : DRIVER_ERROR;
@@ -161,8 +176,8 @@ static int32_t w25qxx_write(device_t *dev, uint32_t offset, const void *buf, siz
 
     // transmit command header, then the user data directly
     spi_bus_acquire(&flash_dev->bus);
-    spi_bus_send(&flash_dev->bus, dma_buffer, 4);
-    spi_bus_send(&flash_dev->bus, &data_ptr[bytes_written], chunk_size);
+    spiSend(flash_dev->bus.spi_driver, 4, dma_buffer);
+    spiSend(flash_dev->bus.spi_driver, chunk_size, &data_ptr[bytes_written]);
     spi_bus_release(&flash_dev->bus);
 
     bytes_written += chunk_size;
@@ -194,9 +209,7 @@ static int w25qxx_wait_busy(w25qxx_t *flash_dev) {
 static int w25qxx_write_enable(w25qxx_t *flash_dev) {
   dma_buffer[0] = W25QXX_CMD_WRITE_ENABLE;
 
-  spi_bus_acquire(&flash_dev->bus);
-  spi_bus_send(&flash_dev->bus, dma_buffer, 1);
-  spi_bus_release(&flash_dev->bus);
+  spi_bus_exchange(&flash_dev->bus, dma_buffer, NULL, 1);
 
   chThdSleepMicroseconds(10);
 
@@ -212,9 +225,7 @@ static int w25qxx_write_enable(w25qxx_t *flash_dev) {
 static int w25qxx_write_disable(w25qxx_t *flash_dev) {
   dma_buffer[0] = W25QXX_CMD_WRITE_DISABLE;
 
-  spi_bus_acquire(&flash_dev->bus);
-  spi_bus_send(&flash_dev->bus, dma_buffer, 1);
-  spi_bus_release(&flash_dev->bus);
+  spi_bus_exchange(&flash_dev->bus, dma_buffer, NULL, 1);
 
   return DRIVER_OK;
 }
@@ -234,14 +245,11 @@ static uint8_t w25qxx_read_status_register(w25qxx_t *flash_dev, uint8_t reg_num)
       return 0xFF; // error indication
   }
 
-  dma_buffer[1] = 0xFF; // dummy byte
-
-  spi_bus_acquire(&flash_dev->bus);
-  spi_bus_exchange(&flash_dev->bus, dma_buffer, dma_buffer, 2);
-  spi_bus_release(&flash_dev->bus);
+  uint8_t rx_buf[2];
+  spi_bus_exchange(&flash_dev->bus, dma_buffer, rx_buf, 2);
 
   // the first received byte is garbage, status is the second byte
-  return dma_buffer[1];
+  return rx_buf[1];
 }
 
 static int w25qxx_read_jedec_id(w25qxx_t *flash_dev, w25qxx_jedec_id_t *id) {
@@ -266,9 +274,7 @@ int w25qxx_chip_erase(w25qxx_t *flash_dev) {
   }
 
   dma_buffer[0] = W25QXX_CMD_CHIP_ERASE;
-  spi_bus_acquire(&flash_dev->bus);
-  spi_bus_send(&flash_dev->bus, dma_buffer, 1);
-  spi_bus_release(&flash_dev->bus);
+  spi_bus_exchange(&flash_dev->bus, dma_buffer, NULL, 1);
 
   if (w25qxx_wait_busy(flash_dev) != DRIVER_OK) {
     bsp_printf("W25QXX: Chip erase busy wait timeout.\n");
@@ -287,10 +293,7 @@ int w25qxx_sector_erase(w25qxx_t *flash_dev, uint32_t sector_addr) {
   dma_buffer[1] = (uint8_t)(sector_addr >> 16);
   dma_buffer[2] = (uint8_t)(sector_addr >> 8);
   dma_buffer[3] = (uint8_t)(sector_addr & 0xFF);
-
-  spi_bus_acquire(&flash_dev->bus);
-  spi_bus_send(&flash_dev->bus, dma_buffer, 4);
-  spi_bus_release(&flash_dev->bus);
+  spi_bus_exchange(&flash_dev->bus, dma_buffer, NULL, 4);
 
   if (w25qxx_wait_busy(flash_dev) != DRIVER_OK) {
     bsp_printf("W25QXX: Sector erase busy wait timeout.\n");
@@ -318,9 +321,7 @@ int w25qxx_block_erase(w25qxx_t *flash_dev, uint32_t block_addr, uint32_t block_
   dma_buffer[2] = (uint8_t)(block_addr >> 8);
   dma_buffer[3] = (uint8_t)(block_addr & 0xFF);
 
-  spi_bus_acquire(&flash_dev->bus);
-  spi_bus_send(&flash_dev->bus, dma_buffer, 4);
-  spi_bus_release(&flash_dev->bus);
+  spi_bus_exchange(&flash_dev->bus, dma_buffer, NULL, 4);
 
   if (w25qxx_wait_busy(flash_dev) != DRIVER_OK) {
     bsp_printf("W25QXX: Block erase busy wait timeout.\n");

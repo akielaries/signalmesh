@@ -38,7 +38,6 @@ int main(void) {
   // local buffers for chunked R/W and verification
   uint8_t chunk_write_buf[WRITE_CHUNK_SIZE];
   uint8_t chunk_read_buf[WRITE_CHUNK_SIZE];
-  return 0;
 
   // no longer generating a full 8MB buffer. Data is generated per chunk.
   bsp_printf("\nGenerating test data pattern for %lu bytes...\n", (unsigned long)FLASH_TOTAL_SIZE);
@@ -84,6 +83,7 @@ int main(void) {
     bsp_printf("Write speed: %.2f KB/s\n", (float)total_written / write_duration_ms);
   }
 
+  return 0;
   bsp_printf("\nReading %lu bytes from Flash in %u-byte chunks and verifying...\n",
              (unsigned long)FLASH_TOTAL_SIZE,
              READ_CHUNK_SIZE);
