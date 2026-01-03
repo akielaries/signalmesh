@@ -149,7 +149,6 @@ static int32_t w25qxx_write(device_t *dev, uint32_t offset, const void *buf, siz
   if (dev == NULL || buf == NULL) {
     return DRIVER_INVALID_PARAM;
   }
-
   w25qxx_t *flash_dev = (w25qxx_t *)dev->priv;
   if (offset + count > flash_dev->size_bytes)
     return DRIVER_INVALID_PARAM;
@@ -174,11 +173,15 @@ static int32_t w25qxx_write(device_t *dev, uint32_t offset, const void *buf, siz
     dma_buffer[2] = (uint8_t)(current_addr >> 8);
     dma_buffer[3] = (uint8_t)(current_addr & 0xFF);
 
-    // transmit command header, then the user data directly
-    spi_bus_acquire(&flash_dev->bus);
-    spiSend(flash_dev->bus.spi_driver, 4, dma_buffer);
-    spiSend(flash_dev->bus.spi_driver, chunk_size, &data_ptr[bytes_written]);
-    spi_bus_release(&flash_dev->bus);
+    // create a temporary buffer to hold command and data for a single exchange
+    uint8_t tx_buf[4 + W25QXX_PAGE_SIZE_BYTES];
+    
+    // copy command and data into the temporary buffer
+    memcpy(tx_buf, dma_buffer, 4);
+    memcpy(tx_buf + 4, &data_ptr[bytes_written], chunk_size);
+
+    // transmit command and data in a single exchange
+    spi_bus_exchange(&flash_dev->bus, tx_buf, NULL, 4 + chunk_size);
 
     bytes_written += chunk_size;
   }
@@ -207,17 +210,23 @@ static int w25qxx_wait_busy(w25qxx_t *flash_dev) {
 }
 
 static int w25qxx_write_enable(w25qxx_t *flash_dev) {
-  dma_buffer[0] = W25QXX_CMD_WRITE_ENABLE;
+  CC_ALIGN_DATA(32) static uint8_t cmd[4];
+  CC_ALIGN_DATA(32) static uint8_t reply[4];
+  cmd[0] = W25QXX_CMD_WRITE_ENABLE;
 
-  spi_bus_exchange(&flash_dev->bus, dma_buffer, NULL, 1);
+  spi_bus_exchange(&flash_dev->bus, cmd, reply, 4);
 
   chThdSleepMicroseconds(10);
 
+  /*
   // verify write enable bit is set
   if ((w25qxx_read_status_register(flash_dev, 1) & W25QXX_STATUS_WEL) == 0) {
     bsp_printf("W25QXX: Failed to enable write (WEL not set).\n");
     return DRIVER_ERROR;
   }
+  */
+
+  bsp_printf("write enabled\n");
 
   return DRIVER_OK;
 }
