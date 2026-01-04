@@ -20,7 +20,6 @@
 
 int main(void) {
   bsp_init();
-  chThdSleepMilliseconds(1000); // wait for things to settle
 
   bsp_printf("\n--- Starting W25Q64 BIST ---\r\n");
 
@@ -75,10 +74,10 @@ int main(void) {
 
   // verify chunk immediately
   if (memcmp(chunk_write_buf, chunk_read_buf, TEST_BUFFER_SIZE) != 0) {
-    bsp_printf("VERIFICATION FAILURE: Mismatch at offset %lu!\n", (unsigned long)offset);
-    print_hexdump("Expected (first 32 bytes)", chunk_write_buf, TEST_BUFFER_SIZE);
-    print_hexdump("Received (first 32 bytes)", chunk_read_buf, TEST_BUFFER_SIZE);
-    bsp_printf("VERIFICATION FAILED: Mismatches found during read operation.\n");
+    bsp_printf("mismatch at offset %lu\n", offset);
+
+    print_hexdump("Expected", chunk_write_buf, TEST_BUFFER_SIZE);
+    print_hexdump("Received", chunk_read_buf, TEST_BUFFER_SIZE);
     return -1;
   }
 

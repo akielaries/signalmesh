@@ -126,7 +126,6 @@ static int32_t w25qxx_read(device_t *dev, uint32_t offset, void *buf, size_t cou
   if (offset + count > flash_dev->size_bytes)
     return DRIVER_INVALID_PARAM;
 
-  // As requested, w25qxx_wait_busy is not called for read operations.
 
   // Define a static, DMA-safe buffer for chunked reading.
   // Using a size that can hold a full page plus the 5-byte command header.
@@ -138,16 +137,21 @@ static int32_t w25qxx_read(device_t *dev, uint32_t offset, void *buf, size_t cou
   uint8_t *data_ptr = (uint8_t *)buf;
 
   while (bytes_read < count) {
+    if (w25qxx_write_enable(flash_dev) != DRIVER_OK) {
+      return bytes_read > 0 ? bytes_read : DRIVER_ERROR;
+    }
     size_t bytes_remaining = count - bytes_read;
     size_t chunk_size = (bytes_remaining < READ_CHUNK_SIZE) ? bytes_remaining : READ_CHUNK_SIZE;
     uint32_t current_addr = offset + bytes_read;
 
+    memset(tx_buffer, 0xFF, 5 + chunk_size);
+
     tx_buffer[0] = W25QXX_CMD_FAST_READ;
-    tx_buffer[1] = (uint8_t)(current_addr >> 24) & 0xFF;
-    tx_buffer[2] = (uint8_t)(current_addr >> 16) & 0xFF;
-    tx_buffer[3] = (uint8_t)(current_addr >> 8) & 0xFF;
-    tx_buffer[4] = (uint8_t)(current_addr >> 0) & 0xFF;
-    tx_buffer[5] = 0x00; // Dummy byte for Fast Read.
+    //tx_buffer[1] = (uint8_t)(current_addr >> 24) & 0xFF;
+    tx_buffer[1] = (uint8_t)(current_addr >> 16) & 0xFF;
+    tx_buffer[2] = (uint8_t)(current_addr >> 8) & 0xFF;
+    tx_buffer[3] = (uint8_t)(current_addr >> 0) & 0xFF;
+    tx_buffer[4] = 0x00; // Dummy byte for Fast Read.
 
     // Perform the exchange for this chunk. The total length is 5 header bytes
     // plus the number of data bytes to read.
@@ -159,6 +163,12 @@ static int32_t w25qxx_read(device_t *dev, uint32_t offset, void *buf, size_t cou
     memcpy(data_ptr + bytes_read, rx_buffer + 5, chunk_size);
 
     bytes_read += chunk_size;
+
+    if (w25qxx_wait_busy(flash_dev) != DRIVER_OK) {
+      // If the wait times out, return the number of bytes that were
+      // successfully written before the failure.
+      return bytes_read;
+    }
   }
 
   return bytes_read;
@@ -171,8 +181,8 @@ static int32_t w25qxx_write(device_t *dev, uint32_t offset, const void *buf, siz
 
   // A single, DMA-safe buffer for the entire transaction (cmd + address + data)
   // Max size is 4 bytes for command + 256 bytes for a full page write.
-  CC_ALIGN_DATA(32) static uint8_t tx_buffer[5 + W25QXX_PAGE_SIZE_BYTES];
-  CC_ALIGN_DATA(32) static uint8_t reply_buffer[5 + W25QXX_PAGE_SIZE_BYTES];
+  CC_ALIGN_DATA(32) static uint8_t tx_buffer[4 + W25QXX_PAGE_SIZE_BYTES];
+  CC_ALIGN_DATA(32) static uint8_t reply_buffer[4 + W25QXX_PAGE_SIZE_BYTES];
 
   w25qxx_t *flash_dev = (w25qxx_t *)dev->priv;
   if (offset + count > flash_dev->size_bytes)
@@ -193,19 +203,20 @@ static int32_t w25qxx_write(device_t *dev, uint32_t offset, const void *buf, siz
     uint32_t bytes_remaining = count - bytes_written;
     uint32_t chunk_size      = (page_space < bytes_remaining) ? page_space : bytes_remaining;
 
+
     // Build the command and address in the static buffer.
     tx_buffer[0] = W25QXX_CMD_PAGE_PROGRAM;
-    tx_buffer[1] = (uint8_t)(current_addr >> 24) & 0xFF;
-    tx_buffer[2] = (uint8_t)(current_addr >> 16) & 0xFF;
-    tx_buffer[3] = (uint8_t)(current_addr >> 8) & 0xFF;
-    tx_buffer[4] = (uint8_t)(current_addr >> 0) & 0xFF;
+    //tx_buffer[1] = (uint8_t)(current_addr >> 24) & 0xFF;
+    tx_buffer[1] = (uint8_t)(current_addr >> 16) & 0xFF;
+    tx_buffer[2] = (uint8_t)(current_addr >> 8) & 0xFF;
+    tx_buffer[3] = (uint8_t)(current_addr >> 0) & 0xFF;
 
-    // Copy the data chunk into the buffer right after the command.
-    memcpy(tx_buffer + 5, data_ptr + bytes_written, chunk_size);
+    // Copy the data chunk into the buffer right after the command
+    memcpy(&tx_buffer[4], data_ptr + bytes_written, chunk_size);
 
     // Transmit command and data in a single exchange.
     spi_bus_exchange(&flash_dev->bus, tx_buffer, reply_buffer, 4 + chunk_size);
-    bsp_printf("wrote bytes\n");
+    bsp_printf("wrote %d bytes\n", 4+chunk_size);
 
     bytes_written += chunk_size;
 
@@ -221,6 +232,32 @@ static int32_t w25qxx_write(device_t *dev, uint32_t offset, const void *buf, siz
   return bytes_written;
 }
 
+static int w25qxx_wait_busy(w25qxx_t *flash_dev) {
+  bsp_printf("busy wait...\n");
+
+  // microseconds?
+  uint32_t timeout = 10000;
+  CC_ALIGN_DATA(32) static uint8_t status[2];
+  CC_ALIGN_DATA(32) static uint8_t cmd[2];
+
+  while (timeout != 0) {
+    cmd[0] = W25QXX_CMD_READ_STATUS_REG1;
+
+    spi_bus_exchange(&flash_dev->bus, cmd, status, 2);
+    bsp_printf("send read reg cmd\n");
+    bsp_printf("status: 0x%X 0x%X \n", status[0], status[1]);
+
+    if ((status[1] & 0x01) == 0x00) {
+      break;
+    }
+    timeout--;
+    chThdSleepMicroseconds(10);
+  }
+
+  return DRIVER_OK;
+}
+
+/*
 // helper function implementations
 static int w25qxx_wait_busy(w25qxx_t *flash_dev) {
   // A long timeout is used here because erase operations can take seconds.
@@ -240,23 +277,22 @@ static int w25qxx_wait_busy(w25qxx_t *flash_dev) {
   bsp_printf("busy wait...done\n");
   return DRIVER_OK;
 }
+*/
 
 static int w25qxx_write_enable(w25qxx_t *flash_dev) {
-  CC_ALIGN_DATA(32) static uint8_t cmd[4];
-  CC_ALIGN_DATA(32) static uint8_t reply[4];
+  CC_ALIGN_DATA(32) static uint8_t cmd[1];
+  CC_ALIGN_DATA(32) static uint8_t reply[1];
   cmd[0] = W25QXX_CMD_WRITE_ENABLE;
 
-  spi_bus_exchange(&flash_dev->bus, cmd, reply, 4);
+  spi_bus_exchange(&flash_dev->bus, cmd, reply, 1);
 
-  chThdSleepMicroseconds(10);
+  chThdSleepMicroseconds(50);
 
-  /*
   // verify write enable bit is set
   if ((w25qxx_read_status_register(flash_dev, 1) & W25QXX_STATUS_WEL) == 0) {
     bsp_printf("W25QXX: Failed to enable write (WEL not set).\n");
     return DRIVER_ERROR;
   }
-  */
 
   bsp_printf("write enabled\n");
 
