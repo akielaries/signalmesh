@@ -13,10 +13,18 @@
 #include "common/utils.h"
 
 #define TEST_BUFFER_SIZE 32
-#define FLASH_TOTAL_SIZE TEST_BUFFER_SIZE
-#define WRITE_CHUNK_SIZE TEST_BUFFER_SIZE
-#define READ_CHUNK_SIZE TEST_BUFFER_SIZE
 
+
+/*
+static const uint8_t test_pattern[] = {
+  0xBA, 0xAD, 0xF0, 0x0D,
+  0xC0, 0xFF, 0xEE, 0x00
+};
+*/
+
+static const uint8_t test_pattern[] = {
+  0xDE, 0xAD, 0xBE, 0xEF,
+};
 
 int main(void) {
   bsp_init();
@@ -40,9 +48,10 @@ int main(void) {
 
   uint32_t offset = 0;
   bsp_printf("\nGenerating test data pattern for %lu bytes...\n", (unsigned long)TEST_BUFFER_SIZE);
-  for (size_t i = 0; i < TEST_BUFFER_SIZE; i++) {
-    chunk_write_buf[i] = (uint8_t)((offset + i) % 256);
-  }
+for (size_t i = 0; i < TEST_BUFFER_SIZE; i++) {
+  chunk_write_buf[i] = test_pattern[i % sizeof(test_pattern)];
+}
+
   print_hexdump("Chunk Write data (head)", chunk_write_buf, TEST_BUFFER_SIZE);
 
   bsp_printf("\nWriting %lu bytes to Flash...\n",
@@ -61,7 +70,7 @@ int main(void) {
              (unsigned long)TEST_BUFFER_SIZE);
   // generate expected data for the current chunk for verification
   for (size_t i = 0; i < TEST_BUFFER_SIZE; i++) {
-    chunk_write_buf[i] = (uint8_t)((offset + i) % 256); // re-use chunk_write_buf for expected data
+    chunk_write_buf[i] = test_pattern[i % sizeof(test_pattern)];
   }
 
   bytes_res = flash->driver->read(flash, offset, chunk_read_buf, TEST_BUFFER_SIZE);
@@ -75,14 +84,13 @@ int main(void) {
   // verify chunk immediately
   if (memcmp(chunk_write_buf, chunk_read_buf, TEST_BUFFER_SIZE) != 0) {
     bsp_printf("mismatch at offset %lu\n", offset);
-
-    print_hexdump("Expected", chunk_write_buf, TEST_BUFFER_SIZE);
-    print_hexdump("Received", chunk_read_buf, TEST_BUFFER_SIZE);
     return -1;
   }
 
+  print_hexdump("Expected", chunk_write_buf, TEST_BUFFER_SIZE);
+  print_hexdump("Received", chunk_read_buf, TEST_BUFFER_SIZE);
 
-  bsp_printf("VERIFICATION SUCCESS: Data read back matches data written.\n");
+  bsp_printf("if we reach here, data was valid...\n");
 
   bsp_printf("\n--- W25Q64 BIST Finished ---\r\n");
 

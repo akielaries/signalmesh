@@ -60,11 +60,6 @@ void spi_bus_send(spi_bus_t *bus, const uint8_t *txbuf, size_t n) {
     return;
   }
   cacheBufferFlush(txbuf, n);
-
-
-  spiAcquireBus(bus->spi_driver);
-  spiSelect(bus->spi_driver);
-
   spiSend(bus->spi_driver, n, txbuf);
 
 }
@@ -86,8 +81,6 @@ void spi_bus_receive(spi_bus_t *bus, uint8_t *rxbuf, size_t n) {
 
 
   spiReceive(bus->spi_driver, n, rxbuf);
-  spiUnselect(bus->spi_driver);
-  spiReleaseBus(bus->spi_driver);
 
   cacheBufferInvalidate(&rxbuf[0], n);
   //cacheBufferInvalidate(rxbuf, n);
