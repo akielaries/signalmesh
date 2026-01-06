@@ -34,8 +34,6 @@ const driver_t w25qxx_driver __attribute__((used)) = {
 
 
 static int w25qxx_wait_busy(w25qxx_t *flash_dev) {
-  bsp_printf("busy wait...\n");
-
   // microseconds?
   uint32_t timeout = 10000;
   CC_ALIGN_DATA(32) static uint8_t status[2];
@@ -45,8 +43,6 @@ static int w25qxx_wait_busy(w25qxx_t *flash_dev) {
     cmd[0] = W25QXX_CMD_READ_STATUS_REG1;
 
     spi_bus_exchange(&flash_dev->bus, cmd, status, 2);
-    bsp_printf("send read reg cmd\n");
-    bsp_printf("status: 0x%X 0x%X \n", status[0], status[1]);
 
     if ((status[1] & 0x01) == 0x00) {
       break;
@@ -57,28 +53,6 @@ static int w25qxx_wait_busy(w25qxx_t *flash_dev) {
 
   return DRIVER_OK;
 }
-
-/*
-// helper function implementations
-static int w25qxx_wait_busy(w25qxx_t *flash_dev) {
-  // A long timeout is used here because erase operations can take seconds.
-  uint32_t timeout_ms = 10000; // 10 second timeout
-  systime_t start_time = chVTGetSystemTimeX();
-
-  bsp_printf("busy wait...\n");
-
-  while ((w25qxx_read_status_register(flash_dev, 1) & W25QXX_STATUS_BUSY) != 0) {
-    if ((chVTGetSystemTimeX() - start_time) > TIME_MS2I(timeout_ms)) {
-      bsp_printf("W25QXX: Wait busy timeout\n");
-      return DRIVER_ERROR;
-    }
-    chThdSleepMicroseconds(100); // Sleep for a short duration before polling again
-  }
-
-  bsp_printf("busy wait...done\n");
-  return DRIVER_OK;
-}
-*/
 
 static int w25qxx_write_enable(w25qxx_t *flash_dev) {
   CC_ALIGN_DATA(32) static uint8_t cmd[1];
@@ -94,8 +68,6 @@ static int w25qxx_write_enable(w25qxx_t *flash_dev) {
     bsp_printf("W25QXX: Failed to enable write (WEL not set).\n");
     return DRIVER_ERROR;
   }
-
-  bsp_printf("write enabled\n");
 
   return DRIVER_OK;
 }
@@ -122,8 +94,6 @@ static uint8_t w25qxx_read_status_register(w25qxx_t *flash_dev, uint8_t reg_num)
   // Byte 1: Send command, receive garbage.
   // Byte 2: Send dummy, receive status.
   spi_bus_exchange(&flash_dev->bus, cmd, rx_buf, 2);
-
-  bsp_printf("reg %d status: 0x%X 0x%X\n", reg_num, rx_buf[0], rx_buf[1]);
 
   // The actual status is in the second byte received.
   return rx_buf[1];
@@ -291,64 +261,85 @@ static int32_t w25qxx_read(device_t *dev, uint32_t offset, void *buf, size_t cou
   return bytes_read;
 }
 
-static int32_t w25qxx_write(device_t *dev, uint32_t offset, const void *buf, size_t count) {
-  if (dev == NULL || buf == NULL) {
-    return DRIVER_INVALID_PARAM;
-  }
-
-  w25qxx_t *flash = (w25qxx_t *)dev->priv;
-
-  if (offset + count > flash->size_bytes) {
-    return DRIVER_INVALID_PARAM;
-  }
-
-  const uint8_t *data_ptr = (const uint8_t *)buf;
-  size_t bytes_written    = 0;
-
-  // erase 4kb sectors that are used
-  uint32_t first_sector = offset & ~(W25QXX_SECTOR_SIZE_BYTES - 1);
-  uint32_t last_sector  = (offset + count - 1) & ~(W25QXX_SECTOR_SIZE_BYTES - 1);
-
-  for (uint32_t addr = first_sector; addr <= last_sector; addr += W25QXX_SECTOR_SIZE_BYTES) {
-    if (w25qxx_erase_sector(flash, addr) != DRIVER_OK) {
-      return DRIVER_ERROR;
+static int w25qxx_page_program(w25qxx_t *flash, uint32_t addr, const void *buf, size_t size) {
+    if (size > W25QXX_PAGE_SIZE_BYTES) {
+        return DRIVER_INVALID_PARAM;
     }
-  }
-  bsp_printf("erased sector...\n");
-
-  CC_ALIGN_DATA(32)
-  static uint8_t tx_buffer[4 + W25QXX_PAGE_SIZE_BYTES];
-  CC_ALIGN_DATA(32)
-  static uint8_t rx_buffer[4 + W25QXX_PAGE_SIZE_BYTES];
-
-  while (bytes_written < count) {
 
     if (w25qxx_write_enable(flash) != DRIVER_OK) {
-      return bytes_written > 0 ? bytes_written : DRIVER_ERROR;
+        return DRIVER_ERROR;
     }
-    bsp_printf("write enabled...\n");
 
-    uint32_t current_addr = offset + bytes_written;
-    uint32_t page_offset  = current_addr % W25QXX_PAGE_SIZE_BYTES;
-    uint32_t page_space   = W25QXX_PAGE_SIZE_BYTES - page_offset;
-    uint32_t remaining    = count - bytes_written;
-    uint32_t chunk_size   = (remaining < page_space) ? remaining : page_space;
+    CC_ALIGN_DATA(32) static uint8_t tx_buffer[4 + W25QXX_PAGE_SIZE_BYTES];
+    CC_ALIGN_DATA(32) static uint8_t rx_buffer[4 + W25QXX_PAGE_SIZE_BYTES];
 
     tx_buffer[0] = W25QXX_CMD_PAGE_PROGRAM;
-    tx_buffer[1] = (current_addr >> 16) & 0xFF;
-    tx_buffer[2] = (current_addr >> 8) & 0xFF;
-    tx_buffer[3] = (current_addr >> 0) & 0xFF;
+    tx_buffer[1] = (addr >> 16) & 0xFF;
+    tx_buffer[2] = (addr >> 8) & 0xFF;
+    tx_buffer[3] = (addr >> 0) & 0xFF;
 
-    memcpy(&tx_buffer[4], data_ptr + bytes_written, chunk_size);
+    memcpy(&tx_buffer[4], buf, size);
 
-    spi_bus_exchange(&flash->bus, tx_buffer, rx_buffer, 4 + chunk_size);
+    spi_bus_exchange(&flash->bus, tx_buffer, rx_buffer, 4 + size);
 
-    if (w25qxx_wait_busy(flash) != DRIVER_OK) {
-      return bytes_written;
+    return w25qxx_wait_busy(flash);
+}
+
+static int32_t w25qxx_write(device_t *dev, uint32_t offset, const void *buf, size_t count) {
+    if (dev == NULL || buf == NULL) {
+        return DRIVER_INVALID_PARAM;
     }
 
-    bytes_written += chunk_size;
-  }
+    w25qxx_t *flash = (w25qxx_t *)dev->priv;
 
-  return bytes_written;
+    if (offset + count > flash->size_bytes) {
+        return DRIVER_INVALID_PARAM;
+    }
+
+    // Buffer for sector-based read-modify-write
+    CC_ALIGN_DATA(32) static uint8_t sector_buf[W25QXX_SECTOR_SIZE_BYTES];
+
+    const uint8_t *data_ptr = (const uint8_t *)buf;
+    size_t bytes_written = 0;
+
+    while (bytes_written < count) {
+        uint32_t current_addr = offset + bytes_written;
+        uint32_t sector_addr = current_addr & ~(W25QXX_SECTOR_SIZE_BYTES - 1);
+        uint32_t sector_internal_offset = current_addr - sector_addr;
+
+        // Determine how many bytes to write in this sector
+        size_t bytes_to_write_in_sector = W25QXX_SECTOR_SIZE_BYTES - sector_internal_offset;
+        size_t remaining_bytes = count - bytes_written;
+        if (bytes_to_write_in_sector > remaining_bytes) {
+            bytes_to_write_in_sector = remaining_bytes;
+        }
+
+        // Read-Modify-Write: only if the write does not span the entire sector
+        // from the beginning. A full sector erase is faster if we overwrite it all.
+        // For simplicity and correctness under all chunking scenarios, we will always R-M-W.
+        
+        // 1. Read the entire sector into the buffer
+        if (w25qxx_read(dev, sector_addr, sector_buf, W25QXX_SECTOR_SIZE_BYTES) != W25QXX_SECTOR_SIZE_BYTES) {
+            return DRIVER_ERROR; // Failed to read the sector
+        }
+
+        // 2. Modify the buffer with the new data
+        memcpy(&sector_buf[sector_internal_offset], data_ptr + bytes_written, bytes_to_write_in_sector);
+
+        // 3. Erase the physical sector
+        if (w25qxx_erase_sector(flash, sector_addr) != DRIVER_OK) {
+            return DRIVER_ERROR; // Failed to erase
+        }
+
+        // 4. Write the modified sector back, page by page
+        for (size_t page_offset = 0; page_offset < W25QXX_SECTOR_SIZE_BYTES; page_offset += W25QXX_PAGE_SIZE_BYTES) {
+            if (w25qxx_page_program(flash, sector_addr + page_offset, &sector_buf[page_offset], W25QXX_PAGE_SIZE_BYTES) != DRIVER_OK) {
+                return DRIVER_ERROR; // Failed to write page
+            }
+        }
+        
+        bytes_written += bytes_to_write_in_sector;
+    }
+
+    return bytes_written;
 }
