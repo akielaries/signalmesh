@@ -30,15 +30,15 @@ void bsp_spi_init(void) {
    * SPI1 I/O pins setup.
    */
   // clock
-  palSetPadMode(GPIOA, 5, PAL_MODE_ALTERNATE(5));
+  palSetPadMode(GPIOA, 5, PAL_MODE_ALTERNATE(5) | PAL_STM32_OSPEED_HIGHEST);
   // MISO
   palSetPadMode(GPIOA, 6, PAL_MODE_ALTERNATE(5) |
-                          PAL_STM32_PUPDR_FLOATING);
+                          PAL_STM32_PUPDR_FLOATING | PAL_STM32_OSPEED_HIGHEST);
   // MOSI
-  palSetPadMode(GPIOB, 5, PAL_MODE_ALTERNATE(5));
+  palSetPadMode(GPIOB, 5, PAL_MODE_ALTERNATE(5) | PAL_STM32_OSPEED_HIGHEST);
   // CS
   palSetPadMode(GPIOA, 4, PAL_MODE_ALTERNATE(5) |
-                          PAL_STM32_PUPDR_PULLUP);
+                          PAL_STM32_PUPDR_PULLUP | PAL_STM32_OSPEED_HIGHEST);
   //palSetPad(GPIOA, 4);
 
   // start SPI1 driver

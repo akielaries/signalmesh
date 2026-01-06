@@ -51,8 +51,9 @@ int main(void) {
   bsp_printf("\nWriting %lu bytes to Flash in %u-byte chunks...\n",
              (unsigned long)FLASH_TOTAL_SIZE,
              WRITE_CHUNK_SIZE);
-  systime_t write_start_time = chVTGetSystemTimeX();
+
   int32_t total_written      = 0;
+  systime_t write_start_time = chVTGetSystemTimeX();
 
   for (uint32_t offset = 0; offset < FLASH_TOTAL_SIZE; offset += WRITE_CHUNK_SIZE) {
     // generate data pattern for the current chunk
@@ -79,12 +80,12 @@ int main(void) {
   
 
   systime_t write_end_time   = chVTGetSystemTimeX();
-  uint32_t write_duration_ms = TIME_MS2I(write_end_time - write_start_time);
+  uint32_t write_duration_ms = (write_end_time - write_start_time) / 10;
 
   bsp_printf("Total bytes written: %ld\n", total_written);
   bsp_printf("Write duration: %lu ms\n", (unsigned long)write_duration_ms);
   if (write_duration_ms > 0) {
-    bsp_printf("Write speed: %.2f KB/s\n", (float)total_written / write_duration_ms);
+    bsp_printf("Write speed: %.2f KB/s\n", ((float)total_written / 1024.0f) / ((float)write_duration_ms / 1000.0f));
   }
 
   bsp_printf("\nReading %lu bytes from Flash in %u-byte chunks and verifying...\n",
@@ -130,11 +131,11 @@ int main(void) {
     */
   }
   systime_t read_end_time   = chVTGetSystemTimeX();
-  uint32_t read_duration_ms = TIME_MS2I(read_end_time - read_start_time);
+  uint32_t read_duration_ms = (read_end_time - read_start_time) / 10;
   bsp_printf("Total bytes read: %ld\n", total_read);
   bsp_printf("Read duration: %lu ms\n", (unsigned long)read_duration_ms);
   if (read_duration_ms > 0) {
-    bsp_printf("Read speed: %.2f KB/s\n", (float)total_read / read_duration_ms);
+    bsp_printf("Read speed: %.2f KB/s\n", ((float)total_read / 1024.0f) / ((float)read_duration_ms / 1000.0f));
   }
 
   if (!verification_failed) {
