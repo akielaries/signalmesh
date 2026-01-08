@@ -26,9 +26,12 @@ spi_bus_t spi1_bus_config = {
 
 
 void bsp_spi_init(void) {
-  /*
-   * SPI1 I/O pins setup.
-   */
+  // 74HC134 setup for the chip select MUX
+  palSetPadMode(GPIOD, 0, PAL_MODE_OUTPUT_PUSHPULL);
+  palSetPadMode(GPIOD, 1, PAL_MODE_OUTPUT_PUSHPULL);
+  palSetPadMode(GPIOF, 9, PAL_MODE_OUTPUT_PUSHPULL);
+
+  // SPI1 pin setup
   // clock
   palSetPadMode(GPIOA, 5, PAL_MODE_ALTERNATE(5) | PAL_STM32_OSPEED_HIGHEST);
   // MISO

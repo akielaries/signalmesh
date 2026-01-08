@@ -20,6 +20,12 @@ int main(void) {
   palSetPadMode(GPIOD, 1, PAL_MODE_OUTPUT_PUSHPULL);
   palSetPadMode(GPIOF, 9, PAL_MODE_OUTPUT_PUSHPULL);
 
+  palSetPadMode(GPIOF, 7, PAL_MODE_ALTERNATE(0) | PAL_MODE_OUTPUT_PUSHPULL);
+  palSetPadMode(GPIOG, 0, PAL_MODE_ALTERNATE(0) | PAL_MODE_OUTPUT_PUSHPULL);
+
+  palWritePad(GPIOG, 0, 1);
+  palWritePad(GPIOF, 7, 1);
+
   uint8_t i = 0;
   while (1) {
     bsp_printf("sel: %d\r\n", i);

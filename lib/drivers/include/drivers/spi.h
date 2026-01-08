@@ -24,6 +24,10 @@ typedef struct {
 } spi_bus_t;
 
 
+
+void spi_cs_mux_select(uint8_t device);
+
+
 void spi_bus_init(spi_bus_t *bus);
 
 /**

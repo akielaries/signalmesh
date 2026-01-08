@@ -16,6 +16,19 @@ void spi_bus_init(spi_bus_t *bus) {
   //spiStart(bus->spi_driver, bus->spi_config);
 }
 
+void spi_cs_mux_select(uint8_t device) {
+  // the device can only be 0 thru 7. the 74HC138 only has 8 outputs
+  if (device > 7) {
+    bsp_printf("Device chip select out of range: %d\n", device);
+    return;
+  }
+
+  palWritePad(GPIOD, 0, (device >> 0) & 1); // A0
+  palWritePad(GPIOD, 1, (device >> 1) & 1); // A1
+  palWritePad(GPIOF, 9, (device >> 2) & 1); // A2
+}
+
+
 void spi_bus_acquire(spi_bus_t *bus) {
   if (bus == NULL || bus->spi_driver == NULL) {
     return;
