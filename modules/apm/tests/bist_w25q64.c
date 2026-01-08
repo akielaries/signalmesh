@@ -12,11 +12,16 @@
 
 #include "common/utils.h"
 
+
 // define the total size of the Flash and the chunk size for read/write
-#define FLASH_TOTAL_SIZE W25Q64_SIZE_BYTES / 128
+#define FLASH_TOTAL_SIZE (W25Q64_SIZE_BYTES / 128)
 #define WRITE_CHUNK_SIZE W25QXX_PAGE_SIZE_BYTES // use page size for writing (256 bytes)
 #define READ_CHUNK_SIZE  256                    // read in larger chunks
 
+
+
+// Static buffer for the entire test pattern
+static uint8_t s_test_pattern_buffer[FLASH_TOTAL_SIZE];
 
 int main(void) {
   bsp_init();
@@ -34,18 +39,16 @@ int main(void) {
     return -1;
   }
 
-  // local buffers for chunked R/W and verification
-  uint8_t chunk_write_buf[WRITE_CHUNK_SIZE];
-  uint8_t chunk_read_buf[WRITE_CHUNK_SIZE];
+  // local buffer for reading flash chunks into
+  uint8_t chunk_read_buf[READ_CHUNK_SIZE];
 
-  // no longer generating a full 8MB buffer. Data is generated per chunk.
+  // Pre-generate the entire test pattern into the static buffer once.
   bsp_printf("\nGenerating test data pattern for %lu bytes...\n", (unsigned long)FLASH_TOTAL_SIZE);
-  // example data pattern for a chunk (first chunk to print hexdump)
-  for (size_t i = 0; i < WRITE_CHUNK_SIZE; i++) {
-    chunk_write_buf[i] = (uint8_t)(i % 256);
+  for (size_t i = 0; i < FLASH_TOTAL_SIZE; i++) {
+    s_test_pattern_buffer[i] = (uint8_t)(i % 256);
   }
   bsp_printf("Example write data for first chunk:\n");
-  print_hexdump("Chunk Write data (head)", chunk_write_buf, 32);
+  print_hexdump("Chunk Write data (head)", s_test_pattern_buffer, 32);
 
 
   bsp_printf("\nWriting %lu bytes to Flash in %u-byte chunks...\n",
@@ -56,12 +59,8 @@ int main(void) {
   systime_t write_start_time = chVTGetSystemTimeX();
 
   for (uint32_t offset = 0; offset < FLASH_TOTAL_SIZE; offset += WRITE_CHUNK_SIZE) {
-    // generate data pattern for the current chunk
-    for (size_t i = 0; i < WRITE_CHUNK_SIZE; i++) {
-      chunk_write_buf[i] = (uint8_t)((offset + i) % 256);
-    }
-
-    int32_t bytes_res = flash->driver->write(flash, offset, chunk_write_buf, WRITE_CHUNK_SIZE);
+    // Data source is now the pre-filled static buffer
+    int32_t bytes_res = flash->driver->write(flash, offset, s_test_pattern_buffer + offset, WRITE_CHUNK_SIZE);
     if (bytes_res < 0) {
       bsp_printf("ERROR: Write failed at offset %lu, result %ld\n",
                  (unsigned long)offset,
@@ -78,14 +77,15 @@ int main(void) {
     */
   }
   
-
   systime_t write_end_time   = chVTGetSystemTimeX();
   uint32_t write_duration_ms = (write_end_time - write_start_time) / 10;
 
   bsp_printf("Total bytes written: %ld\n", total_written);
   bsp_printf("Write duration: %lu ms\n", (unsigned long)write_duration_ms);
   if (write_duration_ms > 0) {
-    bsp_printf("Write speed: %.2f KB/s\n", ((float)total_written / 1024.0f) / ((float)write_duration_ms / 1000.0f));
+    bsp_printf("Write speed: %.2f KB/s (%.2f MB/s)\n",
+                ((float)total_written / 1024.0f) / ((float)write_duration_ms / 1000.0f),
+                ((float)total_written / 1024.0f / 1024.0f) / ((float)write_duration_ms / 1000.0f));
   }
 
   bsp_printf("\nReading %lu bytes from Flash in %u-byte chunks and verifying...\n",
@@ -96,12 +96,6 @@ int main(void) {
   bool verification_failed  = false;
 
   for (uint32_t offset = 0; offset < FLASH_TOTAL_SIZE; offset += READ_CHUNK_SIZE) {
-    // generate expected data for the current chunk for verification
-    for (size_t i = 0; i < READ_CHUNK_SIZE; i++) {
-      chunk_write_buf[i] =
-        (uint8_t)((offset + i) % 256); // re-use chunk_write_buf for expected data
-    }
-
     int32_t bytes_res = flash->driver->read(flash, offset, chunk_read_buf, READ_CHUNK_SIZE);
     if (bytes_res < 0) {
       bsp_printf("ERROR: Read failed at offset %lu, result %ld\n",
@@ -112,11 +106,10 @@ int main(void) {
     }
     total_read += bytes_res;
 
-    // verify chunk immediately
-    if (memcmp(chunk_write_buf, chunk_read_buf, READ_CHUNK_SIZE) != 0) {
+    // verify chunk immediately against the pre-filled static buffer
+    if (memcmp(s_test_pattern_buffer + offset, chunk_read_buf, READ_CHUNK_SIZE) != 0) {
       bsp_printf("VERIFICATION FAILURE: Mismatch at offset %lu!\n", (unsigned long)offset);
-      // print discrepancy for the first few bytes of the mismatching chunk
-      print_hexdump("Expected (first 32 bytes)", chunk_write_buf, 32);
+      print_hexdump("Expected (first 32 bytes)", s_test_pattern_buffer + offset, 32);
       print_hexdump("Received (first 32 bytes)", chunk_read_buf, 32);
       verification_failed = true;
       break;
@@ -135,7 +128,9 @@ int main(void) {
   bsp_printf("Total bytes read: %ld\n", total_read);
   bsp_printf("Read duration: %lu ms\n", (unsigned long)read_duration_ms);
   if (read_duration_ms > 0) {
-    bsp_printf("Read speed: %.2f KB/s\n", ((float)total_read / 1024.0f) / ((float)read_duration_ms / 1000.0f));
+    bsp_printf("Read speed: %.2f KB/s (%.2f MB/s)\n",
+                ((float)total_read / 1024.0f) / ((float)read_duration_ms / 1000.0f),
+                ((float)total_read / 1024.0f / 1024.0f) / ((float)read_duration_ms / 1000.0f));
   }
 
   if (!verification_failed) {
