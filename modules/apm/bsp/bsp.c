@@ -89,7 +89,7 @@ device_t board_devices[] = {
     {
         .name = "w25qxx",
         .driver = &w25qxx_driver,
-        .bus = &spi1_bus_config,
+        .bus = &spi_bus_w25qxx,
         .priv = &w25qxx_dev_data,
         .is_active = false
     },

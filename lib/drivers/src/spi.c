@@ -8,6 +8,39 @@
 
 #include "bsp/utils/bsp_io.h" // For bsp_printf
 
+/**
+ * @brief Sets the MUX to select a specific device and selects the SPI bus.
+ */
+static void spi_bus_cs_select(spi_bus_t *bus) {
+  // The device can only be 0 thru 7 for the 74HC138.
+  if (bus->device_id > 7) {
+    bsp_printf("Device chip select out of range: %d\n", bus->device_id);
+    return;
+  }
+
+  // Set the GPIOs to select the correct MUX channel.
+  palWritePad(GPIOD, 0, (bus->device_id >> 0) & 1); // A0
+  palWritePad(GPIOD, 1, (bus->device_id >> 1) & 1); // A1
+  palWritePad(GPIOF, 9, (bus->device_id >> 2) & 1); // A2
+
+  // Select the underlying SPI bus (will do nothing if ssport is NULL, but good practice).
+  spiSelect(bus->spi_driver);
+}
+
+/**
+ * @brief Sets the MUX to a "deselected" state and unselects the SPI bus.
+ */
+static void spi_bus_cs_unselect(spi_bus_t *bus) {
+  // Unselect the underlying SPI bus.
+  spiUnselect(bus->spi_driver);
+
+  // Select a non-existent device (channel 7) to deselect all real ones.
+  // This assumes real devices use channels 0 through n-1, where n < 8.
+  palWritePad(GPIOD, 0, 1); // A0
+  palWritePad(GPIOD, 1, 1); // A1
+  palWritePad(GPIOF, 9, 1); // A2
+}
+
 
 void spi_bus_init(spi_bus_t *bus) {
   if (bus == NULL || bus->spi_driver == NULL) {
@@ -16,32 +49,20 @@ void spi_bus_init(spi_bus_t *bus) {
   //spiStart(bus->spi_driver, bus->spi_config);
 }
 
-void spi_cs_mux_select(uint8_t device) {
-  // the device can only be 0 thru 7. the 74HC138 only has 8 outputs
-  if (device > 7) {
-    bsp_printf("Device chip select out of range: %d\n", device);
-    return;
-  }
-
-  palWritePad(GPIOD, 0, (device >> 0) & 1); // A0
-  palWritePad(GPIOD, 1, (device >> 1) & 1); // A1
-  palWritePad(GPIOF, 9, (device >> 2) & 1); // A2
-}
-
 
 void spi_bus_acquire(spi_bus_t *bus) {
   if (bus == NULL || bus->spi_driver == NULL) {
     return;
   }
   spiAcquireBus(bus->spi_driver);
-  spiSelect(bus->spi_driver);
+  spi_bus_cs_select(bus);
 }
 
 void spi_bus_release(spi_bus_t *bus) {
   if (bus == NULL || bus->spi_driver == NULL) {
     return;
   }
-  spiUnselect(bus->spi_driver);
+  spi_bus_cs_unselect(bus);
   spiReleaseBus(bus->spi_driver);
 }
 
@@ -71,15 +92,14 @@ void spi_bus_exchange(spi_bus_t *bus, const uint8_t *txbuf, uint8_t *rxbuf, size
     return;
   }
   if (txbuf) {
-    // flush TX buffer in memory?
     cacheBufferFlush(txbuf, n);
   }
 
   spiAcquireBus(bus->spi_driver);
-  spiSelect(bus->spi_driver);
+  spi_bus_cs_select(bus);
   // perform the actual exchange
   spiExchange(bus->spi_driver, n, txbuf, rxbuf);
-  spiUnselect(bus->spi_driver);
+  spi_bus_cs_unselect(bus);
   spiReleaseBus(bus->spi_driver);
 
   if (rxbuf) {

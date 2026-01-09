@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 // External declaration for the SPI bus configuration for SPI1
-extern spi_bus_t spi1_bus_config;
+extern spi_bus_t spi_bus_w25qxx;
 
 /**
  * @brief Initializes the SPI peripheral(s) and their associated GPIO pins.

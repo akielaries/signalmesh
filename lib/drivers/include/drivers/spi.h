@@ -21,11 +21,14 @@ typedef struct {
 
   /** @brief Pointer to SPI configuration structure */
   SPIConfig *spi_config;
+
+  /** @brief The MUX channel (0-7) for the device's chip select */
+  uint8_t device_id;
 } spi_bus_t;
 
 
 
-void spi_cs_mux_select(uint8_t device);
+void spi_cs_mux_select(spi_bus_t *bus);
 
 
 void spi_bus_init(spi_bus_t *bus);
