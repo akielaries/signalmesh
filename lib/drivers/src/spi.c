@@ -3,27 +3,27 @@
 #include "hal.h"
 #include "ch.h"
 
-
 #include "drivers/spi.h"
 
-#include "bsp/utils/bsp_io.h" // For bsp_printf
+#include "bsp/utils/bsp_io.h" // for bsp_printf
+
 
 /**
  * @brief Sets the MUX to select a specific device and selects the SPI bus.
  */
 static void spi_bus_cs_select(spi_bus_t *bus) {
-  // The device can only be 0 thru 7 for the 74HC138.
+  // the device can only be 0 thru 7 for the 74HC138.
   if (bus->device_id > 7) {
     bsp_printf("Device chip select out of range: %d\n", bus->device_id);
     return;
   }
 
-  // Set the GPIOs to select the correct MUX channel.
+  // set the GPIOs to select the correct MUX channel.
   palWritePad(GPIOD, 0, (bus->device_id >> 0) & 1); // A0
   palWritePad(GPIOD, 1, (bus->device_id >> 1) & 1); // A1
   palWritePad(GPIOF, 9, (bus->device_id >> 2) & 1); // A2
 
-  // Select the underlying SPI bus (will do nothing if ssport is NULL, but good practice).
+  // select the underlying SPI bus (will do nothing if ssport is NULL, but good practice).
   spiSelect(bus->spi_driver);
 }
 
@@ -31,11 +31,11 @@ static void spi_bus_cs_select(spi_bus_t *bus) {
  * @brief Sets the MUX to a "deselected" state and unselects the SPI bus.
  */
 static void spi_bus_cs_unselect(spi_bus_t *bus) {
-  // Unselect the underlying SPI bus.
+  // unselect the underlying SPI bus.
   spiUnselect(bus->spi_driver);
 
-  // Select a non-existent device (channel 7) to deselect all real ones.
-  // This assumes real devices use channels 0 through n-1, where n < 8.
+  // select a non-existent device (channel 7) to deselect all real ones.
+  // this assumes real devices use channels 0 through n-1, where n < 8.
   palWritePad(GPIOD, 0, 1); // A0
   palWritePad(GPIOD, 1, 1); // A1
   palWritePad(GPIOF, 9, 1); // A2
