@@ -51,15 +51,16 @@ static int gm009605_send_data(gm009605_t *oled, const uint8_t *data, size_t size
 
 static int gm009605_clear(device_t *dev) {
   gm009605_t *oled = (gm009605_t *)dev->priv;
-  uint8_t buffer[OLED_WIDTH];
-  memset(buffer, 0, sizeof(buffer));
+    uint8_t buffer[OLED_VISIBLE_WIDTH];
+    memset(buffer, 0, sizeof(buffer));
 
-  for (uint8_t i = 0; i < OLED_HEIGHT / 8; i++) {
-    gm009605_send_cmd(oled, 0xB0 + i);
-    gm009605_send_cmd(oled, 0x00);
-    gm009605_send_cmd(oled, 0x10);
-    gm009605_send_data(oled, buffer, sizeof(buffer));
-  }
+    for (uint8_t page = 0; page < OLED_HEIGHT / 8; page++) {
+        gm009605_send_cmd(oled, 0xB0 + page);
+        gm009605_send_cmd(oled, 0x00 + (OLED_X_OFFSET & 0x0F));
+        gm009605_send_cmd(oled, 0x10 + (OLED_X_OFFSET >> 4));
+        gm009605_send_data(oled, buffer, sizeof(buffer));
+    }
+
   return DRIVER_OK;
 }
 
@@ -88,33 +89,61 @@ static int gm009605_write(device_t *dev, uint32_t offset, const void *buf, size_
 static int32_t gm009605_draw(device_t *dev, uint8_t page, uint8_t col, const uint8_t *buffer, size_t buffer_size) {
     gm009605_t *oled = (gm009605_t *)dev->priv;
 
+    if (buffer_size > OLED_VISIBLE_WIDTH) {
+        buffer_size = OLED_VISIBLE_WIDTH;
+    }
+
+    uint8_t hw_col = col + OLED_X_OFFSET;
+
     gm009605_send_cmd(oled, 0xB0 + page);
-    gm009605_send_cmd(oled, 0x00 + (col & 0x0F));
-    gm009605_send_cmd(oled, 0x10 + (col >> 4));
+    gm009605_send_cmd(oled, 0x00 + (hw_col & 0x0F));
+    gm009605_send_cmd(oled, 0x10 + (hw_col >> 4));
 
     gm009605_send_data(oled, buffer, buffer_size);
 
     return DRIVER_OK;
 }
 
+
 static int gm009605_ioctl(device_t *dev, uint32_t cmd, void *arg) {
-  gm009605_t *oled = (gm009605_t *)dev->priv;
-  uint8_t buffer[OLED_WIDTH];
+    gm009605_t *oled = (gm009605_t *)dev->priv;
+    uint8_t buffer[OLED_WIDTH];
 
-  switch (cmd) {
-    case OLED_IOCTL_SET_BRIGHTNESS:
-      if (arg == NULL) {
-        return DRIVER_INVALID_PARAM;
-      }
-      uint8_t brightness = *(uint8_t *)arg;
-      gm009605_send_cmd(oled, SSD1306_SET_CONTRAST);
-      gm009605_send_cmd(oled, brightness);
-      return DRIVER_OK;
-    default:
-      return DRIVER_INVALID_PARAM;
-  }
+    switch (cmd) {
+        case OLED_IOCTL_TEST_PATTERN_HZTL_RAMP:
+            for (uint8_t i = 0; i < OLED_HEIGHT / 8; i++) {
+                for (uint8_t j = 0; j < OLED_WIDTH; j++) {
+                    buffer[j] = j;
+                }
+                gm009605_send_cmd(oled, 0xB0 + i);
+                gm009605_send_cmd(oled, 0x00);
+                gm009605_send_cmd(oled, 0x10);
+                gm009605_send_data(oled, buffer, sizeof(buffer));
+            }
+            return DRIVER_OK;
+        case OLED_IOCTL_TEST_PATTERN_VERT_RAMP:
+            for (uint8_t i = 0; i < OLED_HEIGHT / 8; i++) {
+                for (uint8_t j = 0; j < OLED_WIDTH; j++) {
+                    buffer[j] = (i * (OLED_WIDTH / 8)) + j;
+                }
+                gm009605_send_cmd(oled, 0xB0 + i);
+                gm009605_send_cmd(oled, 0x00);
+                gm009605_send_cmd(oled, 0x10);
+                gm009605_send_data(oled, buffer, sizeof(buffer));
+            }
+            return DRIVER_OK;
+        case OLED_IOCTL_SET_BRIGHTNESS:
+            if (arg == NULL) {
+                return DRIVER_INVALID_PARAM;
+            }
+            uint8_t brightness = *(uint8_t *)arg;
+            gm009605_send_cmd(oled, SSD1306_SET_CONTRAST);
+            gm009605_send_cmd(oled, brightness);
+            return DRIVER_OK;
+        default:
+            return DRIVER_INVALID_PARAM;
+    }
 }
-
 static int gm009605_init(device_t *dev) {
   if (dev->priv == NULL) {
     bsp_printf("GM009605 init error: private data not allocated\n");
