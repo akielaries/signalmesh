@@ -23,6 +23,7 @@
 #include "drivers/24lc256.h"
 #include "drivers/w25qxx.h"
 #include "drivers/servo.h"
+#include "drivers/gm009605.h"
 
 
 
@@ -37,9 +38,12 @@ static bh1750_t bh1750_dev_data;
 static aht2x_t aht2x_dev_data;
 static eeprom_24lc256_t eeprom_24lc256_dev_data;
 // private data for w25qxx
-static w25qxx_t w25qxx_dev_data;
+static w25qxx_t w25qxx_dev_data_1;
+static w25qxx_t w25qxx_dev_data_2;
 // private data for servo
 // static servo_t servo_dev_data; // servo driver doesn't have a private data struct
+// private data for gm009605
+static gm009605_t gm009605_dev_data;
 
 
 // array of devices present on APM
@@ -87,10 +91,24 @@ device_t board_devices[] = {
         .is_active = false
     },
     {
-        .name = "w25qxx",
+        .name = "w25qxx_1",
         .driver = &w25qxx_driver,
-        .bus = &spi_bus_w25qxx,
-        .priv = &w25qxx_dev_data,
+        .bus = &spi_bus_w25qxx_1,
+        .priv = &w25qxx_dev_data_1,
+        .is_active = false
+    },
+    {
+        .name = "w25qxx_2",
+        .driver = &w25qxx_driver,
+        .bus = &spi_bus_w25qxx_2,
+        .priv = &w25qxx_dev_data_2,
+        .is_active = false
+    },
+    {
+        .name = "gm009605",
+        .driver = &gm009605_driver,
+        .bus = &I2CD4,
+        .priv = &gm009605_dev_data,
         .is_active = false
     },
     /*

@@ -7,8 +7,8 @@
 
 // Forward declarations
 static int eeprom_24lc256_init(device_t *dev);
-static int32_t eeprom_24lc256_read(device_t *dev, uint32_t offset, void *buf, size_t count);
-static int32_t eeprom_24lc256_write(device_t *dev, uint32_t offset, const void *buf, size_t count);
+static int eeprom_24lc256_read(device_t *dev, uint32_t offset, void *buf, size_t count);
+static int eeprom_24lc256_write(device_t *dev, uint32_t offset, const void *buf, size_t count);
 
 const driver_t eeprom_24lc256_driver __attribute__((used)) = {
   .name               = "24lc256",
@@ -44,7 +44,7 @@ static int eeprom_24lc256_init(device_t *dev) {
   return DRIVER_OK;
 }
 
-static int32_t eeprom_24lc256_read(device_t *dev, uint32_t offset, void *buf, size_t count) {
+static int eeprom_24lc256_read(device_t *dev, uint32_t offset, void *buf, size_t count) {
   if (dev == NULL || buf == NULL)
     return DRIVER_INVALID_PARAM;
   if (offset + count > EEPROM_24LC256_SIZE_BYTES)
@@ -66,7 +66,7 @@ static int32_t eeprom_24lc256_read(device_t *dev, uint32_t offset, void *buf, si
   return count;
 }
 
-static int32_t eeprom_24lc256_write(device_t *dev, uint32_t offset, const void *buf, size_t count) {
+static int eeprom_24lc256_write(device_t *dev, uint32_t offset, const void *buf, size_t count) {
   if (dev == NULL || buf == NULL)
     return DRIVER_INVALID_PARAM;
   if (offset + count > EEPROM_24LC256_SIZE_BYTES)

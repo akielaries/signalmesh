@@ -126,7 +126,7 @@ struct driver {
    * @param count The number of bytes to read
    * @return The number of bytes read, or a negative error code
    */
-  int32_t (*read)(device_t *dev, uint32_t offset, void *buf, size_t count);
+  int (*read)(device_t *dev, uint32_t offset, void *buf, size_t count);
 
   /**
    * @brief Write data to a storage device
@@ -136,7 +136,11 @@ struct driver {
    * @param count The number of bytes to write
    * @return The number of bytes written, or a negative error code
    */
-  int32_t (*write)(device_t *dev, uint32_t offset, const void *buf, size_t count);
+  int (*write)(device_t *dev, uint32_t offset, const void *buf, size_t count);
+
+  int32_t (*draw)(device_t *dev, uint8_t page, uint8_t col, const uint8_t *buffer, size_t buffer_size);
+
+  int (*clear)(device_t *dev);
 
   /** @brief Directory of readings provided by this driver */
   const driver_readings_directory_t *readings_directory;

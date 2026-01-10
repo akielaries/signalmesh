@@ -13,6 +13,7 @@
 #include "drivers/24lc256.h"
 #include "drivers/w25qxx.h"
 #include "drivers/servo.h"
+#include "drivers/gm009605.h"
 
 // External declarations for board devices (defined in bsp.c)
 extern device_t board_devices[];
@@ -32,6 +33,7 @@ const driver_t *drivers[] = {
   &aht2x_driver,
   &eeprom_24lc256_driver,
   &w25qxx_driver,
+  &gm009605_driver,
   //&servo_driver,
 };
 
@@ -54,7 +56,7 @@ void init_devices(void) {
 
     // Find matching driver for this device
     for (size_t j = 0; j < num_drivers; j++) {
-      if (strcmp(dev->name, drivers[j]->name) == 0) {
+      if (strncmp(dev->name, drivers[j]->name, strlen(drivers[j]->name)) == 0) {
         dev->driver = drivers[j];
 
         // Initialize the device if driver provides init function

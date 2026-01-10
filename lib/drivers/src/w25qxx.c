@@ -8,8 +8,8 @@
 
 // forward declarations for driver_t interface
 static int w25qxx_init(device_t *dev);
-static int32_t w25qxx_read(device_t *dev, uint32_t offset, void *buf, size_t count);
-static int32_t w25qxx_write(device_t *dev, uint32_t offset, const void *buf, size_t count);
+static int w25qxx_read(device_t *dev, uint32_t offset, void *buf, size_t count);
+static int w25qxx_write(device_t *dev, uint32_t offset, const void *buf, size_t count);
 
 // forward declarations for internal helper functions and erase operations
 static int w25qxx_wait_busy(w25qxx_t *flash_dev);
@@ -218,7 +218,7 @@ static int w25qxx_init(device_t *dev) {
   return DRIVER_OK;
 }
 
-static int32_t w25qxx_read(device_t *dev, uint32_t offset, void *buf, size_t count) {
+static int w25qxx_read(device_t *dev, uint32_t offset, void *buf, size_t count) {
   if (dev == NULL || buf == NULL) {
     return DRIVER_INVALID_PARAM;
   }
@@ -285,7 +285,7 @@ static int w25qxx_page_program(w25qxx_t *flash, uint32_t addr, const void *buf, 
     return w25qxx_wait_busy(flash);
 }
 
-static int32_t w25qxx_write(device_t *dev, uint32_t offset, const void *buf, size_t count) {
+static int w25qxx_write(device_t *dev, uint32_t offset, const void *buf, size_t count) {
     if (dev == NULL || buf == NULL) {
         return DRIVER_INVALID_PARAM;
     }
