@@ -39,18 +39,27 @@ void cycle_brightness(device_t *oled) {
 }
 
 void draw_sine_wave(device_t *oled) {
-  oled->driver->clear(oled);
   bsp_printf("Drawing Sine Wave\n");
+
+  // Clear the blue section of the display (pages 2-7)
+  uint8_t clear_buffer[OLED_WIDTH] = {0};
+  for (uint8_t page = 2; page < OLED_HEIGHT / 8; page++) {
+    oled->driver->draw(oled, page, 0, clear_buffer, OLED_WIDTH);
+  }
 
   uint8_t buffer[OLED_WIDTH];
   float frequency = 0.1f; // Adjust for more or fewer cycles
-  float amplitude = (OLED_HEIGHT / 2) - 1; // Max amplitude to fit display
 
-  for (uint8_t page = 0; page < OLED_HEIGHT / 8; page++) {
+  // Adjust geometry for the blue section
+  const int blue_section_start_pixel = 16;
+  const int blue_section_height = 48;
+  float amplitude = (blue_section_height / 2) - 1;
+  int center = blue_section_start_pixel + (blue_section_height / 2);
+
+  for (uint8_t page = 2; page < OLED_HEIGHT / 8; page++) {
     for (uint8_t col = 0; col < OLED_WIDTH; col++) {
-      int y = (int)((OLED_HEIGHT / 2) + amplitude * sinf(col * frequency));
-      
-      // Calculate which bit in the current byte (column) corresponds to 'y'
+      int y = (int)(center + amplitude * sinf(col * frequency));
+
       uint8_t byte_val = 0;
       if (y >= (page * 8) && y < ((page + 1) * 8)) {
         byte_val = 1 << (y % 8);
@@ -62,20 +71,29 @@ void draw_sine_wave(device_t *oled) {
 }
 
 void draw_square_wave(device_t *oled) {
-  oled->driver->clear(oled);
   bsp_printf("Drawing Square Wave\n");
+
+  // Clear the blue section of the display (pages 2-7)
+  uint8_t clear_buffer[OLED_WIDTH] = {0};
+  for (uint8_t page = 2; page < OLED_HEIGHT / 8; page++) {
+    oled->driver->draw(oled, page, 0, clear_buffer, OLED_WIDTH);
+  }
 
   uint8_t buffer[OLED_WIDTH];
   float frequency = 0.1f;
-  float amplitude = (OLED_HEIGHT / 2) - 1;
-  int center = OLED_HEIGHT / 2;
+
+  // Adjust geometry for the blue section
+  const int blue_section_start_pixel = 16;
+  const int blue_section_height = 48;
+  float amplitude = (blue_section_height / 2) - 1;
+  int center = blue_section_start_pixel + (blue_section_height / 2);
 
   static int y_values[OLED_WIDTH];
   for (int col = 0; col < OLED_WIDTH; col++) {
     y_values[col] = center + amplitude * (sinf(col * frequency) >= 0 ? 1 : -1);
   }
 
-  for (uint8_t page = 0; page < OLED_HEIGHT / 8; page++) {
+  for (uint8_t page = 2; page < OLED_HEIGHT / 8; page++) {
     memset(buffer, 0, sizeof(buffer));
     for (int col = 0; col < OLED_WIDTH; col++) {
       int y_current = y_values[col];
@@ -102,15 +120,24 @@ void draw_square_wave(device_t *oled) {
 }
 
 void draw_triangle_wave(device_t *oled) {
-  oled->driver->clear(oled);
   bsp_printf("Drawing Triangle Wave\n");
+
+  // Clear the blue section of the display (pages 2-7)
+  uint8_t clear_buffer[OLED_WIDTH] = {0};
+  for (uint8_t page = 2; page < OLED_HEIGHT / 8; page++) {
+    oled->driver->draw(oled, page, 0, clear_buffer, OLED_WIDTH);
+  }
 
   uint8_t buffer[OLED_WIDTH];
   float frequency = 0.1f;
-  float amplitude = (OLED_HEIGHT / 2) - 1;
-  int center = OLED_HEIGHT / 2;
 
-  for (uint8_t page = 0; page < OLED_HEIGHT / 8; page++) {
+  // Adjust geometry for the blue section
+  const int blue_section_start_pixel = 16;
+  const int blue_section_height = 48;
+  float amplitude = (blue_section_height / 2) - 1;
+  int center = blue_section_start_pixel + (blue_section_height / 2);
+
+  for (uint8_t page = 2; page < OLED_HEIGHT / 8; page++) {
     for (uint8_t col = 0; col < OLED_WIDTH; col++) {
       int y = center + amplitude * (2.0f / M_PI) * asinf(sinf(col * frequency));
 
@@ -125,13 +152,22 @@ void draw_triangle_wave(device_t *oled) {
 }
 
 void draw_sawtooth_wave(device_t *oled) {
-  oled->driver->clear(oled);
   bsp_printf("Drawing Sawtooth Wave\n");
+
+  // Clear the blue section of the display (pages 2-7)
+  uint8_t clear_buffer[OLED_WIDTH] = {0};
+  for (uint8_t page = 2; page < OLED_HEIGHT / 8; page++) {
+    oled->driver->draw(oled, page, 0, clear_buffer, OLED_WIDTH);
+  }
 
   uint8_t buffer[OLED_WIDTH];
   float frequency = 0.1f;
-  float amplitude = (OLED_HEIGHT / 2) - 1;
-  int center = OLED_HEIGHT / 2;
+
+  // Adjust geometry for the blue section
+  const int blue_section_start_pixel = 16;
+  const int blue_section_height = 48;
+  float amplitude = (blue_section_height / 2) - 1;
+  int center = blue_section_start_pixel + (blue_section_height / 2);
 
   static int y_values[OLED_WIDTH];
   for (int col = 0; col < OLED_WIDTH; col++) {
@@ -140,7 +176,7 @@ void draw_sawtooth_wave(device_t *oled) {
     y_values[col] = center + amplitude * (2.0f * t - 1.0f);
   }
 
-  for (uint8_t page = 0; page < OLED_HEIGHT / 8; page++) {
+  for (uint8_t page = 2; page < OLED_HEIGHT / 8; page++) {
     memset(buffer, 0, sizeof(buffer));
     for (int col = 0; col < OLED_WIDTH; col++) {
       int y_current = y_values[col];
@@ -169,6 +205,20 @@ void draw_sawtooth_wave(device_t *oled) {
 
 
 
+void draw_header(device_t *oled, float frequency) {
+    char text_buffer[32];
+    chsnprintf(text_buffer, sizeof(text_buffer), "Freq: %.2f Hz", frequency);
+
+    uint8_t clear_buffer[OLED_WIDTH] = {0};
+    // Clear top two pages (yellow section)
+    oled->driver->draw(oled, 0, 0, clear_buffer, OLED_WIDTH);
+    oled->driver->draw(oled, 1, 0, clear_buffer, OLED_WIDTH);
+
+    // Write text to page 0.
+    oled->driver->write(oled, 0, (const uint8_t*)text_buffer, strlen(text_buffer));
+}
+
+
 int main(void) {
   bsp_init();
 
@@ -183,7 +233,8 @@ int main(void) {
     return -1;
   }
 
-  oled->driver->clear(oled);
+  // Draw the header once
+  draw_header(oled, 25.0f);
 
 /*
   bsp_printf("Drawing Horizontal Ramp\n");

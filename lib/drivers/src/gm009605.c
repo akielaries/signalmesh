@@ -159,8 +159,9 @@ static int gm009605_init(device_t *dev) {
 
   chThdSleepMilliseconds(100);
 
+  bsp_printf("gm009605 Turning off\n");
   gm009605_send_cmd(oled, SSD1306_DISPLAY_OFF);
-  chThdSleepMilliseconds(100);
+  chThdSleepMilliseconds(1000);
 
   gm009605_send_cmd(oled, SSD1306_SET_DISPLAY_CLOCK_DIV);
   gm009605_send_cmd(oled, 0x80);
@@ -185,6 +186,8 @@ static int gm009605_init(device_t *dev) {
   gm009605_send_cmd(oled, 0x40);
   gm009605_send_cmd(oled, SSD1306_DISPLAY_ALL_ON_RESUME);
   gm009605_send_cmd(oled, SSD1306_NORMAL_DISPLAY);
+
+  bsp_printf("gm009605 Turning on\n");
   gm009605_send_cmd(oled, SSD1306_DISPLAY_ON);
 
   oled->initialized = true;

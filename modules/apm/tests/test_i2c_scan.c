@@ -35,7 +35,7 @@ static void i2c_scan(I2CDriver *i2c_driver) {
     } else {
       i2cflags_t err = i2cGetErrors(i2c_driver);
       if (err != I2C_NO_ERROR) {
-        bsp_printf("  Addr 0x%02X: err=0x%02X\r\n", addr, err);
+        //bsp_printf("  Addr 0x%02X: err=0x%02X\r\n", addr, err);
       }
     }
 

@@ -14,6 +14,8 @@
 #include "drivers/w25qxx.h"
 #include "drivers/servo.h"
 #include "drivers/gm009605.h"
+#include "drivers/lcd2004.h"
+
 
 // External declarations for board devices (defined in bsp.c)
 extern device_t board_devices[];
@@ -34,6 +36,7 @@ const driver_t *drivers[] = {
   &eeprom_24lc256_driver,
   &w25qxx_driver,
   &gm009605_driver,
+  &lcd2004_driver,
   //&servo_driver,
 };
 

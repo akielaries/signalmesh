@@ -83,10 +83,13 @@ set(SOURCES
     ${DRIVERS_SRC_DIR}/24lc256.c
     ${DRIVERS_SRC_DIR}/w25qxx.c
     ${DRIVERS_SRC_DIR}/gm009605.c
+    ${DRIVERS_SRC_DIR}/lcd2004.c
+
         # ./app/main.c ./tests/test_i2c_lb.c ./tests/test_ina219.c
     #./tests/test_i2c_scan.c
+    ./tests/bist_lcd2004.c
     #./tests/bist_gm009605.c
-    ./tests/bist_gm009605_ramp.c
+    #./tests/bist_gm009605_ramp.c
     # ./tests/test_bme280.c
     #./tests/test_poll_all.c
     #./tests/test_storage.c

@@ -24,6 +24,7 @@
 #include "drivers/w25qxx.h"
 #include "drivers/servo.h"
 #include "drivers/gm009605.h"
+#include "drivers/lcd2004.h"
 
 
 
@@ -44,6 +45,7 @@ static w25qxx_t w25qxx_dev_data_2;
 // static servo_t servo_dev_data; // servo driver doesn't have a private data struct
 // private data for gm009605
 static gm009605_t gm009605_dev_data;
+static lcd2004_t lcd2004_dev_data;
 
 
 // array of devices present on APM
@@ -109,6 +111,13 @@ device_t board_devices[] = {
         .driver = &gm009605_driver,
         .bus = &I2CD4,
         .priv = &gm009605_dev_data,
+        .is_active = false
+    },
+    {
+        .name = "lcd2004",
+        .driver = &lcd2004_driver,
+        .bus = &I2CD4,
+        .priv = &lcd2004_dev_data,
         .is_active = false
     },
     /*
