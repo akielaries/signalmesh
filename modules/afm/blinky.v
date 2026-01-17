@@ -5,6 +5,9 @@ module blinky (
   output reg [5:0] bank3_1v8_led    // 6-bit output driving LED pins
 );
 
+//alias clk = bank1_3v3_xtal_in;
+//alias
+
 reg [23:0] led_counter;       // LED shifting counter
 reg [24:0] red_led_counter;   // Red LED blinking counter
 
