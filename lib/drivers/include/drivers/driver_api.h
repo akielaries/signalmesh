@@ -63,6 +63,9 @@ struct device {
   /** @brief Bus-specific interface (I2C, SPI, etc) */
   void *bus;
 
+  /** @brief Hardware address (I2C address, SPI CS, etc) */
+  uint8_t addr;
+
   /** @brief Driver-specific private data */
   void *priv;
 

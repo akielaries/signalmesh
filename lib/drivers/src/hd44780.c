@@ -1,10 +1,15 @@
-#include "drivers/lcd2004.h"
-#include "common/utils.h"
+#include <string.h>
+
 #include "ch.h"
+
+#include "common/utils.h"
+#include "bsp/utils/bsp_io.h"
+
 #include "drivers/driver_api.h"
 #include "drivers/i2c.h"
-#include "bsp/utils/bsp_io.h"
-#include <string.h>
+#include "drivers/lcd2004.h"
+
+
 
 static void lcd2004_send_command_or_data(device_t *dev, uint8_t value, uint8_t mode);
 static void lcd2004_write4bits(device_t *dev, uint8_t value);

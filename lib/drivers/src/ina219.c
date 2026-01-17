@@ -108,71 +108,65 @@ static int ina219_write_register(ina219_t *dev, uint8_t reg, uint16_t val) {
 /******************************************************************************/
 static int ina219_init(device_t *dev) {
   if (dev->priv == NULL) {
-    bsp_printf("INA219 init error: private data not allocated\n");
+    bsp_printf("INA219 init error: private data not allocated for '%s'\n", dev->name);
     return DRIVER_ERROR;
   }
   ina219_t *ina_dev = (ina219_t *)dev->priv;
 
-  bsp_printf("INA219: Initializing...\n");
+  bsp_printf("INA219: Initializing '%s'...\n", dev->name);
 
+  // Set bus and address from the device definition
   ina_dev->bus.i2c  = (I2CDriver *)dev->bus;
-  ina_dev->bus.addr = INA219_DEFAULT_ADDRESS;
+  ina_dev->bus.addr = dev->addr;
 
-  bsp_printf("INA219: Resetting device...\n");
+  bsp_printf("INA219: Resetting device at 0x%02X...\n", ina_dev->bus.addr);
   if (ina219_write_register(ina_dev, INA219_REG_CONFIG, INA219_CONFIG_RESET) != 0) {
-    bsp_printf("INA219: Failed to reset device.\n");
+    bsp_printf("INA219: Failed to reset device '%s'.\n", dev->name);
     return DRIVER_ERROR;
   }
   chThdSleepMilliseconds(5);
 
-  // Build configuration register value using macros from ina219.h
-  uint16_t config_value = INA219_CONFIG_BVOLTAGERANGE_32V | INA219_CONFIG_GAIN_8_320MV |
-                          (INA219_CONFIG_ADC_12_BIT_1_SAMPLES << INA219_CONFIG_BADCRES_SHIFT) |
-                          (INA219_CONFIG_ADC_12_BIT_1_SAMPLES << INA219_CONFIG_SADCRES_SHIFT) |
-                          INA219_CONFIG_MODE_SANDBVOLT_CONT;
+  uint16_t config_value;
+  // Example of using the name to set different configurations
+  if (strcmp(dev->name, "ina219_main") == 0) {
+    config_value = INA219_CONFIG_BVOLTAGERANGE_32V | INA219_CONFIG_GAIN_8_320MV |
+                   (INA219_CONFIG_ADC_12_BIT_1_SAMPLES << INA219_CONFIG_BADCRES_SHIFT) |
+                   (INA219_CONFIG_ADC_12_BIT_1_SAMPLES << INA219_CONFIG_SADCRES_SHIFT) |
+                   INA219_CONFIG_MODE_SANDBVOLT_CONT;
+    ina_dev->shunt_resistance = 0.1f;
+  } else if (strcmp(dev->name, "ina219_aux") == 0) {
+    config_value = INA219_CONFIG_BVOLTAGERANGE_16V | INA219_CONFIG_GAIN_4_160MV |
+                   (INA219_CONFIG_ADC_12_BIT_1_SAMPLES << INA219_CONFIG_BADCRES_SHIFT) |
+                   (INA219_CONFIG_ADC_12_BIT_1_SAMPLES << INA219_CONFIG_SADCRES_SHIFT) |
+                   INA219_CONFIG_MODE_SANDBVOLT_CONT;
+    ina_dev->shunt_resistance = 0.05f; // Example: different shunt
+  } else {
+    // Default configuration for any other name
+    config_value = INA219_CONFIG_BVOLTAGERANGE_32V | INA219_CONFIG_GAIN_8_320MV |
+                   (INA219_CONFIG_ADC_12_BIT_1_SAMPLES << INA219_CONFIG_BADCRES_SHIFT) |
+                   (INA219_CONFIG_ADC_12_BIT_1_SAMPLES << INA219_CONFIG_SADCRES_SHIFT) |
+                   INA219_CONFIG_MODE_SANDBVOLT_CONT;
+    ina_dev->shunt_resistance = 0.1f;
+  }
 
-  bsp_printf("INA219: Writing config value: 0x%04X\n", config_value);
+  bsp_printf("INA219: Writing config 0x%04X to '%s'\n", config_value, dev->name);
   if (ina219_write_register(ina_dev, INA219_REG_CONFIG, config_value) != 0) {
-    bsp_printf("INA219: Failed to write config.\n");
+    bsp_printf("INA219: Failed to write config for '%s'.\n", dev->name);
     return DRIVER_ERROR;
   }
 
-  // Calibration for 32V, 3.2A range with 0.1Ω shunt
-  ina_dev->shunt_resistance = 0.1f;
-  ina_dev->current_lsb      = 0.0001f; // 100µA per bit
-  ina_dev->calibration_value =
-    (uint16_t)(0.04096f / (ina_dev->current_lsb * ina_dev->shunt_resistance));
+  // Common calibration logic
+  ina_dev->current_lsb      = 0.0001f; // 100µA per bit (can also be made configurable)
+  ina_dev->calibration_value = (uint16_t)(0.04096f / (ina_dev->current_lsb * ina_dev->shunt_resistance));
   ina_dev->power_lsb = 20.0f * ina_dev->current_lsb;
 
-  bsp_printf("INA219: Current LSB: %.6f A/bit (%.3f mA/bit)\n",
-             ina_dev->current_lsb,
-             ina_dev->current_lsb * 1000.0f);
-  bsp_printf("INA219: Power LSB: %.6f W/bit (%.3f mW/bit)\n",
-             ina_dev->power_lsb,
-             ina_dev->power_lsb * 1000.0f);
-  bsp_printf("INA219: Writing calibration value: %d\n", ina_dev->calibration_value);
-
+  bsp_printf("INA219: Writing calibration %d to '%s'\n", ina_dev->calibration_value, dev->name);
   if (ina219_write_register(ina_dev, INA219_REG_CALIBRATION, ina_dev->calibration_value) != 0) {
-    bsp_printf("INA219: Failed to write calibration.\n");
+    bsp_printf("INA219: Failed to write calibration for '%s'.\n", dev->name);
     return DRIVER_ERROR;
   }
 
-  chThdSleepMilliseconds(20);
-
-  uint16_t read_config;
-  if (ina219_read_register(ina_dev, INA219_REG_CONFIG, &read_config) == 0) {
-    bsp_printf("INA219: Read back config: 0x%04X\n", read_config);
-  } else {
-    bsp_printf("INA219: Failed to read back config.\n");
-    return DRIVER_ERROR;
-  }
-
-  uint16_t read_cal;
-  if (ina219_read_register(ina_dev, INA219_REG_CALIBRATION, &read_cal) == 0) {
-    bsp_printf("INA219: Read back calibration: %d\n", read_cal);
-  }
-
-  bsp_printf("INA219: Initialization complete.\n");
+  bsp_printf("INA219: Initialization complete for '%s'.\n", dev->name);
 
   return DRIVER_OK;
 }

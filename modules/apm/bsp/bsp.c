@@ -8,9 +8,9 @@
 #include "bsp/utils/bsp_gpt.h"
 #include "bsp/utils/bsp_io.h"
 
-#include "bsp/configs/bsp_uart_config.h" // for bsp_debug_stream and bsp_debug_uart_config
-#include "bsp/configs/bsp_i2c_config.h" // for bsp_i2c_init()
-#include "bsp/configs/bsp_spi_config.h" // for bsp_spi_init()
+#include "bsp/configs/bsp_uart_config.h"
+#include "bsp/configs/bsp_i2c_config.h"
+#include "bsp/configs/bsp_spi_config.h"
 
 #include "drivers/driver_registry.h"
 #include "drivers/driver_api.h"
@@ -29,7 +29,7 @@
 
 
 // private data for ina219
-static ina219_t ina219_dev_data;
+static ina219_t ina219_dev_data[2];
 // private data for ina3221
 static ina3221_t ina3221_dev_data;
 // private data for bme280
@@ -51,16 +51,26 @@ static lcd2004_t lcd2004_dev_data;
 // array of devices present on APM
 device_t board_devices[] = {
     {
-        .name = "ina219", // this name must match the driver name
+        .name = "ina219_main",
         .driver = &ina219_driver,
-        .bus = &I2CD4, // bus instance
-        .priv = &ina219_dev_data, // private data for the device
+        .bus = &I2CD4,
+        .addr = 0x40,
+        .priv = &ina219_dev_data[0],
+        .is_active = false
+    },
+    {
+        .name = "ina219_aux",
+        .driver = &ina219_driver,
+        .bus = &I2CD4,
+        .addr = 0x45, // A0 and A1 pins grounded
+        .priv = &ina219_dev_data[1],
         .is_active = false
     },
     {
         .name = "ina3221",
         .driver = &ina3221_driver,
         .bus = &I2CD4,
+        .addr = 0x40, // Note: This may conflict with ina219_main
         .priv = &ina3221_dev_data,
         .is_active = false
     },
@@ -68,6 +78,7 @@ device_t board_devices[] = {
         .name = "aht2x",
         .driver = &aht2x_driver,
         .bus = &I2CD4,
+        .addr = 0x38,
         .priv = &aht2x_dev_data,
         .is_active = false
     },
@@ -75,6 +86,7 @@ device_t board_devices[] = {
         .name = "bme280",
         .driver = &bme280_driver,
         .bus = &I2CD4,
+        .addr = 0x76,
         .priv = NULL,
         .is_active = false
     },
@@ -82,6 +94,7 @@ device_t board_devices[] = {
         .name = "bh1750",
         .driver = &bh1750_driver,
         .bus = &I2CD4,
+        .addr = 0x23,
         .priv = &bh1750_dev_data,
         .is_active = false
     },
@@ -89,6 +102,7 @@ device_t board_devices[] = {
         .name = "24lc256",
         .driver = &eeprom_24lc256_driver,
         .bus = &I2CD4,
+        .addr = 0x50,
         .priv = &eeprom_24lc256_dev_data,
         .is_active = false
     },
@@ -96,6 +110,7 @@ device_t board_devices[] = {
         .name = "w25qxx_1",
         .driver = &w25qxx_driver,
         .bus = &spi_bus_w25qxx_1,
+        .addr = 0, // SPI uses CS pin, not address
         .priv = &w25qxx_dev_data_1,
         .is_active = false
     },
@@ -103,6 +118,7 @@ device_t board_devices[] = {
         .name = "w25qxx_2",
         .driver = &w25qxx_driver,
         .bus = &spi_bus_w25qxx_2,
+        .addr = 0, // SPI uses CS pin, not address
         .priv = &w25qxx_dev_data_2,
         .is_active = false
     },
@@ -110,6 +126,7 @@ device_t board_devices[] = {
         .name = "gm009605",
         .driver = &gm009605_driver,
         .bus = &I2CD4,
+        .addr = 0x3C,
         .priv = &gm009605_dev_data,
         .is_active = false
     },
@@ -117,6 +134,7 @@ device_t board_devices[] = {
         .name = "lcd2004",
         .driver = &lcd2004_driver,
         .bus = &I2CD4,
+        .addr = 0x27,
         .priv = &lcd2004_dev_data,
         .is_active = false
     },
