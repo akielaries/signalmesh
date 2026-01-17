@@ -1,14 +1,31 @@
-IO_LOC "clk" 52;
-IO_PORT "clk" PULL_MODE=UP;
-IO_LOC "led[0]" 10;
-IO_LOC "led[1]" 11;
-IO_LOC "led[2]" 13;
-IO_LOC "led[3]" 14;
-IO_LOC "led[4]" 15;
-IO_LOC "led[5]" 16;
-IO_LOC "btn1" 3;
+# crystal IN (XTAL_IN)
+IO_LOC  "bank1_3v3_xtal_in" 52;
+IO_PORT "bank1_3v3_xtal_in" PULL_MODE=UP;
 
-IO_LOC "uart_tx" 25;
-IO_PORT "uart_tx" IO_TYPE=LVCMOS33;
-IO_LOC "uart_rx" 26;
-IO_PORT "uart_rx" IO_TYPE=LVCMOS33;
+IO_LOC "bank3_1v8_led[0]" 10;
+IO_LOC "bank3_1v8_led[1]" 11;
+IO_LOC "bank3_1v8_led[2]" 13;
+IO_LOC "bank3_1v8_led[3]" 14;
+IO_LOC "bank3_1v8_led[4]" 15;
+IO_LOC "bank3_1v8_led[5]" 16;
+IO_LOC "bank3_1v8_btn1" 3;
+
+# on board SPI flash
+IO_LOC  "bank1_3v3_flash_miso" 62;
+IO_PORT "bank1_3v3_flash_miso" PULL_MODE=UP DRIVE=8;
+IO_LOC  "bank1_3v3_flash_mosi" 61;
+IO_PORT "bank1_3v3_flash_mosi" PULL_MODE=UP DRIVE=8;
+IO_LOC  "bank1_3v3_flash_cs" 60;
+IO_PORT "bank1_3v3_flash_cs" PULL_MODE=UP DRIVE=8;
+IO_LOC  "bank1_3v3_flash_clk" 59;
+IO_PORT "bank1_3v3_flash_clk" PULL_MODE=UP DRIVE=8;
+
+# UART debug port
+IO_LOC  "bank2_3v3_uart_tx" 25;
+IO_PORT "bank2_3v3_uart_tx" IO_TYPE=LVCMOS33;
+IO_LOC  "bank2_3v3_uart_rx" 26;
+IO_PORT "bank2_3v3_uart_rx" IO_TYPE=LVCMOS33;
+
+# LED on GPIO 27
+IO_LOC  "bank2_3v3_red_led" 27;
+IO_PORT "bank2_3v3_red_led" PULL_MODE=UP DRIVE=8;
