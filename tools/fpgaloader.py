@@ -18,7 +18,7 @@ def program_fpga(bitstream_path, board_type, host, port):
         print(f"Error: Bitstream file not found: {bitstream_path}")
         return 1
 
-    # Read bitstream file
+    # read bitstream file
     with open(bitstream_path, "rb") as f:
         bitstream_data = f.read()
 
@@ -27,20 +27,20 @@ def program_fpga(bitstream_path, board_type, host, port):
     print(f"Board type: {board_type}")
 
     try:
-        # Connect to server
+        # connect to server
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(60)  # 60 second timeout
         sock.connect((host, port))
 
-        # Send header (4 bytes file size)
+        # send header (4 bytes file size)
         sock.sendall(file_size.to_bytes(4, "big"))
 
-        # Send board type (1 byte length + string)
+        # send board type (1 byte length + string)
         board_bytes = board_type.encode("utf-8")
         sock.sendall(len(board_bytes).to_bytes(1, "big"))
         sock.sendall(board_bytes)
 
-        # Send bitstream data
+        # send bitstream data
         total_sent = 0
         chunk_size = 4096
 
@@ -48,14 +48,14 @@ def program_fpga(bitstream_path, board_type, host, port):
             chunk = bitstream_data[i : i + chunk_size]
             sent = sock.sendall(chunk)
             total_sent += len(chunk)
-            # Simple progress indicator
+            # simple progress indicator
             if i % (chunk_size * 100) == 0:
                 percent = (total_sent / file_size) * 100
                 print(f"Progress: {percent:.1f}%", end="\r")
 
         print(f"\nTransfer complete. Waiting for programming...")
 
-        # Receive response
+        # receive response
         response_data = b""
         while True:
             try:
@@ -66,7 +66,7 @@ def program_fpga(bitstream_path, board_type, host, port):
             except socket.timeout:
                 break
 
-        # Parse response
+        # parse response
         response = json.loads(response_data.decode("utf-8"))
 
         print("\n" + "=" * 60)
