@@ -5,8 +5,8 @@ IO_PORT "bank1_3v3_xtal_in" PULL_MODE=UP DRIVE=24 IO_TYPE=LVCMOS33;
 #IO_PORT "bank1_3v3_xtal_route" DRIVE=24 IO_TYPE=LVCMOS33;
 
 # constraints for pll_example outputs
-IO_LOC "clk_108mhz_out" 38;
-IO_PORT "clk_108mhz_out" DRIVE=24;
+IO_LOC "pll_clk_out" 38;
+IO_PORT "pll_clk_out" DRIVE=24;
 IO_LOC "pll_locked" 37;
 IO_PORT "pll_locked" DRIVE=24;
 
