@@ -15,7 +15,11 @@ module clk_div_example #(
   //parameter PHASE_INCREMENT = 32'd19_088_744 // 120khz
   //parameter PHASE_INCREMENT = 32'd1_908_874_353 // 12mhz
   //parameter PHASE_INCREMENT = 32'd159_072_862 // 1mhz
-  parameter PHASE_INCREMENT = 32'd795_364_314 // 5mhz
+  //parameter PHASE_INCREMENT = 32'd318_145_725 // 2mhz
+  parameter PHASE_INCREMENT = 32'd477_218_588 // 3mhz
+  //parameter PHASE_INCREMENT = 32'd636_291_451 // 4mhz
+
+  //parameter PHASE_INCREMENT = 32'd795_364_314 // 5mhz
 
 )(
   // --- Inputs ---
@@ -23,7 +27,7 @@ module clk_div_example #(
   input bank3_1v8_sys_rst, // Active-low reset
 
   // --- Outputs ---
-  //output bank1_3v3_xtal_route,
+  output bank1_3v3_xtal_route,
   output reg clk_div_out      // The new, generated clock output
 );
 
@@ -31,7 +35,7 @@ module clk_div_example #(
   wire rst_n;
 
   assign clk = bank1_3v3_xtal_in;
-  //assign bank1_3v3_xtal_route = bank1_3v3_xtal_in;
+  assign bank1_3v3_xtal_route = bank1_3v3_xtal_in;
   assign rst_n = bank3_1v8_sys_rst;
   // --------------------------------------------------------
 

@@ -17,7 +17,6 @@ module pll_example (
   input bank3_1v8_sys_rst,      // Active-low reset
 
   // --- Outputs ---
-  output bank1_3v3_xtal_route, // clock routed to GPIO
   output clk_108mhz_out, // Synthesized, faster clock (108 MHz)
   output pll_locked      // High when the PLL output clock is stable
 );
@@ -27,7 +26,6 @@ wire rst_n;
 wire clk_108mhz_internal; // Internal wire for PLL output and feedback
 
 assign clk = bank1_3v3_xtal_in;
-assign bank1_3v3_xtal_route = bank1_3v3_xtal_in;
 
 assign rst_n = bank3_1v8_sys_rst;
 assign clk_108mhz_out = clk_108mhz_internal; // Assign internal wire to output port
