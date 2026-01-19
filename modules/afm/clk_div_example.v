@@ -1,46 +1,59 @@
 /*
- * Clock Divider Example for Gowin FPGAs
+ * Flexible Clock Generator (NCO) Example for Gowin FPGAs
  *
- * This module demonstrates a simple clock divider. It takes the 27 MHz
- * master clock and divides it by 4 to produce a 6.75 MHz clock.
+ * This module uses a Numerically Controlled Oscillator (NCO) to generate
+ * a square wave of a given frequency. The frequency is controlled by the
+ * PHASE_INCREMENT parameter.
  *
  */
 
-module clk_div_example (
+module clk_div_example #(
+  // This parameter controls the output frequency.
+  // F_out = (F_clk * PHASE_INCREMENT) / (2^32)
+  // For F_out=30kHz, PHASE_INCREMENT = (30000 * 2^32) / 27000000 = 4772186
+  //parameter PHASE_INCREMENT = 32'd4_772_186 // 30khz
+  //parameter PHASE_INCREMENT = 32'd19_088_744 // 120khz
+  //parameter PHASE_INCREMENT = 32'd1_908_874_353 // 12mhz
+  //parameter PHASE_INCREMENT = 32'd159_072_862 // 1mhz
+  parameter PHASE_INCREMENT = 32'd795_364_314 // 5mhz
+
+)(
   // --- Inputs ---
   input bank1_3v3_xtal_in, // Input clock from the crystal oscillator (27 MHz)
   input bank3_1v8_sys_rst, // Active-low reset
 
   // --- Outputs ---
-  output bank1_3v3_xtal_route,
-  output clk_div_out      // The new, divided clock output (6.75 MHz)
+  //output bank1_3v3_xtal_route,
+  output reg clk_div_out      // The new, generated clock output
 );
 
-  // --- Port Aliases (standard Verilog via wire/assign) ---
   wire clk;
   wire rst_n;
 
   assign clk = bank1_3v3_xtal_in;
-  assign bank1_3v3_xtal_route = bank1_3v3_xtal_in;
+  //assign bank1_3v3_xtal_route = bank1_3v3_xtal_in;
   assign rst_n = bank3_1v8_sys_rst;
   // --------------------------------------------------------
 
-  // --- Clock Divider Logic ---
-  // A 2-bit counter is used to achieve a divide-by-4.
-  // The counter will cycle through 00, 01, 10, 11 on each clock edge.
-  reg [1:0] counter;
+  // numerically controller oscillator (NCO)
+  reg [31:0] phase_accumulator;
 
   always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-      counter <= 2'd0;
+      phase_accumulator <= 32'd0;
     end else begin
-      counter <= counter + 1'b1;
+      phase_accumulator <= phase_accumulator + PHASE_INCREMENT;
     end
   end
 
-  // The divided clock is simply the most significant bit (MSB) of the counter.
-  // The MSB will be low for two cycles and high for two cycles, creating a
-  // new clock with a 50% duty cycle at 1/4 the frequency of the input clock.
-  assign clk_div_out = counter[1];
+  // The output clock is the most significant bit (MSB) of the accumulator,
+  // passed through an output register for signal integrity.
+  always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      clk_div_out <= 1'b0;
+    end else begin
+      clk_div_out <= phase_accumulator[31];
+    end
+  end
 
 endmodule
