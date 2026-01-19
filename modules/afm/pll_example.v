@@ -9,15 +9,26 @@
  * with parameters validated for your specific device and frequency plan.
  * The tool will provide a customized instantiation template.
  *
+ * the main idea of a PLL is to lock 
  */
 
+`define PLL_84MHZ_FCLKIN     "27"
+`define PLL_84MHZ_IDIV_SEL   8
+`define PLL_84MHZ_FBDIV_SEL  27
+`define PLL_84MHZ_ODIV_SEL   8
+
+`define PLL_248MHZ_FCLKIN     "27"
+`define PLL_248MHZ_IDIV_SEL   4
+`define PLL_248MHZ_FBDIV_SEL  45
+`define PLL_248MHZ_ODIV_SEL   2
+
+
+
 module pll_example (
-  // --- Inputs ---
   input bank1_3v3_xtal_in, // Input clock from the crystal oscillator (27 MHz)
   input bank3_1v8_sys_rst,      // Active-low reset
 
-  // --- Outputs ---
-  output pll_clk_out, // Synthesized, faster clock (132 MHz)
+  output pll_clk_out, // Synthesized, faster clock
   output pll_locked      // High when the PLL output clock is stable
 );
 
@@ -35,10 +46,13 @@ assign pll_clk_out = clk_132mhz_internal; // Assign internal wire to output port
 // using the Gowin PLL calculator at:
 // juj.github.io/gowin_fpga_code_generators/pll_calculator.html
 rPLL #(
-  .FCLKIN("27"),
-  .IDIV_SEL(8), // -> PFD = 3 MHz (range: 3-400 MHz)
-  .FBDIV_SEL(43), // -> CLKOUT = 132 MHz (range: 3.125-600 MHz)
-  .ODIV_SEL(8) // -> VCO = 1056 MHz (range: 400-1200 MHz)
+  .FCLKIN(`PLL_84MHZ_FCLKIN),
+  // -> PFD = (range: 3-400 MHz)
+  .IDIV_SEL(`PLL_84MHZ_IDIV_SEL),
+  // -> CLKOUT = (range: 3.125-600 MHz)
+  .FBDIV_SEL(`PLL_84MHZ_FBDIV_SEL),
+  // -> VCO = (range: 400-1200 MHz)
+  .ODIV_SEL(`PLL_84MHZ_ODIV_SEL)
 )
 
 pll (
