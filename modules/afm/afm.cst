@@ -5,9 +5,9 @@ IO_PORT "bank1_3v3_xtal_in" PULL_MODE=UP DRIVE=24 IO_TYPE=LVCMOS33;
 #IO_PORT "bank1_3v3_xtal_route" DRIVE=24;
 
 # constraints for the dual PLL outputs
-IO_LOC "bank2_3v3_pll_clk1" 38;
+IO_LOC "bank2_3v3_pll_clk1" 28;
 IO_PORT "bank2_3v3_pll_clk1" DRIVE=24;
-IO_LOC "bank2_3v3_pll_clk2" 32;
+IO_LOC "bank2_3v3_pll_clk2" 38;
 IO_PORT "bank2_3v3_pll_clk2" DRIVE=24;
 
 # Constraints for PLL lock status
