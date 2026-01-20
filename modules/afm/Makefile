@@ -1,43 +1,72 @@
-#YOSYS=yosys
+# Makefile for the 'afm' module
+# This Makefile uses a simple, explicit rule for each design.
 
-#FAMILY= GW1N-9C
+# --- Toolchain ---
+YOSYS      = yosys
+NEXTPNR    = nextpnr-himbaechel
+GOWIN_PACK = gowin_pack
 
-#BLOCK=
+# --- Gowin Device ---
+DEVICE  = GW1NR-LV9QN88PC6/I5
+FAMILY  = GW1N-9C
+FREQ    = 27 # Input clock frequency in MHz
+CST_FILE = afm.cst
 
-blinky:
-	yosys -p "read_verilog blinky.v; synth_gowin -top blinky -json blinky.json"
-	nextpnr-himbaechel --json blinky.json --write pnrblinky.json --freq 27 --device GW1NR-LV9QN88PC6/I5 --vopt family=GW1N-9C --vopt cst=afm.cst
-	gowin_pack -d GW1N-9C -o bitstream.bit pnrblinky.json
+# --- All Verilog sources needed for most designs ---
+# This makes the rules less repetitive.
+V_SOURCES = rtl/top.v cores/pll_core.v
+YOSYS_FLAGS = -Iinclude
 
-uart:
-	yosys -p "read_verilog uart.v uart_test.v; synth_gowin -top uart_test -json uart.json"
-	nextpnr-himbaechel --json uart.json --write pnruart.json --freq 27 --device GW1NR-LV9QN88PC6/I5 --vopt family=GW1N-9C --vopt cst=acm.cst
-	gowin_pack -d GW1N-9C -o bitstream.bit pnruart.json
+# --- Build Targets ---
 
-pll:
-	yosys -p "read_verilog pll_example.v; synth_gowin -top pll_example -json pll_example.json"
-	nextpnr-himbaechel --json pll_example.json --write pnrpll_example.json --freq 27 --device GW1NR-LV9QN88PC6/I5 --vopt family=GW1N-9C --vopt cst=afm.cst
-	gowin_pack -d GW1N-9C -o bitstream.bit pnrpll_example.json
+.PHONY: all top pll_example blinky flash clean
 
-clk_div:
-	yosys -p "read_verilog clk_div_example.v; synth_gowin -top clk_div_example -json clk_div_example.json"
-	nextpnr-himbaechel --json clk_div_example.json --write pnrclk_div_example.json --freq 27 --device GW1NR-LV9QN88PC6/I5 --vopt family=GW1N-9C --vopt cst=afm.cst
-	gowin_pack -d GW1N-9C -o bitstream.bit pnrclk_div_example.json
+# Default target
+all: top
 
-waveform:
-	yosys -p "read_verilog sine_wave_gen.v; synth_gowin -top sine_wave_gen -json sine_wave_gen.json"
-	nextpnr-himbaechel --json sine_wave_gen.json --write pnrsine_wave_gen.json --freq 27 --device GW1NR-LV9QN88PC6/I5 --vopt family=GW1N-9C --vopt cst=afm.cst
-	gowin_pack -d GW1N-9C -o bitstream.bit pnrsine_wave_gen.json
+# Target to build the main 'top' module
+top: build/top.bit
 
-uart_sim:
-	iverilog -o sim_uart uart.v uart_tb.v
-	vvp sim_uart
+build/top.bit: $(V_SOURCES) rtl/top.v
+	@echo "### Building top module..."
+	@mkdir -p build
+	$(YOSYS) -p "read_verilog $(YOSYS_FLAGS) $(V_SOURCES); synth_gowin -top top -json build/top.json"
+	$(NEXTPNR) --json build/top.json --write build/top_pnr.json --freq $(FREQ) --device $(DEVICE) --vopt family=$(FAMILY) --vopt cst=$(CST_FILE)
+	$(GOWIN_PACK) -d $(FAMILY) -o $@ build/top_pnr.json
 
-uart_wave:
-	gtkwave uart.vcd
+# Target to build the 'pll_example'
+pll_example: build/pll_example.bit
 
+build/pll_example.bit: examples/pll_example.v cores/pll_core.v
+	@echo "### Building pll_example..."
+	@mkdir -p build
+	$(YOSYS) -p "read_verilog $(YOSYS_FLAGS) cores/pll_core.v examples/pll_example.v; synth_gowin -top pll_example -json build/pll_example.json"
+	$(NEXTPNR) --json build/pll_example.json --write build/pll_example_pnr.json --freq $(FREQ) --device $(DEVICE) --vopt family=$(FAMILY) --vopt cst=$(CST_FILE)
+	$(GOWIN_PACK) -d $(FAMILY) -o $@ build/pll_example_pnr.json
+
+# Target to build the 'blinky' example
+blinky: build/blinky.bit
+
+build/blinky.bit: examples/blinky.v
+	@echo "### Building blinky example..."
+	@mkdir -p build
+	$(YOSYS) -p "read_verilog $(YOSYS_FLAGS) examples/blinky.v; synth_gowin -top blinky -json build/blinky.json"
+	$(NEXTPNR) --json build/blinky.json --write build/blinky_pnr.json --freq $(FREQ) --device $(DEVICE) --vopt family=$(FAMILY) --vopt cst=$(CST_FILE)
+	$(GOWIN_PACK) -d $(FAMILY) -o $@ build/blinky_pnr.json
+
+
+# --- Utility Targets ---
+
+# Generic flash target - MUST specify the file to flash
+# Example: make flash FILE=build/top.bit
 flash:
-	../../tools/fpgaloader.py -f bitstream.bit -b tangnano9k
+	@if [ -z "$(FILE)" ]; then \
+		echo "ERROR: Please specify the file to flash. Example: make flash FILE=build/top.bit"; \
+		exit 1; \
+	fi
+	@echo "### Flashing $(FILE)..."
+	../../tools/fpgaloader.py -f $(FILE) -b tangnano9k
 
 clean:
-	rm -f *.fs *.bit *.json
+	@echo "### Cleaning build artifacts..."
+	rm -rf build *.log
