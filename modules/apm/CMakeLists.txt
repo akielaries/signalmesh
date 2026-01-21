@@ -45,8 +45,8 @@ include_directories(
   ./bsp/utils
   ${DRIVERS_INCLUDE_DIR}
   ${COMMON_INCLUDE_DIR}
-  #${CHIBIOS_ROOT}/os/hal/include
-  #${CHIBIOS_ROOT}/os/rt/include
+  ${CHIBIOS_ROOT}/os/hal/include
+  ${CHIBIOS_ROOT}/os/rt/include
 
 )
 
@@ -90,7 +90,8 @@ set(SOURCES
     #./tests/bist_lcd2004.c
     #./tests/bist_ina219_dual.c
     #./tests/bist_gm009605.c
-    ./tests/bist_gm009605_ramp.c
+    #./tests/bist_gm009605_ramp.c
+    ./tests/bist_icu.c
     # ./tests/test_bme280.c
     #./tests/test_poll_all.c
     #./tests/test_storage.c

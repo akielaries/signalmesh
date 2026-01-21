@@ -54,6 +54,16 @@ build/blinky.bit: examples/blinky.v
 	$(NEXTPNR) --json build/blinky.json --write build/blinky_pnr.json --freq $(FREQ) --device $(DEVICE) --vopt family=$(FAMILY) --vopt cst=$(CST_FILE)
 	$(GOWIN_PACK) -d $(FAMILY) -o $@ build/blinky_pnr.json
 
+# Target to build the 'clk_div_example'
+clk_div_example: build/clk_div_example.bit
+
+build/clk_div_example.bit: examples/clk_div_example.v
+	@echo "### Building clk_div_example..."
+	@mkdir -p build
+	$(YOSYS) -p "read_verilog $(YOSYS_FLAGS) examples/clk_div_example.v; synth_gowin -top clk_div_example -json build/clk_div_example.json"
+	$(NEXTPNR) --json build/clk_div_example.json --write build/clk_div_example_pnr.json --freq $(FREQ) --device $(DEVICE) --vopt family=$(FAMILY) --vopt cst=$(CST_FILE)
+	$(GOWIN_PACK) -d $(FAMILY) -o $@ build/clk_div_example_pnr.json
+
 
 # --- Utility Targets ---
 
