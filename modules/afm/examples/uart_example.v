@@ -1,20 +1,13 @@
-/**
- * signalmesh 2025
- *
- * @file
- * @brief A practical example of using the UART module to send a "Hello, world!" message.
- * @author Akiel Aries (with modifications by Gemini)
- */
-
 `default_nettype none
 
 module uart_hello_world #(
   parameter CLK_FREQ = 27000000, // Clock frequency in Hz
   parameter BAUD_RATE = 115200   // Desired baud rate
 )(
-  input wire clk,
-  output wire uart_tx,
-  output wire [5:0] led
+  input wire bank1_3v3_xtal_in,
+  input wire bank2_3v3_uart_rx,
+  output wire bank2_3v3_uart_tx,
+  output wire [5:0] bank3_1v8_led
 );
 
   // Calculate the baud rate divisor based on the clock frequency and baud rate
@@ -33,10 +26,10 @@ module uart_hello_world #(
   uart #(
     .BAUD_DIV(BAUD_DIV)
   ) uart_instance (
-    .clk(clk),
-    .uart_rx(1'b1),      // RX is not used in this example, so tie it to high
-    .uart_tx(uart_tx),
-    .led(led),           // Connect the LED output
+    .clk(bank1_3v3_xtal_in),
+    .uart_rx(bank2_3v3_uart_rx),
+    .uart_tx(bank2_3v3_uart_tx),
+    .led(bank3_1v8_led),           // Connect the LED output
     .enable_tx(enable_tx_reg),
     .tx_data(tx_data_reg),
     .tx_done(tx_done_wire)
@@ -52,7 +45,7 @@ module uart_hello_world #(
   reg [$clog2(MESSAGE_LEN):0] char_index = 0;
   reg [23:0] delay_counter = 0;
 
-  always @(posedge clk) begin
+  always @(posedge bank1_3v3_xtal_in) begin
     case (state)
       // Idle state, waits for a bit before starting transmission
       S_IDLE: begin

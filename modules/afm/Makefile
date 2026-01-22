@@ -19,10 +19,10 @@ YOSYS_FLAGS = -Iinclude
 
 # --- Build Targets ---
 
-.PHONY: all top pll_example blinky clk_div_example pll_blink flash clean
+.PHONY: all top pll_example blinky clk_div_example pll_blink uart_example flash clean
 
 # Default target
-all: top
+all: top uart_example
 
 # Target to build the main 'top' module
 top: build/top.bit
@@ -73,6 +73,17 @@ build/pll_blink.bit: examples/pll_blink.v cores/pll_core.v
 	$(YOSYS) -p "read_verilog $(YOSYS_FLAGS) cores/pll_core.v examples/pll_blink.v; synth_gowin -top pll_blink -json build/pll_blink.json"
 	$(NEXTPNR) --json build/pll_blink.json --write build/pll_blink_pnr.json --freq $(FREQ) --device $(DEVICE) --vopt family=$(FAMILY) --vopt cst=$(CST_FILE)
 	$(GOWIN_PACK) -d $(FAMILY) -o $@ build/pll_blink_pnr.json
+
+# Target to build the 'uart_example' example
+uart_example: build/uart_example.bit
+
+build/uart_example.bit: examples/uart_example.v rtl/uart.v
+	@echo "### Building uart_example example..."
+	@mkdir -p build
+	$(YOSYS) -p "read_verilog $(YOSYS_FLAGS) rtl/uart.v examples/uart_example.v; synth_gowin -top uart_hello_world -json build/uart_example.json"
+	$(NEXTPNR) --json build/uart_example.json --write build/uart_example_pnr.json --freq $(FREQ) --device $(DEVICE) --vopt family=$(FAMILY) --vopt cst=$(CST_FILE)
+	$(GOWIN_PACK) -d $(FAMILY) -o $@ build/uart_example_pnr.json
+
 
 
 # --- Utility Targets ---
