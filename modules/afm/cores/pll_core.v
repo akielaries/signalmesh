@@ -2,10 +2,10 @@
 // pll_core.v
 //
 // Generic, configurable PLL core for generating various clock frequencies.
-// This module wraps the vendor-specific 'rPLL' hardware primitive,
-// exposing its main parameters and tying off unused dynamic controls.
+// This module wraps the vendor-specific 'rPLL' hardware primitive/IP
 //
 `include "include/common_defines.vh"
+
 
 module pll_core #(
   // --- Parameters to make this block dynamic ---
@@ -24,9 +24,7 @@ module pll_core #(
 );
 
   // --- IP Core Instantiation ---
-  // Instantiate the Gowin 'rPLL' hard IP core.
-  // This version matches the more complex port mapping from the example,
-  // tying unused dynamic configuration ports to a default state (0).
+  // Instantiate the Gowin 'rPLL' hard IP core
   rPLL #(
     .FCLKIN(FCLKIN),
     .IDIV_SEL(IDIV_SEL),
@@ -37,20 +35,16 @@ module pll_core #(
     .CLKIN(clk_in),
     .RESET(!reset_n), // The primitive requires an active-high reset
     .RESET_P(1'b0),     // Power-on reset for dynamic re-configuration
-
     // Main Outputs
     .CLKOUT(clk_out),
     .LOCK(locked),
-
     // Unused Optional Outputs
     .CLKOUTP(),
     .CLKOUTD(),
     .CLKOUTD3(),
-
     // Feedback Control (unused in this static configuration)
     .CLKFB(1'b0),       // Set to 0 to use internal feedback path
     .FBDSEL(6'b0),
-
     // Dynamic Re-configuration Ports (unused)
     .IDSEL(6'b0),
     .ODSEL(6'b0),

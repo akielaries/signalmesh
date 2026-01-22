@@ -19,7 +19,7 @@ YOSYS_FLAGS = -Iinclude
 
 # --- Build Targets ---
 
-.PHONY: all top pll_example blinky flash clean
+.PHONY: all top pll_example blinky clk_div_example pll_blink flash clean
 
 # Default target
 all: top
@@ -63,6 +63,16 @@ build/clk_div_example.bit: examples/clk_div_example.v
 	$(YOSYS) -p "read_verilog $(YOSYS_FLAGS) examples/clk_div_example.v; synth_gowin -top clk_div_example -json build/clk_div_example.json"
 	$(NEXTPNR) --json build/clk_div_example.json --write build/clk_div_example_pnr.json --freq $(FREQ) --device $(DEVICE) --vopt family=$(FAMILY) --vopt cst=$(CST_FILE)
 	$(GOWIN_PACK) -d $(FAMILY) -o $@ build/clk_div_example_pnr.json
+
+# Target to build the 'pll_blink' example
+pll_blink: build/pll_blink.bit
+
+build/pll_blink.bit: examples/pll_blink.v cores/pll_core.v
+	@echo "### Building pll_blink example..."
+	@mkdir -p build
+	$(YOSYS) -p "read_verilog $(YOSYS_FLAGS) cores/pll_core.v examples/pll_blink.v; synth_gowin -top pll_blink -json build/pll_blink.json"
+	$(NEXTPNR) --json build/pll_blink.json --write build/pll_blink_pnr.json --freq $(FREQ) --device $(DEVICE) --vopt family=$(FAMILY) --vopt cst=$(CST_FILE)
+	$(GOWIN_PACK) -d $(FAMILY) -o $@ build/pll_blink_pnr.json
 
 
 # --- Utility Targets ---
