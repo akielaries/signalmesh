@@ -1,0 +1,21 @@
+{
+ "Device" : "GW1NR-9C",
+ "Files" : [
+  {
+   "Path" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/gowin_rpll/gowin_rpll.v",
+   "Type" : "verilog"
+  }
+ ],
+ "IncludePath" : [
+
+ ],
+ "LoopLimit" : 2000,
+ "ResultFile" : "/home/akiel/trunk/pub/signalmesh/modules/afm/impl/temp/rtl_parser.result",
+ "Top" : "",
+ "VerilogStd" : "verilog_2001",
+ "VhdlStd" : "vhdl_93"
+}

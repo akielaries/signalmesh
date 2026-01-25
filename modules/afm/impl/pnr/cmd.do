@@ -1,0 +1,17 @@
+-d /home/akiel/trunk/pub/signalmesh/modules/afm/impl/gwsynthesis/afm.vg
+-p GW1NR-9C-QFN88P-6
+-pn GW1NR-LV9QN88PC6/I5
+-cst /home/akiel/trunk/pub/signalmesh/modules/afm/src/pins.cst
+-cfg /home/akiel/trunk/pub/signalmesh/modules/afm/impl/pnr/device.cfg
+-sdc /home/akiel/trunk/pub/signalmesh/modules/afm/src/fpga_project.sdc
+-bit
+-tr
+-ph
+-timing
+-cst_error
+-place_option 0
+-route_option 0
+-clock_route_order 0
+-correct_hold 1
+-route_maxfan 23
+-global_freq 50.000

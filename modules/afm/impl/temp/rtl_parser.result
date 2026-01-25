@@ -1,0 +1,20 @@
+[
+ {
+  "InstFile" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v",
+  "InstLine" : 1,
+  "InstName" : "pll_blink",
+  "ModuleFile" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v",
+  "ModuleLine" : 1,
+  "ModuleName" : "pll_blink",
+  "SubInsts" : [
+   {
+    "InstFile" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v",
+    "InstLine" : 17,
+    "InstName" : "rpll_inst",
+    "ModuleFile" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/gowin_rpll/gowin_rpll.v",
+    "ModuleLine" : 11,
+    "ModuleName" : "Gowin_rPLL"
+   }
+  ]
+ }
+]

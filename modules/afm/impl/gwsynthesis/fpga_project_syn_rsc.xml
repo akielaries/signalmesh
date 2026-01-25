@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module name="pll_blink" Register="72" Lut="140" T_Register="72(72)" T_Lut="140(140)">
+ <SubModule name="rpll_inst"/>
+</Module>

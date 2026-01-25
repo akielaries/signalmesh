@@ -1,23 +1,14 @@
-# Makefile for the 'afm' module
-# This Makefile uses a simple, explicit rule for each design.
-
-# --- Toolchain ---
 YOSYS      = yosys
 NEXTPNR    = nextpnr-himbaechel
 GOWIN_PACK = gowin_pack
 
-# --- Gowin Device ---
 DEVICE  = GW1NR-LV9QN88PC6/I5
 FAMILY  = GW1N-9C
 FREQ    = 27 # Input clock frequency in MHz
 CST_FILE = afm.cst
 
-# --- All Verilog sources needed for most designs ---
-# This makes the rules less repetitive.
 V_SOURCES = rtl/top.v cores/pll_core.v
 YOSYS_FLAGS = -Iinclude
-
-# --- Build Targets ---
 
 .PHONY: all top pll_example blinky clk_div_example pll_blink uart_example flash clean
 
