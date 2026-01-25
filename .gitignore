@@ -1,73 +1,7 @@
-# Build directories
 **/build/
 **/.dep/
-**/Debug/
-**/Release/
-
-# Compiled files
-*.o
-*.obj
-*.elf
-*.hex
-*.bin
-*.out
-*.exe
-*.dll
-*.so
-*.dylib
-*.a
-*.lib
-
-# IDE files
-**/.project
-**/.cproject
-**/.settings/
-**/*.gprj.user
-**/*.gprj
-
-# GDB and debugging
 **/.gdb_history
-
-# FPGA files
-**/*.bit
-**/*.fs
-**/*.cst
-**/*.sdc
-**/*.gprj
-
-# Archive and compressed files
-**/*.7z
-**/*.zip
-**/*.tar.gz
-**/*.tgz
-**/*.rar
-
-# Documentation and temporary files
-**/*.html
-**/*.log
-**/*.tmp
-**/*.bak
-**/*.swp
-**/*.swo
-
-# JSON files
-**/*.json
-
-# OS generated files
-**/.DS_Store
-**/Thumbs.db
-**/desktop.ini
-
-# Editor files
-**/.vscode/
-**/.idea/
-**/*.sublime-*
-**/.*.swp
-**/.*.swo
-
-# Build artifacts and temporary files
-**/.*.d
-**/*.map
-**/*.lst
-**/*.lss
-**/*.sym
+**/.json
+**/.fs
+**/.bit
+**/.html
