@@ -10,11 +10,11 @@
    "Type" : "verilog"
   },
   {
-   "Path" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/uart_tx.v",
+   "Path" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/top.v",
    "Type" : "verilog"
   },
   {
-   "Path" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/top.v",
+   "Path" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/uart.v",
    "Type" : "verilog"
   }
  ],

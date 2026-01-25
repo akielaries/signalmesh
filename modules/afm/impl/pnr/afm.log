@@ -7,6 +7,7 @@ Running placement......
 [10%] Placement Phase 0 completed
 [20%] Placement Phase 1 completed
 [30%] Placement Phase 2 completed
+WARN  (TA1132) :  'bank1_3v3_xtal_in' was determined to be a clock but was not created.
 [50%] Placement Phase 3 completed
 Running routing......
 [60%] Routing Phase 0 completed
@@ -25,5 +26,5 @@ Generate file "/home/akiel/trunk/pub/signalmesh/modules/afm/impl/pnr/afm.pin.htm
 Generate file "/home/akiel/trunk/pub/signalmesh/modules/afm/impl/pnr/afm.rpt.html" completed
 Generate file "/home/akiel/trunk/pub/signalmesh/modules/afm/impl/pnr/afm.rpt.txt" completed
 Generate file "/home/akiel/trunk/pub/signalmesh/modules/afm/impl/pnr/afm.tr.html" completed
-Sat Jan 24 19:02:01 2026
+Sat Jan 24 20:51:33 2026
 

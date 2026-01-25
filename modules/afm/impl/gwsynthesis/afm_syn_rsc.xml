@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Module name="top" Register="38" Lut="64" T_Register="131(38)" T_Lut="230(64)">
- <SubModule name="rpll_inst"/>
- <SubModule name="blink_inst" Register="70" Lut="133" T_Register="70(70)" T_Lut="133(133)"/>
- <SubModule name="uart_tx_inst" Register="23" Lut="33" T_Register="23(23)" T_Lut="33(33)"/>
+<Module name="top" T_Register="55(0)" T_Lut="111(0)">
+ <SubModule name="uart_inst" Register="55" Lut="111" T_Register="55(55)" T_Lut="111(111)"/>
 </Module>

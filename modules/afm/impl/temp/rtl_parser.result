@@ -1,15 +1,23 @@
 [
  {
+  "InstFile" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v",
+  "InstLine" : 4,
+  "InstName" : "blink",
+  "ModuleFile" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v",
+  "ModuleLine" : 4,
+  "ModuleName" : "blink"
+ },
+ {
   "InstFile" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/top.v",
-  "InstLine" : 8,
+  "InstLine" : 6,
   "InstName" : "top",
   "ModuleFile" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/top.v",
-  "ModuleLine" : 8,
+  "ModuleLine" : 6,
   "ModuleName" : "top",
   "SubInsts" : [
    {
     "InstFile" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/top.v",
-    "InstLine" : 44,
+    "InstLine" : 31,
     "InstName" : "rpll_inst",
     "ModuleFile" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/gowin_rpll/gowin_rpll.v",
     "ModuleLine" : 11,
@@ -17,19 +25,11 @@
    },
    {
     "InstFile" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/top.v",
-    "InstLine" : 52,
-    "InstName" : "blink_inst",
-    "ModuleFile" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v",
-    "ModuleLine" : 4,
-    "ModuleName" : "blink"
-   },
-   {
-    "InstFile" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/top.v",
-    "InstLine" : 62,
-    "InstName" : "uart_tx_inst",
-    "ModuleFile" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/uart_tx.v",
-    "ModuleLine" : 4,
-    "ModuleName" : "uart_tx"
+    "InstLine" : 40,
+    "InstName" : "uart_inst",
+    "ModuleFile" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/uart.v",
+    "ModuleLine" : 5,
+    "ModuleName" : "uart"
    }
   ]
  }

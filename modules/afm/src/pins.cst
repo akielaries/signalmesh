@@ -23,3 +23,7 @@ IO_LOC  "bank2_3v3_uart_tx" 26;
 IO_PORT "bank2_3v3_uart_tx" IO_TYPE=LVCMOS18;
 IO_LOC  "bank2_3v3_uart_rx" 25;
 IO_PORT "bank2_3v3_uart_rx" IO_TYPE=LVCMOS18;
+
+# User Button for UART module
+IO_LOC "bank3_1v8_btn1" 3;
+IO_PORT "bank3_1v8_btn1" PULL_MODE=UP;
