@@ -6,6 +6,8 @@
     <FileList>
         <File path="/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v" type="verilog"/>
         <File path="/home/akiel/trunk/pub/signalmesh/modules/afm/src/gowin_rpll/gowin_rpll.v" type="verilog"/>
+        <File path="/home/akiel/trunk/pub/signalmesh/modules/afm/src/uart_tx.v" type="verilog"/>
+        <File path="/home/akiel/trunk/pub/signalmesh/modules/afm/src/top.v" type="verilog"/>
     </FileList>
     <OptionList>
         <Option type="disable_insert_pad" value="0"/>

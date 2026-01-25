@@ -1,4 +1,5 @@
 **/build/
+**/impl/
 **/.dep/
 **/.gdb_history
 **/.json

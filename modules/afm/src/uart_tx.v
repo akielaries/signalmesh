@@ -19,20 +19,18 @@ module uart_tx #(
     localparam CLK_PER_BIT = CLOCK_FREQ / BAUD_RATE;
 
     // State machine for UART transmission
-    typedef enum logic [1:0] {
-        IDLE,
-        START_BIT,
-        DATA_BITS,
-        STOP_BIT
-    } uart_state_t;
+    localparam IDLE      = 2'b00;
+    localparam START_BIT = 2'b01;
+    localparam DATA_BITS = 2'b10;
+    localparam STOP_BIT  = 2'b11;
 
-    uart_state_t state;
+    reg [1:0] state;
     reg [3:0] bit_index; // 0-7 for data bits
     reg [$clog2(CLK_PER_BIT)-1:0] clk_counter;
     reg [7:0] tx_data_reg;
 
     // FSM for UART transmission
-    always_ff @(posedge clk or negedge rst_n) begin
+    always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             state <= IDLE;
             o_tx_pin <= 1'b1; // Idle high

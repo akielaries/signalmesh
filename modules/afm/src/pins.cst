@@ -19,7 +19,7 @@ IO_LOC  "bank2_3v3_red_led" 27;
 IO_PORT "bank2_3v3_red_led" PULL_MODE=UP DRIVE=8;
 
 # UART debug port
-#IO_LOC  "bank2_3v3_uart_tx" 25; 
-#IO_PORT "bank2_3v3_uart_tx" IO_TYPE=LVCMOS33;
-#IO_LOC  "bank2_3v3_uart_rx" 26; 
-#IO_PORT "bank2_3v3_uart_rx" IO_TYPE=LVCMOS33;
+IO_LOC  "bank2_3v3_uart_tx" 26;
+IO_PORT "bank2_3v3_uart_tx" IO_TYPE=LVCMOS18;
+IO_LOC  "bank2_3v3_uart_rx" 25;
+IO_PORT "bank2_3v3_uart_rx" IO_TYPE=LVCMOS18;

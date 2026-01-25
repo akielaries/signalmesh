@@ -8,6 +8,14 @@
   {
    "Path" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/gowin_rpll/gowin_rpll.v",
    "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/uart_tx.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/akiel/trunk/pub/signalmesh/modules/afm/src/top.v",
+   "Type" : "verilog"
   }
  ],
  "IncludePath" : [

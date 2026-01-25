@@ -2,13 +2,25 @@ GowinSynthesis start
 Running parser ...
 Analyzing Verilog file '/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v'
 Analyzing Verilog file '/home/akiel/trunk/pub/signalmesh/modules/afm/src/gowin_rpll/gowin_rpll.v'
-Compiling module 'pll_blink'("/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v":1)
+Analyzing Verilog file '/home/akiel/trunk/pub/signalmesh/modules/afm/src/uart_tx.v'
+Analyzing Verilog file '/home/akiel/trunk/pub/signalmesh/modules/afm/src/top.v'
+Compiling module 'top'("/home/akiel/trunk/pub/signalmesh/modules/afm/src/top.v":8)
+Extracting RAM for identifier 'message'("/home/akiel/trunk/pub/signalmesh/modules/afm/src/top.v":74)
 Compiling module 'Gowin_rPLL'("/home/akiel/trunk/pub/signalmesh/modules/afm/src/gowin_rpll/gowin_rpll.v":11)
-WARN  (EX3791) : Expression size 27 truncated to fit in target size 26("/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v":37)
-WARN  (EX3791) : Expression size 25 truncated to fit in target size 24("/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v":76)
-WARN  (EX3791) : Expression size 26 truncated to fit in target size 25("/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v":85)
-NOTE  (EX0101) : Current top module is "pll_blink"
+Compiling module 'blink'("/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v":4)
+WARN  (EX3791) : Expression size 25 truncated to fit in target size 24("/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v":28)
+WARN  (EX3791) : Expression size 25 truncated to fit in target size 24("/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v":53)
+WARN  (EX3791) : Expression size 26 truncated to fit in target size 25("/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v":61)
+Compiling module 'uart_tx'("/home/akiel/trunk/pub/signalmesh/modules/afm/src/uart_tx.v":4)
+WARN  (EX3791) : Expression size 9 truncated to fit in target size 8("/home/akiel/trunk/pub/signalmesh/modules/afm/src/uart_tx.v":61)
+WARN  (EX3791) : Expression size 5 truncated to fit in target size 4("/home/akiel/trunk/pub/signalmesh/modules/afm/src/uart_tx.v":72)
+WARN  (EX3791) : Expression size 9 truncated to fit in target size 8("/home/akiel/trunk/pub/signalmesh/modules/afm/src/uart_tx.v":75)
+WARN  (EX3791) : Expression size 9 truncated to fit in target size 8("/home/akiel/trunk/pub/signalmesh/modules/afm/src/uart_tx.v":85)
+WARN  (EX3791) : Expression size 5 truncated to fit in target size 4("/home/akiel/trunk/pub/signalmesh/modules/afm/src/top.v":113)
+WARN  (EX3791) : Expression size 27 truncated to fit in target size 26("/home/akiel/trunk/pub/signalmesh/modules/afm/src/top.v":120)
+NOTE  (EX0101) : Current top module is "top"
 [5%] Running netlist conversion ...
+WARN  (CV0016) : Input bank2_3v3_uart_rx is unused("/home/akiel/trunk/pub/signalmesh/modules/afm/src/top.v":19)
 Running device independent optimization ...
 [10%] Optimizing Phase 0 completed
 [15%] Optimizing Phase 1 completed

@@ -57,6 +57,8 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td class="label">Design File</td>
 <td>/home/akiel/trunk/pub/signalmesh/modules/afm/src/blink.v<br>
 /home/akiel/trunk/pub/signalmesh/modules/afm/src/gowin_rpll/gowin_rpll.v<br>
+/home/akiel/trunk/pub/signalmesh/modules/afm/src/uart_tx.v<br>
+/home/akiel/trunk/pub/signalmesh/modules/afm/src/top.v<br>
 </td>
 </tr>
 <tr>
@@ -81,7 +83,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 </tr>
 <tr>
 <td class="label">Created Time</td>
-<td>Sat Jan 24 18:05:35 2026
+<td>Sat Jan 24 19:02:00 2026
 </td>
 </tr>
 <tr>
@@ -93,15 +95,15 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <table class="summary_table">
 <tr>
 <td class="label">Top Level Module</td>
-<td>pll_blink</td>
+<td>top</td>
 </tr>
 <tr>
 <td class="label">Synthesis Process</td>
-<td>Running parser:<br/>&nbsp;&nbsp;&nbsp;&nbsp;CPU time = 0h 0m 0.029s, Elapsed time = 0h 0m 0.025s, Peak memory usage = 770.754MB<br/>Running netlist conversion:<br/>&nbsp;&nbsp;&nbsp;&nbsp;CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s, Peak memory usage = 0MB<br/>Running device independent optimization:<br/>&nbsp;&nbsp;&nbsp;&nbsp;Optimizing Phase 0: CPU time = 0h 0m 0.001s, Elapsed time = 0h 0m 0s, Peak memory usage = 770.754MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Optimizing Phase 1: CPU time = 0h 0m 0.001s, Elapsed time = 0h 0m 0s, Peak memory usage = 770.754MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Optimizing Phase 2: CPU time = 0h 0m 0.001s, Elapsed time = 0h 0m 0.001s, Peak memory usage = 770.754MB<br/>Running inference:<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 0: CPU time = 0h 0m 0.001s, Elapsed time = 0h 0m 0s, Peak memory usage = 770.754MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 1: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s, Peak memory usage = 770.754MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 2: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s, Peak memory usage = 770.754MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 3: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s, Peak memory usage = 770.754MB<br/>Running technical mapping:<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 0: CPU time = 0h 0m 0.003s, Elapsed time = 0h 0m 0.002s, Peak memory usage = 770.754MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 1: CPU time = 0h 0m 0.001s, Elapsed time = 0h 0m 0s, Peak memory usage = 770.754MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 2: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s, Peak memory usage = 770.754MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 3: CPU time = 0h 0m 0.47s, Elapsed time = 0h 0m 0.439s, Peak memory usage = 770.754MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 4: CPU time = 0h 0m 0.051s, Elapsed time = 0h 0m 0.049s, Peak memory usage = 770.754MB<br/>Generate output files:<br/>&nbsp;&nbsp;&nbsp;&nbsp;CPU time = 0h 0m 0.008s, Elapsed time = 0h 0m 0.006s, Peak memory usage = 770.754MB<br/></td>
+<td>Running parser:<br/>&nbsp;&nbsp;&nbsp;&nbsp;CPU time = 0h 0m 0.037s, Elapsed time = 0h 0m 0.03s, Peak memory usage = 508.664MB<br/>Running netlist conversion:<br/>&nbsp;&nbsp;&nbsp;&nbsp;CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s, Peak memory usage = 0MB<br/>Running device independent optimization:<br/>&nbsp;&nbsp;&nbsp;&nbsp;Optimizing Phase 0: CPU time = 0h 0m 0.005s, Elapsed time = 0h 0m 0.003s, Peak memory usage = 508.664MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Optimizing Phase 1: CPU time = 0h 0m 0.002s, Elapsed time = 0h 0m 0.001s, Peak memory usage = 508.664MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Optimizing Phase 2: CPU time = 0h 0m 0.004s, Elapsed time = 0h 0m 0.003s, Peak memory usage = 508.664MB<br/>Running inference:<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 0: CPU time = 0h 0m 0.002s, Elapsed time = 0h 0m 0.001s, Peak memory usage = 508.664MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 1: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s, Peak memory usage = 508.664MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 2: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s, Peak memory usage = 508.664MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 3: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s, Peak memory usage = 508.664MB<br/>Running technical mapping:<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 0: CPU time = 0h 0m 0.005s, Elapsed time = 0h 0m 0.004s, Peak memory usage = 508.664MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 1: CPU time = 0h 0m 0.002s, Elapsed time = 0h 0m 0.001s, Peak memory usage = 508.664MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 2: CPU time = 0h 0m 0.001s, Elapsed time = 0h 0m 0s, Peak memory usage = 508.664MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 3: CPU time = 0h 0m 0.632s, Elapsed time = 0h 0m 0.628s, Peak memory usage = 534.473MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 4: CPU time = 0h 0m 0.052s, Elapsed time = 0h 0m 0.05s, Peak memory usage = 534.473MB<br/>Generate output files:<br/>&nbsp;&nbsp;&nbsp;&nbsp;CPU time = 0h 0m 0.01s, Elapsed time = 0h 0m 0.008s, Peak memory usage = 534.473MB<br/></td>
 </tr>
 <tr>
 <td class="label">Total Time and Memory Usage</td>
-<td>CPU time = 0h 0m 0.566s, Elapsed time = 0h 0m 0.522s, Peak memory usage = 770.754MB</td>
+<td>CPU time = 0h 0m 0.752s, Elapsed time = 0h 0m 0.729s, Peak memory usage = 534.473MB</td>
 </tr>
 </table>
 <h1><a name="resource">Resource</a></h1>
@@ -113,11 +115,11 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 </tr>
 <tr>
 <td class="label"><b>I/O Port </b></td>
-<td>9</td>
+<td>11</td>
 </tr>
 <tr>
 <td class="label"><b>I/O Buf </b></td>
-<td>9</td>
+<td>10</td>
 </tr>
 <tr>
 <td class="label">&nbsp&nbsp&nbsp&nbspIBUF</td>
@@ -125,47 +127,51 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 </tr>
 <tr>
 <td class="label">&nbsp&nbsp&nbsp&nbspOBUF</td>
-<td>7</td>
+<td>8</td>
 </tr>
 <tr>
 <td class="label"><b>Register </b></td>
-<td>74</td>
+<td>131</td>
 </tr>
 <tr>
 <td class="label">&nbsp&nbsp&nbsp&nbspDFFP</td>
-<td>2</td>
-</tr>
-<tr>
-<td class="label">&nbsp&nbsp&nbsp&nbspDFFC</td>
-<td>71</td>
-</tr>
-<tr>
-<td class="label">&nbsp&nbsp&nbsp&nbspDFFCE</td>
 <td>1</td>
 </tr>
 <tr>
-<td class="label"><b>LUT </b></td>
-<td>140</td>
+<td class="label">&nbsp&nbsp&nbsp&nbspDFFPE</td>
+<td>3</td>
 </tr>
 <tr>
-<td class="label">&nbsp&nbsp&nbsp&nbspLUT2</td>
-<td>18</td>
-</tr>
-<tr>
-<td class="label">&nbsp&nbsp&nbsp&nbspLUT3</td>
-<td>43</td>
-</tr>
-<tr>
-<td class="label">&nbsp&nbsp&nbsp&nbspLUT4</td>
+<td class="label">&nbsp&nbsp&nbsp&nbspDFFC</td>
 <td>79</td>
 </tr>
 <tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspDFFCE</td>
+<td>48</td>
+</tr>
+<tr>
+<td class="label"><b>LUT </b></td>
+<td>225</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspLUT2</td>
+<td>29</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspLUT3</td>
+<td>62</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspLUT4</td>
+<td>134</td>
+</tr>
+<tr>
 <td class="label"><b>INV </b></td>
-<td>3</td>
+<td>5</td>
 </tr>
 <tr>
 <td class="label">&nbsp&nbsp&nbsp&nbspINV</td>
-<td>3</td>
+<td>5</td>
 </tr>
 <tr>
 <td class="label"><b>CLOCK </b></td>
@@ -185,12 +191,12 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 </tr>
 <tr>
 <td class="label">Logic</td>
-<td>143(143 LUT, 0 ALU) / 8640</td>
-<td>2%</td>
+<td>230(230 LUT, 0 ALU) / 8640</td>
+<td>3%</td>
 </tr>
 <tr>
 <td class="label">Register</td>
-<td>74 / 6693</td>
+<td>131 / 6693</td>
 <td>2%</td>
 </tr>
 <tr>
@@ -200,7 +206,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 </tr>
 <tr>
 <td class="label">&nbsp&nbsp--Register as FF</td>
-<td>74 / 6693</td>
+<td>131 / 6693</td>
 <td>2%</td>
 </tr>
 <tr>
@@ -322,11 +328,11 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 </tr>
 <tr>
 <td class="label">From</td>
-<td>onboard_led0_counter_1_s0</td>
+<td>blink_inst/red_led_counter_1_s0</td>
 </tr>
 <tr>
 <td class="label">To</td>
-<td>onboard_led1_counter_20_s0</td>
+<td>blink_inst/red_led_counter_23_s0</td>
 </tr>
 <tr>
 <td class="label">Launch Clk</td>
@@ -360,7 +366,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>0.623</td>
 <td>tCL</td>
 <td>RR</td>
-<td>75</td>
+<td>131</td>
 <td>rpll_inst/rpll_inst/CLKOUT</td>
 </tr>
 <tr>
@@ -369,15 +375,15 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>RR</td>
 <td>1</td>
-<td>onboard_led0_counter_1_s0/CLK</td>
+<td>blink_inst/red_led_counter_1_s0/CLK</td>
 </tr>
 <tr>
 <td>1.807</td>
 <td>0.458</td>
 <td>tC2Q</td>
 <td>RF</td>
-<td>4</td>
-<td>onboard_led0_counter_1_s0/Q</td>
+<td>5</td>
+<td>blink_inst/red_led_counter_1_s0/Q</td>
 </tr>
 <tr>
 <td>2.767</td>
@@ -385,15 +391,15 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n236_s3/I1</td>
+<td>blink_inst/n64_s3/I1</td>
 </tr>
 <tr>
 <td>3.866</td>
 <td>1.099</td>
 <td>tINS</td>
 <td>FF</td>
-<td>15</td>
-<td>n236_s3/F</td>
+<td>9</td>
+<td>blink_inst/n64_s3/F</td>
 </tr>
 <tr>
 <td>4.826</td>
@@ -401,15 +407,15 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n226_s3/I1</td>
+<td>blink_inst/n55_s3/I1</td>
 </tr>
 <tr>
 <td>5.925</td>
 <td>1.099</td>
 <td>tINS</td>
 <td>FF</td>
-<td>10</td>
-<td>n226_s3/F</td>
+<td>3</td>
+<td>blink_inst/n55_s3/F</td>
 </tr>
 <tr>
 <td>6.885</td>
@@ -417,7 +423,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n223_s3/I1</td>
+<td>blink_inst/n46_s3/I1</td>
 </tr>
 <tr>
 <td>7.984</td>
@@ -425,7 +431,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tINS</td>
 <td>FF</td>
 <td>2</td>
-<td>n223_s3/F</td>
+<td>blink_inst/n46_s3/F</td>
 </tr>
 <tr>
 <td>8.944</td>
@@ -433,7 +439,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n224_s2/I1</td>
+<td>blink_inst/n45_s2/I1</td>
 </tr>
 <tr>
 <td>10.043</td>
@@ -441,7 +447,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>n224_s2/F</td>
+<td>blink_inst/n45_s2/F</td>
 </tr>
 <tr>
 <td>11.003</td>
@@ -449,7 +455,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>onboard_led1_counter_20_s0/D</td>
+<td>blink_inst/red_led_counter_23_s0/D</td>
 </tr>
 </table>
 <b>Data Required Path:</b>
@@ -475,7 +481,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>0.623</td>
 <td>tCL</td>
 <td>RR</td>
-<td>75</td>
+<td>131</td>
 <td>rpll_inst/rpll_inst/CLKOUT</td>
 </tr>
 <tr>
@@ -484,7 +490,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>RR</td>
 <td>1</td>
-<td>onboard_led1_counter_20_s0/CLK</td>
+<td>blink_inst/red_led_counter_23_s0/CLK</td>
 </tr>
 <tr>
 <td>12.645</td>
@@ -492,7 +498,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tSu</td>
 <td> </td>
 <td>1</td>
-<td>onboard_led1_counter_20_s0</td>
+<td>blink_inst/red_led_counter_23_s0</td>
 </tr>
 </table>
 <b>Path Statistics:</b>
@@ -534,11 +540,11 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 </tr>
 <tr>
 <td class="label">From</td>
-<td>onboard_led0_counter_1_s0</td>
+<td>blink_inst/onboard_led0_counter_1_s0</td>
 </tr>
 <tr>
 <td class="label">To</td>
-<td>onboard_led1_counter_23_s0</td>
+<td>blink_inst/onboard_led1_counter_23_s0</td>
 </tr>
 <tr>
 <td class="label">Launch Clk</td>
@@ -572,7 +578,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>0.623</td>
 <td>tCL</td>
 <td>RR</td>
-<td>75</td>
+<td>131</td>
 <td>rpll_inst/rpll_inst/CLKOUT</td>
 </tr>
 <tr>
@@ -581,7 +587,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>RR</td>
 <td>1</td>
-<td>onboard_led0_counter_1_s0/CLK</td>
+<td>blink_inst/onboard_led0_counter_1_s0/CLK</td>
 </tr>
 <tr>
 <td>1.807</td>
@@ -589,7 +595,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tC2Q</td>
 <td>RF</td>
 <td>4</td>
-<td>onboard_led0_counter_1_s0/Q</td>
+<td>blink_inst/onboard_led0_counter_1_s0/Q</td>
 </tr>
 <tr>
 <td>2.767</td>
@@ -597,7 +603,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n236_s3/I1</td>
+<td>blink_inst/n226_s3/I1</td>
 </tr>
 <tr>
 <td>3.866</td>
@@ -605,7 +611,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tINS</td>
 <td>FF</td>
 <td>15</td>
-<td>n236_s3/F</td>
+<td>blink_inst/n226_s3/F</td>
 </tr>
 <tr>
 <td>4.826</td>
@@ -613,7 +619,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n226_s3/I1</td>
+<td>blink_inst/n217_s3/I1</td>
 </tr>
 <tr>
 <td>5.925</td>
@@ -621,7 +627,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tINS</td>
 <td>FF</td>
 <td>10</td>
-<td>n226_s3/F</td>
+<td>blink_inst/n217_s3/F</td>
 </tr>
 <tr>
 <td>6.885</td>
@@ -629,7 +635,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n221_s3/I1</td>
+<td>blink_inst/n207_s3/I1</td>
 </tr>
 <tr>
 <td>7.984</td>
@@ -637,7 +643,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tINS</td>
 <td>FF</td>
 <td>2</td>
-<td>n221_s3/F</td>
+<td>blink_inst/n207_s3/F</td>
 </tr>
 <tr>
 <td>8.944</td>
@@ -645,7 +651,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n221_s2/I1</td>
+<td>blink_inst/n207_s2/I1</td>
 </tr>
 <tr>
 <td>10.043</td>
@@ -653,7 +659,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>n221_s2/F</td>
+<td>blink_inst/n207_s2/F</td>
 </tr>
 <tr>
 <td>11.003</td>
@@ -661,7 +667,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>onboard_led1_counter_23_s0/D</td>
+<td>blink_inst/onboard_led1_counter_23_s0/D</td>
 </tr>
 </table>
 <b>Data Required Path:</b>
@@ -687,7 +693,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>0.623</td>
 <td>tCL</td>
 <td>RR</td>
-<td>75</td>
+<td>131</td>
 <td>rpll_inst/rpll_inst/CLKOUT</td>
 </tr>
 <tr>
@@ -696,7 +702,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>RR</td>
 <td>1</td>
-<td>onboard_led1_counter_23_s0/CLK</td>
+<td>blink_inst/onboard_led1_counter_23_s0/CLK</td>
 </tr>
 <tr>
 <td>12.645</td>
@@ -704,7 +710,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tSu</td>
 <td> </td>
 <td>1</td>
-<td>onboard_led1_counter_23_s0</td>
+<td>blink_inst/onboard_led1_counter_23_s0</td>
 </tr>
 </table>
 <b>Path Statistics:</b>
@@ -734,11 +740,11 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <table class="summary_table">
 <tr>
 <td class="label">Slack</td>
-<td>1.709</td>
+<td>1.642</td>
 </tr>
 <tr>
 <td class="label">Data Arrival Time</td>
-<td>10.936</td>
+<td>11.003</td>
 </tr>
 <tr>
 <td class="label">Data Required Time</td>
@@ -746,11 +752,11 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 </tr>
 <tr>
 <td class="label">From</td>
-<td>onboard_led1_counter_23_s0</td>
+<td>blink_inst/onboard_led0_counter_1_s0</td>
 </tr>
 <tr>
 <td class="label">To</td>
-<td>onboard_led1_counter_9_s0</td>
+<td>blink_inst/onboard_led1_counter_24_s0</td>
 </tr>
 <tr>
 <td class="label">Launch Clk</td>
@@ -784,7 +790,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>0.623</td>
 <td>tCL</td>
 <td>RR</td>
-<td>75</td>
+<td>131</td>
 <td>rpll_inst/rpll_inst/CLKOUT</td>
 </tr>
 <tr>
@@ -793,15 +799,15 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>RR</td>
 <td>1</td>
-<td>onboard_led1_counter_23_s0/CLK</td>
+<td>blink_inst/onboard_led0_counter_1_s0/CLK</td>
 </tr>
 <tr>
 <td>1.807</td>
 <td>0.458</td>
 <td>tC2Q</td>
 <td>RF</td>
-<td>3</td>
-<td>onboard_led1_counter_23_s0/Q</td>
+<td>4</td>
+<td>blink_inst/onboard_led0_counter_1_s0/Q</td>
 </tr>
 <tr>
 <td>2.767</td>
@@ -809,15 +815,15 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n192_s6/I1</td>
+<td>blink_inst/n226_s3/I1</td>
 </tr>
 <tr>
 <td>3.866</td>
 <td>1.099</td>
 <td>tINS</td>
 <td>FF</td>
-<td>1</td>
-<td>n192_s6/F</td>
+<td>15</td>
+<td>blink_inst/n226_s3/F</td>
 </tr>
 <tr>
 <td>4.826</td>
@@ -825,15 +831,15 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n192_s3/I1</td>
+<td>blink_inst/n217_s3/I1</td>
 </tr>
 <tr>
 <td>5.925</td>
 <td>1.099</td>
 <td>tINS</td>
 <td>FF</td>
-<td>4</td>
-<td>n192_s3/F</td>
+<td>10</td>
+<td>blink_inst/n217_s3/F</td>
 </tr>
 <tr>
 <td>6.885</td>
@@ -841,15 +847,15 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n192_s10/I1</td>
+<td>blink_inst/n207_s3/I1</td>
 </tr>
 <tr>
 <td>7.984</td>
 <td>1.099</td>
 <td>tINS</td>
 <td>FF</td>
-<td>7</td>
-<td>n192_s10/F</td>
+<td>2</td>
+<td>blink_inst/n207_s3/F</td>
 </tr>
 <tr>
 <td>8.944</td>
@@ -857,23 +863,23 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n235_s2/I0</td>
+<td>blink_inst/n206_s2/I1</td>
 </tr>
 <tr>
-<td>9.976</td>
-<td>1.032</td>
+<td>10.043</td>
+<td>1.099</td>
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>n235_s2/F</td>
+<td>blink_inst/n206_s2/F</td>
 </tr>
 <tr>
-<td>10.936</td>
+<td>11.003</td>
 <td>0.960</td>
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>onboard_led1_counter_9_s0/D</td>
+<td>blink_inst/onboard_led1_counter_24_s0/D</td>
 </tr>
 </table>
 <b>Data Required Path:</b>
@@ -899,7 +905,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>0.623</td>
 <td>tCL</td>
 <td>RR</td>
-<td>75</td>
+<td>131</td>
 <td>rpll_inst/rpll_inst/CLKOUT</td>
 </tr>
 <tr>
@@ -908,7 +914,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>RR</td>
 <td>1</td>
-<td>onboard_led1_counter_9_s0/CLK</td>
+<td>blink_inst/onboard_led1_counter_24_s0/CLK</td>
 </tr>
 <tr>
 <td>12.645</td>
@@ -916,7 +922,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tSu</td>
 <td> </td>
 <td>1</td>
-<td>onboard_led1_counter_9_s0</td>
+<td>blink_inst/onboard_led1_counter_24_s0</td>
 </tr>
 </table>
 <b>Path Statistics:</b>
@@ -936,7 +942,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <tr>
 <td class="label">Arrival Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.726, 100.000%</td></tr>
 <tr>
-<td class="label">Arrival Data Path Delay:</td><td> cell: 4.329, 45.153%; route: 4.800, 50.066%; tC2Q: 0.458, 4.781%</td></tr>
+<td class="label">Arrival Data Path Delay:</td><td> cell: 4.396, 45.534%; route: 4.800, 49.719%; tC2Q: 0.458, 4.747%</td></tr>
 <tr>
 <td class="label">Required Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.726, 100.000%</td></tr>
 </table>
@@ -946,11 +952,11 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <table class="summary_table">
 <tr>
 <td class="label">Slack</td>
-<td>1.709</td>
+<td>1.642</td>
 </tr>
 <tr>
 <td class="label">Data Arrival Time</td>
-<td>10.936</td>
+<td>11.003</td>
 </tr>
 <tr>
 <td class="label">Data Required Time</td>
@@ -958,11 +964,11 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 </tr>
 <tr>
 <td class="label">From</td>
-<td>onboard_led1_counter_23_s0</td>
+<td>blink_inst/onboard_led0_counter_1_s0</td>
 </tr>
 <tr>
 <td class="label">To</td>
-<td>onboard_led1_counter_10_s0</td>
+<td>blink_inst/onboard_led0_counter_17_s0</td>
 </tr>
 <tr>
 <td class="label">Launch Clk</td>
@@ -996,7 +1002,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>0.623</td>
 <td>tCL</td>
 <td>RR</td>
-<td>75</td>
+<td>131</td>
 <td>rpll_inst/rpll_inst/CLKOUT</td>
 </tr>
 <tr>
@@ -1005,15 +1011,15 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>RR</td>
 <td>1</td>
-<td>onboard_led1_counter_23_s0/CLK</td>
+<td>blink_inst/onboard_led0_counter_1_s0/CLK</td>
 </tr>
 <tr>
 <td>1.807</td>
 <td>0.458</td>
 <td>tC2Q</td>
 <td>RF</td>
-<td>3</td>
-<td>onboard_led1_counter_23_s0/Q</td>
+<td>4</td>
+<td>blink_inst/onboard_led0_counter_1_s0/Q</td>
 </tr>
 <tr>
 <td>2.767</td>
@@ -1021,15 +1027,15 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n192_s6/I1</td>
+<td>blink_inst/n226_s3/I1</td>
 </tr>
 <tr>
 <td>3.866</td>
 <td>1.099</td>
 <td>tINS</td>
 <td>FF</td>
-<td>1</td>
-<td>n192_s6/F</td>
+<td>15</td>
+<td>blink_inst/n226_s3/F</td>
 </tr>
 <tr>
 <td>4.826</td>
@@ -1037,15 +1043,15 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n192_s3/I1</td>
+<td>blink_inst/n149_s3/I1</td>
 </tr>
 <tr>
 <td>5.925</td>
 <td>1.099</td>
 <td>tINS</td>
 <td>FF</td>
-<td>4</td>
-<td>n192_s3/F</td>
+<td>8</td>
+<td>blink_inst/n149_s3/F</td>
 </tr>
 <tr>
 <td>6.885</td>
@@ -1053,15 +1059,15 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n192_s10/I1</td>
+<td>blink_inst/n148_s3/I1</td>
 </tr>
 <tr>
 <td>7.984</td>
 <td>1.099</td>
 <td>tINS</td>
 <td>FF</td>
-<td>7</td>
-<td>n192_s10/F</td>
+<td>2</td>
+<td>blink_inst/n148_s3/F</td>
 </tr>
 <tr>
 <td>8.944</td>
@@ -1069,23 +1075,23 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n234_s2/I0</td>
+<td>blink_inst/n145_s2/I1</td>
 </tr>
 <tr>
-<td>9.976</td>
-<td>1.032</td>
+<td>10.043</td>
+<td>1.099</td>
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>n234_s2/F</td>
+<td>blink_inst/n145_s2/F</td>
 </tr>
 <tr>
-<td>10.936</td>
+<td>11.003</td>
 <td>0.960</td>
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>onboard_led1_counter_10_s0/D</td>
+<td>blink_inst/onboard_led0_counter_17_s0/D</td>
 </tr>
 </table>
 <b>Data Required Path:</b>
@@ -1111,7 +1117,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>0.623</td>
 <td>tCL</td>
 <td>RR</td>
-<td>75</td>
+<td>131</td>
 <td>rpll_inst/rpll_inst/CLKOUT</td>
 </tr>
 <tr>
@@ -1120,7 +1126,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>RR</td>
 <td>1</td>
-<td>onboard_led1_counter_10_s0/CLK</td>
+<td>blink_inst/onboard_led0_counter_17_s0/CLK</td>
 </tr>
 <tr>
 <td>12.645</td>
@@ -1128,7 +1134,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tSu</td>
 <td> </td>
 <td>1</td>
-<td>onboard_led1_counter_10_s0</td>
+<td>blink_inst/onboard_led0_counter_17_s0</td>
 </tr>
 </table>
 <b>Path Statistics:</b>
@@ -1148,7 +1154,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <tr>
 <td class="label">Arrival Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.726, 100.000%</td></tr>
 <tr>
-<td class="label">Arrival Data Path Delay:</td><td> cell: 4.329, 45.153%; route: 4.800, 50.066%; tC2Q: 0.458, 4.781%</td></tr>
+<td class="label">Arrival Data Path Delay:</td><td> cell: 4.396, 45.534%; route: 4.800, 49.719%; tC2Q: 0.458, 4.747%</td></tr>
 <tr>
 <td class="label">Required Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.726, 100.000%</td></tr>
 </table>
@@ -1158,11 +1164,11 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <table class="summary_table">
 <tr>
 <td class="label">Slack</td>
-<td>1.709</td>
+<td>1.642</td>
 </tr>
 <tr>
 <td class="label">Data Arrival Time</td>
-<td>10.936</td>
+<td>11.003</td>
 </tr>
 <tr>
 <td class="label">Data Required Time</td>
@@ -1170,11 +1176,11 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 </tr>
 <tr>
 <td class="label">From</td>
-<td>onboard_led1_counter_23_s0</td>
+<td>blink_inst/onboard_led0_counter_1_s0</td>
 </tr>
 <tr>
 <td class="label">To</td>
-<td>onboard_led1_counter_13_s0</td>
+<td>blink_inst/onboard_led0_counter_20_s0</td>
 </tr>
 <tr>
 <td class="label">Launch Clk</td>
@@ -1208,7 +1214,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>0.623</td>
 <td>tCL</td>
 <td>RR</td>
-<td>75</td>
+<td>131</td>
 <td>rpll_inst/rpll_inst/CLKOUT</td>
 </tr>
 <tr>
@@ -1217,15 +1223,15 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>RR</td>
 <td>1</td>
-<td>onboard_led1_counter_23_s0/CLK</td>
+<td>blink_inst/onboard_led0_counter_1_s0/CLK</td>
 </tr>
 <tr>
 <td>1.807</td>
 <td>0.458</td>
 <td>tC2Q</td>
 <td>RF</td>
-<td>3</td>
-<td>onboard_led1_counter_23_s0/Q</td>
+<td>4</td>
+<td>blink_inst/onboard_led0_counter_1_s0/Q</td>
 </tr>
 <tr>
 <td>2.767</td>
@@ -1233,15 +1239,15 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n192_s6/I1</td>
+<td>blink_inst/n226_s3/I1</td>
 </tr>
 <tr>
 <td>3.866</td>
 <td>1.099</td>
 <td>tINS</td>
 <td>FF</td>
-<td>1</td>
-<td>n192_s6/F</td>
+<td>15</td>
+<td>blink_inst/n226_s3/F</td>
 </tr>
 <tr>
 <td>4.826</td>
@@ -1249,15 +1255,15 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n192_s3/I1</td>
+<td>blink_inst/n149_s3/I1</td>
 </tr>
 <tr>
 <td>5.925</td>
 <td>1.099</td>
 <td>tINS</td>
 <td>FF</td>
-<td>4</td>
-<td>n192_s3/F</td>
+<td>8</td>
+<td>blink_inst/n149_s3/F</td>
 </tr>
 <tr>
 <td>6.885</td>
@@ -1265,15 +1271,15 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n192_s10/I1</td>
+<td>blink_inst/n143_s3/I1</td>
 </tr>
 <tr>
 <td>7.984</td>
 <td>1.099</td>
 <td>tINS</td>
 <td>FF</td>
-<td>7</td>
-<td>n192_s10/F</td>
+<td>2</td>
+<td>blink_inst/n143_s3/F</td>
 </tr>
 <tr>
 <td>8.944</td>
@@ -1281,23 +1287,23 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>n231_s2/I0</td>
+<td>blink_inst/n142_s2/I1</td>
 </tr>
 <tr>
-<td>9.976</td>
-<td>1.032</td>
+<td>10.043</td>
+<td>1.099</td>
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>n231_s2/F</td>
+<td>blink_inst/n142_s2/F</td>
 </tr>
 <tr>
-<td>10.936</td>
+<td>11.003</td>
 <td>0.960</td>
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>onboard_led1_counter_13_s0/D</td>
+<td>blink_inst/onboard_led0_counter_20_s0/D</td>
 </tr>
 </table>
 <b>Data Required Path:</b>
@@ -1323,7 +1329,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>0.623</td>
 <td>tCL</td>
 <td>RR</td>
-<td>75</td>
+<td>131</td>
 <td>rpll_inst/rpll_inst/CLKOUT</td>
 </tr>
 <tr>
@@ -1332,7 +1338,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tNET</td>
 <td>RR</td>
 <td>1</td>
-<td>onboard_led1_counter_13_s0/CLK</td>
+<td>blink_inst/onboard_led0_counter_20_s0/CLK</td>
 </tr>
 <tr>
 <td>12.645</td>
@@ -1340,7 +1346,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <td>tSu</td>
 <td> </td>
 <td>1</td>
-<td>onboard_led1_counter_13_s0</td>
+<td>blink_inst/onboard_led0_counter_20_s0</td>
 </tr>
 </table>
 <b>Path Statistics:</b>
@@ -1360,7 +1366,7 @@ table.detail_table td.label { min-width: 100px; width: 8%;}
 <tr>
 <td class="label">Arrival Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.726, 100.000%</td></tr>
 <tr>
-<td class="label">Arrival Data Path Delay:</td><td> cell: 4.329, 45.153%; route: 4.800, 50.066%; tC2Q: 0.458, 4.781%</td></tr>
+<td class="label">Arrival Data Path Delay:</td><td> cell: 4.396, 45.534%; route: 4.800, 49.719%; tC2Q: 0.458, 4.747%</td></tr>
 <tr>
 <td class="label">Required Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.726, 100.000%</td></tr>
 </table>

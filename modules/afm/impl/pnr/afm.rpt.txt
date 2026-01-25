@@ -12,27 +12,27 @@
   <Part Number>: GW1NR-LV9QN88PC6/I5
   <Device>: GW1NR-9
   <Device Version>: C
-  <Created Time>:Sat Jan 24 18:05:36 2026
+  <Created Time>:Sat Jan 24 19:02:01 2026
 
 
 2. PnR Details
 
   Running placement:
-    Placement Phase 0: CPU time = 0h 0m 0.003s, Elapsed time = 0h 0m 0.003s
-    Placement Phase 1: CPU time = 0h 0m 0.05s, Elapsed time = 0h 0m 0.049s
-    Placement Phase 2: CPU time = 0h 0m 0.004s, Elapsed time = 0h 0m 0.003s
-    Placement Phase 3: CPU time = 0h 0m 0.2s, Elapsed time = 0h 0m 0.194s
-    Total Placement: CPU time = 0h 0m 0.257s, Elapsed time = 0h 0m 0.249s
+    Placement Phase 0: CPU time = 0h 0m 0.005s, Elapsed time = 0h 0m 0.004s
+    Placement Phase 1: CPU time = 0h 0m 0.053s, Elapsed time = 0h 0m 0.052s
+    Placement Phase 2: CPU time = 0h 0m 0.008s, Elapsed time = 0h 0m 0.007s
+    Placement Phase 3: CPU time = 0h 0m 0.197s, Elapsed time = 0h 0m 0.196s
+    Total Placement: CPU time = 0h 0m 0.263s, Elapsed time = 0h 0m 0.259s
  Running routing:
     Routing Phase 0: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s
-    Routing Phase 1: CPU time = 0h 0m 0.084s, Elapsed time = 0h 0m 0.083s
-    Routing Phase 2: CPU time = 0h 0m 0.065s, Elapsed time = 0h 0m 0.059s
+    Routing Phase 1: CPU time = 0h 0m 0.109s, Elapsed time = 0h 0m 0.103s
+    Routing Phase 2: CPU time = 0h 0m 0.103s, Elapsed time = 0h 0m 0.089s
     Routing Phase 3: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s
-    Total Routing: CPU time = 0h 0m 0.149s, Elapsed time = 0h 0m 0.142s
+    Total Routing: CPU time = 0h 0m 0.212s, Elapsed time = 0h 0m 0.192s
  Generate output files:
-    CPU time = 0h 0m 0.221s, Elapsed time = 0h 0m 0.218s
+    CPU time = 0h 0m 0.233s, Elapsed time = 0h 0m 0.224s
 
- Total Time and Memory Usage: CPU time = 0h 0m 0.627s, Elapsed time = 0h 0m 0.609s, Peak memory usage = 770MB
+ Total Time and Memory Usage: CPU time = 0h 0m 0.708s, Elapsed time = 0h 0m 0.675s, Peak memory usage = 656MB
 
 
 3. Resource Usage Summary
@@ -40,19 +40,19 @@
   --------------------------------------------------------------------------------
   Resources                   | Usage                               | Utilization
   --------------------------------------------------------------------------------
-  Logic                       | 142/8640                            |  2%
-    --LUT,ALU,ROM16           | 142(142 LUT, 0 ALU, 0 ROM16)        | -
+  Logic                       | 229/8640                            |  3%
+    --LUT,ALU,ROM16           | 229(229 LUT, 0 ALU, 0 ROM16)        | -
     --SSRAM(RAM16)            | 0                                   | -
-  Register                    | 74/6693                             |  2%
+  Register                    | 131/6693                            |  2%
     --Logic Register as Latch | 0/6480                              |  0%
-    --Logic Register as FF    | 74/6480                             |  2%
+    --Logic Register as FF    | 130/6480                            |  2%
     --I/O Register as Latch   | 0/213                               |  0%
-    --I/O Register as FF      | 0/213                               |  0%
-  CLS                         | 81/4320                             |  2%
-  I/O Port                    | 9/71                                |  13%
-  I/O Buf                     | 9                                   | -
+    --I/O Register as FF      | 1/213                               |  <1%
+  CLS                         | 133/4320                            |  4%
+  I/O Port                    | 11/71                               |  16%
+  I/O Buf                     | 10                                  | -
     --Input Buf               | 2                                   | -
-    --Output Buf              | 7                                   | -
+    --Output Buf              | 8                                   | -
     --Inout Buf               | 0                                   | -
   ================================================================================
 
@@ -64,7 +64,7 @@
   I/O Bank  | Usage       | Utilization 
   --------------------------------------
   bank 1   | 1/25        | 4%          
-  bank 2   | 1/23        | 5%          
+  bank 2   | 3/23        | 14%         
   bank 3   | 7/23        | 31%         
   ======================================
 
@@ -86,7 +86,7 @@
   -------------------------------------------
   Signal         | Global Clock   | Location
   -------------------------------------------
-  pll_clk_fast   | PRIMARY        |  BR BL
+  pll_clk        | PRIMARY        |  BR BL
   bank3_1v8_sys_rst_d| LW             |  -
   bank1_3v3_xtal_in_d| HCLK           | BANK4_BANK5_HCLK0
   ===========================================
@@ -99,6 +99,7 @@ Port Name          | Diff Pair | Loc./Bank     | Constraint | Dir.  | Site     |
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bank1_3v3_xtal_in  | -         | 52/1          | Y          | in    | IOR17[A] | GCLKT_3         | LVCMOS33   | NA    | UP        | ON        | NONE       | NA         | NA         | OFF             | NA            | 3.3       
 bank3_1v8_sys_rst  | -         | 4/3           | Y          | in    | IOL5[A]  | JTAGSEL_N/LPLL_T_in | LVCMOS18   | NA    | UP        | ON        | NONE       | NA         | NA         | OFF             | NA            | 1.8       
+bank2_3v3_uart_rx  | -         | 25/2          | Y          | in    | IOB8[A]  | -               | LVCMOS18   | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8       
 bank2_3v3_red_led  | -         | 27/2          | Y          | out   | IOB11[A] | -               | LVCMOS18   | 8     | UP        | NA        | NA         | OFF        | NA         | NA              | NA            | 1.8       
 bank3_1v8_led[0]   | -         | 10/3          | Y          | out   | IOL15[A] | GCLKT_6         | LVCMOS18   | 8     | UP        | NA        | NA         | OFF        | NA         | OFF             | NA            | 1.8       
 bank3_1v8_led[1]   | -         | 11/3          | Y          | out   | IOL16[B] | -               | LVCMOS18   | 8     | UP        | NA        | NA         | OFF        | NA         | OFF             | NA            | 1.8       
@@ -106,6 +107,7 @@ bank3_1v8_led[2]   | -         | 13/3          | Y          | out   | IOL21[B] |
 bank3_1v8_led[3]   | -         | 14/3          | Y          | out   | IOL22[B] | -               | LVCMOS18   | 8     | UP        | NA        | NA         | OFF        | NA         | OFF             | NA            | 1.8       
 bank3_1v8_led[4]   | -         | 15/3          | Y          | out   | IOL25[B] | -               | LVCMOS18   | 8     | UP        | NA        | NA         | OFF        | NA         | OFF             | NA            | 1.8       
 bank3_1v8_led[5]   | -         | 16/3          | Y          | out   | IOL26[B] | -               | LVCMOS18   | 8     | UP        | NA        | NA         | OFF        | NA         | OFF             | NA            | 1.8       
+bank2_3v3_uart_tx  | -         | 26/2          | Y          | out   | IOB8[B]  | -               | LVCMOS18   | 8     | UP        | NA        | NA         | OFF        | NA         | NA              | NA            | 1.8       
 ==========================================================================================================================================================================================================================
 
 
@@ -142,8 +144,8 @@ Loc./Bank| Signal             | Dir.  | Site     | CFG             | IO Type  | 
 18/2     | -                  | in    | IOB2[B]  | -               | LVCMOS18 | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8  
 19/2     | -                  | in    | IOB4[A]  | -               | LVCMOS18 | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8  
 20/2     | -                  | in    | IOB4[B]  | -               | LVCMOS18 | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8  
-25/2     | -                  | in    | IOB8[A]  | -               | LVCMOS18 | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8  
-26/2     | -                  | in    | IOB8[B]  | -               | LVCMOS18 | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8  
+25/2     | bank2_3v3_uart_rx  | in    | IOB8[A]  | -               | LVCMOS18 | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8  
+26/2     | bank2_3v3_uart_tx  | out   | IOB8[B]  | -               | LVCMOS18 | 8     | UP        | NA        | NA         | OFF        | NA         | NA              | NA            | 1.8  
 27/2     | bank2_3v3_red_led  | out   | IOB11[A] | -               | LVCMOS18 | 8     | UP        | NA        | NA         | OFF        | NA         | NA              | NA            | 1.8  
 28/2     | -                  | in    | IOB11[B] | -               | LVCMOS18 | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8  
 29/2     | -                  | in    | IOB13[A] | -               | LVCMOS18 | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8  
