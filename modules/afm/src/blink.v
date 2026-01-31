@@ -12,20 +12,20 @@ module blink (
 );
 
     // --- Red LED Blinker ---
-    localparam RED_LED_BLINK_DIV = 4666666; // ~0.5 second toggle at 27MHz
-    reg [23:0] red_led_counter;
+    localparam RED_LED_BLINK_DIV = 4_666_666; // ~0.5 second toggle at 27MHz
+    reg [24:0] red_led_counter; // Widened to 25 bits
     reg red_led_state;
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            red_led_counter <= 0;
+            red_led_counter <= {25{1'b0}}; // Explicitly sized 0
             red_led_state   <= 1'b0;
         end else begin
             if (red_led_counter == RED_LED_BLINK_DIV - 1) begin
-                red_led_counter <= 0;
+                red_led_counter <= {25{1'b0}}; // Explicitly sized 0
                 red_led_state   <= ~red_led_state; // Toggle
             end else begin
-                red_led_counter <= red_led_counter + 1;
+                red_led_counter <= red_led_counter + 25'd1; // Explicitly sized 1
             end
         end
     end
@@ -34,31 +34,31 @@ module blink (
 
     // --- On-board LED Blinker ---
     localparam ONBOARD_LED0_BLINK_DIV = 10_500_000;
-    reg [23:0] onboard_led0_counter;
+    reg [24:0] onboard_led0_counter; // Widened to 25 bits
 
     localparam ONBOARD_LED1_BLINK_DIV = 21_000_000;
-    reg [24:0] onboard_led1_counter;
+    reg [25:0] onboard_led1_counter; // Widened to 26 bits
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            onboard_led0_counter <= 0;
-            onboard_led1_counter <= 0;
+            onboard_led0_counter <= {25{1'b0}}; // Explicitly sized 0
+            onboard_led1_counter <= {26{1'b0}}; // Explicitly sized 0
             o_onboard_leds       <= 6'b111111; // All OFF (active-low)
         end else begin
             // LED 0
             if (onboard_led0_counter == ONBOARD_LED0_BLINK_DIV - 1) begin
-                onboard_led0_counter   <= 0;
+                onboard_led0_counter   <= {25{1'b0}}; // Explicitly sized 0
                 o_onboard_leds[0] <= ~o_onboard_leds[0]; // Toggle
             end else begin
-                onboard_led0_counter <= onboard_led0_counter + 1;
+                onboard_led0_counter <= onboard_led0_counter + 25'd1; // Explicitly sized 1
             end
 
             // LED 1
             if (onboard_led1_counter == ONBOARD_LED1_BLINK_DIV - 1) begin
-                onboard_led1_counter   <= 0;
+                onboard_led1_counter   <= {26{1'b0}}; // Explicitly sized 0
                 o_onboard_leds[1] <= ~o_onboard_leds[1]; // Toggle
             end else begin
-                onboard_led1_counter <= onboard_led1_counter + 1;
+                onboard_led1_counter <= onboard_led1_counter + 26'd1; // Explicitly sized 1
             end
         end
     end

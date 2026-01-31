@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Module name="top" T_Register="55(0)" T_Lut="111(0)">
- <SubModule name="uart_inst" Register="55" Lut="111" T_Register="55(55)" T_Lut="111(111)"/>
-</Module>
