@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-# Set the project name
-project(softcore_fw_example C ASM)
+project(audio_fx_module C ASM)
 
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR arm)
