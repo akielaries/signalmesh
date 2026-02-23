@@ -1,0 +1,3 @@
+# Board Support Package
+This code comes from the Gowin MCU Designer (GMD) tool and remains unmodified
+except for the linker and startup ASM files...
