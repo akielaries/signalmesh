@@ -9,20 +9,39 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "GOWIN_M1_ddr3.h"
+#include "debug.h"
 
 
 /* Definitions ---------------------------------------------------------------*/
 uint8_t DDR3_Init(void)
 {
-	uint32_t init_flag = 0;
-	
-	do
-	{
-		init_flag = DDR3->INIT;
-	}
-	while(!init_flag);
-	
-	return init_flag;
+  uint32_t init_flag = 0;
+  uint32_t timeout = 10000000;  // ~10 second timeout at 50MHz
+  
+  dbg_printf("DDR3 controller base: 0x%08X\r\n", (uint32_t)DDR3);
+  dbg_printf("Waiting for DDR3 initialization...\r\n");
+  
+  do
+  {
+    init_flag = DDR3->INIT;
+    timeout--;
+    
+    // Print progress every million iterations
+    if ((timeout % 1000000) == 0) {
+      dbg_printf("  [%d] INIT register = 0x%08X\r\n", 
+                 (10 - (timeout/1000000)), init_flag);
+    }
+    
+    if (timeout == 0) {
+      dbg_printf("ERROR: DDR3 init TIMEOUT!\r\n");
+      dbg_printf("INIT register final value: 0x%08X\r\n", init_flag);
+      return 0xFF;  // Error
+    }
+  }
+  while(!init_flag);
+  
+  dbg_printf("SUCCESS: DDR3 initialized! INIT=0x%08X\r\n", init_flag);
+  return 1;
 }
 
 void DDR3_Read(uint32_t addr, uint32_t *rd_buff)

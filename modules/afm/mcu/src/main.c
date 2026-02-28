@@ -5,6 +5,7 @@
 #include "gpio.h"
 #include "delay.h"
 #include "sys_defs.h"
+#include "GOWIN_M1_ddr3.h"
 
 #include "hw.h"
 
@@ -85,6 +86,113 @@ THREAD_FUNCTION(compute_fn, arg) {
   }
 }
 
+void ddr3_pattern_test(void) {
+    dbg_printf("\r\n=== DDR3 Pattern Test ===\r\n");
+
+    uint32_t errors = 0;
+
+    // Make buffers static to avoid stack issues
+    static uint32_t write_buf[4];
+    static uint32_t read_buf[4];
+
+    // Write pattern to 64 different 16-byte blocks (1KB total)
+    dbg_printf("Writing pattern to 64 blocks (1KB)...\r\n");
+    for (uint32_t block = 0; block < 64; block++) {
+        // Fill buffer with pattern
+        write_buf[0] = (block * 4) + 0;
+        write_buf[1] = (block * 4) + 1;
+        write_buf[2] = (block * 4) + 2;
+        write_buf[3] = (block * 4) + 3;
+
+        uint32_t addr = block * 16;  // 16-byte aligned addresses
+        DDR3_Write(DDR3_BASE + addr, write_buf);
+
+        if ((block % 16) == 0) {
+            dbg_printf("  Written %d blocks...\r\n", block);
+        }
+    }
+
+    dbg_printf("Reading back and verifying...\r\n");
+    for (uint32_t block = 0; block < 64; block++) {
+        uint32_t addr = block * 16;
+        DDR3_Read(DDR3_BASE + addr, read_buf);
+
+        // Verify each word in the block
+        for (int word = 0; word < 4; word++) {
+            uint32_t expected = (block * 4) + word;
+            if (read_buf[word] != expected) {
+                dbg_printf("  ERROR at addr 0x%08X[%d]: expected 0x%08X, read 0x%08X\r\n",
+                           DDR3_BASE + addr, word, expected, read_buf[word]);
+                errors++;
+                if (errors > 10) goto done;
+            }
+        }
+
+        if ((block % 16) == 0) {
+            dbg_printf("  Verified %d blocks...\r\n", block);
+        }
+    }
+
+done:
+    if (errors == 0) {
+        dbg_printf("PASS: Pattern test succeeded! All 256 words correct.\r\n");
+    } else {
+        dbg_printf("FAIL: Pattern test failed with %d errors\r\n", errors);
+    }
+
+    // Show first 4 blocks (64 bytes = 16 words)
+    dbg_printf("\r\nFirst 4 blocks at DDR3_BASE:\r\n");
+    for (uint32_t block = 0; block < 4; block++) {
+        DDR3_Read(DDR3_BASE + (block * 16), read_buf);
+        dbg_printf("  Block %d [0x%08X]: 0x%08X 0x%08X 0x%08X 0x%08X\r\n",
+                   block, DDR3_BASE + (block * 16),
+                   read_buf[0], read_buf[1], read_buf[2], read_buf[3]);
+    }
+}
+
+void ddr3_rw_test(void) {
+  dbg_printf("DDR3 test (16-byte aligned)\r\n");
+  
+  static uint32_t write_data[6][4] = {
+    {0x91234567, 0x89abcdef, 0xfedcba98, 0x76543210},
+    {0x66666666, 0x88888888, 0xeeeeeeee, 0xffffffff},
+    {1, 2, 3, 4}, 
+    {5, 6, 7, 8}, 
+    {9, 10, 11, 12},
+    {13, 14, 15, 16} 
+  };
+  
+  static uint32_t read_data[6][4];
+  
+  unsigned int addr = 0x00;
+  
+  dbg_printf("Writing 6 blocks with 16-byte increment...\r\n");
+  for(int i = 0; i < 6; i++) {
+    DDR3_Write(addr + i*16, write_data[i]);  // Changed to i*16
+  }
+  
+  dbg_printf("Reading back...\r\n");
+  for(int i = 0; i < 6; i++) {
+    DDR3_Read(addr + i*16, read_data[i]);    // Changed to i*16
+  }
+  
+  dbg_printf("Results:\r\n");
+  for(int i = 0; i < 6; i++) {
+    dbg_printf("Block %d: 0x%08X 0x%08X 0x%08X 0x%08X ", 
+               i, read_data[i][0], read_data[i][1], read_data[i][2], read_data[i][3]);
+    
+    // Check if correct
+    if (read_data[i][0] == write_data[i][0] &&
+        read_data[i][1] == write_data[i][1] &&
+        read_data[i][2] == write_data[i][2] &&
+        read_data[i][3] == write_data[i][3]) {
+      dbg_printf("OK\r\n");
+    } else {
+      dbg_printf("MISMATCH\r\n");
+    }
+  }
+}
+
 /* ========================== MAIN ========================= */
 /* ========================================================= */
 /*
@@ -92,6 +200,13 @@ THREAD_FUNCTION(compute_fn, arg) {
  */
 int main(void) {
   hw_init();
+
+  dbg_printf("DDR3 init\r\n");
+  uint8_t status = DDR3_Init();
+  dbg_printf("DDR3 init status: %d\r\n", status);
+
+  ddr3_rw_test();
+  //ddr3_pattern_test();
 
   // start the scheduler/kernel
   dbg_printf("initializing kernel...\r\n");

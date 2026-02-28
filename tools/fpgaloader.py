@@ -91,7 +91,7 @@ def program_fpga(bitstream_path, board_type, host, port):
         return 1
     except ConnectionRefusedError:
         print(f"Error: Could not connect to {host}:{port}")
-        print("Make sure the server is running on the Jetson Nano")
+        print("Make sure the server is running")
         return 1
     except Exception as e:
         print(f"Error: {e}")
