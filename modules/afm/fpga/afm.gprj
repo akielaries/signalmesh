@@ -5,11 +5,20 @@
     <Version>5</Version>
     <Device name="GW1NR-9C" pn="GW1NR-LV9QN88PC6/I5">gw1nr9c-004</Device>
     <FileList>
-        <File path="src/blink.v" type="file.verilog" enable="1"/>
-        <File path="src/gowin_rpll/gowin_rpll.v" type="file.verilog" enable="1"/>
+        <File path="src/ahb1_sram.v" type="file.verilog" enable="1"/>
+        <File path="src/apb_ahb_bridge.v" type="file.verilog" enable="1"/>
+        <File path="src/apb_memmap.v" type="file.verilog" enable="1"/>
+        <File path="src/gowin_empu_m1/gowin_empu_m1.v" type="file.verilog" enable="1"/>
+        <File path="src/gpio.v" type="file.verilog" enable="1"/>
+        <File path="src/gpio_regs.v" type="file.verilog" enable="1"/>
+        <File path="src/gwct_apb_master.v" type="file.verilog" enable="1"/>
+        <File path="src/gwct_bridge.v" type="file.verilog" enable="1"/>
+        <File path="src/gwct_packet.v" type="file.verilog" enable="1"/>
+        <File path="src/gwct_uart.v" type="file.verilog" enable="1"/>
+        <File path="src/sysinfo.v" type="file.verilog" enable="1"/>
+        <File path="src/sysinfo_regs.v" type="file.verilog" enable="1"/>
         <File path="src/top.v" type="file.verilog" enable="1"/>
-        <File path="src/uart.v" type="file.verilog" enable="1"/>
         <File path="src/pins.cst" type="file.cst" enable="1"/>
-        <File path="src/fpga_project.sdc" type="file.sdc" enable="1"/>
+        <File path="src/afm.sdc" type="file.sdc" enable="1"/>
     </FileList>
 </Project>

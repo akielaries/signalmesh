@@ -1,8 +1,10 @@
-# Audio Filter Module
-Uses a GW1NR-9C FPGA and the Gowin ARM Cortex M1 IP softcore
+# Cortex M1 example
+Makes use of the Tang Mega 60k and the ARM Cortex M1 softcore. It makes use of the
+gwct debug module from here: https://github.com/akielaries/gwct/tree/main
 
-## rtl/
-All RTL and IP related goodies are here
-
-## fw/
-Firmware written in C and using the arm-none-eabi-gcc toolchain
+Uses:
+- UART1
+- APB1
+- DDR3
+- GPIO
+- SWD

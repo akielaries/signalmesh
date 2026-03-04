@@ -1,0 +1,2599 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>synthesis Report</title>
+<style type="text/css">
+body { font-family: Verdana, Arial, sans-serif; font-size: 12px; }
+div#main_wrapper{ width: 100%; }
+div#content { margin-left: 350px; margin-right: 30px; }
+div#catalog_wrapper {position: fixed; top: 30px; width: 350px; float: left; }
+div#catalog ul { list-style-type: none; }
+div#catalog li { text-align: left; list-style-type:circle; color: #0084ff; margin-top: 3px; margin-bottom: 3px; }
+div#catalog a { display:inline-block; text-decoration: none; color: #0084ff; font-weight: bold; padding: 3px; }
+div#catalog a:visited { color: #0084ff; }
+div#catalog a:hover { color: #fff; background: #0084ff; }
+hr { margin-top: 30px; margin-bottom: 30px; }
+h1, h3 { text-align: center; }
+h1 {margin-top: 50px; }
+table, th, td { border: 1px solid #aaa; }
+table { border-collapse:collapse; margin-top: 10px; margin-bottom: 20px; width: 100%; }
+th, td { padding: 5px 5px 5px 5px; }
+th { color: #fff; font-weight: bold; background-color: #0084ff; }
+table.summary_table td.label { width: 24%; min-width: 200px; background-color: #dee8f4; }
+table.detail_table td.label { min-width: 100px; width: 8%;}
+</style>
+</head>
+<body>
+<div id="main_wrapper">
+<div id="catalog_wrapper">
+<div id="catalog">
+<ul>
+<li><a href="#about" style=" font-size: 16px;">Synthesis Messages</a></li>
+<li><a href="#summary" style=" font-size: 16px;">Synthesis Details</a></li>
+<li><a href="#resource" style=" font-size: 16px;">Resource</a>
+<ul>
+<li><a href="#usage" style=" font-size: 14px;">Resource Usage Summary</a></li>
+<li><a href="#utilization" style=" font-size: 14px;">Resource Utilization Summary</a></li>
+</ul>
+</li>
+<li><a href="#timing" style=" font-size: 16px;">Timing</a>
+<ul>
+<li><a href="#clock" style=" font-size: 14px;">Clock Summary</a></li>
+<li><a href="#performance" style=" font-size: 14px;">Max Frequency Summary</a></li>
+<li><a href="#detail timing" style=" font-size: 14px;">Detail Timing Paths Informations</a></li>
+</ul>
+</li>
+</ul>
+</div><!-- catalog -->
+</div><!-- catalog_wrapper -->
+<div id="content">
+<h1><a name="about">Synthesis Messages</a></h1>
+<table class="summary_table">
+<tr>
+<td class="label">Report Title</td>
+<td>GowinSynthesis Report</td>
+</tr>
+<tr>
+<td class="label">Design File</td>
+<td>/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/ahb_def_slave.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/BusMatrix.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/can.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/can_top.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_adder.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_ahb.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_alu_dec.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_core.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_ctl.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_ctl_add3.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_dbg_ahb_dec.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_dbg_ahb_mux.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_dbg_bp.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_dbg_ctl.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_dbg_define.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_dbg_dw.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_dbg_mtx.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_dbg_mtx_dbg.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_dbg_mtx_sys.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_dbg_rom_tb.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_dbg_sys.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_dbg_tcm.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_dbg_undefs.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_decoder.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_defs.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_dp.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_excpt.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_fetch.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_fns.vh<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_matrix_check_fns.vh<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_mem_ctl.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_multiplier.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_multiply_shift.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_mux4.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_nvic.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_nvic_ahb.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_nvic_ahb_os.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_nvic_defs.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_nvic_main.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_nvic_pri_lvl.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_nvic_pri_num.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_nvic_tree.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_nvic_undefs.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_reg_bank.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_shifter.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cm1_undefs.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_ethmac_miim_wrapper.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_ethmac_rx_buffer_to_ahb.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_ethmac_rx_to_buffer.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_ethmac_rx_wrapper.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_ethmac_sdp_wrapper_32bit.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_ethmac_tx_wrapper.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_ethmac_wrapper.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_gpio.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_ahbif_ctrl.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_arbiter.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_async_fifo_clr.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_config.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_const.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_ctrl.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_eilmif_ctrl.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_fifo.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_gck.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_pad_lib.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_reg.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_regif.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_regif_ctrl.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_spiif.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_sync.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_sync_l2l.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_spi_flash_sync_p2p.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_ahb_to_iop.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_dualtimers.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_dualtimers_defs.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_dualtimers_frc.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_spi.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_timer.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_autocorrelation.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_balancefilter.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_collector.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_crngt_to_trng.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_dx_inv_chain.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_dx_trng_top.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_dxm_ff.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_dxm_interrupt_low.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_dxm_mux.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_dxm_mux_clk.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_dxm_sync.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_ehr.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_entropy_gen.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_gtech_models.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_lfsr_new.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_line.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_noise_gen.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_pmf_table.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_prng_top_wrap.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_reg_file.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_rng_engine.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_rng_misc.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_rng_top.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_rng_top_wrap_unconnected.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_rosc.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_rst_logic.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_sample_cntr.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_slave_bus_ifc.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_sync.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_tests_misc.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_trng_top.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_uart.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_watchdog.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_watchdog_defs.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_apb_watchdog_frc.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/cmsdk_iop_gpio.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/CortexM1Dbg.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/CortexM1DbgIntegration.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/CortexM1DbgIntegrationWrapper.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/dapahbap.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPAhbApAhbSync.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPAhbApDapSync.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPAhbApDefs.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPAhbApMst.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPAhbApSlv.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPAhbApSyn.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPDecMux.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPDpApbDefs.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPDpApbSync.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPDpEnSync.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPDpIMux.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPDpSync.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPJtagDpDefs.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPJtagDpProtocol.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPSwDpApbIf.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPSwDpDefs.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPSwDpProtocol.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPSwDpSync.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/dapswjdp.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPSwjDpDefs.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DAPSwjWatcher.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/ddr3_1_4code_hs.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/ddr3_to_ahb_top.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/DDR3_TOP.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/dtcmdbg.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/eth_mac.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/eth_mac_top.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/Gowin_EMPU_M1_top.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/GowinAhbExt.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/GowinCM1AhbExt.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/GowinCM1AhbExtWrapper.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/gw_ahb_psram.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/gw_apb_i2c.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/gw_apb_int_wrapper.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/gw_apb_sd.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/gw_gpio.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/InputStage.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/itcmdbg.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/MatrixDecodeS0.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/MatrixDecodeS1.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/MatrixDecodeS2.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/OutputArb1.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/OutputArb2.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/OutputArb3.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/OutputStage1.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/OutputStage2.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/OutputStage3.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/p_sse050_interconnect_f0_ahb_to_apb.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/p_sse050_interconnect_f0_apb_slave_mux.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/psram_code.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/PSRAM_TOP.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/rng_addr_params.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/rng_cc_params.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/rng_params.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/Rtc.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/RtcApbif.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/RtcControl.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/RtcCounter.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/RtcInterrupt.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/RtcParams.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/RtcRevAnd.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/RtcSynctoPCLK.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/RtcUpdate.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/sse050_int_apb_decoder.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/sse050_integration_peripherals.v<br>
+/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/GOWIN_EMPU_M1/data/debug/sync_p2p.v<br>
+/home/akiel/trunk/pub/signalmesh/modules/afm/fpga/src/gowin_empu_m1/temp/gw_empu_m1/cm1_option_defs.v<br>
+/home/akiel/trunk/pub/signalmesh/modules/afm/fpga/src/gowin_empu_m1/temp/gw_empu_m1/ahb_option_defs.v<br>
+/home/akiel/trunk/pub/signalmesh/modules/afm/fpga/src/gowin_empu_m1/temp/gw_empu_m1/parameter.vh<br>
+/home/akiel/trunk/pub/signalmesh/modules/afm/fpga/src/gowin_empu_m1/temp/gw_empu_m1/triple_speed_mac_param.v<br>
+/home/akiel/trunk/pub/signalmesh/modules/afm/fpga/src/gowin_empu_m1/temp/gw_empu_m1/triple_speed_mac_define.v<br>
+/home/akiel/trunk/pub/signalmesh/modules/afm/fpga/src/gowin_empu_m1/temp/gw_empu_m1/DDR3_define.v<br>
+</td>
+</tr>
+<tr>
+<td class="label">GowinSynthesis Constraints File</td>
+<td>---</td>
+</tr>
+<tr>
+<td class="label">Tool Version</td>
+<td>V1.9.12.01</td>
+</tr>
+<tr>
+<td class="label">Part Number</td>
+<td>GW1NR-LV9QN88PC6/I5</td>
+</tr>
+<tr>
+<td class="label">Device</td>
+<td>GW1NR-9</td>
+</tr>
+<tr>
+<td class="label">Device Version</td>
+<td>C</td>
+</tr>
+<tr>
+<td class="label">Created Time</td>
+<td>Tue Mar  3 19:46:01 2026
+</td>
+</tr>
+<tr>
+<td class="label">Legal Announcement</td>
+<td>Copyright (C)2014-2025 Gowin Semiconductor Corporation. ALL rights reserved.</td>
+</tr>
+</table>
+<h1><a name="summary">Synthesis Details</a></h1>
+<table class="summary_table">
+<tr>
+<td class="label">Top Level Module</td>
+<td>Gowin_EMPU_M1_Top</td>
+</tr>
+<tr>
+<td class="label">Synthesis Process</td>
+<td>Running parser:<br/>&nbsp;&nbsp;&nbsp;&nbsp;CPU time = 0h 0m 2s, Elapsed time = 0h 0m 2s, Peak memory usage = 185.332MB<br/>Running netlist conversion:<br/>&nbsp;&nbsp;&nbsp;&nbsp;CPU time = 0h 0m 0.117s, Elapsed time = 0h 0m 0.117s, Peak memory usage = 185.457MB<br/>Running device independent optimization:<br/>&nbsp;&nbsp;&nbsp;&nbsp;Optimizing Phase 0: CPU time = 0h 0m 0.98s, Elapsed time = 0h 0m 0.98s, Peak memory usage = 186.082MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Optimizing Phase 1: CPU time = 0h 0m 0.321s, Elapsed time = 0h 0m 0.323s, Peak memory usage = 186.145MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Optimizing Phase 2: CPU time = 0h 0m 0.898s, Elapsed time = 0h 0m 0.902s, Peak memory usage = 186.266MB<br/>Running inference:<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 0: CPU time = 0h 0m 0.635s, Elapsed time = 0h 0m 0.636s, Peak memory usage = 186.820MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 1: CPU time = 0h 0m 0.05s, Elapsed time = 0h 0m 0.05s, Peak memory usage = 187.141MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 2: CPU time = 0h 0m 0.041s, Elapsed time = 0h 0m 0.041s, Peak memory usage = 187.199MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 3: CPU time = 0h 0m 0.02s, Elapsed time = 0h 0m 0.02s, Peak memory usage = 187.324MB<br/>Running technical mapping:<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 0: CPU time = 0h 0m 0.863s, Elapsed time = 0h 0m 0.864s, Peak memory usage = 187.324MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 1: CPU time = 0h 0m 0.147s, Elapsed time = 0h 0m 0.147s, Peak memory usage = 187.324MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 2: CPU time = 0h 0m 0.341s, Elapsed time = 0h 0m 0.341s, Peak memory usage = 187.324MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 3: CPU time = 0h 0m 28s, Elapsed time = 0h 0m 28s, Peak memory usage = 214.016MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 4: CPU time = 0h 0m 0.629s, Elapsed time = 0h 0m 0.629s, Peak memory usage = 214.016MB<br/>Generate output files:<br/>&nbsp;&nbsp;&nbsp;&nbsp;CPU time = 0h 0m 0.433s, Elapsed time = 0h 0m 0.435s, Peak memory usage = 214.016MB<br/></td>
+</tr>
+<tr>
+<td class="label">Total Time and Memory Usage</td>
+<td>CPU time = 0h 0m 35s, Elapsed time = 0h 0m 35s, Peak memory usage = 214.016MB</td>
+</tr>
+</table>
+<h1><a name="resource">Resource</a></h1>
+<h2><a name="usage">Resource Usage Summary</a></h2>
+<table class="summary_table">
+<tr>
+<td class="label"><b>Resource</b></td>
+<td><b>Usage</b></td>
+</tr>
+<tr>
+<td class="label"><b>I/O Port </b></td>
+<td>134</td>
+</tr>
+<tr>
+<td class="label"><b>I/O Buf </b></td>
+<td>134</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspIBUF</td>
+<td>38</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspOBUF</td>
+<td>79</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspIOBUF</td>
+<td>17</td>
+</tr>
+<tr>
+<td class="label"><b>Register </b></td>
+<td>2579</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspDFF</td>
+<td>50</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspDFFE</td>
+<td>32</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspDFFSE</td>
+<td>1</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspDFFR</td>
+<td>3</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspDFFRE</td>
+<td>1</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspDFFP</td>
+<td>26</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspDFFPE</td>
+<td>82</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspDFFC</td>
+<td>496</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspDFFCE</td>
+<td>1888</td>
+</tr>
+<tr>
+<td class="label"><b>LUT </b></td>
+<td>5655</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspLUT2</td>
+<td>465</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspLUT3</td>
+<td>1632</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspLUT4</td>
+<td>3558</td>
+</tr>
+<tr>
+<td class="label"><b>ALU </b></td>
+<td>148</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspALU</td>
+<td>148</td>
+</tr>
+<tr>
+<td class="label"><b>SSRAM </b></td>
+<td>16</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspRAM16SDP4</td>
+<td>16</td>
+</tr>
+<tr>
+<td class="label"><b>INV </b></td>
+<td>20</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspINV</td>
+<td>20</td>
+</tr>
+<tr>
+<td class="label"><b>DSP </b></td>
+<td></td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspMULT36X36</td>
+<td>1</td>
+</tr>
+<tr>
+<td class="label"><b>BSRAM </b></td>
+<td>16</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp&nbsp&nbspDPB</td>
+<td>16</td>
+</tr>
+</table>
+<h2><a name="utilization">Resource Utilization Summary</a></h2>
+<table class="summary_table">
+<tr>
+<td class="label"><b>Resource</b></td>
+<td><b>Usage</b></td>
+<td><b>Utilization</b></td>
+</tr>
+<tr>
+<td class="label">Logic</td>
+<td>5919(5675 LUT, 148 ALU, 16 RAM16) / 8640</td>
+<td>69%</td>
+</tr>
+<tr>
+<td class="label">Register</td>
+<td>2579 / 6693</td>
+<td>39%</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp--Register as Latch</td>
+<td>0 / 6693</td>
+<td>0%</td>
+</tr>
+<tr>
+<td class="label">&nbsp&nbsp--Register as FF</td>
+<td>2579 / 6693</td>
+<td>39%</td>
+</tr>
+<tr>
+<td class="label">BSRAM</td>
+<td>16 / 26</td>
+<td>62%</td>
+</tr>
+</table>
+<h1><a name="timing">Timing</a></h1>
+<h2><a name="clock">Clock Summary:</a></h2>
+<table class="summary_table">
+<tr>
+<th>NO.</th>
+<th>Clock Name</th>
+<th>Type</th>
+<th>Period</th>
+<th>Frequency(MHz)</th>
+<th>Rise</th>
+<th>Fall</th>
+<th>Source</th>
+<th>Master</th>
+<th>Object</th>
+</tr>
+<tr>
+<td>1</td>
+<td>HCLK</td>
+<td>Base</td>
+<td>20.000</td>
+<td>50.000</td>
+<td>0.000</td>
+<td>10.000</td>
+<td> </td>
+<td> </td>
+<td>HCLK_ibuf/I </td>
+</tr>
+<tr>
+<td>2</td>
+<td>JTAG_9</td>
+<td>Base</td>
+<td>20.000</td>
+<td>50.000</td>
+<td>0.000</td>
+<td>10.000</td>
+<td> </td>
+<td> </td>
+<td>JTAG_9_ibuf/I </td>
+</tr>
+</table>
+<h2><a name="performance">Max Frequency Summary:</a></h2>
+<table class="summary_table">
+<tr>
+<th>NO.</th>
+<th>Clock Name</th>
+<th>Constraint</th>
+<th>Actual Fmax</th>
+<th>Logic Level</th>
+<th>Entity</th>
+</tr>
+<tr>
+<td>1</td>
+<td>HCLK</td>
+<td>50.000(MHz)</td>
+<td>38.401(MHz)</td>
+<td>15</td>
+<td>TOP</td>
+</tr>
+<tr>
+<td>2</td>
+<td>JTAG_9</td>
+<td>50.000(MHz)</td>
+<td>59.797(MHz)</td>
+<td>9</td>
+<td>TOP</td>
+</tr>
+</table>
+<h2><a name="detail timing">Detail Timing Paths Information</a></h2>
+<h3>Path&nbsp1</h3>
+<b>Path Summary:</b></br>
+<table class="summary_table">
+<tr>
+<td class="label">Slack</td>
+<td>-7.722</td>
+</tr>
+<tr>
+<td class="label">Data Arrival Time</td>
+<td>28.018</td>
+</tr>
+<tr>
+<td class="label">Data Required Time</td>
+<td>20.296</td>
+</tr>
+<tr>
+<td class="label">From</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_swj_dp/uDAPSwDpProtocol/ApSel_6_s0</td>
+</tr>
+<tr>
+<td class="label">To</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/PackCtr_1_s1</td>
+</tr>
+<tr>
+<td class="label">Launch Clk</td>
+<td>JTAG_9[R]</td>
+</tr>
+<tr>
+<td class="label">Latch Clk</td>
+<td>HCLK[R]</td>
+</tr>
+</table>
+<b>Data Arrival Path:</b>
+<table class="summary_table">
+<tr>
+<th>AT</th>
+<th>DELAY</th>
+<th>TYPE</th>
+<th>RF</th>
+<th>FANOUT</th>
+<th>NODE</th>
+</tr>
+<tr>
+<td>0.000</td>
+<td>0.000</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td>JTAG_9</td>
+</tr>
+<tr>
+<td>0.000</td>
+<td>0.000</td>
+<td>tCL</td>
+<td>RR</td>
+<td>1</td>
+<td>JTAG_9_ibuf/I</td>
+</tr>
+<tr>
+<td>0.982</td>
+<td>0.982</td>
+<td>tINS</td>
+<td>RR</td>
+<td>190</td>
+<td>JTAG_9_ibuf/O</td>
+</tr>
+<tr>
+<td>1.708</td>
+<td>0.726</td>
+<td>tNET</td>
+<td>RR</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_swj_dp/uDAPSwDpProtocol/ApSel_6_s0/CLK</td>
+</tr>
+<tr>
+<td>2.166</td>
+<td>0.458</td>
+<td>tC2Q</td>
+<td>RF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_swj_dp/uDAPSwDpProtocol/ApSel_6_s0/Q</td>
+</tr>
+<tr>
+<td>3.126</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s2/I1</td>
+</tr>
+<tr>
+<td>4.225</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s2/F</td>
+</tr>
+<tr>
+<td>5.185</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s1/I2</td>
+</tr>
+<tr>
+<td>6.007</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>38</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s1/F</td>
+</tr>
+<tr>
+<td>6.967</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/CswSwWrEn_s6/I2</td>
+</tr>
+<tr>
+<td>7.789</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>5</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/CswSwWrEn_s6/F</td>
+</tr>
+<tr>
+<td>8.749</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_1_s25/I2</td>
+</tr>
+<tr>
+<td>9.571</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_1_s25/F</td>
+</tr>
+<tr>
+<td>10.531</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s25/I0</td>
+</tr>
+<tr>
+<td>11.563</td>
+<td>1.032</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s25/F</td>
+</tr>
+<tr>
+<td>12.523</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s24/I1</td>
+</tr>
+<tr>
+<td>13.622</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>3</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s24/F</td>
+</tr>
+<tr>
+<td>14.582</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n363_s0/I1</td>
+</tr>
+<tr>
+<td>15.627</td>
+<td>1.045</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n363_s0/COUT</td>
+</tr>
+<tr>
+<td>15.627</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n364_s0/CIN</td>
+</tr>
+<tr>
+<td>15.684</td>
+<td>0.057</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n364_s0/COUT</td>
+</tr>
+<tr>
+<td>15.684</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n365_s0/CIN</td>
+</tr>
+<tr>
+<td>15.741</td>
+<td>0.057</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n365_s0/COUT</td>
+</tr>
+<tr>
+<td>15.741</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n366_s0/CIN</td>
+</tr>
+<tr>
+<td>15.798</td>
+<td>0.057</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n366_s0/COUT</td>
+</tr>
+<tr>
+<td>16.758</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s2/I2</td>
+</tr>
+<tr>
+<td>17.580</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s2/F</td>
+</tr>
+<tr>
+<td>18.540</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s1/I1</td>
+</tr>
+<tr>
+<td>19.639</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>20</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s1/F</td>
+</tr>
+<tr>
+<td>20.599</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextDapRdData_1_s1/I0</td>
+</tr>
+<tr>
+<td>21.631</td>
+<td>1.032</td>
+<td>tINS</td>
+<td>FF</td>
+<td>21</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextDapRdData_1_s1/F</td>
+</tr>
+<tr>
+<td>22.591</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextPackCtr_0_s8/I3</td>
+</tr>
+<tr>
+<td>23.217</td>
+<td>0.626</td>
+<td>tINS</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextPackCtr_0_s8/F</td>
+</tr>
+<tr>
+<td>24.177</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextPackCtr_1_s9/I1</td>
+</tr>
+<tr>
+<td>25.276</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextPackCtr_1_s9/F</td>
+</tr>
+<tr>
+<td>26.236</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextPackCtr_1_s8/I2</td>
+</tr>
+<tr>
+<td>27.058</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextPackCtr_1_s8/F</td>
+</tr>
+<tr>
+<td>28.018</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/PackCtr_1_s1/D</td>
+</tr>
+</table>
+<b>Data Required Path:</b>
+<table class="summary_table">
+<tr>
+<th>AT</th>
+<th>DELAY</th>
+<th>TYPE</th>
+<th>RF</th>
+<th>FANOUT</th>
+<th>NODE</th>
+</tr>
+<tr>
+<td>20.000</td>
+<td>0.000</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td>HCLK</td>
+</tr>
+<tr>
+<td>20.000</td>
+<td>0.000</td>
+<td>tCL</td>
+<td>RR</td>
+<td>1</td>
+<td>HCLK_ibuf/I</td>
+</tr>
+<tr>
+<td>20.000</td>
+<td>0.000</td>
+<td>tINS</td>
+<td>RR</td>
+<td>2439</td>
+<td>HCLK_ibuf/O</td>
+</tr>
+<tr>
+<td>20.726</td>
+<td>0.726</td>
+<td>tNET</td>
+<td>RR</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/PackCtr_1_s1/CLK</td>
+</tr>
+<tr>
+<td>20.696</td>
+<td>-0.030</td>
+<td>tUnc</td>
+<td> </td>
+<td> </td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/PackCtr_1_s1</td>
+</tr>
+<tr>
+<td>20.296</td>
+<td>-0.400</td>
+<td>tSu</td>
+<td> </td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/PackCtr_1_s1</td>
+</tr>
+</table>
+<b>Path Statistics:</b>
+<table class="summary_table">
+<tr>
+<td class="label">Clock Skew:</td>
+<td>-0.982</td>
+</tr>
+<tr>
+<td class="label">Setup Relationship:</td>
+<td>20.000</td>
+</tr>
+<tr>
+<td class="label">Logic Level:</td>
+<td>15</td>
+</tr>
+<tr>
+<td class="label">Arrival Clock Path Delay:</td><td> cell: 0.982, 57.491%; route: 0.726, 42.509%</td></tr>
+<tr>
+<td class="label">Arrival Data Path Delay:</td><td> cell: 12.412, 47.175%; route: 13.440, 51.083%; tC2Q: 0.458, 1.742%</td></tr>
+<tr>
+<td class="label">Required Clock Path Delay:</td><td> cell: 0.982, 57.491%; route: 0.726, 42.509%</td></tr>
+</table>
+<br/>
+<h3>Path&nbsp2</h3>
+<b>Path Summary:</b></br>
+<table class="summary_table">
+<tr>
+<td class="label">Slack</td>
+<td>-5.940</td>
+</tr>
+<tr>
+<td class="label">Data Arrival Time</td>
+<td>26.236</td>
+</tr>
+<tr>
+<td class="label">Data Required Time</td>
+<td>20.296</td>
+</tr>
+<tr>
+<td class="label">From</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_swj_dp/uDAPSwDpProtocol/ApSel_6_s0</td>
+</tr>
+<tr>
+<td class="label">To</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/PackCtr_0_s1</td>
+</tr>
+<tr>
+<td class="label">Launch Clk</td>
+<td>JTAG_9[R]</td>
+</tr>
+<tr>
+<td class="label">Latch Clk</td>
+<td>HCLK[R]</td>
+</tr>
+</table>
+<b>Data Arrival Path:</b>
+<table class="summary_table">
+<tr>
+<th>AT</th>
+<th>DELAY</th>
+<th>TYPE</th>
+<th>RF</th>
+<th>FANOUT</th>
+<th>NODE</th>
+</tr>
+<tr>
+<td>0.000</td>
+<td>0.000</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td>JTAG_9</td>
+</tr>
+<tr>
+<td>0.000</td>
+<td>0.000</td>
+<td>tCL</td>
+<td>RR</td>
+<td>1</td>
+<td>JTAG_9_ibuf/I</td>
+</tr>
+<tr>
+<td>0.982</td>
+<td>0.982</td>
+<td>tINS</td>
+<td>RR</td>
+<td>190</td>
+<td>JTAG_9_ibuf/O</td>
+</tr>
+<tr>
+<td>1.708</td>
+<td>0.726</td>
+<td>tNET</td>
+<td>RR</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_swj_dp/uDAPSwDpProtocol/ApSel_6_s0/CLK</td>
+</tr>
+<tr>
+<td>2.166</td>
+<td>0.458</td>
+<td>tC2Q</td>
+<td>RF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_swj_dp/uDAPSwDpProtocol/ApSel_6_s0/Q</td>
+</tr>
+<tr>
+<td>3.126</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s2/I1</td>
+</tr>
+<tr>
+<td>4.225</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s2/F</td>
+</tr>
+<tr>
+<td>5.185</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s1/I2</td>
+</tr>
+<tr>
+<td>6.007</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>38</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s1/F</td>
+</tr>
+<tr>
+<td>6.967</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/CswSwWrEn_s6/I2</td>
+</tr>
+<tr>
+<td>7.789</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>5</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/CswSwWrEn_s6/F</td>
+</tr>
+<tr>
+<td>8.749</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_1_s25/I2</td>
+</tr>
+<tr>
+<td>9.571</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_1_s25/F</td>
+</tr>
+<tr>
+<td>10.531</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s25/I0</td>
+</tr>
+<tr>
+<td>11.563</td>
+<td>1.032</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s25/F</td>
+</tr>
+<tr>
+<td>12.523</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s24/I1</td>
+</tr>
+<tr>
+<td>13.622</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>3</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s24/F</td>
+</tr>
+<tr>
+<td>14.582</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n363_s0/I1</td>
+</tr>
+<tr>
+<td>15.627</td>
+<td>1.045</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n363_s0/COUT</td>
+</tr>
+<tr>
+<td>15.627</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n364_s0/CIN</td>
+</tr>
+<tr>
+<td>15.684</td>
+<td>0.057</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n364_s0/COUT</td>
+</tr>
+<tr>
+<td>15.684</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n365_s0/CIN</td>
+</tr>
+<tr>
+<td>15.741</td>
+<td>0.057</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n365_s0/COUT</td>
+</tr>
+<tr>
+<td>15.741</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n366_s0/CIN</td>
+</tr>
+<tr>
+<td>15.798</td>
+<td>0.057</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n366_s0/COUT</td>
+</tr>
+<tr>
+<td>16.758</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s2/I2</td>
+</tr>
+<tr>
+<td>17.580</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s2/F</td>
+</tr>
+<tr>
+<td>18.540</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s1/I1</td>
+</tr>
+<tr>
+<td>19.639</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>20</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s1/F</td>
+</tr>
+<tr>
+<td>20.599</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextDapRdData_1_s1/I0</td>
+</tr>
+<tr>
+<td>21.631</td>
+<td>1.032</td>
+<td>tINS</td>
+<td>FF</td>
+<td>21</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextDapRdData_1_s1/F</td>
+</tr>
+<tr>
+<td>22.591</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextPackCtr_0_s8/I3</td>
+</tr>
+<tr>
+<td>23.217</td>
+<td>0.626</td>
+<td>tINS</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextPackCtr_0_s8/F</td>
+</tr>
+<tr>
+<td>24.177</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextPackCtr_0_s7/I1</td>
+</tr>
+<tr>
+<td>25.276</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextPackCtr_0_s7/F</td>
+</tr>
+<tr>
+<td>26.236</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/PackCtr_0_s1/D</td>
+</tr>
+</table>
+<b>Data Required Path:</b>
+<table class="summary_table">
+<tr>
+<th>AT</th>
+<th>DELAY</th>
+<th>TYPE</th>
+<th>RF</th>
+<th>FANOUT</th>
+<th>NODE</th>
+</tr>
+<tr>
+<td>20.000</td>
+<td>0.000</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td>HCLK</td>
+</tr>
+<tr>
+<td>20.000</td>
+<td>0.000</td>
+<td>tCL</td>
+<td>RR</td>
+<td>1</td>
+<td>HCLK_ibuf/I</td>
+</tr>
+<tr>
+<td>20.000</td>
+<td>0.000</td>
+<td>tINS</td>
+<td>RR</td>
+<td>2439</td>
+<td>HCLK_ibuf/O</td>
+</tr>
+<tr>
+<td>20.726</td>
+<td>0.726</td>
+<td>tNET</td>
+<td>RR</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/PackCtr_0_s1/CLK</td>
+</tr>
+<tr>
+<td>20.696</td>
+<td>-0.030</td>
+<td>tUnc</td>
+<td> </td>
+<td> </td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/PackCtr_0_s1</td>
+</tr>
+<tr>
+<td>20.296</td>
+<td>-0.400</td>
+<td>tSu</td>
+<td> </td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/PackCtr_0_s1</td>
+</tr>
+</table>
+<b>Path Statistics:</b>
+<table class="summary_table">
+<tr>
+<td class="label">Clock Skew:</td>
+<td>-0.982</td>
+</tr>
+<tr>
+<td class="label">Setup Relationship:</td>
+<td>20.000</td>
+</tr>
+<tr>
+<td class="label">Logic Level:</td>
+<td>14</td>
+</tr>
+<tr>
+<td class="label">Arrival Clock Path Delay:</td><td> cell: 0.982, 57.491%; route: 0.726, 42.509%</td></tr>
+<tr>
+<td class="label">Arrival Data Path Delay:</td><td> cell: 11.590, 47.251%; route: 12.480, 50.880%; tC2Q: 0.458, 1.869%</td></tr>
+<tr>
+<td class="label">Required Clock Path Delay:</td><td> cell: 0.982, 57.491%; route: 0.726, 42.509%</td></tr>
+</table>
+<br/>
+<h3>Path&nbsp3</h3>
+<b>Path Summary:</b></br>
+<table class="summary_table">
+<tr>
+<td class="label">Slack</td>
+<td>-5.053</td>
+</tr>
+<tr>
+<td class="label">Data Arrival Time</td>
+<td>25.705</td>
+</tr>
+<tr>
+<td class="label">Data Required Time</td>
+<td>20.653</td>
+</tr>
+<tr>
+<td class="label">From</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_swj_dp/uDAPSwDpProtocol/ApSel_6_s0</td>
+</tr>
+<tr>
+<td class="label">To</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaReg_cdc_check_0_s0</td>
+</tr>
+<tr>
+<td class="label">Launch Clk</td>
+<td>JTAG_9[R]</td>
+</tr>
+<tr>
+<td class="label">Latch Clk</td>
+<td>HCLK[R]</td>
+</tr>
+</table>
+<b>Data Arrival Path:</b>
+<table class="summary_table">
+<tr>
+<th>AT</th>
+<th>DELAY</th>
+<th>TYPE</th>
+<th>RF</th>
+<th>FANOUT</th>
+<th>NODE</th>
+</tr>
+<tr>
+<td>0.000</td>
+<td>0.000</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td>JTAG_9</td>
+</tr>
+<tr>
+<td>0.000</td>
+<td>0.000</td>
+<td>tCL</td>
+<td>RR</td>
+<td>1</td>
+<td>JTAG_9_ibuf/I</td>
+</tr>
+<tr>
+<td>0.982</td>
+<td>0.982</td>
+<td>tINS</td>
+<td>RR</td>
+<td>190</td>
+<td>JTAG_9_ibuf/O</td>
+</tr>
+<tr>
+<td>1.708</td>
+<td>0.726</td>
+<td>tNET</td>
+<td>RR</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_swj_dp/uDAPSwDpProtocol/ApSel_6_s0/CLK</td>
+</tr>
+<tr>
+<td>2.166</td>
+<td>0.458</td>
+<td>tC2Q</td>
+<td>RF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_swj_dp/uDAPSwDpProtocol/ApSel_6_s0/Q</td>
+</tr>
+<tr>
+<td>3.126</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s2/I1</td>
+</tr>
+<tr>
+<td>4.225</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s2/F</td>
+</tr>
+<tr>
+<td>5.185</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s1/I2</td>
+</tr>
+<tr>
+<td>6.007</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>38</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s1/F</td>
+</tr>
+<tr>
+<td>6.967</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/CswSwWrEn_s6/I2</td>
+</tr>
+<tr>
+<td>7.789</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>5</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/CswSwWrEn_s6/F</td>
+</tr>
+<tr>
+<td>8.749</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_1_s25/I2</td>
+</tr>
+<tr>
+<td>9.571</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_1_s25/F</td>
+</tr>
+<tr>
+<td>10.531</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s25/I0</td>
+</tr>
+<tr>
+<td>11.563</td>
+<td>1.032</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s25/F</td>
+</tr>
+<tr>
+<td>12.523</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s24/I1</td>
+</tr>
+<tr>
+<td>13.622</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>3</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s24/F</td>
+</tr>
+<tr>
+<td>14.582</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n363_s0/I1</td>
+</tr>
+<tr>
+<td>15.627</td>
+<td>1.045</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n363_s0/COUT</td>
+</tr>
+<tr>
+<td>15.627</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n364_s0/CIN</td>
+</tr>
+<tr>
+<td>15.684</td>
+<td>0.057</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n364_s0/COUT</td>
+</tr>
+<tr>
+<td>15.684</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n365_s0/CIN</td>
+</tr>
+<tr>
+<td>15.741</td>
+<td>0.057</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n365_s0/COUT</td>
+</tr>
+<tr>
+<td>15.741</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n366_s0/CIN</td>
+</tr>
+<tr>
+<td>15.798</td>
+<td>0.057</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n366_s0/COUT</td>
+</tr>
+<tr>
+<td>16.758</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s2/I2</td>
+</tr>
+<tr>
+<td>17.580</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s2/F</td>
+</tr>
+<tr>
+<td>18.540</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s1/I1</td>
+</tr>
+<tr>
+<td>19.639</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>20</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s1/F</td>
+</tr>
+<tr>
+<td>20.599</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextDapRdData_1_s1/I0</td>
+</tr>
+<tr>
+<td>21.631</td>
+<td>1.032</td>
+<td>tINS</td>
+<td>FF</td>
+<td>21</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextDapRdData_1_s1/F</td>
+</tr>
+<tr>
+<td>22.591</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaWrEn_s1/I3</td>
+</tr>
+<tr>
+<td>23.217</td>
+<td>0.626</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaWrEn_s1/F</td>
+</tr>
+<tr>
+<td>24.177</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaWrEn_s0/I2</td>
+</tr>
+<tr>
+<td>24.979</td>
+<td>0.802</td>
+<td>tINS</td>
+<td>FR</td>
+<td>10</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaWrEn_s0/F</td>
+</tr>
+<tr>
+<td>25.705</td>
+<td>0.726</td>
+<td>tNET</td>
+<td>RR</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaReg_cdc_check_0_s0/CE</td>
+</tr>
+</table>
+<b>Data Required Path:</b>
+<table class="summary_table">
+<tr>
+<th>AT</th>
+<th>DELAY</th>
+<th>TYPE</th>
+<th>RF</th>
+<th>FANOUT</th>
+<th>NODE</th>
+</tr>
+<tr>
+<td>20.000</td>
+<td>0.000</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td>HCLK</td>
+</tr>
+<tr>
+<td>20.000</td>
+<td>0.000</td>
+<td>tCL</td>
+<td>RR</td>
+<td>1</td>
+<td>HCLK_ibuf/I</td>
+</tr>
+<tr>
+<td>20.000</td>
+<td>0.000</td>
+<td>tINS</td>
+<td>RR</td>
+<td>2439</td>
+<td>HCLK_ibuf/O</td>
+</tr>
+<tr>
+<td>20.726</td>
+<td>0.726</td>
+<td>tNET</td>
+<td>RR</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaReg_cdc_check_0_s0/CLK</td>
+</tr>
+<tr>
+<td>20.696</td>
+<td>-0.030</td>
+<td>tUnc</td>
+<td> </td>
+<td> </td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaReg_cdc_check_0_s0</td>
+</tr>
+<tr>
+<td>20.653</td>
+<td>-0.043</td>
+<td>tSu</td>
+<td> </td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaReg_cdc_check_0_s0</td>
+</tr>
+</table>
+<b>Path Statistics:</b>
+<table class="summary_table">
+<tr>
+<td class="label">Clock Skew:</td>
+<td>-0.982</td>
+</tr>
+<tr>
+<td class="label">Setup Relationship:</td>
+<td>20.000</td>
+</tr>
+<tr>
+<td class="label">Logic Level:</td>
+<td>14</td>
+</tr>
+<tr>
+<td class="label">Arrival Clock Path Delay:</td><td> cell: 0.982, 57.491%; route: 0.726, 42.509%</td></tr>
+<tr>
+<td class="label">Arrival Data Path Delay:</td><td> cell: 11.293, 47.059%; route: 12.246, 51.031%; tC2Q: 0.458, 1.910%</td></tr>
+<tr>
+<td class="label">Required Clock Path Delay:</td><td> cell: 0.982, 57.491%; route: 0.726, 42.509%</td></tr>
+</table>
+<br/>
+<h3>Path&nbsp4</h3>
+<b>Path Summary:</b></br>
+<table class="summary_table">
+<tr>
+<td class="label">Slack</td>
+<td>-5.053</td>
+</tr>
+<tr>
+<td class="label">Data Arrival Time</td>
+<td>25.705</td>
+</tr>
+<tr>
+<td class="label">Data Required Time</td>
+<td>20.653</td>
+</tr>
+<tr>
+<td class="label">From</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_swj_dp/uDAPSwDpProtocol/ApSel_6_s0</td>
+</tr>
+<tr>
+<td class="label">To</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaReg_cdc_check_1_s0</td>
+</tr>
+<tr>
+<td class="label">Launch Clk</td>
+<td>JTAG_9[R]</td>
+</tr>
+<tr>
+<td class="label">Latch Clk</td>
+<td>HCLK[R]</td>
+</tr>
+</table>
+<b>Data Arrival Path:</b>
+<table class="summary_table">
+<tr>
+<th>AT</th>
+<th>DELAY</th>
+<th>TYPE</th>
+<th>RF</th>
+<th>FANOUT</th>
+<th>NODE</th>
+</tr>
+<tr>
+<td>0.000</td>
+<td>0.000</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td>JTAG_9</td>
+</tr>
+<tr>
+<td>0.000</td>
+<td>0.000</td>
+<td>tCL</td>
+<td>RR</td>
+<td>1</td>
+<td>JTAG_9_ibuf/I</td>
+</tr>
+<tr>
+<td>0.982</td>
+<td>0.982</td>
+<td>tINS</td>
+<td>RR</td>
+<td>190</td>
+<td>JTAG_9_ibuf/O</td>
+</tr>
+<tr>
+<td>1.708</td>
+<td>0.726</td>
+<td>tNET</td>
+<td>RR</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_swj_dp/uDAPSwDpProtocol/ApSel_6_s0/CLK</td>
+</tr>
+<tr>
+<td>2.166</td>
+<td>0.458</td>
+<td>tC2Q</td>
+<td>RF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_swj_dp/uDAPSwDpProtocol/ApSel_6_s0/Q</td>
+</tr>
+<tr>
+<td>3.126</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s2/I1</td>
+</tr>
+<tr>
+<td>4.225</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s2/F</td>
+</tr>
+<tr>
+<td>5.185</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s1/I2</td>
+</tr>
+<tr>
+<td>6.007</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>38</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s1/F</td>
+</tr>
+<tr>
+<td>6.967</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/CswSwWrEn_s6/I2</td>
+</tr>
+<tr>
+<td>7.789</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>5</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/CswSwWrEn_s6/F</td>
+</tr>
+<tr>
+<td>8.749</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_1_s25/I2</td>
+</tr>
+<tr>
+<td>9.571</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_1_s25/F</td>
+</tr>
+<tr>
+<td>10.531</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s25/I0</td>
+</tr>
+<tr>
+<td>11.563</td>
+<td>1.032</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s25/F</td>
+</tr>
+<tr>
+<td>12.523</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s24/I1</td>
+</tr>
+<tr>
+<td>13.622</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>3</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s24/F</td>
+</tr>
+<tr>
+<td>14.582</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n363_s0/I1</td>
+</tr>
+<tr>
+<td>15.627</td>
+<td>1.045</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n363_s0/COUT</td>
+</tr>
+<tr>
+<td>15.627</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n364_s0/CIN</td>
+</tr>
+<tr>
+<td>15.684</td>
+<td>0.057</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n364_s0/COUT</td>
+</tr>
+<tr>
+<td>15.684</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n365_s0/CIN</td>
+</tr>
+<tr>
+<td>15.741</td>
+<td>0.057</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n365_s0/COUT</td>
+</tr>
+<tr>
+<td>15.741</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n366_s0/CIN</td>
+</tr>
+<tr>
+<td>15.798</td>
+<td>0.057</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n366_s0/COUT</td>
+</tr>
+<tr>
+<td>16.758</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s2/I2</td>
+</tr>
+<tr>
+<td>17.580</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s2/F</td>
+</tr>
+<tr>
+<td>18.540</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s1/I1</td>
+</tr>
+<tr>
+<td>19.639</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>20</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s1/F</td>
+</tr>
+<tr>
+<td>20.599</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextDapRdData_1_s1/I0</td>
+</tr>
+<tr>
+<td>21.631</td>
+<td>1.032</td>
+<td>tINS</td>
+<td>FF</td>
+<td>21</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextDapRdData_1_s1/F</td>
+</tr>
+<tr>
+<td>22.591</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaWrEn_s1/I3</td>
+</tr>
+<tr>
+<td>23.217</td>
+<td>0.626</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaWrEn_s1/F</td>
+</tr>
+<tr>
+<td>24.177</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaWrEn_s0/I2</td>
+</tr>
+<tr>
+<td>24.979</td>
+<td>0.802</td>
+<td>tINS</td>
+<td>FR</td>
+<td>10</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaWrEn_s0/F</td>
+</tr>
+<tr>
+<td>25.705</td>
+<td>0.726</td>
+<td>tNET</td>
+<td>RR</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaReg_cdc_check_1_s0/CE</td>
+</tr>
+</table>
+<b>Data Required Path:</b>
+<table class="summary_table">
+<tr>
+<th>AT</th>
+<th>DELAY</th>
+<th>TYPE</th>
+<th>RF</th>
+<th>FANOUT</th>
+<th>NODE</th>
+</tr>
+<tr>
+<td>20.000</td>
+<td>0.000</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td>HCLK</td>
+</tr>
+<tr>
+<td>20.000</td>
+<td>0.000</td>
+<td>tCL</td>
+<td>RR</td>
+<td>1</td>
+<td>HCLK_ibuf/I</td>
+</tr>
+<tr>
+<td>20.000</td>
+<td>0.000</td>
+<td>tINS</td>
+<td>RR</td>
+<td>2439</td>
+<td>HCLK_ibuf/O</td>
+</tr>
+<tr>
+<td>20.726</td>
+<td>0.726</td>
+<td>tNET</td>
+<td>RR</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaReg_cdc_check_1_s0/CLK</td>
+</tr>
+<tr>
+<td>20.696</td>
+<td>-0.030</td>
+<td>tUnc</td>
+<td> </td>
+<td> </td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaReg_cdc_check_1_s0</td>
+</tr>
+<tr>
+<td>20.653</td>
+<td>-0.043</td>
+<td>tSu</td>
+<td> </td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaReg_cdc_check_1_s0</td>
+</tr>
+</table>
+<b>Path Statistics:</b>
+<table class="summary_table">
+<tr>
+<td class="label">Clock Skew:</td>
+<td>-0.982</td>
+</tr>
+<tr>
+<td class="label">Setup Relationship:</td>
+<td>20.000</td>
+</tr>
+<tr>
+<td class="label">Logic Level:</td>
+<td>14</td>
+</tr>
+<tr>
+<td class="label">Arrival Clock Path Delay:</td><td> cell: 0.982, 57.491%; route: 0.726, 42.509%</td></tr>
+<tr>
+<td class="label">Arrival Data Path Delay:</td><td> cell: 11.293, 47.059%; route: 12.246, 51.031%; tC2Q: 0.458, 1.910%</td></tr>
+<tr>
+<td class="label">Required Clock Path Delay:</td><td> cell: 0.982, 57.491%; route: 0.726, 42.509%</td></tr>
+</table>
+<br/>
+<h3>Path&nbsp5</h3>
+<b>Path Summary:</b></br>
+<table class="summary_table">
+<tr>
+<td class="label">Slack</td>
+<td>-5.053</td>
+</tr>
+<tr>
+<td class="label">Data Arrival Time</td>
+<td>25.705</td>
+</tr>
+<tr>
+<td class="label">Data Required Time</td>
+<td>20.653</td>
+</tr>
+<tr>
+<td class="label">From</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_swj_dp/uDAPSwDpProtocol/ApSel_6_s0</td>
+</tr>
+<tr>
+<td class="label">To</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaReg_cdc_check_2_s0</td>
+</tr>
+<tr>
+<td class="label">Launch Clk</td>
+<td>JTAG_9[R]</td>
+</tr>
+<tr>
+<td class="label">Latch Clk</td>
+<td>HCLK[R]</td>
+</tr>
+</table>
+<b>Data Arrival Path:</b>
+<table class="summary_table">
+<tr>
+<th>AT</th>
+<th>DELAY</th>
+<th>TYPE</th>
+<th>RF</th>
+<th>FANOUT</th>
+<th>NODE</th>
+</tr>
+<tr>
+<td>0.000</td>
+<td>0.000</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td>JTAG_9</td>
+</tr>
+<tr>
+<td>0.000</td>
+<td>0.000</td>
+<td>tCL</td>
+<td>RR</td>
+<td>1</td>
+<td>JTAG_9_ibuf/I</td>
+</tr>
+<tr>
+<td>0.982</td>
+<td>0.982</td>
+<td>tINS</td>
+<td>RR</td>
+<td>190</td>
+<td>JTAG_9_ibuf/O</td>
+</tr>
+<tr>
+<td>1.708</td>
+<td>0.726</td>
+<td>tNET</td>
+<td>RR</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_swj_dp/uDAPSwDpProtocol/ApSel_6_s0/CLK</td>
+</tr>
+<tr>
+<td>2.166</td>
+<td>0.458</td>
+<td>tC2Q</td>
+<td>RF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_swj_dp/uDAPSwDpProtocol/ApSel_6_s0/Q</td>
+</tr>
+<tr>
+<td>3.126</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s2/I1</td>
+</tr>
+<tr>
+<td>4.225</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s2/F</td>
+</tr>
+<tr>
+<td>5.185</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s1/I2</td>
+</tr>
+<tr>
+<td>6.007</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>38</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/AhbCtlEn_s1/F</td>
+</tr>
+<tr>
+<td>6.967</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/CswSwWrEn_s6/I2</td>
+</tr>
+<tr>
+<td>7.789</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>5</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/CswSwWrEn_s6/F</td>
+</tr>
+<tr>
+<td>8.749</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_1_s25/I2</td>
+</tr>
+<tr>
+<td>9.571</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_1_s25/F</td>
+</tr>
+<tr>
+<td>10.531</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s25/I0</td>
+</tr>
+<tr>
+<td>11.563</td>
+<td>1.032</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s25/F</td>
+</tr>
+<tr>
+<td>12.523</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s24/I1</td>
+</tr>
+<tr>
+<td>13.622</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>3</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextState_0_s24/F</td>
+</tr>
+<tr>
+<td>14.582</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n363_s0/I1</td>
+</tr>
+<tr>
+<td>15.627</td>
+<td>1.045</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n363_s0/COUT</td>
+</tr>
+<tr>
+<td>15.627</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n364_s0/CIN</td>
+</tr>
+<tr>
+<td>15.684</td>
+<td>0.057</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n364_s0/COUT</td>
+</tr>
+<tr>
+<td>15.684</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n365_s0/CIN</td>
+</tr>
+<tr>
+<td>15.741</td>
+<td>0.057</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n365_s0/COUT</td>
+</tr>
+<tr>
+<td>15.741</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n366_s0/CIN</td>
+</tr>
+<tr>
+<td>15.798</td>
+<td>0.057</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n366_s0/COUT</td>
+</tr>
+<tr>
+<td>16.758</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s2/I2</td>
+</tr>
+<tr>
+<td>17.580</td>
+<td>0.822</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s2/F</td>
+</tr>
+<tr>
+<td>18.540</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s1/I1</td>
+</tr>
+<tr>
+<td>19.639</td>
+<td>1.099</td>
+<td>tINS</td>
+<td>FF</td>
+<td>20</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/n527_s1/F</td>
+</tr>
+<tr>
+<td>20.599</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextDapRdData_1_s1/I0</td>
+</tr>
+<tr>
+<td>21.631</td>
+<td>1.032</td>
+<td>tINS</td>
+<td>FF</td>
+<td>21</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/NextDapRdData_1_s1/F</td>
+</tr>
+<tr>
+<td>22.591</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaWrEn_s1/I3</td>
+</tr>
+<tr>
+<td>23.217</td>
+<td>0.626</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaWrEn_s1/F</td>
+</tr>
+<tr>
+<td>24.177</td>
+<td>0.960</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaWrEn_s0/I2</td>
+</tr>
+<tr>
+<td>24.979</td>
+<td>0.802</td>
+<td>tINS</td>
+<td>FR</td>
+<td>10</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaWrEn_s0/F</td>
+</tr>
+<tr>
+<td>25.705</td>
+<td>0.726</td>
+<td>tNET</td>
+<td>RR</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaReg_cdc_check_2_s0/CE</td>
+</tr>
+</table>
+<b>Data Required Path:</b>
+<table class="summary_table">
+<tr>
+<th>AT</th>
+<th>DELAY</th>
+<th>TYPE</th>
+<th>RF</th>
+<th>FANOUT</th>
+<th>NODE</th>
+</tr>
+<tr>
+<td>20.000</td>
+<td>0.000</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td>HCLK</td>
+</tr>
+<tr>
+<td>20.000</td>
+<td>0.000</td>
+<td>tCL</td>
+<td>RR</td>
+<td>1</td>
+<td>HCLK_ibuf/I</td>
+</tr>
+<tr>
+<td>20.000</td>
+<td>0.000</td>
+<td>tINS</td>
+<td>RR</td>
+<td>2439</td>
+<td>HCLK_ibuf/O</td>
+</tr>
+<tr>
+<td>20.726</td>
+<td>0.726</td>
+<td>tNET</td>
+<td>RR</td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaReg_cdc_check_2_s0/CLK</td>
+</tr>
+<tr>
+<td>20.696</td>
+<td>-0.030</td>
+<td>tUnc</td>
+<td> </td>
+<td> </td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaReg_cdc_check_2_s0</td>
+</tr>
+<tr>
+<td>20.653</td>
+<td>-0.043</td>
+<td>tSu</td>
+<td> </td>
+<td>1</td>
+<td>M1_inst/u_CortexM1DbgIntegration_inst/u_cortexm1/u_dap_ahb_ap/uDAPAhbApSlv/TaReg_cdc_check_2_s0</td>
+</tr>
+</table>
+<b>Path Statistics:</b>
+<table class="summary_table">
+<tr>
+<td class="label">Clock Skew:</td>
+<td>-0.982</td>
+</tr>
+<tr>
+<td class="label">Setup Relationship:</td>
+<td>20.000</td>
+</tr>
+<tr>
+<td class="label">Logic Level:</td>
+<td>14</td>
+</tr>
+<tr>
+<td class="label">Arrival Clock Path Delay:</td><td> cell: 0.982, 57.491%; route: 0.726, 42.509%</td></tr>
+<tr>
+<td class="label">Arrival Data Path Delay:</td><td> cell: 11.293, 47.059%; route: 12.246, 51.031%; tC2Q: 0.458, 1.910%</td></tr>
+<tr>
+<td class="label">Required Clock Path Delay:</td><td> cell: 0.982, 57.491%; route: 0.726, 42.509%</td></tr>
+</table>
+<br/>
+</div><!-- content -->
+</div><!-- main_wrapper -->
+</body>
+</html>

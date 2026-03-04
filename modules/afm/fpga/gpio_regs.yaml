@@ -1,0 +1,16 @@
+memory-map:
+  bus: apb-32
+  name: gpio_regs
+  description: GPIO Memory Map
+  children:
+    - reg:
+        name: out
+        description: GPIO output reg
+        width: 32
+        access: rw
+
+    - reg:
+        name: stat
+        description: GPIO status
+        width: 32
+        access: ro

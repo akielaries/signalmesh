@@ -1,29 +1,35 @@
-# crystal IN (XTAL_IN)
-IO_LOC  "bank1_3v3_xtal_in" 52; 
-IO_PORT "bank1_3v3_xtal_in" PULL_MODE=UP IO_TYPE=LVCMOS33;
+//Copyright (C)2014-2025 Gowin Semiconductor Corporation.
+//All rights reserved. 
+//File Title: Physical Constraints file
+//Tool Version: V1.9.12.01
+//Part Number: GW1NR-LV9QN88PC6/I5
+//Device: GW1NR
+//Device Version: C
+//Created Time: Sat 02 07 17:22:59 2026
 
-# system reset
-IO_LOC "bank3_1v8_sys_rst" 4;
-IO_PORT "bank3_1v8_sys_rst" PULL_MODE=UP;
+IO_LOC "HCLK" 52;
+IO_PORT "HCLK" PULL_MODE=UP;
+IO_LOC "hwRstn" 4;
+IO_PORT "hwRstn" PULL_MODE=UP;
 
-# on board LEDs
-IO_LOC "bank3_1v8_led[0]" 10; 
-IO_LOC "bank3_1v8_led[1]" 11; 
-IO_LOC "bank3_1v8_led[2]" 13; 
-IO_LOC "bank3_1v8_led[3]" 14; 
-IO_LOC "bank3_1v8_led[4]" 15; 
-IO_LOC "bank3_1v8_led[5]" 16; 
 
-# off board LED on GPIO 27
-IO_LOC  "bank2_3v3_red_led" 27; 
-IO_PORT "bank2_3v3_red_led" PULL_MODE=UP DRIVE=8;
+IO_LOC "UART1RXD" 38;
+IO_PORT "UART1RXD" IO_TYPE=LVCMOS18 BANK_VCCIO=1.8;
+IO_LOC "UART1TXD" 37;
+IO_PORT "UART1TXD" IO_TYPE=LVCMOS18 BANK_VCCIO=1.8;
 
-# UART debug port
-IO_LOC  "bank2_3v3_uart_tx" 26;
-IO_PORT "bank2_3v3_uart_tx" IO_TYPE=LVCMOS18;
-IO_LOC  "bank2_3v3_uart_rx" 25;
-IO_PORT "bank2_3v3_uart_rx" IO_TYPE=LVCMOS18;
+IO_LOC "GPIO[0]" 27;
+IO_PORT "GPIO[0]" PULL_MODE=UP DRIVE=8
 
-# User Button for UART module
-IO_LOC "bank3_1v8_btn1" 3;
-IO_PORT "bank3_1v8_btn1" PULL_MODE=UP;
+// gwct (gowin command line tool)
+IO_LOC "GWCT_TX" 36; // this is a global clock pin
+
+IO_LOC "GWCT_RX" 39;
+
+
+IO_LOC "BOOT_LED_A" 16;
+
+IO_LOC "JTAG_7_SWDIO" 31;
+IO_PORT "JTAG_7_SWDIO" PULL_MODE=UP DRIVE=8;
+IO_LOC "JTAG_9_SWDCLK" 32;
+IO_PORT "JTAG_9_SWDCLK" PULL_MODE=NONE;

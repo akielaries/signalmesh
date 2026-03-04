@@ -1,78 +1,247 @@
-// top.v
-// Main top-level module for the project.
-// - Instantiates PLL for stable clocking of the blink module (RECOMMENDED).
-// - Uses raw system clock for the uart module (as requested).
-// - Instantiates 'blink.v' for red LED and onboard LEDs 0 & 1.
-// - Instantiates the user's 'uart' module for UART (TX/RX) and onboard LEDs 2-5.
+// =============================================================================
+// top.v — Gowin EMPU Cortex-M1 + GWCT debug module
+//
+// GWCT (Gowin Watch & Control Tool) is a UART-based debug master that can
+// read and write APB-mapped registers independently of the Cortex-M1.
+//
+// APB bus arbitration (simple priority mux):
+//   - GWCT has priority when it has an active transaction (gwct_apb_sel=1)
+//   - Cortex-M1 APB bridge gets the bus otherwise
+//
+// This means: if GWCT is active, the Cortex-M1 cannot access APB until
+// GWCT finishes its single transaction (~4-5 APB cycles). This is fine
+// for debug purposes.
+// =============================================================================
+
 
 module top (
-    // --- System Interface ---
-    input  wire bank1_3v3_xtal_in,   // 27 MHz clock input
-    input  wire bank3_1v8_sys_rst,   // Active-low reset input
-
-    // --- LED Interface ---
-    output wire bank2_3v3_red_led,  // Off-board red LED
-    output wire [5:0] bank3_1v8_led,    // On-board LEDs
-
-    // --- UART Interface ---
-    output wire bank2_3v3_uart_tx,   // UART Transmit pin
-    input  wire bank2_3v3_uart_rx,   // UART Receive pin
-    input  wire bank3_1v8_btn1       // User button 1 (connected to uart module)
+    input HCLK,
+    input hwRstn,
+    inout [15:0] GPIO,
+    inout JTAG_7_SWDIO,
+    inout JTAG_9_SWDCLK,
+    input UART1RXD,
+    output UART1TXD,
+    output GWCT_TX,
+    input  GWCT_RX,  
+    output LOCKUP,
+    output HALTED,
+    inout BOOT_LED_A
 );
+    // =========================================================================
+    // 0.5 second counter at 50mhz drives BOOT_LED
+    // =========================================================================
+    reg [24:0] counter;
+    reg gpio1_out;
 
-    // --- Internal Signals & Wires ---
-    wire sys_clk;
-    wire rst_n;
-    wire pll_clk; // Main clock for the blink module (from PLL)
+    always @(posedge HCLK or negedge hwRstn) begin
+        if (!hwRstn) begin
+            counter   <= 25'd0;
+            gpio1_out <= 1'b0;
+        end else begin
+            if (counter == 25_000_000 - 1) begin
+                counter   <= 25'd0;
+                gpio1_out <= ~gpio1_out;
+            end else begin
+                counter <= counter + 1'b1;
+            end
+        end
+    end
 
-    // Connections for blink module
-    wire offboard_led_from_blink;
-    wire [5:0] onboard_leds_from_blink;
+    assign BOOT_LED_A = gpio1_out;
 
-    // Internal wire for uart module's LED output
-    wire [5:0] uart_led_internal; // New internal wire to receive LEDs from uart_inst
+    // =========================================================================
+    // APB1 wires from Cortex-M1 APB bridge
+    // =========================================================================
+    wire [31:0] APB1PADDR;
+    wire        APB1PENABLE;
+    wire        APB1PWRITE;
+    wire [3:0]  APB1PSTRB;
+    wire [2:0]  APB1PPROT;
+    wire [31:0] APB1PWDATA;
+    wire [31:0] APB1PRDATA;
+    wire        APB1PREADY;
+    wire        APB1PSLVERR;
+    wire        APB1PCLK;
+    wire        APB1PRESET;
+    wire        APB1PSEL;
 
-    // --- Clocking and Reset ---
-    assign sys_clk = bank1_3v3_xtal_in; // Raw system clock
-    assign rst_n = bank3_1v8_sys_rst;   // Global reset for top-level
+    // =========================================================================
+    // AHB1 wires from Cortex-M1 APB bridge
+    // =========================================================================
+/*
+    wire [31:0] AHB1HRDATA; //input [31:0] AHB1HRDATA
+    wire AHB1HREADYOUT; //input AHB1HREADYOUT
+	wire [1:0] AHB1HRESP; //input [1:0] AHB1HRESP
+	wire [1:0] AHB1HTRANS; //output [1:0] AHB1HTRANS
+	wire [2:0] AHB1HBURST; //output [2:0] AHB1HBURST
+	wire [3:0] AHB1HPROT; //output [3:0] AHB1HPROT
+	wire [2:0] AHB1HSIZE; //output [2:0] AHB1HSIZE
+	wire AHB1HWRITE; //output AHB1HWRITE
+	wire AHB1HREADYMUX; //output AHB1HREADYMUX
+	wire [3:0] AHB1HMASTER; //output [3:0] AHB1HMASTER
+	wire AHB1HMASTLOCK; //output AHB1HMASTLOCK
+	wire [31:0] AHB1HADDR; //output [31:0] AHB1HADDR
+    wire [31:0] AHB1HWDATA; //output [31:0] AHB1HWDATA
+    wire AHB1HSEL; //output AHB1HSEL
+	wire AHB1HCLK; //output AHB1HCLK
+    wire AHB1HRESET; //output AHB1HRESET
+*/
+    // ------------------------------------------------------------
+    // Cortex-M1 instantiation
+    // ------------------------------------------------------------
+    Gowin_EMPU_M1_Top Cortex_M1_instance(
+        .LOCKUP(LOCKUP),
+        .HALTED(HALTED),
+        .GPIO(GPIO),
+        .JTAG_7(JTAG_7_SWDIO),
+        .JTAG_9(JTAG_9_SWDCLK),
+        .UART1RXD(UART1RXD),
+        .UART1TXD(UART1TXD),
+ 
+/*           
+        // AHB1 interface
+		.AHB1HRDATA(AHB1HRDATA), //input [31:0] AHB1HRDATA
+		.AHB1HREADYOUT(AHB1HREADYOUT), //input AHB1HREADYOUT
+		.AHB1HRESP(AHB1HRESP), //input [1:0] AHB1HRESP
+		.AHB1HTRANS(AHB1HTRANS), //output [1:0] AHB1HTRANS
+		.AHB1HBURST(AHB1HBURST), //output [2:0] AHB1HBURST
+		.AHB1HPROT(AHB1HPROT), //output [3:0] AHB1HPROT
+		.AHB1HSIZE(AHB1HSIZE), //output [2:0] AHB1HSIZE
+		.AHB1HWRITE(AHB1HWRITE), //output AHB1HWRITE
+		.AHB1HREADYMUX(AHB1HREADYMUX), //output AHB1HREADYMUX
+		.AHB1HMASTER(AHB1HMASTER), //output [3:0] AHB1HMASTER
+		.AHB1HMASTLOCK(AHB1HMASTLOCK), //output AHB1HMASTLOCK
+		.AHB1HADDR(AHB1HADDR), //output [31:0] AHB1HADDR
+		.AHB1HWDATA(AHB1HWDATA), //output [31:0] AHB1HWDATA
+		.AHB1HSEL(AHB1HSEL), //output AHB1HSEL
+		.AHB1HCLK(AHB1HCLK), //output AHB1HCLK
+		.AHB1HRESET(AHB1HRESET), //output AHB1HRESET
+*/
+        // APB1 interface
+        .APB1PADDR(APB1PADDR),
+        .APB1PENABLE(APB1PENABLE),
+        .APB1PWRITE(APB1PWRITE),
+        .APB1PSTRB(APB1PSTRB),
+//        .APB1PPROT(APB1PPROT),
+        .APB1PWDATA(APB1PWDATA),
+        .APB1PRDATA(APB1PRDATA),
+        .APB1PREADY(APB1PREADY),
+        .APB1PSLVERR(APB1PSLVERR),
+        .APB1PCLK(APB1PCLK),
+        .APB1PRESET(APB1PRESET),
+        .APB1PSEL(APB1PSEL),
 
-    // PLL Instantiation - RECOMMENDED for stable clocking for blink module
-    Gowin_rPLL rpll_inst (
-        .clkout(pll_clk), // PLL output for blink module
-        .clkin(sys_clk)   // PLL input from raw system clock
+        .HCLK(HCLK),
+        .hwRstn(hwRstn)
+    );
+    // =========================================================================
+    // AHB1 RAM (16 KB scratch at 0x8000_0000)
+    // =========================================================================
+    wire [31:0] ahb_ram_hrdata;
+    wire        ahb_ram_hreadyout;
+    wire [1:0]  ahb_ram_hresp;
+
+    ahb_sram #(
+        .SIZE      (16384),
+        .BASE_ADDR (32'h8000_0000)
+    ) ahb_ram_inst (
+        .HCLK       (HCLK),
+        .HRESETn    (hwRstn),
+
+        .HADDR      (AHB1HADDR),
+        .HWRITE     (AHB1HWRITE),
+        .HSIZE      (AHB1HSIZE),
+        .HTRANS     (AHB1HTRANS),
+        .HWDATA     (AHB1HWDATA),
+        .HSEL       (AHB1HSEL),        // use CPU's internal select if it covers 0x8000_0000
+
+        .HRDATA     (ahb_ram_hrdata),
+        .HREADYOUT  (ahb_ram_hreadyout),
+        .HRESP      (ahb_ram_hresp)
     );
 
-    // --- Module Instantiations ---
+    // Connect the RAM outputs to the CPU inputs
+    assign AHB1HRDATA    = ahb_ram_hrdata;
+    assign AHB1HREADYOUT = ahb_ram_hreadyout;
+    assign AHB1HRESP     = ahb_ram_hresp;
 
-    // Instantiate the blinker module
-    blink blink_inst (
-        .clk(pll_clk), // Clocked by stable PLL output
-        .rst_n(rst_n),
-        .o_red_led(offboard_led_from_blink),
-        .o_onboard_leds(onboard_leds_from_blink)
+    // =========================================================================
+    // GWCT debug bridge debug master with N-bus support
+    // =========================================================================
+    // Single bus configuration
+    wire [31:0] gwct_PADDR;
+    wire        gwct_PSEL;
+    wire        gwct_PENABLE;
+    wire        gwct_PWRITE;
+    wire [31:0] gwct_PWDATA;
+    wire [3:0]  gwct_PSTRB;
+    wire [2:0]  gwct_PPROT;
+
+    // Slave response wires
+    wire [31:0] slave_PRDATA;
+    wire        slave_PREADY;
+    wire        slave_PSLVERR;
+
+    gwct_debug_bridge_n #(
+        .CLK_HZ(50_000_000),
+        .BAUD(115_200),
+        .NUM_APB_BUSES(1),          // Currently using 1 bus (APB1)
+        .ADDR_BITS(28)              // Address decode uses addr[31:28]
+    ) gwct_inst (
+        .clk        (HCLK),
+        .rstn       (hwRstn),
+        
+        // UART pins
+        .uart_rx    (GWCT_RX),
+        .uart_tx    (GWCT_TX),
+        
+        // APB master signals (single bus = simple wires)
+        .PADDR      (gwct_PADDR),
+        .PSEL       (gwct_PSEL),
+        .PENABLE    (gwct_PENABLE),
+        .PWRITE     (gwct_PWRITE),
+        .PWDATA     (gwct_PWDATA),
+        .PSTRB      (gwct_PSTRB),
+        .PPROT      (gwct_PPROT),
+        .PRDATA     (slave_PRDATA),
+        .PREADY     (slave_PREADY),
+        .PSLVERR    (slave_PSLVERR)
     );
 
-    // Instantiate the user's combined UART module
-    uart #(
-        .DELAY_FRAMES(234) // 27,000,000 / 115200
-    ) uart_inst (
-        .clk(sys_clk),          // Clocked by raw system clock, as requested
-        .uart_rx(bank2_3v3_uart_rx), // Connect top-level RX pin
-        .uart_tx(bank2_3v3_uart_tx), // Connect top-level TX pin
-        .led(uart_led_internal),// Connect uart's LEDs to internal wire
-        .btn1(bank3_1v8_btn1)   // Connect top-level button
-    );
-    
-    // --- Final Output Assignments ---
-    // Off-board red LED is driven by the blink module
-    assign bank2_3v3_red_led = offboard_led_from_blink;
+    // =========================================================================
+    // APB bus mux — GWCT takes priority over Cortex-M1
+    //
+    //   gwct_apb_sel = 1  →  GWCT drives the bus
+    //   gwct_apb_sel = 0  →  Cortex-M1 drives the bus
+    // =========================================================================
+    wire gwct_apb_sel = gwct_PSEL;
 
-    // On-board LEDs: Combine outputs from blink and uart modules
-    // Assuming blink drives LED0 and LED1, and uart drives LED2-5
-    // Note: If uart.v also controls LED0/1, uart.v's assignment will take precedence.
-    assign bank3_1v8_led = {
-        uart_led_internal[5:2],           // LEDs 5,4,3,2 from uart module's internal LEDs
-        onboard_leds_from_blink[1:0]  // LEDs 1,0 from blink module
-    };
+    wire [31:0] mux_PADDR   = gwct_apb_sel ? gwct_PADDR   : APB1PADDR;
+    wire        mux_PSEL    = gwct_apb_sel ? gwct_PSEL    : APB1PSEL;
+    wire        mux_PENABLE = gwct_apb_sel ? gwct_PENABLE : APB1PENABLE;
+    wire        mux_PWRITE  = gwct_apb_sel ? gwct_PWRITE  : APB1PWRITE;
+    wire [31:0] mux_PWDATA  = gwct_apb_sel ? gwct_PWDATA  : APB1PWDATA;
+
+    // Feed response back to Cortex-M1 (stall if GWCT owns bus)
+    assign APB1PRDATA  = slave_PRDATA;
+    assign APB1PREADY  = gwct_apb_sel ? 1'b0 : slave_PREADY;
+    assign APB1PSLVERR = slave_PSLVERR;
+
+    // =========================================================================
+    // apb_memmap slave — sees muxed bus
+    // =========================================================================
+    apb_memmap apb_memmap_inst (
+        .APBCLK   (APB1PCLK),
+        .APBRESET (APB1PRESET),
+        .PADDR    (mux_PADDR),
+        .PSEL     (mux_PSEL),
+        .PENABLE  (mux_PENABLE),
+        .PWRITE   (mux_PWRITE),
+        .PWDATA   (mux_PWDATA),
+        .PRDATA   (slave_PRDATA),
+        .PREADY   (slave_PREADY),
+        .PSLVERR  (slave_PSLVERR)
+    );
 
 endmodule

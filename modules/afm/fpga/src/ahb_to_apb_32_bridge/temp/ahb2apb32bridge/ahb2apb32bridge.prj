@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gowin-synthesis-project>
+<Project>
+    <Version>beta</Version>
+    <Device id="GW5AT-60B" package="PBGA484A" speed="2" partNumber="GW5AT-LV60PG484AC2/I1"/>
+    <FileList>
+        <File path="/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge_Top.v" type="verilog"/>
+        <File path="/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge.v" type="verilog"/>
+    </FileList>
+    <OptionList>
+        <Option type="disable_insert_pad" value="1"/>
+        <Option type="enable_dsrm" value="0"/>
+        <Option type="include_path" value="/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data"/>
+        <Option type="include_path" value="/home/akiel/trunk/pub/afm/src/ahb_to_apb_32_bridge/temp/ahb2apb32bridge"/>
+        <Option type="ip_version" value="1.0"/>
+        <Option type="output_file" value="ahb_to_apb_32_bridge.vg"/>
+        <Option type="output_template" value="ahb_to_apb_32_bridge_tmp.v"/>
+        <Option type="ram_balance" value="1"/>
+        <Option type="ram_rw_check" value="1"/>
+        <Option type="top_module" value="AHB_to_APB_32_Bridge_Top"/>
+        <Option type="vcc" value="0.9"/>
+        <Option type="vccx" value="3.3"/>
+        <Option type="verilog_language" value="sysv-2017"/>
+    </OptionList>
+</Project>

@@ -1,0 +1,2728 @@
+//Copyright (C)2014-2025 Gowin Semiconductor Corporation.
+//All rights reserved.
+//File Title: Post-PnR Verilog Simulation Model file
+//Tool Version: V1.9.12.01
+//Created Time: Sun Feb 15 19:19:56 2026
+
+`timescale 100 ps/100 ps
+module AHB_to_APB_32_Bridge_Top(
+	hclk,
+	hresetn,
+	hsel,
+	hready_in,
+	htrans,
+	haddr,
+	hsize,
+	hprot,
+	hwrite,
+	hwdata,
+	apb2ahb_clken,
+	pclk,
+	presetn,
+	hrdata,
+	hready,
+	hresp,
+	pprot,
+	pstrb,
+	paddr,
+	penable,
+	pwrite,
+	pwdata
+);
+input hclk;
+input hresetn;
+input hsel;
+input hready_in;
+input [1:0] htrans;
+input [31:0] haddr;
+input [2:0] hsize;
+input [3:0] hprot;
+input hwrite;
+input [31:0] hwdata;
+input apb2ahb_clken;
+input pclk;
+input presetn;
+output [31:0] hrdata;
+output hready;
+output [1:0] hresp;
+output [2:0] pprot;
+output [3:0] pstrb;
+output [31:0] paddr;
+output penable;
+output pwrite;
+output [31:0] pwdata;
+wire GND;
+wire VCC;
+wire apb2ahb_clken;
+wire [31:0] haddr;
+wire hclk;
+wire [3:0] hprot;
+wire [31:0] hrdata;
+wire hready;
+wire hready_in;
+wire hresetn;
+wire [1:0] hresp;
+wire hsel;
+wire [2:0] hsize;
+wire [1:0] htrans;
+wire [31:0] hwdata;
+wire hwrite;
+wire [31:0] paddr;
+wire pclk;
+wire penable;
+wire [2:0] pprot;
+wire presetn;
+wire [3:0] pstrb;
+wire [31:0] pwdata;
+wire pwrite;
+wire \u_AHB_to_APB_32_bridge/buff_wr_cmd ;
+wire \u_AHB_to_APB_32_bridge/n603_3 ;
+wire \u_AHB_to_APB_32_bridge/hctrl_ns_2_19 ;
+wire \u_AHB_to_APB_32_bridge/hctrl_cs_1_8 ;
+wire \u_AHB_to_APB_32_bridge/hready_d_4 ;
+wire \u_AHB_to_APB_32_bridge/hready_d_5 ;
+wire \u_AHB_to_APB_32_bridge/hready_d_6 ;
+wire \u_AHB_to_APB_32_bridge/wr_strb_3_4 ;
+wire \u_AHB_to_APB_32_bridge/wr_strb_2_4 ;
+wire \u_AHB_to_APB_32_bridge/n121_4 ;
+wire \u_AHB_to_APB_32_bridge/pwrite_d_3 ;
+wire \u_AHB_to_APB_32_bridge/n603_4 ;
+wire \u_AHB_to_APB_32_bridge/hctrl_ns_0_17 ;
+wire \u_AHB_to_APB_32_bridge/penable_6 ;
+wire \u_AHB_to_APB_32_bridge/hctrl_ns_2_20 ;
+wire \u_AHB_to_APB_32_bridge/ps0_prdata_0_7 ;
+wire \u_AHB_to_APB_32_bridge/ps0_prdata_0_8 ;
+wire \u_AHB_to_APB_32_bridge/hctrl_ns_1_29 ;
+wire \u_AHB_to_APB_32_bridge/n603_6 ;
+wire \u_AHB_to_APB_32_bridge/hctrl_ns_2_21 ;
+wire \u_AHB_to_APB_32_bridge/hctrl_ns_1_31 ;
+wire \u_AHB_to_APB_32_bridge/hctrl_ns_0_20 ;
+wire \u_AHB_to_APB_32_bridge/n603_8 ;
+wire \u_AHB_to_APB_32_bridge/hctrl_ns_0_22 ;
+wire \u_AHB_to_APB_32_bridge/n156_6 ;
+wire \u_AHB_to_APB_32_bridge/n121_6 ;
+wire \u_AHB_to_APB_32_bridge/n535_8 ;
+wire \u_AHB_to_APB_32_bridge/penable_9 ;
+wire \u_AHB_to_APB_32_bridge/n544_10 ;
+wire \u_AHB_to_APB_32_bridge/rd_cmd_entering_fifo ;
+wire \u_AHB_to_APB_32_bridge/wr_data_entering_fifo ;
+wire \u_AHB_to_APB_32_bridge/wbuf_en ;
+wire \u_AHB_to_APB_32_bridge/hwrite_d1 ;
+wire \u_AHB_to_APB_32_bridge/paddr_miss ;
+wire \u_AHB_to_APB_32_bridge/n125_6 ;
+wire \u_AHB_to_APB_32_bridge/n447_6 ;
+wire \u_AHB_to_APB_32_bridge/cmd_fifo_full ;
+wire \u_AHB_to_APB_32_bridge/cmd_fifo_empty ;
+wire \u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[5]_4 ;
+wire \u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[30]_4 ;
+wire \u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[31]_4 ;
+wire \u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[34]_4 ;
+wire \u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[35]_4 ;
+wire \u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[36]_4 ;
+wire \u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[37]_4 ;
+wire \u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[5]_4 ;
+wire \u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[30]_4 ;
+wire \u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[31]_4 ;
+wire \u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[34]_4 ;
+wire \u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[35]_4 ;
+wire \u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[36]_4 ;
+wire \u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[37]_4 ;
+wire \u_AHB_to_APB_32_bridge/n38_5 ;
+wire \u_AHB_to_APB_32_bridge/n38_7 ;
+wire \u_AHB_to_APB_32_bridge/n38_9 ;
+wire \u_AHB_to_APB_32_bridge/wdata_fifo_empty ;
+wire [3:0] \u_AHB_to_APB_32_bridge/wr_strb ;
+wire [0:0] \u_AHB_to_APB_32_bridge/hctrl_ns ;
+wire [2:0] \u_AHB_to_APB_32_bridge/hctrl_cs ;
+wire [0:0] \u_AHB_to_APB_32_bridge/rd_ptr ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/n35_3 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/n54_6 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/n13_5 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/n40_5 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/n35_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_6 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_8 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/n8_6 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_96 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_102 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[0]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[1]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[2]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[3]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[4]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[6]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[7]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[8]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[9]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[10]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[11]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[12]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[13]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[14]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[15]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[16]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[17]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[18]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[19]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[20]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[21]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[22]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[23]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[24]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[25]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[26]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[27]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[28]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[29]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[33]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[0]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[1]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[2]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[3]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[4]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[6]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[7]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[8]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[9]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[10]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[11]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[12]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[13]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[14]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[15]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[16]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[17]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[18]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[19]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[20]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[21]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[22]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[23]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[24]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[25]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[26]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[27]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[28]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[29]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[33]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[32]_6 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[32]_6 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/n41_10 ;
+wire \u_AHB_to_APB_32_bridge/u_cmd_fifo/n14_10 ;
+wire [1:0] \u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr ;
+wire [1:1] \u_AHB_to_APB_32_bridge/u_cmd_fifo/rd_ptr_0 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/n35_3 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/n54_6 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/n40_5 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/n35_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_5_0 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_6 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_7_1 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/n14_15 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/n8_6 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/n13_8 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/full ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[0]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[1]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[2]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[3]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[4]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[5]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[6]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[7]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[8]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[9]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[10]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[11]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[12]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[13]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[14]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[15]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[16]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[17]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[18]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[19]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[20]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[21]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[22]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[23]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[24]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[25]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[26]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[27]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[28]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[29]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[30]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[31]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[0]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[1]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[2]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[3]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[4]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[5]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[6]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[7]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[8]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[9]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[10]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[11]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[12]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[13]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[14]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[15]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[16]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[17]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[18]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[19]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[20]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[21]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[22]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[23]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[24]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[25]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[26]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[27]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[28]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[29]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[30]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[31]_4 ;
+wire \u_AHB_to_APB_32_bridge/u_wdata_fifo/n41_10 ;
+wire [1:0] \u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr ;
+wire [1:0] \u_AHB_to_APB_32_bridge/u_wdata_fifo/wr_ptr ;
+VCC VCC_cZ (
+  .V(VCC)
+);
+GND GND_cZ (
+  .G(GND)
+);
+GSR GSR (
+	.GSRI(VCC)
+);
+OBUF gowin_buf_0 (
+	.I(GND),
+	.O(hrdata[1])
+);
+OBUF gowin_buf_1 (
+	.I(GND),
+	.O(hrdata[2])
+);
+OBUF gowin_buf_2 (
+	.I(GND),
+	.O(hrdata[4])
+);
+OBUF gowin_buf_3 (
+	.I(GND),
+	.O(hrdata[5])
+);
+OBUF gowin_buf_4 (
+	.I(GND),
+	.O(hrdata[6])
+);
+OBUF gowin_buf_5 (
+	.I(GND),
+	.O(hrdata[7])
+);
+OBUF gowin_buf_6 (
+	.I(GND),
+	.O(hrdata[8])
+);
+OBUF gowin_buf_7 (
+	.I(GND),
+	.O(hrdata[9])
+);
+OBUF gowin_buf_8 (
+	.I(GND),
+	.O(hrdata[10])
+);
+OBUF gowin_buf_9 (
+	.I(GND),
+	.O(hrdata[11])
+);
+OBUF gowin_buf_10 (
+	.I(hrdata[3]),
+	.O(hrdata[12])
+);
+OBUF gowin_buf_11 (
+	.I(GND),
+	.O(hrdata[13])
+);
+OBUF gowin_buf_12 (
+	.I(GND),
+	.O(hrdata[14])
+);
+OBUF gowin_buf_13 (
+	.I(GND),
+	.O(hrdata[15])
+);
+OBUF gowin_buf_14 (
+	.I(GND),
+	.O(hrdata[16])
+);
+OBUF gowin_buf_15 (
+	.I(hrdata[3]),
+	.O(hrdata[17])
+);
+OBUF gowin_buf_16 (
+	.I(GND),
+	.O(hrdata[18])
+);
+OBUF gowin_buf_17 (
+	.I(GND),
+	.O(hrdata[19])
+);
+OBUF gowin_buf_18 (
+	.I(GND),
+	.O(hrdata[20])
+);
+OBUF gowin_buf_19 (
+	.I(GND),
+	.O(hrdata[21])
+);
+OBUF gowin_buf_20 (
+	.I(GND),
+	.O(hrdata[22])
+);
+OBUF gowin_buf_21 (
+	.I(GND),
+	.O(hrdata[23])
+);
+OBUF gowin_buf_22 (
+	.I(GND),
+	.O(hrdata[24])
+);
+OBUF gowin_buf_23 (
+	.I(GND),
+	.O(hrdata[25])
+);
+OBUF gowin_buf_24 (
+	.I(GND),
+	.O(hrdata[26])
+);
+OBUF gowin_buf_25 (
+	.I(GND),
+	.O(hrdata[27])
+);
+OBUF gowin_buf_26 (
+	.I(GND),
+	.O(hrdata[28])
+);
+OBUF gowin_buf_27 (
+	.I(GND),
+	.O(hrdata[29])
+);
+OBUF gowin_buf_28 (
+	.I(GND),
+	.O(hrdata[30])
+);
+OBUF gowin_buf_29 (
+	.I(GND),
+	.O(hrdata[31])
+);
+OBUF gowin_buf_30 (
+	.I(GND),
+	.O(hresp[1])
+);
+OBUF gowin_buf_31 (
+	.I(GND),
+	.O(pprot[1])
+);
+OBUF gowin_buf_32 (
+	.I(GND),
+	.O(paddr[0])
+);
+OBUF gowin_buf_33 (
+	.I(GND),
+	.O(paddr[1])
+);
+LUT4 \u_AHB_to_APB_32_bridge/hready_d_s  (
+	.I0(\u_AHB_to_APB_32_bridge/hready_d_4 ),
+	.I1(apb2ahb_clken),
+	.I2(\u_AHB_to_APB_32_bridge/hready_d_5 ),
+	.I3(\u_AHB_to_APB_32_bridge/hready_d_6 ),
+	.F(hready)
+);
+defparam \u_AHB_to_APB_32_bridge/hready_d_s .INIT=16'h8F00;
+LUT2 \u_AHB_to_APB_32_bridge/hresp_d_0_s  (
+	.I0(\u_AHB_to_APB_32_bridge/hctrl_cs [1]),
+	.I1(\u_AHB_to_APB_32_bridge/hctrl_cs [2]),
+	.F(hresp[0])
+);
+defparam \u_AHB_to_APB_32_bridge/hresp_d_0_s .INIT=4'h4;
+LUT4 \u_AHB_to_APB_32_bridge/buff_wr_cmd_s0  (
+	.I0(hprot[3]),
+	.I1(hprot[2]),
+	.I2(\u_AHB_to_APB_32_bridge/wbuf_en ),
+	.I3(hwrite),
+	.F(\u_AHB_to_APB_32_bridge/buff_wr_cmd )
+);
+defparam \u_AHB_to_APB_32_bridge/buff_wr_cmd_s0 .INIT=16'hFE00;
+LUT3 \u_AHB_to_APB_32_bridge/wr_strb_3_s0  (
+	.I0(haddr[1]),
+	.I1(hsize[1]),
+	.I2(\u_AHB_to_APB_32_bridge/wr_strb_3_4 ),
+	.F(\u_AHB_to_APB_32_bridge/wr_strb [3])
+);
+defparam \u_AHB_to_APB_32_bridge/wr_strb_3_s0 .INIT=8'h60;
+LUT4 \u_AHB_to_APB_32_bridge/wr_strb_2_s0  (
+	.I0(haddr[0]),
+	.I1(haddr[1]),
+	.I2(hsize[1]),
+	.I3(\u_AHB_to_APB_32_bridge/wr_strb_2_4 ),
+	.F(\u_AHB_to_APB_32_bridge/wr_strb [2])
+);
+defparam \u_AHB_to_APB_32_bridge/wr_strb_2_s0 .INIT=16'h1400;
+LUT2 \u_AHB_to_APB_32_bridge/wr_strb_1_s0  (
+	.I0(haddr[1]),
+	.I1(\u_AHB_to_APB_32_bridge/wr_strb_3_4 ),
+	.F(\u_AHB_to_APB_32_bridge/wr_strb [1])
+);
+defparam \u_AHB_to_APB_32_bridge/wr_strb_1_s0 .INIT=4'h4;
+LUT3 \u_AHB_to_APB_32_bridge/wr_strb_0_s0  (
+	.I0(haddr[0]),
+	.I1(haddr[1]),
+	.I2(\u_AHB_to_APB_32_bridge/wr_strb_2_4 ),
+	.F(\u_AHB_to_APB_32_bridge/wr_strb [0])
+);
+defparam \u_AHB_to_APB_32_bridge/wr_strb_0_s0 .INIT=8'h10;
+LUT4 \u_AHB_to_APB_32_bridge/pstrb_d_0_s  (
+	.I0(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[34]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[34]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/cmd_fifo_empty ),
+	.I3(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(pstrb[0])
+);
+defparam \u_AHB_to_APB_32_bridge/pstrb_d_0_s .INIT=16'h0C0A;
+LUT4 \u_AHB_to_APB_32_bridge/pstrb_d_1_s  (
+	.I0(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[35]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[35]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/cmd_fifo_empty ),
+	.I3(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(pstrb[1])
+);
+defparam \u_AHB_to_APB_32_bridge/pstrb_d_1_s .INIT=16'h0C0A;
+LUT4 \u_AHB_to_APB_32_bridge/pstrb_d_2_s  (
+	.I0(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[36]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[36]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/cmd_fifo_empty ),
+	.I3(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(pstrb[2])
+);
+defparam \u_AHB_to_APB_32_bridge/pstrb_d_2_s .INIT=16'h0C0A;
+LUT4 \u_AHB_to_APB_32_bridge/pstrb_d_3_s  (
+	.I0(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[37]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[37]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/cmd_fifo_empty ),
+	.I3(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(pstrb[3])
+);
+defparam \u_AHB_to_APB_32_bridge/pstrb_d_3_s .INIT=16'h0C0A;
+LUT3 \u_AHB_to_APB_32_bridge/n603_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/hready_d_4 ),
+	.I1(pwrite),
+	.I2(\u_AHB_to_APB_32_bridge/n603_4 ),
+	.F(\u_AHB_to_APB_32_bridge/n603_3 )
+);
+defparam \u_AHB_to_APB_32_bridge/n603_s0 .INIT=8'h80;
+LUT3 \u_AHB_to_APB_32_bridge/hctrl_ns_0_s9  (
+	.I0(\u_AHB_to_APB_32_bridge/hctrl_ns_0_22 ),
+	.I1(\u_AHB_to_APB_32_bridge/hctrl_ns_0_17 ),
+	.I2(\u_AHB_to_APB_32_bridge/hctrl_ns_0_20 ),
+	.F(\u_AHB_to_APB_32_bridge/hctrl_ns [0])
+);
+defparam \u_AHB_to_APB_32_bridge/hctrl_ns_0_s9 .INIT=8'hF8;
+LUT2 \u_AHB_to_APB_32_bridge/hctrl_ns_2_s11  (
+	.I0(\u_AHB_to_APB_32_bridge/hctrl_ns_2_20 ),
+	.I1(\u_AHB_to_APB_32_bridge/hctrl_ns_0_20 ),
+	.F(\u_AHB_to_APB_32_bridge/hctrl_ns_2_19 )
+);
+defparam \u_AHB_to_APB_32_bridge/hctrl_ns_2_s11 .INIT=4'hE;
+LUT4 \u_AHB_to_APB_32_bridge/ps0_prdata_17_s1  (
+	.I0(paddr[4]),
+	.I1(paddr[2]),
+	.I2(\u_AHB_to_APB_32_bridge/penable_9 ),
+	.I3(\u_AHB_to_APB_32_bridge/ps0_prdata_0_8 ),
+	.F(hrdata[3])
+);
+defparam \u_AHB_to_APB_32_bridge/ps0_prdata_17_s1 .INIT=16'h1000;
+LUT3 \u_AHB_to_APB_32_bridge/hctrl_cs_1_s3  (
+	.I0(\u_AHB_to_APB_32_bridge/hctrl_cs [0]),
+	.I1(\u_AHB_to_APB_32_bridge/hctrl_cs [2]),
+	.I2(\u_AHB_to_APB_32_bridge/n121_6 ),
+	.F(\u_AHB_to_APB_32_bridge/hctrl_cs_1_8 )
+);
+defparam \u_AHB_to_APB_32_bridge/hctrl_cs_1_s3 .INIT=8'hBF;
+LUT4 \u_AHB_to_APB_32_bridge/hready_d_s0  (
+	.I0(penable),
+	.I1(\u_AHB_to_APB_32_bridge/penable_6 ),
+	.I2(\u_AHB_to_APB_32_bridge/n38_7 ),
+	.I3(\u_AHB_to_APB_32_bridge/n38_5 ),
+	.F(\u_AHB_to_APB_32_bridge/hready_d_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/hready_d_s0 .INIT=16'h8000;
+LUT2 \u_AHB_to_APB_32_bridge/hready_d_s1  (
+	.I0(\u_AHB_to_APB_32_bridge/hctrl_cs [2]),
+	.I1(\u_AHB_to_APB_32_bridge/hctrl_cs [0]),
+	.F(\u_AHB_to_APB_32_bridge/hready_d_5 )
+);
+defparam \u_AHB_to_APB_32_bridge/hready_d_s1 .INIT=4'h4;
+LUT4 \u_AHB_to_APB_32_bridge/hready_d_s2  (
+	.I0(\u_AHB_to_APB_32_bridge/hctrl_cs [1]),
+	.I1(\u_AHB_to_APB_32_bridge/hctrl_cs [0]),
+	.I2(\u_AHB_to_APB_32_bridge/hctrl_cs [2]),
+	.I3(\u_AHB_to_APB_32_bridge/cmd_fifo_full ),
+	.F(\u_AHB_to_APB_32_bridge/hready_d_6 )
+);
+defparam \u_AHB_to_APB_32_bridge/hready_d_s2 .INIT=16'h004F;
+LUT4 \u_AHB_to_APB_32_bridge/wr_strb_3_s1  (
+	.I0(hsize[0]),
+	.I1(hsize[1]),
+	.I2(haddr[0]),
+	.I3(\u_AHB_to_APB_32_bridge/wr_strb_2_4 ),
+	.F(\u_AHB_to_APB_32_bridge/wr_strb_3_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/wr_strb_3_s1 .INIT=16'h1E00;
+LUT4 \u_AHB_to_APB_32_bridge/wr_strb_2_s1  (
+	.I0(hsize[1]),
+	.I1(hsize[0]),
+	.I2(hsize[2]),
+	.I3(hwrite),
+	.F(\u_AHB_to_APB_32_bridge/wr_strb_2_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/wr_strb_2_s1 .INIT=16'h0700;
+LUT2 \u_AHB_to_APB_32_bridge/n121_s1  (
+	.I0(hsel),
+	.I1(hready_in),
+	.F(\u_AHB_to_APB_32_bridge/n121_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/n121_s1 .INIT=4'h8;
+LUT3 \u_AHB_to_APB_32_bridge/pwrite_d_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[30]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[30]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(\u_AHB_to_APB_32_bridge/pwrite_d_3 )
+);
+defparam \u_AHB_to_APB_32_bridge/pwrite_d_s0 .INIT=8'hCA;
+LUT4 \u_AHB_to_APB_32_bridge/n603_s1  (
+	.I0(\u_AHB_to_APB_32_bridge/n603_8 ),
+	.I1(\u_AHB_to_APB_32_bridge/n603_6 ),
+	.I2(paddr[4]),
+	.I3(paddr[2]),
+	.F(\u_AHB_to_APB_32_bridge/n603_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/n603_s1 .INIT=16'h8000;
+LUT3 \u_AHB_to_APB_32_bridge/hctrl_ns_0_s11  (
+	.I0(htrans[1]),
+	.I1(hready_in),
+	.I2(\u_AHB_to_APB_32_bridge/hctrl_ns_2_20 ),
+	.F(\u_AHB_to_APB_32_bridge/hctrl_ns_0_17 )
+);
+defparam \u_AHB_to_APB_32_bridge/hctrl_ns_0_s11 .INIT=8'h0B;
+LUT4 \u_AHB_to_APB_32_bridge/penable_s4  (
+	.I0(\u_AHB_to_APB_32_bridge/pwrite_d_3 ),
+	.I1(\u_AHB_to_APB_32_bridge/n38_9 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_cmd_entering_fifo ),
+	.I3(\u_AHB_to_APB_32_bridge/cmd_fifo_empty ),
+	.F(\u_AHB_to_APB_32_bridge/penable_6 )
+);
+defparam \u_AHB_to_APB_32_bridge/penable_s4 .INIT=16'hF077;
+LUT4 \u_AHB_to_APB_32_bridge/hctrl_ns_2_s12  (
+	.I0(\u_AHB_to_APB_32_bridge/hctrl_ns_2_21 ),
+	.I1(apb2ahb_clken),
+	.I2(\u_AHB_to_APB_32_bridge/hready_d_5 ),
+	.I3(\u_AHB_to_APB_32_bridge/paddr_miss ),
+	.F(\u_AHB_to_APB_32_bridge/hctrl_ns_2_20 )
+);
+defparam \u_AHB_to_APB_32_bridge/hctrl_ns_2_s12 .INIT=16'h8000;
+LUT3 \u_AHB_to_APB_32_bridge/ps0_prdata_0_s2  (
+	.I0(\u_AHB_to_APB_32_bridge/wbuf_en ),
+	.I1(paddr[4]),
+	.I2(paddr[2]),
+	.F(\u_AHB_to_APB_32_bridge/ps0_prdata_0_7 )
+);
+defparam \u_AHB_to_APB_32_bridge/ps0_prdata_0_s2 .INIT=8'h7C;
+LUT2 \u_AHB_to_APB_32_bridge/ps0_prdata_0_s3  (
+	.I0(\u_AHB_to_APB_32_bridge/n603_8 ),
+	.I1(\u_AHB_to_APB_32_bridge/n603_6 ),
+	.F(\u_AHB_to_APB_32_bridge/ps0_prdata_0_8 )
+);
+defparam \u_AHB_to_APB_32_bridge/ps0_prdata_0_s3 .INIT=4'h8;
+LUT4 \u_AHB_to_APB_32_bridge/hctrl_ns_1_s19  (
+	.I0(\u_AHB_to_APB_32_bridge/hctrl_cs [2]),
+	.I1(\u_AHB_to_APB_32_bridge/hctrl_cs [1]),
+	.I2(hwrite),
+	.I3(\u_AHB_to_APB_32_bridge/n121_4 ),
+	.F(\u_AHB_to_APB_32_bridge/hctrl_ns_1_29 )
+);
+defparam \u_AHB_to_APB_32_bridge/hctrl_ns_1_s19 .INIT=16'h0FBB;
+LUT4 \u_AHB_to_APB_32_bridge/n603_s3  (
+	.I0(paddr[8]),
+	.I1(paddr[6]),
+	.I2(paddr[5]),
+	.I3(paddr[3]),
+	.F(\u_AHB_to_APB_32_bridge/n603_6 )
+);
+defparam \u_AHB_to_APB_32_bridge/n603_s3 .INIT=16'h0001;
+LUT3 \u_AHB_to_APB_32_bridge/hctrl_ns_2_s13  (
+	.I0(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[31]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[31]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(\u_AHB_to_APB_32_bridge/hctrl_ns_2_21 )
+);
+defparam \u_AHB_to_APB_32_bridge/hctrl_ns_2_s13 .INIT=8'h35;
+LUT4 \u_AHB_to_APB_32_bridge/hctrl_ns_1_s20  (
+	.I0(\u_AHB_to_APB_32_bridge/hctrl_ns_1_29 ),
+	.I1(htrans[1]),
+	.I2(hready_in),
+	.I3(\u_AHB_to_APB_32_bridge/hctrl_ns_2_20 ),
+	.F(\u_AHB_to_APB_32_bridge/hctrl_ns_1_31 )
+);
+defparam \u_AHB_to_APB_32_bridge/hctrl_ns_1_s20 .INIT=16'h0045;
+LUT4 \u_AHB_to_APB_32_bridge/hctrl_ns_0_s13  (
+	.I0(hready_in),
+	.I1(\u_AHB_to_APB_32_bridge/hctrl_cs [0]),
+	.I2(\u_AHB_to_APB_32_bridge/hctrl_cs [1]),
+	.I3(\u_AHB_to_APB_32_bridge/hctrl_cs [2]),
+	.F(\u_AHB_to_APB_32_bridge/hctrl_ns_0_20 )
+);
+defparam \u_AHB_to_APB_32_bridge/hctrl_ns_0_s13 .INIT=16'h0700;
+LUT4 \u_AHB_to_APB_32_bridge/n603_s4  (
+	.I0(paddr[9]),
+	.I1(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[5]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[5]_4 ),
+	.I3(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(\u_AHB_to_APB_32_bridge/n603_8 )
+);
+defparam \u_AHB_to_APB_32_bridge/n603_s4 .INIT=16'h0511;
+LUT4 \u_AHB_to_APB_32_bridge/hctrl_ns_0_s14  (
+	.I0(\u_AHB_to_APB_32_bridge/buff_wr_cmd ),
+	.I1(\u_AHB_to_APB_32_bridge/hctrl_cs [2]),
+	.I2(\u_AHB_to_APB_32_bridge/hctrl_cs [0]),
+	.I3(\u_AHB_to_APB_32_bridge/n121_4 ),
+	.F(\u_AHB_to_APB_32_bridge/hctrl_ns_0_22 )
+);
+defparam \u_AHB_to_APB_32_bridge/hctrl_ns_0_s14 .INIT=16'h5530;
+LUT4 \u_AHB_to_APB_32_bridge/pwrite_d_s1  (
+	.I0(\u_AHB_to_APB_32_bridge/cmd_fifo_empty ),
+	.I1(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[30]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[30]_4 ),
+	.I3(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(pwrite)
+);
+defparam \u_AHB_to_APB_32_bridge/pwrite_d_s1 .INIT=16'h5044;
+LUT4 \u_AHB_to_APB_32_bridge/n156_s2  (
+	.I0(hwrite),
+	.I1(htrans[1]),
+	.I2(hsel),
+	.I3(hready_in),
+	.F(\u_AHB_to_APB_32_bridge/n156_6 )
+);
+defparam \u_AHB_to_APB_32_bridge/n156_s2 .INIT=16'h4000;
+LUT4 \u_AHB_to_APB_32_bridge/n121_s2  (
+	.I0(htrans[1]),
+	.I1(hwrite),
+	.I2(hsel),
+	.I3(hready_in),
+	.F(\u_AHB_to_APB_32_bridge/n121_6 )
+);
+defparam \u_AHB_to_APB_32_bridge/n121_s2 .INIT=16'h8000;
+LUT4 \u_AHB_to_APB_32_bridge/n535_s3  (
+	.I0(\u_AHB_to_APB_32_bridge/penable_6 ),
+	.I1(\u_AHB_to_APB_32_bridge/n38_7 ),
+	.I2(\u_AHB_to_APB_32_bridge/n38_5 ),
+	.I3(penable),
+	.F(\u_AHB_to_APB_32_bridge/n535_8 )
+);
+defparam \u_AHB_to_APB_32_bridge/n535_s3 .INIT=16'h7F80;
+LUT3 \u_AHB_to_APB_32_bridge/penable_s6  (
+	.I0(\u_AHB_to_APB_32_bridge/penable_6 ),
+	.I1(\u_AHB_to_APB_32_bridge/n38_7 ),
+	.I2(\u_AHB_to_APB_32_bridge/n38_5 ),
+	.F(\u_AHB_to_APB_32_bridge/penable_9 )
+);
+defparam \u_AHB_to_APB_32_bridge/penable_s6 .INIT=8'h80;
+LUT4 \u_AHB_to_APB_32_bridge/n544_s4  (
+	.I0(\u_AHB_to_APB_32_bridge/n38_5 ),
+	.I1(\u_AHB_to_APB_32_bridge/n38_7 ),
+	.I2(\u_AHB_to_APB_32_bridge/paddr_miss ),
+	.I3(\u_AHB_to_APB_32_bridge/penable_6 ),
+	.F(\u_AHB_to_APB_32_bridge/n544_10 )
+);
+defparam \u_AHB_to_APB_32_bridge/n544_s4 .INIT=16'h0700;
+LUT4 \u_AHB_to_APB_32_bridge/ps0_prdata_0_s4  (
+	.I0(\u_AHB_to_APB_32_bridge/ps0_prdata_0_7 ),
+	.I1(\u_AHB_to_APB_32_bridge/n603_8 ),
+	.I2(\u_AHB_to_APB_32_bridge/n603_6 ),
+	.I3(\u_AHB_to_APB_32_bridge/penable_9 ),
+	.F(hrdata[0])
+);
+defparam \u_AHB_to_APB_32_bridge/ps0_prdata_0_s4 .INIT=16'h4000;
+DFFCE \u_AHB_to_APB_32_bridge/hctrl_cs_2_s0  (
+	.D(\u_AHB_to_APB_32_bridge/hctrl_ns_2_19 ),
+	.CLK(hclk),
+	.CE(VCC),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n125_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/hctrl_cs [2])
+);
+defparam \u_AHB_to_APB_32_bridge/hctrl_cs_2_s0 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/hctrl_cs_0_s0  (
+	.D(\u_AHB_to_APB_32_bridge/hctrl_ns [0]),
+	.CLK(hclk),
+	.CE(VCC),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n125_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/hctrl_cs [0])
+);
+defparam \u_AHB_to_APB_32_bridge/hctrl_cs_0_s0 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/rd_cmd_entering_fifo_s0  (
+	.D(\u_AHB_to_APB_32_bridge/n156_6 ),
+	.CLK(pclk),
+	.CE(VCC),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n447_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/rd_cmd_entering_fifo )
+);
+defparam \u_AHB_to_APB_32_bridge/rd_cmd_entering_fifo_s0 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/wr_data_entering_fifo_s0  (
+	.D(\u_AHB_to_APB_32_bridge/hwrite_d1 ),
+	.CLK(pclk),
+	.CE(VCC),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n447_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/wr_data_entering_fifo )
+);
+defparam \u_AHB_to_APB_32_bridge/wr_data_entering_fifo_s0 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/wbuf_en_s0  (
+	.D(pwdata[0]),
+	.CLK(pclk),
+	.CE(\u_AHB_to_APB_32_bridge/n603_3 ),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n447_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/wbuf_en )
+);
+defparam \u_AHB_to_APB_32_bridge/wbuf_en_s0 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/hwrite_d1_s0  (
+	.D(\u_AHB_to_APB_32_bridge/n121_6 ),
+	.CLK(hclk),
+	.CE(VCC),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n125_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/hwrite_d1 )
+);
+defparam \u_AHB_to_APB_32_bridge/hwrite_d1_s0 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/hctrl_cs_1_s1  (
+	.D(\u_AHB_to_APB_32_bridge/hctrl_ns_1_31 ),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/hctrl_cs_1_8 ),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n125_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/hctrl_cs [1])
+);
+defparam \u_AHB_to_APB_32_bridge/hctrl_cs_1_s1 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/penable_s5  (
+	.D(\u_AHB_to_APB_32_bridge/n535_8 ),
+	.CLK(pclk),
+	.CE(VCC),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n447_6 ),
+	.Q(penable)
+);
+defparam \u_AHB_to_APB_32_bridge/penable_s5 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/paddr_miss_s4  (
+	.D(\u_AHB_to_APB_32_bridge/n544_10 ),
+	.CLK(pclk),
+	.CE(VCC),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n447_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/paddr_miss )
+);
+defparam \u_AHB_to_APB_32_bridge/paddr_miss_s4 .INIT=1'b0;
+INV \u_AHB_to_APB_32_bridge/n125_s2  (
+	.I(hresetn),
+	.O(\u_AHB_to_APB_32_bridge/n125_6 )
+);
+INV \u_AHB_to_APB_32_bridge/n447_s2  (
+	.I(presetn),
+	.O(\u_AHB_to_APB_32_bridge/n447_6 )
+);
+LUT4 \u_AHB_to_APB_32_bridge/u_cmd_fifo/n35_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n35_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr [0]),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.I3(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n8_6 ),
+	.F(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n35_3 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/n35_s0 .INIT=16'h2482;
+LUT4 \u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_s1  (
+	.I0(\u_AHB_to_APB_32_bridge/n38_5 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_6 ),
+	.I2(\u_AHB_to_APB_32_bridge/n38_7 ),
+	.I3(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_8 ),
+	.F(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_s1 .INIT=16'hFF80;
+LUT4 \u_AHB_to_APB_32_bridge/u_cmd_fifo/n54_s2  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr [0]),
+	.I1(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.I2(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_4 ),
+	.I3(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n35_4 ),
+	.F(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n54_6 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/n54_s2 .INIT=16'h4029;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_0_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[0]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[0]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[2])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_0_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_1_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[1]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[1]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[3])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_1_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_2_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[2]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[2]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[4])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_2_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_3_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[3]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[3]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[5])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_3_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_4_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[4]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[4]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[6])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_4_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_5_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[5]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[5]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[7])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_5_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_6_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[6]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[6]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[8])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_6_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_7_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[7]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[7]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[9])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_7_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_8_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[8]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[8]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[10])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_8_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_9_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[9]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[9]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[11])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_9_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_10_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[10]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[10]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[12])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_10_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_11_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[11]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[11]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[13])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_11_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_12_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[12]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[12]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[14])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_12_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_13_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[13]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[13]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[15])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_13_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_14_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[14]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[14]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[16])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_14_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_15_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[15]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[15]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[17])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_15_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_16_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[16]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[16]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[18])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_16_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_17_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[17]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[17]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[19])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_17_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_18_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[18]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[18]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[20])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_18_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_19_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[19]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[19]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[21])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_19_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_20_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[20]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[20]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[22])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_20_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_21_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[21]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[21]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[23])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_21_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_22_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[22]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[22]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[24])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_22_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_23_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[23]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[23]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[25])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_23_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_24_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[24]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[24]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[26])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_24_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_25_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[25]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[25]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[27])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_25_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_26_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[26]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[26]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[28])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_26_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_27_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[27]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[27]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[29])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_27_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_28_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[28]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[28]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[30])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_28_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_29_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[29]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[29]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(paddr[31])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_29_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_32_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[32]_6 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[32]_6 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(pprot[2])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_32_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_33_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[33]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[33]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(pprot[0])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_RAMOUT_33_G[0]_s0 .INIT=8'hCA;
+LUT2 \u_AHB_to_APB_32_bridge/u_cmd_fifo/n13_s2  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr [1]),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr [0]),
+	.F(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n13_5 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/n13_s2 .INIT=4'h6;
+LUT2 \u_AHB_to_APB_32_bridge/u_cmd_fifo/n40_s2  (
+	.I0(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/rd_ptr_0 [1]),
+	.F(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n40_5 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/n40_s2 .INIT=4'h6;
+LUT2 \u_AHB_to_APB_32_bridge/u_cmd_fifo/n35_s1  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr [1]),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/rd_ptr_0 [1]),
+	.F(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n35_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/n35_s1 .INIT=4'h6;
+LUT4 \u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_s2  (
+	.I0(paddr[22]),
+	.I1(paddr[21]),
+	.I2(paddr[24]),
+	.I3(paddr[20]),
+	.F(\u_AHB_to_APB_32_bridge/n38_5 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_s2 .INIT=16'h0001;
+LUT4 \u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_s3  (
+	.I0(\u_AHB_to_APB_32_bridge/n38_9 ),
+	.I1(\u_AHB_to_APB_32_bridge/pwrite_d_3 ),
+	.I2(\u_AHB_to_APB_32_bridge/cmd_fifo_empty ),
+	.I3(penable),
+	.F(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_6 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_s3 .INIT=16'h0700;
+LUT3 \u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_s4  (
+	.I0(paddr[23]),
+	.I1(paddr[25]),
+	.I2(paddr[26]),
+	.F(\u_AHB_to_APB_32_bridge/n38_7 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_s4 .INIT=8'h01;
+LUT2 \u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_s5  (
+	.I0(\u_AHB_to_APB_32_bridge/cmd_fifo_empty ),
+	.I1(\u_AHB_to_APB_32_bridge/paddr_miss ),
+	.F(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_8 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_s5 .INIT=4'h4;
+LUT2 \u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_s6  (
+	.I0(\u_AHB_to_APB_32_bridge/wr_data_entering_fifo ),
+	.I1(\u_AHB_to_APB_32_bridge/wdata_fifo_empty ),
+	.F(\u_AHB_to_APB_32_bridge/n38_9 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_s6 .INIT=4'h4;
+LUT4 \u_AHB_to_APB_32_bridge/u_cmd_fifo/n8_s2  (
+	.I0(\u_AHB_to_APB_32_bridge/cmd_fifo_full ),
+	.I1(htrans[1]),
+	.I2(hsel),
+	.I3(hready_in),
+	.F(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n8_6 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/n8_s2 .INIT=16'h4000;
+LUT4 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_s91  (
+	.I0(hprot[0]),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[32]_6 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr [0]),
+	.I3(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n8_6 ),
+	.F(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_96 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_s91 .INIT=16'hC5CC;
+LUT2 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_s93  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr [0]),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n8_6 ),
+	.F(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_s93 .INIT=4'h4;
+LUT4 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_s94  (
+	.I0(hprot[0]),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[32]_6 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr [0]),
+	.I3(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n8_6 ),
+	.F(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_102 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_s94 .INIT=16'h5CCC;
+LUT2 \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_s95  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr [0]),
+	.I1(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n8_6 ),
+	.F(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_s95 .INIT=4'h8;
+DFFCE \u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr_0_s0  (
+	.D(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n14_10 ),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n8_6 ),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n125_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr [0])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr_0_s0 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/u_cmd_fifo/full_s0  (
+	.D(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n35_3 ),
+	.CLK(hclk),
+	.CE(VCC),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n125_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/cmd_fifo_full )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/full_s0 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/u_cmd_fifo/rd_ptr_1_s0  (
+	.D(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n40_5 ),
+	.CLK(pclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_4 ),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n447_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/rd_ptr_0 [1])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/rd_ptr_1_s0 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/u_cmd_fifo/rd_ptr_0_s0  (
+	.D(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n41_10 ),
+	.CLK(pclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n38_4 ),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n447_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/rd_ptr [0])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/rd_ptr_0_s0 .INIT=1'b0;
+DFFPE \u_AHB_to_APB_32_bridge/u_cmd_fifo/empty_s0  (
+	.D(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n54_6 ),
+	.CLK(pclk),
+	.CE(VCC),
+	.PRESET(\u_AHB_to_APB_32_bridge/n447_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/cmd_fifo_empty )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/empty_s0 .INIT=1'b1;
+DFFCE \u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr_1_s0  (
+	.D(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n13_5 ),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n8_6 ),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n125_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr [1])
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr_1_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[0]_s0  (
+	.D(haddr[2]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[0]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[0]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[1]_s0  (
+	.D(haddr[3]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[1]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[1]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[2]_s0  (
+	.D(haddr[4]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[2]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[2]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[3]_s0  (
+	.D(haddr[5]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[3]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[3]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[4]_s0  (
+	.D(haddr[6]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[4]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[4]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[5]_s0  (
+	.D(haddr[7]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[5]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[5]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[6]_s0  (
+	.D(haddr[8]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[6]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[6]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[7]_s0  (
+	.D(haddr[9]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[7]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[7]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[8]_s0  (
+	.D(haddr[10]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[8]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[8]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[9]_s0  (
+	.D(haddr[11]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[9]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[9]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[10]_s0  (
+	.D(haddr[12]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[10]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[10]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[11]_s0  (
+	.D(haddr[13]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[11]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[11]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[12]_s0  (
+	.D(haddr[14]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[12]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[12]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[13]_s0  (
+	.D(haddr[15]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[13]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[13]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[14]_s0  (
+	.D(haddr[16]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[14]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[14]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[15]_s0  (
+	.D(haddr[17]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[15]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[15]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[16]_s0  (
+	.D(haddr[18]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[16]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[16]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[17]_s0  (
+	.D(haddr[19]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[17]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[17]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[18]_s0  (
+	.D(haddr[20]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[18]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[18]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[19]_s0  (
+	.D(haddr[21]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[19]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[19]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[20]_s0  (
+	.D(haddr[22]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[20]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[20]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[21]_s0  (
+	.D(haddr[23]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[21]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[21]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[22]_s0  (
+	.D(haddr[24]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[22]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[22]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[23]_s0  (
+	.D(haddr[25]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[23]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[23]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[24]_s0  (
+	.D(haddr[26]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[24]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[24]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[25]_s0  (
+	.D(haddr[27]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[25]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[25]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[26]_s0  (
+	.D(haddr[28]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[26]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[26]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[27]_s0  (
+	.D(haddr[29]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[27]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[27]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[28]_s0  (
+	.D(haddr[30]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[28]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[28]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[29]_s0  (
+	.D(haddr[31]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[29]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[29]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[30]_s0  (
+	.D(hwrite),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[30]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[30]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[31]_s0  (
+	.D(\u_AHB_to_APB_32_bridge/buff_wr_cmd ),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[31]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[31]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[33]_s0  (
+	.D(hprot[1]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[33]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[33]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[34]_s0  (
+	.D(\u_AHB_to_APB_32_bridge/wr_strb [0]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[34]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[34]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[35]_s0  (
+	.D(\u_AHB_to_APB_32_bridge/wr_strb [1]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[35]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[35]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[36]_s0  (
+	.D(\u_AHB_to_APB_32_bridge/wr_strb [2]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[36]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[36]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[37]_s0  (
+	.D(\u_AHB_to_APB_32_bridge/wr_strb [3]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_100 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_0_G[37]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[37]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[0]_s0  (
+	.D(haddr[2]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[0]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[0]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[1]_s0  (
+	.D(haddr[3]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[1]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[1]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[2]_s0  (
+	.D(haddr[4]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[2]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[2]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[3]_s0  (
+	.D(haddr[5]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[3]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[3]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[4]_s0  (
+	.D(haddr[6]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[4]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[4]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[5]_s0  (
+	.D(haddr[7]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[5]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[5]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[6]_s0  (
+	.D(haddr[8]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[6]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[6]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[7]_s0  (
+	.D(haddr[9]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[7]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[7]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[8]_s0  (
+	.D(haddr[10]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[8]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[8]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[9]_s0  (
+	.D(haddr[11]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[9]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[9]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[10]_s0  (
+	.D(haddr[12]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[10]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[10]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[11]_s0  (
+	.D(haddr[13]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[11]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[11]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[12]_s0  (
+	.D(haddr[14]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[12]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[12]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[13]_s0  (
+	.D(haddr[15]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[13]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[13]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[14]_s0  (
+	.D(haddr[16]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[14]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[14]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[15]_s0  (
+	.D(haddr[17]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[15]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[15]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[16]_s0  (
+	.D(haddr[18]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[16]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[16]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[17]_s0  (
+	.D(haddr[19]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[17]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[17]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[18]_s0  (
+	.D(haddr[20]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[18]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[18]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[19]_s0  (
+	.D(haddr[21]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[19]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[19]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[20]_s0  (
+	.D(haddr[22]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[20]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[20]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[21]_s0  (
+	.D(haddr[23]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[21]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[21]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[22]_s0  (
+	.D(haddr[24]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[22]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[22]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[23]_s0  (
+	.D(haddr[25]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[23]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[23]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[24]_s0  (
+	.D(haddr[26]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[24]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[24]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[25]_s0  (
+	.D(haddr[27]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[25]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[25]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[26]_s0  (
+	.D(haddr[28]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[26]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[26]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[27]_s0  (
+	.D(haddr[29]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[27]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[27]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[28]_s0  (
+	.D(haddr[30]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[28]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[28]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[29]_s0  (
+	.D(haddr[31]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[29]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[29]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[30]_s0  (
+	.D(hwrite),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[30]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[30]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[31]_s0  (
+	.D(\u_AHB_to_APB_32_bridge/buff_wr_cmd ),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[31]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[31]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[33]_s0  (
+	.D(hprot[1]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[33]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[33]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[34]_s0  (
+	.D(\u_AHB_to_APB_32_bridge/wr_strb [0]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[34]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[34]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[35]_s0  (
+	.D(\u_AHB_to_APB_32_bridge/wr_strb [1]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[35]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[35]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[36]_s0  (
+	.D(\u_AHB_to_APB_32_bridge/wr_strb [2]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[36]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[36]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[37]_s0  (
+	.D(\u_AHB_to_APB_32_bridge/wr_strb [3]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_105 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/mem_mem_RAMREG_1_G[37]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[37]_s0 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[32]_s1  (
+	.D(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_96 ),
+	.CLK(hclk),
+	.CE(VCC),
+	.CLEAR(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[32]_6 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_0_G[32]_s1 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[32]_s1  (
+	.D(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_102 ),
+	.CLK(hclk),
+	.CE(VCC),
+	.CLEAR(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[32]_6 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/mem_mem_RAMREG_1_G[32]_s1 .INIT=1'b0;
+LUT1 \u_AHB_to_APB_32_bridge/u_cmd_fifo/n41_s5  (
+	.I0(\u_AHB_to_APB_32_bridge/rd_ptr [0]),
+	.F(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n41_10 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/n41_s5 .INIT=2'h1;
+LUT1 \u_AHB_to_APB_32_bridge/u_cmd_fifo/n14_s5  (
+	.I0(\u_AHB_to_APB_32_bridge/u_cmd_fifo/wr_ptr [0]),
+	.F(\u_AHB_to_APB_32_bridge/u_cmd_fifo/n14_10 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_cmd_fifo/n14_s5 .INIT=2'h1;
+LUT4 \u_AHB_to_APB_32_bridge/u_wdata_fifo/n35_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n35_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/wr_ptr [0]),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.I3(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n8_6 ),
+	.F(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n35_3 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/n35_s0 .INIT=16'h2482;
+LUT4 \u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_s1  (
+	.I0(\u_AHB_to_APB_32_bridge/n38_5 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_5_0 ),
+	.I2(\u_AHB_to_APB_32_bridge/n38_7 ),
+	.I3(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_6 ),
+	.F(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_s1 .INIT=16'hFF80;
+LUT4 \u_AHB_to_APB_32_bridge/u_wdata_fifo/n54_s2  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/wr_ptr [0]),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_4 ),
+	.I3(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n35_4 ),
+	.F(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n54_6 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/n54_s2 .INIT=16'h4029;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_0_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[0]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[0]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[0])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_0_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_1_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[1]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[1]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[1])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_1_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_2_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[2]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[2]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[2])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_2_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_3_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[3]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[3]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[3])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_3_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_4_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[4]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[4]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[4])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_4_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_5_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[5]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[5]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[5])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_5_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_6_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[6]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[6]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[6])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_6_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_7_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[7]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[7]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[7])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_7_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_8_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[8]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[8]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[8])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_8_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_9_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[9]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[9]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[9])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_9_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_10_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[10]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[10]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[10])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_10_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_11_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[11]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[11]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[11])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_11_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_12_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[12]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[12]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[12])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_12_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_13_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[13]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[13]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[13])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_13_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_14_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[14]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[14]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[14])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_14_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_15_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[15]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[15]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[15])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_15_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_16_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[16]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[16]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[16])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_16_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_17_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[17]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[17]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[17])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_17_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_18_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[18]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[18]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[18])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_18_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_19_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[19]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[19]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[19])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_19_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_20_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[20]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[20]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[20])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_20_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_21_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[21]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[21]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[21])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_21_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_22_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[22]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[22]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[22])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_22_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_23_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[23]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[23]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[23])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_23_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_24_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[24]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[24]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[24])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_24_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_25_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[25]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[25]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[25])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_25_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_26_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[26]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[26]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[26])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_26_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_27_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[27]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[27]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[27])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_27_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_28_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[28]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[28]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[28])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_28_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_29_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[29]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[29]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[29])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_29_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_30_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[30]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[30]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[30])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_30_G[0]_s0 .INIT=8'hCA;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_31_G[0]_s0  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[31]_4 ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[31]_4 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(pwdata[31])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_RAMOUT_31_G[0]_s0 .INIT=8'hCA;
+LUT2 \u_AHB_to_APB_32_bridge/u_wdata_fifo/n40_s2  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [1]),
+	.F(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n40_5 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/n40_s2 .INIT=4'h6;
+LUT2 \u_AHB_to_APB_32_bridge/u_wdata_fifo/n35_s1  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/wr_ptr [1]),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [1]),
+	.F(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n35_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/n35_s1 .INIT=4'h6;
+LUT4 \u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_s2  (
+	.I0(\u_AHB_to_APB_32_bridge/rd_cmd_entering_fifo ),
+	.I1(\u_AHB_to_APB_32_bridge/cmd_fifo_empty ),
+	.I2(\u_AHB_to_APB_32_bridge/pwrite_d_3 ),
+	.I3(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_7_1 ),
+	.F(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_5_0 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_s2 .INIT=16'hB000;
+LUT2 \u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_s3  (
+	.I0(\u_AHB_to_APB_32_bridge/wdata_fifo_empty ),
+	.I1(\u_AHB_to_APB_32_bridge/paddr_miss ),
+	.F(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_6 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_s3 .INIT=4'h4;
+LUT2 \u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_s4  (
+	.I0(\u_AHB_to_APB_32_bridge/wdata_fifo_empty ),
+	.I1(penable),
+	.F(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_7_1 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_s4 .INIT=4'h4;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_s72  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/wr_ptr [0]),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/full ),
+	.I2(\u_AHB_to_APB_32_bridge/hwrite_d1 ),
+	.F(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_s72 .INIT=8'h20;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_s73  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/wr_ptr [0]),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/full ),
+	.I2(\u_AHB_to_APB_32_bridge/hwrite_d1 ),
+	.F(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_s73 .INIT=8'h10;
+LUT3 \u_AHB_to_APB_32_bridge/u_wdata_fifo/n14_s6  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/full ),
+	.I1(\u_AHB_to_APB_32_bridge/hwrite_d1 ),
+	.I2(\u_AHB_to_APB_32_bridge/u_wdata_fifo/wr_ptr [0]),
+	.F(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n14_15 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/n14_s6 .INIT=8'hB4;
+LUT2 \u_AHB_to_APB_32_bridge/u_wdata_fifo/n8_s1  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/full ),
+	.I1(\u_AHB_to_APB_32_bridge/hwrite_d1 ),
+	.F(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n8_6 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/n8_s1 .INIT=4'h4;
+LUT4 \u_AHB_to_APB_32_bridge/u_wdata_fifo/n13_s4  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/full ),
+	.I1(\u_AHB_to_APB_32_bridge/u_wdata_fifo/wr_ptr [0]),
+	.I2(\u_AHB_to_APB_32_bridge/hwrite_d1 ),
+	.I3(\u_AHB_to_APB_32_bridge/u_wdata_fifo/wr_ptr [1]),
+	.F(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n13_8 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/n13_s4 .INIT=16'hBF40;
+DFFCE \u_AHB_to_APB_32_bridge/u_wdata_fifo/full_s0  (
+	.D(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n35_3 ),
+	.CLK(hclk),
+	.CE(VCC),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n125_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/full )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/full_s0 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr_1_s0  (
+	.D(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n40_5 ),
+	.CLK(pclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_4 ),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n447_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [1])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr_1_s0 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr_0_s0  (
+	.D(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n41_10 ),
+	.CLK(pclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n38_4 ),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n447_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr_0_s0 .INIT=1'b0;
+DFFPE \u_AHB_to_APB_32_bridge/u_wdata_fifo/empty_s0  (
+	.D(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n54_6 ),
+	.CLK(pclk),
+	.CE(VCC),
+	.PRESET(\u_AHB_to_APB_32_bridge/n447_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/wdata_fifo_empty )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/empty_s0 .INIT=1'b1;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[0]_s0  (
+	.D(hwdata[0]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[0]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[0]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[1]_s0  (
+	.D(hwdata[1]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[1]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[1]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[2]_s0  (
+	.D(hwdata[2]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[2]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[2]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[3]_s0  (
+	.D(hwdata[3]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[3]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[3]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[4]_s0  (
+	.D(hwdata[4]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[4]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[4]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[5]_s0  (
+	.D(hwdata[5]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[5]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[5]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[6]_s0  (
+	.D(hwdata[6]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[6]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[6]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[7]_s0  (
+	.D(hwdata[7]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[7]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[7]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[8]_s0  (
+	.D(hwdata[8]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[8]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[8]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[9]_s0  (
+	.D(hwdata[9]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[9]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[9]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[10]_s0  (
+	.D(hwdata[10]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[10]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[10]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[11]_s0  (
+	.D(hwdata[11]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[11]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[11]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[12]_s0  (
+	.D(hwdata[12]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[12]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[12]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[13]_s0  (
+	.D(hwdata[13]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[13]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[13]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[14]_s0  (
+	.D(hwdata[14]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[14]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[14]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[15]_s0  (
+	.D(hwdata[15]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[15]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[15]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[16]_s0  (
+	.D(hwdata[16]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[16]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[16]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[17]_s0  (
+	.D(hwdata[17]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[17]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[17]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[18]_s0  (
+	.D(hwdata[18]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[18]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[18]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[19]_s0  (
+	.D(hwdata[19]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[19]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[19]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[20]_s0  (
+	.D(hwdata[20]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[20]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[20]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[21]_s0  (
+	.D(hwdata[21]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[21]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[21]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[22]_s0  (
+	.D(hwdata[22]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[22]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[22]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[23]_s0  (
+	.D(hwdata[23]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[23]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[23]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[24]_s0  (
+	.D(hwdata[24]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[24]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[24]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[25]_s0  (
+	.D(hwdata[25]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[25]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[25]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[26]_s0  (
+	.D(hwdata[26]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[26]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[26]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[27]_s0  (
+	.D(hwdata[27]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[27]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[27]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[28]_s0  (
+	.D(hwdata[28]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[28]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[28]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[29]_s0  (
+	.D(hwdata[29]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[29]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[29]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[30]_s0  (
+	.D(hwdata[30]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[30]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[30]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[31]_s0  (
+	.D(hwdata[31]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_78 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[31]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_0_G[31]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[0]_s0  (
+	.D(hwdata[0]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[0]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[0]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[1]_s0  (
+	.D(hwdata[1]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[1]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[1]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[2]_s0  (
+	.D(hwdata[2]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[2]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[2]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[3]_s0  (
+	.D(hwdata[3]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[3]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[3]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[4]_s0  (
+	.D(hwdata[4]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[4]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[4]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[5]_s0  (
+	.D(hwdata[5]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[5]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[5]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[6]_s0  (
+	.D(hwdata[6]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[6]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[6]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[7]_s0  (
+	.D(hwdata[7]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[7]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[7]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[8]_s0  (
+	.D(hwdata[8]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[8]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[8]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[9]_s0  (
+	.D(hwdata[9]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[9]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[9]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[10]_s0  (
+	.D(hwdata[10]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[10]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[10]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[11]_s0  (
+	.D(hwdata[11]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[11]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[11]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[12]_s0  (
+	.D(hwdata[12]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[12]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[12]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[13]_s0  (
+	.D(hwdata[13]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[13]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[13]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[14]_s0  (
+	.D(hwdata[14]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[14]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[14]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[15]_s0  (
+	.D(hwdata[15]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[15]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[15]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[16]_s0  (
+	.D(hwdata[16]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[16]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[16]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[17]_s0  (
+	.D(hwdata[17]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[17]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[17]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[18]_s0  (
+	.D(hwdata[18]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[18]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[18]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[19]_s0  (
+	.D(hwdata[19]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[19]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[19]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[20]_s0  (
+	.D(hwdata[20]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[20]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[20]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[21]_s0  (
+	.D(hwdata[21]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[21]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[21]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[22]_s0  (
+	.D(hwdata[22]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[22]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[22]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[23]_s0  (
+	.D(hwdata[23]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[23]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[23]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[24]_s0  (
+	.D(hwdata[24]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[24]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[24]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[25]_s0  (
+	.D(hwdata[25]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[25]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[25]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[26]_s0  (
+	.D(hwdata[26]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[26]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[26]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[27]_s0  (
+	.D(hwdata[27]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[27]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[27]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[28]_s0  (
+	.D(hwdata[28]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[28]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[28]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[29]_s0  (
+	.D(hwdata[29]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[29]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[29]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[30]_s0  (
+	.D(hwdata[30]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[30]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[30]_s0 .INIT=1'b0;
+DFFRE \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[31]_s0  (
+	.D(hwdata[31]),
+	.CLK(hclk),
+	.CE(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_76 ),
+	.RESET(GND),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[31]_4 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/mem_mem_RAMREG_1_G[31]_s0 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/u_wdata_fifo/wr_ptr_0_s2  (
+	.D(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n14_15 ),
+	.CLK(hclk),
+	.CE(VCC),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n125_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/wr_ptr [0])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/wr_ptr_0_s2 .INIT=1'b0;
+DFFCE \u_AHB_to_APB_32_bridge/u_wdata_fifo/wr_ptr_1_s1  (
+	.D(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n13_8 ),
+	.CLK(hclk),
+	.CE(VCC),
+	.CLEAR(\u_AHB_to_APB_32_bridge/n125_6 ),
+	.Q(\u_AHB_to_APB_32_bridge/u_wdata_fifo/wr_ptr [1])
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/wr_ptr_1_s1 .INIT=1'b0;
+LUT1 \u_AHB_to_APB_32_bridge/u_wdata_fifo/n41_s5  (
+	.I0(\u_AHB_to_APB_32_bridge/u_wdata_fifo/rd_ptr [0]),
+	.F(\u_AHB_to_APB_32_bridge/u_wdata_fifo/n41_10 )
+);
+defparam \u_AHB_to_APB_32_bridge/u_wdata_fifo/n41_s5 .INIT=2'h1;
+endmodule

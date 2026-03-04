@@ -1,0 +1,56 @@
+memory-map:
+  bus: apb-32
+  name: sysinfo_regs
+  description: System Information Memory Map
+  children:
+    - reg:
+        name: magic
+        description: Unique magic number for identification
+        width: 32
+        access: ro
+    - reg:
+        name: mfg_code_A
+        description: Manufacturer Code A
+        width: 32
+        access: ro
+    - reg:
+        name: mfg_code_B
+        description: Manufacturer Code B
+        width: 32
+        access: ro
+    - reg:
+        name: version
+        description: Firmware Version (Major.Minor.Patch)
+        width: 32
+        access: ro
+        children:
+          - field:
+              name: patch
+              description: Patch version
+              range: 7-0
+          - field:
+              name: minor
+              description: Minor version
+              range: 15-8
+          - field:
+              name: major
+              description: Major version
+              range: 31-16
+    - reg:
+        name: cheby_version
+        description: Cheby Version (Major.Minor.Patch)
+        width: 32
+        access: ro
+        children:
+          - field:
+              name: patch
+              description: Patch version
+              range: 7-0
+          - field:
+              name: minor
+              description: Minor version
+              range: 15-8
+          - field:
+              name: major
+              description: Major version
+              range: 31-16

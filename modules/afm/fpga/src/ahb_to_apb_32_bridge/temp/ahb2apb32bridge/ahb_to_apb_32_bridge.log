@@ -1,0 +1,36 @@
+GowinSynthesis start
+Running parser ...
+Analyzing Verilog file '/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge_Top.v'
+Analyzing included file 'config.vh'("/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge_Top.v":1)
+Back to file '/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge_Top.v'("/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge_Top.v":1)
+Analyzing included file '/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/const.vh'("/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge_Top.v":2)
+Back to file '/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge_Top.v'("/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge_Top.v":2)
+Analyzing Verilog file '/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge.v'
+Analyzing included file 'config.vh'("/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge.v":588)
+Back to file '/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge.v'("/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge.v":588)
+Analyzing included file '/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/const.vh'("/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge.v":588)
+Back to file '/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge.v'("/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge.v":588)
+Compiling module 'AHB_to_APB_32_Bridge_Top'("/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge_Top.v":4)
+Compiling module '**'("/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge.v":588)
+Extracting RAM for identifier '**'("/home/akiel/Downloads/Gowin_V1.9.12.01_linux/IDE/ipcore/AHB2APB32Bridge/data/AHB_to_APB_32_bridge.v":588)
+NOTE  (EX0101) : Current top module is "AHB_to_APB_32_Bridge_Top"
+[5%] Running netlist conversion ...
+Running device independent optimization ...
+[10%] Optimizing Phase 0 completed
+[15%] Optimizing Phase 1 completed
+[25%] Optimizing Phase 2 completed
+Running inference ...
+[30%] Inferring Phase 0 completed
+[40%] Inferring Phase 1 completed
+[50%] Inferring Phase 2 completed
+[55%] Inferring Phase 3 completed
+Running technical mapping ...
+[60%] Tech-Mapping Phase 0 completed
+[65%] Tech-Mapping Phase 1 completed
+[75%] Tech-Mapping Phase 2 completed
+[80%] Tech-Mapping Phase 3 completed
+[90%] Tech-Mapping Phase 4 completed
+[95%] Generate netlist file "/home/akiel/trunk/pub/afm/src/ahb_to_apb_32_bridge/temp/ahb2apb32bridge/ahb_to_apb_32_bridge.vg" completed
+Generate template file "/home/akiel/trunk/pub/afm/src/ahb_to_apb_32_bridge/temp/ahb2apb32bridge/ahb_to_apb_32_bridge_tmp.v" completed
+[100%] Generate report file "/home/akiel/trunk/pub/afm/src/ahb_to_apb_32_bridge/temp/ahb2apb32bridge/ahb_to_apb_32_bridge_syn.rpt.html" completed
+GowinSynthesis finish
