@@ -4,7 +4,7 @@
 CAD work going on here right now: https://github.com/akielaries/signalmesh_CAD/
 
 # Details
-Don't forget to initialize submodules. ChibiOS is the RTOS used in this project
+Don't forget to initialize submodules. ChibiOS is the RTOS used in this project. The FPGA piece uses a custom low footprint RTOS.
 
 ```
 git submodule init
