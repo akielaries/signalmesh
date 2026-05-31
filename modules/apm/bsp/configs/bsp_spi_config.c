@@ -56,4 +56,15 @@ void bsp_spi_init(void) {
   spiStart(&SPID1, &spi1_hw_config);
 
   bsp_printf("SPI MUX driver initialized\n");
+
+  /*
+   * QUADSPI pins for W25Q64 on bank 1, all AF9
+   * routed to ZIO headers CN8, CN9, CN10 on the Nucleo-H755ZI
+   */
+  palSetPadMode(GPIOB, 2,  PAL_MODE_ALTERNATE(9) | PAL_STM32_OSPEED_HIGHEST); // CLK   CN10
+  palSetPadMode(GPIOC, 11, PAL_MODE_ALTERNATE(9) | PAL_STM32_OSPEED_HIGHEST); // NCS   CN8
+  palSetPadMode(GPIOC, 9,  PAL_MODE_ALTERNATE(9) | PAL_STM32_OSPEED_HIGHEST); // IO0   CN8/CN9
+  palSetPadMode(GPIOC, 10, PAL_MODE_ALTERNATE(9) | PAL_STM32_OSPEED_HIGHEST); // IO1   CN8
+  palSetPadMode(GPIOE, 2,  PAL_MODE_ALTERNATE(9) | PAL_STM32_OSPEED_HIGHEST); // IO2   CN9
+  palSetPadMode(GPIOD, 13,  PAL_MODE_ALTERNATE(9) | PAL_STM32_OSPEED_HIGHEST); // IO3   CN10
 }

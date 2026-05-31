@@ -91,7 +91,8 @@ set(SOURCES
     #./tests/bist_ina219_dual.c
     #./tests/bist_gm009605.c
     #./tests/bist_gm009605_ramp.c
-    ./tests/bist_icu.c
+    #./tests/bist_icu.c
+    ./tests/test_qspi_w25q64.c
     # ./tests/test_bme280.c
     #./tests/test_poll_all.c
     #./tests/test_storage.c
@@ -113,7 +114,11 @@ target_link_options(
   -Wl,-Map=${CMAKE_BINARY_DIR}/stm32h755_aam.map,--cref,--no-warn-mismatch
   -Wl,--gc-sections
   -Wl,--library-path=../${TOOLCHAIN}/ld
-  -Wl,--script=../${TOOLCHAIN}/ld/STM32H755xI_M7.ld
+  # pass the linker script as a driver-level -T, not -Wl,--script=
+  # debian's arm-none-eabi-gcc 15 defaults to picolibc and auto-injects
+  # -T picolibc.ld unless it sees a top-level -T flag; --script= is not
+  # recognized as -T, so picolibc.ld gets merged in and .text lands at 0x0
+  -T../${TOOLCHAIN}/ld/STM32H755xI_M7.ld
   -Wl,--defsym=__process_stack_size__=0x400
   -Wl,--defsym=__main_stack_size__=0x400)
 

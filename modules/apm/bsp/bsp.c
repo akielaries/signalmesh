@@ -53,7 +53,7 @@ device_t board_devices[] = {
     {
         .name = "ina219_main",
         .driver = &ina219_driver,
-        .bus = &I2CD4,
+        .bus = &I2CD1,
         .addr = 0x40,
         .priv = &ina219_dev_data[0],
         .is_active = false
@@ -61,7 +61,7 @@ device_t board_devices[] = {
     {
         .name = "ina219_aux",
         .driver = &ina219_driver,
-        .bus = &I2CD4,
+        .bus = &I2CD1,
         .addr = 0x45, // A0 and A1 pins grounded
         .priv = &ina219_dev_data[1],
         .is_active = false
@@ -69,7 +69,7 @@ device_t board_devices[] = {
     {
         .name = "ina3221",
         .driver = &ina3221_driver,
-        .bus = &I2CD4,
+        .bus = &I2CD1,
         .addr = 0x40, // Note: This may conflict with ina219_main
         .priv = &ina3221_dev_data,
         .is_active = false
@@ -77,7 +77,7 @@ device_t board_devices[] = {
     {
         .name = "aht2x",
         .driver = &aht2x_driver,
-        .bus = &I2CD4,
+        .bus = &I2CD1,
         .addr = 0x38,
         .priv = &aht2x_dev_data,
         .is_active = false
@@ -85,7 +85,7 @@ device_t board_devices[] = {
     {
         .name = "bme280",
         .driver = &bme280_driver,
-        .bus = &I2CD4,
+        .bus = &I2CD1,
         .addr = 0x76,
         .priv = NULL,
         .is_active = false
@@ -93,7 +93,7 @@ device_t board_devices[] = {
     {
         .name = "bh1750",
         .driver = &bh1750_driver,
-        .bus = &I2CD4,
+        .bus = &I2CD1,
         .addr = 0x23,
         .priv = &bh1750_dev_data,
         .is_active = false
@@ -101,7 +101,7 @@ device_t board_devices[] = {
     {
         .name = "24lc256",
         .driver = &eeprom_24lc256_driver,
-        .bus = &I2CD4,
+        .bus = &I2CD1,
         .addr = 0x50,
         .priv = &eeprom_24lc256_dev_data,
         .is_active = false
@@ -125,7 +125,7 @@ device_t board_devices[] = {
     {
         .name = "gm009605",
         .driver = &gm009605_driver,
-        .bus = &I2CD4,
+        .bus = &I2CD1,
         .addr = 0x3C,
         .priv = &gm009605_dev_data,
         .is_active = false
@@ -133,7 +133,7 @@ device_t board_devices[] = {
     {
         .name = "lcd2004",
         .driver = &lcd2004_driver,
-        .bus = &I2CD4,
+        .bus = &I2CD1,
         .addr = 0x27,
         .priv = &lcd2004_dev_data,
         .is_active = false
@@ -183,8 +183,8 @@ void bsp_init(void) {
   bsp_spi_init();
   bsp_printf("SPI initialized\n");
 
-  init_devices();
-  bsp_printf("initialized devices\n");
+  //init_devices();
+  //bsp_printf("initialized devices\n");
 
 /*
   // these should be configured more elegantly like how the i2c stuff is configured

@@ -5,6 +5,8 @@
 #include "bsp/utils/bsp_io.h"
 #include "bsp/configs/bsp_uart_config.h"
 
+
+
 /* 100KHz timing */
 static const I2CConfig i2c_config = {
   .timingr = 0x00C0EAFF,
@@ -12,7 +14,10 @@ static const I2CConfig i2c_config = {
   // STM32_TIMINGR_SCLDEL(0x7U) | STM32_TIMINGR_SDADEL(0x0U) |
   // STM32_TIMINGR_SCLH(0x75U)  | STM32_TIMINGR_SCLL(0xB1U),
   .cr1 = 0,
-  .cr2 = 0};
+  .cr2 = 0,
+};
+
+
 
 static void i2c_scan(I2CDriver *i2c_driver) {
   bsp_printf("Scanning I2C bus...\r\n");
@@ -20,7 +25,7 @@ static void i2c_scan(I2CDriver *i2c_driver) {
   int count     = 0;
 
   for (uint8_t addr = 1; addr < 128; addr++) {
-    // bsp_printf("scanning addr 0x%X\n", addr);
+    //bsp_printf("scanning addr 0x%02X ...\r\n", addr);
     msg_t status = i2cMasterTransmitTimeout(i2c_driver,
                                             addr,
                                             &dummy,
@@ -52,28 +57,29 @@ int main(void) {
   bsp_init();
 
   bsp_printf("--- Starting I2C Scan Test ---\r\n");
-  // palSetPadMode(GPIOB, 8,  PAL_MODE_ALTERNATE(4) |
-  //                        PAL_STM32_OTYPE_OPENDRAIN |
-  //                        PAL_STM32_PUPDR_PULLUP);
+  palSetPadMode(GPIOB, 8,  PAL_MODE_ALTERNATE(4) |
+                          PAL_STM32_OTYPE_OPENDRAIN |
+                          PAL_STM32_PUPDR_PULLUP);
 
-  // palSetPadMode(GPIOB, 9,  PAL_MODE_ALTERNATE(4) |
-  //                        PAL_STM32_OTYPE_OPENDRAIN |
-  //                        PAL_STM32_PUPDR_PULLUP);
-  palSetPadMode(GPIOD,
-                12,
+  palSetPadMode(GPIOB, 9,  PAL_MODE_ALTERNATE(4) |
+                          PAL_STM32_OTYPE_OPENDRAIN |
+                          PAL_STM32_PUPDR_PULLUP);
+  /*
+  palSetPadMode(GPIOF,
+                0,
                 PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
                   PAL_STM32_PUPDR_PULLUP);
-  palSetPadMode(GPIOD,
-                13,
+  palSetPadMode(GPIOF,
+                1,
                 PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN |
                   PAL_STM32_PUPDR_PULLUP);
+  */
+  rccEnableI2C1(true);
 
-  rccEnableI2C4(true);
-
-  i2cStart(&I2CD4, &i2c_config);
+  i2cStart(&I2CD1, &i2c_config);
   chThdSleepMilliseconds(50);
 
-  i2c_scan(&I2CD4);
+  i2c_scan(&I2CD1);
 
   while (true) {
     chThdSleepMilliseconds(1000);

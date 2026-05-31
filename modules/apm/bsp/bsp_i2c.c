@@ -11,26 +11,27 @@ const I2CConfig bsp_i2c_config = {
   .cr2 = 0
 };
 
-// Use I2C4 as the default I2C driver
-I2CDriver *const bsp_i2c_driver = &I2CD4;
+I2CDriver *const bsp_i2c_driver = &I2CD1;
 
 
 void bsp_i2c_init(void) {
-    // I2C4
-    palSetPadMode(GPIOD,
-                  12,
-                  PAL_MODE_ALTERNATE(4) |
-                  PAL_STM32_OTYPE_OPENDRAIN |
-                  PAL_STM32_PUPDR_PULLUP);
-    palSetPadMode(GPIOD,
-                  13,
-                  PAL_MODE_ALTERNATE(4) |
-                  PAL_STM32_OTYPE_OPENDRAIN |
-                  PAL_STM32_PUPDR_PULLUP);
+  // I2C4 is PD12 and PD13
+  // I2C2 is PF0 (SDA) and PF1 (SCL)
+  // I2C1 is PB9 (SDA) and PB8 (SCL)
+  palSetPadMode(GPIOB,
+                8,
+                PAL_MODE_ALTERNATE(4) |
+                PAL_STM32_OTYPE_OPENDRAIN |
+                PAL_STM32_PUPDR_PULLUP);
+  palSetPadMode(GPIOB,
+                9,
+                PAL_MODE_ALTERNATE(4) |
+                PAL_STM32_OTYPE_OPENDRAIN |
+                PAL_STM32_PUPDR_PULLUP);
 
-    // reset clock control enable clocks
-    rccEnableI2C4(true);
+  // reset clock control enable clocks
+  rccEnableI2C1(true);
 
-    // start I2C drivers
-    i2cStart(bsp_i2c_driver, &bsp_i2c_config);
+  // start I2C drivers
+  i2cStart(bsp_i2c_driver, &bsp_i2c_config);
 }
