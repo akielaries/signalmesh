@@ -343,3 +343,234 @@ static int w25qxx_write(device_t *dev, uint32_t offset, const void *buf, size_t 
 
     return bytes_written;
 }
+
+// ===========================================================================
+// QSPI (ChibiOS WSPI) command-level operations. see w25qxx.h for cache and
+// reentrancy notes. these back the memory-mapped storage driver (qspi_memmap)
+// ===========================================================================
+
+#define W25QXX_QSPI_READ_DUMMY 8U
+#define W25Q_SR2_QE_BIT        0x02U
+
+// shared internal aligned buffers (cortex-m7 d-cache line is 32 bytes)
+CC_ALIGN_DATA(32) static uint8_t qspi_status[32];
+CC_ALIGN_DATA(32) static uint8_t qspi_bounce[W25QXX_PAGE_SIZE_BYTES];
+
+// 1-line opcode-only command (no address, no data)
+static void qspi_cmd_op_only(wspi_command_t *cmd, uint8_t op) {
+  cmd->cmd   = op;
+  cmd->addr  = 0U;
+  cmd->alt   = 0U;
+  cmd->dummy = 0U;
+  cmd->cfg   = WSPI_CFG_CMD_MODE_ONE_LINE | WSPI_CFG_ADDR_MODE_NONE |
+               WSPI_CFG_ALT_MODE_NONE | WSPI_CFG_DATA_MODE_NONE |
+               WSPI_CFG_CMD_SIZE_8;
+}
+
+// 1-line opcode + 1-line data read (jedec, status registers)
+static void qspi_cmd_read1(wspi_command_t *cmd, uint8_t op) {
+  cmd->cmd   = op;
+  cmd->addr  = 0U;
+  cmd->alt   = 0U;
+  cmd->dummy = 0U;
+  cmd->cfg   = WSPI_CFG_CMD_MODE_ONE_LINE | WSPI_CFG_ADDR_MODE_NONE |
+               WSPI_CFG_ALT_MODE_NONE | WSPI_CFG_DATA_MODE_ONE_LINE |
+               WSPI_CFG_CMD_SIZE_8;
+}
+
+bool w25qxx_qspi_lines_need_qe(w25qxx_qspi_lines_t lines) {
+  return lines == W25QXX_QSPI_QUAD;
+}
+
+void w25qxx_qspi_build_read_cmd(wspi_command_t *cmd,
+                                w25qxx_qspi_lines_t lines, uint32_t addr) {
+  uint8_t op;
+  uint32_t data_mode;
+  uint8_t dummy;
+
+  switch (lines) {
+    case W25QXX_QSPI_DUAL:
+      op        = 0x3BU; // fast read dual output (1-1-2)
+      data_mode = WSPI_CFG_DATA_MODE_TWO_LINES;
+      dummy     = W25QXX_QSPI_READ_DUMMY;
+      break;
+    case W25QXX_QSPI_QUAD:
+      op        = 0x6BU; // fast read quad output (1-1-4)
+      data_mode = WSPI_CFG_DATA_MODE_FOUR_LINES;
+      dummy     = W25QXX_QSPI_READ_DUMMY;
+      break;
+    case W25QXX_QSPI_SINGLE:
+    default:
+      // 0x03 read data: 0 dummy, chip drives continuously. more robust on a
+      // marginal bus than 0x0B fast read (which has a dummy turnaround phase)
+      op        = W25QXX_CMD_READ_DATA; // 0x03
+      data_mode = WSPI_CFG_DATA_MODE_ONE_LINE;
+      dummy     = 0U;
+      break;
+  }
+
+  cmd->cmd   = op;
+  cmd->addr  = addr;
+  cmd->alt   = 0U;
+  cmd->dummy = dummy;
+  cmd->cfg   = WSPI_CFG_CMD_MODE_ONE_LINE | WSPI_CFG_ADDR_MODE_ONE_LINE |
+               WSPI_CFG_ADDR_SIZE_24 | WSPI_CFG_ALT_MODE_NONE |
+               data_mode | WSPI_CFG_CMD_SIZE_8;
+}
+
+bool w25qxx_qspi_reset(WSPIDriver *wspi) {
+  wspi_command_t cmd;
+
+  qspi_cmd_op_only(&cmd, W25QXX_CMD_RESET_ENABLE); // 0x66
+  if (wspiCommand(wspi, &cmd) != MSG_OK) {
+    return false;
+  }
+  qspi_cmd_op_only(&cmd, W25QXX_CMD_RESET_DEVICE); // 0x99
+  if (wspiCommand(wspi, &cmd) != MSG_OK) {
+    return false;
+  }
+  chThdSleepMilliseconds(1); // tRST
+  return true;
+}
+
+bool w25qxx_qspi_read_jedec(WSPIDriver *wspi, uint8_t out[3]) {
+  wspi_command_t cmd;
+
+  qspi_cmd_read1(&cmd, W25QXX_CMD_READ_JEDEC_ID); // 0x9F
+  if (wspiReceive(wspi, &cmd, 3U, qspi_status) != MSG_OK) {
+    return false;
+  }
+  cacheBufferInvalidate(qspi_status, 3U);
+  out[0] = qspi_status[0];
+  out[1] = qspi_status[1];
+  out[2] = qspi_status[2];
+  return true;
+}
+
+static bool qspi_read_status(WSPIDriver *wspi, uint8_t op, uint8_t *val) {
+  wspi_command_t cmd;
+
+  qspi_cmd_read1(&cmd, op);
+  if (wspiReceive(wspi, &cmd, 1U, qspi_status) != MSG_OK) {
+    return false;
+  }
+  cacheBufferInvalidate(qspi_status, sizeof qspi_status);
+  *val = qspi_status[0];
+  return true;
+}
+
+static bool qspi_write_enable(WSPIDriver *wspi) {
+  wspi_command_t cmd;
+  qspi_cmd_op_only(&cmd, W25QXX_CMD_WRITE_ENABLE);
+  return wspiCommand(wspi, &cmd) == MSG_OK;
+}
+
+bool w25qxx_qspi_wait_idle(WSPIDriver *wspi, uint32_t timeout_ms) {
+  systime_t deadline = chVTGetSystemTimeX() + TIME_MS2I(timeout_ms);
+
+  do {
+    uint8_t sr1;
+    if (!qspi_read_status(wspi, W25QXX_CMD_READ_STATUS_REG1, &sr1)) {
+      return false;
+    }
+    if ((sr1 & W25QXX_STATUS_BUSY) == 0U) {
+      return true;
+    }
+    chThdSleepMilliseconds(1);
+  } while (chVTGetSystemTimeX() < deadline);
+  return false;
+}
+
+bool w25qxx_qspi_set_quad_enable(WSPIDriver *wspi) {
+  wspi_command_t cmd;
+  uint8_t sr2;
+
+  if (!qspi_read_status(wspi, W25QXX_CMD_READ_STATUS_REG2, &sr2)) { // 0x35
+    return false;
+  }
+  if (sr2 & W25Q_SR2_QE_BIT) {
+    return true; // already set; QE is non-volatile and persists across resets
+  }
+  if (!qspi_write_enable(wspi)) {
+    return false;
+  }
+  qspi_status[0] = (uint8_t)(sr2 | W25Q_SR2_QE_BIT);
+  cmd.cmd   = 0x31U; // write status register 2 (winbond extension)
+  cmd.addr  = 0U;
+  cmd.alt   = 0U;
+  cmd.dummy = 0U;
+  cmd.cfg   = WSPI_CFG_CMD_MODE_ONE_LINE | WSPI_CFG_ADDR_MODE_NONE |
+              WSPI_CFG_ALT_MODE_NONE | WSPI_CFG_DATA_MODE_ONE_LINE |
+              WSPI_CFG_CMD_SIZE_8;
+  cacheBufferFlush(qspi_status, sizeof qspi_status);
+  if (wspiSend(wspi, &cmd, 1U, qspi_status) != MSG_OK) {
+    return false;
+  }
+  return w25qxx_qspi_wait_idle(wspi, 1000);
+}
+
+bool w25qxx_qspi_erase_sector(WSPIDriver *wspi, uint32_t addr) {
+  wspi_command_t cmd;
+
+  if (!qspi_write_enable(wspi)) {
+    return false;
+  }
+  cmd.cmd   = W25QXX_CMD_SECTOR_ERASE; // 0x20
+  cmd.addr  = addr;
+  cmd.alt   = 0U;
+  cmd.dummy = 0U;
+  cmd.cfg   = WSPI_CFG_CMD_MODE_ONE_LINE | WSPI_CFG_ADDR_MODE_ONE_LINE |
+              WSPI_CFG_ADDR_SIZE_24 | WSPI_CFG_ALT_MODE_NONE |
+              WSPI_CFG_DATA_MODE_NONE | WSPI_CFG_CMD_SIZE_8;
+  if (wspiCommand(wspi, &cmd) != MSG_OK) {
+    return false;
+  }
+  return w25qxx_qspi_wait_idle(wspi, 1000);
+}
+
+bool w25qxx_qspi_program_page(WSPIDriver *wspi, uint32_t addr,
+                              const uint8_t *buf, size_t len) {
+  wspi_command_t cmd;
+
+  if (len == 0U || len > W25QXX_PAGE_SIZE_BYTES) {
+    return false;
+  }
+  if (!qspi_write_enable(wspi)) {
+    return false;
+  }
+  // bounce through an aligned buffer so callers need not align their data
+  memcpy(qspi_bounce, buf, len);
+  cacheBufferFlush(qspi_bounce, sizeof qspi_bounce);
+  cmd.cmd   = W25QXX_CMD_PAGE_PROGRAM; // 0x02
+  cmd.addr  = addr;
+  cmd.alt   = 0U;
+  cmd.dummy = 0U;
+  cmd.cfg   = WSPI_CFG_CMD_MODE_ONE_LINE | WSPI_CFG_ADDR_MODE_ONE_LINE |
+              WSPI_CFG_ADDR_SIZE_24 | WSPI_CFG_ALT_MODE_NONE |
+              WSPI_CFG_DATA_MODE_ONE_LINE | WSPI_CFG_CMD_SIZE_8;
+  if (wspiSend(wspi, &cmd, len, qspi_bounce) != MSG_OK) {
+    return false;
+  }
+  return w25qxx_qspi_wait_idle(wspi, 100);
+}
+
+bool w25qxx_qspi_read(WSPIDriver *wspi, w25qxx_qspi_lines_t lines,
+                      uint32_t addr, uint8_t *buf, size_t len) {
+  // read in page-sized chunks through the aligned bounce buffer so callers
+  // need not align their destination
+  while (len > 0U) {
+    size_t chunk = (len > sizeof qspi_bounce) ? sizeof qspi_bounce : len;
+    wspi_command_t cmd;
+
+    w25qxx_qspi_build_read_cmd(&cmd, lines, addr);
+    if (wspiReceive(wspi, &cmd, chunk, qspi_bounce) != MSG_OK) {
+      return false;
+    }
+    cacheBufferInvalidate(qspi_bounce, sizeof qspi_bounce);
+    memcpy(buf, qspi_bounce, chunk);
+    addr += chunk;
+    buf  += chunk;
+    len  -= chunk;
+  }
+  return true;
+}

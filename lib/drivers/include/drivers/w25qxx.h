@@ -97,6 +97,46 @@ int w25qxx_chip_erase(w25qxx_t *flash_dev);
 int w25qxx_sector_erase(w25qxx_t *flash_dev, uint32_t sector_addr);
 int w25qxx_block_erase(w25qxx_t *flash_dev, uint32_t block_addr, uint32_t block_size);
 
+// ---------------------------------------------------------------------------
+// QSPI (ChibiOS WSPI) command-level operations
+//
+// these drive the part over the dedicated QUADSPI peripheral (WSPIDriver),
+// separate from the SPI-mux path above. they exist to back the memory-mapped
+// storage driver in qspi_memmap.h. all reads/writes are cache-correct:
+// AXI SRAM is cacheable and the cortex-m7 d-cache is on, while the WSPI LLD
+// does no cache maintenance, so these helpers invalidate after a receive and
+// flush before a send. control buffers are internal; callers need not align
+// their own buffers (page data is bounced through an aligned buffer)
+//
+// not reentrant: shared internal aligned buffers, single-threaded use only
+// ---------------------------------------------------------------------------
+
+// number of data lines used in the fast-read data phase
+typedef enum {
+  W25QXX_QSPI_SINGLE = 0, // 1-1-1, opcode 0x0B, 8 dummy, no QE needed
+  W25QXX_QSPI_DUAL,       // 1-1-2, opcode 0x3B, 8 dummy, no QE needed
+  W25QXX_QSPI_QUAD,       // 1-1-4, opcode 0x6B, 8 dummy, QE must be set
+} w25qxx_qspi_lines_t;
+
+// build the fast-read command descriptor for the given line mode and address.
+// shared by indirect reads and by memory-mapped mode (wspiMapFlash)
+void w25qxx_qspi_build_read_cmd(wspi_command_t *cmd,
+                                w25qxx_qspi_lines_t lines, uint32_t addr);
+
+// true if the given line mode requires the QE bit to be set first
+bool w25qxx_qspi_lines_need_qe(w25qxx_qspi_lines_t lines);
+
+// command-level ops over the WSPI driver, all return true on success
+bool w25qxx_qspi_reset(WSPIDriver *wspi);
+bool w25qxx_qspi_read_jedec(WSPIDriver *wspi, uint8_t out[3]);
+bool w25qxx_qspi_wait_idle(WSPIDriver *wspi, uint32_t timeout_ms);
+bool w25qxx_qspi_set_quad_enable(WSPIDriver *wspi);
+bool w25qxx_qspi_erase_sector(WSPIDriver *wspi, uint32_t addr);
+bool w25qxx_qspi_program_page(WSPIDriver *wspi, uint32_t addr,
+                              const uint8_t *buf, size_t len);
+bool w25qxx_qspi_read(WSPIDriver *wspi, w25qxx_qspi_lines_t lines,
+                      uint32_t addr, uint8_t *buf, size_t len);
+
 #ifdef __cplusplus
 }
 #endif

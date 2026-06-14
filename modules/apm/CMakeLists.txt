@@ -82,6 +82,7 @@ set(SOURCES
 
     ${DRIVERS_SRC_DIR}/24lc256.c
     ${DRIVERS_SRC_DIR}/w25qxx.c
+    ${DRIVERS_SRC_DIR}/qspi_memmap.c
     ${DRIVERS_SRC_DIR}/gm009605.c
     ${DRIVERS_SRC_DIR}/lcd2004.c
 
@@ -92,7 +93,8 @@ set(SOURCES
     #./tests/bist_gm009605.c
     #./tests/bist_gm009605_ramp.c
     #./tests/bist_icu.c
-    ./tests/test_qspi_w25q64.c
+    # ./tests/test_qspi_w25q64.c   # low-level reference for the qspi bring-up
+    ./tests/test_qspi_memmap_dual.c
     # ./tests/test_bme280.c
     #./tests/test_poll_all.c
     #./tests/test_storage.c
