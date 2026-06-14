@@ -62,9 +62,14 @@ void bsp_spi_init(void) {
    * routed to ZIO headers CN8, CN9, CN10 on the Nucleo-H755ZI
    */
   palSetPadMode(GPIOB, 2,  PAL_MODE_ALTERNATE(9) | PAL_STM32_OSPEED_HIGHEST); // CLK   CN10
-  palSetPadMode(GPIOC, 11, PAL_MODE_ALTERNATE(9) | PAL_STM32_OSPEED_HIGHEST); // NCS   CN8
-  palSetPadMode(GPIOC, 9,  PAL_MODE_ALTERNATE(9) | PAL_STM32_OSPEED_HIGHEST); // IO0   CN8/CN9
-  palSetPadMode(GPIOC, 10, PAL_MODE_ALTERNATE(9) | PAL_STM32_OSPEED_HIGHEST); // IO1   CN8
-  palSetPadMode(GPIOE, 2,  PAL_MODE_ALTERNATE(9) | PAL_STM32_OSPEED_HIGHEST); // IO2   CN9
-  palSetPadMode(GPIOD, 13,  PAL_MODE_ALTERNATE(9) | PAL_STM32_OSPEED_HIGHEST); // IO3   CN10
+  // NCS must be on a BK1_NCS-capable pin. PC11 AF9 is BK2_NCS (bank 2) and
+  // the peripheral never asserts it in single-bank mode - this caused CS to
+  // stay high on the saleae and JEDEC reads of 0x00. PG6 AF10 is BK1_NCS,
+  // confirmed by ST H735 board file and ChibiOS forum thread t=5919.
+  // PG6 lives on morpho CN12, needs one jumper off the ZIO headers
+  palSetPadMode(GPIOG, 6,  PAL_MODE_ALTERNATE(10) | PAL_STM32_OSPEED_HIGHEST); // NCS   CN12
+  palSetPadMode(GPIOD, 11, PAL_MODE_ALTERNATE(9) | PAL_STM32_OSPEED_HIGHEST); // IO0
+  palSetPadMode(GPIOD, 12, PAL_MODE_ALTERNATE(9) | PAL_STM32_OSPEED_HIGHEST); // IO1
+  palSetPadMode(GPIOE, 2,  PAL_MODE_ALTERNATE(9) | PAL_STM32_OSPEED_HIGHEST | PAL_STM32_PUPDR_PULLUP); // IO2/WP    CN9
+  palSetPadMode(GPIOD, 13, PAL_MODE_ALTERNATE(9) | PAL_STM32_OSPEED_HIGHEST | PAL_STM32_PUPDR_PULLUP); // IO3/HOLD  CN10
 }

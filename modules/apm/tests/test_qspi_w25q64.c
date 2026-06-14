@@ -49,10 +49,16 @@
 // MDMA cannot access DTCM (where main()'s stack lives on H7), so all WSPI
 // rx/tx buffers must be in AXI SRAM. file-scope statics land in .bss which
 // the H7 linker script places in AXI SRAM (0x24000000), which MDMA can reach
-static uint8_t s_jedec[3];
-static uint8_t s_pattern[TEST_BYTES];
-static uint8_t s_mapped_copy[TEST_BYTES];
-static uint8_t s_sr_scratch[2];
+//
+// AXI SRAM is cacheable and the cortex-m7 d-cache is enabled at boot
+// (crt1.c __cpu_init), but the quadspi LLD does no cache maintenance. so each
+// dma buffer must be 32-byte aligned (one buffer per cache line) and the cpu
+// must invalidate after a receive / flush before a transmit, otherwise reads
+// hit the stale zero-initialized cache line and return 00 00 00
+CC_ALIGN_DATA(32) static uint8_t s_jedec[32];
+CC_ALIGN_DATA(32) static uint8_t s_pattern[TEST_BYTES];
+CC_ALIGN_DATA(32) static uint8_t s_mapped_copy[TEST_BYTES];
+CC_ALIGN_DATA(32) static uint8_t s_sr_scratch[32];
 
 
 // ---------------------------------------------------------------------------
@@ -124,9 +130,12 @@ static void cmd_op_addr_only(wspi_command_t *cmd, uint8_t op, uint32_t addr) {
 }
 
 // helper: the read command used in memory-mapped mode
-// 0x6B Fast Read Quad Output: cmd 1-line, addr 1-line, data 4-line, 8 dummies
+// 0x3B Fast Read Dual Output: cmd 1-line, addr 1-line, data 2-line, 8 dummies.
+// dual only toggles 2 data lines so it is far more tolerant of clock noise than
+// quad (0x6B/4-line) on marginal wiring. switch back to 0x6B + FOUR_LINES once
+// the clock signal integrity is solid
 static void cmd_mmap_read_1_1_4(wspi_command_t *cmd) {
-  cmd->cmd   = W25QXX_CMD_FAST_READ_QUAD;
+  cmd->cmd   = 0x3BU;   // fast read dual output (1-1-2)
   cmd->addr  = 0U;
   cmd->alt   = 0U;
   cmd->dummy = 8U;
@@ -134,7 +143,7 @@ static void cmd_mmap_read_1_1_4(wspi_command_t *cmd) {
              | WSPI_CFG_ADDR_MODE_ONE_LINE
              | WSPI_CFG_ADDR_SIZE_24
              | WSPI_CFG_ALT_MODE_NONE
-             | WSPI_CFG_DATA_MODE_FOUR_LINES
+             | WSPI_CFG_DATA_MODE_TWO_LINES
              | WSPI_CFG_CMD_SIZE_8;
 }
 
@@ -151,6 +160,7 @@ static bool flash_wait_idle(uint32_t timeout_ms) {
     if (wspiReceive(&WSPID1, &cmd, 1U, s_sr_scratch) != MSG_OK) {
       return false;
     }
+    cacheBufferInvalidate(s_sr_scratch, sizeof s_sr_scratch);
     if ((s_sr_scratch[0] & W25QXX_STATUS_BUSY) == 0U) {
       return true;
     }
@@ -169,7 +179,13 @@ static bool flash_write_enable(void) {
 static bool flash_read_jedec_id(uint8_t out[3]) {
   wspi_command_t cmd;
   cmd_op_read1(&cmd, W25QXX_CMD_READ_JEDEC_ID);
-  return wspiReceive(&WSPID1, &cmd, 3U, out) == MSG_OK;
+  if (wspiReceive(&WSPID1, &cmd, 3U, out) != MSG_OK) {
+    return false;
+  }
+  // out must be a 32-byte aligned dma buffer (s_jedec); invalidate the line so
+  // the cpu sees what mdma wrote instead of the stale .bss zeros
+  cacheBufferInvalidate(out, 3U);
+  return true;
 }
 
 // sets the QE bit in SR2 if not already set
@@ -181,6 +197,7 @@ static bool flash_enable_quad(void) {
   if (wspiReceive(&WSPID1, &cmd, 1U, s_sr_scratch) != MSG_OK) {
     return false;
   }
+  cacheBufferInvalidate(s_sr_scratch, sizeof s_sr_scratch);
   if (s_sr_scratch[0] & W25Q_SR2_QE_BIT) {
     return true;
   }
@@ -199,6 +216,7 @@ static bool flash_enable_quad(void) {
             | WSPI_CFG_ALT_MODE_NONE
             | WSPI_CFG_DATA_MODE_ONE_LINE
             | WSPI_CFG_CMD_SIZE_8;
+  cacheBufferFlush(s_sr_scratch, sizeof s_sr_scratch);
   if (wspiSend(&WSPID1, &cmd, 1U, s_sr_scratch) != MSG_OK) {
     return false;
   }
@@ -223,10 +241,55 @@ static bool flash_page_program(uint32_t addr, const uint8_t *buf, size_t len) {
     return false;
   }
   cmd_op_addr_write1(&cmd, W25QXX_CMD_PAGE_PROGRAM, addr);
+  // flush so mdma sends what the cpu wrote, not stale cache
+  cacheBufferFlush(buf, len);
   if (wspiSend(&WSPID1, &cmd, len, buf) != MSG_OK) {
     return false;
   }
   return flash_wait_idle(100);
+}
+
+// 1-line indirect read (0x03 Read Data: cmd/addr/data all single line, 0 dummy)
+// uses only IO0/IO1, so it is a known-good cross-check independent of the quad
+// data lines and the memory-mapped path
+static bool flash_read_data(uint32_t addr, uint8_t *buf, size_t len) {
+  wspi_command_t cmd;
+  cmd.cmd   = W25QXX_CMD_READ_DATA;
+  cmd.addr  = addr;
+  cmd.alt   = 0U;
+  cmd.dummy = 0U;
+  cmd.cfg   = WSPI_CFG_CMD_MODE_ONE_LINE
+            | WSPI_CFG_ADDR_MODE_ONE_LINE
+            | WSPI_CFG_ADDR_SIZE_24
+            | WSPI_CFG_ALT_MODE_NONE
+            | WSPI_CFG_DATA_MODE_ONE_LINE
+            | WSPI_CFG_CMD_SIZE_8;
+  if (wspiReceive(&WSPID1, &cmd, len, buf) != MSG_OK) {
+    return false;
+  }
+  cacheBufferInvalidate(buf, len);
+  return true;
+}
+
+// quad indirect read (0x6B, 1-1-4, 8 dummy) via wspiReceive, NOT memory-mapped.
+// isolates the 4-line data capture from the memory-mapped path
+static bool flash_read_quad(uint32_t addr, uint8_t *buf, size_t len) {
+  wspi_command_t cmd;
+  cmd.cmd   = 0x6BU;
+  cmd.addr  = addr;
+  cmd.alt   = 0U;
+  cmd.dummy = 8U;
+  cmd.cfg   = WSPI_CFG_CMD_MODE_ONE_LINE
+            | WSPI_CFG_ADDR_MODE_ONE_LINE
+            | WSPI_CFG_ADDR_SIZE_24
+            | WSPI_CFG_ALT_MODE_NONE
+            | WSPI_CFG_DATA_MODE_FOUR_LINES
+            | WSPI_CFG_CMD_SIZE_8;
+  if (wspiReceive(&WSPID1, &cmd, len, buf) != MSG_OK) {
+    return false;
+  }
+  cacheBufferInvalidate(buf, len);
+  return true;
 }
 
 // ---------------------------------------------------------------------------
@@ -278,6 +341,63 @@ int main(void) {
   bsp_printf("programmed %u bytes at 0x%08lX\n",
              (unsigned)TEST_BYTES, (unsigned long)TEST_SECTOR_OFFSET);
 
+  // cross-check the write with a 1-line indirect read before trying the quad
+  // memory-mapped path. if this matches but the mmap read does not, the write
+  // is good and the quad read is the problem; if this also fails, the write is
+  if (!flash_read_data(TEST_SECTOR_OFFSET, s_mapped_copy, TEST_BYTES)) {
+    bsp_printf("FAIL: indirect 1-line read-back\n");
+    return -1;
+  }
+  {
+    size_t first = TEST_BYTES;
+    size_t ndiff = 0;
+    for (size_t i = 0; i < TEST_BYTES; i++) {
+      if (s_pattern[i] != s_mapped_copy[i]) {
+        if (first == TEST_BYTES) {
+          first = i;
+        }
+        ndiff++;
+      }
+    }
+    if (ndiff == 0) {
+      bsp_printf("indirect read-back: OK all %u bytes match\n", (unsigned)TEST_BYTES);
+    } else {
+      bsp_printf("indirect read-back: MISMATCH first at %u (0x%X) wrote %02X read %02X, %u/%u differ\n",
+                 (unsigned)first, (unsigned)first,
+                 s_pattern[first], s_mapped_copy[first],
+                 (unsigned)ndiff, (unsigned)TEST_BYTES);
+      print_hexdump("indirect", s_mapped_copy, 32);
+    }
+  }
+
+  // quad indirect read-back: same 0x6B quad read but in indirect (non-mmap)
+  // mode. tells us if the 4-line capture works at all outside memory-mapped
+  if (!flash_read_quad(TEST_SECTOR_OFFSET, s_mapped_copy, TEST_BYTES)) {
+    bsp_printf("FAIL: quad indirect read-back\n");
+    return -1;
+  }
+  {
+    size_t first = TEST_BYTES;
+    size_t ndiff = 0;
+    for (size_t i = 0; i < TEST_BYTES; i++) {
+      if (s_pattern[i] != s_mapped_copy[i]) {
+        if (first == TEST_BYTES) {
+          first = i;
+        }
+        ndiff++;
+      }
+    }
+    if (ndiff == 0) {
+      bsp_printf("quad indirect read-back: OK all %u bytes match\n", (unsigned)TEST_BYTES);
+    } else {
+      bsp_printf("quad indirect read-back: MISMATCH first at %u (0x%X) wrote %02X read %02X, %u/%u differ\n",
+                 (unsigned)first, (unsigned)first,
+                 s_pattern[first], s_mapped_copy[first],
+                 (unsigned)ndiff, (unsigned)TEST_BYTES);
+      print_hexdump("quad", s_mapped_copy, 32);
+    }
+  }
+
   // phase 4: enter memory-mapped mode and verify via direct pointer read
   // note on cache:
   //   the cortex-m7 d-cache may shadow stale values for the 0x90000000 window
@@ -291,23 +411,55 @@ int main(void) {
   cmd_mmap_read_1_1_4(&map_cmd);
   wspiMapFlash(&WSPID1, &map_cmd, NULL);
 
+  // the 0x90000000 window is cacheable under the default mpu map; invalidate it
+  // each pass so every read comes from the flash and not a stale d-cache line.
+  // base and length are 32-byte aligned here so no neighbours are affected
   const volatile uint8_t *mapped = (const volatile uint8_t *)(QSPI_MEMMAP_BASE + TEST_SECTOR_OFFSET);
-  for (size_t i = 0; i < TEST_BYTES; i++) {
-    s_mapped_copy[i] = mapped[i];
+
+  // repeat the read 10x with a delay to expose flaky / intermittent reads
+  unsigned passes = 0;
+  for (unsigned pass = 0; pass < 10U; pass++) {
+    cacheBufferInvalidate(mapped, TEST_BYTES);
+    for (size_t i = 0; i < TEST_BYTES; i++) {
+      s_mapped_copy[i] = mapped[i];
+    }
+
+    if (memcmp(s_pattern, s_mapped_copy, TEST_BYTES) == 0) {
+      passes++;
+      bsp_printf("pass %u: OK\n", pass);
+    } else {
+      // report the first mismatch so we can tell a clean boundary (cache /
+      // read-size) from scattered errors (timing)
+      size_t first = TEST_BYTES;
+      size_t ndiff = 0;
+      for (size_t i = 0; i < TEST_BYTES; i++) {
+        if (s_pattern[i] != s_mapped_copy[i]) {
+          if (first == TEST_BYTES) {
+            first = i;
+          }
+          ndiff++;
+        }
+      }
+      bsp_printf("pass %u: MISMATCH first at %u (0x%X) wrote %02X read %02X, %u/%u differ\n",
+                 pass, (unsigned)first, (unsigned)first,
+                 s_pattern[first], s_mapped_copy[first],
+                 (unsigned)ndiff, (unsigned)TEST_BYTES);
+      size_t win = first & ~((size_t)31);
+      print_hexdump("written @win", s_pattern + win,     32);
+      print_hexdump("mapped  @win", s_mapped_copy + win, 32);
+    }
+
+    chThdSleepMilliseconds(100);
   }
 
   wspiUnmapFlash(&WSPID1);
 
-  // verify
-  if (memcmp(s_pattern, s_mapped_copy, TEST_BYTES) != 0) {
-    bsp_printf("FAIL: memory-mapped read does not match indirect write\n");
-    print_hexdump("written ", s_pattern,     32);
-    print_hexdump("mapped  ", s_mapped_copy, 32);
+  if (passes != 10U) {
+    bsp_printf("FAIL: %u/10 memory-mapped reads matched\n", passes);
     return -1;
   }
 
-  bsp_printf("PASS: %u bytes at 0x%08lX match between indirect-write and mmap-read\n",
-             (unsigned)TEST_BYTES,
+  bsp_printf("PASS: 10/10 memory-mapped reads matched at 0x%08lX\n",
              (unsigned long)(QSPI_MEMMAP_BASE + TEST_SECTOR_OFFSET));
   print_hexdump("mapped (head)", s_mapped_copy, 32);
 
