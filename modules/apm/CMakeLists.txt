@@ -94,7 +94,9 @@ set(SOURCES
     #./tests/bist_gm009605_ramp.c
     #./tests/bist_icu.c
     # ./tests/test_qspi_w25q64.c   # low-level reference for the qspi bring-up
-    ./tests/test_qspi_memmap_dual.c
+    #./tests/test_qspi_memmap_dual.c
+    #./tests/test_qspi_memmap_dual_pwr.c
+    ./tests/test_qspi_bench.c
     # ./tests/test_bme280.c
     #./tests/test_poll_all.c
     #./tests/test_storage.c

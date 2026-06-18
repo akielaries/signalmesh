@@ -25,6 +25,8 @@
 #include "common/utils.h"
 
 #define QSPI_MEMMAP_BASE   0x90000000UL
+#define QSPI_FLASH_PATTERN 0xDEADBEEF
+
 #define TEST_SECTOR_OFFSET 0x00000000UL
 #define TEST_BYTES         256U
 
@@ -129,7 +131,6 @@ int main(void) {
     chThdSleepMilliseconds(100);
   }
 
-  qspi_memmap_disable(&qspi_cfg);
 
   if (passes != 10U) {
     bsp_printf("FAIL: %u/10 memory-mapped reads matched\n", passes);
@@ -138,6 +139,35 @@ int main(void) {
   bsp_printf("PASS: 10/10 memory-mapped reads matched at 0x%08lX\n",
              (unsigned long)(QSPI_MEMMAP_BASE + TEST_SECTOR_OFFSET));
   print_hexdump("mapped (head)", s_mapped_copy, 32);
+
+  // --- finale: persist a known 32-bit pattern to flash --------------------
+  // NOR flash writes are command sequences (erase then program), not pointer
+  // stores, and cannot run while mapped. so: exit mmap, erase, program, re-map
+  bsp_printf("saving known pattern 0x%08lX\n", (unsigned long)QSPI_FLASH_PATTERN);
+  qspi_memmap_disable(&qspi_cfg);
+
+  uint32_t pattern = QSPI_FLASH_PATTERN;
+  if (!qspi_memmap_erase_sector(&qspi_cfg, TEST_SECTOR_OFFSET)) {
+    bsp_printf("FAIL: erase\n");
+    return -1;
+  }
+  if (!qspi_memmap_program(&qspi_cfg, TEST_SECTOR_OFFSET,
+                           (const uint8_t *)&pattern, sizeof pattern)) {
+    bsp_printf("FAIL: program\n");
+    return -1;
+  }
+
+  // re-map and read the pattern back with a plain pointer
+  const volatile uint8_t *flash = qspi_memmap_enable(&qspi_cfg);
+  if (flash == NULL) {
+    bsp_printf("FAIL: re-enable mmap\n");
+    return -1;
+  }
+  qspi_memmap_invalidate((const void *)flash, 32U);
+  uint32_t readback = *(const uint32_t *)flash;
+  bsp_printf("readback @0x%08lX: 0x%08lX (%s)\n",
+             (unsigned long)QSPI_MEMMAP_BASE, (unsigned long)readback,
+             (readback == QSPI_FLASH_PATTERN) ? "OK" : "MISMATCH");
 
   bsp_printf("\n--- test_qspi_memmap_dual finished ---\r\n");
   while (1) {

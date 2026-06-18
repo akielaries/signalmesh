@@ -461,8 +461,24 @@ static bool qspi_read_status(WSPIDriver *wspi, uint8_t op, uint8_t *val) {
 
 static bool qspi_write_enable(WSPIDriver *wspi) {
   wspi_command_t cmd;
-  qspi_cmd_op_only(&cmd, W25QXX_CMD_WRITE_ENABLE);
-  return wspiCommand(wspi, &cmd) == MSG_OK;
+
+  // send write-enable and confirm WEL actually latched, retrying a couple of
+  // times. the first indirect command after leaving memory-mapped mode can be
+  // dropped; without this check an erase/program silently no-ops
+  for (int attempt = 0; attempt < 3; attempt++) {
+    uint8_t sr1;
+    qspi_cmd_op_only(&cmd, W25QXX_CMD_WRITE_ENABLE);
+    if (wspiCommand(wspi, &cmd) != MSG_OK) {
+      return false;
+    }
+    if (!qspi_read_status(wspi, W25QXX_CMD_READ_STATUS_REG1, &sr1)) {
+      return false;
+    }
+    if (sr1 & W25QXX_STATUS_WEL) {
+      return true;
+    }
+  }
+  return false;
 }
 
 bool w25qxx_qspi_wait_idle(WSPIDriver *wspi, uint32_t timeout_ms) {
