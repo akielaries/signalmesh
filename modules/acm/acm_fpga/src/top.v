@@ -1,21 +1,26 @@
-// top modules for the Audio Creation Module (ACM)
+// top module for the Audio Creation Module (ACM)
 
 module top (
+  input  HCLK,        // 27 MHz system clock
+  input  HRST,        // S1 button: active-high reset (idles low, high when pressed)
 
-  input HCLK, // hw clock 27MHz
-  input HRST, // hw reset
- 
-  // 4 of the 5 on board LEDs. 5th is the boot LED
-  inout [4:0] LED,
-  inout BOOT_LED
+  output [5:0] LED    // 6 user leds (pads 15-20)
 );
 
-  // boot LED blinker
-  boot_blinker boot_blink_module (
+  // 1hz boot indicator
+  boot_blinker boot_blink_inst (
     .HCLK(HCLK),
     .HRST(HRST),
-    .BOOT_LED_OUT(BOOT_LED)
+    .BOOT_LED(LED[5])
   );
 
+  // on board user LEDs blinking
+  led_flow #(
+    .NUM_LEDS(5)
+  ) led_flow_inst (
+    .HCLK(HCLK),
+    .HRST(HRST),
+    .LEDS(LED[4:0])
+  );
 
 endmodule
