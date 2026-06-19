@@ -12,7 +12,7 @@
 // ---------------------------------------------------------------------------
 module uart_tx #(
   parameter integer CLK_FREQ = 27_000_000,
-  parameter integer BAUD     = 115200
+  parameter integer BAUD     = 1_000_000
 ) (
   input  wire       clk,
   input  wire       rst,        // active high
@@ -68,7 +68,7 @@ endmodule
 // ---------------------------------------------------------------------------
 module stm32_uart_test #(
   parameter integer CLK_FREQ = 27_000_000,
-  parameter integer BAUD     = 115200
+  parameter integer BAUD     = 1_000_000
 ) (
   input  wire HCLK,
   input  wire HRST,      // active high reset (S1)
