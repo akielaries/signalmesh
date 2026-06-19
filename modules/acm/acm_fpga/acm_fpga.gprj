@@ -6,6 +6,7 @@
     <Device name="GW2AR-18" pn="GW2AR-LV18QN88PC7/I6">gw2ar18-019</Device>
     <FileList>
         <File path="src/boot_blink.v" type="file.verilog" enable="1"/>
+        <File path="src/stm32_uart_test.v" type="file.verilog" enable="1"/>
         <File path="src/top.v" type="file.verilog" enable="1"/>
         <File path="src/pins.cst" type="file.cst" enable="1"/>
         <File path="src/timing.sdc" type="file.sdc" enable="1"/>

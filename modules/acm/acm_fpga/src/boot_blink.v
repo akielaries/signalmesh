@@ -37,7 +37,7 @@ endmodule
 // lights the user leds one after another in a wrapping chase
 module led_flow #(
   parameter NUM_LEDS   = 5,
-  parameter STEP_TICKS = 27_000_000 / 20,    // advance ~10 times per second
+  parameter STEP_TICKS = 27_000_000 / 20,    // 20 times per second
   parameter ACTIVE_LOW = 1
 ) (
   input  wire                HCLK,
