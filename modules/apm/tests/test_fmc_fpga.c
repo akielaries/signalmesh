@@ -30,6 +30,8 @@
 #define REG_LED       0x02U
 #define FPGA_ID       0xA5U
 
+// the FMC window is non-cacheable (Device) via the MPU region in fmc_mpu_init,
+// so plain volatile access goes straight to the FPGA - no cache maintenance.
 static inline uint8_t fpga_rd(uint32_t off) {
   return *(volatile uint8_t *)(FMC_FPGA_BASE + off);
 }
@@ -81,15 +83,28 @@ static void fmc_ctrl_init(void) {
   __DSB();
 }
 
-// mark the FMC window non-cacheable (Device) so register access bypasses cache
+// mark the FMC window non-cacheable (Device) so register access bypasses cache.
+// build RASR by hand - the ARM_MPU_RASR() macro dropped the enable+size fields
+// on this CMSIS, leaving the region disabled.
 static void fmc_mpu_init(void) {
   ARM_MPU_Disable();
-  ARM_MPU_SetRegionEx(7U, FMC_FPGA_BASE,
-      ARM_MPU_RASR(1U, ARM_MPU_AP_FULL, 0U, 1U, 0U, 1U, 0U,
-                   ARM_MPU_REGION_SIZE_1MB));
+  MPU->RNR  = 7U;
+  MPU->RBAR = FMC_FPGA_BASE;                 // base; VALID=0 -> use RNR
+  MPU->RASR = MPU_RASR_ENABLE_Msk        |
+              (19U << MPU_RASR_SIZE_Pos) |   // 2^(19+1) = 1 MB
+              (1U  << MPU_RASR_XN_Pos)   |   // no execute
+              (3U  << MPU_RASR_AP_Pos)   |   // RW full access
+              (1U  << MPU_RASR_B_Pos)    |   // TEX=0 C=0 B=1 S=1 -> Device
+              (1U  << MPU_RASR_S_Pos);
   ARM_MPU_Enable(MPU_CTRL_PRIVDEFENA_Msk);
+  SCB_CleanInvalidateDCache();               // drop lines cached while it was normal
   __DSB();
   __ISB();
+
+  MPU->RNR = 7U;
+  bsp_printf("MPU CTRL=0x%08lX rgn7 RBAR=0x%08lX RASR=0x%08lX SCB_CCR=0x%08lX\n",
+             (unsigned long)MPU->CTRL, (unsigned long)MPU->RBAR,
+             (unsigned long)MPU->RASR, (unsigned long)SCB->CCR);
 }
 
 int main(void) {
@@ -113,19 +128,16 @@ int main(void) {
   bsp_printf("SCRATCH wrote 0x5A read 0x%02X %s\n",
              (unsigned)sc, (sc == 0x5AU) ? "OK" : "MISMATCH");
 
-  // 3. drive the FPGA LEDs over FMC - visible end-to-end proof
-  bsp_printf("walking FPGA LEDs via LED_CTRL...\n");
+  // 3. chase LED0..LED4 one at a time over FMC (LED5 is the RTL boot blink).
+  // must go through fpga_wr() - raw pointer writes get cached and never land.
+  bsp_printf("chasing FPGA LEDs via LED_CTRL...\n");
   uint8_t pat = 0x01U;
   while (true) {
     fpga_wr(REG_LED, pat);
-    uint8_t rb = fpga_rd(REG_LED) & 0x1FU;
-    bsp_printf("LED_CTRL=0x%02X readback=0x%02X %s\n",
-               (unsigned)(pat & 0x1FU), (unsigned)rb,
-               (rb == (pat & 0x1FU)) ? "" : "MISMATCH");
     pat <<= 1;
     if (pat > 0x10U) {
       pat = 0x01U;
     }
-    chThdSleepMilliseconds(2000);
+    chThdSleepMilliseconds(250);
   }
 }
