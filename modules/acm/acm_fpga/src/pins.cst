@@ -25,13 +25,13 @@ IO_LOC  "LED[0]" 15;
 IO_PORT "LED[0]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
 
 // ===========================================================================
-// FMC multiplexed bus to the STM32 (8-bit AD + control), all LVCMOS33.
+// FMC multiplexed bus to the STM32 (16-bit AD + control), all LVCMOS33.
 // AD is bidirectional; NADV/NOE/NWE/NE1 are inputs (pulled up so they idle
 // deasserted before the STM32 brings FMC up); NWAIT is an output.
 // fpga pin <-- jumper --> STM32 pin. run the bus slow for the breadboard PoC.
 // ===========================================================================
 
-// AD bus (8-bit: D0..D7 only)
+// AD bus (16-bit: D0..D15)
 IO_LOC  "FMC_AD[0]"  76;   // STM32 PD14
 IO_PORT "FMC_AD[0]"  IO_TYPE=LVCMOS33 PULL_MODE=NONE;
 IO_LOC  "FMC_AD[1]"  80;   // STM32 PD15
@@ -48,6 +48,22 @@ IO_LOC  "FMC_AD[6]"  51;   // STM32 PE9
 IO_PORT "FMC_AD[6]"  IO_TYPE=LVCMOS33 PULL_MODE=NONE;
 IO_LOC  "FMC_AD[7]"  48;   // STM32 PE10
 IO_PORT "FMC_AD[7]"  IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[8]"  55;   // STM32 PE11
+IO_PORT "FMC_AD[8]"  IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[9]"  49;   // STM32 PE12
+IO_PORT "FMC_AD[9]"  IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[10]" 86;   // STM32 PE13
+IO_PORT "FMC_AD[10]" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[11]" 79;   // STM32 PE14
+IO_PORT "FMC_AD[11]" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[12]" 72;   // STM32 PE15
+IO_PORT "FMC_AD[12]" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[13]" 71;   // STM32 PD8
+IO_PORT "FMC_AD[13]" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[14]" 53;   // STM32 PD9 -- WAS BAD on 53/74/75, pick a clean pin
+IO_PORT "FMC_AD[14]" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[15]" 52;   // STM32 PD10
+IO_PORT "FMC_AD[15]" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
 
 // control
 IO_LOC  "FMC_NADV"  31;    // STM32 PB7 (NL)

@@ -10,8 +10,8 @@ module top (
 
   output [5:0] LED,       // 6 user leds (pads 15-20)
 
-  // FMC multiplexed async bus from the STM32 (8-bit AD, addr latched by NADV)
-  inout  [7:0]  FMC_AD,
+  // FMC multiplexed async bus from the STM32 (16-bit AD, addr latched by NADV)
+  inout  [15:0] FMC_AD,
   input         FMC_NADV, // NL  (active low) - address latch
   input         FMC_NOE,  //     (active low) - read strobe
   input         FMC_NWE,  //     (active low) - write strobe
@@ -36,7 +36,7 @@ module top (
   );
 
   // FMC register slave
-  wire [7:0] led_ctrl;
+  wire [15:0] led_ctrl;
   fmc_mux_slave fmc_inst (
     .clk(HCLK),
     .rst(HRST),
