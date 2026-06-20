@@ -48,9 +48,9 @@ void bsp_spi_init(void) {
    * SPI1 74HC138 MUX pin setup. These are the address lines for the chip
    * select "decoder"
    */
-  palSetPadMode(GPIOD, 0, PAL_MODE_OUTPUT_PUSHPULL ); // A0
-  palSetPadMode(GPIOD, 1, PAL_MODE_OUTPUT_PUSHPULL ); // A1
-  palSetPadMode(GPIOF, 9, PAL_MODE_OUTPUT_PUSHPULL ); // A2
+  //palSetPadMode(GPIOD, 0, PAL_MODE_OUTPUT_PUSHPULL ); // A0
+  //palSetPadMode(GPIOD, 1, PAL_MODE_OUTPUT_PUSHPULL ); // A1
+  //palSetPadMode(GPIOF, 9, PAL_MODE_OUTPUT_PUSHPULL ); // A2
 
   // start the underlying SPI1 driver
   spiStart(&SPID1, &spi1_hw_config);

@@ -100,6 +100,7 @@ set(SOURCES
     #./tests/test_qspi_bench.c
     #./tests/test_fpga_uart.c
     ./tests/test_fmc_fpga.c
+    #./tests/gpio_pin_check.c
 
     # test drivers
     # ./tests/test_bme280.c
