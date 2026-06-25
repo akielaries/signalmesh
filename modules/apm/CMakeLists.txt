@@ -97,9 +97,10 @@ set(SOURCES
     # ./tests/test_qspi_w25q64.c   # low-level reference for the qspi bring-up
     #./tests/test_qspi_memmap_dual.c
     #./tests/test_qspi_memmap_dual_pwr.c
-    #./tests/test_qspi_bench.c
+    ./tests/test_qspi_bench.c
+
     #./tests/test_fpga_uart.c
-    ./tests/test_fmc_fpga.c
+    #./tests/test_fmc_fpga.c
     #./tests/gpio_pin_check.c
 
     # test drivers

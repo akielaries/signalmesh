@@ -207,6 +207,10 @@ static int w25qxx_init(device_t *dev) {
       break;
     case 0x4018: // W25Q128
       flash_dev->size_bytes = W25Q128_SIZE_BYTES;
+      bsp_printf("FLash IC ID 0x%X w25q128. %d bytes / %d mb\n",
+                 flash_dev->device_id,
+                 W25Q128_SIZE_BYTES,
+                 W25Q128_SIZE_BYTES / 1024 / 1024);
       break;
     default:
       flash_dev->size_bytes = W25Q64_SIZE_BYTES; // default to 8MB if unknown

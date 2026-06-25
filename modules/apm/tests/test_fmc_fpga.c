@@ -41,8 +41,8 @@ static inline void fpga_wr(uint32_t off, uint16_t val) {
 
 // configure the FMC pins as alternate function (AF12, except NE1/NWAIT = AF9)
 static void fmc_gpio_init(void) {
-  const iomode_t af12 = PAL_MODE_ALTERNATE(12) | PAL_STM32_OSPEED_HIGHEST;
-  const iomode_t af9  = PAL_MODE_ALTERNATE(9)  | PAL_STM32_OSPEED_HIGHEST;
+  const iomode_t af12 = PAL_MODE_ALTERNATE(12) | PAL_STM32_OSPEED_LOWEST;
+  const iomode_t af9  = PAL_MODE_ALTERNATE(9)  | PAL_STM32_OSPEED_LOWEST;
 
   // AD bus (16-bit: D0..D15)
   palSetPadMode(GPIOD, 14, af12);  // AD0
@@ -77,7 +77,7 @@ static void fmc_ctrl_init(void) {
   // timing (FMC clock cycles): ADDSET=15, ADDHLD=15, DATAST=255, BUSTURN=15
   FMC_Bank1_R->BTCR[1] = (15U  << FMC_BTRx_ADDSET_Pos)  |
                          (15U  << FMC_BTRx_ADDHLD_Pos)  |
-                         (255U << FMC_BTRx_DATAST_Pos)  |
+                         (15U << FMC_BTRx_DATAST_Pos)  |
                          (15U  << FMC_BTRx_BUSTURN_Pos);
 
   // control: global FMC enable + bank enable + muxed + PSRAM + 16-bit + write
@@ -140,6 +140,10 @@ int main(void) {
   uint16_t pat = 0x01U;
   while (true) {
     fpga_wr(REG_LED, pat);
+    uint16_t rb = fpga_rd(REG_LED) & 0x1FU;
+    bsp_printf("LED_CTRL set=0x%02X read=0x%02X %s\n",
+               (unsigned)(pat & 0x1FU), (unsigned)rb,
+               (rb == (pat & 0x1FU)) ? "OK" : "MISMATCH");
     pat <<= 1;
     if (pat > 0x10U) {
       pat = 0x01U;

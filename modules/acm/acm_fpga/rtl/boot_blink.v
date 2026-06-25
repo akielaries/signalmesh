@@ -1,28 +1,31 @@
-// blinker tasks for the boot indicator and the user led chase
-// HRST is the S1 button: on the tang nano 20k pin 88 idles low (external 1k
-// pull-down R6) and reads high when pressed, so reset is ACTIVE HIGH
-// tang nano 20k leds are active low, so a driven 0 lights the led
+// blinker cores for the boot indicator and the user led chase
+// conventions (the instantiating top sets the board specifics):
+//   HRST is ACTIVE HIGH (1 = reset)
+//   ACTIVE_LOW=1 means a driven 0 lights the led
+// HALF_PERIOD/STEP_TICKS come from the board top.v as CLK_FREQ-derived values;
+// the defaults below are only for standalone use and are always overridden
 
 // blinks a single led at ~1 Hz to show the fpga booted and is alive
 module boot_blinker #(
-  parameter HALF_PERIOD = 27_000_000 / 2,   // toggle every 0.5s at 27MHz
+  parameter HALF_PERIOD = 27_000_000 / 2,   // default for standalone use only
   parameter ACTIVE_LOW  = 1
 ) (
   input  wire HCLK,
-  input  wire HRST,                         // active high reset (S1 pressed)
+  input  wire HRST,                         // active high reset
   output wire BOOT_LED
 );
 
-  reg [23:0] count;
-  reg        state;
+  // size the counter from the parameter so any clock frequency works
+  reg [$clog2(HALF_PERIOD)-1:0] count;
+  reg                           state;
 
   always @(posedge HCLK or posedge HRST) begin
     if (HRST) begin
-      count <= 24'd0;
+      count <= 0;
       state <= 1'b0;
     end
     else if (count == HALF_PERIOD - 1) begin
-      count <= 24'd0;
+      count <= 0;
       state <= ~state;
     end
     else begin

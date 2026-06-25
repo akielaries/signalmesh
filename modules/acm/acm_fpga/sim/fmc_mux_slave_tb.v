@@ -2,7 +2,7 @@
 // and checks ID read, scratch write/read-back, and the LED_CTRL register.
 //
 // run (icarus verilog):
-//   iverilog -o fmc_tb ../src/fmc_mux_slave.v fmc_mux_slave_tb.v && vvp fmc_tb
+//   iverilog -o fmc_tb ../rtl/fmc_mux_slave.v fmc_mux_slave_tb.v && vvp fmc_tb
 // view waveforms: gtkwave fmc_tb.vcd
 
 `timescale 1ns/1ps

@@ -76,16 +76,16 @@ module stm32_uart_test #(
 );
   localparam integer MSG_LEN = 8;       // "ACM:XX\r\n"
 
-  // 1 Hz tick
-  reg [24:0] sec_cnt;                   // 2^25 > 27e6
-  reg        tick;
+  // 1 Hz tick; size the counter from CLK_FREQ so any clock frequency works
+  reg [$clog2(CLK_FREQ)-1:0] sec_cnt;
+  reg                        tick;
   always @(posedge HCLK or posedge HRST) begin
     if (HRST) begin
-      sec_cnt <= 25'd0;
+      sec_cnt <= 0;
       tick    <= 1'b0;
     end
     else if (sec_cnt == CLK_FREQ - 1) begin
-      sec_cnt <= 25'd0;
+      sec_cnt <= 0;
       tick    <= 1'b1;
     end
     else begin

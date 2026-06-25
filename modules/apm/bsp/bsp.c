@@ -154,6 +154,41 @@ device_t board_devices[] = {
 const size_t num_board_devices = sizeof(board_devices) / sizeof(board_devices[0]);
 
 
+// onboard-LED heartbeat: a low-priority "is it alive" sweep over the three
+// nucleo user LEDs. started by bsp_init, not from app main
+static const ioline_t heartbeat_leds[] = {
+  LINE_LED_GREEN,
+  LINE_LED_YELLOW,
+  LINE_LED_RED,
+};
+
+static THD_WORKING_AREA(wa_heartbeat, 256);
+static THD_FUNCTION(heartbeat_thread, arg) {
+  (void)arg;
+  chRegSetThreadName("heartbeat");
+
+  const size_t n = sizeof(heartbeat_leds) / sizeof(heartbeat_leds[0]);
+  for (size_t i = 0; i < n; i++) {
+    palSetLineMode(heartbeat_leds[i], PAL_MODE_OUTPUT_PUSHPULL);
+    palClearLine(heartbeat_leds[i]);
+  }
+
+  // sweep one LED at a time so the cycle shows the scheduler is alive
+  size_t cur = 0;
+  while (true) {
+    palSetLine(heartbeat_leds[cur]);
+    chThdSleepMilliseconds(500);
+    palClearLine(heartbeat_leds[cur]);
+    cur = (cur + 1U) % n;
+  }
+}
+
+static void heartbeat_start(void) {
+  chThdCreateStatic(wa_heartbeat, sizeof(wa_heartbeat),
+                    LOWPRIO, heartbeat_thread, NULL);
+}
+
+
 void bsp_init(void) {
   halInit();
   chSysInit();
@@ -197,6 +232,9 @@ void bsp_init(void) {
   // PWM on PE11, timer 1 channel 2?
   palSetPadMode(GPIOE, 11, PAL_MODE_ALTERNATE(1));
 */
+
+  heartbeat_start();
+  bsp_printf("heartbeat thread started\n");
 
   bsp_printf("End of BSP init\n\r\n");
 }

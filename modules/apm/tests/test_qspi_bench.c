@@ -46,14 +46,15 @@ static volatile uint32_t g_sink;
 static const WSPIConfig wspicfg = {
   .end_cb   = NULL,
   .error_cb = NULL,
-  .dcr      = STM32_DCR_FSIZE(22U) | STM32_DCR_CSHT(1U),
+  // FSIZE = log2(device_size) - 1; 16 MB W25Q128 -> 23
+  .dcr      = STM32_DCR_FSIZE(23U) | STM32_DCR_CSHT(1U),
 };
 
 static const qspi_memmap_config_t qspi_cfg = {
   .wspi       = &WSPID1,
   .wspi_cfg   = &wspicfg,
   .base       = QSPI_MEMMAP_BASE,
-  .size_bytes = W25Q64_SIZE_BYTES,
+  .size_bytes = W25Q128_SIZE_BYTES,
   .lines      = W25QXX_QSPI_DUAL,
 };
 
@@ -66,6 +67,19 @@ static uint32_t kbps(size_t bytes, uint32_t us) {
   return (uint32_t)(((uint64_t)bytes * 1000000ULL) / (uint64_t)us / 1024ULL);
 }
 
+static const char *lines_name(w25qxx_qspi_lines_t lines) {
+  switch (lines) {
+    case W25QXX_QSPI_SINGLE:
+      return "single";
+    case W25QXX_QSPI_DUAL:
+      return "dual";
+    case W25QXX_QSPI_QUAD:
+      return "quad";
+    default:
+      return "?";
+  }
+}
+
 int main(void) {
   bsp_init();
   bsp_printf("\n--- test_qspi_bench: QSPI capacity + bandwidth ---\r\n");
@@ -74,7 +88,8 @@ int main(void) {
     bsp_printf("FAIL: qspi_memmap_init\n");
     return -1;
   }
-  bsp_printf("init OK (dual, /16)\n");
+  bsp_printf("init OK (%s, /%u)\n", lines_name(qspi_cfg.lines),
+             (unsigned)STM32_WSPI_QUADSPI1_PRESCALER_VALUE);
 
   // ---- 1. capacity (decode from JEDEC id) -------------------------------
   uint8_t jedec[3];
@@ -115,18 +130,48 @@ int main(void) {
   }
   uint32_t prog_us = elapsed_us(t0, chVTGetSystemTimeX());
 
-  // verify
-  bool wr_ok = true;
-  for (uint32_t off = 0; off < BENCH_WRITE_BYTES && wr_ok; off += PAGE_SIZE) {
-    if (!w25qxx_qspi_read(qspi_cfg.wspi, W25QXX_QSPI_SINGLE,
-                          BENCH_WRITE_OFFSET + off, rbuf, PAGE_SIZE)) {
-      wr_ok = false;
-      break;
+  // verify: read each page back through BOTH the single-line (0x03) and the
+  // dual (0x3B) indirect paths and compare to the pattern. reading both lets
+  // us tell a bad write (both mismatch at the same place) apart from a flaky
+  // read path (only one mismatches). reports the first divergence per mode
+  bool sgl_ok = true, dual_ok = true;
+  for (uint32_t off = 0; off < BENCH_WRITE_BYTES && (sgl_ok || dual_ok); off += PAGE_SIZE) {
+    uint8_t *sbuf = rbuf;       // bytes [0..255]   single read
+    uint8_t *dbuf = rbuf + 256; // bytes [256..511] dual read
+    if (sgl_ok && w25qxx_qspi_read(qspi_cfg.wspi, W25QXX_QSPI_SINGLE,
+                                   BENCH_WRITE_OFFSET + off, sbuf, PAGE_SIZE)) {
+      for (uint32_t i = 0; i < PAGE_SIZE; i++) {
+        if (sbuf[i] != pat[i]) {
+          bsp_printf("verify single: MISMATCH @ +0x%06lX want 0x%02X got 0x%02X\n",
+                     (unsigned long)(BENCH_WRITE_OFFSET + off + i), pat[i], sbuf[i]);
+          sgl_ok = false;
+          break;
+        }
+      }
+    } else if (sgl_ok) {
+      bsp_printf("verify single: read FAIL @ +0x%06lX\n",
+                 (unsigned long)(BENCH_WRITE_OFFSET + off));
+      sgl_ok = false;
     }
-    if (memcmp(rbuf, pat, PAGE_SIZE) != 0) {
-      wr_ok = false;
+    if (dual_ok && w25qxx_qspi_read(qspi_cfg.wspi, qspi_cfg.lines,
+                                    BENCH_WRITE_OFFSET + off, dbuf, PAGE_SIZE)) {
+      for (uint32_t i = 0; i < PAGE_SIZE; i++) {
+        if (dbuf[i] != pat[i]) {
+          bsp_printf("verify %-6s: MISMATCH @ +0x%06lX want 0x%02X got 0x%02X\n",
+                     lines_name(qspi_cfg.lines),
+                     (unsigned long)(BENCH_WRITE_OFFSET + off + i), pat[i], dbuf[i]);
+          dual_ok = false;
+          break;
+        }
+      }
+    } else if (dual_ok) {
+      bsp_printf("verify %-6s: read FAIL @ +0x%06lX\n",
+                 lines_name(qspi_cfg.lines),
+                 (unsigned long)(BENCH_WRITE_OFFSET + off));
+      dual_ok = false;
     }
   }
+  bool wr_ok = sgl_ok && dual_ok;
   bsp_printf("erase   : %lu KB in %lu us = %lu KB/s\n",
              (unsigned long)(BENCH_WRITE_BYTES / 1024U), (unsigned long)erase_us,
              (unsigned long)kbps(BENCH_WRITE_BYTES, erase_us));
@@ -167,6 +212,61 @@ int main(void) {
     uint32_t w = *(const volatile uint32_t *)(flash + blk);
     bsp_printf("  +0x%06lX: 0x%08lX\n", (unsigned long)blk, (unsigned long)w);
   }
+
+  // read-determinism probe: read ONE page repeatedly through memmap and check
+  // (a) whether repeated reads of the same bytes agree with each other and
+  // (b) whether they match the written pattern. this splits a flaky read
+  // (passes disagree -> physical bus/power/ground) from statically-wrong data
+  // (passes agree but != pat -> the program/erase side, not the read)
+  {
+    uint8_t *a = rbuf;       // pass A bytes [0..255]
+    uint8_t *b = rbuf + 256; // pass B bytes [256..511]
+    const uint32_t probe_off = BENCH_WRITE_OFFSET;
+    uint32_t unstable = 0, wrong = 0;
+    uint8_t err_mask = 0; // OR of (want ^ got): which byte-bit positions ever wrong
+    for (uint32_t pass = 0; pass < 16U; pass++) {
+      qspi_memmap_invalidate((const void *)(flash + probe_off), PAGE_SIZE);
+      for (uint32_t i = 0; i < PAGE_SIZE; i++) {
+        a[i] = flash[probe_off + i];
+      }
+      qspi_memmap_invalidate((const void *)(flash + probe_off), PAGE_SIZE);
+      for (uint32_t i = 0; i < PAGE_SIZE; i++) {
+        b[i] = flash[probe_off + i];
+      }
+      for (uint32_t i = 0; i < PAGE_SIZE; i++) {
+        if (a[i] != b[i]) {
+          unstable++;
+        }
+        if (a[i] != pat[i]) {
+          wrong++;
+          err_mask |= (uint8_t)(a[i] ^ pat[i]);
+        }
+      }
+    }
+    // in quad output each byte is two nibbles, bit n of a nibble comes off IOn.
+    // so byte-bits {0,4}->IO0, {1,5}->IO1, {2,6}->IO2, {3,7}->IO3. a bad data
+    // line shows up as a fixed pair of bits in the error mask
+    bsp_printf("memmap probe @ +0x%06lX, 16 passes: %lu unstable, %lu wrong vs pat\n",
+               (unsigned long)probe_off, (unsigned long)unstable, (unsigned long)wrong);
+    bsp_printf("  err bitmask 0x%02X  IO0:%c IO1:%c IO2:%c IO3:%c\n", err_mask,
+               (err_mask & 0x11) ? 'X' : '.', (err_mask & 0x22) ? 'X' : '.',
+               (err_mask & 0x44) ? 'X' : '.', (err_mask & 0x88) ? 'X' : '.');
+  }
+
+  // cross-check: verify the SAME write region through the memmap engine
+  bool mm_ok = true;
+  qspi_memmap_invalidate((const void *)(flash + BENCH_WRITE_OFFSET), BENCH_WRITE_BYTES);
+  for (uint32_t off = 0; off < BENCH_WRITE_BYTES; off++) {
+    uint8_t got = flash[BENCH_WRITE_OFFSET + off];
+    if (got != pat[off & (PAGE_SIZE - 1)]) {
+      bsp_printf("verify memmap: MISMATCH @ +0x%06lX want 0x%02X got 0x%02X\n",
+                 (unsigned long)(BENCH_WRITE_OFFSET + off),
+                 pat[off & (PAGE_SIZE - 1)], got);
+      mm_ok = false;
+      break;
+    }
+  }
+  bsp_printf("verify memmap: %s\n", mm_ok ? "OK" : "MISMATCH");
 
   // mmap read bandwidth (invalidate first so reads come from flash, not cache)
   qspi_memmap_invalidate((const void *)flash, BENCH_MMAP_READ_BYTES);

@@ -21,15 +21,21 @@ module top (
   output        UART_TX   // 1 Hz heartbeat on FPGA pin 73
 );
 
+  localparam integer CLK_FREQ = 27_000_000;   // tang nano 20k system clock
+
   // boot/alive indicator on LED5
-  boot_blinker boot_blink_inst (
+  boot_blinker #(
+    .HALF_PERIOD(CLK_FREQ / 2)
+  ) boot_blink_inst (
     .HCLK(HCLK),
     .HRST(HRST),
     .BOOT_LED(LED[5])
   );
 
   // 1 Hz "ACM:XX" fabric heartbeat
-  stm32_uart_test uart_test_inst (
+  stm32_uart_test #(
+    .CLK_FREQ(CLK_FREQ)
+  ) uart_test_inst (
     .HCLK(HCLK),
     .HRST(HRST),
     .UART_TX(UART_TX)

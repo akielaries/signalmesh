@@ -1,0 +1,99 @@
+// ===========================================================================
+// tang primer 25k (GW5A-LV25MG121) pin constraints
+// ball locations taken from the sipeed TangPrimer-25K-example project
+// (pmod_led.cst / hdmi.cst). VERIFY every ball in the gowin ide before build.
+//
+// onboard, fixed by the board:
+//   E2  = 50 MHz system clock
+//   L6  = onboard led   (boot/alive blinker)
+//   K6  = onboard key   (reset)
+//
+// the FMC bus, LED[4:0] and UART_TX below are on dock pmod/header balls. these
+// are placeholders on a contiguous pmod index range (idx 0..26 from the sipeed
+// pmod numbering) so they are physically adjacent on the connector. reassign to
+// match how you jumper to the STM32; consult the dock pinout for the physical
+// pin behind each ball
+// ===========================================================================
+
+// 50 MHz system clock
+IO_LOC  "HCLK" E2;
+IO_PORT "HCLK" PULL_MODE=NONE;
+
+// onboard key as reset. RTL expects ACTIVE HIGH (1 = reset). pull-down so the
+// pin idles low (deasserted) and the board boots without the key pressed.
+// if the board comes up stuck in reset, the key idles high -> flip polarity
+IO_LOC  "HRST" H10;
+IO_PORT "HRST" IO_TYPE=LVCMOS33 PULL_MODE=DOWN;
+
+// boot/alive blinker on the onboard led
+IO_LOC  "LED[5]" C11;
+IO_PORT "LED[5]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+
+// LED_CTRL leds from the STM32 (pmod idx 21..25)
+IO_LOC  "LED[4]" B2;
+IO_PORT "LED[4]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+IO_LOC  "LED[3]" F1;
+IO_PORT "LED[3]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+IO_LOC  "LED[2]" G1;
+IO_PORT "LED[2]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+IO_LOC  "LED[1]" G2;
+IO_PORT "LED[1]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+IO_LOC  "LED[0]" K4;
+IO_PORT "LED[0]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+
+// fabric heartbeat UART TX (pmod idx 26)
+IO_LOC  "UART_TX" A1;
+IO_PORT "UART_TX" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+
+// ===========================================================================
+// FMC multiplexed bus to the STM32 (16-bit AD + control), all LVCMOS33.
+// AD is bidirectional; NADV/NOE/NWE/NE1 are inputs (pulled up so they idle
+// deasserted before the STM32 brings FMC up); NWAIT is an output.
+// run the bus slow for the breadboard PoC.
+// ===========================================================================
+
+// AD bus D0..D15 (pmod idx 0..15)
+IO_LOC  "FMC_AD[0]"  G5;
+IO_PORT "FMC_AD[0]"  IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[1]"  F5;
+IO_PORT "FMC_AD[1]"  IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[2]"  G7;
+IO_PORT "FMC_AD[2]"  IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[3]"  G8;
+IO_PORT "FMC_AD[3]"  IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[4]"  H7;
+IO_PORT "FMC_AD[4]"  IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[5]"  H8;
+IO_PORT "FMC_AD[5]"  IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[6]"  L5;
+IO_PORT "FMC_AD[6]"  IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[7]"  K5;
+IO_PORT "FMC_AD[7]"  IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[8]"  J5;
+IO_PORT "FMC_AD[8]"  IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[9]"  H5;
+IO_PORT "FMC_AD[9]"  IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[10]" L9;
+IO_PORT "FMC_AD[10]" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[11]" K9;
+IO_PORT "FMC_AD[11]" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[12]" J8;
+IO_PORT "FMC_AD[12]" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[13]" K8;
+IO_PORT "FMC_AD[13]" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[14]" F6;
+IO_PORT "FMC_AD[14]" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+IO_LOC  "FMC_AD[15]" F7;
+IO_PORT "FMC_AD[15]" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+
+// control (pmod idx 16..20)
+IO_LOC  "FMC_NADV"  L2;
+IO_PORT "FMC_NADV"  IO_TYPE=LVCMOS33 PULL_MODE=UP;
+IO_LOC  "FMC_NOE"   L1;
+IO_PORT "FMC_NOE"   IO_TYPE=LVCMOS33 PULL_MODE=UP;
+IO_LOC  "FMC_NWE"   K1;
+IO_PORT "FMC_NWE"   IO_TYPE=LVCMOS33 PULL_MODE=UP;
+IO_LOC  "FMC_NE1"   K2;
+IO_PORT "FMC_NE1"   IO_TYPE=LVCMOS33 PULL_MODE=UP;
+IO_LOC  "FMC_NWAIT" J4;
+IO_PORT "FMC_NWAIT" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
