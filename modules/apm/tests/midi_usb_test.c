@@ -59,6 +59,12 @@ int main(void) {
   bsp_printf("HCFG forced -> 0x%08lX (FSLSPCS=%lu)\r\n",
              (unsigned long)*otg_fs_hcfg, (unsigned long)(*otg_fs_hcfg & 3u));
 
+  // VBUS sensing is off (VBDEN=0); on H7 the host won't detect a connect unless
+  // it believes the session is valid. force VBUS-valid + A-session-valid.
+  volatile uint32_t *const otg_gotgctl = (volatile uint32_t *)0x40080000UL;
+  *otg_gotgctl |= (1u << 2) | (1u << 3) | (1u << 4) | (1u << 5);
+  bsp_printf("GOTGCTL forced -> 0x%08lX\r\n", (unsigned long)*otg_gotgctl);
+
   // OTG_FS host port register: PCSTS (bit0) goes high when the PHY detects a
   // device pull-up - a hardware-level probe independent of enumeration/debug.
   volatile uint32_t *const otg_fs_hprt = (volatile uint32_t *)(0x40080000UL + 0x440UL);
@@ -69,9 +75,13 @@ int main(void) {
     chThdSleepMilliseconds(100);
     if (++tick >= 10) {                 // ~1 Hz
       tick = 0;
+      // re-assert FS PHY clock select now that CMOD=1 - the LLD set it during
+      // the device->host transition (CMOD=0) when host regs aren't writable
+      *otg_fs_hcfg = (*otg_fs_hcfg & ~0x3u) | 0x1u;
       uint32_t hprt = *otg_fs_hprt;
       uint32_t gintsts = *(volatile uint32_t *)0x40080014UL;  // CMOD = bit0 (1=host)
-      bsp_printf("HPRT=0x%08lX PCSTS=%lu PSPD=%lu CMOD=%lu\r\n",
+      bsp_printf("HCFG=0x%08lX HPRT=0x%08lX PCSTS=%lu PSPD=%lu CMOD=%lu\r\n",
+                 (unsigned long)*otg_fs_hcfg,
                  (unsigned long)hprt,
                  (unsigned long)(hprt & 1u),
                  (unsigned long)((hprt >> 17) & 3u),
