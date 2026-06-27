@@ -5,9 +5,15 @@
 // latches writes. 16-bit bus.
 //
 // register map (16-bit, word-addressed; STM32 byte offset = word index * 2):
-//   word 0 (0x60000000): ID       RO  0xACE1
-//   word 1 (0x60000002): SCRATCH  RW
-//   word 2 (0x60000004): LED_CTRL RW  low 5 bits -> LEDs
+//   word 0     (0x60000000): ID        RO  0xACE1
+//   word 1     (0x60000002): SCRATCH   RW
+//   word 2     (0x60000004): LED_CTRL  RW  low 5 bits -> LEDs
+//   word 3     (0x60000006): WAVE_SEL  RW  [1:0] 0=sine 1=saw 2=square 3=triangle
+//   0x100-1FF  (0x60000200): AUDIO     RO  sample(index, WAVE_SEL), 12-bit in low bits
+//
+// the AUDIO region is one period of the selected waveform (256 x 12-bit). the
+// STM32 reads it into a DAC buffer; WAVE_SEL picks the timbre. this is the
+// minimal "wavetable generator" slice - DDS pitch + mixing come later.
 //
 // NADV/NOE/NWE/NE1 are asynchronous to clk; brought across with 2-FF synchronizers.
 
@@ -60,12 +66,14 @@ module fmc_mux_slave (
 
   // ---- registers + write commit on the NWE rising edge ----
   reg [15:0] scratch;
+  reg [1:0]  wave_sel;
   reg [15:0] wdata;
   reg        nwe_d;
   always @(posedge clk or posedge rst) begin
     if (rst) begin
       scratch  <= 16'd0;
       led_ctrl <= 16'd0;
+      wave_sel <= 2'd0;
       wdata    <= 16'd0;
       nwe_d    <= 1'b1;
     end
@@ -78,21 +86,44 @@ module fmc_mux_slave (
         case (addr)
           16'd1: scratch  <= wdata;
           16'd2: led_ctrl <= wdata;
+          16'd3: wave_sel <= wdata[1:0];
           default: ;
         endcase
       end
     end
   end
 
+  // ---- waveform generator: one period of the selected wave, by index ----
+  wire [11:0] sine_s;
+  sine_lut u_sine (.addr(addr[7:0]), .data(sine_s));
+
+  wire [6:0] tri_idx = addr[7] ? (7'd127 - addr[6:0]) : addr[6:0];
+  reg  [11:0] wave_s;
+  always @(*) begin
+    case (wave_sel)
+      2'd0:    wave_s = sine_s;                  // sine (LUT)
+      2'd1:    wave_s = {addr[7:0], 4'b0};       // sawtooth  (0..4080)
+      2'd2:    wave_s = addr[7] ? 12'd0 : 12'd4095;  // square
+      2'd3:    wave_s = {tri_idx, 5'b0};         // triangle  (0..4064)
+      default: wave_s = sine_s;
+    endcase
+  end
+
   // ---- combinational read mux ----
   reg [15:0] rdata;
   always @(*) begin
-    case (addr)
-      16'd0:   rdata = ID_VALUE;
-      16'd1:   rdata = scratch;
-      16'd2:   rdata = led_ctrl;
-      default: rdata = 16'h0000;
-    endcase
+    if (addr[15:8] == 8'h01) begin
+      rdata = {4'b0, wave_s};              // AUDIO region 0x100-0x1FF
+    end
+    else begin
+      case (addr)
+        16'd0:   rdata = ID_VALUE;
+        16'd1:   rdata = scratch;
+        16'd2:   rdata = led_ctrl;
+        16'd3:   rdata = {14'b0, wave_sel};
+        default: rdata = 16'h0000;
+      endcase
+    end
   end
 
   // ---- drive AD only during the read data phase ----

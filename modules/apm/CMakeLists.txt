@@ -19,6 +19,7 @@ set(CMAKE_TOOLCHAIN_FILE ${TOOLCHAIN}/gcc_stm32.cmake)
 set(CMAKE_MODULE_PATH ${TOOLCHAIN})
 # list(APPEND CMAKE_MODULE_PATH "${TOOLCHAIN}")
 set(CHIBIOS_ROOT "${SIGNALMESH_ROOT}/import/ChibiOS")
+set(CHIBIOS_CONTRIB_ROOT "${SIGNALMESH_ROOT}/import/ChibiOS-Contrib")
 
 include(${TOOLCHAIN}/gcc_stm32.cmake)
 # include(${TOOLCHAIN}/chibiOS_common.cmake)
@@ -47,6 +48,8 @@ include_directories(
   ${COMMON_INCLUDE_DIR}
   ${CHIBIOS_ROOT}/os/hal/include
   ${CHIBIOS_ROOT}/os/rt/include
+  ${CHIBIOS_CONTRIB_ROOT}/os/hal/include
+  ${CHIBIOS_CONTRIB_ROOT}/os/hal/ports/STM32/LLD/USBHv1
 
 )
 
@@ -97,10 +100,12 @@ set(SOURCES
     # ./tests/test_qspi_w25q64.c   # low-level reference for the qspi bring-up
     #./tests/test_qspi_memmap_dual.c
     #./tests/test_qspi_memmap_dual_pwr.c
-    ./tests/test_qspi_bench.c
+    #./tests/test_qspi_bench.c
 
     #./tests/test_fpga_uart.c
     #./tests/test_fmc_fpga.c
+    #./tests/fmc_audio_test.c
+    ./tests/midi_usb_test.c
     #./tests/gpio_pin_check.c
 
     # test drivers

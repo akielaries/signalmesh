@@ -555,6 +555,11 @@
 #define WSPI_USE_MUTUAL_EXCLUSION TRUE
 #endif
 
+// enable the ChibiOS-Contrib community HAL and pull in its config.
+// mainline hal.h includes hal_community.h when HAL_USE_COMMUNITY is TRUE.
+#define HAL_USE_COMMUNITY TRUE
+#include "halconf_community.h"
+
 #endif /* HALCONF_H */
 
 /** @} */

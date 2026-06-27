@@ -162,7 +162,7 @@
 #define STM32_SAI1SEL        STM32_SAI1SEL_PLL1_Q_CK
 #define STM32_LPTIM1SEL      STM32_LPTIM1SEL_PCLK1
 #define STM32_CECSEL         STM32_CECSEL_LSE_CK
-#define STM32_USBSEL         STM32_USBSEL_PLL1_Q_CK
+#define STM32_USBSEL         STM32_USBSEL_HSI48_CK
 #define STM32_I2C123SEL      STM32_I2C123SEL_PCLK1
 #define STM32_RNGSEL         STM32_RNGSEL_HSI48_CK
 #define STM32_USART16SEL     STM32_USART16SEL_PCLK2
@@ -497,6 +497,23 @@
 #define STM32_USB_OTG1_RX_FIFO_SIZE    512
 #define STM32_USB_OTG2_RX_FIFO_SIZE    1024
 #define STM32_USB_HOST_WAKEUP_DURATION 2
+
+/*
+ * USB host (USBH, ChibiOS-Contrib) settings.
+ * OTG1 = OTG_FS (PA11/PA12) when STM32_OTG1_USE_HS is FALSE.
+ * CHANNELS_NUMBER is required by the host LLD (hard #error otherwise).
+ */
+#define STM32_USBH_USE_OTG1           FALSE
+#define STM32_USBH_USE_OTG2           TRUE
+#define STM32_OTG2_USE_HS             FALSE
+#define STM32_OTG_FS_CHANNELS_NUMBER  8
+#define STM32_OTG_HS_CHANNELS_NUMBER  12
+#define STM32_USBH_MIN_QSPACE         4
+#define STM32_USBH_CHANNELS_NP        4
+
+// external VBUS (powered hub / PSU); PA9 not wired, so disable the core's
+// VBUS-sense or it never starts a host session
+#define BOARD_OTG_NOVBUSSENS
 
 /*
  * WDG driver system settings.

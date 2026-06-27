@@ -7,6 +7,7 @@
     <FileList>
         <File path="../../rtl/boot_blink.v" type="file.verilog" enable="1"/>
         <File path="../../rtl/fmc_mux_slave.v" type="file.verilog" enable="1"/>
+        <File path="../../rtl/sine_lut.v" type="file.verilog" enable="1"/>
         <File path="../../rtl/stm32_uart_test.v" type="file.verilog" enable="1"/>
         <File path="top.v" type="file.verilog" enable="1"/>
         <File path="pins.cst" type="file.cst" enable="1"/>

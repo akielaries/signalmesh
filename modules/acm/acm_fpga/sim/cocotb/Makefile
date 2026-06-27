@@ -8,7 +8,7 @@
 SIM           ?= icarus
 TOPLEVEL_LANG ?= verilog
 
-VERILOG_SOURCES = $(PWD)/../../rtl/fmc_mux_slave.v
+VERILOG_SOURCES = $(PWD)/../../rtl/fmc_mux_slave.v $(PWD)/../../rtl/sine_lut.v
 
 # top-level RTL module and the python test module (test_fmc_mux_slave.py)
 COCOTB_TOPLEVEL     = fmc_mux_slave

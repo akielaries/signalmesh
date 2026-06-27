@@ -11,6 +11,9 @@ function(add_chibios_stm32h7_library target)
     set(_chibios_root "${CHIBIOS_ROOT}")
   endif()
 
+  # ChibiOS-Contrib (community HAL) vendored alongside mainline
+  set(_contrib_root "${_chibios_root}/../ChibiOS-Contrib")
+
   if(NOT ARG_TYPE)
     set(ARG_TYPE "STATIC")
   endif()
@@ -49,6 +52,13 @@ function(add_chibios_stm32h7_library target)
     "${_chibios_root}/os/hal/ports/STM32/STM32H7xx/hal_lld.c"
     "${_chibios_root}/os/hal/ports/STM32/STM32H7xx/stm32_isr.c"
     "${_chibios_root}/os/hal/ports/common/ARMCMx/nvic.c"
+
+    "${_contrib_root}/os/hal/src/hal_community.c"
+    "${_contrib_root}/os/hal/src/hal_usbh.c"
+    "${_contrib_root}/os/hal/src/usbh/hal_usbh_debug.c"
+    "${_contrib_root}/os/hal/src/usbh/hal_usbh_desciter.c"
+    "${_contrib_root}/os/hal/src/usbh/hal_usbh_hub.c"
+    "${_contrib_root}/os/hal/ports/STM32/LLD/USBHv1/hal_usbh_lld.c"
   )
 
   if(ARG_TYPE STREQUAL "OBJECT")
@@ -101,6 +111,9 @@ function(add_chibios_stm32h7_library target)
     #"${_chibios_root}/os/hal/ports/STM32/LLD/I2Cv4"
     "${_chibios_root}/os/hal/ports/STM32/STM32H7xx"
     "${_chibios_root}/os/hal/ports/common/ARMCMx"
+
+    "${_contrib_root}/os/hal/include"
+    "${_contrib_root}/os/hal/ports/STM32/LLD/USBHv1"
   )
   #target_link_libraries(${target} PUBLIC chibios_common)
 

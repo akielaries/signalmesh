@@ -3,7 +3,7 @@
 #   make wave   -> run then open the waveform in gtkwave
 #   make clean
 
-SRC = ../rtl/fmc_mux_slave.v
+SRC = ../rtl/fmc_mux_slave.v ../rtl/sine_lut.v
 TB  = fmc_mux_slave_tb.v
 OUT = fmc_tb
 
