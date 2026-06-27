@@ -1,0 +1,85 @@
+# audio_regs.yaml - ACM audio / per-voice control registers (over FMC).
+# the STM32 (driven by MIDI + panel) writes these; the FPGA DSP reads them to
+# synthesize. cheby/gen.sh -> modules/apm/bsp/audio_regs.h + acm rtl/audio_regs.v
+#
+# structure:
+#   - ctrl/status : global audio engine controls (one each)
+#   - voice[]     : per-OSCILLATOR block, identical layout x8 (polyphony). each
+#                   voice holds its own note; the MIDI handler allocates one
+#                   voice per key and writes:
+#                     note number -> voice[v].freq        (DDS tuning word)
+#                     velocity    -> voice[v].ctrl.level  (amplitude)
+#                     note on/off -> voice[v].ctrl.gate   (start / release)
+
+memory-map:
+  name: audio
+  bus: wb-16               # 16-bit, matches the FMC slave (same bus as core_regs)
+  description: ACM audio/voice control registers (STM32 -> FPGA DSP, over FMC)
+  children:
+
+    - reg:
+        name: ctrl
+        address: 0x00
+        width: 16
+        access: rw
+        description: global audio engine control
+        children:
+          - field:
+              name: enable
+              range: 0
+              description: 1 = audio engine running
+          - field:
+              name: srate
+              range: 2-1
+              description: sample-rate select (0=44.1k 1=48k 2=96k 3=192k)
+
+    - reg:
+        name: status
+        address: 0x02
+        width: 16
+        access: ro
+        description: audio engine status
+        children:
+          - field:
+              name: active_voices
+              range: 7-0
+              description: number of currently gated voices
+
+    - reg:
+        name: sample
+        address: 0x04
+        width: 16
+        access: ro
+        description: latest mixed DDS output sample (signed); STM32 reads -> DAC
+
+    # ---- per-oscillator voice array: one template, replicated x8 (polyphony) ----
+    - repeat:
+        name: voice
+        address: 0x40
+        count: 8
+        children:
+
+          - reg:
+              name: freq
+              width: 32
+              access: rw
+              description: DDS tuning word - inc = note_freq * 2^32 / Fs
+
+          - reg:
+              name: ctrl
+              width: 16
+              access: rw
+              description: per-voice control
+              children:
+                - field:
+                    name: gate
+                    range: 0
+                    description: 1 = note on (sounding), 0 = note off (release)
+                - field:
+                    name: wave
+                    range: 3-1
+                    description: waveform (0=sine 1=saw 2=square 3=triangle)
+                - field:
+                    name: level
+                    range: 15-8
+                    description: amplitude (velocity-scaled)

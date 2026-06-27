@@ -89,6 +89,8 @@ set(SOURCES
     ${DRIVERS_SRC_DIR}/gm009605.c
     ${DRIVERS_SRC_DIR}/lcd2004.c
 
+    ${DRIVERS_SRC_DIR}/usbh_midi.c
+
     # ./app/main.c ./tests/test_i2c_lb.c ./tests/test_ina219.c
     #./tests/test_i2c_scan.c
     #./tests/bist_lcd2004.c
@@ -105,7 +107,8 @@ set(SOURCES
     #./tests/test_fpga_uart.c
     #./tests/test_fmc_fpga.c
     #./tests/fmc_audio_test.c
-    ./tests/midi_usb_test.c
+    #./tests/midi_usb_driver_test.c
+    ./tests/test_fmc_core.c
     #./tests/gpio_pin_check.c
 
     # test drivers

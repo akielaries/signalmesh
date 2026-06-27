@@ -19,8 +19,8 @@
 #define HAL_USBH_USE_HUB                         TRUE
 #define HAL_USBHHUB_MAX_INSTANCES                1
 #define HAL_USBHHUB_MAX_PORTS                    6
-// off until the MIDI driver lands - it #includes usbh_additional_class_drivers.h
-#define HAL_USBH_USE_ADDITIONAL_CLASS_DRIVERS    FALSE
+// MIDI class driver (lib/drivers/src/usbh_midi.c) registers via this hook
+#define HAL_USBH_USE_ADDITIONAL_CLASS_DRIVERS    TRUE
 
 // enumeration timing (defaults from the contrib examples)
 #define HAL_USBH_PORT_DEBOUNCE_TIME              200

@@ -1,0 +1,42 @@
+# core_regs.yaml - ACM core FMC registers, common to ALL FPGA board targets.
+# the STM32 reads `magic` to confirm the FMC link + that the FPGA is programmed,
+# and `fpga_id` to learn which FPGA it's talking to (value set per-board in top.v).
+#
+# one YAML, both sides, kept in sync:
+#   cheby -i core_regs.yaml --gen-c                            core_regs.h    # STM32 defines
+#   cheby -i core_regs.yaml --hdl verilog --gen-hdl            core_regs.v    # FPGA reg file
+#   cheby -i core_regs.yaml --gen-consts --consts-style verilog core_consts.vh
+
+memory-map:
+  name: core
+  bus: wb-16               # 16-bit data bus - matches the FMC muxed slave (2-byte regs)
+  description: ACM core control registers (STM32 manager <-> FPGA, over FMC), common to all boards
+  children:
+
+    - reg:
+        name: magic
+        address: 0x00
+        width: 16
+        access: ro
+        description: link-check magic, reads 0xACE1 when the gateware is up
+
+    - reg:
+        name: fpga_id
+        address: 0x02
+        width: 16
+        access: ro
+        description: FPGA target id, set per-board (GW2AR-18=0x2018, GW5A-25=0x5025)
+
+    - reg:
+        name: scratch
+        address: 0x04
+        width: 16
+        access: rw
+        description: scratch register for a read/write sanity check
+
+    - reg:
+        name: version
+        address: 0x06
+        width: 16
+        access: ro
+        description: gateware version, driven by RTL

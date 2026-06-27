@@ -1,12 +1,13 @@
 // top module for the Audio Creation Module (ACM) on the Gowin GW5A-LV25MG121
 //
 //   LED[5]   = boot/alive blinker        -> onboard led
-//   LED[4:0] = LED_CTRL register written by the STM32 over FMC -> pmod header
+//   LED[4:0] = mirror of the scratch register (debug: STM32 writes show up here)
 //   UART_TX  = 1 Hz fabric heartbeat (observe on a USB-UART)
 //
-// shares the cores in ../../rtl; only this integration layer and the pin/timing
-// constraints are board specific. functionally identical to the GW2AR-18 build,
-// the GW5A-25 just runs a 50 MHz clock and uses different pins
+// the board layer: physical pins, clock, reset, heartbeats, and THIS board's
+// identity. the actual datapath (FMC bridge + core/audio regs + DDS) lives in
+// the shared acm_top. functionally identical to the GW2AR-18 build; this one
+// just runs a 50 MHz clock, uses different pins, and reports fpga_id 0x5025.
 
 module top (
   input  HCLK,            // 50 MHz system clock (ball E2)
@@ -26,6 +27,7 @@ module top (
 );
 
   localparam integer CLK_FREQ = 50_000_000;   // tang primer 25k system clock
+  localparam integer FS_DIV   = 1042;         // 50 MHz / 1042 ~= 48 kHz sample rate
 
   // boot/alive indicator on LED5
   boot_blinker #(
@@ -45,21 +47,27 @@ module top (
     .UART_TX(UART_TX)
   );
 
-  // FMC register slave
-  wire [15:0] led_ctrl;
-  fmc_mux_slave fmc_inst (
+  // ---- ACM datapath (FMC regs + synth) - identity declared by this board ----
+  wire [15:0] scratch;
+
+  acm_top #(
+    .TICK_DIV(FS_DIV)
+  ) acm_inst (
     .clk(HCLK),
     .rst(HRST),
-    .AD(FMC_AD),
-    .NADV(FMC_NADV),
-    .NOE(FMC_NOE),
-    .NWE(FMC_NWE),
-    .NE1(FMC_NE1),
-    .NWAIT(FMC_NWAIT),
-    .led_ctrl(led_ctrl)
+    .FMC_AD(FMC_AD),
+    .FMC_NADV(FMC_NADV),
+    .FMC_NOE(FMC_NOE),
+    .FMC_NWE(FMC_NWE),
+    .FMC_NE1(FMC_NE1),
+    .FMC_NWAIT(FMC_NWAIT),
+    .magic_i(16'hACE1),     // common link-check
+    .fpga_id_i(16'h5025),   // GW5A-25 (Tang Primer 25K)
+    .version_i(16'h0001),
+    .scratch_o(scratch)
   );
 
-  // board LEDs are active low; invert so a written 1 lights the led
-  assign LED[4:0] = ~led_ctrl[4:0];
+  // board LEDs are active low; mirror scratch low bits as a write indicator
+  assign LED[4:0] = ~scratch[4:0];
 
 endmodule
