@@ -9,35 +9,12 @@ two chips:
   second target) as the DSP - it runs the oscillator bank that actually makes sound.
 
 They talk over a 16-bit multiplexed **FMC** bus, with the register interface defined
-once in **Cheby** and generated for both sides.
+once in **Cheby** and generated for both sides. The whole signal chain, top to bottom:
 
-```mermaid
-flowchart LR
-    KB["MIDI keyboard"] -->|USB-MIDI| OTG["USB host (OTG_FS, PA11/PA12)"]
+![ACM system architecture](diagrams/acm-architecture.svg)
 
-    subgraph STM32["STM32H755 - control + I/O"]
-        OTG --> PARSE["usbh_midi: parse notes"]
-        PARSE --> ALLOC["voice allocator"]
-        ALLOC -->|"write voice regs"| FMCM["FMC master"]
-        TIM["TIM6 @ 48 kHz"] --> DMACH["DMA"]
-        DMACH -->|"read dac reg"| FMCM
-        DMACH --> DAC["DAC1 -> PA4"]
-    end
-
-    FMCM <==>|"16-bit muxed FMC"| BR
-
-    subgraph FPGA["FPGA - DSP"]
-        BR["FMC -> Wishbone bridge"] --> DEC["address decode"]
-        DEC --> CORE["core regs"]
-        DEC --> AUDIO["audio regs"]
-        AUDIO -->|"freq/gate/wave/level x8"| DDS["dds_synth (8 voices)"]
-        DDS -->|"mixed sample"| CONV["signed -> 12-bit"]
-        CONV --> DACREG["dac reg"]
-        DACREG --> AUDIO
-    end
-
-    DAC -->|analog| SPK["powered speakers"]
-```
+<sub>Diagram source: `docs/diagrams/acm-architecture.dot` - render with
+`dot -Tsvg acm-architecture.dot -o acm-architecture.svg`.</sub>
 
 ## Who does what
 
@@ -56,32 +33,17 @@ After setup, the audio samples never pass through the CPU.
 
 ## End-to-end: a key becomes sound
 
+The two halves run independently - the STM32 only touches registers on note
+events, the FPGA free-runs at the sample rate, and the DMA bridges them at Fs:
+
 ```mermaid
-sequenceDiagram
-    participant K as Keyboard
-    participant U as usbh_midi
-    participant A as voice allocator
-    participant R as audio regs (FMC)
-    participant D as dds_synth
-    participant M as TIM6 + DMA
-    participant O as DAC / speaker
-
-    K->>U: note-on (note, velocity)
-    U->>A: note_cb(note, vel, on=true)
-    A->>R: voice[v].freq = tuning[note]
-    A->>R: voice[v].ctrl = gate | wave | level
-    Note over D,R: every Fs tick the FPGA advances each phase, picks the wave, scales by level, mixes 8 voices, writes the 12-bit code to the dac reg
-    loop every Fs tick (48 kHz)
-        M->>R: DMA reads dac reg
-        M->>O: writes DAC
-    end
-    K->>U: note-off
-    U->>A: note_cb(note, 0, on=false)
-    A->>R: voice[v].ctrl gate = 0
+flowchart TD
+    A["key pressed: note-on (note, vel)"] --> B["STM32: allocate a free voice"]
+    B --> C["STM32: write voice freq + gate + level (FMC)"]
+    C --> D["FPGA free-runs: phase, wave, level, mix 8 -> dac reg"]
+    D --> E["TIM6 DMA: dac reg -> DAC every 48 kHz tick"]
+    E --> F["key released: note-off -> clear that voice gate"]
 ```
-
-The two halves run independently: the STM32 only touches the registers on note
-events; the FPGA free-runs at the sample rate; the DMA bridges them at Fs.
 
 ## FMC register map
 
@@ -111,13 +73,9 @@ The register layout is written once as YAML and generated for both sides, so the
 firmware and the gateware can never disagree on the contract.
 
 ```mermaid
-flowchart LR
-    Y1["core_regs.yaml"] --> GEN["cheby/gen.sh"]
-    Y2["audio_regs.yaml"] --> GEN
-    GEN -->|"--gen-c"| H["modules/apm/cheby/*.h (STM32 offsets + structs)"]
-    GEN -->|"--hdl verilog"| V["modules/acm/.../rtl/*.v (wb-16 register files)"]
-    H --> FW["STM32 firmware"]
-    V --> RTL["FPGA design"]
+flowchart TD
+    Y["*.yaml (core, audio)"] --> GEN["cheby/gen.sh"]
+    GEN --> OUT["C headers (STM32) + verilog (FPGA)"]
 ```
 
 - `bus: wb-16` - Wishbone, 16-bit, matched to the FMC so one FMC access = one bus
@@ -127,40 +85,34 @@ flowchart LR
 
 ## FPGA internals
 
-`acm_top` is a pure-wiring composition root: it connects independent blocks and
-holds no policy of its own (identity values come in as ports from the board's
-`top.v`).
+`acm_top` is a pure-wiring composition root: the FMC bridge feeds an address
+decode that splits into the two register files; the audio voice registers drive
+the oscillator bank, whose mixed output is converted to a DAC-ready code.
+(The Fs tick divider clocks the DDS; `audio.sample` is a signed debug tap.)
 
 ```mermaid
 flowchart TD
-    FMC["FMC muxed bus"] --> BR["fmc_wb_bridge: sync + latch addr + one wb cycle/access"]
-    BR --> DEC{"wb_adr[6]"}
-    DEC -->|"0 -> 0x00"| CORE["core: magic / fpga_id / scratch / version"]
-    DEC -->|"1 -> 0x80"| AUDIO["audio: ctrl / status / sample / dac / voice[8]"]
-    AUDIO --> VBUS["voice freq/gate/wave/level x8"]
-    TICK["Fs tick divider (27 MHz / 562 ~= 48 kHz)"] --> DDS
-    VBUS --> DDS["dds_synth"]
-    DDS --> MIX["mixed signed sample"]
-    MIX --> SREG["audio.sample (debug)"]
-    MIX --> CONV[">>3 + 2048, clamp"]
-    CONV --> DACREG["audio.dac (12-bit)"]
+    FMC["FMC bus"] --> BR["fmc_wb_bridge"]
+    BR --> DEC{"decode wb_adr[6]"}
+    DEC -->|"0"| CORE["core regs"]
+    DEC -->|"1"| AUDIO["audio regs"]
+    AUDIO --> DDS["dds_synth 8 voices + mix"]
+    DDS --> CONV[">>3 +2048, clamp"]
+    CONV --> DACREG["dac reg (12-bit)"]
 ```
 
 ### A DDS voice
 
-Each of the 8 voices is a numerically-controlled oscillator. The bank is
-time-multiplexed (one shared sine LUT + one multiplier walk the voices each tick).
+Each of the 8 voices is a numerically-controlled oscillator (the bank is
+time-multiplexed: one shared sine LUT + one multiplier walk the voices each tick).
+The per-voice registers `freq`, `wave`, `level`, `gate` drive each stage below:
 
 ```mermaid
-flowchart LR
-    FREQ["freq (tuning word)"] --> ACC["phase accumulator (+= freq each tick)"]
-    ACC --> SEL["waveform select"]
-    WAVE["wave: 0=sin 1=saw 2=sqr 3=tri"] --> SEL
-    SEL --> SCALE["x level"]
-    LEVEL["level"] --> SCALE
-    GATE["gate"] -->|"0 = mute"| SCALE
-    SCALE --> SUM["sum of 8 voices / 8"]
-    SUM --> OUT["mixed sample"]
+flowchart TD
+    ACC["phase accumulator (+= freq)"] --> SEL["select waveform (wave)"]
+    SEL --> SCALE["scale by level"]
+    SCALE --> GATE["apply gate"]
+    GATE --> MIX["sum 8 voices / 8"]
 ```
 
 - `freq` (tuning word) sets pitch: `inc = note_freq * 2^32 / Fs`, accumulated each
@@ -176,10 +128,10 @@ triggers a DMA that reads that one FMC register and writes the DAC - no CPU per
 sample. The CPU only services USB-MIDI and voice allocation.
 
 ```mermaid
-flowchart LR
-    TIM["TIM6 TRGO @ 48 kHz"] --> DMA["DMA (depth-1 circular)"]
-    DMA -->|"read"| DREG["FMC: audio.dac"]
-    DMA -->|"write"| DHR["DAC DHR12R1"]
+flowchart TD
+    TIM["TIM6 @ 48 kHz"] --> DMA["DMA (depth-1 circular)"]
+    DMA --> RD["read audio.dac (FMC)"]
+    RD --> DHR["write DAC DHR12R1"]
     DHR --> PA4["PA4 -> jack -> speakers"]
 ```
 
@@ -201,7 +153,7 @@ On-target tests live in `modules/apm/tests` (e.g. `test_fmc_core.c`,
 ## Status
 
 ```mermaid
-flowchart LR
+flowchart TD
     A["USB-MIDI host"]:::done --> B["register map (Cheby)"]:::done
     B --> C["DDS voices"]:::done
     C --> D["polyphony"]:::done

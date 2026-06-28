@@ -1,0 +1,65 @@
+// ACM synth - system block diagram. render:
+//   dot -Tsvg acm-architecture.dot -o acm-architecture.svg
+//   dot -Tpng -Gdpi=150 acm-architecture.dot -o acm-architecture.png
+digraph acm {
+  rankdir=LR;
+  bgcolor="transparent";
+  splines=spline;
+  pad=0.3;
+  nodesep=0.35;
+  ranksep=0.8;
+
+  node [fontname="Helvetica", fontsize=10, shape=box,
+        style="rounded,filled", color="#90A4AE", fillcolor="white",
+        penwidth=1.2, margin="0.18,0.10"];
+  edge [fontname="Helvetica", fontsize=8, color="#546E7A", penwidth=1.1];
+
+  kb  [label="MIDI keyboard", fillcolor="#ECEFF1", color="#607D8B"];
+  spk [label="powered speakers", fillcolor="#ECEFF1", color="#607D8B"];
+
+  subgraph cluster_stm32 {
+    label="STM32H755  -  control + I/O";
+    labelloc="t"; fontname="Helvetica-bold"; fontsize=12; fontcolor="#1565C0";
+    style="rounded,filled"; fillcolor="#E3F2FD"; color="#1976D2"; penwidth=1.6; margin=14;
+
+    usb   [label="USB-MIDI host", fillcolor="#BBDEFB", color="#1976D2"];
+    parse [label="usbh_midi", fillcolor="#BBDEFB", color="#1976D2"];
+    alloc [label="voice allocator", fillcolor="#BBDEFB", color="#1976D2"];
+    fmcm  [label="FMC controller", fillcolor="#BBDEFB", color="#1976D2"];
+    tim   [label="TIM6", fillcolor="#BBDEFB", color="#1976D2"];
+    dma   [label="DMA", fillcolor="#BBDEFB", color="#1976D2"];
+    dac   [label="DAC1 (PA4)", fillcolor="#BBDEFB", color="#1976D2"];
+  }
+
+  subgraph cluster_fpga {
+    label="FPGA  -  DSP";
+    labelloc="t"; fontname="Helvetica-bold"; fontsize=12; fontcolor="#2E7D32";
+    style="rounded,filled"; fillcolor="#E8F5E9"; color="#388E3C"; penwidth=1.6; margin=14;
+
+    bridge [label="FMC -> WB bridge", fillcolor="#C8E6C9", color="#388E3C"];
+    dec    [label="address decode", fillcolor="#C8E6C9", color="#388E3C"];
+    core   [label="core regs", fillcolor="#C8E6C9", color="#388E3C"];
+    audio  [label="audio regs (voice[8] + dac)", fillcolor="#C8E6C9", color="#388E3C"];
+    dds    [label="dds_synth (8 osc + mix)", fillcolor="#C8E6C9", color="#388E3C"];
+  }
+
+  // ---- control path (STM32 -> FPGA) ----
+  kb -> usb     [label="USB-MIDI", fontcolor="#37474F"];
+  usb -> parse;
+  parse -> alloc [label="notes"];
+  alloc -> fmcm;
+  fmcm -> bridge [dir=both, label="FMC: 16-bit muxed", color="#E65100", fontcolor="#E65100", penwidth=2.4, fontsize=10];
+  bridge -> dec  [label="Wishbone-16", color="#6A1B9A", fontcolor="#6A1B9A", penwidth=1.9, fontsize=9];
+  dec -> core    [label="wb"];
+  dec -> audio   [label="wb"];
+
+  // ---- synthesis ----
+  audio -> dds   [label="freq/gate/wave/level"];
+  dds -> audio   [label="dac (12-bit)", style=dashed, constraint=false];
+
+  // ---- audio return (FPGA -> DAC) ----
+  fmcm -> dma    [label="dac samples"];
+  tim -> dma     [label="48 kHz"];
+  dma -> dac     [label="12-bit"];
+  dac -> spk     [label="analog line-out", fontcolor="#37474F"];
+}

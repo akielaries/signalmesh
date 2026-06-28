@@ -52,6 +52,13 @@ memory-map:
         access: ro
         description: latest mixed DDS output sample (signed); STM32 reads -> DAC
 
+    - reg:
+        name: dac
+        address: 0x06
+        width: 16
+        access: ro
+        description: DAC-ready sample (12-bit unsigned in [11:0]) for STM32 DMA -> DAC DHR
+
     # ---- per-oscillator voice array: one template, replicated x8 (polyphony) ----
     - repeat:
         name: voice

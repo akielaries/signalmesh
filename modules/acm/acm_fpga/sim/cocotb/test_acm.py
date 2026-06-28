@@ -137,4 +137,14 @@ async def acm_test(dut):
     silent = [to_signed(await fmc_read(dut, SAMPLE_ADDR)) for _ in range(4)]
     assert all(s == 0 for s in silent), f"gate off should be silent, got {silent}"
 
+    # FPGA-side DAC-ready code (the signed->12-bit conversion the STM32 DMAs):
+    # silence -> mid-scale 2048; re-gated -> tracks the signal, within 12-bit range
+    DAC_ADDR = 0x43                                  # audio `dac` reg (byte 0x86)
+    assert (d := await fmc_read(dut, DAC_ADDR)) == 2048, f"dac idle={d}, want 2048"
+    await fmc_write(dut, VOICE0_CTRL, voice_ctrl(gate=1, wave=1, level=0xFF))
+    dac_live = [await fmc_read(dut, DAC_ADDR) for _ in range(6)]
+    assert all(0 <= d <= 4095 for d in dac_live), f"dac out of 12-bit range: {dac_live}"
+    assert any(d != 2048 for d in dac_live), f"dac should track signal: {dac_live}"
+    dut._log.info(f"ACM ok: dac idle=2048, live={dac_live}")
+
     dut._log.info(f"ACM datapath OK: live={live}, silent={silent}")

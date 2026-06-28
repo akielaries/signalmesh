@@ -33,6 +33,7 @@ static inline void wr(uint32_t off, uint16_t v) {
 }
 
 #define A_SAMPLE        (AUDIO_BASE + AUDIO_SAMPLE)
+#define A_DAC           (AUDIO_BASE + AUDIO_DAC)     // FPGA 12-bit DAC-ready code
 #define A_VOICE_FREQ(i) (AUDIO_BASE + AUDIO_VOICE + (i) * AUDIO_VOICE_SIZE + AUDIO_VOICE_FREQ)
 #define A_VOICE_CTRL(i) (AUDIO_BASE + AUDIO_VOICE + (i) * AUDIO_VOICE_SIZE + AUDIO_VOICE_CTRL)
 
@@ -84,26 +85,29 @@ static void fmc_mpu_init(void) {
 #define GPT_HZ        1200000U
 
 static const DACConfig dac_cfg = {
-  .init = 0U,
+  .init = 2048U,                          // mid-scale (AC zero) until streaming
   .datamode = DAC_DHRM_12BIT_RIGHT,
   .cr = 0U
 };
 
-static inline uint16_t sample_to_dac(int16_t s) {
-  // >>3 leaves headroom for ~4-voice chords without clipping. the FPGA already
-  // mixes sum/8, so per-voice it's quiet - turn the amp up. clamp for safety.
-  int32_t v = ((int32_t)s >> 3) + 2048;
-  if (v < 0)    { v = 0; }
-  if (v > 4095) { v = 4095; }
-  return (uint16_t)v;
-}
-static void dac_tick_cb(GPTDriver *gptp) {
-  (void)gptp;
-  DAC1->DHR12R1 = sample_to_dac((int16_t)rd(A_SAMPLE));
-}
-static const GPTConfig gpt_cfg = {
-  .frequency = GPT_HZ, .callback = dac_tick_cb, .cr2 = 0U, .dier = 0U
+// TIM6-triggered DMA plays directly from the FPGA's `dac` register - no CPU in
+// the audio path. the FPGA already produced a DAC-ready 12-bit code, so the DMA
+// just moves FMC -> DAC each Fs tick.
+static const DACConversionGroup dac_grpcfg = {
+  .num_channels = 1U,
+  .end_cb       = NULL,
+  .error_cb     = NULL,
+  .trigger      = DAC_TRG(5)              // TIM6 TRGO (TSEL=5 on H7)
 };
+
+// TIM6 as the Fs trigger source: TRGO on update event (no callback - DMA does it)
+static const GPTConfig gpt_cfg = {
+  .frequency = GPT_HZ, .callback = NULL, .cr2 = TIM_CR2_MMS_1, .dier = 0U
+};
+
+// depth-1 circular "buffer" = the FPGA dac register; the DMA re-reads it each
+// trigger (non-cacheable FMC, so it always sees the live value).
+static dacsample_t *const dac_src = (dacsample_t *)(FMC_FPGA_BASE + A_DAC);
 
 #define SYNTH_WAVE  0U                  // 0=sine 1=saw 2=square 3=triangle
 #define NVOICES     8U                  // matches audio_regs voice[8]
@@ -178,11 +182,12 @@ int main(void) {
   build_note_table();
   synth_all_off();          // all 8 voices gated off to start
 
-  // DAC + Fs streaming timer (PA4)
+  // DAC on PA4, fed by TIM6-triggered DMA straight from the FPGA dac register
   palSetPadMode(GPIOA, 4, PAL_MODE_INPUT_ANALOG);
   dacStart(&DACD1, &dac_cfg);
   gptStart(&GPTD6, &gpt_cfg);
-  gptStartContinuous(&GPTD6, GPT_HZ / SAMPLE_RATE);
+  dacStartConversion(&DACD1, &dac_grpcfg, dac_src, 1U);   // depth 1 = re-read FMC each tick
+  gptStartContinuous(&GPTD6, GPT_HZ / SAMPLE_RATE);       // 25 -> 48 kHz TRGO
 
   // hand parsed notes to the synth glue
   usbhmidiSetNoteCallback(note_cb);

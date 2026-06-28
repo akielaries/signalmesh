@@ -19,6 +19,9 @@
 /* REG sample */
 #define AUDIO_SAMPLE 0x4UL
 
+/* REG dac */
+#define AUDIO_DAC 0x6UL
+
 /* REG voice */
 #define AUDIO_VOICE 0x40UL
 #define AUDIO_VOICE_SIZE 8 /* 0x8 */
@@ -47,8 +50,11 @@ struct audio {
   /* [0x4]: REG (ro) */
   uint16_t sample;
 
+  /* [0x6]: REG (ro) */
+  uint16_t dac;
+
   /* padding to: 64 Bytes */
-  uint8_t __padding_0[58];
+  uint32_t __padding_0[14];
 
   /* [0x40]: REPEAT */
   struct voice {

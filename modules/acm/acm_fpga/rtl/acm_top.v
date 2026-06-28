@@ -85,6 +85,13 @@ module acm_top #(
   wire [8*8-1:0]  v_level;
   wire signed [15:0] dds_sample;
 
+  // DAC-ready code: signed mix -> 12-bit unsigned (>>3 headroom + clamp), so the
+  // STM32 can DMA it straight to the DAC with no CPU in the audio path.
+  wire signed [16:0] dac_biased = ($signed(dds_sample) >>> 3) + 17'sd2048;
+  wire [11:0] dac_code = dac_biased[16]       ? 12'd0    :   // negative -> 0
+                         (|dac_biased[15:12]) ? 12'd4095 :   // > 4095 -> clamp
+                         dac_biased[11:0];
+
   audio audio_inst (
     .rst_n_i(~rst), .clk_i(clk),
     .wb_cyc_i(audio_cyc), .wb_stb_i(audio_cyc & wb_stb), .wb_adr_i(wb_adr[5:0]),
@@ -93,6 +100,7 @@ module acm_top #(
     .ctrl_enable_o(), .ctrl_srate_o(),
     .status_active_voices_i(8'd0),
     .sample_i(dds_sample),
+    .dac_i({4'b0, dac_code}),
     .voice_0_freq_o(v_freq[0*32 +: 32]), .voice_0_ctrl_gate_o(v_gate[0]),
     .voice_0_ctrl_wave_o(v_wave[0*3 +: 3]), .voice_0_ctrl_level_o(v_level[0*8 +: 8]),
     .voice_1_freq_o(v_freq[1*32 +: 32]), .voice_1_ctrl_gate_o(v_gate[1]),
