@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # regenerate register interfaces from the cheby sources in this directory.
-#   C headers -> modules/apm/bsp            (STM32 firmware, on the include path)
+#   C headers -> modules/apm/cheby          (STM32 firmware, on the include path)
 #   verilog   -> modules/acm/acm_fpga/rtl   (FPGA, shared across board targets)
 #
 # the .yaml files here are the single source of truth; the generated .h/.v are
@@ -16,7 +16,7 @@ hdl_dst="$root/modules/acm/acm_fpga/rtl"
 shopt -s nullglob
 for yaml in "$here"/*.yaml; do
   name="$(basename "$yaml" .yaml)"
-  printf 'cheby  %-14s -> apm/bsp/%s.h , acm rtl/%s.v\n' "$name" "$name" "$name"
+  printf 'cheby  %-14s -> apm/cheby/%s.h , acm rtl/%s.v\n' "$name" "$name" "$name"
   cheby -i "$yaml" --gen-c                "$hdr_dst/$name.h"
   cheby -i "$yaml" --hdl verilog --gen-hdl "$hdl_dst/$name.v"
 done

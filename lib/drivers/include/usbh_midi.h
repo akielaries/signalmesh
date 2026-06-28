@@ -32,6 +32,13 @@ struct USBHMIDIDriver {
 extern USBHMIDIDriver USBHMIDID[USBH_MIDI_MAX_INSTANCES];
 extern const usbh_classdriverinfo_t usbhMidiClassDriverInfo;
 
+// note-event hook. the app sets this to react to parsed notes:
+//   on = true  -> note-on  (velocity vel, 1..127)
+//   on = false -> note-off (vel = 0)
+// called from the USB IN-completion context, so keep the handler short.
+typedef void (*usbhmidi_note_cb_t)(uint8_t note, uint8_t vel, bool on);
+void usbhmidiSetNoteCallback(usbhmidi_note_cb_t cb);
+
 #endif
 
 #endif /* USBH_MIDI_H */

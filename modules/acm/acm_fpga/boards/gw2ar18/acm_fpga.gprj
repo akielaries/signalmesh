@@ -5,15 +5,15 @@
     <Version>5</Version>
     <Device name="GW2AR-18" pn="GW2AR-LV18QN88PC8/I7">gw2ar18-018</Device>
     <FileList>
-        <File path="src/fmc_mux_slave.v" type="file.verilog" enable="1"/>
+        <File path="src/fmc_mux_slave.v" type="file.verilog" enable="0"/>
         <File path="top.v" type="file.verilog" enable="1"/>
-        <File path="/home/akiel/trunk/pub/signalmesh/modules/acm/acm_fpga/rtl/acm_top.v" type="file.verilog" enable="0"/>
-        <File path="/home/akiel/trunk/pub/signalmesh/modules/acm/acm_fpga/rtl/audio_regs.v" type="file.verilog" enable="0"/>
+        <File path="/home/akiel/trunk/pub/signalmesh/modules/acm/acm_fpga/rtl/acm_top.v" type="file.verilog" enable="1"/>
+        <File path="/home/akiel/trunk/pub/signalmesh/modules/acm/acm_fpga/rtl/audio_regs.v" type="file.verilog" enable="1"/>
         <File path="/home/akiel/trunk/pub/signalmesh/modules/acm/acm_fpga/rtl/boot_blink.v" type="file.verilog" enable="1"/>
         <File path="/home/akiel/trunk/pub/signalmesh/modules/acm/acm_fpga/rtl/core_regs.v" type="file.verilog" enable="1"/>
-        <File path="/home/akiel/trunk/pub/signalmesh/modules/acm/acm_fpga/rtl/dds_synth.v" type="file.verilog" enable="0"/>
+        <File path="/home/akiel/trunk/pub/signalmesh/modules/acm/acm_fpga/rtl/dds_synth.v" type="file.verilog" enable="1"/>
         <File path="/home/akiel/trunk/pub/signalmesh/modules/acm/acm_fpga/rtl/fmc_wb_bridge.v" type="file.verilog" enable="1"/>
-        <File path="/home/akiel/trunk/pub/signalmesh/modules/acm/acm_fpga/rtl/sine_lut.v" type="file.verilog" enable="0"/>
+        <File path="/home/akiel/trunk/pub/signalmesh/modules/acm/acm_fpga/rtl/sine_lut.v" type="file.verilog" enable="1"/>
         <File path="/home/akiel/trunk/pub/signalmesh/modules/acm/acm_fpga/rtl/stm32_uart_test.v" type="file.verilog" enable="1"/>
         <File path="pins.cst" type="file.cst" enable="1"/>
         <File path="timing.sdc" type="file.sdc" enable="1"/>

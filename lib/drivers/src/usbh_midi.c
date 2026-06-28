@@ -27,6 +27,12 @@
 
 USBHMIDIDriver USBHMIDID[USBH_MIDI_MAX_INSTANCES];
 
+// app note-event hook (set via usbhmidiSetNoteCallback); called from _in_cb
+static usbhmidi_note_cb_t midi_note_cb;
+void usbhmidiSetNoteCallback(usbhmidi_note_cb_t cb) {
+  midi_note_cb = cb;
+}
+
 // DMA-capable read buffers, one per instance
 static USBH_DEFINE_BUFFER(uint8_t midi_inbuf[USBH_MIDI_MAX_INSTANCES][USBH_MIDI_BUF_SIZE]);
 
@@ -57,9 +63,11 @@ static void _in_cb(usbh_urb_t *urb) {
       const uint8_t ch  = st & 0x0FU;
       if (cin == 0x9U && d2 != 0U) {
         uinfof("MIDI note ON  ch=%u note=%u vel=%u", ch, d1, d2);
+        if (midi_note_cb != NULL) { midi_note_cb(d1, d2, true); }
       }
       else if (cin == 0x8U || (cin == 0x9U && d2 == 0U)) {
         uinfof("MIDI note OFF ch=%u note=%u", ch, d1);
+        if (midi_note_cb != NULL) { midi_note_cb(d1, 0U, false); }
       }
       else if (cin != 0U) {
         uinfof("MIDI cin=%X %02x %02x %02x", cin, st, d1, d2);

@@ -108,7 +108,10 @@ set(SOURCES
     #./tests/test_fmc_fpga.c
     #./tests/fmc_audio_test.c
     #./tests/midi_usb_driver_test.c
-    ./tests/test_fmc_core.c
+    #./tests/test_fmc_core.c
+    #./tests/test_fmc_dds_e2e.c
+    ./tests/test_midi_synth.c
+
     #./tests/gpio_pin_check.c
 
     # test drivers
