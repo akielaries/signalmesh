@@ -37,6 +37,9 @@ set(DRIVERS_INCLUDE_DIR ../../lib/drivers/include)
 set(COMMON_SRC_DIR ../../lib/common/src)
 set(COMMON_INCLUDE_DIR ../../lib/common/include)
 
+set(BOOTLOADER_SRC_DIR ../../lib/bootloader/src)
+set(BOOTLOADER_INCLUDE_DIR ../../lib/bootloader/include)
+
 include_directories(
   .
   ./bsp
@@ -46,6 +49,7 @@ include_directories(
   ./bsp/utils
   ${DRIVERS_INCLUDE_DIR}
   ${COMMON_INCLUDE_DIR}
+  ${BOOTLOADER_INCLUDE_DIR}
   ${CHIBIOS_ROOT}/os/hal/include
   ${CHIBIOS_ROOT}/os/rt/include
   ${CHIBIOS_CONTRIB_ROOT}/os/hal/include
@@ -69,6 +73,9 @@ set(SOURCES
 
     ${COMMON_SRC_DIR}/utils.c
     ${COMMON_SRC_DIR}/lcd_ui.c
+
+    ${BOOTLOADER_SRC_DIR}/crc32.c
+    ${BOOTLOADER_SRC_DIR}/frame.c
 
     ${DRIVERS_SRC_DIR}/driver_registry.c
 
@@ -101,7 +108,8 @@ set(SOURCES
     #./tests/bist_gm009605_ramp.c
     #./tests/test_uart3_hello.c
     #./tests/test_uart3_echo.c
-    ./tests/test_uart3_rx_bench.c
+    #./tests/test_uart3_rx_bench.c
+    ./tests/test_fw_receiver.c
     #./tests/bist_icu.c
 
     # ./tests/test_qspi_w25q64.c   # low-level reference for the qspi bring-up
