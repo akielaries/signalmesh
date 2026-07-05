@@ -57,6 +57,11 @@ void init_devices(void) {
   for (size_t i = 0; i < num_board_devices; i++) {
     device_t *dev = &board_devices[i];
 
+    // skip devices not populated on this board (set is_active in board_devices)
+    if (!dev->is_active) {
+      continue;
+    }
+
     // Find matching driver for this device
     for (size_t j = 0; j < num_drivers; j++) {
       if (strncmp(dev->name, drivers[j]->name, strlen(drivers[j]->name)) == 0) {

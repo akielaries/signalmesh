@@ -56,7 +56,7 @@ device_t board_devices[] = {
         .bus = &I2CD1,
         .addr = 0x40,
         .priv = &ina219_dev_data[0],
-        .is_active = false
+        .is_active = true
     },
     {
         .name = "ina219_aux",
@@ -64,7 +64,7 @@ device_t board_devices[] = {
         .bus = &I2CD1,
         .addr = 0x45, // A0 and A1 pins grounded
         .priv = &ina219_dev_data[1],
-        .is_active = false
+        .is_active = true
     },
     {
         .name = "ina3221",
@@ -128,15 +128,15 @@ device_t board_devices[] = {
         .bus = &I2CD1,
         .addr = 0x3C,
         .priv = &gm009605_dev_data,
-        .is_active = false
+        .is_active = true
     },
     {
         .name = "lcd2004",
         .driver = &lcd2004_driver,
         .bus = &I2CD1,
-        .addr = 0x27,
+        .addr = 0x26,          // PCF8574 backpack on this module lands at 0x26 (not the 0x27 default)
         .priv = &lcd2004_dev_data,
-        .is_active = false
+        .is_active = true
     },
     /*
     {
@@ -218,8 +218,8 @@ void bsp_init(void) {
   bsp_spi_init();
   bsp_printf("SPI initialized\n");
 
-  //init_devices();
-  //bsp_printf("initialized devices\n");
+  init_devices();
+  bsp_printf("initialized devices\n");
 
 /*
   // these should be configured more elegantly like how the i2c stuff is configured

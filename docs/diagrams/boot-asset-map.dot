@@ -1,0 +1,60 @@
+// ACM boot/update - asset + memory map. render: ./render.sh
+// where every image lives: STM32 A/B in internal dual-bank flash,
+// FPGA bitstreams + golden assets in memory-mapped QSPI.
+digraph asset_map {
+  rankdir=LR;
+  bgcolor="white";
+  pad=0.3;
+  nodesep=0.35;
+  ranksep=0.8;
+
+  node [fontname="Helvetica", fontsize=10, shape=plaintext];
+  edge [fontname="Helvetica", fontsize=8, color="#546E7A", penwidth=1.1];
+
+  // internal flash: 2MB, two 1MB banks, hardware SWAP_BANK for A/B
+  subgraph cluster_int {
+    label="STM32H74x/H75x internal flash  -  2 MB, dual bank";
+    labelloc="t"; fontname="Helvetica-bold"; fontsize=12; fontcolor="#1565C0";
+    style="rounded,filled"; fillcolor="#E3F2FD"; color="#1976D2"; penwidth=1.6; margin=14;
+
+    intflash [label=<
+      <table border="0" cellborder="1" cellspacing="0" cellpadding="8">
+        <tr><td bgcolor="#90CAF9" align="left"><b>Bank 1  @ 0x0800_0000  (1 MB)</b></td></tr>
+        <tr><td bgcolor="#BBDEFB" align="left">bootloader / updater core<br/>(write-protected sectors)</td></tr>
+        <tr><td bgcolor="#E3F2FD" align="left"><b>slot A</b>  -  application image A</td></tr>
+        <tr><td bgcolor="#90CAF9" align="left"><b>Bank 2  @ 0x0810_0000  (1 MB)</b></td></tr>
+        <tr><td bgcolor="#E3F2FD" align="left"><b>slot B</b>  -  application image B</td></tr>
+        <tr><td bgcolor="#FFF3E0" align="left">option bytes: SWAP_BANK, BOOT_ADD0/1<br/>(atomic A/B select + rollback)</td></tr>
+      </table>>];
+  }
+
+  // external QSPI: dual W25Q64 memory-mapped, holds FPGA assets + DR copy
+  subgraph cluster_qspi {
+    label="QSPI flash  -  memory-mapped (dual W25Q64)";
+    labelloc="t"; fontname="Helvetica-bold"; fontsize=12; fontcolor="#2E7D32";
+    style="rounded,filled"; fillcolor="#E8F5E9"; color="#388E3C"; penwidth=1.6; margin=14;
+
+    qspi [label=<
+      <table border="0" cellborder="1" cellspacing="0" cellpadding="8">
+        <tr><td bgcolor="#A5D6A7" align="left"><b>base @ 0x9000_0000</b></td></tr>
+        <tr><td bgcolor="#C8E6C9" align="left"><b>golden</b> FPGA bitstream<br/>(factory fallback, read-only)</td></tr>
+        <tr><td bgcolor="#E8F5E9" align="left"><b>active</b> FPGA bitstream<br/>(current, updatable)</td></tr>
+        <tr><td bgcolor="#FFF3E0" align="left">STM32 golden image<br/>(disaster-recovery copy, optional)</td></tr>
+        <tr><td bgcolor="#ECEFF1" align="left">params / config / cal data</td></tr>
+      </table>>];
+  }
+
+  // manifest header wraps every image so verify/transport code is shared
+  manifest [shape=note, style="filled", fillcolor="#FFFDE7", color="#F9A825",
+            fontsize=9, fontname="Helvetica",
+            label="manifest header (per image)\lmagic | target_id | version\llength | crc32 / sha\l"];
+
+  fpga [shape=box, style="rounded,filled", fillcolor="#C8E6C9", color="#388E3C",
+        fontname="Helvetica-bold", fontsize=11, label="Gowin FPGA\l(GW2AR-18 / GW5A-25)"];
+
+  intflash -> fpga [style=invis];
+  qspi -> fpga [label="active bitstream\n(golden on fallback)",
+                color="#E65100", fontcolor="#E65100", penwidth=2.0];
+  manifest -> intflash [style=dashed, label="wraps A/B"];
+  manifest -> qspi [style=dashed, label="wraps bitstreams"];
+}

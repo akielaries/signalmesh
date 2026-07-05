@@ -68,6 +68,7 @@ set(SOURCES
     ./bsp/utils/bsp_io.c
 
     ${COMMON_SRC_DIR}/utils.c
+    ${COMMON_SRC_DIR}/lcd_ui.c
 
     ${DRIVERS_SRC_DIR}/driver_registry.c
 
@@ -94,9 +95,13 @@ set(SOURCES
     # ./app/main.c ./tests/test_i2c_lb.c ./tests/test_ina219.c
     #./tests/test_i2c_scan.c
     #./tests/bist_lcd2004.c
+    #./tests/test_lcd_ui.c
     #./tests/bist_ina219_dual.c
     #./tests/bist_gm009605.c
     #./tests/bist_gm009605_ramp.c
+    #./tests/test_uart3_hello.c
+    #./tests/test_uart3_echo.c
+    ./tests/test_uart3_rx_bench.c
     #./tests/bist_icu.c
 
     # ./tests/test_qspi_w25q64.c   # low-level reference for the qspi bring-up
@@ -110,7 +115,10 @@ set(SOURCES
     #./tests/midi_usb_driver_test.c
     #./tests/test_fmc_core.c
     #./tests/test_fmc_dds_e2e.c
-    ./tests/test_midi_synth.c
+    #./tests/test_midi_synth.c
+    #./tests/test_pot_mux.c
+    #./tests/test_pot_level.c
+    #./tests/test_env_autogate.c
 
     #./tests/gpio_pin_check.c
 

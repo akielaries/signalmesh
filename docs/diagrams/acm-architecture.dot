@@ -1,13 +1,13 @@
-// ACM synth - system block diagram. render:
-//   dot -Tsvg acm-architecture.dot -o acm-architecture.svg
-//   dot -Tpng -Gdpi=150 acm-architecture.dot -o acm-architecture.png
+// ACM synth - system block diagram. render: ./render.sh
+// layout: two chip containers side by side (blocks stacked vertically inside),
+// FMC bus across the middle.
 digraph acm {
-  rankdir=LR;
-  bgcolor="transparent";
+  rankdir=TB;
+  bgcolor="white";
   splines=spline;
   pad=0.3;
-  nodesep=0.35;
-  ranksep=0.8;
+  nodesep=0.3;
+  ranksep=0.5;
 
   node [fontname="Helvetica", fontsize=10, shape=box,
         style="rounded,filled", color="#90A4AE", fillcolor="white",
@@ -20,46 +20,40 @@ digraph acm {
   subgraph cluster_stm32 {
     label="STM32H755  -  control + I/O";
     labelloc="t"; fontname="Helvetica-bold"; fontsize=12; fontcolor="#1565C0";
-    style="rounded,filled"; fillcolor="#E3F2FD"; color="#1976D2"; penwidth=1.6; margin=14;
+    style="rounded,filled"; fillcolor="#E3F2FD"; color="#1976D2"; penwidth=1.6; margin=12;
 
-    usb   [label="USB-MIDI host", fillcolor="#BBDEFB", color="#1976D2"];
-    parse [label="usbh_midi", fillcolor="#BBDEFB", color="#1976D2"];
+    midi  [label="USB-MIDI host", fillcolor="#BBDEFB", color="#1976D2"];
     alloc [label="voice allocator", fillcolor="#BBDEFB", color="#1976D2"];
     fmcm  [label="FMC controller", fillcolor="#BBDEFB", color="#1976D2"];
-    tim   [label="TIM6", fillcolor="#BBDEFB", color="#1976D2"];
-    dma   [label="DMA", fillcolor="#BBDEFB", color="#1976D2"];
+    dma   [label="TIM6 + DMA", fillcolor="#BBDEFB", color="#1976D2"];
     dac   [label="DAC1 (PA4)", fillcolor="#BBDEFB", color="#1976D2"];
+
+    midi -> alloc [label="notes"];
+    alloc -> fmcm;
+    fmcm -> dma   [label="dac samples"];
+    dma -> dac    [label="12-bit"];
   }
 
   subgraph cluster_fpga {
     label="FPGA  -  DSP";
     labelloc="t"; fontname="Helvetica-bold"; fontsize=12; fontcolor="#2E7D32";
-    style="rounded,filled"; fillcolor="#E8F5E9"; color="#388E3C"; penwidth=1.6; margin=14;
+    style="rounded,filled"; fillcolor="#E8F5E9"; color="#388E3C"; penwidth=1.6; margin=12;
 
     bridge [label="FMC -> WB bridge", fillcolor="#C8E6C9", color="#388E3C"];
     dec    [label="address decode", fillcolor="#C8E6C9", color="#388E3C"];
     core   [label="core regs", fillcolor="#C8E6C9", color="#388E3C"];
     audio  [label="audio regs (voice[8] + dac)", fillcolor="#C8E6C9", color="#388E3C"];
     dds    [label="dds_synth (8 osc + mix)", fillcolor="#C8E6C9", color="#388E3C"];
+
+    bridge -> dec [label="Wishbone-16", color="#6A1B9A", fontcolor="#6A1B9A", penwidth=1.9];
+    dec -> core   [label="wb"];
+    dec -> audio  [label="wb"];
+    audio -> dds  [label="freq/gate/wave/level"];
+    dds -> audio  [label="dac", style=dashed, constraint=false];
   }
 
-  // ---- control path (STM32 -> FPGA) ----
-  kb -> usb     [label="USB-MIDI", fontcolor="#37474F"];
-  usb -> parse;
-  parse -> alloc [label="notes"];
-  alloc -> fmcm;
-  fmcm -> bridge [dir=both, label="FMC: 16-bit muxed", color="#E65100", fontcolor="#E65100", penwidth=2.4, fontsize=10];
-  bridge -> dec  [label="Wishbone-16", color="#6A1B9A", fontcolor="#6A1B9A", penwidth=1.9, fontsize=9];
-  dec -> core    [label="wb"];
-  dec -> audio   [label="wb"];
-
-  // ---- synthesis ----
-  audio -> dds   [label="freq/gate/wave/level"];
-  dds -> audio   [label="dac (12-bit)", style=dashed, constraint=false];
-
-  // ---- audio return (FPGA -> DAC) ----
-  fmcm -> dma    [label="dac samples"];
-  tim -> dma     [label="48 kHz"];
-  dma -> dac     [label="12-bit"];
-  dac -> spk     [label="analog line-out", fontcolor="#37474F"];
+  kb -> midi [label="USB-MIDI"];
+  dac -> spk [label="analog"];
+  fmcm -> bridge [dir=both, constraint=false, label="FMC: 16-bit muxed",
+                  color="#E65100", fontcolor="#E65100", penwidth=2.4, fontsize=10];
 }

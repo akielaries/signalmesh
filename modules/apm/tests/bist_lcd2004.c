@@ -94,6 +94,7 @@ int main(void) {
 
   device_t *lcd = find_device("lcd2004");
   if (lcd) {
+    // init handled centrally by init_devices() in bsp_init
     test_simple_string(lcd);
     test_multi_line(lcd);
     test_custom_chars(lcd);

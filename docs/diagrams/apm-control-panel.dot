@@ -1,0 +1,65 @@
+// APM board <-> control board interconnect (Vivado / IP-integrator style:
+// blocks with pin ports, orthogonal wires). render: ./render.sh
+//   CTRL FFC   -> SPI / shift registers (digital: buttons + LEDs)
+//   PERIPH FFC -> 8 potentiometer channels (analog)
+digraph apm_control {
+  rankdir=LR;
+  bgcolor="white";
+  splines=ortho;
+  pad=0.3;
+  nodesep=0.6;
+  ranksep=1.1;
+  node [shape=plain, fontname="Helvetica", fontsize=10];
+  edge [fontname="Helvetica", fontsize=9, color="#37474F", penwidth=1.3, arrowsize=0.7];
+
+  subgraph cluster_apm {
+    label="APM BOARD";
+    labelloc="t"; labeljust="l"; fontname="Helvetica-bold"; fontsize=14; fontcolor="#1565C0";
+    style="rounded,filled"; fillcolor="#F4F9FE"; color="#1976D2"; penwidth=2; margin=20;
+
+    stm32 [label=<
+      <table border="1" color="#1976D2" cellborder="0" cellspacing="0" cellpadding="6" bgcolor="#E3F2FD">
+        <tr><td bgcolor="#1976D2"><font color="white"><b>STM32H755</b></font></td></tr>
+        <tr><td port="spi" align="right">SPI (SCK/MOSI/MISO/CS)</td></tr>
+        <tr><td port="adc" align="right">ADC[7:0]</td></tr>
+      </table>>];
+
+    j1 [label=<
+      <table border="1" color="#1976D2" cellborder="0" cellspacing="0" cellpadding="6" bgcolor="#FFFFFF">
+        <tr><td colspan="2" bgcolor="#90CAF9"><b>CTRL FFC  J1</b></td></tr>
+        <tr><td port="i" align="left">SPI</td><td port="o" align="right">SPI</td></tr>
+      </table>>];
+
+    j2 [label=<
+      <table border="1" color="#1976D2" cellborder="0" cellspacing="0" cellpadding="6" bgcolor="#FFFFFF">
+        <tr><td colspan="2" bgcolor="#90CAF9"><b>PERIPH FFC  J2</b></td></tr>
+        <tr><td port="o" align="left">ADC[7:0]</td><td port="i" align="right">AIN[7:0]</td></tr>
+      </table>>];
+
+    stm32:spi -> j1:i;
+    j2:o -> stm32:adc;
+  }
+
+  subgraph cluster_ctrl {
+    label="CONTROL BOARD";
+    labelloc="t"; labeljust="l"; fontname="Helvetica-bold"; fontsize=14; fontcolor="#2E7D32";
+    style="rounded,filled"; fillcolor="#F5FBF6"; color="#388E3C"; penwidth=2; margin=20;
+
+    shift [label=<
+      <table border="1" color="#388E3C" cellborder="0" cellspacing="0" cellpadding="6" bgcolor="#E8F5E9">
+        <tr><td colspan="2" bgcolor="#388E3C"><font color="white"><b>shift regs  74HC595 / 165</b></font></td></tr>
+        <tr><td port="spi" align="left">SPI</td><td port="led" align="right">LEDs</td></tr>
+        <tr><td port="btn" align="left">buttons / switches</td><td align="right"> </td></tr>
+      </table>>];
+
+    pots [label=<
+      <table border="1" color="#388E3C" cellborder="0" cellspacing="0" cellpadding="6" bgcolor="#E8F5E9">
+        <tr><td bgcolor="#388E3C"><font color="white"><b>8 potentiometers</b></font></td></tr>
+        <tr><td port="out" align="left">AIN[7:0]</td></tr>
+      </table>>];
+  }
+
+  // FFC cables (bus wires between the boards)
+  j1:o -> shift:spi [dir=both, xlabel="CTRL FFC", color="#E65100", penwidth=2.6, arrowsize=0.8];
+  pots:out -> j2:i  [dir=both, xlabel="PERIPH FFC", color="#6A1B9A", penwidth=2.6, arrowsize=0.8];
+}

@@ -422,7 +422,10 @@
  *          buffers.
  */
 #if !defined(SERIAL_BUFFERS_SIZE) || defined(__DOXYGEN__)
-#define SERIAL_BUFFERS_SIZE 16
+// bumped from 16: the serial ISR pushes one byte at a time into this queue and
+// a small queue drops bytes at Mbaud RX if the draining thread stalls briefly.
+// 4096 gives ~20ms of slack at 2 Mbaud
+#define SERIAL_BUFFERS_SIZE 4096
 #endif
 
 /*===========================================================================*/

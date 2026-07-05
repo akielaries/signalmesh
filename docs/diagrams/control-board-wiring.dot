@@ -1,0 +1,96 @@
+// Control board wiring: 4052 (ADSR pots) + 595 (DIP waveform scan) + volume pots.
+// solid = via POTS FFC ; dashed = hand-wired GPIO. render: ./render.sh
+digraph wiring {
+  rankdir=LR;
+  bgcolor="white";
+  splines=ortho;
+  pad=0.3;
+  nodesep=0.4;
+  ranksep=1.0;
+  node [shape=plain, fontname="Helvetica", fontsize=10];
+  edge [fontname="Helvetica", fontsize=8, color="#37474F", penwidth=1.2, arrowsize=0.6];
+
+  subgraph cluster_stm32 {
+    label="STM32H755 (APM)"; labelloc="t"; labeljust="l";
+    fontname="Helvetica-bold"; fontsize=13; fontcolor="#1565C0";
+    style="rounded,filled"; fillcolor="#F4F9FE"; color="#1976D2"; penwidth=2; margin=16;
+    stm32 [label=<
+      <table border="1" color="#1976D2" cellborder="0" cellspacing="0" cellpadding="5" bgcolor="#E3F2FD">
+        <tr><td bgcolor="#1976D2"><font color="white"><b>STM32H755</b></font></td></tr>
+        <tr><td port="ainx" align="right">AIN_X  (ADC)</td></tr>
+        <tr><td port="ainy" align="right">AIN_Y  (ADC)</td></tr>
+        <tr><td port="vol1" align="right">VOL1  (ADC)</td></tr>
+        <tr><td port="vol2" align="right">VOL2  (ADC)</td></tr>
+        <tr><td port="sela" align="right">SEL_A  (GPIO)</td></tr>
+        <tr><td port="selb" align="right">SEL_B  (GPIO)</td></tr>
+        <tr><td port="ser" align="right">595 SER  (GPIO)</td></tr>
+        <tr><td port="sck" align="right">595 SCLK  (GPIO)</td></tr>
+        <tr><td port="rck" align="right">595 RCLK  (GPIO)</td></tr>
+        <tr><td port="sense" align="right">SENSE  (GPIO)</td></tr>
+      </table>>];
+  }
+
+  ffc [label=<
+    <table border="1" color="#6A1B9A" cellborder="0" cellspacing="0" cellpadding="5" bgcolor="#F3E5F5">
+      <tr><td colspan="2" bgcolor="#6A1B9A"><font color="white"><b>POTS FFC (10p)</b></font></td></tr>
+      <tr><td port="l1" align="left">SEL_A</td><td port="r1" align="right">SEL_A</td></tr>
+      <tr><td port="l2" align="left">SEL_B</td><td port="r2" align="right">SEL_B</td></tr>
+      <tr><td port="l3" align="left">AIN_X</td><td port="r3" align="right">AIN_X</td></tr>
+      <tr><td port="l4" align="left">AIN_Y</td><td port="r4" align="right">AIN_Y</td></tr>
+      <tr><td port="l5" align="left">VOL1</td><td port="r5" align="right">VOL1</td></tr>
+      <tr><td port="l6" align="left">VOL2</td><td port="r6" align="right">VOL2</td></tr>
+    </table>>];
+
+  subgraph cluster_ctrl {
+    label="CONTROL BOARD"; labelloc="t"; labeljust="l";
+    fontname="Helvetica-bold"; fontsize=13; fontcolor="#2E7D32";
+    style="rounded,filled"; fillcolor="#F5FBF6"; color="#388E3C"; penwidth=2; margin=16;
+
+    mux [label=<
+      <table border="1" color="#388E3C" cellborder="0" cellspacing="0" cellpadding="5" bgcolor="#E8F5E9">
+        <tr><td colspan="2" bgcolor="#388E3C"><font color="white"><b>74HC4052 mux</b></font></td></tr>
+        <tr><td port="a" align="left">A (sel)</td><td port="xcom" align="right">Xcom</td></tr>
+        <tr><td port="b" align="left">B (sel)</td><td port="ycom" align="right">Ycom</td></tr>
+        <tr><td port="xb" align="left">X0-X3</td><td align="right"> </td></tr>
+        <tr><td port="yb" align="left">Y0-Y3</td><td align="right"> </td></tr>
+      </table>>];
+
+    sr [label=<
+      <table border="1" color="#388E3C" cellborder="0" cellspacing="0" cellpadding="5" bgcolor="#E8F5E9">
+        <tr><td colspan="2" bgcolor="#388E3C"><font color="white"><b>74HC595 scan</b></font></td></tr>
+        <tr><td port="ser" align="left">SER</td><td port="q02" align="right">Q0-Q2</td></tr>
+        <tr><td port="sck" align="left">SCLK</td><td port="q35" align="right">Q3-Q5</td></tr>
+        <tr><td port="rck" align="left">RCLK</td><td align="right"> </td></tr>
+      </table>>];
+
+    adsr1   [shape=box, style="rounded,filled", fillcolor="white", color="#388E3C", label="osc1 ADSR: 4x 10k slider"];
+    adsr2   [shape=box, style="rounded,filled", fillcolor="white", color="#388E3C", label="osc2 ADSR: 4x 10k slider"];
+    volpot1 [shape=box, style="rounded,filled", fillcolor="white", color="#388E3C", label="osc1 volume: 250k"];
+    volpot2 [shape=box, style="rounded,filled", fillcolor="white", color="#388E3C", label="osc2 volume: 250k"];
+    dip1    [shape=box, style="rounded,filled", fillcolor="white", color="#388E3C", label="osc1 DIP: waveform"];
+    dip2    [shape=box, style="rounded,filled", fillcolor="white", color="#388E3C", label="osc2 DIP: waveform"];
+    sense   [shape=box, style="rounded,filled", fillcolor="#FFF3E0", color="#E65100", label="sense node (10k pull-up)"];
+  }
+
+  // analog path - via the POTS FFC (solid)
+  stm32:sela -> ffc:l1;  ffc:r1 -> mux:a;
+  stm32:selb -> ffc:l2;  ffc:r2 -> mux:b;
+  mux:xcom -> ffc:r3;    ffc:l3 -> stm32:ainx;
+  mux:ycom -> ffc:r4;    ffc:l4 -> stm32:ainy;
+  volpot1 -> ffc:r5;     ffc:l5 -> stm32:vol1;
+  volpot2 -> ffc:r6;     ffc:l6 -> stm32:vol2;
+
+  // sliders into the mux channels
+  adsr1 -> mux:xb [xlabel="x4 wipers"];
+  adsr2 -> mux:yb [xlabel="x4 wipers"];
+
+  // digital waveform scan - hand-wired GPIO (dashed)
+  stm32:ser -> sr:ser [style=dashed, color="#E65100"];
+  stm32:sck -> sr:sck [style=dashed, color="#E65100"];
+  stm32:rck -> sr:rck [style=dashed, color="#E65100"];
+  sr:q02 -> dip1;
+  sr:q35 -> dip2;
+  dip1 -> sense;
+  dip2 -> sense;
+  sense -> stm32:sense [style=dashed, color="#E65100"];
+}

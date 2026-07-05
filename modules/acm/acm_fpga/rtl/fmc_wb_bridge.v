@@ -5,6 +5,10 @@
 // wires carry data. the async strobes are synced into clk; each FMC access turns
 // into ONE wb cycle to the reg file, which acks within a couple clocks - the
 // FMC's slow async timing easily covers that latency.
+// see: https://cdn.opencores.org/downloads/wbspec_b3.pdf#page=110&zoom=100,0,0
+// A.6.2 Simple 16-bit SLAVE Output Port With 16-bit Granularity 
+
+
 
 module fmc_wb_bridge (
   input  wire        clk,          // 27 MHz fpga clock

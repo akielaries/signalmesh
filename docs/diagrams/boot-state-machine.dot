@@ -1,0 +1,73 @@
+// ACM boot + rollback state machine. render: ./render.sh
+// normal path falls through to READY; update path branches on host-present;
+// FPGA load tries active then golden; DAC stays muted until everything is up.
+digraph boot_sm {
+  rankdir=TB;
+  bgcolor="white";
+  splines=polyline;
+  pad=0.3;
+  nodesep=0.4;
+  ranksep=0.5;
+
+  node [fontname="Helvetica", fontsize=10, shape=box,
+        style="rounded,filled", color="#1976D2", fillcolor="#E3F2FD",
+        penwidth=1.3, margin="0.16,0.10"];
+  edge [fontname="Helvetica", fontsize=8, color="#546E7A", penwidth=1.1];
+
+  // terminals + decisions
+  reset  [label="power on / reset", shape=oval, fillcolor="#ECEFF1", color="#607D8B"];
+  ready  [label="READY  -  run app\n(DAC un-muted)", shape=oval,
+          fillcolor="#C8E6C9", color="#2E7D32", fontname="Helvetica-bold"];
+  err    [label="ERROR  -  halt\n(DAC muted, LCD shows fault)", shape=oval,
+          fillcolor="#FFCDD2", color="#C62828", fontname="Helvetica-bold"];
+
+  d_host [label="update requested?\n(host present / pad held)", shape=diamond,
+          fillcolor="#FFF3E0", color="#F9A825"];
+  d_appok[label="active STM32 image\nconfirmed valid?", shape=diamond,
+          fillcolor="#FFF3E0", color="#F9A825"];
+  d_fpga [label="FPGA DONE +\nmagic readback ok?", shape=diamond,
+          fillcolor="#FFF3E0", color="#F9A825"];
+  d_gold [label="golden bitstream\nDONE + magic ok?", shape=diamond,
+          fillcolor="#FFF3E0", color="#F9A825"];
+
+  // update branch
+  subgraph cluster_upd {
+    label="UPDATE MODE  -  UART @ 2 Mbaud, live status on 20x04";
+    labelloc="t"; fontname="Helvetica-bold"; fontsize=11; fontcolor="#6A1B9A";
+    style="rounded,filled"; fillcolor="#F3E5F5"; color="#8E24AA"; penwidth=1.5; margin=12;
+
+    u_rx   [label="receive framed image\n(seq + crc, per-block ack)", fillcolor="#E1BEE7", color="#8E24AA"];
+    u_ver  [label="verify manifest + crc", fillcolor="#E1BEE7", color="#8E24AA"];
+    u_stage[label="stage to inactive bank /\nQSPI active slot", fillcolor="#E1BEE7", color="#8E24AA"];
+    u_commit[label="commit: SWAP_BANK /\nmark active, then reset", fillcolor="#E1BEE7", color="#8E24AA"];
+    u_rx -> u_ver -> u_stage -> u_commit;
+  }
+
+  // normal boot chain
+  rails  [label="rails + clocks OK"];
+  devs   [label="init active devices\n(LCD, INA, OLED)  -  lcd_ui up"];
+  loadf  [label="load active FPGA bitstream\n(RECONFIG_N, stream via SSPI)"];
+  loadg  [label="load golden bitstream", fillcolor="#FFF8E1", color="#F9A825"];
+  relf   [label="release FPGA logic reset"];
+
+  // rollback note
+  rb [shape=note, style="filled", fillcolor="#FFFDE7", color="#F9A825", fontsize=8,
+      label="rollback: new image must set\l'boot confirmed' within N boots\l(watchdog) else revert SWAP_BANK\l"];
+
+  reset -> d_host;
+  d_host -> u_rx     [label="yes", fontcolor="#8E24AA"];
+  u_commit -> reset  [label="reset", style=dashed, constraint=false, color="#8E24AA"];
+  d_host -> d_appok  [label="no"];
+
+  d_appok -> rails   [label="yes"];
+  d_appok -> err     [label="no (both slots bad)", fontcolor="#C62828"];
+  d_appok -> rb      [style=dashed, dir=none, constraint=false];
+
+  rails -> devs -> loadf -> d_fpga;
+  d_fpga -> relf     [label="yes"];
+  d_fpga -> loadg    [label="no", fontcolor="#F57F17"];
+  loadg -> d_gold;
+  d_gold -> relf     [label="yes"];
+  d_gold -> err      [label="no", fontcolor="#C62828"];
+  relf -> ready;
+}

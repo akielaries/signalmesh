@@ -1,4 +1,4 @@
-// acm_top - ACM FPGA datapath (shared across boards).
+// acm_top ACM FPGA datapath (shared across boards).
 //
 // this is a COMPOSITION ROOT: it only instantiates blocks and wires them
 // together - no register values, no DSP logic of its own. every block below is
@@ -11,6 +11,7 @@
 // the board's top.v instantiates this, wires the physical FMC pins, drives the
 // identity inputs (magic/fpga_id/version) for its target, and sets TICK_DIV for
 // its clock.  to change the register layout, edit the ADDRESS DECODE section.
+
 
 module acm_top #(
   parameter integer TICK_DIV = 562          // clk cycles per audio sample (27 MHz/562 ~= 48 kHz)
@@ -26,7 +27,7 @@ module acm_top #(
   input  wire        FMC_NE1,
   output wire        FMC_NWAIT,
 
-  // identity register values - the board declares these (NOT baked in here)
+  // identity register values. the board declares these (NOT baked in here)
   input  wire [15:0] magic_i,
   input  wire [15:0] fpga_id_i,
   input  wire [15:0] version_i,
@@ -35,7 +36,7 @@ module acm_top #(
 );
 
   // ==========================================================================
-  // 1. FMC -> Wishbone-16 master
+  // FMC -> Wishbone-16 master
   // ==========================================================================
   wire        wb_cyc, wb_stb, wb_we, wb_ack;
   wire [7:0]  wb_adr;
@@ -43,15 +44,26 @@ module acm_top #(
   wire [15:0] wb_wdata, wb_rdata;
 
   fmc_wb_bridge bridge_inst (
-    .clk(clk), .rst(rst),
-    .AD(FMC_AD), .NADV(FMC_NADV), .NOE(FMC_NOE), .NWE(FMC_NWE),
-    .NE1(FMC_NE1), .NWAIT(FMC_NWAIT),
-    .wb_cyc_o(wb_cyc), .wb_stb_o(wb_stb), .wb_adr_o(wb_adr), .wb_sel_o(wb_sel),
-    .wb_we_o(wb_we), .wb_dat_o(wb_wdata), .wb_dat_i(wb_rdata), .wb_ack_i(wb_ack)
+    .clk(clk),
+    .rst(rst),
+    .AD(FMC_AD),
+    .NADV(FMC_NADV),
+    .NOE(FMC_NOE),
+    .NWE(FMC_NWE),
+    .NE1(FMC_NE1),
+    .NWAIT(FMC_NWAIT),
+    .wb_cyc_o(wb_cyc),
+    .wb_stb_o(wb_stb),
+    .wb_adr_o(wb_adr),
+    .wb_sel_o(wb_sel),
+    .wb_we_o(wb_we),
+    .wb_dat_o(wb_wdata),
+    .wb_dat_i(wb_rdata),
+    .wb_ack_i(wb_ack)
   );
 
   // ==========================================================================
-  // 2. ADDRESS DECODE  <-- the register map. edit here to add/move blocks.
+  // ADDRESS DECODE  <-- the register map. edit here to add/move blocks.
   //      core   : FMC byte 0x00..0x7F   (word address bit 6 = 0)
   //      audio  : FMC byte 0x80..0xFF   (word address bit 6 = 1)
   // ==========================================================================
