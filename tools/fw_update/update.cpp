@@ -25,6 +25,8 @@
 namespace {
 
 // fnv-1a 32-bit, must match the firmware receiver
+// (Fowler–Noll–Vo hash function)
+// https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function
 uint32_t fnv1a(const std::vector<uint8_t> &data) {
   uint32_t h = 0x811C9DC5u;
   for (uint8_t b : data) {
