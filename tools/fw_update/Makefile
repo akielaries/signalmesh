@@ -8,7 +8,7 @@ BL_SRC		= ../../lib/bootloader/src/crc32.c ../../lib/bootloader/src/frame.c
 
 
 mkupdate:
-	$(COMPILE) mkupdate.cpp -o mkupdate.bin
+	$(COMPILE) mkupdate.cpp ../../lib/bootloader/src/crc32.c -o mkupdate.bin
 
 update:
 	$(COMPILE) update.cpp custom_baud.c $(BL_SRC) -o update.bin

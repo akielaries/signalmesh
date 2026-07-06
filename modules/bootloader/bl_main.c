@@ -63,17 +63,29 @@ static int qspi_bringup(void) {
   return qspi_memmap_init(&qspi_cfg) ? 1 : 0;
 }
 
-// TODO: copy a QSPI app slot into the internal-flash exec region (erase +
-// program), so the linked-once app can run. return 0 on success.
-static int stage_app(enum bl_slot slot) {
-  (void)slot;
-  return -1;
-}
+// hand off to the app at `app_base` (the app's vector table): stop the RTOS
+// tick, flush caches (the app runs XIP from QSPI + reads its rodata), point VTOR
+// at it, load its stack pointer, and branch to its reset vector. never returns.
+static void jump_to_app(uint32_t app_base) {
+  const uint32_t *v = (const uint32_t *)app_base;
+  uint32_t sp = v[0];
+  uint32_t reset = v[1];
 
-// TODO: jump to the app at BL_SLOT_APP_EXEC (set MSP from word0, VTOR, branch to
-// the reset vector at word1).
-static void jump_to_app(uint32_t base) {
-  (void)base;
+  __disable_irq();
+  SysTick->CTRL = 0U;                 // stop the ChibiOS tick
+  SCB->ICSR = SCB_ICSR_PENDSTCLR_Msk; // clear any pending tick
+
+  SCB_CleanInvalidateDCache();        // app reads freshly-written QSPI
+  SCB_InvalidateICache();             // and executes from it (XIP)
+
+  SCB->VTOR = app_base;
+  __DSB();
+  __set_MSP(sp);
+  __DSB();
+  __ISB();
+  ((void (*)(void))reset)();
+  for (;;) {
+  }
 }
 
 int main(void) {
@@ -116,16 +128,14 @@ int main(void) {
       if (bl_image_validate((const void *)bl_memmap[slot].base) != 0) {
         continue; // stored image bad, try the next
       }
-      if (stage_app(slot) != 0) {
-        continue; // copy to exec region failed
-      }
-      if (bl_image_validate((const void *)bl_memmap[BL_SLOT_APP_EXEC].base) != 0) {
-        continue; // exec copy didn't verify
-      }
-      bsp_printf("booting app from %s\r\n", bl_memmap[slot].name);
+      // XIP: run the app in place from its QSPI slot (no copy). the image sits
+      // at BL_IMAGE_OFFSET into the slot (its vector table).
+      uint32_t app = bl_memmap[slot].base + BL_IMAGE_OFFSET;
+      bsp_printf("booting app from %s (XIP @ 0x%08lX)\r\n", bl_memmap[slot].name,
+                 (unsigned long)app);
       // TODO: load the fpga bitstream (BL_SLOT_FPGA_ACTIVE; golden on failure)
       // and hold the DAC muted until the FPGA asserts DONE + a magic readback.
-      jump_to_app(bl_memmap[BL_SLOT_APP_EXEC].base); // no return on success
+      jump_to_app(app); // no return on success
     }
   } else {
     bsp_printf("QSPI not ready...\n");

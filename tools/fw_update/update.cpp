@@ -11,7 +11,9 @@
 #include <algorithm>
 #include <cstdint>
 #include <cstring>
+#include <fstream>
 #include <iostream>
+#include <iterator>
 #include <random>
 #include <string>
 #include <vector>
@@ -26,6 +28,7 @@
 #include "bootloader/protocol.h"
 #include "bootloader/crc32.h"
 #include "bootloader/frame.h"
+#include "bootloader/image.h"
 
 #include "custom_baud.h"
 
@@ -286,6 +289,82 @@ int run_stream(const std::string &dev, int baud, size_t size, uint16_t target) {
   return rc;
 }
 
+// send a real image blob (built by mkupdate: bl_image_header + app). the target
+// is read from the blob's header. streams it as one framed transfer and reports
+// the RESULT.
+int run_file(const std::string &dev, int baud, const std::string &path) {
+  std::ifstream in(path, std::ios::binary);
+  if (!in) {
+    std::cerr << "open " << path << "\n";
+    return 1;
+  }
+  std::vector<uint8_t> blob((std::istreambuf_iterator<char>(in)),
+                            std::istreambuf_iterator<char>());
+  if (blob.size() < sizeof(bl_image_header)) {
+    std::cerr << path << ": too small to be an image blob\n";
+    return 1;
+  }
+  bl_image_header h;
+  memcpy(&h, blob.data(), sizeof(h));
+  if (h.magic != BL_IMAGE_MAGIC) {
+    std::cerr << path << ": bad magic - run mkupdate first\n";
+    return 1;
+  }
+
+  uint32_t crc = bl_crc32(blob.data(), blob.size());
+  std::cout << "file " << path << "  " << blob.size() << " bytes  target "
+            << h.target << "  image " << h.length << "\n";
+  printf("blob crc32: 0x%08X\n", crc);
+
+  int fd = open_serial(dev, baud);
+  if (fd < 0) {
+    return 1;
+  }
+  if (!handshake(fd)) {
+    ::close(fd);
+    return 1;
+  }
+  usleep(20000);
+
+  bl_manifest m;
+  m.magic = BL_MANIFEST_MAGIC;
+  m.target = h.target;
+  m.reserved = 0;
+  m.version = h.version;
+  m.length = static_cast<uint32_t>(blob.size());
+  m.crc32 = crc;
+  if (!send_frame(fd, BL_MANIFEST, 0, &m, sizeof(m))) {
+    ::close(fd);
+    return 1;
+  }
+
+  uint16_t seq = 0;
+  size_t off = 0;
+  while (off < blob.size()) {
+    uint16_t chunk =
+        static_cast<uint16_t>(std::min<size_t>(BL_MAX_PAYLOAD, blob.size() - off));
+    if (!send_frame(fd, BL_DATA, seq++, blob.data() + off, chunk)) {
+      ::close(fd);
+      return 1;
+    }
+    off += chunk;
+  }
+  send_frame(fd, BL_DONE, seq, nullptr, 0);
+
+  int rc = 1;
+  bl_frame f;
+  if (recv_frame(fd, 4000, f) && f.type == BL_RESULT) {
+    bl_result r;
+    memcpy(&r, f.payload, sizeof(r));
+    printf("RESULT status=%u bytes=%u\n", r.status, r.bytes);
+    rc = (r.status == BL_OK) ? 0 : 1;
+  } else {
+    std::cerr << "no RESULT frame\n";
+  }
+  ::close(fd);
+  return rc;
+}
+
 void usage(const char *prog) {
   std::cout
       << "usage: " << prog << " --dev <path> [options]\n"
@@ -373,6 +452,10 @@ int main(int argc, char **argv) {
     return ok ? 0 : 1;
   }
 
+  if (!file.empty()) {
+    return run_file(dev, baud, file);
+  }
+
   if (stream) {
     return run_stream(dev, baud, size, target);
   }
@@ -381,6 +464,6 @@ int main(int argc, char **argv) {
     return run_test(dev, baud, size);
   }
 
-  std::cerr << "pick a mode: --hello, --stream, or --test (see --help)\n";
+  std::cerr << "pick a mode: --file, --hello, --stream, or --test (see --help)\n";
   return 1;
 }
