@@ -59,6 +59,22 @@ include_directories(
 
 add_definitions(-DCHPRINTF_USE_FLOAT=1 -DCORE_CM7 -DCORTEX_USE_FPU=FALSE)
 
+# --- build-time version header (repo VERSION file + git state) ---
+get_filename_component(REPO_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../.. ABSOLUTE)
+set(VERSION_GEN_DIR ${CMAKE_BINARY_DIR}/generated)
+file(MAKE_DIRECTORY ${VERSION_GEN_DIR})
+add_custom_target(version_gen ALL
+  BYPRODUCTS ${VERSION_GEN_DIR}/version_gen.h
+  COMMAND ${CMAKE_COMMAND}
+    -DVERSION_FILE=${REPO_ROOT}/VERSION
+    -DTEMPLATE=${REPO_ROOT}/cmake/version.h.in
+    -DOUTPUT=${VERSION_GEN_DIR}/version_gen.h
+    -DCOMPONENT=APM
+    -DSRC_DIR=${CMAKE_CURRENT_SOURCE_DIR}
+    -P ${REPO_ROOT}/cmake/version.cmake
+  COMMENT "Generating version_gen.h (APM)")
+include_directories(${VERSION_GEN_DIR})
+
 set(SOURCES
     ./bsp/bsp.c
     ./bsp/configs/bsp_uart_config.c
@@ -149,6 +165,7 @@ set(SOURCES
 )
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})
+add_dependencies(${PROJECT_NAME}.elf version_gen)
 
 target_link_options(
   ${PROJECT_NAME}.elf

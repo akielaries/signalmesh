@@ -18,6 +18,7 @@
 #include "bsp/utils/bsp_io.h"
 
 #include "drivers/qspi_memmap.h"
+#include "drivers/w25qxx.h"
 
 #include "bootloader/protocol.h"
 #include "bootloader/frame.h"
@@ -25,9 +26,42 @@
 #include "bootloader/image.h"
 #include "bootloader/memmap.h"
 
-// TODO: reuse the qspi_memmap_config_t used by test_qspi_bench (dual, base
-// 0x90000000, 16MB). declare it extern from the bsp or define here.
-// extern const qspi_memmap_config_t qspi_cfg;
+#include "version_gen.h" // generated: FW_VERSION_STRING etc.
+
+#include "bl_update.h"
+
+// QSPI config - same as test_qspi_bench: 16MB W25Q128, dual lines, memory-mapped
+// at 0x90000000. the clock prescaler is a build-time mcuconf setting (from apm).
+static const WSPIConfig wspi_cfg = {
+  .end_cb   = NULL,
+  .error_cb = NULL,
+  .dcr      = STM32_DCR_FSIZE(23U) | STM32_DCR_CSHT(1U), // FSIZE = log2(16MB)-1
+};
+
+static const qspi_memmap_config_t qspi_cfg = {
+  .wspi       = &WSPID1,
+  .wspi_cfg   = &wspi_cfg,
+  .base       = 0x90000000UL,
+  .size_bytes = W25Q128_SIZE_BYTES,
+  .lines      = W25QXX_QSPI_DUAL,
+};
+
+// bring up QSPI: configure the QUADSPI pins and init the device (indirect mode).
+// returns 1 on success. the cascade enters memory-mapped mode to read the slots;
+// the update path uses indirect erase/program.
+static int qspi_bringup(void) {
+  // QUADSPI pins, lifted from apm/bsp/configs/bsp_spi_config.c (AF9 except NCS)
+  palSetPadMode(GPIOB, 2,  PAL_MODE_ALTERNATE(9)  | PAL_STM32_OSPEED_LOWEST); // CLK
+  palSetPadMode(GPIOG, 6,  PAL_MODE_ALTERNATE(10) | PAL_STM32_OSPEED_LOWEST); // NCS (BK1)
+  palSetPadMode(GPIOD, 11, PAL_MODE_ALTERNATE(9)  | PAL_STM32_OSPEED_LOWEST); // IO0
+  palSetPadMode(GPIOD, 12, PAL_MODE_ALTERNATE(9)  | PAL_STM32_OSPEED_LOWEST); // IO1
+  palSetPadMode(GPIOE, 2,  PAL_MODE_ALTERNATE(9)  | PAL_STM32_OSPEED_LOWEST |
+                           PAL_STM32_PUPDR_PULLUP); // IO2/WP
+  palSetPadMode(GPIOD, 13, PAL_MODE_ALTERNATE(9)  | PAL_STM32_OSPEED_LOWEST |
+                           PAL_STM32_PUPDR_PULLUP); // IO3/HOLD
+
+  return qspi_memmap_init(&qspi_cfg) ? 1 : 0;
+}
 
 // TODO: copy a QSPI app slot into the internal-flash exec region (erase +
 // program), so the linked-once app can run. return 0 on success.
@@ -50,26 +84,30 @@ int main(void) {
   halInit();
   chSysInit();
   bsp_io_init(); // debug console on UART5
-  bsp_printf("\n--- signalmesh bootloader ---\r\n");
+  bsp_printf("\n--- %s ---\r\n", FW_VERSION_STRING); // e.g. bootloader v1.0.0-7e98556-dirty
 
-  // bring up QSPI so the app slots + fpga bitstream are readable as memory.
-  // TODO: configure the QUADSPI AF9 pins (PB2/PG6/PD11-13/PE2 - lift from
-  // apm/bsp/configs/bsp_spi_config.c) then qspi_memmap_init(&qspi_cfg) and set
-  // qspi_ready. until QSPI is memory-mapped, touching 0x90.. bus-faults, so the
-  // boot cascade below is skipped and we drop straight to the golden loop.
-  int qspi_ready = 0;
+  // bring up QSPI (pins + device init). until this succeeds, touching 0x90..
+  // bus-faults, so the boot cascade is gated on it.
+  int qspi_ready = qspi_bringup();
+  bsp_printf("QSPI: %s\r\n",
+             qspi_ready ? "up (W25Q128 dual, memmap @ 0x90000000)" : "init FAILED");
 
-  // 1) TODO: update requested? (host HELLO on UART4 within a window / button /
-  //    a flag in BL_SLOT_PARAMS). if so, lift the UART4 DMA + handshake from
-  //    test_uart4_rx_bench.c and run a session:
-  //      MANIFEST APM_H755 -> copy the current active image (slot1) down to
-  //        slot0, then write the new image to slot1 (qspi_memmap_program).
-  //      MANIFEST FPGA_*    -> write BL_SLOT_FPGA_ACTIVE.
-  //      verify crc vs manifest, write a bl_image_header, reply RESULT.
+  // 1) update mode: give a host a short window to connect on UART4 and push an
+  //    image. bl_update_run receives it (MANIFEST/DATA/DONE), verifies, and
+  //    writes the target QSPI slot; the boot cascade below then boots it.
+  //    runs in indirect mode (qspi bringup left it there); the cascade enables
+  //    memory-mapped mode afterwards.
+  //    TODO: slot rotation - copy the current active image (slot1) down to slot0
+  //    before overwriting slot1, so slot0 stays the last-known-good.
+  if (qspi_ready) {
+    bl_update_run(&qspi_cfg, 5000U); // 5s window to catch a host (tune down later)
+  }
 
   // 2) boot cascade: newest first, then fallback. needs QSPI (slots live at
   // 0x90..), so it is skipped until qspi_ready is set above.
   if (qspi_ready) {
+    // enter memory-mapped mode so the slots at 0x90.. are readable by pointer
+    qspi_memmap_enable(&qspi_cfg);
     bsp_printf("QSPI ready, reading slots...\n");
 
     static const enum bl_slot order[] = {BL_SLOT_APP_1, BL_SLOT_APP_0};

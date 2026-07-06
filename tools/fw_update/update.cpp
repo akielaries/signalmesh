@@ -237,6 +237,7 @@ int run_stream(const std::string &dev, int baud, size_t size, uint16_t target) {
     ::close(fd);
     return 1;
   }
+  usleep(20000); // let the firmware arm its stream receiver after the ack
 
   bl_manifest m;
   m.magic = BL_MANIFEST_MAGIC;

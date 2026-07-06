@@ -26,6 +26,8 @@
 #include "drivers/gm009605.h"
 #include "drivers/lcd2004.h"
 
+#include "version_gen.h" // generated: FW_VERSION_STRING etc.
+
 
 
 // private data for ina219
@@ -197,6 +199,7 @@ void bsp_init(void) {
   bsp_io_init();
 
   bsp_printf("\n...Starting...\n\n");
+  bsp_printf("%s\n", FW_VERSION_STRING); // e.g. APM v1.0.0-7e98556-dirty
 
   bsp_printf("booting...");
   for (uint8_t i = 0; i < 3; i++) {

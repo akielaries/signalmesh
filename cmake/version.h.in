@@ -1,0 +1,15 @@
+// generated - do not edit. produced at build time by cmake/version.cmake from
+// the repo VERSION file + git state.
+
+#ifndef VERSION_GEN_H
+#define VERSION_GEN_H
+
+#define FW_COMPONENT      "@FW_COMPONENT@"    // bootloader / APM
+#define FW_VERSION        "@FW_VERSION@"      // semver from VERSION file, e.g. 1.0.0
+#define FW_GIT_HASH       "@FW_GIT_HASH@"     // short commit, e.g. 7e98556
+#define FW_GIT_BRANCH     "@FW_GIT_BRANCH@"
+#define FW_DIRTY          @FW_DIRTY@          // 1 if the working tree has changes
+// full banner, e.g. "bootloader v1.0.0-7e98556-dirty"
+#define FW_VERSION_STRING "@FW_VERSION_STRING@"
+
+#endif // VERSION_GEN_H
