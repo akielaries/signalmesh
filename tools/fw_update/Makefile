@@ -11,7 +11,7 @@ mkupdate:
 	$(COMPILE) mkupdate.cpp -o mkupdate.bin
 
 update:
-	$(COMPILE) update.cpp $(BL_SRC) -o update.bin
+	$(COMPILE) update.cpp custom_baud.c $(BL_SRC) -o update.bin
 
 clean:
 	rm *.bin

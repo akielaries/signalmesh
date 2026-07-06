@@ -109,7 +109,12 @@ set(SOURCES
     #./tests/test_uart3_hello.c
     #./tests/test_uart3_echo.c
     #./tests/test_uart3_rx_bench.c
-    ./tests/test_fw_receiver.c
+    ./tests/test_uart4_rx_bench.c
+    #./tests/test_uart3_loopback.c
+    #./tests/test_uart4_loopback.c
+    #./tests/test_uart3_raw_loopback.c
+    #./tests/test_pb_gpio_loopback.c
+    #./tests/test_fw_receiver.c
     #./tests/bist_icu.c
 
     # ./tests/test_qspi_w25q64.c   # low-level reference for the qspi bring-up

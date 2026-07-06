@@ -27,6 +27,8 @@
 #include "bootloader/crc32.h"
 #include "bootloader/frame.h"
 
+#include "custom_baud.h"
+
 namespace {
 
 // fnv-1a 32-bit, must match the firmware receiver
@@ -59,63 +61,24 @@ size_t parse_size(const std::string &s) {
   return static_cast<size_t>(std::stod(num) * static_cast<double>(mult));
 }
 
-// map an integer baud to its termios constant; 0 if unsupported
-speed_t baud_const(int baud) {
-  switch (baud) {
-    case 115200:  return B115200;
-    case 230400:  return B230400;
-    case 460800:  return B460800;
-    case 921600:  return B921600;
-    case 1000000: return B1000000;
-    case 1500000: return B1500000;
-    case 2000000: return B2000000;
-    case 3000000: return B3000000;
-    default:      return 0;
-  }
-}
-
-// open the serial device raw: 8N1, no flow control, matching the firmware cr3=0
+// open the serial device and configure it raw 8N1, no flow control, at an exact
+// baud via termios2 (see custom_baud.c) - any integer, not just the fixed
+// Bxxxxxx constants, so 6M/7.5M etc. work
 int open_serial(const std::string &dev, int baud) {
-  speed_t bc = baud_const(baud);
-  if (bc == 0) {
-    std::cerr << "unsupported baud " << baud << "\n";
-    return -1;
-  }
-
   int fd = ::open(dev.c_str(), O_RDWR | O_NOCTTY | O_CLOEXEC);
   if (fd < 0) {
     std::cerr << "open " << dev << ": " << std::strerror(errno) << "\n";
     return -1;
   }
-
-  termios tio{};
-  if (tcgetattr(fd, &tio) != 0) {
-    std::cerr << "tcgetattr: " << std::strerror(errno) << "\n";
-    ::close(fd);
-    return -1;
-  }
-
-  cfmakeraw(&tio);
-  tio.c_cflag |= (CLOCAL | CREAD);      // ignore modem lines, enable rx
-  tio.c_cflag &= ~CSIZE;
-  tio.c_cflag |= CS8;                   // 8 data bits
-  tio.c_cflag &= ~CSTOPB;               // 1 stop bit
-  tio.c_cflag &= ~PARENB;               // no parity
-  tio.c_cflag &= ~CRTSCTS;              // no hw flow control
-  tio.c_iflag &= ~(IXON | IXOFF | IXANY); // no sw flow control
-  tio.c_cc[VMIN] = 0;
-  tio.c_cc[VTIME] = 0;
-
-  cfsetospeed(&tio, bc);
-  cfsetispeed(&tio, bc);
-
-  if (tcsetattr(fd, TCSANOW, &tio) != 0) {
-    std::cerr << "tcsetattr: " << std::strerror(errno) << "\n";
+  if (serial_setup(fd, (unsigned)baud) != 0) {
+    std::cerr << "serial_setup " << baud << ": " << std::strerror(errno) << "\n";
     ::close(fd);
     return -1;
   }
   return fd;
 }
+
+bool handshake(int fd); // defined below; used by run_test
 
 // blast `size` dummy bytes and report host-side throughput + checksum
 int run_test(const std::string &dev, int baud, size_t size) {
@@ -134,6 +97,13 @@ int run_test(const std::string &dev, int baud, size_t size) {
   if (fd < 0) {
     return 1;
   }
+
+  // framed handshake first so both ends confirm the link before the transfer
+  if (!handshake(fd)) {
+    ::close(fd);
+    return 1;
+  }
+  usleep(20000); // let the firmware arm its DMA receiver after the ack
 
   auto t0 = std::chrono::steady_clock::now();
   size_t off = 0;
