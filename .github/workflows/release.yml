@@ -150,9 +150,15 @@ jobs:
           gh release create "${{ steps.gate.outputs.tag }}" \
             --title "acm ${{ steps.gate.outputs.version }}" --notes-file notes.md
 
-  # -------- host tools: build update.bin + mkupdate.bin, release --------
-  tools:
+  # -------- host tools: check tag, build per-platform, release once --------
+  # mkupdate is portable (built for all targets); update uses Linux-only serial
+  # ioctls (termios2), so it is Linux-only.
+  tools-gate:
     runs-on: ubuntu-latest
+    outputs:
+      release: ${{ steps.gate.outputs.release }}
+      version: ${{ steps.gate.outputs.version }}
+      tag: ${{ steps.gate.outputs.tag }}
     steps:
       - uses: actions/checkout@v4
       - id: gate
@@ -168,16 +174,81 @@ jobs:
           else
             echo "release=true" >> "$GITHUB_OUTPUT"
           fi
+
+  tools-build:
+    needs: tools-gate
+    if: needs.tools-gate.outputs.release == 'true'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: linux-x86_64
+            cxx: g++
+            tools: mkupdate update
+            static: "-static"
+          - os: ubuntu-latest
+            target: linux-aarch64
+            cxx: aarch64-linux-gnu-g++
+            tools: mkupdate update
+            static: "-static"
+          - os: macos-latest
+            target: macos-arm64
+            cxx: clang++
+            tools: mkupdate
+            static: ""
+          - os: windows-latest
+            target: windows-x86_64
+            cxx: g++
+            tools: mkupdate
+            static: "-static"
+            ext: ".exe"
+    steps:
+      - uses: actions/checkout@v4
+      - name: install cross toolchain
+        if: matrix.target == 'linux-aarch64'
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq g++-aarch64-linux-gnu
       - name: build
-        if: steps.gate.outputs.release == 'true'
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq make g++ &&
-             make -C tools/fw_update mkupdate && make -C tools/fw_update update
+        shell: bash
+        run: |
+          set -e
+          cd tools/fw_update
+          INC=-I../../lib/bootloader/include
+          for t in ${{ matrix.tools }}; do
+            out="$t-${{ matrix.target }}${{ matrix.ext }}"
+            if [ "$t" = mkupdate ]; then
+              ${{ matrix.cxx }} -O2 ${{ matrix.static }} $INC \
+                mkupdate.cpp ../../lib/bootloader/src/crc32.c -o "$out"
+            else
+              ${{ matrix.cxx }} -O2 ${{ matrix.static }} $INC \
+                update.cpp custom_baud.c \
+                ../../lib/bootloader/src/crc32.c ../../lib/bootloader/src/frame.c -o "$out"
+            fi
+            echo "built $out"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tools-${{ matrix.target }}
+          path: tools/fw_update/*-${{ matrix.target }}*
+
+  tools-release:
+    needs: [tools-gate, tools-build]
+    if: needs.tools-gate.outputs.release == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          pattern: tools-*
+          merge-multiple: true
+      - name: checksums
+        run: (cd dist && sha256sum * > SHA256SUMS)
       - name: release
-        if: steps.gate.outputs.release == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           python3 tools/ci/version.py --notes tools/fw_update/version.yml > notes.md
-          gh release create "${{ steps.gate.outputs.tag }}" \
-            tools/fw_update/update.bin tools/fw_update/mkupdate.bin \
-            --title "fw-tools ${{ steps.gate.outputs.version }}" --notes-file notes.md
+          gh release create "${{ needs.tools-gate.outputs.tag }}" dist/* \
+            --title "fw-tools ${{ needs.tools-gate.outputs.version }}" --notes-file notes.md

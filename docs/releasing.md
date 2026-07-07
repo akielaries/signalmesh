@@ -32,7 +32,8 @@ edited an older entry's notes), the job skips. Bump the number to cut a release.
 |------------|------------------------------|-----------------|------------------------------|
 | apm        | `modules/apm/version.yml`    | `apm/v*`        | `.smup`                      |
 | bootloader | `modules/bootloader/version.yml` | `bootloader/v*` | `.hex`, `.bin`           |
-| fw-tools   | `tools/fw_update/version.yml`| `tools/v*`      | `update.bin`, `mkupdate.bin` |
+| acm (fpga) | `modules/acm/version.yml`    | `acm/v*`        | notes only (bitstream pending Gowin CI) |
+| fw-tools   | `tools/fw_update/version.yml`| `tools/v*`      | per-platform `mkupdate-*` / `update-*` (see below) |
 
 The bootloader release runs in the `bootloader-release` GitHub **environment** -
 add required reviewers (repo Settings > Environments) so a golden-image release
@@ -46,6 +47,21 @@ The demo app is built and smoke-tested in `ci.yml` but not released.
 1. Edit the component's `version.yml`: add a new top entry with the new version + notes.
 2. Commit and push to `main`.
 3. The release appears under the repo's **Releases** page with its assets attached.
+
+## Host tools targets
+
+`mkupdate` is portable; `update` uses Linux-only serial ioctls. The `tools`
+release builds a matrix and attaches:
+
+| asset | mkupdate | update |
+|-------|----------|--------|
+| `linux-x86_64`  | yes | yes |
+| `linux-aarch64` | yes (cross) | yes (cross) |
+| `macos-arm64`   | yes | no (Linux serial) |
+| `windows-x86_64.exe` | yes | no |
+
+Plus a `SHA256SUMS` file. Porting `update` to macOS/Windows means replacing the
+`custom_baud.c` termios2 serial layer.
 
 ## Notes
 
