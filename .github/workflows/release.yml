@@ -11,6 +11,7 @@ on:
     branches: [main]
     paths:
       - 'modules/apm/version.yml'
+      - 'modules/acm/version.yml'
       - 'modules/bootloader/version.yml'
       - 'tools/fw_update/version.yml'
 
@@ -119,6 +120,35 @@ jobs:
           gh release create "${{ needs.bootloader-check.outputs.tag }}" \
             dist/signalmesh_bootloader.hex dist/signalmesh_bootloader.bin dist/bootloader.sha256 \
             --title "bootloader ${{ needs.bootloader-check.outputs.version }}" --notes-file notes.md
+
+  # -------- acm (fpga): notes-only release until a gowin CI runner exists --------
+  # TODO: once a self-hosted x86-64 runner with gw_sh is available, build the
+  # bitstream, wrap with mkupdate (GW2AR18 / GW5A25), and attach the .smup here.
+  acm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VER=$(python3 tools/ci/version.py --version modules/acm/version.yml)
+          TAG="acm/v$VER"
+          echo "version=$VER" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "release=false" >> "$GITHUB_OUTPUT"; echo "$TAG already released"
+          else
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: release (notes only - bitstream asset pending gowin CI)
+        if: steps.gate.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 tools/ci/version.py --notes modules/acm/version.yml > notes.md
+          gh release create "${{ steps.gate.outputs.tag }}" \
+            --title "acm ${{ steps.gate.outputs.version }}" --notes-file notes.md
 
   # -------- host tools: build update.bin + mkupdate.bin, release --------
   tools:

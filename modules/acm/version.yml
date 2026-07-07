@@ -1,0 +1,17 @@
+# acm (gowin fpga audio DSP) version history. newest entry FIRST - auto-released
+# on push to main as tag acm/v<version>. NOTE: no gowin CI runner yet, so the
+# release is notes-only for now; the bitstream asset is added once a self-hosted
+# x86-64 runner with gw_sh exists (or attach a locally-built .smup by hand).
+# keep each note on ONE line (the CI reader is line-based).
+releases:
+  - version: 1.0.0
+    notes:
+      - modular RTL composition - acm_top is a thin composition root wiring decoupled leaf blocks over documented interfaces (no god-module)
+      - FMC multiplexed 16-bit async slave bridged to a Wishbone-16 master (fmc_wb_bridge) for the STM32H7 FMC bus
+      - cheby-generated Wishbone-16 register files (core + audio) from YAML
+      - control registers + audio FIFO/buffers memory-mapped to the STM32
+      - DDS synthesis (dds_synth) with sine LUT and selectable waveforms (sine/saw/square/triangle)
+      - 48 kHz audio tick, signed mix to 12-bit DAC-ready output
+      - per-board identity registers (magic / fpga_id / version)
+      - targets Tang Nano 20K (GW2AR-18) and Tang Primer 25K (GW5A-25)
+      - bring-up + sim - boot blink, STM32 UART test, FMC mux-slave testbench

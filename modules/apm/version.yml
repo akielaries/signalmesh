@@ -1,9 +1,11 @@
 # apm (stm32h755 manager) version history. newest entry FIRST - its version drives
 # the boot banner and, on push to main, is auto-released as tag apm/v<version>
 # (see .github/workflows/release.yml). bump the version + add notes to cut a
-# release; leave it unchanged and nothing happens.
+# release. keep each note on ONE line (the CI reader is line-based).
 releases:
   - version: 1.0.0
     notes:
-      - initial APM release
-      - versioned boot banner (git hash + dirty flag)
+      - various I2C drivers working (INA power monitors, temp sensors, etc)
+      - W25QX (64/128) SPI and QSPI drivers working, incl memory-mapped tests
+      - FMC 16-bit muxed with ~20 address lines working
+      - memory-mapped control registers + audio FIFO/buffers between ACM and APM (Gowin FPGA to STM32H7)
