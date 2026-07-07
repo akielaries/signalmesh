@@ -4,9 +4,10 @@
 // describes an in-flight transfer.
 //
 // slot layout (built by mkupdate): [bl_image_header][pad][app image]. the app
-// image starts at BL_IMAGE_OFFSET into the slot - a VTOR-aligned boundary so the
-// app can be executed in place (XIP) from the QSPI-mapped slot. all memory-
-// mapped, so validation is plain pointer access; only writes are medium-specific.
+// image starts at BL_IMAGE_OFFSET into the slot. the bootloader validates the
+// slot in place (memory-mapped QSPI, so plain pointer access) then stages the
+// image into the internal-flash exec region to run it; the header stays behind
+// in QSPI as metadata. the offset keeps the image VTOR-aligned in the slot too.
 
 #ifndef BOOTLOADER_IMAGE_H
 #define BOOTLOADER_IMAGE_H

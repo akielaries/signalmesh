@@ -1,8 +1,10 @@
-// minimal bare-metal demo app for the bootloader XIP path. runs in place from
-// its QSPI slot (no ChibiOS, no bsp). prints a banner on UART5 - which the
-// bootloader already configured and left running - and blinks the green LED, so
-// you visibly see the bootloader hand off. no .data/.bss, so no startup init is
-// needed: the vector table's reset entry jumps straight to Reset_Handler.
+// minimal bare-metal demo app for the bootloader stage-to-flash path. the
+// bootloader copies this image from its QSPI slot into the internal-flash exec
+// region (0x08100000) and runs it from there (no ChibiOS, no bsp). prints a
+// banner on UART5 - which the bootloader already configured and left running -
+// and blinks the green LED, so you visibly see the hand off. no .data/.bss, so
+// no startup init is needed: the vector table's reset entry jumps straight to
+// Reset_Handler.
 
 #include <stdint.h>
 
@@ -33,7 +35,7 @@ static void print5(const char *s) {
 __attribute__((noreturn)) void Reset_Handler(void) {
   GPIOB_MODER = (GPIOB_MODER & ~(3U << (LED_PIN * 2U))) | (1U << (LED_PIN * 2U));
 
-  print5("\r\n>>> demo app v1.0.0 booted (XIP from QSPI) <<<\r\n");
+  print5("\r\n>>> demo app v1.0.0 booted (from internal flash) <<<\r\n");
 
   for (;;) {
     GPIOB_ODR ^= (1U << LED_PIN);

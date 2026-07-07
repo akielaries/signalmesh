@@ -29,6 +29,7 @@
 #include "version_gen.h" // generated: FW_VERSION_STRING etc.
 
 #include "bl_update.h"
+#include "bl_stage.h"
 
 // QSPI config - same as test_qspi_bench: 16MB W25Q128, dual lines, memory-mapped
 // at 0x90000000. the clock prescaler is a build-time mcuconf setting (from apm).
@@ -64,8 +65,8 @@ static int qspi_bringup(void) {
 }
 
 // hand off to the app at `app_base` (the app's vector table): stop the RTOS
-// tick, flush caches (the app runs XIP from QSPI + reads its rodata), point VTOR
-// at it, load its stack pointer, and branch to its reset vector. never returns.
+// tick, flush caches (we just programmed the app into flash), point VTOR at it,
+// load its stack pointer, and branch to its reset vector. never returns.
 static void jump_to_app(uint32_t app_base) {
   const uint32_t *v = (const uint32_t *)app_base;
   uint32_t sp = v[0];
@@ -75,8 +76,8 @@ static void jump_to_app(uint32_t app_base) {
   SysTick->CTRL = 0U;                 // stop the ChibiOS tick
   SCB->ICSR = SCB_ICSR_PENDSTCLR_Msk; // clear any pending tick
 
-  SCB_CleanInvalidateDCache();        // app reads freshly-written QSPI
-  SCB_InvalidateICache();             // and executes from it (XIP)
+  SCB_CleanInvalidateDCache();        // app image was just programmed to flash
+  SCB_InvalidateICache();             // drop any stale fetch of the old contents
 
   SCB->VTOR = app_base;
   __DSB();
@@ -108,9 +109,8 @@ int main(void) {
   //    image. bl_update_run receives it (MANIFEST/DATA/DONE), verifies, and
   //    writes the target QSPI slot; the boot cascade below then boots it.
   //    runs in indirect mode (qspi bringup left it there); the cascade enables
-  //    memory-mapped mode afterwards.
-  //    TODO: slot rotation - copy the current active image (slot1) down to slot0
-  //    before overwriting slot1, so slot0 stays the last-known-good.
+  //    memory-mapped mode afterwards. on an app update it first rotates the
+  //    current active image (slot1) down to slot0, keeping it as the fallback.
   if (qspi_ready) {
     bl_update_run(&qspi_cfg, 5000U); // 5s window to catch a host (tune down later)
   }
@@ -128,10 +128,14 @@ int main(void) {
       if (bl_image_validate((const void *)bl_memmap[slot].base) != 0) {
         continue; // stored image bad, try the next
       }
-      // XIP: run the app in place from its QSPI slot (no copy). the image sits
-      // at BL_IMAGE_OFFSET into the slot (its vector table).
-      uint32_t app = bl_memmap[slot].base + BL_IMAGE_OFFSET;
-      bsp_printf("booting app from %s (XIP @ 0x%08lX)\r\n", bl_memmap[slot].name,
+      // stage: copy the validated image from the QSPI slot into the internal-
+      // flash exec region (bank 2) and verify it, then run the app from flash at
+      // full core speed. if staging fails, fall through to the next slot.
+      if (bl_stage_app(slot) != 0) {
+        continue;
+      }
+      uint32_t app = bl_memmap[BL_SLOT_APP_EXEC].base;
+      bsp_printf("booting app from %s -> exec 0x%08lX\r\n", bl_memmap[slot].name,
                  (unsigned long)app);
       // TODO: load the fpga bitstream (BL_SLOT_FPGA_ACTIVE; golden on failure)
       // and hold the DAC muted until the FPGA asserts DONE + a magic readback.

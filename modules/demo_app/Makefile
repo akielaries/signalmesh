@@ -1,5 +1,6 @@
-# bare-metal demo app for the bootloader XIP path.
-# produces demo_app.bin -> wrap with mkupdate -> upload with update.bin --file.
+# bare-metal demo app for the bootloader stage-to-flash path (linked for the
+# 0x08100000 exec region). produces demo_app.bin -> wrap with mkupdate ->
+# upload with update.bin --file.
 
 CROSS  = arm-none-eabi-
 CFLAGS = -mcpu=cortex-m7 -mthumb -Os -ffreestanding -fno-builtin \

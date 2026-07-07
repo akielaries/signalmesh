@@ -53,6 +53,7 @@ static uint32_t g_recv;    // bytes buffered
 static uint16_t g_status;  // final status
 
 static uint8_t g_img[UPD_MAX_IMAGE]; // RAM buffer for the incoming image
+CC_ALIGN_DATA(32) static uint8_t rot_buf[QSPI_SECTOR]; // scratch for slot rotation
 
 // ---- DMA callbacks ----
 static void dispatch(UARTDriver *uartp, size_t got) {
@@ -141,6 +142,63 @@ static int write_slot(uint32_t dev_off, const uint8_t *data, uint32_t len) {
   return 0;
 }
 
+// copy the current active image (slot1) down to the fallback slot (slot0) so an
+// update keeps the previous image as last-known-good. only runs if slot1 holds a
+// valid image. the QSPI driver has no indirect read, so we read slot1 via memmap
+// and write slot0 via indirect erase/program - mutually exclusive modes, so we
+// toggle per 4KB chunk (no big scratch buffer; g_img already holds the new
+// image). call in indirect mode; returns having restored indirect mode.
+static void rotate_active_to_fallback(void) {
+  uint32_t s1_base = bl_memmap[BL_SLOT_APP_1].base;
+  uint32_t s0_off = bl_memmap[BL_SLOT_APP_0].base - g_qspi->base;
+  uint32_t fallback_cap = bl_memmap[BL_SLOT_APP_0].size;
+
+  // validate the current active image and read its on-flash size (via memmap)
+  qspi_memmap_enable(g_qspi);
+  qspi_memmap_invalidate((const void *)(uintptr_t)s1_base, 32U);
+  const bl_image_header *h = (const bl_image_header *)(uintptr_t)s1_base;
+  uint32_t total = 0;
+  int valid = 0;
+  if (h->magic == BL_IMAGE_MAGIC &&
+      h->length <= fallback_cap - BL_IMAGE_OFFSET) {
+    total = BL_IMAGE_OFFSET + h->length;
+    qspi_memmap_invalidate((const void *)(uintptr_t)s1_base, (total + 31U) & ~31U);
+    valid = (bl_image_validate((const void *)(uintptr_t)s1_base) == 0);
+  }
+  qspi_memmap_disable(g_qspi);
+
+  if (!valid) {
+    bsp_printf("rotate: no valid active image, skipping\r\n");
+    return;
+  }
+  bsp_printf("rotate: active -> fallback (%lu bytes)\r\n", (unsigned long)total);
+
+  for (uint32_t o = 0; o < total; o += QSPI_SECTOR) {
+    uint32_t chunk = (total - o) < QSPI_SECTOR ? (total - o) : QSPI_SECTOR;
+
+    // read this 4KB chunk of the active image (memmap)
+    qspi_memmap_enable(g_qspi);
+    qspi_memmap_invalidate((const void *)(uintptr_t)(s1_base + o), QSPI_SECTOR);
+    memcpy(rot_buf, (const void *)(uintptr_t)(s1_base + o), chunk);
+    qspi_memmap_disable(g_qspi);
+
+    // erase + program it into the fallback slot (indirect)
+    if (!qspi_memmap_erase_sector(g_qspi, s0_off + o)) {
+      bsp_printf("rotate: erase failed @ +0x%lX\r\n", (unsigned long)(s0_off + o));
+      return;
+    }
+    for (uint32_t p = 0; p < chunk; p += QSPI_PAGE) {
+      uint32_t plen = (chunk - p) < QSPI_PAGE ? (chunk - p) : QSPI_PAGE;
+      if (!qspi_memmap_program(g_qspi, s0_off + o + p, rot_buf + p, plen)) {
+        bsp_printf("rotate: program failed @ +0x%lX\r\n",
+                   (unsigned long)(s0_off + o + p));
+        return;
+      }
+    }
+  }
+  bsp_printf("rotate: done\r\n");
+}
+
 // handle one complete frame; returns 1 when the session is finished
 static int handle_frame(const bl_frame *f) {
   switch (f->type) {
@@ -210,6 +268,13 @@ static int handle_frame(const bl_frame *f) {
       } else if (bl_crc32(g_img, g_recv) != g_manifest.crc32) {
         st = BL_ERR_CRC;
       } else {
+        // for an app update, first move the current active image (slot1) down
+        // to the fallback (slot0) so it stays as last-known-good, then commit
+        // the new image to the active slot. fpga updates have their own
+        // active/golden pair and are not rotated.
+        if (g_manifest.target == BL_TARGET_APM_H755) {
+          rotate_active_to_fallback();
+        }
         bsp_printf("update: crc ok, writing %lu bytes to slot...\r\n",
                    (unsigned long)g_recv);
         st = (write_slot(g_dst_off, g_img, g_recv) == 0) ? BL_OK : BL_ERR_FLASH;

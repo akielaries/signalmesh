@@ -79,6 +79,7 @@ include_directories(${VERSION_GEN_DIR})
 set(SOURCES
     ./bl_main.c
     ./bl_update.c
+    ./bl_stage.c
     ./memmap.c
     ${BOOTLOADER_SRC_DIR}/crc32.c
     ${BOOTLOADER_SRC_DIR}/frame.c
@@ -94,6 +95,9 @@ set(SOURCES
     # QSPI: the app slots + fpga bitstream (existing driver, used directly)
     ${DRIVERS_SRC_DIR}/qspi_memmap.c
     ${DRIVERS_SRC_DIR}/w25qxx.c
+
+    # internal-flash erase/program: stage the chosen app into bank 2 exec region
+    ${DRIVERS_SRC_DIR}/stm32h7_flash.c
 )
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})
