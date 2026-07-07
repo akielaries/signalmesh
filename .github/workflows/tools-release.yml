@@ -1,0 +1,29 @@
+# host update tools release. tag tools/vX.Y.Z. publishes update.bin (the uploader
+# the user runs) and mkupdate.bin (wraps firmware into .smup) as release assets.
+
+name: tools-release
+
+on:
+  push:
+    tags: ['tools/v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install toolchain
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq make g++
+      - name: build
+        run: make -C tools/fw_update mkupdate && make -C tools/fw_update update
+      - name: create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ github.ref_name }}" \
+            tools/fw_update/update.bin tools/fw_update/mkupdate.bin \
+            --title "fw-tools ${{ github.ref_name }}" \
+            --notes "Host update tools. update.bin uploads a .smup to the bootloader; mkupdate.bin wraps a firmware .bin into a .smup."

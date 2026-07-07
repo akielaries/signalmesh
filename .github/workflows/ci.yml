@@ -1,0 +1,36 @@
+# build every firmware module + the host tools on push/PR, and smoke-wrap the
+# demo image. releases are separate, tag-triggered workflows (<module>-release).
+
+name: ci
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['**.md', 'docs/**']
+  pull_request:
+    paths-ignore: ['**.md', 'docs/**']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: install toolchain
+        run: sudo apt-get update -qq &&
+             sudo apt-get install -y -qq gcc-arm-none-eabi cmake make g++
+      - name: build apm
+        run: cmake -S modules/apm -B modules/apm/build &&
+             cmake --build modules/apm/build -j"$(nproc)"
+      - name: build bootloader
+        run: cmake -S modules/bootloader -B modules/bootloader/build &&
+             cmake --build modules/bootloader/build -j"$(nproc)"
+      - name: build demo app
+        run: make -C modules/demo_app
+      - name: build host tools
+        run: make -C tools/fw_update mkupdate && make -C tools/fw_update update
+      - name: smoke - wrap demo into .smup
+        run: |
+          tools/fw_update/mkupdate.bin modules/demo_app/demo_app.bin demo.smup APM
+          test "$(od -An -tx1 -N4 demo.smup | tr -d ' ')" = "424c4d31"

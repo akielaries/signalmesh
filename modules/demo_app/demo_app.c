@@ -6,7 +6,12 @@
 // no startup init is needed: the vector table's reset entry jumps straight to
 // Reset_Handler.
 
+// this is baremetal so it can be tiny in code size for a simple demo app
+// to exercise our bootloader functionality
+
 #include <stdint.h>
+
+
 
 // UART5 registers (debug console; the bootloader set the baud, we just write)
 #define UART5_ISR (*(volatile uint32_t *)(0x40005000UL + 0x1CU))

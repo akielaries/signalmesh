@@ -96,8 +96,10 @@ int main(void) {
   // UART4 and QSPI itself.
   halInit();
   chSysInit();
+
   bsp_io_init(); // debug console on UART5
-  bsp_printf("\n--- %s ---\r\n", FW_VERSION_STRING); // e.g. bootloader v1.0.0-7e98556-dirty
+
+  bsp_printf("\n--- %s ---\r\n", FW_VERSION_STRING);
 
   // bring up QSPI (pins + device init). until this succeeds, touching 0x90..
   // bus-faults, so the boot cascade is gated on it.
@@ -123,6 +125,7 @@ int main(void) {
     bsp_printf("QSPI ready, reading slots...\n");
 
     static const enum bl_slot order[] = {BL_SLOT_APP_1, BL_SLOT_APP_0};
+
     for (unsigned i = 0; i < 2U; i++) {
       enum bl_slot slot = order[i];
       if (bl_image_validate((const void *)bl_memmap[slot].base) != 0) {

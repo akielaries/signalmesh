@@ -3,4 +3,5 @@
 	url = https://github.com/ChibiOS/ChibiOS.git
 [submodule "import/ChibiOS-Contrib"]
 	path = import/ChibiOS-Contrib
-	url = git@github.com:ChibiOS/ChibiOS-Contrib.git
+	url = https://github.com/akielaries/ChibiOS-Contrib.git
+	branch = signalmesh
