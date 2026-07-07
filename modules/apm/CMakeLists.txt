@@ -66,7 +66,7 @@ file(MAKE_DIRECTORY ${VERSION_GEN_DIR})
 add_custom_target(version_gen ALL
   BYPRODUCTS ${VERSION_GEN_DIR}/version_gen.h
   COMMAND ${CMAKE_COMMAND}
-    -DVERSION_FILE=${REPO_ROOT}/VERSION
+    -DVERSION_FILE=${CMAKE_CURRENT_SOURCE_DIR}/version.yml
     -DTEMPLATE=${REPO_ROOT}/cmake/version.h.in
     -DOUTPUT=${VERSION_GEN_DIR}/version_gen.h
     -DCOMPONENT=APM

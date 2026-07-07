@@ -1,0 +1,153 @@
+# version-driven releases. edit a module's version.yml (bump the top entry) and
+# push to main; this cuts a github release tagged <component>/v<version> with the
+# entry's notes as the body. idempotent - if the tag already exists (version
+# unchanged, e.g. a notes-only edit), the job skips. runs only when a version.yml
+# changes.
+
+name: release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'modules/apm/version.yml'
+      - 'modules/bootloader/version.yml'
+      - 'tools/fw_update/version.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  # -------- apm: build firmware, wrap into .smup, release --------
+  apm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VER=$(python3 tools/ci/version.py --version modules/apm/version.yml)
+          TAG="apm/v$VER"
+          echo "version=$VER" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "release=false" >> "$GITHUB_OUTPUT"; echo "$TAG already released"
+          else
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: install toolchain
+        if: steps.gate.outputs.release == 'true'
+        run: sudo apt-get update -qq &&
+             sudo apt-get install -y -qq gcc-arm-none-eabi cmake make g++
+      - name: build + package
+        if: steps.gate.outputs.release == 'true'
+        run: |
+          set -e
+          cmake -S modules/apm -B modules/apm/build
+          cmake --build modules/apm/build -j"$(nproc)"
+          mkdir -p dist
+          make -C tools/fw_update mkupdate
+          arm-none-eabi-objcopy -O binary \
+            modules/apm/build/audio_peripheral_module.elf dist/audio_peripheral_module.bin
+          tools/fw_update/mkupdate.bin \
+            dist/audio_peripheral_module.bin dist/audio_peripheral_module.smup APM
+          test "$(od -An -tx1 -N4 dist/audio_peripheral_module.smup | tr -d ' ')" = "424c4d31"
+          (cd dist && sha256sum audio_peripheral_module.smup > audio_peripheral_module.smup.sha256)
+      - name: release
+        if: steps.gate.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 tools/ci/version.py --notes modules/apm/version.yml > notes.md
+          gh release create "${{ steps.gate.outputs.tag }}" \
+            dist/audio_peripheral_module.smup dist/audio_peripheral_module.smup.sha256 \
+            --title "apm ${{ steps.gate.outputs.version }}" --notes-file notes.md
+
+  # -------- bootloader: check first (no gate), then release behind approval --------
+  bootloader-check:
+    runs-on: ubuntu-latest
+    outputs:
+      release: ${{ steps.gate.outputs.release }}
+      version: ${{ steps.gate.outputs.version }}
+      tag: ${{ steps.gate.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VER=$(python3 tools/ci/version.py --version modules/bootloader/version.yml)
+          TAG="bootloader/v$VER"
+          echo "version=$VER" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "release=false" >> "$GITHUB_OUTPUT"; echo "$TAG already released"
+          else
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  bootloader-release:
+    needs: bootloader-check
+    if: needs.bootloader-check.outputs.release == 'true'
+    runs-on: ubuntu-latest
+    environment: bootloader-release # manual approval - a bad golden image bricks the board
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: install toolchain
+        run: sudo apt-get update -qq &&
+             sudo apt-get install -y -qq gcc-arm-none-eabi cmake make
+      - name: build + package
+        run: |
+          set -e
+          cmake -S modules/bootloader -B modules/bootloader/build
+          cmake --build modules/bootloader/build -j"$(nproc)"
+          mkdir -p dist
+          B=modules/bootloader/build/signalmesh_bootloader
+          arm-none-eabi-objcopy -O binary "$B.elf" dist/signalmesh_bootloader.bin
+          arm-none-eabi-objcopy -O ihex   "$B.elf" dist/signalmesh_bootloader.hex
+          (cd dist && sha256sum signalmesh_bootloader.bin signalmesh_bootloader.hex > bootloader.sha256)
+      - name: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 tools/ci/version.py --notes modules/bootloader/version.yml > notes.md
+          gh release create "${{ needs.bootloader-check.outputs.tag }}" \
+            dist/signalmesh_bootloader.hex dist/signalmesh_bootloader.bin dist/bootloader.sha256 \
+            --title "bootloader ${{ needs.bootloader-check.outputs.version }}" --notes-file notes.md
+
+  # -------- host tools: build update.bin + mkupdate.bin, release --------
+  tools:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VER=$(python3 tools/ci/version.py --version tools/fw_update/version.yml)
+          TAG="tools/v$VER"
+          echo "version=$VER" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "release=false" >> "$GITHUB_OUTPUT"; echo "$TAG already released"
+          else
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: build
+        if: steps.gate.outputs.release == 'true'
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq make g++ &&
+             make -C tools/fw_update mkupdate && make -C tools/fw_update update
+      - name: release
+        if: steps.gate.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 tools/ci/version.py --notes tools/fw_update/version.yml > notes.md
+          gh release create "${{ steps.gate.outputs.tag }}" \
+            tools/fw_update/update.bin tools/fw_update/mkupdate.bin \
+            --title "fw-tools ${{ steps.gate.outputs.version }}" --notes-file notes.md

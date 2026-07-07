@@ -1,17 +1,26 @@
-# generate version_gen.h from the repo VERSION file + git state. run at build
+# generate version_gen.h from a module version file + git state. run at build
 # time via `cmake -P`; configure_file only rewrites the output when the content
 # actually changes, so a clean tree at the same commit causes no rebuild churn.
 #
 # args (all -D on the cmake -P command line):
-#   VERSION_FILE  path to the VERSION file (holds the base semver)
+#   VERSION_FILE  a module version.yml (newest release entry first) OR a plain
+#                 file holding just the semver
 #   TEMPLATE      path to version.h.in
 #   OUTPUT        path to write version_gen.h
 #   COMPONENT     component name baked into the banner (bootloader / APM)
 #   SRC_DIR       any path inside the git repo (git -C finds the root)
 
 if(EXISTS "${VERSION_FILE}")
-  file(READ "${VERSION_FILE}" BASE_VERSION)
-  string(STRIP "${BASE_VERSION}" BASE_VERSION)
+  file(READ "${VERSION_FILE}" _raw)
+  if(_raw MATCHES "version:")
+    # version.yml: take the first (newest) "version:" entry as the base semver
+    file(STRINGS "${VERSION_FILE}" _vlines REGEX "version:")
+    list(GET _vlines 0 _vline)
+    string(REGEX REPLACE "^[ \t-]*version:[ \t]*[\"']?([^\"' \t]+).*" "\\1"
+           BASE_VERSION "${_vline}")
+  else()
+    string(STRIP "${_raw}" BASE_VERSION)
+  endif()
 else()
   set(BASE_VERSION "0.0.0")
 endif()

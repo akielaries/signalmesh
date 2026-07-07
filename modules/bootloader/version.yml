@@ -1,0 +1,9 @@
+# bootloader (golden image) version history. newest entry FIRST - its version
+# drives the boot banner and, on push to main, is auto-released as tag
+# bootloader/v<version>. the bootloader release passes through a manual approval
+# environment (a bad golden image bricks the board).
+releases:
+  - version: 1.0.0
+    notes:
+      - initial bootloader release
+      - uart update link, slot rotation, stage-to-flash boot

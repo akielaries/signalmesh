@@ -1,46 +1,60 @@
 # Releasing
 
-The monorepo cuts independent, per-module releases from git tags, via GitHub
-Actions (`.github/workflows/`).
+Releases are driven by per-module `version.yml` files, via GitHub Actions. There
+is no manual tagging - you bump a version and push.
 
-## What is released
+## How it works
 
-| component  | tag prefix      | asset(s)                     | delivered by      |
-|------------|-----------------|------------------------------|-------------------|
-| apm        | `apm/v*`        | `.smup`                      | bootloader update |
-| bootloader | `bootloader/v*` | `.hex`, `.bin`               | debugger flash    |
-| fw-tools   | `tools/v*`      | `update.bin`, `mkupdate.bin` | host download     |
-| acm (fpga) | `acm/v*`        | `.smup` (later - gowin CI)   | bootloader update |
+Each releasable component owns a `version.yml` (newest entry first):
 
-The demo app is built and smoke-tested in `ci.yml` but not released (test payload).
+```yaml
+releases:
+  - version: 1.1.0
+    notes:
+      - what changed
+  - version: 1.0.0
+    notes:
+      - initial release
+```
+
+The top entry's `version`:
+- feeds the firmware **boot banner** (`cmake/version.cmake` reads it, then appends
+  the git short hash and a `-dirty` flag), e.g. `APM v1.1.0-9d089aa8-dirty`, and
+- drives the **release**: on push to `main`, `release.yml` cuts a GitHub release
+  tagged `<component>/v<version>` with that entry's notes as the body.
+
+It is idempotent: if a release for the top version already exists (e.g. you only
+edited an older entry's notes), the job skips. Bump the number to cut a release.
+
+## Components
+
+| component  | version.yml                  | tag             | asset(s)                     |
+|------------|------------------------------|-----------------|------------------------------|
+| apm        | `modules/apm/version.yml`    | `apm/v*`        | `.smup`                      |
+| bootloader | `modules/bootloader/version.yml` | `bootloader/v*` | `.hex`, `.bin`           |
+| fw-tools   | `tools/fw_update/version.yml`| `tools/v*`      | `update.bin`, `mkupdate.bin` |
+
+The bootloader release runs in the `bootloader-release` GitHub **environment** -
+add required reviewers (repo Settings > Environments) so a golden-image release
+needs manual approval. A check job gates it, so approval is only requested when
+the bootloader version actually changed.
+
+The demo app is built and smoke-tested in `ci.yml` but not released.
 
 ## Cut a release
 
-Tag with the component prefix and push the tag:
-
-```
-git tag apm/v1.2.0
-git push origin apm/v1.2.0
-```
-
-That runs the matching `<component>-release.yml` workflow: build -> wrap into the
-asset -> `gh release create`. The release and its assets appear under the repo's
-**Releases** page.
-
-The bootloader release runs in the `bootloader-release` GitHub **environment** - a
-bad golden image bricks the board, so configure required reviewers on that
-environment (repo Settings > Environments) to enforce manual approval.
-
-## What a push does
-
-- Push to `main` / a PR -> `ci.yml` builds all modules + host tools and
-  smoke-wraps the demo image. No releases.
-- Push a `<component>/v*` tag -> only that component's release workflow runs.
+1. Edit the component's `version.yml`: add a new top entry with the new version + notes.
+2. Commit and push to `main`.
+3. The release appears under the repo's **Releases** page with its assets attached.
 
 ## Notes
 
-- Each `.smup` carries an image CRC; a `.sha256` is published alongside.
-- A `.smup` targets a bootloader speaking the `BLM1` image header - note the
-  minimum bootloader version in release notes when the format changes.
-- FPGA (acm) builds need a self-hosted x86-64 runner with the Gowin `gw_sh`
-  toolchain; not wired up yet.
+- `ci.yml` builds every module on push/PR; `release.yml` only runs when a
+  `version.yml` changes.
+- Each `.smup` carries an image CRC and a `.sha256` published alongside.
+- A `.smup` targets a bootloader speaking the `BLM1` image format - note the
+  minimum bootloader version in the entry when the format changes.
+- FPGA (acm) is not wired up yet - it needs a self-hosted x86-64 runner with the
+  Gowin `gw_sh` toolchain, plus its own `version.yml`.
+- `tools/ci/version.py` is the dependency-free reader CI uses to pull the top
+  version/notes out of a `version.yml`.
