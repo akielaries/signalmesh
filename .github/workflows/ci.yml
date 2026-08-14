@@ -1,5 +1,7 @@
-# build every firmware module + the host tools on push/PR, and smoke-wrap the
-# demo image. releases are separate, tag-triggered workflows (<module>-release).
+# build each module on push/PR. jobs are INDEPENDENT and run in parallel - one
+# failing does not block the others. releases are separate (release.yml).
+# order here (demo, bootloader, apm, tools) is just display order; add the fpga
+# build as another job when a gowin runner exists.
 
 name: ci
 
@@ -11,7 +13,22 @@ on:
     paths-ignore: ['**.md', 'docs/**']
 
 jobs:
-  build:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install toolchain
+        run: sudo apt-get update -qq &&
+             sudo apt-get install -y -qq gcc-arm-none-eabi make g++
+      - name: build demo app
+        run: make -C modules/demo_app
+      - name: smoke - wrap into .smup
+        run: |
+          make -C tools/fw_update mkupdate
+          tools/fw_update/mkupdate.bin modules/demo_app/demo_app.bin demo.smup APM
+          test "$(od -An -tx1 -N4 demo.smup | tr -d ' ')" = "424c4d31"
+
+  bootloader:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,17 +37,28 @@ jobs:
       - name: install toolchain
         run: sudo apt-get update -qq &&
              sudo apt-get install -y -qq gcc-arm-none-eabi cmake make g++
-      - name: build apm
-        run: cmake -S modules/apm -B modules/apm/build &&
-             cmake --build modules/apm/build -j"$(nproc)"
-      - name: build bootloader
+      - name: build
         run: cmake -S modules/bootloader -B modules/bootloader/build &&
              cmake --build modules/bootloader/build -j"$(nproc)"
-      - name: build demo app
-        run: make -C modules/demo_app
-      - name: build host tools
+
+  apm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: install toolchain
+        run: sudo apt-get update -qq &&
+             sudo apt-get install -y -qq gcc-arm-none-eabi cmake make g++
+      - name: build
+        run: cmake -S modules/apm -B modules/apm/build &&
+             cmake --build modules/apm/build -j"$(nproc)"
+
+  tools:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install toolchain
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq make g++
+      - name: build
         run: make -C tools/fw_update mkupdate && make -C tools/fw_update update
-      - name: smoke - wrap demo into .smup
-        run: |
-          tools/fw_update/mkupdate.bin modules/demo_app/demo_app.bin demo.smup APM
-          test "$(od -An -tx1 -N4 demo.smup | tr -d ' ')" = "424c4d31"
