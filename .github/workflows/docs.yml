@@ -1,0 +1,42 @@
+name: docs
+
+# convert docs/*.md to html with tools/mddoc.py and publish to github pages at
+# https://akielaries.github.io/signalmesh/ (same approach as signalmesh_CAD).
+# needs Settings > Pages > Source = "GitHub Actions" on the repo
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'tools/mddoc.py'
+      - '.github/workflows/docs.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: docs-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: build docs
+        run: python3 tools/mddoc.py docs _site signalmesh
+
+      - name: upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: deploy to github pages
+        id: deploy
+        uses: actions/deploy-pages@v4
