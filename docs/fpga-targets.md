@@ -8,8 +8,8 @@ constraints, timing constraints, clock divider and its `fpga_id`.
 |---|---|---|
 | Tang Nano 20K (GW2AR-18C) | first bring-up board, Nucleo-H755 over FMC | working |
 | Tang Primer 25K (GW5A-25) | second Gowin target, same datapath | working |
-| Basys 3 (XC7A35T) | Xilinx stand-in until the main board is fabbed | planned |
-| MAIN_COMPUTE_BOARD (XC7A100T) | nominal board, see `signalmesh_CAD/boards/MAIN_COMPUTE_BOARD` | in layout |
+| Basys 3 (XC7A35T) | Xilinx stand-in until the main board is fabbed | builds, timing met, untested on hardware |
+| MAIN_COMPUTE_BOARD (XC7A100T) | nominal board, see `signalmesh_CAD/boards/MAIN_COMPUTE_BOARD` | in layout, stub top builds |
 
 ## device resources
 
@@ -37,9 +37,9 @@ and the 100T is about 3x the 35T. The DSP count is what limits voice count and F
 
 | | Tang Nano 20K | Tang Primer 25K | Basys 3 | MAIN_COMPUTE_BOARD |
 |---|---|---|---|---|
-| fabric clock | 27 MHz | 50 MHz | 100 MHz | 100 MHz SYSCLK + MMCM |
+| fabric clock | 27 MHz | 50 MHz | 50 MHz (MMCM from the 100 MHz oscillator) | 100 MHz SYSCLK + MMCM |
 | audio clock | divided from 27 MHz | divided from 50 MHz | divided from 100 MHz | 24.576 / 22.5792 MHz XOs |
-| `TICK_DIV` for 48 kHz | 562 | 1042 | 2083 | MCLK based |
+| `TICK_DIV` for 48 kHz | 562 | 1042 | 1042 | MCLK based |
 | `fpga_id` | 0x2018 | 0x5025 | 0x7035 (planned) | 0x7100 (planned) |
 | external memory | 64 Mbit SDRAM (in package) | - | - | DDR3L 512 MB x16, 1.6 GB/s |
 | config flash | SPI flash on board | SPI flash on module | 32 Mbit Quad SPI | none: STM32 loads it over SelectMAP |
@@ -100,3 +100,100 @@ What each installer product is, and whether this project needs it:
 
 To add a product later without reinstalling, run `xsetup -b Add` from the installer, or pick
 "Add Design Tools or Devices" in the GUI.
+
+## build layout
+
+```
+modules/acm/acm_fpga/
+  rtl/                    shared, vendor-neutral RTL
+  rtl.f                   shared RTL file list for the vivado flow
+  boards/
+    gw2ar18/              Tang Nano 20K, gowin ide project
+    gw5a25/               Tang Primer 25K, gowin ide project
+    xc7a35t_basys3/       top.v, basys3.xdc, board.tcl
+    xc7a100t_mcb/         top.v (stub), mcb_pins.xdc (synced), board.tcl
+  scripts/
+    vivado/build.tcl      non-project batch build
+    vivado/project.tcl    creates a .xpr for the gui
+    sync_mcb_xdc.sh       pulls mcb_pins.xdc from signalmesh_CAD
+  Makefile
+  sim/cocotb/             benches
+```
+
+`board.tcl` holds the part, top module, constraint files and board-only sources. A new
+Xilinx target is a new `boards/<part>_<board>/` folder plus one line in the Makefile.
+
+Basys 3 Pmod wiring to the Nucleo-144 H755 (pins from `modules/apm/tests/test_fmc_fpga.c`):
+
+| signal | Nucleo | Basys 3 |
+|---|---|---|
+| AD0-AD3 | PD14 PD15 PD0 PD1 | JA1-JA4 |
+| AD4-AD7 | PE7 PE8 PE9 PE10 | JA7-JA10 |
+| AD8-AD11 | PE11 PE12 PE13 PE14 | JB1-JB4 |
+| AD12-AD15 | PE15 PD8 PD9 PD10 | JB7-JB10 |
+| NE1 | PC7 | JC1 |
+| NADV (NL) | PB7 | JC2 |
+| NOE | PD4 | JC3 |
+| NWE | PD5 | JC4 |
+| NWAIT | PC6 | JC7 |
+| FMC_CLK (reserved) | PD3 | JC8 |
+| GND | GND | Pmod pin 5 or 11 |
+
+## building and loading
+
+From `modules/acm/acm_fpga`:
+
+```
+make BOARD=basys3 bit       # bitstream in build/basys3/top.bit
+make BOARD=basys3 prog      # load over USB-JTAG with openFPGALoader (no vivado needed)
+make BOARD=mcb bit          # MAIN_COMPUTE_BOARD stub
+make sync-xdc               # after the CAD pin plan changes
+```
+
+Each build writes to `build/<board>/` (gitignored):
+
+| file | what it is |
+|---|---|
+| `top.bit` | bitstream |
+| `post_synth.dcp`, `post_route.dcp` | design checkpoints, open these in the gui |
+| `reports/timing.rpt` | timing summary, WNS and the worst paths |
+| `reports/util.rpt`, `util_hier.rpt` | resource use, flat and per module |
+| `reports/io.rpt` | every pin with its standard and bank |
+| `reports/clocks.rpt`, `power.rpt`, `drc.rpt` | clock buffers, power estimate, design rule checks |
+| `vivado.log` | full log |
+
+The build exits with an error if timing is not met.
+
+## viewing designs in Vivado
+
+Two ways in. The scripted build is the source of truth; the gui is for looking.
+
+**Routed checkpoint (fastest).** `make BOARD=basys3 gui`, or start `vivado` and use
+File > Checkpoint > Open on `build/basys3/post_route.dcp`. This opens the placed and routed
+design with no project. Useful views from the Window menu or the Flow Navigator:
+
+| to see | where |
+|---|---|
+| placement and routing on the die | Window > Device |
+| pin assignments and banks | Window > I/O Ports, or Layout > I/O Planning |
+| timing and the worst paths | Reports > Timing > Report Timing Summary, then double-click a path |
+| resource use per module | Reports > Report Utilization, then the Hierarchy view |
+| schematic of a module or path | select a cell or path, press F4 |
+| clock network | Reports > Report Clock Networks |
+
+Selecting a path in the timing report highlights it in the Device and Schematic views.
+
+**Project (full gui flow).** `make BOARD=basys3 project`, then File > Project > Open on
+`build/basys3/proj/acm_xc7a35t_basys3.xpr`. Sources point at the repo files. Here the
+Flow Navigator runs Synthesis, Implementation and Generate Bitstream, and you can open the
+elaborated RTL schematic (RTL Analysis > Open Elaborated Design) before synthesis.
+Changes you make to sources in the gui land in the repo files, but project settings do not
+feed back into the scripted build, so put lasting changes in `board.tcl` or the XDC.
+
+**Hardware manager.** Open Hardware Manager > Open Target > Auto Connect, then Program Device
+with `build/basys3/top.bit`. This needs the cable drivers installed. `make prog` does the same
+without the gui.
+
+**Simulation.** The cocotb benches stay the main simulation flow (`make sim`). Vivado's
+simulator (XSim) is available from the project's Flow Navigator if a waveform view of a
+Xilinx primitive such as the MMCM is needed.
