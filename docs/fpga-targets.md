@@ -50,6 +50,10 @@ and the 100T is about 3x the 35T. The DSP count is what limits voice count and F
 
 ## STM32 link per target
 
+The FMC bus width and mode are a per-target choice: the board's `top.v` picks the FPGA-side
+bridge and the STM32 BSP sets the matching FMC bank config. The datapath behind the bridge
+is the same everywhere.
+
 | target | MCU | FMC mode | pins |
 |---|---|---|---|
 | Tang Nano 20K | Nucleo-144 H755 | 16-bit muxed AD, async, NADV latch | ~21 |

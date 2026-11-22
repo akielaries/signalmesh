@@ -5,6 +5,7 @@
 //
 //   MAGIC   = 0xACE1               link / gateware check
 //   FPGA_ID = 0x2018 GW2AR-18      (Tang Nano 20K)  /  0x5025 GW5A-25 (Primer 25K)
+//             0x7035 XC7A35T       (Basys 3)        /  0x7100 XC7A100T (main board)
 //   SCRATCH = RW                   round-trip + walks LED[4:0] on the board
 
 #include "ch.h"
@@ -79,7 +80,9 @@ int main(void) {
 
   uint16_t fid = fpga_rd(CORE_FPGA_ID);
   const char *board = (fid == 0x2018U) ? "GW2AR-18 (Tang Nano 20K)" :
-                      (fid == 0x5025U) ? "GW5A-25 (Tang Primer 25K)" : "unknown";
+                      (fid == 0x5025U) ? "GW5A-25 (Tang Primer 25K)" :
+                      (fid == 0x7035U) ? "XC7A35T (Basys 3)" :
+                      (fid == 0x7100U) ? "XC7A100T (main compute board)" : "unknown";
   bsp_printf("FPGA_ID = 0x%04X (%s)\n", (unsigned)fid, board);
 
   bsp_printf("VERSION = 0x%04X\n", (unsigned)fpga_rd(CORE_VERSION));

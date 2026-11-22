@@ -4,6 +4,7 @@
 #   make BOARD=basys3 prog      load it over the onboard USB-JTAG (openFPGALoader)
 #   make BOARD=basys3 gui       open the routed design in the vivado gui
 #   make BOARD=basys3 project   create a .xpr project for the gui flow
+#   make BOARD=basys3 open      open the project in the vivado gui (creates it if missing)
 #   make BOARD=mcb    bit       MAIN_COMPUTE_BOARD stub
 #   make sync-xdc               refresh the MCB pins from signalmesh_CAD
 #   make sim                    cocotb benches (sim/cocotb)
@@ -29,7 +30,7 @@ endif
 
 RTL := $(shell grep -v '^\s*\#' rtl.f) $(wildcard $(BOARD_DIR)/*.v $(BOARD_DIR)/*.xdc $(BOARD_DIR)/*.tcl)
 
-.PHONY: bit prog gui project sync-xdc sim clean
+.PHONY: bit prog gui project open sync-xdc sim clean
 
 bit: $(OUT)/top.bit
 
@@ -49,6 +50,14 @@ project:
 	@mkdir -p $(OUT)
 	cd $(OUT) && $(VIVADO) $(VFLAGS) -source $(CURDIR)/scripts/vivado/project.tcl \
 	  -tclargs $(CURDIR)/$(BOARD_DIR) $(CURDIR)/$(OUT)
+
+XPR := $(OUT)/proj/acm_$(notdir $(BOARD_DIR)).xpr
+
+$(XPR):
+	$(MAKE) BOARD=$(BOARD) project
+
+open: $(XPR)
+	cd $(OUT)/proj && $(VIVADO) -nojournal -nolog $(CURDIR)/$(XPR) &
 
 sync-xdc:
 	scripts/sync_mcb_xdc.sh

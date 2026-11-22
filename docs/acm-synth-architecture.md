@@ -5,11 +5,21 @@ two chips:
 
 - a **STM32H755** (Nucleo-144) as the control + I/O manager - it hosts the USB-MIDI
   keyboard, allocates voices, and streams audio out its DAC.
-- an **FPGA** (Tang Nano 20K / GW2AR-18, with a Tang Primer 25K / GW5A-25 as a
-  second target) as the DSP - it runs the oscillator bank that actually makes sound.
+- an **FPGA** as the DSP - it runs the oscillator bank that actually makes sound.
+  Targets: Tang Nano 20K (GW2AR-18C), Tang Primer 25K (GW5A-25), Basys 3 (XC7A35T)
+  and the MAIN_COMPUTE_BOARD (XC7A100T). See [FPGA targets](fpga-targets.md).
 
-They talk over a 16-bit multiplexed **FMC** bus, with the register interface defined
-once in **Cheby** and generated for both sides. The whole signal chain, top to bottom:
+They talk over the STM32 **FMC** bus, with the register interface defined once in
+**Cheby** and generated for both sides. The bus width and mode are per target:
+
+| target | FMC bus |
+| --- | --- |
+| Tang Nano 20K, Tang Primer 25K, Basys 3 (Nucleo-144 H755) | 16-bit multiplexed AD, async, NADV address latch |
+| MAIN_COMPUTE_BOARD (on-board STM32H755XIH6) | 32-bit synchronous NOR/PSRAM, non-multiplexed, A0-A18, NBL0-3, FMC_CLK 120-125 MHz |
+
+The board layer picks the bridge (`fmc_wb_bridge` for the 16-bit bus, a sync 32-bit
+bridge for the main board, not written yet) and the STM32 BSP sets the matching FMC
+bank config. Everything behind the bridge is shared. The whole signal chain, top to bottom:
 
 ![ACM system architecture](diagrams/acm-architecture.svg)
 
@@ -48,13 +58,14 @@ flowchart TD
 ## FMC register map
 
 One flat FMC address space, decoded on the FPGA by word-address bit 6
-(`core` low, `audio` high). All registers are 16-bit (the audio `freq` is 32-bit
-across two words).
+(`core` low, `audio` high). This is the map as built for the 16-bit bus: all
+registers are 16-bit (the audio `freq` is 32-bit across two words). The 32-bit
+main board build will need the Cheby maps on a 32-bit bus, which moves these offsets.
 
 | FMC byte | block.register | access | meaning |
 | --- | --- | --- | --- |
 | 0x00 | core.magic | RO | link check, reads 0xACE1 |
-| 0x02 | core.fpga_id | RO | board id (0x2018 = 20K, 0x5025 = 25K) |
+| 0x02 | core.fpga_id | RO | board id (0x2018 = 20K, 0x5025 = 25K, 0x7035 = Basys 3, 0x7100 = main board) |
 | 0x04 | core.scratch | RW | scratch / LED debug |
 | 0x06 | core.version | RO | gateware version |
 | 0x80 | audio.ctrl | RW | engine enable, sample-rate select |
@@ -78,8 +89,9 @@ flowchart TD
     GEN --> OUT["C headers (STM32) + verilog (FPGA)"]
 ```
 
-- `bus: wb-16` - Wishbone, 16-bit, matched to the FMC so one FMC access = one bus
-  cycle, no width adapter.
+- `bus: wb-16` - Wishbone, 16-bit, matched to the 16-bit FMC so one FMC access =
+  one bus cycle, no width adapter. The main board's 32-bit bus will use a 32-bit
+  Wishbone build of the same maps.
 - RO registers become HDL **input ports** (the design drives them, e.g. per-board
   `fpga_id`); RW registers become stored regs.
 
@@ -159,7 +171,7 @@ flowchart TD
     C --> D["polyphony"]:::done
     D --> E["DMA audio out"]:::done
     E --> F["envelopes / filters"]:::todo
-    F --> G["custom PCB (16-bit FMC)"]:::todo
+    F --> G["MAIN_COMPUTE_BOARD (32-bit sync FMC)"]:::todo
 
     classDef done fill:#cfc,stroke:#393;
     classDef todo fill:#eee,stroke:#999,stroke-dasharray:4;
@@ -167,4 +179,5 @@ flowchart TD
 
 Working end to end today: play the keyboard, hear polyphonic sound, with the
 audio streaming itself FPGA -> DAC. Next up are per-voice envelopes / filters and
-moving off the breadboard to a PCB (where 16-bit FMC is solid).
+moving off the breadboard to the MAIN_COMPUTE_BOARD, where the FMC becomes a 32-bit
+synchronous bus on short PCB traces.
